@@ -16,9 +16,7 @@ export default BaseAuthenticator.extend({
 
   authenticate: function(options) {
     let promise;
-    console.log('options', options);
-   if (options.hasAccessToken) {
-     console.log("ss");
+    if (options.hasAccessToken) {
       promise = this.get('authenticationService').authenticateWithToken(
         options.accessToken
       );

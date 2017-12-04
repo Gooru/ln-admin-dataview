@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import Env from 'admin-dataview/config/environment';
 
 /**
  * Adapter for the Authentication (Login) with API 3.0
@@ -59,8 +60,8 @@ export default Ember.Object.extend({
    * @param access token required to build the get headers
    * @returns {Promise}
    */
-   authenticationWithToken: function(data) {
-    const url = this.get('namespace') + '/token';
+  authenticationWithToken: function(data) {
+    const url = `${this.get('namespace')  }/token`;
     const options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',

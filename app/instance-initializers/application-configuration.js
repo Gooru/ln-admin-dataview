@@ -1,5 +1,3 @@
-import Env from 'admin-dataview/config/environment';
-
 /**
  * Initialize the configuration settings from config file.
  * @param  {Object} instance

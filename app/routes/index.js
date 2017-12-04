@@ -18,20 +18,15 @@ export default Ember.Route.extend({
   // Methods
 
   model(params) {
-    console.log(params);
-      const route = this;
-      let details = null;
-      let accessToken = params.access_token;
-      console.log(accessToken);
-      if (accessToken) {
-        details = this.get('sessionService')
-          .signInWithToken(accessToken)
-          .then(function() {
-            const applicationController = route.controllerFor('application');
-          });
-      }
-      return details;
-    },
+    const route = this;
+    let details = null;
+    let accessToken = params.access_token;
+    if (accessToken) {
+      details = route.get('sessionService')
+        .signInWithToken(accessToken);
+    }
+    return details;
+  },
 
   setupController(controller, model) {
     this._super(controller, model);
