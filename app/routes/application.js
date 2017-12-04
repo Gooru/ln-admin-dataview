@@ -60,13 +60,6 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, ConfigurationMixin,
          */
     onCompleteSignIn: function() {
       this.transitionTo('index');
-    },
-
-    /**
-         * Action triggered when logging out
-         */
-    onLogout: function() {
-      this.transitionTo('index');
     }
   }
 });

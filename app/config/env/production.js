@@ -7,5 +7,4 @@ export default {
     'url': 'https://www.gooru.org',
     'secureUrl': 'https://www.gooru.org'
   }
-
 };

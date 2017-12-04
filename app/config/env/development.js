@@ -4,7 +4,8 @@
 export default {
   'appRootPath': '/', //default is root
   'endpoint' : {
-    'url': 'http://nile-dev.gooru.org',
-    'secureUrl': 'https://nile-dev.gooru.org'
-  }
+    'url': 'http://nile-qa.gooru.org',
+    'secureUrl': 'http://nile-qa.gooru.org'
+  },
+  'gooru-app-url' : '//localhost:4200'
 };

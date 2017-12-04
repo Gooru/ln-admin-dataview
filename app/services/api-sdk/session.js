@@ -24,6 +24,7 @@ export default Ember.Service.extend({
    */
   signInWithToken: function(token) {
     return this.get('session').authenticate('authenticator:auth-api-3', {
+      hasAccessToken: true,
       accessToken: token
     });
   },

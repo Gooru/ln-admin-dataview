@@ -16,8 +16,12 @@ export default BaseAuthenticator.extend({
 
   authenticate: function(options) {
     let promise;
-    if(options.isAuthenticated) {
-      promise = new Ember.RSVP.Promise(function(resolve) {resolve(options.user);});
+    console.log('options', options);
+   if (options.hasAccessToken) {
+     console.log("ss");
+      promise = this.get('authenticationService').authenticateWithToken(
+        options.accessToken
+      );
     } else {
       promise = this.get('authenticationService').signIn(options.username, options.password);
     }

@@ -22,7 +22,10 @@ module.exports = function (grunt) {
           relativeFilesPath: true,
           persistent: false,
           mute: true,
-          location: "0.0.0.0"
+          location: "0.0.0.0",
+          admin: 8001,
+          tls: 8002,
+          stubs: 8003
         },
         files: [{
           src: ['tests/stubs/**/*-endpoint.json']

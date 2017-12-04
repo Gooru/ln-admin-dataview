@@ -9,13 +9,28 @@
           <ul class="nav navbar-nav menu-navbar">
           {{#if isAuthenticated}}
             <li class="navbar-nav-list visible-md visible-lg profile-link">
-                {{#link-to 'index' class="profile"}}
-                  <div class="img-container pull-left">
-                    <img class="img-responsive" src="{{session.user.avatarUrl}}"/>
-                  </div>
-                  <span class="username">{{truncate text=session.user.username maxLength=18}}</span>
-                {{/link-to}}
+            <div class="profile">
+              <div class="img-container pull-left">
+                <img class="img-responsive" src="{{session.user.avatarUrl}}"/>
+              </div>
+              <span class="username">{{truncate text=session.user.username maxLength=18}}</span>
+            </div>
             </li>
+            <li class="navbar-nav-list visible-md visible-lg dropdown">
+               <a class="profile-more dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                 {{app-icon name='more_vert'}}
+               </a>
+               <ul class="dropdown-menu pull-right" role="menu" id="profile-more">
+                 <li class="navbar-nav-list">
+                   <a href="{{supportSiteUrl}}" target="_blank" class="navbar-link">
+                     {{t "common.support"}}
+                   </a>
+                 </li>
+                 <li class="navbar-nav-list">
+                   <a class="navbar-link" {{action "logout"}}> {{t "logout.name"}}</a>
+                 </li>
+               </ul>
+             </li>
                <li class="navbar-nav-list hidden-md hidden-lg dropdown xs-design">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true">{{app-icon name='menu'}}</a>
                 <ul class="dropdown-menu" role="menu">
@@ -23,9 +38,7 @@
                     <button class="btn dropdown-toggle" data-toggle="dropdown">{{app-icon name='close'}}</button>
                   </li>
                   <li class="navbar-nav-list">
-                    {{#link-to 'index' class="navbar-link"}}
-                      <span class="">{{t "profile.name"}}</span>
-                    {{/link-to}}
+                      <span class="profile">{{truncate text=session.user.username maxLength=18}}</span>
                   </li>
                   <li class="navbar-nav-list">
                     <a href="{{supportSiteUrl}}" target="_blank" class="navbar-link">
@@ -35,27 +48,6 @@
                   <li class="navbar-nav-list">
                     <a class="navbar-link" {{action "logout"}}> {{t "logout.name"}}</a>
                   </li>
-                </ul>
-              </li>
-          {{else}}
-            <li class="navbar-nav-list visible-md visible-lg">
-              {{#link-to 'sign-in' class="btn btn-info sign-in-button" tagName='button' }} {{t "signIn.logIn"}} {{/link-to}}
-            </li>
-            <li class="navbar-nav-list visible-md visible-lg no-hover">
-              {{#link-to 'sign-up' class="btn btn-primary sign-up-button" tagName='button' }} {{t "signUp.name"}} {{/link-to}}
-            </li>
-            <li class="navbar-nav-list hidden-md hidden-lg dropdown xs-design">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true">{{app-icon name='menu'}}</a>
-                <ul class="dropdown-menu" role="menu">
-                  <li class="navbar-nav-list close-menu">
-                     <button class="btn dropdown-toggle" data-toggle="dropdown">{{app-icon name='close'}}</button>
-                  </li>
-                    <li class="navbar-nav-list">
-                      {{#link-to 'sign-in' class="navbar-link sign-in-link" }} {{t "signIn.logIn"}} {{/link-to}}
-                    </li>
-                    <li class="navbar-nav-list">
-                        {{#link-to 'sign-up' class="navbar-link sign-up-link" }} {{t "signUp.name"}} {{/link-to}}
-                    </li>
                 </ul>
               </li>
           {{/if}}

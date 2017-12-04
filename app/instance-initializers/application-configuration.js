@@ -6,9 +6,7 @@ import Env from 'admin-dataview/config/environment';
  */
 export function initialize(instance) {
   const configurationService = instance.container.lookup('service:configuration');
-  const awProps = Env.APP.awProps;
-  const configBaseUrl = awProps ? awProps.appRootPath : undefined;
-  configurationService.loadConfiguration(configBaseUrl).then(function() {
+  configurationService.loadConfiguration().then(function() {
     instance.application.advanceReadiness();
   });
 }

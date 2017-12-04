@@ -4,7 +4,6 @@ import ConfigurationService from 'admin-dataview/services/configuration';
  * Get endpoint url from config
  */
 export function getEndpointUrl() {
-  //TODO don't use global configuration variable
   const configuration = ConfigurationService.configuration;
   return configuration ? configuration.get('endpoint.url') : '';
 }
@@ -18,51 +17,9 @@ export function getEndpointSecureUrl() {
 }
 
 /**
- * Get real time url from config
+ * Get Gooru application site avatarUrl
  */
-export function getRealTimeWebServiceUrl() {
+export function getGooruAppUrl() {
   const configuration = ConfigurationService.configuration;
-  return configuration.get('realTime.webServiceUrl');
-}
-
-/**
- * Get real time uri from config
- */
-export function getRealTimeWebServiceUri() {
-  const configuration = ConfigurationService.configuration;
-  return configuration.get('realTime.webServiceUri');
-}
-
-/**
- * get real time web socket uri
- */
-export function getRealTimeWebSocketUri() {
-  const configuration = ConfigurationService.configuration;
-  return configuration.get('realTime.webSocketUri');
-}
-
-/**
- * Get real time web socket url
- */
-export function getRealTimeWebSocketUrl() {
-  const configuration = ConfigurationService.configuration;
-  return configuration.get('realTime.webSocketUrl') + getRealTimeWebSocketUri();
-}
-
-/**
- * Get defaultLanguage setting from config
- */
-export function getLanguageSettingdefaultLang() {
-  //TODO don't use global configuration variable
-  const configuration = ConfigurationService.configuration;
-  return configuration ? configuration.get('languageSetting.defaultLang') : '';
-}
-
-/**
- * Get defaultLanguage drop menu setting from config
- */
-export function getLanguageSettingdropMenu() {
-  //TODO don't use global configuration variable
-  const configuration = ConfigurationService.configuration;
-  return configuration ? configuration.get('languageSetting.showDropMenu') : '';
+  return configuration ? configuration.get('gooru-app-url') : '';
 }

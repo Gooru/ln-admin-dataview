@@ -1,6 +1,4 @@
 import Ember from 'ember';
-import Env from 'admin-dataview/config/environment';
-import EndPointsConfig from 'admin-dataview/utils/endpoint-config';
 
 /**
  * Adapter for the Authentication (Login) with API 3.0
@@ -20,9 +18,8 @@ export default Ember.Object.extend({
    */
   signIn: function(data) {
     const adapter = this;
-    const endpointUrl = EndPointsConfig.getEndpointSecureUrl();
     const namespace = this.get('namespace');
-    const url = `${endpointUrl}${namespace}/signin`;
+    const url = `${namespace}/signin`;
     const options = {
       type: 'POST',
       contentType: 'application/json; charset=utf-8',
@@ -52,6 +49,23 @@ export default Ember.Object.extend({
       contentType: 'application/json; charset=utf-8',
       headers: {
         'Authorization' : `Token ${token}`
+      }
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Post a request to authenticate a google user
+   * @param access token required to build the get headers
+   * @returns {Promise}
+   */
+   authenticationWithToken: function(data) {
+    const url = this.get('namespace') + '/token';
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: {
+        Authorization: `Token ${data.accessToken}`
       }
     };
     return Ember.$.ajax(url, options);

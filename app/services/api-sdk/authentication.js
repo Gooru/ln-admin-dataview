@@ -45,6 +45,29 @@ export default Ember.Service.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service.get('authenticationAdapter').signOut().then(resolve, reject);
     });
+  },
+
+  /**
+   * Authenticates as a normal user using access token
+   * @param accessToken user access token
+   * @returns {Object} the normalized response from the endpoint
+   */
+  authenticateWithToken: function(accessToken) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('authenticationAdapter')
+        .authenticationWithToken({
+          accessToken
+        })
+        .then(function(response) {
+          resolve(
+            service
+              .get('authenticationSerializer')
+              .normalizeResponse(response, false, accessToken)
+          );
+        }, reject);
+    });
   }
 
 });
