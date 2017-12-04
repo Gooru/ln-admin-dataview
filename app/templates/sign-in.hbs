@@ -1,0 +1,53 @@
+<div class="controller sign-in row">
+  <div class="sign-in-wrapper col-md-12 col-sm-12 col-xs-12">
+    <div class="sign-in-header">
+      {{#if sessionEnds}}
+        <h1>{{t "signIn.title-session-ends"}}</h1>
+        <div class="description" alt="{{t "signIn.description-session-ends"}}"
+             title="{{t "signIn.description-session-ends"}}">{{t "signIn.description-session-ends"}}
+        </div>
+      {{else}}
+        <h1>{{t "signIn.title"}}</h1>
+        <div class="description" alt="{{t "signIn.description"}}"
+             title="{{t "signIn.description"}}">{{t "signIn.description"}}
+        </div>
+      {{/if}}
+      <a href="{{unbound googleSignInUrl}}">
+        <div class="google-button">
+          <div class="google-button-content-wrapper">
+            <div class="google-button-icon">
+              <div class="google-button-icon-image">
+              </div>
+            </div>
+            <span class="google-button-content">
+              <span>{{t "signIn.googleButton"}}</span>
+            </span>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="divider"></div>
+    <div class="sign-in-form">
+      <form>
+        <div class="form-group username">
+          <label for="usernameId">
+            <span>{{t "signIn.usernameOrEmail"}}</span>
+            {{validation.app-input model=user valuePath='username' didValidate=didValidate inputId='usernameId'}}
+          </label>
+        </div>
+        <div class="form-group">
+          <label for="passwordId">
+            <span>{{t "signIn.password"}}</span>
+            {{validation.app-input model=user valuePath='password' type='password' didValidate=didValidate inputId='passwordId'}}
+          </label>
+        </div>
+        <div class="form-group forgot-password">
+          {{#link-to 'forgot-password'}} {{t "signIn.forgotPassword"}} {{/link-to}}
+        </div>
+        <div class="log-in-button form-group text-center">
+          <button class="btn btn-success submit-sign-in" {{action "signIn"}}>{{t "signIn.logIn"}} <span>{{app-icon name='keyboard_arrow_right'}}</span></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

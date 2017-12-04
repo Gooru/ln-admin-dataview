@@ -1,0 +1,77 @@
+{
+  "env": {
+    "browser": true,
+    "commonjs": true,
+    "embertest": true,
+    "es6": true,
+    "jquery": true,
+    "node": true,
+    "phantomjs": true,
+    "qunit": true
+  },
+  "extends": "eslint:recommended",
+  "globals": {
+    "Promise": false,
+    "Clipboard": false,
+    "document": false,
+    "katex": false,
+    "MathQuill": false,
+    "moment": false,
+    "SockJS": false,
+    "Stomp": false,
+    "Switchery": false,
+    "wait": false,
+    "window": false,
+    "wysihtml5": false,
+    "wysihtml5ParserRules": false
+  },
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "comma-dangle": "error",
+    "curly": "error",
+    "dot-notation": "error",
+    "eqeqeq": [
+      "error",
+      "smart"
+    ],
+    "indent": [
+      "error",
+      2
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "no-caller": "error",
+    "no-duplicate-imports": "error",
+    "no-empty-function": "error",
+    "no-eval": "error",
+    "no-extra-bind": "error",
+    "no-multiple-empty-lines": "error",
+    "no-new-func": "error",
+    "no-new-wrappers": "error",
+    "no-trailing-spaces": [
+      "error",
+      {
+        "ignoreComments": false
+      }
+    ],
+    "no-unneeded-ternary": "error",
+    "no-use-before-define": "error",
+    "no-useless-call": "error",
+    "no-useless-concat": "error",
+    "no-useless-escape": "error",
+    "prefer-template": "error",
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "require-jsdoc": "error",
+    "semi": [
+      "error",
+      "always"
+    ]
+  }
+}
