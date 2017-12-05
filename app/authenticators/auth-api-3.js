@@ -14,16 +14,8 @@ export default BaseAuthenticator.extend({
     return Ember.RSVP.resolve(data);
   },
 
-  authenticate: function(options) {
-    let promise;
-    if (options.hasAccessToken) {
-      promise = this.get('authenticationService').authenticateWithToken(
-        options.accessToken
-      );
-    } else {
-      promise = this.get('authenticationService').signIn(options.username, options.password);
-    }
-    return promise.then(response => {
+  authenticate: function(accessToken) {
+    return this.get('authenticationService').authenticateWithToken(accessToken).then(response => {
       let localStorage = window.localStorage;
       let itemId = `${response.user.id  }_logins`;
       let localStorageItem = localStorage.getItem(itemId);

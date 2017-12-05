@@ -22,8 +22,7 @@ export default Ember.Route.extend({
     let details = null;
     let accessToken = params.access_token;
     if (accessToken) {
-      details = route.get('sessionService')
-        .signInWithToken(accessToken);
+      details = route.get('sessionService').authenticateWithToken(accessToken);
     }
     return details;
   },

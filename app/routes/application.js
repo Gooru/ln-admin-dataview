@@ -53,13 +53,6 @@ export default Ember.Route.extend(UnauthenticatedRouteMixin, ConfigurationMixin,
   // -------------------------------------------------------------------------
   // Actions - only transition actions should be placed at the route
   actions: {
-    /**
-         * Action triggered when submitting the login form
-         * @see application.hbs
-         * @see app-header.hbs
-         */
-    onCompleteSignIn: function() {
-      this.transitionTo('index');
-    }
+
   }
 });

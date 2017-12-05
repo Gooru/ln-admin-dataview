@@ -1,0 +1,47 @@
+.app-navigation {
+  background-color: $white;
+  box-shadow: -3px 0 4px 0 rgba(0, 0, 0, 0.2);
+  .nav-tabs > li.active > a,
+  .nav-tabs > li.active > a:focus,
+  .nav-tabs > li.active > a:hover {
+    border-width: 0;
+  }
+
+  .nav-tabs > li > a {
+    border: none;
+    color: $dark-400;
+    font-size: 15px;
+  }
+
+  .nav-tabs > li.active > a {
+    font-weight: bold;
+  }
+  .nav-tabs > li > a:hover,
+  .nav-tabs > li.active > a {
+    border: none;
+    color: $blue-700 !important;
+    background: transparent;
+  }
+
+  .nav-tabs > li > a::after {
+    content: "";
+    background: $blue-700;
+    height: 2px;
+    position: absolute;
+    width: 100%;
+    left: 0;
+    bottom: -1px;
+    transition: all 250ms ease 0s;
+    transform: scale(0);
+  }
+
+  .nav-tabs > li.active > a::after,
+  .nav-tabs > li:hover > a::after {
+    transform: scale(1);
+  }
+
+  .tab-nav > li > a::after {
+    background: #21527d none repeat scroll 0 0;
+    color: #fff;
+  }
+}

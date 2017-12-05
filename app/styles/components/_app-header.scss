@@ -18,7 +18,10 @@
       @include flexbox;
       @include align-items(center);
       background-color: inherit;
-      border: 0;
+      border-bottom: 1px solid  $dark-600;
+      box-shadow: none;
+      -webkit-box-shadow: none;
+      border-radius: 0px;
       margin-bottom: 0;
       min-height: 55px;
       @media (min-width: $screen-md) {
@@ -113,7 +116,7 @@
               border-top: 2px solid $brand-primary;
               padding: 0;
               @media (min-width: $screen-md) {
-                top: 52px;
+                top: 50px;
               }
               li {
                 padding: 0;

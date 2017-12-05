@@ -6,9 +6,9 @@
 }
 .app-container {
   height: 100vh;
-  padding-top: 55px;
+  padding-top: 90px;
   @media (min-width: $screen-md) {
-    padding-top: 63px;
+    padding-top: 100px;
   }
 
   > .controller {

@@ -29,5 +29,4 @@ export default Ember.Object.extend({
       return hash.configuration.value;
     });
   }
-
 });

@@ -20,34 +20,6 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Authenticates as a normal user using the credentials
-   * @param username account username
-   * @param password account password
-   * @returns {Object} the normalized response from the endpoint
-   */
-  signIn: function(username, password) {
-    const service = this;
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('authenticationAdapter').signIn({
-        username: username,
-        password: password
-      }).then(function(response) {
-        resolve(service.get('authenticationSerializer').normalizeResponse(response, false));
-      }, reject);
-    });
-  },
-
-  /**
-   * Invalidates current token
-   */
-  signOut: function() {
-    const service = this;
-    return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('authenticationAdapter').signOut().then(resolve, reject);
-    });
-  },
-
-  /**
    * Authenticates as a normal user using access token
    * @param accessToken user access token
    * @returns {Object} the normalized response from the endpoint

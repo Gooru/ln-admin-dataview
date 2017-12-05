@@ -49,16 +49,6 @@ export const TAXONOMY_CATEGORIES = [
   LEARNING_CATEGORY
 ];
 
-export const CONTENT_CATEGORIES = [
-  K12_CATEGORY,
-  EDUCATION_CATEGORY
-];
-
-export const SEARCH_CATEGORIES = [
-  K12_CATEGORY,
-  EDUCATION_CATEGORY
-];
-
 export const CONTENT_TYPES = {
   COLLECTION: 'collection',
   ASSESSMENT: 'assessment',
@@ -88,6 +78,7 @@ export const KEY_CODES = {
   SPACE: 32,
   UP: 38
 };
+
 export const VIEW_LAYOUT_PICKER_OPTIONS = {
   LIST:'list',
   THUMBNAILS:'thumbnails'
@@ -100,12 +91,6 @@ export const EMOTION_VALUES = [
   {value: 2, unicode: '1f641'},
   {value: 1, unicode: '1f625'}
 ];
-
-// unicode values for the correct and incorrect svg files
-export const FEEDBACK_EMOTION_VALUES = {
-  CORRECT: '1f44d',
-  INCORRECT: '1f44e'
-};
 
 export const SCORES = {
   REGULAR: 60,
@@ -128,47 +113,6 @@ export const ROLES = {
   TEACHER: 'teacher'
 };
 
-export const CORRECT_COLOR = GRADING_SCALE[GRADING_SCALE.length - 1].COLOR; //green-400
-
-export const INCORRECT_COLOR = GRADING_SCALE[0].COLOR;//red-400
-
-export const ANONYMOUS_COLOR = '#0072BC';//blue-400
-
-export const NO_ANSWER_COLOR = '#FFFFFF';//white
-
-export const STUDY_PLAYER_BAR_COLOR = '#CDD2D6';//$light-300
-
-export const TIME_SPENT_CHART_COLOR = '#0072BC';//blue-400
-
-// Height of the application header in pixels
-export const HEADER_HEIGHT = 50;
-
-export const REAL_TIME_CLIENT = {
-  CONNECTION_ATTEMPT_DELAY: 3000,
-  OUTGOING_HEARTBEAT: 5000,
-  INCOMING_HEARTBEAT: 5000
-};
-
-export const ENTITY_TYPE = {
-  CONTENT: 'content',
-  USER: 'user'
-};
-
-export const NETWORK_TYPE = {
-  FOLLOWING: 'followings',
-  FOLLOWERS: 'followers'
-};
-
-export const COUNTRY_CODES = {
-  US: 'US'
-};
-
-export const DEFAULT_PAGE_SIZE = 50;
-
-export const DEFAULT_BOOKMARK_PAGE_SIZE = 19;
-
-export const DEFAULT_SEARCH_PAGE_SIZE = 20;
-
 export const TAXONOMY_LEVELS = {
   COURSE:   'course',
   DOMAIN:   'domain',
@@ -176,80 +120,4 @@ export const TAXONOMY_LEVELS = {
   MICRO:    'micro-standard'
 };
 
-export const CENTURY_SKILLS_GROUPS = {
-  KEY_COGNITIVE_SKILLS_AND_STRATEGIES: 'Key Cognitive Skills and Strategies',
-  KEY_CONTENT_KNOWLEDGE:               'Key Content Knowledge',
-  KEY_LEARNING_SKILLS_AND_TECHNIQUES:  'Key Learning Skills and Techniques'
-};
-
-export const CODE_TYPES = {
-  STANDARD_CATEGORY:  'standard_level_0',
-  STANDARD:           'standard_level_1',
-  SUB_STANDARD:       'standard_level_2',
-  LEARNING_TARGET_L0: 'learning_target_level_0',
-  LEARNING_TARGET_L1: 'learning_target_level_1',
-  LEARNING_TARGET_L2: 'learning_target_level_2'
-};
-
-export const GOORU_DEFAULT_STANDARD = 'GDF';
-
-export const ASSESSMENT_SHOW_VALUES = {
-  IMMEDIATE: 'immediate',
-  SUMMARY: 'summary',
-  NEVER: 'never'
-};
-
-export const MAX_ATTEMPTS = 10;
-
-/* token expiration time in milliseconds */
-export const TOKEN_EXPIRATION_TIME = 180000;
-
-export const RESERVED_WORDS = [
-  'account-settings',
-  'analytics',
-  'assessments',
-  'class',
-  'classes',
-  'collections',
-  'content',
-  'context-player',
-  'courses',
-  'featured',
-  'forgot-password',
-  'home',
-  'index',
-  'integration',
-  'logout',
-  'network',
-  'player',
-  'profile',
-  'questions',
-  'reports',
-  'reset-password',
-  'resources',
-  'search',
-  'sign-in',
-  'sign-up',
-  'sign-up-finish',
-  'student',
-  'teacher',
-  'goals'
-];
-
-export const GOAL_STATUS = {
-  NOT_STARTED : 'not_started',
-  ACTIVE : 'activated',
-  COMPLETED : 'completed',
-  DROPPED : 'dropped'
-};
-
-export const RUBRIC_TYPE = {
-  _1xN: '1xN',
-  NxN: 'NxN'
-};
-
-export const PLAYER_EVENT_SOURCE = {
-  COURSE_MAP: 'coursemap',
-  DAILY_CLASS: 'dailyclassactivity',
-  INDEPENDENT_ACTIVITY: 'ILActivity'
-};
+export const NAVIGATION_MENUS = ['GCM', 'CROSSWALK', 'ACTIVITIES', 'LEARNERS', 'SUGGEST'];

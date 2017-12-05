@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row">
+    <ul class="nav nav-tabs" role="tablist">
+    {{#each menuItems as |value index|}}
+        <li role="presentation" class="{{if (eq index activeMenuIndex) "active"}}">
+          <a href="#GCM" aria-controls="GCM" role="tab" data-toggle="tab">{{value}}</a>
+        </li>
+    {{/each}}
+    </ul>
+  </div>
+</div>
