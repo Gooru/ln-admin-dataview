@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import ConfigurationMixin from 'admin-dataview/mixins/configuration';
 import {NAVIGATION_MENUS} from 'admin-dataview/config/config';
+import Utils from 'admin-dataview/utils/utils';
 
 /**
  * RGO navigation Tabs
@@ -29,42 +30,13 @@ export default Ember.Component.extend(ConfigurationMixin, {
      * Triggered when an menu item is selected
      * @param item
      */
-    selectItem: function(item) {
-      if (this.get('onItemSelected')) {
-        this.selectItem(item);
-        this.sendAction('onItemSelected', item);
-      }
+    onMenuItemSelection: function(item) {
+      this.sendAction('onMenuItemSelection', item);
     }
   },
 
   // -------------------------------------------------------------------------
-  // Events
-
-  /**
-   * DidInsertElement ember event
-   */
-  didInsertElement: function() {
-    var item = this.get('selectedMenuItem');
-    this.selectItem(item);
-  },
-
-  willDestroyElement() {
-    this._super(...arguments);
-    this.set('selectedMenuItem', null);
-  },
-
-  // -------------------------------------------------------------------------
   // Properties
-
-  /**
-   * @property {String|Function} onItemSelected - event handler for when an menu item is selected
-   */
-  onItemSelected: null,
-
-  /**
-   * @property {String} selectedMenuItem - menu Item selected
-   */
-  selectedMenuItem: null,
 
   /**
    * Navigation menu items
@@ -77,31 +49,8 @@ export default Ember.Component.extend(ConfigurationMixin, {
   * @property {Boolean}
   */
   activeMenuIndex: Ember.computed(function() {
-    return 1;
-  }),
+    let activeMenuIndex = NAVIGATION_MENUS.indexOf(Utils.getRoutePathLastOccurrence());
+    return activeMenuIndex > -1 ? activeMenuIndex : 0;
+  })
 
-  // -------------------------------------------------------------------------
-  // Observers
-  /**
-   * Refreshes the left navigation with the selected menu item
-   */
-  refreshSelectedMenuItem: function() {
-    var item = this.get('selectedMenuItem');
-    this.selectItem(item);
-  }.observes('selectedMenuItem'),
-
-  // -------------------------------------------------------------------------
-
-  // Methods
-  /**
-   * Triggered when a menu item is selected. Set the class icon for the item selected showing in the mobiles dropdown menu.
-   * @param {string} item
-   */
-  selectItem: function(item) {
-    if (item) {
-      var itemElement = `.${item}`;
-      this.$('.tab').removeClass('active');
-      this.$(itemElement).addClass('active');
-    }
-  }
 });

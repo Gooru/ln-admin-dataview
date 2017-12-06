@@ -10,7 +10,7 @@ module.exports = function (grunt) {
           maxBuffer: (200*1024) * 2
         }
       },
-      "ember-server-stubby": 'ember serve --proxy http://localhost:8883',
+      "ember-server-stubby": 'ember serve --port 4201 --proxy http://localhost:8003',
       'build-dev': 'ember build',
       'build-prod': 'ember build --environment=production',
       'build-prod-bamboo': 'ember build --environment=production --output-path admin-dataview'

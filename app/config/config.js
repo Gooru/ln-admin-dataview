@@ -120,4 +120,4 @@ export const TAXONOMY_LEVELS = {
   MICRO:    'micro-standard'
 };
 
-export const NAVIGATION_MENUS = ['GCM', 'CROSSWALK', 'ACTIVITIES', 'LEARNERS', 'SUGGEST'];
+export const NAVIGATION_MENUS = ['gcm', 'crosswalk', 'activities', 'learners', 'suggest'];

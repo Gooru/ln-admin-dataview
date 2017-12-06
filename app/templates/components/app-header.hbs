@@ -55,6 +55,8 @@
         </div>
       </nav>
     </div>
-    {{app-navigation class="col-xs-12"}}
+    {{#if isAuthenticated}}
+      {{app-navigation class="col-xs-12" onMenuItemSelection='onMenuItemSelection'}}
+    {{/if}}
   </div>
 </div>

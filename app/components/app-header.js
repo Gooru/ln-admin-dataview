@@ -38,6 +38,10 @@ export default Ember.Component.extend(ModalMixin, {
     logout: function() {
       this.get('session').invalidate();
       window.location.href =  `${window.location.protocol + EndPointsConfig.getGooruAppUrl()  }/logout`;
+    },
+
+    onMenuItemSelection: function(item) {
+      this.sendAction('onMenuItemSelection', item);
     }
   },
 

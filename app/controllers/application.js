@@ -23,7 +23,9 @@ export default Ember.Controller.extend(ConfigurationMixin, {
   // Actions
 
   actions: {
-
+    onMenuItemSelection(item) {
+      this.transitionToRoute(item);
+    }
   }
 
 });

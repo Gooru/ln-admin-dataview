@@ -24,6 +24,7 @@ testem.log
 access.log
 error.log
 *.sublime-*
+package-lock.js
 
 #tests
 report-xunit.xml

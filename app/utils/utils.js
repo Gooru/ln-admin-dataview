@@ -1,7 +1,8 @@
 /**
- * [utils description]
- * @return {[type]} [description]
+ * Find the route path last occurrence
+ * @return {String}
  */
-export default function utils() {
-  return true;
+export function getRoutePathLastOccurrence() {
+  let currentLocationPath = window.location.href;
+  return currentLocationPath.substr(currentLocationPath.lastIndexOf('/') + 1);
 }

@@ -1,4 +1,4 @@
-.application{
+.route-application{
   overflow-x: hidden;
   &.no-vertical-scroll{
     overflow-y: hidden;
@@ -6,7 +6,7 @@
 }
 .app-container {
   height: 100vh;
-  padding-top: 90px;
+  padding-top: 103px;
   @media (min-width: $screen-md) {
     padding-top: 100px;
   }
@@ -60,5 +60,11 @@
       }
     }
 
+  }
+}
+
+.route-sign-in {
+  .app-header {
+      display: none;
   }
 }
