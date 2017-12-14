@@ -50,6 +50,19 @@ export default Ember.Route.extend(ConfigurationMixin, {
     Ember.$(document).off('ajaxError');
   },
 
+  beforeModel(transition) {
+    const params = transition.queryParams;
+    const route = this;
+    let details = null;
+    let accessToken = params.access_token;
+    if (accessToken) {
+      details = route.get('authService').authenticateWithToken(accessToken).then(function() {
+        route.transitionTo('gcm');
+      });
+    }
+    return details;
+  },
+
   // -------------------------------------------------------------------------
   // Actions - only transition actions should be placed at the route
   actions: {

@@ -3,6 +3,11 @@ import ConfigurationMixin from 'admin-dataview/mixins/configuration';
 
 export default Ember.Controller.extend(ConfigurationMixin, {
 
+  // --------------------------------------------------------------------------
+  // Query params
+
+  queryParams: ['access_token'],
+
   // -------------------------------------------------------------------------
   // Dependencies
 
@@ -10,7 +15,6 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    * @requires service:session
    */
   session: Ember.inject.service('session'),
-
   /**
    * Authentication (api-sdk/authentication) service.
    * @property {AuthenticationService} authService

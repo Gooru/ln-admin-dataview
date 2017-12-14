@@ -17,18 +17,6 @@ export default Ember.Route.extend({
   // --------------------------------------------------------------------------
   // Methods
 
-  model(params) {
-    const route = this;
-    let details = null;
-    let accessToken = params.access_token;
-    if (accessToken) {
-      details = route.get('sessionService').authenticateWithToken(accessToken).then(function() {
-        route.transitionTo('gcm');
-      });
-    }
-    return details;
-  },
-
   beforeModel: function() {
     if (this.get('session.isAuthenticated')) {
       this.transitionTo('gcm');
