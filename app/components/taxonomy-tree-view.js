@@ -45,7 +45,15 @@ export default Ember.Component.extend({
    */
   height: null,
 
-  nodeClickEventNotifyCount: 0,
+  margin: Ember.computed(function() {
+    let margin = Ember.Object.create({
+      top: 20,
+      right: 120,
+      bottom: 20,
+      left: 120
+    });
+    return margin;
+  }),
 
   root: null,
 
@@ -64,10 +72,13 @@ export default Ember.Component.extend({
     let component = this;
     let width = component.get('width');
     let height = component.get('height');
+    let margin = component.get('margin');
     let svg = d3.select(component.element).append('svg')
-      .attr('width', component.get('width'))
-      .attr('height', component.get('height'))
-      .append('g');
+      .attr('width', width + margin.right + margin.left)
+      .attr('height', height + margin.top + margin.bottom)
+      .append('g')
+      .attr('transform', `translate(${  margin.left  },${  margin.top  })`);
+
     let treemap = d3.tree().size([height, width]);
     let treeData = this.get('data');
     let root = d3.hierarchy(treeData, function(d) {
@@ -111,9 +122,9 @@ export default Ember.Component.extend({
         component.set('index', ++index);
         return d.id || (d.id = component.get('index'));
       });
-      /**
-       * Click handling on when each node get choosed
-       */
+    /**
+     * Click handling on when each node get choosed
+     */
     function click(d) {
       if (d.children) {
         d._children = d.children;
@@ -132,9 +143,9 @@ export default Ember.Component.extend({
 
     nodeEnter.append('circle')
       .attr('class', 'node')
-      .attr('r', 3)
+      .attr('r', 5)
       .style('fill', function(d) {
-        return d._children ? 'lightsteelblue' : '#fff';
+        return d.hasChild ? 'lightsteelblue' : '#fff';
       });
 
     nodeEnter.append('text')
@@ -160,7 +171,7 @@ export default Ember.Component.extend({
     nodeUpdate.select('circle.node')
       .attr('r', 5)
       .style('fill', function(d) {
-        return d._children ? 'lightsteelblue' : '#fff';
+        return d.data.hasChild ? 'lightsteelblue' : '#fff';
       })
       .attr('cursor', 'pointer');
 
@@ -211,16 +222,16 @@ export default Ember.Component.extend({
         return diagonal(d, d.parent);
       });
 
-    /*var linkExit = link.exit().transition()
+    link.exit().transition()
       .duration(duration)
-      .attr('d', function(d) {
+      .attr('d', function() {
         var o = {
           x: source.x,
           y: source.y
         };
         return diagonal(o, o);
       })
-      .remove(); */
+      .remove();
 
     nodes.forEach(function(d) {
       d.x0 = d.x;
@@ -230,48 +241,27 @@ export default Ember.Component.extend({
 
   data: null,
 
-  updateData: function(d) {
+  updateData: function(selectedNode, newNodes) {
     let component = this;
-    /*console.log(d);
 
-
-    let childNodes = d._children;
-    var childData = [];
-    if (!d.children) {
-
-    }
-    childNodes.forEach(childNode => {
-      let nodes = childNode.data.children;
+    if (!selectedNode.children) {
       var childArray = [];
-      var parentObj = d3.hierarchy(childNode);
-
-      parentObj.data.parent = d.name;
-      parentObj.depth = d.depth + 1;
-      parentObj.height = d.height + 1;
-      parentObj.parent = d;
-      parentObj.name = childNode.name;
-      nodes.forEach(node => {
-          var obj = d3.hierarchy(node);
-          obj.data.parent = parentObj.name;
-          obj.depth = parentObj.depth + 1;
-          obj.height = parentObj.height + 1;
-          obj.parent = parentObj;
-          obj.name = node.name;
-          childArray.push(obj);
-      });
-      parentObj.children = childArray;
-      childData.push(parentObj);
-    }); */
-    //d.children = childData;
-
-    if (d.children) {
-      d._children = d.children;
-      d.children = null;
-    } else {
-      d.children = d._children;
-      d._children = null;
     }
-    component.update(d);
+
+    selectedNode.height = selectedNode.height + 1;
+
+    newNodes.forEach(function(d) {
+      var obj = d3.hierarchy(d);
+      obj.data.parent = selectedNode.name;
+      obj.depth = selectedNode.depth + 1;
+      obj.parent = selectedNode;
+      obj.name = d.name;
+      childArray.push(obj);
+    });
+    selectedNode.children = childArray;
+
+
+    component.update(selectedNode);
   }
 
 });

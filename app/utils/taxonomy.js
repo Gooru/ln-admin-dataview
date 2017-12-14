@@ -111,3 +111,13 @@ export function getCourseId(id) {
   let ids = id.split('-');
   return `${ids[0]  }-${  ids[1]}`;
 }
+
+/**
+ * Parse and read domain id for given string
+ * @param  {String} id
+ * @return {String}
+ */
+export function getDomainId(id) {
+  let ids = id.split('-');
+  return `${ids[0]}-${ids[1]}-${ids[2]}`;
+}
