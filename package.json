@@ -66,7 +66,7 @@
     "broccoli-static-compiler": "^0.2.2",
     "ember-cli-deprecation-workflow": "^0.2.3",
     "ember-cli-sass": "^7.0.0",
-    "ember-d3": "^0.3.4",
+    "ember-d3": "^0.2.0",
     "ember-data": "~2.17.0",
     "ember-load-initializers": "1.0.0",
     "ember-papaparse": "0.0.3",
