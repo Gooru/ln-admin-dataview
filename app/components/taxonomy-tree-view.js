@@ -24,8 +24,8 @@ export default Ember.Component.extend({
 
     // Get the component dimensions from the css
     this.setProperties({
-      height: parseInt($component.css('height').split('px')[0]),
-      width: parseInt($component.css('width').split('px')[0])
+      height: parseInt($component.height()),
+      width: parseInt($component.width())
     });
 
     // Render the tree view
@@ -72,13 +72,6 @@ export default Ember.Component.extend({
     let component = this;
     let width = component.get('width');
     let height = component.get('height');
-    let margin = component.get('margin');
-    let svg = d3.select(component.element).append('svg')
-      .attr('width', width + margin.right + margin.left)
-      .attr('height', height + margin.top + margin.bottom)
-      .append('g')
-      .attr('transform', `translate(${  margin.left  },${  margin.top  })`);
-
     let treemap = d3.tree().size([height, width]);
     let treeData = this.get('data');
     let root = d3.hierarchy(treeData, function(d) {
@@ -99,18 +92,46 @@ export default Ember.Component.extend({
     root.children.forEach(collapse);
     component.set('root', root);
     component.set('treemap', treemap);
-    component.set('svg', svg);
     this.update(root);
   },
 
   update: function(source) {
     let component = this;
-    let duration = component.get('duration');
-    let treemap = component.get('treemap');
-    let svg = component.get('svg');
+    let duration = d3.event && d3.event.altKey ? 5000 : 500;
+    let width = component.get('width');
+    let margin = component.get('margin');
+    let root = component.get('root');
+
+
+    // compute the new height
+    let levelWidth = [1];
+    let childCount = function(level, n) {
+      if (n.children && n.children.length > 0) {
+        if (levelWidth.length <= level + 1) {levelWidth.push(0);}
+        levelWidth[level + 1] += n.children.length;
+        n.children.forEach(function(d) {
+          childCount(level + 1, d);
+        });
+      }
+    };
+    childCount(0, root);
+
+    let newHeight = d3.max(levelWidth) * 60;
+
+    let treemap = d3.tree().size([newHeight, width]);
+
     let treeData = treemap(component.get('root'));
     let nodes = treeData.descendants(),
       links = treeData.descendants().slice(1);
+
+
+    d3.select('svg').remove();
+
+    let svg = d3.select(component.element).append('svg')
+      .attr('width', width + margin.right + margin.left)
+      .attr('height', newHeight + margin.top + margin.bottom)
+      .append('g')
+      .attr('transform', `translate(${  margin.left  },${  margin.top  })`);
 
     nodes.forEach(function(d) {
       d.y = d.depth * 180;
