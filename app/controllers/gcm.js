@@ -195,7 +195,7 @@ export default Ember.Controller.extend({
     let children = Ember.A();
     if (standards && standards.length > 0) {
       standards.forEach(standard => {
-        let standardNode = controller.createNode(standard);
+        let standardNode = controller.createNode(standard, true);
         let standardChildNodes = standard.get('children');
         if (standardChildNodes && standardChildNodes.length > 0) {
           let microStandardNodes = standardChildNodes[0];
@@ -203,7 +203,7 @@ export default Ember.Controller.extend({
           if (microStandardNodes && microStandardNodes.length > 0) {
             let standardChildNode = Ember.A();
             microStandardNodes.forEach(microStandard => {
-              standardChildNode.pushObject(controller.createNode(microStandard));
+              standardChildNode.pushObject(controller.createNode(microStandard, false));
             });
             standardNode.set('childData', standardChildNode);
             if (standardChildNode.length > 0) {
@@ -224,11 +224,11 @@ export default Ember.Controller.extend({
     }
   },
 
-  createNode: function(data) {
+  createNode: function(data, isShowDisplayCode = false) {
     let node = Ember.Object.create({
       'id': data.id,
       'code': data.code,
-      'name': data.title,
+      'name': isShowDisplayCode ? data.code : data.title,
       'children': null
     });
     return node;
