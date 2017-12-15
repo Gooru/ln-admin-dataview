@@ -1,0 +1,7 @@
+ {
+  "endpoint" : {
+    "url": "http://nile-dev.gooru.org",
+    "secureUrl": "http://nile-dev.gooru.org"
+  },
+  "gooru-app-url" : "//nile-dev.gooru.org"
+}

@@ -9,7 +9,7 @@ export default {
       crossDomain: true,
       beforeSend: function(jqXHR, settings) {
         const url = settings.url;
-        if (url.startsWith('/')) {
+        if (!url.startsWith('/')) {
           const endpointUrl = EndPointsConfig.getEndpointUrl();
           settings.url = `${endpointUrl}${url}`;
         }
