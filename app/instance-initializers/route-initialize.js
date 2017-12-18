@@ -78,6 +78,5 @@ export function initialize(instance) {
 
 export default {
   name: 'route',
-  after: 'application-configuration',
   initialize: initialize
 };

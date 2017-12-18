@@ -17,14 +17,6 @@ export default BaseAuthenticator.extend({
   authenticate: function(accessToken) {
     return this.get('authenticationService').authenticateWithToken(accessToken).then(response => {
       response.accessToken = accessToken;
-      let localStorage = window.localStorage;
-      let itemId = `${response.user.id  }_logins`;
-      let localStorageItem = localStorage.getItem(itemId);
-      if(!localStorageItem) {
-        localStorage.setItem(itemId, 1);
-      } else {
-        localStorage.setItem(itemId, localStorageItem + 1);
-      }
       return response;
     });
   }
