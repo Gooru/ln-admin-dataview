@@ -99,10 +99,10 @@ export default Ember.Component.extend({
     }
     root.children.forEach(collapse);
     component.set('root', root);
-    this.update(root);
+    this.update(root, 0);
   },
 
-  update: function(source) {
+  update: function(source, depth) {
     let component = this;
     let duration = component.get('duration');
     let width = component.get('width');
@@ -125,7 +125,7 @@ export default Ember.Component.extend({
     };
     childCount(0, root);
 
-    let newHeight = d3.max(levelWidth) * 80;
+    let newHeight = d3.max(levelWidth) * component.normalizeHeightBasedOnDepth(depth);
 
     let treemap = d3.tree().size([newHeight, width]);
 
@@ -143,7 +143,7 @@ export default Ember.Component.extend({
       .attr('transform', `translate(${  margin.left  },${  margin.top  })`);
 
     nodes.forEach(function(d) {
-      d.y = d.depth * 200;
+      d.y = d.depth * 220;
     });
 
     let node = svg.selectAll('g.node')
@@ -160,7 +160,7 @@ export default Ember.Component.extend({
         if (d.children) {
           d._children = d.children;
           d.children = null;
-          component.update(d);
+          component.update(d, d.depth);
         } else {
           component.sendAction('onClickNode', d, component);
         }
@@ -179,13 +179,30 @@ export default Ember.Component.extend({
     let nodeEnter = node.enter().append('g')
       .attr('class', 'node')
       .attr('transform', function() {
-        return `translate(${  source.y0  },${  source.x0  })`;
+        return `translate(${source.y0 },${  source.x0  })`;
       })
       .on('click', click);
 
     let nodeText = nodeEnter.append('svg:foreignObject')
-      .attr('y', -10)
-      .attr('text-anchor', function(d) {
+      .attr('y', function(d) {
+        if (d.depth === 0) {
+          return -12;
+        } else if (d.depth === 1 || d.depth === 2) {
+          return -18;
+        }  else if (d.depth === 3) {
+          return -15;
+        } else {
+          return -10;
+        }
+      }).attr('x', function(d) {
+        if (d.depth === 0) {
+          return -50;
+        } else if (d.depth === 1 || d.depth === 2) {
+          return -20;
+        } else if (d.depth === 3) {
+          return -40;
+        }
+      }).attr('text-anchor', function(d) {
         return d.children || d._children ? 'end' : 'start';
       })
       .style('fill-opacity', 1e-6)
@@ -229,10 +246,14 @@ export default Ember.Component.extend({
      * Generates the diagonal path
      */
     function diagonal(s, d) {
-      let path = `M ${s.y} ${s.x}
-              C ${(s.y + d.y) / 2} ${s.x},
-                ${(s.y + d.y) / 2} ${d.x},
-                ${d.y} ${d.x}`;
+      let sourceX = s.x;
+      let sourceY = s.y;
+      let selectedNodeX = d.x;
+      let selectedNodeY = d.y;
+      let path = `M ${sourceY} ${sourceX}
+              C ${(sourceY + selectedNodeY) / 2} ${sourceX},
+                ${(sourceY + selectedNodeY) / 2} ${selectedNodeX},
+                ${selectedNodeY} ${selectedNodeX}`;
 
       return path;
     }
@@ -294,7 +315,17 @@ export default Ember.Component.extend({
     selectedNode.children = childArray;
 
 
-    component.update(selectedNode);
+    component.update(selectedNode, selectedNode.depth);
+  },
+
+  normalizeHeightBasedOnDepth: function(depth) {
+    if (depth === 0) {
+      return 50;
+    } else if (depth === 1) {
+      return 60;
+    } else {
+      return 75;
+    }
   }
 
 });

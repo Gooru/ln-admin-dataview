@@ -18,7 +18,7 @@ export default Ember.Object.extend({
   loadConfiguration: function (key, configBaseUrl) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const basePath = configBaseUrl ? configBaseUrl : '';
+    const basePath = configBaseUrl ? configBaseUrl : (`${window.location.protocol  }//${  window.location.host}`) ;
     const url = `${basePath}${namespace}/${key}.json`;
     const options = {
       type: 'GET'

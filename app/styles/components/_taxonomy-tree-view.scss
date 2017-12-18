@@ -32,10 +32,12 @@
       width: 12px;
       height: 12px;
       float: left;
+
       i {
         font-size: 12px;
         margin-left: -40px;
       }
+
       :hover {
         color: #00ace9;
       }
@@ -56,7 +58,7 @@
       width: 58px;
       height: 20px;
       text-align: center;
-      margin-left: -50px;
+
       .node-more-info {
         visibility: hidden;
       }
@@ -74,9 +76,7 @@
     }
 
     &.node-3 {
-      margin-left: -70px;
       width: 200px;
-      margin-top: -12px;
       height: 38px;
 
       .node-text {
@@ -85,14 +85,12 @@
     }
 
     &.node-4 {
-      margin-left: -10px;
       width: 150px;
       height: 20px;
     }
 
     &.node-5 {
-      width: 300px;
-      margin-top: -12px;
+      width: 200px;
       height: 38px;
 
       .node-text {
