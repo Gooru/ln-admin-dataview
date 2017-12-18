@@ -229,6 +229,7 @@ export default Ember.Controller.extend({
       'id': data.id,
       'code': data.code,
       'name': isShowDisplayCode ? data.code : data.title,
+      'title': data.title,
       'children': null
     });
     return node;
