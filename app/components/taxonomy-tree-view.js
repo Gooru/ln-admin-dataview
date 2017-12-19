@@ -172,7 +172,7 @@ export default Ember.Component.extend({
      * @param  {Node} d selected node
      */
     function onMoreInfoClick(d) {
-      component.sendAction('onClickNodeMoreInfo', d.data);
+      component.sendAction('onClickNodeMoreInfo', d);
       d3.event.stopPropagation();
     }
 
