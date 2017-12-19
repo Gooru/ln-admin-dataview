@@ -1,0 +1,117 @@
+.cardGroup {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  background: $white;
+  overflow: hidden;
+}
+
+.card {
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  border: none;
+  border-radius: 0;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  border: 1px solid $light-100;
+  overflow: hidden;
+}
+
+.cardGroupBody {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  margin: 10px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding: 15px;
+
+  .courses {
+    i {
+      background: url("images/course-icon.svg");
+      width: 32.5px;
+      height: 25px;
+      object-fit: contain;
+      display: block;
+    }
+  }
+
+  .assesments {
+    i {
+      background: url("images/assessment-icon.svg");
+      width: 32.8px;
+      height: 24.6px;
+      object-fit: contain;
+      display: block;
+    }
+  }
+
+  .collections {
+    i {
+      background: url("images/collection-icon.svg");
+      width: 32px;
+      height: 25px;
+      object-fit: contain;
+      display: block;
+    }
+  }
+
+  .resources {
+    i {
+      background: url("images/resource-icon.svg");
+      width: 21.5px;
+      height: 24.6px;
+      object-fit: contain;
+      display: block;
+    }
+  }
+
+  .questions {
+    i {
+      background: url("images/question-icon.svg");
+      width: 21px;
+      height: 21px;
+      object-fit: contain;
+      display: block;
+    }
+  }
+
+  .rubrics {
+    i {
+      background: url("images/rubric-icon.svg");
+      width: 32px;
+      height: 20px;
+      object-fit: contain;
+      display: block;
+    }
+  }
+}
+
+.cardIcon {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.countText {
+  width: 29px;
+  height: 30px;
+  font-size: 25px;
+  text-align: center;
+  color: $dark-800;
+  margin: 10px;
+}
