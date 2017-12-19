@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import Utils from 'admin-dataview/utils/taxonomy';
-import {getNodeInfo, getStructuredContentData} from 'admin-dataview/utils/utils';
 import {CONTENT_TYPES} from 'admin-dataview/config/config';
 
 export default Ember.Controller.extend({
@@ -132,7 +131,7 @@ export default Ember.Controller.extend({
     */
     onClickNodeMoreInfo: function(node) {
       let controller = this;
-      let nodeInfo = getNodeInfo(node);
+      let nodeInfo = Utils.getNodeInfo(node);
       let selectedNodeData = {
         type: nodeInfo.type,
         parent: nodeInfo.parent,
@@ -292,12 +291,12 @@ export default Ember.Controller.extend({
       assessmentCount: assessmentCountPromise,
       rubricCount: rubricCountPromise
     }).then(function(hash) {
-      contentCountData.push(getStructuredContentData(CONTENT_TYPES.COURSE, hash.courceCount));
-      contentCountData.push(getStructuredContentData(CONTENT_TYPES.ASSESSMENT, hash.assessmentCount));
-      contentCountData.push(getStructuredContentData(CONTENT_TYPES.COLLECTION, hash.collectionCount));
-      contentCountData.push(getStructuredContentData(CONTENT_TYPES.RESOURCE, hash.resourceCount));
-      contentCountData.push(getStructuredContentData(CONTENT_TYPES.QUESTION, hash.questionCount));
-      contentCountData.push(getStructuredContentData(CONTENT_TYPES.RUBRIC, hash.rubricCount));
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COURSE, hash.courceCount));
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.ASSESSMENT, hash.assessmentCount));
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COLLECTION, hash.collectionCount));
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RESOURCE, hash.resourceCount));
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.QUESTION, hash.questionCount));
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RUBRIC, hash.rubricCount));
       return contentCountData;
     });
   }

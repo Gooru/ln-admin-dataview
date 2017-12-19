@@ -54,7 +54,7 @@ export default Ember.Route.extend(ConfigurationMixin, {
     const params = transition.queryParams;
     const route = this;
     let details = null;
-    details = route.get('configurationService').loadConfiguration().then(function(configuration) {
+    details = route.get('configurationService').loadConfiguration().then(function() {
       let accessToken = params.access_token;
       if (accessToken) {
        route.get('authService').authenticateWithToken(accessToken).then(function() {
