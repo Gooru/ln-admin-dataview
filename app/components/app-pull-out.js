@@ -119,14 +119,6 @@ export default Ember.Component.extend({
     return component.get('nodeData.name');
   }),
 
-  /**
-  * Breadcrumb information of the selected node
-  */
-  breadcrumb: Ember.computed('nodeData', function() {
-    let component = this;
-    return component.get('nodeData.parent');
-  }),
-
   //--------------------------------------------------------------------------
   // Observer
   //

@@ -1,0 +1,14 @@
+{{#each groupContentData as |contentData|}}
+  <div class="cardGroup">
+    {{#each contentData as |contentDataCount|}}
+      <div class="card ">
+        <div class="cardGroupBody">
+          <div class="{{contentDataCount.name}}">
+            <i class="icon"></i>
+          </div>
+          <div class="countText">{{contentDataCount.count}}</div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+{{/each}}

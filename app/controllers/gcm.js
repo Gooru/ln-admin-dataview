@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import Utils from 'admin-dataview/utils/taxonomy';
-import {getNodeInfo} from 'admin-dataview/utils/utils';
+import {getNodeInfo, getStructuredContentData} from 'admin-dataview/utils/utils';
+import {CONTENT_TYPES} from 'admin-dataview/config/config';
 
 export default Ember.Controller.extend({
 
@@ -275,6 +276,7 @@ export default Ember.Controller.extend({
   * return hashed json of each content type conunt
   */
   getSearchContentCount: function(selectedNode) {
+    const contentCountData = [];
     const resourceCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(selectedNode));
     const questionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(selectedNode));
     const courseCountPromise = Ember.RSVP.resolve(this.get('searchService').searchCourses(selectedNode));
@@ -290,7 +292,13 @@ export default Ember.Controller.extend({
       assessmentCount: assessmentCountPromise,
       rubricCount: rubricCountPromise
     }).then(function(hash) {
-      return hash;
+      contentCountData.push(getStructuredContentData(CONTENT_TYPES.COURSE, hash.courceCount));
+      contentCountData.push(getStructuredContentData(CONTENT_TYPES.ASSESSMENT, hash.assessmentCount));
+      contentCountData.push(getStructuredContentData(CONTENT_TYPES.COLLECTION, hash.collectionCount));
+      contentCountData.push(getStructuredContentData(CONTENT_TYPES.RESOURCE, hash.resourceCount));
+      contentCountData.push(getStructuredContentData(CONTENT_TYPES.QUESTION, hash.questionCount));
+      contentCountData.push(getStructuredContentData(CONTENT_TYPES.RUBRIC, hash.rubricCount));
+      return contentCountData;
     });
   }
 

@@ -31,9 +31,20 @@ export function getNodeInfo(node) {
   case 4:
     return {
       type: 'standard',
-      parent: null
+      parent: `${node.parent.parent.parent.data.name} > ${node.parent.parent.data.name} > ${node.parent.data.name}`
     };
   default:
     return null;
   }
+}
+
+/**
+* Get structured content count information
+* @return {json}
+*/
+export function getStructuredContentData(contentType, contentCount) {
+  return {
+    name: contentType,
+    count: contentCount
+  };
 }
