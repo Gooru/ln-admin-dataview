@@ -1,3 +1,6 @@
 <div class="gcm">
-  {{taxonomy-tree-view data=taxonomyTreeViewData onClickNode='onClickTaxonomyNode'}}
+  {{taxonomy-tree-view data=taxonomyTreeViewData onClickNodeMoreInfo="onClickNodeMoreInfo" onClickNode='onClickTaxonomyNode'}}
+  {{#if showPullOut}}
+    {{app-pull-out showPullOut=showPullOut nodeData=nodeData contentCount=contentCount}}
+  {{/if}}
 </div>

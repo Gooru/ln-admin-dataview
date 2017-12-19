@@ -3,8 +3,8 @@
     <header class="pull-out-header">
       <div class=header-content>
         <div class="info pull-left">
+          <div class="code">{{code}}</div>
           <div class="title">{{title}}</div>
-          <div class="description">{{description}}</div>
         </div>
         <div class="action pull-right">
           {{#if showMore}}
@@ -27,7 +27,8 @@
       </div>
     </header>
     <div class="pull-out-content">
-      {{yield lessContent}}
+      <div class="parent-bredkcrumb">{{breadcrumb}}</div>
+      {{content-display contentCount=contentCount}}
     </div>
     <footer class="pull-out-footer">
       <!-- TO-DO -->
