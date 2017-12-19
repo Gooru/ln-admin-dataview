@@ -103,6 +103,22 @@ export default Ember.Component.extend({
 
   showPullOut: false,
 
+  /**
+  * GUT code of the selected node item
+  */
+  code: Ember.computed('nodeData', function() {
+    let component = this;
+    return component.get('nodeData.code');
+  }),
+
+  /**
+  * Title of the selected node
+  */
+  title: Ember.computed('nodeData', function() {
+    let component = this;
+    return component.get('nodeData.name');
+  }),
+
   //--------------------------------------------------------------------------
   // Observer
   //

@@ -54,10 +54,10 @@ export default Ember.Route.extend(ConfigurationMixin, {
     const params = transition.queryParams;
     const route = this;
     let details = null;
-    details = route.get('configurationService').loadConfiguration().then(function() {
+    details = route.get('configurationService').loadConfiguration().then(function(configuration) {
       let accessToken = params.access_token;
       if (accessToken) {
-        route.get('authService').authenticateWithToken(accessToken).then(function() {
+       route.get('authService').authenticateWithToken(accessToken).then(function() {
           route.transitionTo('gcm', { queryParams: { access_token: undefined }});
         });
       }
