@@ -179,7 +179,7 @@ export default Ember.Object.extend({
 
   defineHeaders: function() {
     return {
-      Authorization: `Token ${this.get('session.token-api3')}`
+      Authorization: `Token ${this.get('session.accessToken')}`
     };
   }
 });
