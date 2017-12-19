@@ -43,7 +43,7 @@
 
   .courses {
     i {
-      background: url("images/gcm-course-count.svg");
+      background: url("images/course-icon.svg");
       width: 32.5px;
       height: 25px;
       object-fit: contain;
@@ -53,7 +53,7 @@
 
   .assesments {
     i {
-      background: url("images/gcm-assessment-count.svg");
+      background: url("images/assessment-icon.svg");
       width: 32.8px;
       height: 24.6px;
       object-fit: contain;
@@ -63,7 +63,7 @@
 
   .collections {
     i {
-      background: url("images/gcm-collection-count.svg");
+      background: url("images/collection-icon.svg");
       width: 32px;
       height: 25px;
       object-fit: contain;
@@ -73,7 +73,7 @@
 
   .resources {
     i {
-      background: url("images/gcm-resource-count.svg");
+      background: url("images/resource-icon.svg");
       width: 21.5px;
       height: 24.6px;
       object-fit: contain;
@@ -83,9 +83,9 @@
 
   .questions {
     i {
-      background: url("images/gcm-question-count.svg");
-      width: 21.3px;
-      height: 21.3px;
+      background: url("images/question-icon.svg");
+      width: 21px;
+      height: 21px;
       object-fit: contain;
       display: block;
     }
@@ -93,7 +93,7 @@
 
   .rubrics {
     i {
-      background: url("images/gcm-rubric-count.svg");
+      background: url("images/rubric-icon.svg");
       width: 32px;
       height: 20px;
       object-fit: contain;
@@ -105,17 +105,6 @@
 .cardIcon {
   font-size: 32px;
   margin-bottom: 10px;
-
-  .courses {
-    i {
-      background: url("images/gcm-course-count.svg");
-      width: 20px;
-      height: 20px;
-      object-fit: contain;
-      display: block;
-      cursor: pointer;
-    }
-  }
 }
 
 .countText {
