@@ -195,7 +195,7 @@ export default Ember.Controller.extend({
     let children = Ember.A();
     if (standards && standards.length > 0) {
       standards.forEach(standard => {
-        let standardNode = controller.createNode(standard, true);
+        let standardNode = controller.createNode(standard, false);
         let standardChildNodes = standard.get('children');
         if (standardChildNodes && standardChildNodes.length > 0) {
           let microStandardNodes = standardChildNodes[0];

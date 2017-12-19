@@ -137,13 +137,14 @@ export default Ember.Component.extend({
     d3.select('svg').remove();
 
     let svg = d3.select(component.element).append('svg')
-      .attr('width', width + margin.right + margin.left)
+      .attr('width', width + margin.right + margin.left + 400)
       .attr('height', newHeight + margin.top + margin.bottom)
       .append('g')
       .attr('transform', `translate(${  margin.left  },${  margin.top  })`);
 
+
     nodes.forEach(function(d) {
-      d.y = d.depth * 220;
+      d.y = d.depth * component.normalizeYPostionBasedOnDepth(d.depth);
     });
 
     let node = svg.selectAll('g.node')
@@ -187,20 +188,16 @@ export default Ember.Component.extend({
       .attr('y', function(d) {
         if (d.depth === 0) {
           return -12;
-        } else if (d.depth === 1 || d.depth === 2) {
+        } else  {
           return -18;
-        }  else if (d.depth === 3) {
-          return -15;
-        } else {
-          return -10;
         }
       }).attr('x', function(d) {
         if (d.depth === 0) {
-          return -50;
+          return 0;
         } else if (d.depth === 1 || d.depth === 2) {
-          return -20;
+          return 0;
         } else if (d.depth === 3) {
-          return -40;
+          return 0;
         }
       }).attr('text-anchor', function(d) {
         return d.children || d._children ? 'end' : 'start';
@@ -209,7 +206,8 @@ export default Ember.Component.extend({
       .attr('width', 200).attr('height', 50)
       .append('xhtml:div')
       .attr('class', function(d) {
-        return `${'node-label node-'}${d.depth}`;
+        let hasChildClass = d.data.hasChild ? '' : ' node-no-child';
+        return `${'node-label node-'}${d.depth}${hasChildClass}`;
       });
 
     //Node label
@@ -227,14 +225,16 @@ export default Ember.Component.extend({
     nodeUpdate.transition()
       .duration(duration)
       .attr('transform', function(d) {
-        return `translate(${  d.y  },${  d.x  })`;
+        let sourceY = d.y + component.normalizeY1PostionBasedOnDepth(d.depth);
+        return `translate(${  sourceY  },${  d.x  })`;
       });
 
 
     node.exit().transition()
       .duration(duration)
-      .attr('transform', function() {
-        return `translate(${  source.y  },${  source.x  })`;
+      .attr('transform', function(d) {
+        let sourceY = source.y + component.normalizeYPostionBasedOnDepth(d.depth);
+        return `translate(${  sourceY  },${  source.x  })`;
       })
       .remove();
 
@@ -247,9 +247,9 @@ export default Ember.Component.extend({
      */
     function diagonal(s, d) {
       let sourceX = s.x;
-      let sourceY = s.y;
+      let sourceY = s.y + component.normalizeYPostionBasedOnDepth(d.depth);
       let selectedNodeX = d.x;
-      let selectedNodeY = d.y;
+      let selectedNodeY = d.y + component.normalizeYPostionBasedOnDepth(d.depth);
       let path = `M ${sourceY} ${sourceX}
               C ${(sourceY + selectedNodeY) / 2} ${sourceX},
                 ${(sourceY + selectedNodeY) / 2} ${selectedNodeX},
@@ -291,6 +291,7 @@ export default Ember.Component.extend({
       d.x0 = d.x;
       d.y0 = d.y;
     });
+
   },
 
   data: null,
@@ -323,9 +324,50 @@ export default Ember.Component.extend({
       return 50;
     } else if (depth === 1) {
       return 60;
-    } else {
+    } else if (depth === 2)  {
       return 75;
+    } else   {
+      return 80;
     }
+  },
+
+  normalizeYPostionBasedOnDepth: function(depth) {
+    if (depth >= 0) {
+      if (depth === 0) {
+        return 0;
+      } else if (depth === 1) {
+        return 160;
+      } else if (depth === 2) {
+        return 220;
+      } else if (depth === 3) {
+        return 240;
+      } else if (depth === 4) {
+        return 260;
+      } else if (depth === 5) {
+        return 280;
+      }
+    }
+    return 0;
+  },
+
+  normalizeY1PostionBasedOnDepth: function(depth) {
+    if (depth >= 0) {
+      if (depth === 0) {
+        return -40;
+      } else if (depth === 1) {
+        return 0;
+      } else if (depth === 2) {
+        return 80;
+      } else if (depth === 3) {
+        return 100;
+      } else if (depth === 4) {
+        return 120;
+      } else if (depth === 5) {
+        return 140;
+      }
+    }
+    return 0;
   }
+
 
 });
