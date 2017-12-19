@@ -18,7 +18,7 @@ export default Ember.Component.extend({
    * Grouped the content data count object by default size.
    * @return {Array}
    */
-  groupContentData: Ember.computed(function() {
+  groupContentData: Ember.computed('contentCountData', function() {
     let data = this.get('contentCountData');
     let groupData = null;
     if (data) {

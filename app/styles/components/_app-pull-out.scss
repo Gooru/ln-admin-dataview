@@ -2,7 +2,7 @@
   position: absolute;
   top: 0;
   height: 100vh;
-  right: -101%;
+  right: -65%;
   z-index: 99999;
   width: 100%;
 
@@ -25,10 +25,10 @@
       height: 100px;
       background-color: $white;
       border-top: dashed 2px $dark-600;
+      border-bottom: dashed 2px $dark-600;
 
       .header-content {
-        padding-top: 23px;
-        border-bottom: dashed 2px $dark-600;
+        padding-top: 9px;
         width: calc(100% - 30px);
         height: 100%;
         margin: 0 auto;
@@ -42,10 +42,10 @@
           font-weight: bold;
           text-align: left;
           color: $dark-700;
-          line-height: 1.5;
         }
 
         .description {
+          font-size: 15px;
           text-align: left;
           color: $dark-800;
           @include ellipsis($font-size: 15px, $line-height: 1.2, $lines-to-show: 2, $excerpt-bg: $white);
@@ -58,6 +58,7 @@
         .close-info,
         .less-info,
         .more-info {
+          opacity: 0.3;
           cursor: pointer;
           width: 50px;
           margin-right: 3px;

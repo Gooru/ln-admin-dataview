@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import Utils from 'admin-dataview/utils/taxonomy';
+import {CONTENT_TYPES} from 'admin-dataview/config/config';
 
 export default Ember.Controller.extend({
 
@@ -11,6 +12,11 @@ export default Ember.Controller.extend({
    */
   taxonomyService: Ember.inject.service('taxonomy'),
 
+  /**
+  * Search service to fetch content details
+  */
+  searchService: Ember.inject.service('api-sdk/search'),
+
   //-------------------------------------------------------------------------
   //Properties
 
@@ -20,6 +26,16 @@ export default Ember.Controller.extend({
   taxonomyTreeViewData: null,
 
   subjects: null,
+
+  /**
+  * Content count of the selected node
+  */
+  contentCount: null,
+
+  /**
+  * Slected node data
+  */
+  nodeData: null,
 
 
   defaultTaxonomyTreeViewData: Ember.computed(function() {
@@ -108,6 +124,25 @@ export default Ember.Controller.extend({
         let microStandardNodes = standardNode.get('childData');
         component.updateData(d, microStandardNodes);
       }
+    },
+
+    /**
+    * Action triggered when clicking more info in each node
+    */
+    onClickNodeMoreInfo: function(node) {
+      let controller = this;
+      let nodeInfo = Utils.getNodeInfo(node);
+      let selectedNodeData = {
+        type: nodeInfo.type,
+        parent: nodeInfo.parent,
+        name: node.data.name,
+        code: node.data.id
+      };
+      controller.set('nodeData', selectedNodeData);
+      controller.getSearchContentCount(selectedNodeData).then(function(contentCount) {
+        controller.set('contentCount', contentCount);
+        controller.set('showPullOut', true);
+      });
     }
   },
 
@@ -233,6 +268,37 @@ export default Ember.Controller.extend({
       'children': null
     });
     return node;
+  },
+
+  /**
+  * Get Content count of search results
+  * return hashed json of each content type conunt
+  */
+  getSearchContentCount: function(selectedNode) {
+    const contentCountData = [];
+    const resourceCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(selectedNode));
+    const questionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(selectedNode));
+    const courseCountPromise = Ember.RSVP.resolve(this.get('searchService').searchCourses(selectedNode));
+    const collectionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchCollections(selectedNode));
+    const assessmentCountPromise = Ember.RSVP.resolve(this.get('searchService').searchAssessments(selectedNode));
+    const rubricCountPromise = Ember.RSVP.resolve(this.get('searchService').searchRubrics(selectedNode));
+
+    return Ember.RSVP.hash({
+      resourceCount: resourceCountPromise,
+      questionCount: questionCountPromise,
+      courceCount: courseCountPromise,
+      collectionCount: collectionCountPromise,
+      assessmentCount: assessmentCountPromise,
+      rubricCount: rubricCountPromise
+    }).then(function(hash) {
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COURSE, hash.courceCount));
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.ASSESSMENT, hash.assessmentCount));
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COLLECTION, hash.collectionCount));
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RESOURCE, hash.resourceCount));
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.QUESTION, hash.questionCount));
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RUBRIC, hash.rubricCount));
+      return contentCountData;
+    });
   }
 
 });
