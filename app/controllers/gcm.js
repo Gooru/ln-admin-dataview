@@ -65,7 +65,9 @@ export default Ember.Controller.extend({
      * @param  {Object} component
      */
     onClickTaxonomyNode: function(node, component) {
-      let taxonomyTreeViewData = this.get('taxonomyTreeViewData');
+      let controller = this;
+      controller.set('showPullOut', false);
+      let taxonomyTreeViewData = controller.get('taxonomyTreeViewData');
       let id = node.data.id;
       if (node.depth === 1) {
         let subjectNodes = taxonomyTreeViewData.get('children');
@@ -74,7 +76,7 @@ export default Ember.Controller.extend({
         let course = courseNodes.get(0);
         let domainNodes = course.get('childData');
         if (!domainNodes) {
-          this.renderCourseDomainsData(node).then(function() {
+          controller.renderCourseDomainsData(node).then(function() {
             component.updateData(node, courseNodes);
           });
         } else {
@@ -88,7 +90,7 @@ export default Ember.Controller.extend({
         let domainNodes = course.get('childData');
         let domainNode = domainNodes.get(0);
         if (!domainNode.get('childData')) {
-          this.renderDomainCodesData(node).then(function() {
+          controller.renderDomainCodesData(node).then(function() {
             component.updateData(node, domainNodes);
           });
         } else {

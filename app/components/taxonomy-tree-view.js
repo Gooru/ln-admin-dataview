@@ -173,6 +173,7 @@ export default Ember.Component.extend({
      * @param  {Node} d selected node
      */
     function onMoreInfoClick(d) {
+      component.updateMoreInfoActiveNodes(d.data.id);
       component.sendAction('onClickNodeMoreInfo', d);
       d3.event.stopPropagation();
     }
@@ -207,7 +208,8 @@ export default Ember.Component.extend({
       .append('xhtml:div')
       .attr('class', function(d) {
         let hasChildClass = d.data.hasChild ? '' : ' node-no-child';
-        return `${'node-label node-'}${d.depth}${hasChildClass}`;
+        let id = ` node-label-${  d.data.id.replace(/\./g, 's')}`;
+        return `${'node-label node-'}${d.depth}${hasChildClass}${id}`;
       });
 
     //Node label
@@ -259,7 +261,13 @@ export default Ember.Component.extend({
     }
 
     let linkEnter = link.enter().insert('path', 'g')
-      .attr('class', 'link')
+      .attr('class', function(d) {
+        let id = d.data.id.replace(/\./g, 's');
+        return `${'link link-'}${id}`;
+      }).attr('copyclass', function(d) {
+        let id = d.data.id.replace(/\./g, 's');
+        return `${'link link-'}${id}`;
+      })
       .attr('d', function() {
         var o = {
           x: source.x0,
@@ -367,6 +375,29 @@ export default Ember.Component.extend({
       }
     }
     return 0;
+  },
+
+  updateMoreInfoActiveNodes: function(id) {
+    let component = this;
+    id = id.replace(/\./g, 's');
+    component.$('svg g path.link').each(function(index, element) {
+      let replaceClass = component.$(element).attr('copyclass');
+      component.$(element).attr('class', replaceClass);
+    });
+    component.$('.node-label').removeClass('selected');
+    component.$(`.node-label-${  id}`).addClass('selected');
+    let ids = id.split('-');
+    for(let index = 0; index < ids.length; index++) {
+      let newId = '';
+      for(let nextIndex = 0; nextIndex <= index; nextIndex++) {
+        if (nextIndex > 0) {
+          newId = `${newId  }-${  ids[nextIndex]}`;
+        } else {
+          newId = newId + ids[nextIndex];
+        }
+      }
+      component.$(`svg g path.link-${  newId}`).attr('class', `selected link link-${  newId}`);
+    }
   }
 
 
