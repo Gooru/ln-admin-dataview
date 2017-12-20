@@ -8,6 +8,8 @@
 @import 'controllers/application';
 @import 'controllers/gcm';
 
+@import 'helpers/three-bounce-spinner';
+
 @import 'components/app-header';
 @import 'components/app-navigation';
 @import 'components/app-pull-out';

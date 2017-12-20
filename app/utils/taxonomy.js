@@ -146,7 +146,14 @@ export function getNodeInfo(node) {
   case 4:
     return {
       type: 'standard',
-      parent: `${node.parent.parent.parent.data.name} > ${node.parent.parent.data.name} > ${node.parent.data.name}`
+      parent: `${node.parent.parent.parent.data.name} > ${node.parent.parent.data.name} > ${node.parent.data.name}`,
+      title: node.data.title
+    };
+  case 5:
+    return {
+      type: 'standard',
+      parent: `${node.parent.parent.parent.parent.data.name} > ${node.parent.parent.parent.data.name} > ${node.parent.parent.data.name}  > ${node.parent.data.name}`,
+      title: node.data.title
     };
   default:
     return null;

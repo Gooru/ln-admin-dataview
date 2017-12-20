@@ -1,5 +1,5 @@
 import Ember from 'ember';
-
+import {TAXONOMY_LEVELS} from 'admin-dataview/config/config';
 /**
  * Adapter to support the Search for Collections, Assessments, Resources and Questions
  *
@@ -21,7 +21,8 @@ export default Ember.Object.extend({
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/scollection`;
-    let filterType = `flt.${nodeData.type}Name`;
+    let nodeType = nodeData.type;
+    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `flt.${nodeType}Name`;
     const options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
@@ -29,8 +30,9 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       data: {
         q: '*',
+        length: 1,
         'flt.collectionType': 'collection',
-        length: 1
+        'flt.publishStatus': 'published,unpublished'
       }
     };
     if (nodeData.name) {
@@ -49,7 +51,8 @@ export default Ember.Object.extend({
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/scollection`;
-    let filterType = `flt.${nodeData.type}Name`;
+    let nodeType = nodeData.type;
+    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `flt.${nodeType}Name`;
     const options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
@@ -58,7 +61,8 @@ export default Ember.Object.extend({
       data: {
         q: '*',
         length: 1,
-        'flt.collectionType': 'assessment'
+        'flt.collectionType': 'assessment',
+        'flt.publishStatus': 'published,unpublished'
       }
     };
     if (nodeData.name) {
@@ -77,7 +81,8 @@ export default Ember.Object.extend({
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/resource`;
-    let filterType = `flt.${nodeData.type}Name`;
+    let nodeType = nodeData.type;
+    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `flt.${nodeType}Name`;
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
@@ -86,7 +91,8 @@ export default Ember.Object.extend({
       data: {
         q: '*',
         length: 1,
-        'flt.contentFormat': 'resource'
+        'flt.contentFormat': 'resource',
+        'flt.publishStatus': 'published,unpublished'
       }
     };
     if (nodeData.name) {
@@ -105,7 +111,8 @@ export default Ember.Object.extend({
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/resource`;
-    let filterType = `flt.${nodeData.type}Name`;
+    let nodeType = nodeData.type;
+    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `flt.${nodeType}Name`;
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
@@ -114,7 +121,8 @@ export default Ember.Object.extend({
       data: {
         q: '*',
         length: 1,
-        'flt.resourceFormat': 'question'
+        'flt.resourceFormat': 'question',
+        'flt.publishStatus': 'published,unpublished'
       }
     };
     if (nodeData.name) {
@@ -133,7 +141,8 @@ export default Ember.Object.extend({
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/course`;
-    let filterType = `${nodeData.type}Name`;
+    let nodeType = nodeData.type;
+    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `${nodeType}Display` : `${nodeType}Name`;
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
@@ -141,7 +150,9 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       data: {
         q: '*',
-        length: 1
+        start: 3,
+        length: 10,
+        'publishStatus': 'published,unpublished'
       }
     };
     if (nodeData.name) {
@@ -160,7 +171,8 @@ export default Ember.Object.extend({
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/rubric`;
-    let filterType = `${nodeData.type}Name`;
+    let nodeType = nodeData.type;
+    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `${nodeType}Display` : `${nodeType}Name`;
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
@@ -168,7 +180,8 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       data: {
         q: '*',
-        length: 1
+        length: 1,
+        'publishStatus': 'published,unpublished'
       }
     };
     if (nodeData.name) {
