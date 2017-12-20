@@ -5,13 +5,11 @@
     </div>
   </header>
   {{taxonomy-tree-view data=taxonomyTreeViewData onClickNodeMoreInfo="onClickNodeMoreInfo" onClickNode='onClickTaxonomyNode'}}
-  {{#if showPullOut}}
-    {{#app-pull-out showPullOut=showPullOut title=nodeData.code  description=nodeData.name showMore=isCompetencyNode  as |section| }}
-      {{#if section.isLessContent}}
-        {{gcm-pull-out-body contentCountData=contentCount isLoading=isLoading nodeData=nodeData breadcrumb=nodeData.parent nodeDescription=nodeData.description}}
-      {{else if section.isMoreContent}}
+  {{#app-pull-out showPullOut=showPullOut title=nodeData.code  description=nodeData.name showMore=isCompetencyNode  as |section| }}
+    {{#if section.isLessContent}}
+      {{gcm-pull-out-body contentCountData=contentCount isLoading=isLoading nodeData=nodeData breadcrumb=nodeData.parent nodeDescription=nodeData.description}}
+    {{else if section.isMoreContent}}
 
-      {{/if}}
-    {{/app-pull-out}}
-  {{/if}}
+    {{/if}}
+  {{/app-pull-out}}
 </div>
