@@ -402,7 +402,7 @@ export default Ember.Component.extend({
 
   truncateString: function(text) {
     if (text.length > 64) {
-      return text.substring(0, 60) + "...";
+      return `${text.substring(0, 60)  }...`;
     }
     return text;
   }

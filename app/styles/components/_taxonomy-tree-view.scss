@@ -4,8 +4,7 @@
   overflow-y: auto;
 
   .node-no-child {
-    cursor: default;
-    pointer-events: none;
+    cursor: default !important;
   }
 
   .node-label {
@@ -17,12 +16,20 @@
     box-shadow: 0 0 4px 2px rgba(74, 74, 74, 0.2);
     cursor: pointer;
     display: flex;
-    &:hover, &.selected {
+
+    &.selected,
+    &:hover {
       box-shadow: 0 0 4px 2px rgba(0, 172, 233, 0.40);
+
       .node-more-info {
         color: $blue-800;
+
+        i {
+          cursor: pointer;
+        }
       }
     }
+
     .node-text {
       font-size: 10px;
       text-align: left;
@@ -45,7 +52,8 @@
 
       i {
         font-size: 12px;
-        margin-left: -40px;
+        margin-left: -37px;
+        display: block;
       }
     }
 
@@ -55,9 +63,8 @@
     &.node-4,
     &.node-5 {
       .node-more-info {
-        i {
-          margin-top: 13px;
-        }
+        margin-top: 13px;
+        margin-left: -3px;
       }
     }
 
@@ -90,6 +97,7 @@
     fill: none;
     stroke: $light-600;
     stroke-width: 1px;
+
     &.selected {
       stroke: $blue-800;
       stroke-width: 1.5px;
