@@ -110,6 +110,7 @@ export default Ember.Component.extend({
     if (this.get('showPullOut')) {
       let component = this;
       const right = 460 - component.$().width();
+      component.$().removeClass('app-pull-out-hidden');
       component.$().animate({
         right: `${right  }px`
       }, {
@@ -121,6 +122,10 @@ export default Ember.Component.extend({
       let component = this;
       component.$().animate({
         right: '-101%'
+      }, {
+        complete: function() {
+          component.$().addClass('app-pull-out-hidden');
+        }
       });
     }
   })

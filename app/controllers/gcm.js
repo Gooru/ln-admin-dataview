@@ -70,36 +70,29 @@ export default Ember.Controller.extend({
 
   actions: {
     /**
-     * Action triggered when the event open the pull out.
+     * Action triggered  when node get clicked from tree node.
+     * @param  {Object} d selected node
+     * @param  {Object} component
      */
-    onPullOutOpen: function() {
-      this.set('showPullOut', true);
-    },
-
-    /**
-     * Action triggered when the event close the pull out .
-     */
-    onPullOutClose: function() {
-      this.set('showPullOut', false);
-    },
-
-    onClickTaxonomyNode: function(d, component) {
-      let taxonomyTreeViewData = this.get('taxonomyTreeViewData');
-      let id = d.data.id;
-      if (d.depth === 1) {
+    onClickTaxonomyNode: function(node, component) {
+      let controller = this;
+      controller.set('showPullOut', false);
+      let taxonomyTreeViewData = controller.get('taxonomyTreeViewData');
+      let id = node.data.id;
+      if (node.depth === 1) {
         let subjectNodes = taxonomyTreeViewData.get('children');
         let subject = subjectNodes.findBy('id', id);
         let courseNodes = subject.get('children');
         let course = courseNodes.get(0);
         let domainNodes = course.get('childData');
         if (!domainNodes) {
-          this.renderCourseDomainsData(d).then(function() {
-            component.updateData(d, courseNodes);
+          controller.renderCourseDomainsData(node).then(function() {
+            component.updateData(node, courseNodes);
           });
         } else {
-          component.updateData(d, courseNodes);
+          component.updateData(node, courseNodes);
         }
-      } else if (d.depth === 2) {
+      } else if (node.depth === 2) {
         let subjectNodes = taxonomyTreeViewData.get('children');
         let subject = subjectNodes.findBy('id', Utils.getSubjectId(id));
         let courseNodes = subject.get('children');
@@ -107,13 +100,13 @@ export default Ember.Controller.extend({
         let domainNodes = course.get('childData');
         let domainNode = domainNodes.get(0);
         if (!domainNode.get('childData')) {
-          this.renderDomainCodesData(d).then(function() {
-            component.updateData(d, domainNodes);
+          controller.renderDomainCodesData(node).then(function() {
+            component.updateData(node, domainNodes);
           });
         } else {
-          component.updateData(d, domainNodes);
+          component.updateData(node, domainNodes);
         }
-      } else if (d.depth === 3) {
+      } else if (node.depth === 3) {
         let subjectNodes = taxonomyTreeViewData.get('children');
         let subject = subjectNodes.findBy('id', Utils.getSubjectId(id));
         let courseNodes = subject.get('children');
@@ -121,8 +114,8 @@ export default Ember.Controller.extend({
         let domainNodes = course.get('childData');
         let domainNode = domainNodes.findBy('id', id);
         let standardNodes = domainNode.get('childData');
-        component.updateData(d, standardNodes);
-      } else if (d.depth === 4) {
+        component.updateData(node, standardNodes);
+      } else if (node.depth === 4) {
         let subjectNodes = taxonomyTreeViewData.get('children');
         let subject = subjectNodes.findBy('id', Utils.getSubjectId(id));
         let courseNodes = subject.get('children');
@@ -132,7 +125,7 @@ export default Ember.Controller.extend({
         let standardNodes = domainNode.get('childData');
         let standardNode = standardNodes.findBy('id', id);
         let microStandardNodes = standardNode.get('childData');
-        component.updateData(d, microStandardNodes);
+        component.updateData(node, microStandardNodes);
       }
     },
 
@@ -188,8 +181,8 @@ export default Ember.Controller.extend({
     }
   },
 
-  renderCourseDomainsData: function(d) {
-    let id = d.data.id;
+  renderCourseDomainsData: function(node) {
+    let id = node.data.id;
     let controller = this;
     let subjects = controller.get('subjects');
     let subject = subjects.findBy('id', id);
@@ -210,9 +203,9 @@ export default Ember.Controller.extend({
     });
   },
 
-  renderDomainCodesData: function(d) {
+  renderDomainCodesData: function(node) {
     let controller = this;
-    let id = d.data.id;
+    let id = node.data.id;
     let subjects = controller.get('subjects');
     let subjectId = Utils.getSubjectId(id);
     let courseId = Utils.getCourseId(id);
@@ -245,7 +238,7 @@ export default Ember.Controller.extend({
     let children = Ember.A();
     if (standards && standards.length > 0) {
       standards.forEach(standard => {
-        let standardNode = controller.createNode(standard, true);
+        let standardNode = controller.createNode(standard, false);
         let standardChildNodes = standard.get('children');
         if (standardChildNodes && standardChildNodes.length > 0) {
           let microStandardNodes = standardChildNodes[0];

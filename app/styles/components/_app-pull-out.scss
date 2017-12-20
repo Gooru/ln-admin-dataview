@@ -2,7 +2,7 @@
   position: absolute;
   top: 0;
   height: 100vh;
-  right: -65%;
+  right: -101%;
   z-index: 99999;
   width: 100%;
 
@@ -11,6 +11,10 @@
       box-shadow: 3px 0 4px 0 rgba(0, 0, 0, 0.2);
       position: relative;
     }
+  }
+
+  &.app-pull-out-hidden {
+    z-index: -99999;
   }
 
   .pull-out-less-content-container {
