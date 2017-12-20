@@ -204,7 +204,7 @@ export default Ember.Component.extend({
         return d.children || d._children ? 'end' : 'start';
       })
       .style('fill-opacity', 1e-6)
-      .attr('width', 200).attr('height', 50)
+      .attr('width', 200).attr('height', 38)
       .append('xhtml:div')
       .attr('class', function(d) {
         let hasChildClass = d.data.hasChild ? '' : ' node-no-child';
@@ -216,7 +216,7 @@ export default Ember.Component.extend({
     nodeText.append('xhtml:div')
       .attr('class', 'node-text')
       .text(function(d) {
-        return d.data.name;
+        return component.truncateString(d.data.name);
       });
 
     nodeText.append('xhtml:div').attr('class', 'node-more-info').append('i')
@@ -398,6 +398,13 @@ export default Ember.Component.extend({
       }
       component.$(`svg g path.link-${  newId}`).attr('class', `selected link link-${  newId}`);
     }
+  },
+
+  truncateString: function(text) {
+    if (text.length > 64) {
+      return text.substring(0, 60) + "...";
+    }
+    return text;
   }
 
 
