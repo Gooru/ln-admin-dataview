@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import Utils from 'admin-dataview/utils/taxonomy';
-import {CONTENT_TYPES} from 'admin-dataview/config/config';
+import {CONTENT_TYPES, TAXONOMY_LEVELS} from 'admin-dataview/config/config';
 
 export default Ember.Controller.extend({
 
@@ -36,6 +36,16 @@ export default Ember.Controller.extend({
   * Slected node data
   */
   nodeData: null,
+
+  /**
+  * is competency level node or not
+  */
+  isCompetencyNode: false,
+
+  /**
+  * Show loading spinner
+  */
+  isLoading: true,
 
 
   defaultTaxonomyTreeViewData: Ember.computed(function() {
@@ -132,16 +142,21 @@ export default Ember.Controller.extend({
     onClickNodeMoreInfo: function(node) {
       let controller = this;
       let nodeInfo = Utils.getNodeInfo(node);
+      let nodeDescription = nodeInfo.title ? nodeInfo.title : null;
       let selectedNodeData = {
         type: nodeInfo.type,
         parent: nodeInfo.parent,
         name: node.data.name,
-        code: node.data.id
+        code: node.data.id,
+        description: nodeDescription
       };
+      controller.set('isCompetencyNode', nodeInfo.type === TAXONOMY_LEVELS.STANDARD);
       controller.set('nodeData', selectedNodeData);
+      controller.set('isLoading', true);
+      controller.set('showPullOut', true);
       controller.getSearchContentCount(selectedNodeData).then(function(contentCount) {
         controller.set('contentCount', contentCount);
-        controller.set('showPullOut', true);
+        controller.set('isLoading', false);
       });
     }
   },

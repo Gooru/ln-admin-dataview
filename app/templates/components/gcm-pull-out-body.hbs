@@ -1,2 +1,9 @@
 <div class="parent-bredkcrumb">{{breadcrumb}}</div>
-{{content-display-count contentCountData=contentCountData}}
+{{#if nodeDescription}}
+  <div class="standard-description">{{nodeDescription}}</div>
+{{/if}}
+{{#if isLoading}}
+  {{three-bounce-spinner}}
+{{else}}
+  {{content-display-count contentCountData=contentCountData}}
+{{/if}}
