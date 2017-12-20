@@ -9,11 +9,11 @@ const Router = Ember.Router.extend({
 Router.map(function() {
   this.route('index', { path: '/'});
   this.route('gcm');
-  this.route('crosswalk');
   this.route('activities');
   this.route('learners');
   this.route('suggest');
   this.route('sign-in');
+  this.route('crosswalk');
 });
 
 export default Router;

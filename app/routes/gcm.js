@@ -6,6 +6,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   //------------------------------------------------------------------------
   //Dependencies
 
+  i18n: Ember.inject.service(),
+
   /**
    * @requires service:taxonomy
    */

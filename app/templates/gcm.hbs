@@ -1,4 +1,9 @@
 <div class="gcm">
+  <header class="gcm-header">
+    <div class="title">
+        {{t "gcm.title"}}
+    </div>
+  </header>
   {{taxonomy-tree-view data=taxonomyTreeViewData onClickNodeMoreInfo="onClickNodeMoreInfo" onClickNode='onClickTaxonomyNode'}}
     {{#app-pull-out showPullOut=showPullOut title=nodeData.code description=nodeData.name showMore=false as |section| }}
       {{#if section.isLessContent}}

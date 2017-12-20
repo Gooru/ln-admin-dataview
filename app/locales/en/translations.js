@@ -8,5 +8,8 @@ export default {
   },
   profile: {
     name: 'Profile'
+  },
+  gcm: {
+    title: 'Gooru Competency Model'
   }
 };

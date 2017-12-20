@@ -120,7 +120,7 @@ export const TAXONOMY_LEVELS = {
   MICRO:    'micro-standard'
 };
 
-export const NAVIGATION_MENUS = ['gcm', 'crosswalk', 'activities', 'learners', 'suggest'];
+export const NAVIGATION_MENUS = ['gcm', 'activities', 'learners', 'suggest'];
 
 export const CODE_TYPES = {
   STANDARD_CATEGORY: 'standard_level_0',
