@@ -157,7 +157,8 @@ export default Ember.Component.extend({
      * Click handling on when each node get choosed
      */
     function click(d) {
-      if (d.depth > 0) {
+      if (d.depth > 0 && d.data.hasChild) {
+        component.appendLoader(d.data.id);
         if (d.children) {
           d._children = d.children;
           d.children = null;
@@ -405,6 +406,13 @@ export default Ember.Component.extend({
       return `${text.substring(0, 60)  }...`;
     }
     return text;
+  },
+
+  appendLoader: function(id) {
+    let component = this;
+    id = id.replace(/\./g, 's');
+    component.$(`.node-label-${  id  } .node-more-info`).hide();
+    component.$(`.node-label-${  id}`).append('<div class="loader"><img src="/assets/images/loader.svg"></div>');
   }
 
 

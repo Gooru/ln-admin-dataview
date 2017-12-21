@@ -5,6 +5,9 @@
 
   .node-no-child {
     cursor: default !important;
+    &:hover {
+      box-shadow: 0 0 4px 2px rgba(74, 74, 74, 0.2) !important;
+    }
   }
 
   .node-label {
@@ -16,6 +19,13 @@
     box-shadow: 0 0 4px 2px rgba(74, 74, 74, 0.2);
     cursor: pointer;
     display: flex;
+    .loader {
+      margin-left: -14px;
+      margin-top: 4px;
+      img {
+        height: 18px;
+      }
+    }
 
     &.selected,
     &:hover {
