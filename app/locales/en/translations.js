@@ -10,6 +10,11 @@ export default {
     name: 'Profile'
   },
   gcm: {
-    title: 'Gooru Competency Model'
+    title: 'Gooru Competency Model',
+    switch_to_crosswalk: 'Switch to Crosswalk'
+  },
+  crosswalk: {
+    title: 'Crosswalk',
+    switch_to_gcm: 'Switch to GCM'
   }
 };
