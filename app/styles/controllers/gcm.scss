@@ -21,3 +21,15 @@
     }
   }
 }
+// Added this styles for quick fix!
+.app-container > h3 {
+  color: $gray;
+  text-align: center;
+  line-height: 50vh;
+}
+
+.coming-next {
+  color: $gray;
+  text-align: center;
+  margin-top: 30vh;
+}
