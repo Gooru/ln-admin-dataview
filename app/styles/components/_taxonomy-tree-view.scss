@@ -82,7 +82,10 @@
       width: 58px;
       height: 20px;
       text-align: center;
-
+      .node-text {
+        margin-left: 3px;
+        padding-top: 3px;
+      }
       .node-more-info {
         visibility: hidden;
       }

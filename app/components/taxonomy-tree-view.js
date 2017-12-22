@@ -205,7 +205,7 @@ export default Ember.Component.extend({
         return d.children || d._children ? 'end' : 'start';
       })
       .style('fill-opacity', 1e-6)
-      .attr('width', 200).attr('height', 38)
+      .attr('width', 250).attr('height', 38)
       .append('xhtml:div')
       .attr('class', function(d) {
         let hasChildClass = d.data.hasChild ? '' : ' node-no-child';
@@ -402,8 +402,8 @@ export default Ember.Component.extend({
   },
 
   truncateString: function(text) {
-    if (text.length > 64) {
-      return `${text.substring(0, 60)  }...`;
+    if (text.length > 74) {
+      return `${text.substring(0, 70)  }...`;
     }
     return text;
   },

@@ -4,6 +4,16 @@
   .app-pull-out {
     top: 110px;
     height: calc(100vh - 110px);
+    .pull-out-more-content-container {
+      display: table;
+
+      .coming-next {
+        color: $gray;
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+      }
+    }
   }
 
   .gcm-header {
@@ -30,22 +40,11 @@
       color: $white;
       display: table-cell;
       vertical-align: middle;
+
       a {
         color: $white;
         text-decoration: underline;
       }
     }
   }
-}
-// Added this styles for quick fix!
-.app-container > h3 {
-  color: $gray;
-  text-align: center;
-  line-height: 50vh;
-}
-
-.coming-next {
-  color: $gray;
-  text-align: center;
-  margin-top: 30vh;
 }
