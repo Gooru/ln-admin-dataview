@@ -5,7 +5,7 @@ import QuestionModel from 'admin-dataview/models/question/question';
 import CollectionModel from 'admin-dataview/models/collection/collection';
 import AssessmentModel from 'admin-dataview/models/assessment/assessment';
 import TaxonomySerializer from 'admin-dataview/serializers/taxonomy/taxonomy';
-import { DEFAULT_IMAGES, TAXONOMY_LEVELS } from 'admin-dataview/config/config';
+import { DEFAULT_IMAGES } from 'admin-dataview/config/config';
 import ProfileModel from 'admin-dataview/models/profile/profile';
 import {getResourceFormat} from 'admin-dataview/utils/utils';
 
@@ -67,8 +67,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
       format: format,
       url: resource.url,
       thumbnailUrl: resource.thumbnail
-      ? basePath + resource.thumbnail
-      : appRootPath + DEFAULT_IMAGES.RESOURCE,
+        ? basePath + resource.thumbnail
+        : appRootPath + DEFAULT_IMAGES.RESOURCE,
       creator: resource.creator ? serializer.normalizeOwner(resource.creator) : null,
       owner: resource.user ? serializer.normalizeOwner(resource.user) : null,
       type: 'resource',
@@ -124,7 +124,6 @@ export default Ember.Object.extend(ConfigurationMixin, {
       [];
 
     const course = collectionData.course || {};
-    console.log('collection payload', collectionData);
     return CollectionModel.create(Ember.getOwner(this).ownerInjection(), {
       id: collectionData.id,
       title: collectionData.title,
@@ -142,7 +141,6 @@ export default Ember.Object.extend(ConfigurationMixin, {
       course: course.title,
       courseId: course.id,
       isVisibleOnProfile: collectionData.profileUserVisibility,
-      type: collectionData.type,
       owner: ProfileModel.create({
         id: collectionData.gooruUId,
         firstName: collectionData.userFirstName,
@@ -202,7 +200,6 @@ export default Ember.Object.extend(ConfigurationMixin, {
         assessmentData.taxonomySet.curriculum &&
         assessmentData.taxonomySet.curriculum.curriculumInfo) ||
       [];
-    console.log('assessment payload', assessmentData);
     const course = assessmentData.course || {};
     return AssessmentModel.create(Ember.getOwner(this).ownerInjection(), {
       id: assessmentData.id,
@@ -266,7 +263,6 @@ export default Ember.Object.extend(ConfigurationMixin, {
         questionData.taxonomySet.curriculum &&
         questionData.taxonomySet.curriculum.curriculumInfo) ||
       [];
-      console.log('question payload', questionData);
     const format = QuestionModel.normalizeQuestionType(questionData.contentSubFormat);
     return QuestionModel.create(Ember.getOwner(this).ownerInjection(), {
       id: questionData.gooruOid,

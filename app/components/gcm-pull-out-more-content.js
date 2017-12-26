@@ -65,7 +65,6 @@ export default Ember.Component.extend({
       assessmentContent: assessmentPromise,
       questionContent: questionPromise
     }).then(function(hash) {
-      console.log('hash in more content', hash);
       component.set('resourceContent', hash.resourceContent);
       component.set('collectionContent', hash.collectionContent);
       component.set('assessmentContent', hash.assessmentContent);
