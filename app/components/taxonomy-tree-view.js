@@ -157,7 +157,8 @@ export default Ember.Component.extend({
      * Click handling on when each node get choosed
      */
     function click(d) {
-      if (d.depth > 0) {
+      if (d.depth > 0 && d.data.hasChild) {
+        component.appendLoader(d.data.id);
         if (d.children) {
           d._children = d.children;
           d.children = null;
@@ -204,7 +205,7 @@ export default Ember.Component.extend({
         return d.children || d._children ? 'end' : 'start';
       })
       .style('fill-opacity', 1e-6)
-      .attr('width', 200).attr('height', 38)
+      .attr('width', 250).attr('height', 38)
       .append('xhtml:div')
       .attr('class', function(d) {
         let hasChildClass = d.data.hasChild ? '' : ' node-no-child';
@@ -401,10 +402,17 @@ export default Ember.Component.extend({
   },
 
   truncateString: function(text) {
-    if (text.length > 64) {
-      return `${text.substring(0, 60)  }...`;
+    if (text.length > 74) {
+      return `${text.substring(0, 70)  }...`;
     }
     return text;
+  },
+
+  appendLoader: function(id) {
+    let component = this;
+    id = id.replace(/\./g, 's');
+    component.$(`.node-label-${  id  } .node-more-info`).hide();
+    component.$(`.node-label-${  id}`).append('<div class="loader"><img src="/assets/images/loader.svg"></div>');
   }
 
 
