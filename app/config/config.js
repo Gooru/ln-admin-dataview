@@ -130,3 +130,16 @@ export const CODE_TYPES = {
   LEARNING_TARGET_L1: 'learning_target_level_1',
   LEARNING_TARGET_L2: 'learning_target_level_2'
 };
+
+//Question Types
+export const QUESTION_TYPES = {
+  multipleChoice: 'MC',
+  multipleAnswer: 'MA',
+  trueFalse: 'T/F',
+  openEnded: 'OE',
+  fib: 'FIB',
+  hotSpotText: 'HS_TXT',
+  hotSpotImage: 'HS_IMG',
+  hotTextReorder: 'HT_RO',
+  hotTextHighlight: 'HT_HL'
+};

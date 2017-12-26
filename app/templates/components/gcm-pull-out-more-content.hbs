@@ -1,0 +1,42 @@
+<div>
+  <header>
+    <div class="header-content">
+      <span class="heading-title">{{t 'gcm.activities'}}</span>
+      <span class="heading-title">{{t 'gcm.trending'}}</span>
+      <span class="heading-title">{{t 'gcm.learners'}}</span>
+    </div>
+  </header>
+  <div class="body">
+    <div class="section most-relevant">
+      <div class="section-title">{{t 'gcm.pull-out.section.most-relevant'}}</div>
+      <div class="section-content collections col-sm-12">
+        {{#each collectionContent as |content|}}
+          <div class="col-sm-4">
+            {{cards.content-card content=content}}
+          </div>
+        {{/each}}
+      </div>
+      <div class="section-content assessment col-sm-12">
+        {{#each assessmentContent as |content|}}
+          <div class="col-sm-4">
+            {{cards.content-card content=content}}
+          </div>
+        {{/each}}
+      </div>
+      <div class="section-content resources col-sm-12">
+        {{#each resourceContent as |content|}}
+          <div class="col-sm-4">
+            {{cards.content-card content=content}}
+          </div>
+        {{/each}}
+      </div>
+      <div class="section-content questions col-sm-12">
+        {{#each questionContent as |content|}}
+          <div class="col-sm-4">
+            {{cards.content-card content=content}}
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>

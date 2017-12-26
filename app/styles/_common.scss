@@ -256,9 +256,9 @@ span.validation.warning {
     i.audio-icon {
         background: url("gooru/images/audio-resource.svg");
     }
-    .gru-taxonomy-tag-list.in-card,
-    .gru-preview-taxonomy-tag-list {
-        .gru-taxonomy-tag {
+    .taxonomy-tag-list.in-card,
+    .preview-taxonomy-tag-list {
+        .taxonomy-tag {
             background-color: $blue-400;
             border: 0 none;
             div {
@@ -275,7 +275,7 @@ span.validation.warning {
             }
         }
     }
-    .gru-preview-taxonomy-tag-list {
+    .preview-taxonomy-tag-list {
         .tag-caption {
             display: none;
         }

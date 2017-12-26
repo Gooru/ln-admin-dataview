@@ -17,7 +17,7 @@ export default Ember.Object.extend({
    * @param nodeData
    * @returns {Promise.<Collection[]>}
    */
-  searchCollections: function(nodeData) {
+  searchCollections: function(nodeData, length) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/scollection`;
@@ -30,7 +30,7 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       data: {
         q: '*',
-        length: 1,
+        length: length,
         'flt.collectionType': 'collection',
         'flt.publishStatus': 'published,unpublished'
       }
@@ -47,7 +47,7 @@ export default Ember.Object.extend({
    * @param nodeData the term to search
    * @returns {Promise.<Assessment[]>}
    */
-  searchAssessments: function(nodeData) {
+  searchAssessments: function(nodeData, length) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/scollection`;
@@ -60,7 +60,7 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       data: {
         q: '*',
-        length: 1,
+        length: length,
         'flt.collectionType': 'assessment',
         'flt.publishStatus': 'published,unpublished'
       }
@@ -77,7 +77,7 @@ export default Ember.Object.extend({
    * @param nodeData the term to search
    * @returns {Promise.<Resource[]>}
    */
-  searchResources: function(nodeData) {
+  searchResources: function(nodeData, length = 1) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/resource`;
@@ -90,7 +90,7 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       data: {
         q: '*',
-        length: 1,
+        length: length,
         'flt.contentFormat': 'resource',
         'flt.publishStatus': 'published,unpublished'
       }
@@ -107,7 +107,7 @@ export default Ember.Object.extend({
    * @param nodeData the term to search
    * @returns {Promise.<Question[]>}
    */
-  searchQuestions: function(nodeData) {
+  searchQuestions: function(nodeData, length) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/resource`;
@@ -120,7 +120,7 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       data: {
         q: '*',
-        length: 1,
+        length: length,
         'flt.resourceFormat': 'question',
         'flt.publishStatus': 'published,unpublished'
       }
