@@ -32,10 +32,11 @@
       border-bottom: dashed 2px $dark-600;
 
       .header-content {
-        padding-top: 9px;
+        padding-top: 20px;
         width: calc(100% - 30px);
         height: 100%;
         margin: 0 auto;
+        margin-right: 5px;
       }
 
       .info {
@@ -62,11 +63,12 @@
         .close-info,
         .less-info,
         .more-info {
-          opacity: 0.3;
+          opacity: 0.8;
           cursor: pointer;
           width: 50px;
-          margin-right: 3px;
-
+          &:hover {
+            opacity: 1;
+          }
           i {
             margin-left: -81px;
             pointer-events: none;
@@ -108,7 +110,7 @@
     }
 
     .pull-out-content {
-      padding-left: 15px;
+      padding-left: 25px;
       padding-right: 15px;
       width: 100%;
       height: calc(100% - 100px);

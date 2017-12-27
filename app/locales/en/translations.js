@@ -39,5 +39,10 @@ export default {
     'content': {
       'created-by': 'Created by'
     }
+    switch_to_crosswalk: 'Switch to Crosswalk'
+  },
+  crosswalk: {
+    title: 'Crosswalk',
+    switch_to_gcm: 'Switch to GCM'
   }
 };
