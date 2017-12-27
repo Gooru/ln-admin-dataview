@@ -38,7 +38,7 @@ export default {
     },
     'content': {
       'created-by': 'Created by'
-    }
+    },
     switch_to_crosswalk: 'Switch to Crosswalk'
   },
   crosswalk: {
