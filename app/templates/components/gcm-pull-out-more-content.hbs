@@ -12,28 +12,28 @@
       <div class="section-content collections col-sm-12">
         {{#each collectionContent as |content|}}
           <div class="col-sm-4">
-            {{cards.content-card content=content}}
+            {{cards.content-card content=content isAddEnabled=false}}
           </div>
         {{/each}}
       </div>
       <div class="section-content assessment col-sm-12">
         {{#each assessmentContent as |content|}}
           <div class="col-sm-4">
-            {{cards.content-card content=content}}
+            {{cards.content-card content=content isAddEnabled=false}}
           </div>
         {{/each}}
       </div>
       <div class="section-content resources col-sm-12">
         {{#each resourceContent as |content|}}
           <div class="col-sm-4">
-            {{cards.content-card content=content}}
+            {{cards.content-card content=content isAddEnabled=false}}
           </div>
         {{/each}}
       </div>
       <div class="section-content questions col-sm-12">
         {{#each questionContent as |content|}}
           <div class="col-sm-4">
-            {{cards.content-card content=content}}
+            {{cards.content-card content=content isAddEnabled=false}}
           </div>
         {{/each}}
       </div>

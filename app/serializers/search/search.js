@@ -272,6 +272,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
       format: format,
       publisher: null, //TODO missing publisher at API response,
       thumbnailUrl: questionData.thumbnail,
+      creator: questionData.creator ? serializer.normalizeOwner(questionData.creator) : null,
       owner: questionData.user ? serializer.normalizeOwner(questionData.user) : null,
       standards: serializer.get('taxonomySerializer').normalizeTaxonomyArray(taxonomyInfo),
       efficacy: questionData.efficacy ? questionData.efficacy : null,
