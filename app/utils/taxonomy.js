@@ -131,29 +131,34 @@ export function getNodeInfo(node) {
   case 1:
     return {
       type: 'subject',
-      parent: node.data.name
+      parent: node.data.name,
+      searchValue: node.data.name
     };
   case 2:
     return {
       type: 'course',
-      parent: node.parent.data.name
+      parent: node.parent.data.name,
+      searchValue: node.data.name
     };
   case 3:
     return {
       type: 'domain',
-      parent: `${node.parent.parent.data.name} > ${node.parent.data.name}`
+      parent: `${node.parent.parent.data.name} > ${node.parent.data.name}`,
+      searchValue: node.data.name
     };
   case 4:
     return {
       type: 'standard',
       parent: `${node.parent.parent.parent.data.name} > ${node.parent.parent.data.name} > ${node.parent.data.name}`,
-      title: node.data.title
+      title: node.data.title,
+      searchValue: node.data.code
     };
   case 5:
     return {
       type: 'standard',
       parent: `${node.parent.parent.parent.parent.data.name} > ${node.parent.parent.parent.data.name} > ${node.parent.parent.data.name}  > ${node.parent.data.name}`,
-      title: node.data.title
+      title: node.data.title,
+      searchValue: node.data.code
     };
   default:
     return null;
