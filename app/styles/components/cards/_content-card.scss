@@ -198,7 +198,6 @@
          background-color: $white;
          border-top: solid 1px #f2f2f2;
          .actions {
-
            height: 42px;
            width: 100%;
            border-bottom: dashed 2px #979797;
@@ -212,49 +211,6 @@
            .add {
              color: $orange-400;
            }
-         }
-
-         .top, .bottom {
-           position: absolute;
-           width: 100%;
-           height: 100%;
-           top:0;
-           left:0;
-
-         }
-
-         .top:before, .top:after, .bottom:before, .bottom:after{
-           content:" ";
-           position:absolute;
-           width: 9px;
-           height: 12px;
-           background-color: red;
-         }
-
-         .top:before {
-           bottom: 70px;
-           right: 19px;
-           border-bottom-left-radius: 9px;
-
-         }
-
-         .top:after {
-          left: 19px;
-          bottom: 73px;
-          border-bottom-right-radius: 9px;
-         }
-
-         .bottom:before {
-           top: 32px;
-           right: -1px;
-           border-top-left-radius: 9px;
-         }
-
-         .bottom:after {
-           top: 30px;
-           left: -1px;
-           border-top-right-radius: 9px;
-
          }
 
          .data-info {
