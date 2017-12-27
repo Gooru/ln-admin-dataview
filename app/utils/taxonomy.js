@@ -165,8 +165,9 @@ export function getNodeInfo(node) {
 * @return {json}
 */
 export function getStructuredContentData(contentType, contentCount) {
+  const usLocale = 'en-US';
   return {
     name: contentType,
-    count: contentCount
+    count: contentCount.toLocaleString(usLocale)
   };
 }

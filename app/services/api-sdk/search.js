@@ -156,5 +156,69 @@ export default Ember.Service.extend({
         }
       );
     });
+  },
+
+  getResourceContent: function(nodeData, length = 1) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service.get('searchAdapter').searchResources(nodeData, length).then(
+        function(response) {
+          resolve(
+            service.get('searchSerializer').nomalizeSearchResourceContent(response)
+          );
+        },
+        function(error) {
+          reject(error);
+        }
+      );
+    });
+  },
+
+  getCollectionContent: function(nodeData, length = 1) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service.get('searchAdapter').searchCollections(nodeData, length).then(
+        function(response) {
+          resolve(
+            service.get('searchSerializer').normalizeSearchCollectionContent(response)
+          );
+        },
+        function(error) {
+          reject(error);
+        }
+      );
+    });
+  },
+
+  getAssessmentContent: function(nodeData, length =1) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service.get('searchAdapter').searchAssessments(nodeData, length).then(
+        function(response) {
+          resolve(
+            service.get('searchSerializer').normalizeSearchAssessmentContent(response)
+          );
+        },
+        function(error) {
+          reject(error);
+        }
+      );
+    });
+  },
+
+  getQuestionContent: function(nodeData, length) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service.get('searchAdapter').searchQuestions(nodeData, length).then(
+        function(response) {
+          resolve(
+            service.get('searchSerializer').normalizeSearchQuestionContent(response)
+          );
+        },
+        function(error) {
+          reject(error);
+        }
+      );
+    });
   }
 });
