@@ -36,7 +36,7 @@ export default Ember.Object.extend({
       }
     };
     if (nodeData.name) {
-      options.data[`${filterType}`] = nodeData.name;
+      options.data[`${filterType}`] = nodeData.searchValue;
     }
     return Ember.$.ajax(url, options);
   },
@@ -66,7 +66,7 @@ export default Ember.Object.extend({
       }
     };
     if (nodeData.name) {
-      options.data[`${filterType}`] = nodeData.name;
+      options.data[`${filterType}`] = nodeData.searchValue;
     }
     return Ember.$.ajax(url, options);
   },
@@ -96,7 +96,7 @@ export default Ember.Object.extend({
       }
     };
     if (nodeData.name) {
-      options.data[`${filterType}`] = nodeData.name;
+      options.data[`${filterType}`] = nodeData.searchValue;
     }
     return Ember.$.ajax(url, options);
   },
@@ -126,7 +126,7 @@ export default Ember.Object.extend({
       }
     };
     if (nodeData.name) {
-      options.data[`${filterType}`] = nodeData.name;
+      options.data[`${filterType}`] = nodeData.searchValue;
     }
     return Ember.$.ajax(url, options);
   },
@@ -156,7 +156,7 @@ export default Ember.Object.extend({
       }
     };
     if (nodeData.name) {
-      options.data[`${filterType}`] = nodeData.name;
+      options.data[`${filterType}`] = nodeData.searchValue;
     }
     return Ember.$.ajax(url, options);
   },
@@ -185,7 +185,7 @@ export default Ember.Object.extend({
       }
     };
     if (nodeData.name) {
-      options.data[`${filterType}`] = nodeData.name;
+      options.data[`${filterType}`] = nodeData.searchValue;
     }
     return Ember.$.ajax(url, options);
   },

@@ -140,7 +140,8 @@ export default Ember.Controller.extend({
         type: nodeInfo.type,
         parent: nodeInfo.parent,
         name: node.data.name,
-        code: node.data.id,
+        code: node.data.code,
+        searchValue: nodeInfo.searchValue,
         description: nodeDescription
       };
       controller.set('isCompetencyNode', nodeInfo.type === TAXONOMY_LEVELS.STANDARD);
