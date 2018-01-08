@@ -74,6 +74,8 @@ export default Ember.Component.extend({
      * Action triggered when the user close the pull out
      */
     onPullOutClose: function() {
+      this.set('showMore', false);
+      this.set('showLess', false);
       this.set('showPullOut', false);
     }
   },
