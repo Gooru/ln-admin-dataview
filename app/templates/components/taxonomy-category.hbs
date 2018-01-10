@@ -1,0 +1,5 @@
+<div class="btn-group categories">
+  {{#each categories as |category|}}
+    <button type="button" class="btn btn-sm btn-{{if (eq  category.value selectedCategory) 'primary' 'info'}}" {{action 'onChooseCategory' category}}>{{t category.label}}</button>
+  {{/each}}
+</div>
