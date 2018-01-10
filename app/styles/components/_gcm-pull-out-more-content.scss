@@ -1,25 +1,11 @@
 .gcm-pull-out-more-content {
-  header {
-    height: 100px;
-    line-height: 100px;
-    padding-left: 26%;
-    margin: 0 35px;
-    border-bottom: dashed 2px $dark-600;
-    .heading-title {
-      font-size: 15px;
-      font-weight: bold;
-      text-transform: uppercase;
-      color: $gray-29;
-      margin-right: 8%;
-    }
-  }
   .body {
     height: calc(100vh - 210px);
     overflow-y: auto;
     .section {
       .section-title {
         padding: 8px 0;
-        margin: 0 35px;
+        margin: 45px 35px 15px 35px;
         font-size: 15px;
         font-weight: bold;
         color: $gray-29;
@@ -27,7 +13,10 @@
         border-bottom: dashed 2px $dark-600;
       }
       .section-content  {
-        margin-top: 10px;
+        margin-top: 12px;
+        .prerequisites {
+          margin: 10px 0 0 0px;
+        }
       }
     }
   }
