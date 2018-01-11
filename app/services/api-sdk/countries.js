@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import AuthenticationAdapter from 'admin-dataview/adapters/countries/countries';
+import CountriesAdapter from 'admin-dataview/adapters/countries/countries';
 
 /**
  * Service for the countries
@@ -12,7 +12,7 @@ export default Ember.Service.extend({
 
   init: function() {
     this._super(...arguments);
-    this.set('countriesAdapter', AuthenticationAdapter.create(Ember.getOwner(this).ownerInjection()));
+    this.set('countriesAdapter', CountriesAdapter.create(Ember.getOwner(this).ownerInjection()));
   },
 
   /**
@@ -26,7 +26,27 @@ export default Ember.Service.extend({
         .get('countriesAdapter')
         .getCountries()
         .then(function(response) {
-          resolve(response);
+          resolve(Ember.Object.create(response));
+        }, reject);
+    });
+  },
+
+  /**
+   * Fetch the countries region data
+   * @returns {Object}
+   */
+  getCountriesRegion: function() {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('countriesAdapter')
+        .getCountriesRegion()
+        .then(function(response) {
+          let result = Ember.A();
+          response.forEach(data => {
+            result.pushObject(Ember.Object.create(data));
+          });
+          resolve(result);
         }, reject);
     });
   }
