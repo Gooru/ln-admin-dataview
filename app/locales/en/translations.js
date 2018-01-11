@@ -16,6 +16,12 @@ export default {
       HT_RO: 'Drag and Drop Order',
       HT_HL: 'Highlight Text'
     },
+
+    currentlyStudying: 'currently Studying',
+    signatureAssessment: 'signature Assessment',
+    signatureCollection: 'signature Collection',
+    mostPopularProviders: 'most popular providers',
+
     categoryOptions: {
       k12: 'K-12',
       'higher-ed': 'Higher Education',
@@ -38,7 +44,16 @@ export default {
     engagement: 'Engagement',
     'pull-out': {
       section: {
-        'most-relevant': 'Most Relevant'
+        'most-relevant': 'Most Relevant',
+        'prerequisites': 'Prerequisites',
+        'assessments': 'Assessments',
+        'collections': 'Collections',
+        'questions': 'Questions',
+        'resources': 'Resources',
+        'learnerSummary': 'Learner Summary',
+        'studentsMastery': 'Student Mastery',
+        'performanceDistribution': 'Performance Distibution'
+
       }
     },
     'content': {
