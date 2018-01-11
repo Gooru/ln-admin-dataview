@@ -37,6 +37,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
    * @returns {contentCount}
    */
   normalizeSearchContentCount: function(payload) {
+
     let totalHitCount = payload ? payload.totalHitCount : null;
     return totalHitCount;
   },
@@ -280,6 +281,20 @@ export default Ember.Object.extend(ConfigurationMixin, {
       engagement: questionData.engagement ? questionData.engagement : null
     });
   },
+
+
+  /**
+   * Normalizes a question
+   * @param {*} result
+   * @returns {Question}
+   */
+  normalizeSearchlearningMapsContent: function(learningMapsContent) {
+    // const serializer = this;
+    const questionData = learningMapsContent.contents;
+
+    return questionData;
+  },
+
 
   /**
    * Normalizes owner

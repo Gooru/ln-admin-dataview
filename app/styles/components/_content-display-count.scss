@@ -60,6 +60,24 @@
       display: block;
     }
   }
+  .lesson {
+    i {
+      background: url("images/lesson-icon.svg");
+      width: 24px;
+      height: 6px;
+      object-fit: contain;
+      display: block;
+    }
+  }
+  .unit {
+    i {
+      background: url("images/unit-icon.svg");
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+      display: block;
+    }
+  }
 
   .collection {
     i {
@@ -75,7 +93,7 @@
     i {
       background: url("images/resource-icon.svg");
       width: 21.5px;
-      height: 24.2px;
+      height: 24px;
       object-fit: contain;
       display: block;
     }

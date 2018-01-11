@@ -18,8 +18,8 @@ export default {
     },
 
     currentlyStudying: 'currently Studying',
-    signatureAssessment: 'signature Assessment',
-    signatureCollection: 'signature Collection',
+    signatureAssessment: 'signature Assessments',
+    signatureCollection: 'signature Collections',
     mostPopularProviders: 'most popular providers',
 
     categoryOptions: {
