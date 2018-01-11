@@ -16,11 +16,17 @@ export default {
       HT_RO: 'Drag and Drop Order',
       HT_HL: 'Highlight Text'
     },
-    currentlyStudying : 'currently Studying',
-    signatureAssessment: 'signature Assessment',
-    signatureCollection : 'signature Collection',
-    mostPopularProviders: 'most popular providers'
 
+    currentlyStudying: 'currently Studying',
+    signatureAssessment: 'signature Assessment',
+    signatureCollection: 'signature Collection',
+    mostPopularProviders: 'most popular providers',
+
+    categoryOptions: {
+      k12: 'K-12',
+      'higher-ed': 'Higher Education',
+      'professional-dev': 'Professional Development'
+    }
   },
   logout: {
     name: 'Logout'

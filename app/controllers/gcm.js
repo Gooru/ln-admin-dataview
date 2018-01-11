@@ -47,6 +47,12 @@ export default Ember.Controller.extend({
   */
   isLoading: true,
 
+  /**
+   * It will maintain value of number of times taxonomy subject category was choosen.
+   * @type {Number}
+   */
+  reloadCount: 0,
+
 
   defaultTaxonomyTreeViewData: Ember.computed(function() {
     let data = Ember.Object.create({
@@ -67,6 +73,9 @@ export default Ember.Controller.extend({
       this.parseTaxonomyData(subject.get('courses'), targetNode, true);
     });
   }),
+
+  // -------------------------------------------------------------------------
+  // Actions
 
   actions: {
     /**
@@ -152,6 +161,14 @@ export default Ember.Controller.extend({
         controller.set('contentCount', contentCount);
         controller.set('isLoading', false);
       });
+    },
+    /**
+     * Action get triggered when subject category is choosen
+     * @param  {Object} category
+     */
+    onChooseCategory: function(category) {
+      this.set('showPullOut', false);
+      this.send('chooseCategory', category);
     }
   },
 

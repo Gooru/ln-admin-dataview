@@ -18,13 +18,13 @@
 @import 'components/app-navigation';
 @import 'components/app-pull-out';
 @import 'components/gcm-pull-out-body';
-@import 'components/taxonomy-tree-view';
 @import 'components/validation/app-input';
 @import 'components/content-display-count';
 @import 'components/gcm-pull-out-more-content';
 @import 'components/cards/content-card';
 @import 'components/taxonomy/taxonomy-tag-list';
 @import 'components/taxonomy/taxonomy-tag';
+
 @import 'components/charts/study-count-chart';
 @import 'components/charts/gcm-x-bar-chart';
 @import 'components/popular-providers';
@@ -34,3 +34,5 @@
 @import "components/learners-summary";
 @import "components/students-mastery";
 @import "components/performance-distribution";
+@import 'components/taxonomy/taxonomy-tree-view';
+@import 'components/taxonomy/taxonomy-category';
