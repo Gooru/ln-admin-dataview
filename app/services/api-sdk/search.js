@@ -158,6 +158,52 @@ export default Ember.Service.extend({
     });
   },
 
+
+  /**
+   * Search for units
+   *
+   * @param nodeData
+   * @returns {Promise.<Question[]>}
+   */
+  searchUnits: function(nodeData) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service.get('searchAdapter').searchUnits(nodeData).then(
+        function(response) {
+          resolve(
+            service.get('searchSerializer').normalizeSearchContentCount(response)
+          );
+        },
+        function(error) {
+          reject(error);
+        }
+      );
+    });
+  },
+
+
+  /**
+   * Search for units
+   *
+   * @param nodeData
+   * @returns {Promise.<Question[]>}
+   */
+  searchLessons: function(nodeData) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service.get('searchAdapter').searchLessons(nodeData).then(
+        function(response) {
+          resolve(
+            service.get('searchSerializer').normalizeSearchContentCount(response)
+          );
+        },
+        function(error) {
+          reject(error);
+        }
+      );
+    });
+  },
+
   getResourceContent: function(nodeData, length = 1) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
@@ -220,5 +266,24 @@ export default Ember.Service.extend({
         }
       );
     });
+  },
+
+
+  learningMapsContent: function(nodeData, length) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service.get('searchAdapter').learningMapsContent(nodeData, length).then(
+        function(response) {
+          resolve(
+            service.get('searchSerializer').normalizeSearchlearningMapsContent(response)
+          );
+        },
+        function(error) {
+          reject(error);
+        }
+      );
+    });
   }
+
+
 });
