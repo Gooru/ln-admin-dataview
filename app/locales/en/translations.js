@@ -15,6 +15,11 @@ export default {
       HT_TO: 'Drag and Drop Order',
       HT_RO: 'Drag and Drop Order',
       HT_HL: 'Highlight Text'
+    },
+    categoryOptions: {
+      k12: 'K-12',
+      'higher-ed': 'Higher Education',
+      'professional-dev': 'Professional Development'
     }
   },
   logout: {

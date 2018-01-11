@@ -75,9 +75,25 @@ export default Ember.Component.extend({
    */
   duration: 750,
 
+  /**
+   * It will maintain value of number of times taxonomy subject category was choosen.
+   * @type {Number}
+   */
+  reloadCount: 0,
+
+  // -------------------------------------------------------------------------
+  // Observer
+
+  /**
+   * This method get executed whenever the reload count get updated.
+   */
+  onReload: Ember.observer('reloadCount', function() {
+    this.renderTreeView();
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
-  //
+
   renderTreeView: function() {
     let component = this;
     let height = component.get('height');
@@ -190,7 +206,7 @@ export default Ember.Component.extend({
       .attr('y', function(d) {
         if (d.depth === 0) {
           return -12;
-        } else  {
+        } else {
           return -18;
         }
       }).attr('x', function(d) {
@@ -333,9 +349,9 @@ export default Ember.Component.extend({
       return 50;
     } else if (depth === 1) {
       return 60;
-    } else if (depth === 2)  {
+    } else if (depth === 2) {
       return 75;
-    } else   {
+    } else {
       return 80;
     }
   },
@@ -388,9 +404,9 @@ export default Ember.Component.extend({
     component.$('.node-label').removeClass('selected');
     component.$(`.node-label-${  id}`).addClass('selected');
     let ids = id.split('-');
-    for(let index = 0; index < ids.length; index++) {
+    for (let index = 0; index < ids.length; index++) {
       let newId = '';
-      for(let nextIndex = 0; nextIndex <= index; nextIndex++) {
+      for (let nextIndex = 0; nextIndex <= index; nextIndex++) {
         if (nextIndex > 0) {
           newId = `${newId  }-${  ids[nextIndex]}`;
         } else {

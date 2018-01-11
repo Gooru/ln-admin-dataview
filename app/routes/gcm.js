@@ -16,17 +16,40 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   //-------------------------------------------------------------------------
   //Properties
 
-  defaultCategory: 'k_12',
+  selectedCategory: 'k_12',
 
   defaultFrameworkId: 'GDT',
+
+
+  // -------------------------------------------------------------------------
+  // Actions
+  actions: {
+    /**
+     * Action get triggered when subject category is choosen
+     * @param  {Object} category
+     */
+    chooseCategory: function(category) {
+      let route = this;
+      route.set('selectedCategory', category.value);
+      return route.loadTaxonomyData().then(({subjects}) => {
+        let controller = this.get('controller');
+        controller.set('subjects', subjects);
+        controller.incrementProperty('reloadCount');
+      });
+    }
+  },
 
   // -------------------------------------------------------------------------
   // Methods
 
   model: function() {
+    return this.loadTaxonomyData();
+  },
+
+  loadTaxonomyData: function() {
     let route = this;
     return Ember.RSVP.hash({
-      subjects: this.get('taxonomyService').getSubjects(route.get('defaultCategory'))
+      subjects: this.get('taxonomyService').getSubjects(route.get('selectedCategory'))
     }).then(({
       subjects
     }) => {
