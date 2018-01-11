@@ -46,4 +46,18 @@
       }
     }
   }
+
+  .crosswalk-body {
+    background-color: $white;
+    .section-title {
+      text-align: center;
+      padding: 15px;
+      .title {
+        font-size: 19.5px;
+        font-weight: 300;
+        line-height: 1.54;
+        color: #666666;
+      }
+    }
+  }
 }
