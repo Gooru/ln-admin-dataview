@@ -24,5 +24,15 @@
 @import 'components/cards/content-card';
 @import 'components/taxonomy/taxonomy-tag-list';
 @import 'components/taxonomy/taxonomy-tag';
+
+@import 'components/charts/study-count-chart';
+@import 'components/charts/gcm-x-bar-chart';
+@import 'components/popular-providers';
+@import "components/signature-assessments";
+@import "components/signature-collections";
+@import "components/gcm-pull-out-more-prerequisites";
+@import "components/learners-summary";
+@import "components/students-mastery";
+@import "components/performance-distribution";
 @import 'components/taxonomy/taxonomy-tree-view';
 @import 'components/taxonomy/taxonomy-category';

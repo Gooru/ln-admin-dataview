@@ -1,42 +1,67 @@
 <div>
-  <header>
-    <div class="header-content">
-      <span class="heading-title">{{t 'gcm.activities'}}</span>
-      <span class="heading-title">{{t 'gcm.trending'}}</span>
-      <span class="heading-title">{{t 'gcm.learners'}}</span>
-    </div>
-  </header>
   <div class="body">
-    <div class="section most-relevant">
-      <div class="section-title">{{t 'gcm.pull-out.section.most-relevant'}}</div>
-      <div class="section-content collections col-sm-12">
-        {{#each collectionContent as |content|}}
-          <div class="col-md-4 col-sm-12">
-            {{cards.content-card content=content isAddEnabled=false}}
-          </div>
-        {{/each}}
+    <div class="section pre-requisites">
+
+      <div class="section-content prerequisites col-sm-12">
+        <div class="section-title">{{t 'gcm.pull-out.section.prerequisites'}}</div>
+        {{gcm-pull-out-more-prerequisites}}
       </div>
+
       <div class="section-content assessment col-sm-12">
+        <div class="section-title">{{t 'gcm.pull-out.section.assessments'}}</div>
         {{#each assessmentContent as |content|}}
           <div class="col-md-4 col-sm-12">
             {{cards.content-card content=content isAddEnabled=false}}
           </div>
         {{/each}}
       </div>
+
+      <div class="section-content collections col-sm-12">
+        <div class="section-title">{{t 'gcm.pull-out.section.collections'}}</div>
+        {{#each collectionContent as |content|}}
+          <div class="col-md-4 col-sm-12">
+            {{cards.content-card content=content isAddEnabled=false}}
+          </div>
+        {{/each}}
+      </div>
+
       <div class="section-content resources col-sm-12">
+        <div class="section-title">{{t 'gcm.pull-out.section.resources'}}</div>
         {{#each resourceContent as |content|}}
           <div class="col-md-4 col-sm-12">
             {{cards.content-card content=content isAddEnabled=false}}
           </div>
         {{/each}}
       </div>
+
       <div class="section-content questions col-sm-12">
+        <div class="section-title">{{t 'gcm.pull-out.section.questions'}}</div>
         {{#each questionContent as |content|}}
           <div class="col-md-4 col-sm-12">
             {{cards.content-card content=content isAddEnabled=false}}
           </div>
         {{/each}}
       </div>
+
+      <div class="section-content learner-summary col-sm-12">
+        <div class="section-title">{{t 'gcm.pull-out.section.learnerSummary'}}</div>
+        {{learners-summary}}
+      </div>
+
+      <div class="section-content student-mastery col-sm-12">
+        <div class="section-title">{{t 'gcm.pull-out.section.studentsMastery'}}</div>
+        <div class="col-md-12">
+          {{students-mastery}}
+        </div>
+      </div>
+
+      <div class="section-content performance-distribution col-sm-12">
+        <div class="section-title">{{t 'gcm.pull-out.section.performanceDistribution'}}</div>
+        <div class="col-md-12">
+          {{performance-distribution}}
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
