@@ -1,45 +1,30 @@
 .gcm-pull-out-more-prerequisites {
-  .total {
-    height: 40px;
+  .left-node {
+    padding-bottom: 10px;
 
-    .left-node {
-      width: 130px;
-      display: inline-block;
+    .standard-tags {
+      width: 75px;
       float: left;
-      padding: 2px 0 16px 21px;
-
-      .standard-tags {
-        width: 75px;
-        float: left;
-        border: 1px solid rgba(193, 193, 193, 0.29);
-        border-radius: 20px;
-        text-align: center;
-        padding-right: 6px;
-      }
+      border: 1px solid rgba(193, 193, 193, 0.29);
+      border-radius: 20px;
+      text-align: center;
     }
+  }
 
-    .border {
-      content: "";
-      width: 13px;
-      height: 100%;
-      border-left: 1px solid $dark-600;
-    }
+  .border {
+    content: "";
+    width: 13px;
+    height: 100%;
+    border-left: 1px solid $dark-600;
+    
+  }
 
-    .right-node {
-      width: 608px;
-      height: 30px;
-      line-height: 1;
-      span {
-        font-family: Lato;
-        font-size: 12px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: left;
-        color: $dark-800;
-      }
-    }
+  .right-node {
+    border:1px solid transparent;
+    border-left: 1px solid #979797;
+    position: relative;
+    padding-bottom: 10px !important;
+
+
   }
 }
