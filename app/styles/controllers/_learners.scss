@@ -1,12 +1,6 @@
 .learners {
-  height: calc(100vh - 110px);
-  display: table;
-  width: 100%;
-  h3 {
-    color: $gray;
-    text-align: center;
-    margin: 0 auto;
-    vertical-align: middle;
-    display: table-cell;
+  #world-map {
+    width: 1200px;
+    height: 500px;
   }
 }
