@@ -21,7 +21,7 @@ export default {
     signatureAssessment: 'signature Assessments',
     signatureCollection: 'signature Collections',
     mostPopularProviders: 'most popular providers',
-    globalStatistics: 'global Statistics', 
+    globalStatistics: 'global Statistics',
 
     categoryOptions: {
       k12: 'K-12',
@@ -65,5 +65,13 @@ export default {
   crosswalk: {
     title: 'Crosswalk',
     switch_to_gcm: 'Switch to GCM'
+  },
+  learner: {
+    'reports' : 'reports',
+    'journeys-taken': 'journeys taken' ,
+    'proficiency' : 'proficiency',
+    'preferences' : 'preferences',
+    'markers' : 'markers',
+    'profile' : 'profile'
   }
 };

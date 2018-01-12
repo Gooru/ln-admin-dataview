@@ -51,7 +51,8 @@ export default Ember.Component.extend({
   // Methods
 
   renderCompetencyGrid: function() {
-
+    d3.select();
+    return null;
   }
 
 });

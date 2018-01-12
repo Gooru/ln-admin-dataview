@@ -10,7 +10,7 @@ import {NAVIGATION_MENUS} from 'admin-dataview/config/config';
  * @see controllers/application.js
  * @augments ember/Component
  */
-export default Ember.Component.extend(ConfigurationMixin, {
+export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Dependencies
   i18n: Ember.inject.service(),
@@ -30,6 +30,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
      */
     onMenuItemSelection: function(item) {
       this.sendAction('onMenuItemSelection', item);
+
     }
   },
 
@@ -47,7 +48,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
   * @property {Boolean}
   */
   activeMenuIndex: Ember.computed(function() {
-    let activeMenuIndex = NAVIGATION_MENUS.indexOf(Utils.getRoutePathLastOccurrence());
+    let activeMenuIndex = NAVIGATION_MENUS;
     return activeMenuIndex > -1 ? activeMenuIndex : 0;
   })
 

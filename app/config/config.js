@@ -1,22 +1,21 @@
 export const RESOURCE_COMPONENT_MAP = {
-  'video/youtube' : 'player.resources.gru-youtube-resource',
-  'resource/url'  : 'player.resources.gru-url-resource',
-  'handouts'      : 'player.resources.gru-pdf-resource',
-  'image'         : 'player.resources.gru-image-resource',
-  'vimeo/video'   : 'player.resources.gru-vimeo-resource'
+  'video/youtube': 'player.resources.gru-youtube-resource',
+  'resource/url': 'player.resources.gru-url-resource',
+  'handouts': 'player.resources.gru-pdf-resource',
+  'image': 'player.resources.gru-image-resource',
+  'vimeo/video': 'player.resources.gru-vimeo-resource'
 };
 
-export const UPLOADABLE_TYPES = [
-  {
-    value: 'image',
-    validExtensions: '.jpg, .jpeg, .gif, .png',
-    validType: 'image/*'
-  },
-  {
-    value: 'text',
-    validExtensions: '.pdf',
-    validType: 'application/pdf'
-  }
+export const UPLOADABLE_TYPES = [{
+  value: 'image',
+  validExtensions: '.jpg, .jpeg, .gif, .png',
+  validType: 'image/*'
+},
+{
+  value: 'text',
+  validExtensions: '.pdf',
+  validType: 'application/pdf'
+}
 ];
 
 export const VIDEO_RESOURCE_TYPE = 'video';
@@ -39,9 +38,21 @@ export const DEFAULT_IMAGES = {
   QUESTION_PLACEHOLDER_IMAGE: 'assets/images/question-placeholder-image.png'
 };
 
-export const K12_CATEGORY = {value: 'k_12', apiCode: 'K12', label: 'common.categoryOptions.k12'};
-export const EDUCATION_CATEGORY = {value: 'higher_education', apiCode: 'HE', label: 'common.categoryOptions.higher-ed'};
-export const LEARNING_CATEGORY = {value: 'professional_learning', apiCode: 'PL', label: 'common.categoryOptions.professional-dev'};
+export const K12_CATEGORY = {
+  value: 'k_12',
+  apiCode: 'K12',
+  label: 'common.categoryOptions.k12'
+};
+export const EDUCATION_CATEGORY = {
+  value: 'higher_education',
+  apiCode: 'HE',
+  label: 'common.categoryOptions.higher-ed'
+};
+export const LEARNING_CATEGORY = {
+  value: 'professional_learning',
+  apiCode: 'PL',
+  label: 'common.categoryOptions.professional-dev'
+};
 
 export const TAXONOMY_CATEGORIES = [
   K12_CATEGORY,
@@ -56,9 +67,9 @@ export const CONTENT_TYPES = {
   COURSE: 'course',
   UNIT: 'unit',
   LESSON: 'lesson',
-  RESOURCE:'resource',
-  QUESTION:'question',
-  RUBRIC:'rubric'
+  RESOURCE: 'resource',
+  QUESTION: 'question',
+  RUBRIC: 'rubric'
 };
 
 export const ASSESSMENT_SUB_TYPES = {
@@ -80,16 +91,30 @@ export const KEY_CODES = {
 };
 
 export const VIEW_LAYOUT_PICKER_OPTIONS = {
-  LIST:'list',
-  THUMBNAILS:'thumbnails'
+  LIST: 'list',
+  THUMBNAILS: 'thumbnails'
 };
 
-export const EMOTION_VALUES = [
-  {value: 5, unicode: '1f601'},
-  {value: 4, unicode: '1f642'},
-  {value: 3, unicode: '1f610'},
-  {value: 2, unicode: '1f641'},
-  {value: 1, unicode: '1f625'}
+export const EMOTION_VALUES = [{
+  value: 5,
+  unicode: '1f601'
+},
+{
+  value: 4,
+  unicode: '1f642'
+},
+{
+  value: 3,
+  unicode: '1f610'
+},
+{
+  value: 2,
+  unicode: '1f641'
+},
+{
+  value: 1,
+  unicode: '1f625'
+}
 ];
 
 export const SCORES = {
@@ -100,12 +125,26 @@ export const SCORES = {
 
 };
 
-export const GRADING_SCALE = [
-  {LOWER_LIMIT: 0, COLOR: '#F46360'}, //red-400
-  {LOWER_LIMIT: 60, COLOR: '#ED8E36'}, //orange-400
-  {LOWER_LIMIT: 70, COLOR: '#F8BA41'}, //yellow-400
-  {LOWER_LIMIT: 80, COLOR: '#A3CA9F'}, //green-200
-  {LOWER_LIMIT: 90, COLOR: '#4B9741'} //green-400
+export const GRADING_SCALE = [{
+  LOWER_LIMIT: 0,
+  COLOR: '#F46360'
+}, //red-400
+{
+  LOWER_LIMIT: 60,
+  COLOR: '#ED8E36'
+}, //orange-400
+{
+  LOWER_LIMIT: 70,
+  COLOR: '#F8BA41'
+}, //yellow-400
+{
+  LOWER_LIMIT: 80,
+  COLOR: '#A3CA9F'
+}, //green-200
+{
+  LOWER_LIMIT: 90,
+  COLOR: '#4B9741'
+} //green-400
 ];
 
 export const ROLES = {
@@ -114,19 +153,49 @@ export const ROLES = {
 };
 
 export const TAXONOMY_LEVELS = {
-  COURSE:   'course',
-  DOMAIN:   'domain',
+  COURSE: 'course',
+  DOMAIN: 'domain',
   STANDARD: 'standard',
-  MICRO:    'micro-standard'
+  MICRO: 'micro-standard'
 };
 
 export const NAVIGATION_MENUS = ['gcm', 'activities', 'learners', 'suggest'];
 
-export const NAVIGATION_MENUS_INDEX = {'gcm' : 0, 'activities' : 1, 'learners' : 2, 'suggest' : 3, 'learner':2};
+export const NAVIGATION_MENUS_INDEX = {
+  'gcm': 0,
+  'activities': 1,
+  'learners': 2,
+  'suggest': 3,
+  'learner': 2
+};
 
-export const LEARNER_NAVIGATION_MENUS = ['learner.reports', 'learner.journeys-taken', 'learner.proficiency', 'learner.preferences', 'learner.markers', 'learner.profile'];
+export const LEARNER_NAVIGATION_MENUS = [{
+  'value': 'reports',
+  'label': 'learner.reports'
+}, {
+  'value': 'journeys-taken',
+  'label': 'learner.journeys-taken'
+}, {
+  'value': 'proficiency',
+  'label': 'learner.proficiency'
+}, {
+  'value': 'preferences',
+  'label': 'learner.preferences'
+}, {
+  'value': 'markers',
+  'label': 'learner.markers'
+}, {
+  'value': 'profile',
+  'label': 'learner.profile'
+}];
 
-export const LEARNER_NAVIGATION_MENUS_INDEX = {'gcm' : 0, 'activities' : 1, 'learners' : 2, 'suggest' : 3, 'learner':2};
+export const LEARNER_NAVIGATION_MENUS_INDEX = {
+  'gcm': 0,
+  'activities': 1,
+  'learners': 2,
+  'suggest': 3,
+  'learner': 2
+};
 
 
 export const CODE_TYPES = {
