@@ -1,0 +1,41 @@
+[{
+  "country_code": "NA",
+  "latitude": "41",
+  "longitude": "-103"
+}, {
+  "country_code": "PA",
+  "latitude": "-7.25",
+  "longitude": "154"
+}, {
+  "country_code": "EU",
+  "latitude": "48",
+  "longitude": "5.5"
+}, {
+  "country_code": "AF",
+  "latitude": "5.82",
+  "longitude": "16.8"
+}, {
+  "country_code": "LA",
+  "latitude": "-15",
+  "longitude": "-61"
+}, {
+  "country_code": "ME",
+  "latitude": "29.3",
+  "longitude": "45.7"
+}, {
+  "country_code": "EUR",
+  "latitude": "51.68",
+  "longitude": "39"
+}, {
+  "country_code": "FUS",
+  "latitude": "61.3",
+  "longitude": "82"
+}, {
+  "country_code": "AEC",
+  "latitude": "11.2",
+  "longitude": "122"
+}, {
+  "country_code": "CH",
+  "latitude": "33.8",
+  "longitude": "104.4"
+}]

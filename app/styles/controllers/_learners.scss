@@ -3,12 +3,10 @@
   display: table;
   width: 100%;
 
-  h3 {
-    color: $gray;
-    text-align: center;
+  #world-map {
+    width: 960px;
+    height: 500px;
     margin: 0 auto;
-    vertical-align: middle;
-    display: table-cell;
   }
 
   .containers {

@@ -15,6 +15,7 @@ export default Ember.Component.extend({
   // Attributes
 
   classNames: ['taxonomy-tree-view'],
+
   // -------------------------------------------------------------------------
   // Events
 
