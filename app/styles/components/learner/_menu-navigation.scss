@@ -1,0 +1,59 @@
+.learner-menu-navigation {
+  background-color: $white;
+  box-shadow: -3px 0 4px 0 rgba(0, 0, 0, 0.2);
+  .container {
+    width: 750px;
+  }
+  .nav-tabs {
+    &:after {
+      display: none;
+    }
+    > li > a {
+      border: none;
+      color: $dark-400;
+      font-size: 15px;
+      font-weight: 300;
+      padding: 10px 40px;
+      outline: none;
+      text-transform: uppercase;
+      &:focus {
+        border-width: 0;
+      }
+
+      &:hover {
+        border-width: 0;
+        border: none;
+        color: $blue-700 !important;
+        background: transparent;
+      }
+
+      &::after {
+        content: "";
+        background: $blue-700;
+        height: 2px;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: -1px;
+        transition: all 250ms ease 0s;
+        transform: scale(0);
+      }
+    }
+
+    li.active > a {
+      font-weight: bold;
+      border: none;
+      color: $blue-700 !important;
+      background: transparent;
+      &::after {
+        transform: scale(1);
+      }
+    }
+
+    li:hover > a {
+      &::after {
+        transform: scale(1);
+      }
+    }
+  }
+}

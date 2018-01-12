@@ -124,6 +124,9 @@ export const NAVIGATION_MENUS = ['gcm', 'activities', 'learners', 'suggest'];
 
 export const NAVIGATION_MENUS_INDEX = {'gcm' : 0, 'activities' : 1, 'learners' : 2, 'suggest' : 3, 'learner':2};
 
+export const LEARNER_NAVIGATION_MENUS = ['learner.reports', 'learner.journeys-taken', 'learner.proficiency', 'learner.preferences', 'learner.markers', 'learner.profile'];
+
+export const LEARNER_NAVIGATION_MENUS_INDEX = {'gcm' : 0, 'activities' : 1, 'learners' : 2, 'suggest' : 3, 'learner':2};
 
 
 export const CODE_TYPES = {
