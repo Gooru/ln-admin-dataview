@@ -1,4 +1,7 @@
 .app-crosswalk-table {
+  height: 100vh;
+  overflow: auto;
+  padding-bottom: 30px;
   table.crosswalk-data {
     width: 95%;
     overflow: auto;
@@ -28,9 +31,17 @@
           border-right: solid 1px #e3e5ea;
           font-size: 12px;
           color: #37424b;
+          &:hover {
+            background-color: $light-100;
+          }
         }
         td:first-child {
           border-left: none;
+          max-width: 250px;
+          line-height: 1.8;
+        }
+        td:nth-child(2) {
+          background-color: $light-100;
         }
         td:last-child {
           border-right: none;

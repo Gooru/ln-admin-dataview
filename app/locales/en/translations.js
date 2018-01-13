@@ -68,7 +68,10 @@ export default {
       subject: 'Subject',
       framework: 'Framework'
     },
-    'generate-table': 'Generate Table'
+    'generate-table': 'Generate Table',
+    framework: {
+      'warning-text': 'Select up to 5 Frameworks'
+    }
   },
   learner: {
     'reports': 'reports',

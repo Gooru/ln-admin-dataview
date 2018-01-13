@@ -13,6 +13,15 @@ export default Ember.Component.extend({
   selectedFrameworks: [],
 
   // -------------------------------------------------------------------------
+  // Events
+
+  didInsertElement: function() {
+    let component = this;
+    component.$('#k_12').addClass('active');
+    component.$('#subject-0').addClass('active');
+  },
+
+  // -------------------------------------------------------------------------
   // Actions
 
   actions: {
@@ -22,6 +31,7 @@ export default Ember.Component.extend({
     getSubjects: function(category) {
       let component = this;
       component.$('.category-card .current-level-value a').removeClass('active');
+      component.$('.subject-card .current-level-value a').removeClass('active');
       component.$(`#${category}`).addClass('active');
       component.sendAction('getSubjects', category);
     },
@@ -29,10 +39,10 @@ export default Ember.Component.extend({
     /*
     * Event triggered when user click subbject to pull frameworks
     */
-    getFrameworks: function(subject) {
+    getFrameworks: function(subject, elementIndex) {
       let component = this;
       component.$('.subject-card .current-level-value a').removeClass('active');
-      component.$(`.${subject.id}`).addClass('active');
+      component.$(`#subject-${elementIndex}`).addClass('active');
       component.sendAction('getFrameworks', subject);
     },
 
@@ -41,12 +51,8 @@ export default Ember.Component.extend({
     */
     selectCheckableItem: function(frameworkItem) {
       let component = this;
-      component.get('selectedFrameworks').push(frameworkItem.frameworkId);
-      let selectedFrameworks = component.get('selectedFrameworks');
-      if (selectedFrameworks.length > 4) {
-        component.sendAction('frameworkLimitExceed', selectedFrameworks);
-        component.set('selectedFrameworks', []);
-      }
+      let frameworkId = frameworkItem.frameworkId;
+      component.sendAction('frameworkStack', frameworkId);
     }
   }
 });

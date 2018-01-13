@@ -34,6 +34,11 @@ export default Ember.Component.extend({
   frameworks: [],
 
   /**
+  * Selected category id
+  */
+  currentCategoryId: 'k_12',
+
+  /**
   * Selected subject id
   */
   currentSubjectId: null,
@@ -48,6 +53,24 @@ export default Ember.Component.extend({
   */
   isShowFrameworkLevel: false,
 
+  /**
+  * Default category
+  */
+  defaultCategory: 'k_12',
+
+  // -------------------------------------------------------------------------
+  // Events
+
+  init: function() {
+    let component = this;
+    component._super(...arguments);
+    let currentSubject = component.fetchTaxonomySubjects(component.get('defaultCategory'));
+    currentSubject.then(function(subject) {
+      component.set('currentSubjectId', subject.id);
+      component.fetchTaxonomyFrameworks(subject);
+    });
+  },
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -57,7 +80,13 @@ export default Ember.Component.extend({
     */
     getSubjects: function(category) {
       let component = this;
-      return component.fetchTaxonomySubjects(category);
+      let currentCategoryId = component.get('currentCategoryId');
+      if (currentCategoryId !== category) {
+        component.set('currentCategoryId', category);
+        component.sendAction('disableGenerateBtn');
+        return component.fetchTaxonomySubjects(category);
+      }
+      return true;
     },
 
     /**
@@ -66,16 +95,17 @@ export default Ember.Component.extend({
     getFrameworks: function(subject) {
       let component = this;
       component.set('currentSubjectId', subject.id);
+      component.sendAction('disableGenerateBtn', subject.id);
       return component.fetchTaxonomyFrameworks(subject);
     },
 
     /**
-    * Action triggered when checkbox maximum limit exists
+    * Action triggered when user select a framework
     */
-    frameworkLimitExceed: function(selectedFrameworks) {
+    frameworkStack: function(frameworkId) {
       let component = this;
       let subjectId = component.get('currentSubjectId');
-      return component.sendAction('frameworkLimitExceed', subjectId, selectedFrameworks);
+      return component.sendAction('frameworkStack', subjectId, frameworkId);
     }
   },
 
@@ -96,6 +126,7 @@ export default Ember.Component.extend({
         component.set('subjects', hash.subjectsList);
         component.set('isShowFrameworkLevel', false);
         component.set('isShowSubjectLevel', true);
+        return hash.subjectsList[0];
       });
   },
 
@@ -103,7 +134,6 @@ export default Ember.Component.extend({
   * @param subject
   * Method to fetchTaxonomyFrameworks
   */
-
   fetchTaxonomyFrameworks(subject) {
     let component = this;
     component.set('frameworks', subject.frameworks);

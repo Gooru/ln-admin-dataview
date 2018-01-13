@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import {truncateString} from 'admin-dataview/utils/utils';
 
 export default Ember.Controller.extend({
 
@@ -38,19 +39,44 @@ export default Ember.Controller.extend({
   */
   tableData: [],
 
+  /**
+  * Default crosswalk table header items
+  */
+  defaultTableHeaderItems: ['COMPETENCY', 'GUT CODE'],
+
   //------------------------------------------------------------------------
   // Actions
 
   actions: {
 
     /**
-    * Action triggered when user checked maximum checkboxes
+    * Action triggered when user select framework
     */
-    frameworkLimitExceed: function(subjectId, selectedFrameworks) {
+    frameworkStack: function(subjectId, frameworkId) {
       let controller = this;
-      controller.set('selectedFrameworks', selectedFrameworks);
+      let frameworkStack = controller.get('selectedFrameworks');
+      let frameworkPosition = frameworkStack.indexOf(frameworkId);
+      if (frameworkStack.includes(frameworkId)) {
+        frameworkStack.splice(frameworkPosition, 1);
+      } else {
+        frameworkStack.push(frameworkId);
+      }
+      controller.set('selectedFrameworks', frameworkStack);
       controller.set('subjectId', subjectId);
       controller.set('enableGenerateTableBtn', true);
+      let numberOfItems = frameworkStack.length;
+      if (numberOfItems < 1 || numberOfItems > 5) {
+        controller.set('enableGenerateTableBtn', false);
+      }
+    },
+
+    disableGenerateBtn: function(subjectId) {
+      let controller = this;
+      let currentSubjectId = controller.get('subjectId');
+      if (subjectId !== currentSubjectId) {
+        controller.set('selectedFrameworks', []);
+        controller.set('enableGenerateTableBtn', false);
+      }
     },
 
     /**
@@ -60,8 +86,6 @@ export default Ember.Controller.extend({
       let controller = this;
       let selectedFrameworks = controller.get('selectedFrameworks');
       let subjectId = controller.get('subjectId');
-      //Add a new item at beginning of an array
-      selectedFrameworks.unshift('GUT CODE');
       let crosswalkDataPromise = Ember.RSVP.resolve(controller.get('crosswalkService').getCrosswalkData(subjectId));
       return Ember.RSVP.hash({
         frameworkList: selectedFrameworks,
@@ -81,22 +105,28 @@ export default Ember.Controller.extend({
     let controller = this;
     let crosswalkData = rawData.crosswalkData;
     let frameworkList = rawData.frameworkList;
+    let defaultHeaderItems = controller.get('defaultTableHeaderItems');
+    let tableHeader = defaultHeaderItems.concat(frameworkList);
+    let numberOfColumns = tableHeader.length;
     let tableBody = [];
     crosswalkData.map(data => {
-      let tableRowData = [data.id];
+      let tableRowData = [];
+      tableRowData.length = numberOfColumns;
+      tableRowData.fill('');
+      tableRowData[0] = truncateString(data.title);
+      tableRowData[1] = data.id;
       data.crosswalkCodes.forEach(crosswalkCode => {
-        let frameworkPosition = frameworkList.indexOf(crosswalkCode.framework_id);
-        let frameworkId = '';
-        if (frameworkPosition > 0) {
-          frameworkId = crosswalkCode.id;
-          tableRowData[frameworkPosition] = frameworkId;
+        let frameworkId = crosswalkCode.framework_id;
+        let frameworkPosition = tableHeader.indexOf(frameworkId);
+        if (frameworkList.includes(frameworkId)) {
+          tableRowData[frameworkPosition] = crosswalkCode.id;
         }
       });
       tableBody.push(tableRowData);
       return true;
     });
     let tableData = {
-      header: rawData.frameworkList,
+      header: tableHeader,
       body: tableBody
     };
     controller.set('tableData', tableData);
