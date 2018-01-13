@@ -71,6 +71,9 @@
         font-weight: bold;
         color: #ffffff;
         text-transform: uppercase;
+        &.disabled {
+          pointer-events: none;
+        }
       }
     }
   }
