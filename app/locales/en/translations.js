@@ -71,17 +71,21 @@ export default {
     'generate-table': 'Generate Table'
   },
   learner: {
-    'reports' : 'reports',
-    'journeys-taken': 'journeys taken' ,
-    'proficiency' : 'proficiency',
-    'preferences' : 'preferences',
-    'markers' : 'markers',
-    'profile' : 'profile',
-    'yesterday':'Yesterday',
-    'last-week':'Last Week',
+    'reports': 'reports',
+    'journeys-taken': 'journeys taken',
+    'proficiency': 'proficiency',
+    'preferences': 'preferences',
+    'markers': 'markers',
+    'profile': 'profile',
+    'yesterday': 'Yesterday',
+    'last-week': 'Last Week',
     'last-month': 'Last Month',
-    'last-6-months' :'Last 6 Months',
-    'last-year':'Last Year',
-    'from-the-beginning-of-time':'From the Beginning of Time'
+    'last-6-months': 'Last 6 Months',
+    'last-year': 'Last Year',
+    'from-the-beginning-of-time': 'From the Beginning of Time',
+    'courses-independent-journey': 'courses & independent journey',
+    'competencies': 'competencies',
+    'time-spent-activities': 'time spent activities',
+    'courses-performance-and-time': 'courses : performance and time'
   }
 };

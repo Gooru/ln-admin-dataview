@@ -190,11 +190,12 @@ export const LEARNER_NAVIGATION_MENUS = [{
 }];
 
 export const LEARNER_NAVIGATION_MENUS_INDEX = {
-  'gcm': 0,
-  'activities': 1,
-  'learners': 2,
-  'suggest': 3,
-  'learner': 2
+  'reports': 0,
+  'journeys-taken': 1,
+  'proficiency': 2,
+  'preferences': 3,
+  'markers': 4,
+  'profile': 5
 };
 
 
