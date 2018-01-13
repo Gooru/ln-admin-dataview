@@ -49,14 +49,28 @@
 
   .crosswalk-body {
     background-color: $white;
-    .section-title {
-      text-align: center;
-      padding: 15px;
-      .title {
-        font-size: 19.5px;
-        font-weight: 300;
-        line-height: 1.54;
-        color: #666666;
+    .subect-browser {
+      .section-title {
+        text-align: center;
+        padding: 15px;
+        .title {
+          font-size: 19.5px;
+          font-weight: 300;
+          line-height: 1.54;
+          color: #666666;
+        }
+      }
+    }
+    .generate-table-btn {
+      padding: 30px;
+      .generate-btn {
+        width: 160px;
+        height: 50px;
+        background-color: #1b72ba;
+        font-size: 15px;
+        font-weight: bold;
+        color: #ffffff;
+        text-transform: uppercase;
       }
     }
   }

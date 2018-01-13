@@ -1,0 +1,22 @@
+<div class="table-responsive">
+  <table class="table crosswalk-data" id="crosswalk-data">
+    <thead>
+      <tr>
+        {{#each tableData.header as |header|}}
+          <th>
+            {{header}}
+          </th>
+        {{/each}}
+      </tr>
+    </thead>
+    <tbody>
+      {{#each tableData.body as |tableRow|}}
+        <tr>
+          {{#each tableRow as |tableBody|}}
+            <td>{{tableBody}}</td>
+          {{/each}}
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>
