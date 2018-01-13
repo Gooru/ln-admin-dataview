@@ -63,6 +63,12 @@ export default {
   },
   crosswalk: {
     title: 'Crosswalk',
-    switch_to_gcm: 'Switch to GCM'
+    switch_to_gcm: 'Switch to GCM',
+    'browser-level': {
+      category: 'Category',
+      subject: 'Subject',
+      framework: 'Framework'
+    },
+    'generate-table': 'Generate Table'
   }
 };

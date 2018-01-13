@@ -1,0 +1,41 @@
+.app-crosswalk-table {
+  table.crosswalk-data {
+    width: 95%;
+    overflow: auto;
+    margin: auto;
+    th, td {
+      padding-left: 19px;
+    }
+    thead {
+      tr {
+        th {
+          font-size: 15px;
+          font-weight: bold;
+          color: #37424b;
+          text-transform: uppercase;
+        }
+        th:first-child {
+          min-width: 270px;
+        }
+      }
+    }
+    tbody {
+      tr {
+        td {
+          height: 52px;
+          line-height: 3;
+          border-left: solid 1px #e3e5ea;
+          border-right: solid 1px #e3e5ea;
+          font-size: 12px;
+          color: #37424b;
+        }
+        td:first-child {
+          border-left: none;
+        }
+        td:last-child {
+          border-right: none;
+        }
+      }
+    }
+  }
+}
