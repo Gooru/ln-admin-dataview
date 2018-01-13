@@ -219,3 +219,23 @@ export const QUESTION_TYPES = {
   hotTextReorder: 'HT_RO',
   hotTextHighlight: 'HT_HL'
 };
+
+export const LEARNER_TIME_PERIOD_FILTER = [{
+  'value': 'yesterday',
+  'label': 'learner.yesterday'
+}, {
+  'value': 'last-week',
+  'label': 'learner.last-week'
+}, {
+  'value': 'last-month',
+  'label': 'learner.last-month'
+}, {
+  'value': 'last-6-months',
+  'label': 'learner.last-6-months'
+}, {
+  'value': 'last-year',
+  'label': 'learner.last-year'
+}, {
+  'value': 'from-the-beginning-of-time',
+  'label': 'learner.from-the-beginning-of-time'
+}];

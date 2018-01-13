@@ -17,7 +17,12 @@
   },
   "lint-staged": {
     "*.js": [
-      "eslint",
+      "node_modules/.bin/prettier --single-quote --write",
+      "node_modules/.bin/eslint --fix",
+      "git add"
+    ],
+    "*.scss": [
+      "node_modules/.bin/prettier --write",
       "git add"
     ]
   },

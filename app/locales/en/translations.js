@@ -76,6 +76,12 @@ export default {
     'proficiency' : 'proficiency',
     'preferences' : 'preferences',
     'markers' : 'markers',
-    'profile' : 'profile'
+    'profile' : 'profile',
+    'yesterday':'Yesterday',
+    'last-week':'Last Week',
+    'last-month': 'Last Month',
+    'last-6-months' :'Last 6 Months',
+    'last-year':'Last Year',
+    'from-the-beginning-of-time':'From the Beginning of Time'
   }
 };

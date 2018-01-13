@@ -4,12 +4,12 @@ import {LEARNER_NAVIGATION_MENUS,LEARNER_NAVIGATION_MENUS_INDEX} from 'admin-dat
 import Utils from 'admin-dataview/utils/utils';
 
 /**
- * RGO navigation Tabs
+ * Learner navigation Tabs
  *
- * Component responsible for enabling more flexible navigation options for RGO.
- * For example, where {@link controllers/learner.js} allows access the RGO information and navigate through the menu options.
+ * Component responsible for enabling more flexible navigation options for Learner.
+ * For example, where {@link controllers/learner.js} allows access the Learner information and navigate through the menu options.
  * @module
- * @see controllers/application.js
+ * @see controllers/learner.js
  * @augments ember/Component
  */
 export default Ember.Component.extend(ConfigurationMixin, {
