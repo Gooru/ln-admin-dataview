@@ -69,8 +69,6 @@ export default {
       framework: 'Framework'
     },
     'generate-table': 'Generate Table'
-    }
-    switch_to_gcm: 'Switch to GCM'
   },
   learner: {
     'reports' : 'reports',
