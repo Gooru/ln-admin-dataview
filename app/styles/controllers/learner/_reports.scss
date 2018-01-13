@@ -1,0 +1,34 @@
+.learner-report {
+  .report-panel {
+    float: left;
+    margin-bottom: 23px;
+  }
+
+  .courses-independent-journey {
+    width: 500px;
+    height: 482px;
+    margin-right: 23px;
+
+    .courses-independent-journeys-chart {
+      width: 260px;
+      height: 260px;
+      margin: 50px auto 0;
+    }
+  }
+
+  .competencies {
+    width: 500px;
+    height: 482px;
+  }
+
+  .time-spent-activities {
+    width: 500px;
+    height: 482px;
+    margin-right: 23px;
+  }
+
+  .courses-performance-and-time {
+    width: 500px;
+    height: 482px;
+  }
+}

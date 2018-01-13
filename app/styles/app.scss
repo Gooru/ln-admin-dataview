@@ -12,12 +12,14 @@
 @import 'controllers/activities';
 @import 'controllers/suggest';
 @import 'controllers/learner';
+@import 'controllers/learner/reports';
 
 @import 'helpers/three-bounce-spinner';
 
 @import 'components/app-header';
 @import 'components/app-navigation';
 @import 'components/app-pull-out';
+@import 'components/app-panel-box';
 @import 'components/gcm-pull-out-body';
 @import 'components/validation/app-input';
 @import 'components/content-display-count';
@@ -32,6 +34,7 @@
 @import 'components/charts/study-count-chart';
 @import 'components/charts/gcm-x-bar-chart';
 @import 'components/charts/world-chart';
+@import 'components/charts/courses-independent-journey';
 @import 'components/popular-providers';
 @import "components/signature-assessments";
 @import "components/signature-collections";
@@ -43,3 +46,4 @@
 @import 'components/taxonomy/taxonomy-category';
 @import 'components/global-statistics';
 @import 'components/learner/menu-navigation.scss';
+@import 'components/learner/time-period-filter.scss';

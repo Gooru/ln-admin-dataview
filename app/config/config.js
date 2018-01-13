@@ -190,11 +190,12 @@ export const LEARNER_NAVIGATION_MENUS = [{
 }];
 
 export const LEARNER_NAVIGATION_MENUS_INDEX = {
-  'gcm': 0,
-  'activities': 1,
-  'learners': 2,
-  'suggest': 3,
-  'learner': 2
+  'reports': 0,
+  'journeys-taken': 1,
+  'proficiency': 2,
+  'preferences': 3,
+  'markers': 4,
+  'profile': 5
 };
 
 
@@ -219,3 +220,23 @@ export const QUESTION_TYPES = {
   hotTextReorder: 'HT_RO',
   hotTextHighlight: 'HT_HL'
 };
+
+export const LEARNER_TIME_PERIOD_FILTER = [{
+  'value': 'yesterday',
+  'label': 'learner.yesterday'
+}, {
+  'value': 'last-week',
+  'label': 'learner.last-week'
+}, {
+  'value': 'last-month',
+  'label': 'learner.last-month'
+}, {
+  'value': 'last-6-months',
+  'label': 'learner.last-6-months'
+}, {
+  'value': 'last-year',
+  'label': 'learner.last-year'
+}, {
+  'value': 'from-the-beginning-of-time',
+  'label': 'learner.from-the-beginning-of-time'
+}];
