@@ -7,7 +7,12 @@
         {{t "crosswalk.title"}}
     </div>
   </header>
-  <div class="coming-soon">
-    <h3>Coming soon...</h3>
+  <div class="crosswalk-body">
+    <div class="section-title">
+      <span class="title">{{t 'crosswalk.browser-level.category'}}, </span>
+      <span class="title">{{t 'crosswalk.browser-level.subject'}}, </span>
+      <span class="title">{{t 'crosswalk.browser-level.framework'}}</span>
+    </div>
+    {{crosswalk.app-subject-browser getSelectedValues="getSelectedValues"}}
   </div>
 </div>

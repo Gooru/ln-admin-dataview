@@ -1,0 +1,22 @@
+<div class="{{type}}-card">
+  {{#if (eq type 'category')}}
+    {{#each values as |value|}}
+      <div class="current-level-value">
+        <a {{action "getSubjects" value.value}}>
+          {{t value.label}}
+        </a>
+      </div>
+    {{/each}}
+  {{else}}
+    {{#each values as |value|}}
+      <div class="current-level-value">
+        {{#if (eq type 'framework')}}
+          <input type="checkbox" class="checkbox">
+        {{/if}}
+        <a {{action "getFrameworks" value}}>
+          {{value.title}}
+        </a>
+      </div>
+    {{/each}}
+  {{/if}}
+</div>
