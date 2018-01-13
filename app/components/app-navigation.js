@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import ConfigurationMixin from 'admin-dataview/mixins/configuration';
-import {NAVIGATION_MENUS} from 'admin-dataview/config/config';
+import {NAVIGATION_MENUS,NAVIGATION_MENUS_INDEX} from 'admin-dataview/config/config';
 import Utils from 'admin-dataview/utils/utils';
 
 /**
@@ -49,7 +49,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
   * @property {Boolean}
   */
   activeMenuIndex: Ember.computed(function() {
-    let activeMenuIndex = NAVIGATION_MENUS.indexOf(Utils.getRoutePathLastOccurrence());
+    let activeMenuIndex = NAVIGATION_MENUS_INDEX[Utils.getRoutePathFirstOccurrence()];
     return activeMenuIndex > -1 ? activeMenuIndex : 0;
   })
 

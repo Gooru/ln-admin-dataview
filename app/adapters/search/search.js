@@ -1,5 +1,7 @@
 import Ember from 'ember';
-import {TAXONOMY_LEVELS} from 'admin-dataview/config/config';
+import {
+  TAXONOMY_LEVELS
+} from 'admin-dataview/config/config';
 /**
  * Adapter to support the Search for Collections, Assessments, Resources and Questions
  *
@@ -10,6 +12,8 @@ export default Ember.Object.extend({
   session: Ember.inject.service('session'),
 
   namespace: '/gooru-search/rest/v2/search',
+
+  namespace1: '/gooru-search/rest/v1/pedagogy-search',
 
   /**
    * Fetches the collections that match with the node
@@ -187,6 +191,94 @@ export default Ember.Object.extend({
     if (nodeData.name) {
       options.data[`${filterType}`] = nodeData.searchValue;
     }
+    return Ember.$.ajax(url, options);
+  },
+
+
+  /**
+   * Fetches rubrics that match with the node
+   *
+   * @param nodeData the term to search
+   * @returns {Promise.<Course[]>}
+   */
+  searchUnits: function(nodeData) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/unit`;
+    let nodeType = nodeData.type;
+    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `${nodeType}Display` : `${nodeType}Name`;
+    let options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      headers: adapter.defineHeaders(),
+      data: {
+        q: '*',
+        length: 1,
+        'publishStatus': 'published,unpublished'
+      }
+    };
+    if (nodeData.name) {
+      options.data[`${filterType}`] = nodeData.searchValue;
+    }
+    return Ember.$.ajax(url, options);
+  },
+
+
+  /**
+   * Fetches rubrics that match with the node
+   *
+   * @param nodeData the term to search
+   * @returns {Promise.<Course[]>}
+   */
+  searchLessons: function(nodeData) {
+    const adapter = this;
+    const namespace = this.get('namespace');
+    const url = `${namespace}/lesson`;
+    let nodeType = nodeData.type;
+    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `${nodeType}Display` : `${nodeType}Name`;
+    let options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      headers: adapter.defineHeaders(),
+      data: {
+        q: '*',
+        length: 1,
+        'publishStatus': 'published,unpublished'
+      }
+    };
+    if (nodeData.name) {
+      options.data[`${filterType}`] = nodeData.searchValue;
+    }
+    return Ember.$.ajax(url, options);
+  },
+
+
+  /**
+   * Fetches learningMapsContent
+   *
+   * @param nodeData the term to search
+   * @returns {Promise.<Course[]>}
+   */
+  learningMapsContent: function(nodeData) {
+    const adapter = this;
+    const namespace1 = this.get('namespace1');
+    const url = `${namespace1}/learning-maps`;
+    let spliting  = nodeData.searchValue.split('.');
+    let fwCode = spliting[0];
+    let options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      headers: adapter.defineHeaders(),
+      data: {
+        q: '*',
+        length: 1,
+        'flt.standardDisplay': nodeData.code,
+        'flt.fwCode': fwCode
+      }
+    };
     return Ember.$.ajax(url, options);
   },
 

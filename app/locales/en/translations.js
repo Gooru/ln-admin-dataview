@@ -17,9 +17,10 @@ export default {
       HT_HL: 'Highlight Text'
     },
     currentlyStudying: 'currently Studying',
-    signatureAssessment: 'signature Assessment',
-    signatureCollection: 'signature Collection',
+    signatureAssessment: 'signature Assessments',
+    signatureCollection: 'signature Collections',
     mostPopularProviders: 'most popular providers',
+    globalStatistics: 'global Statistics',
     categoryOptions: {
       k12: 'K-12',
       'higher-ed': 'Higher Education',
@@ -67,5 +68,14 @@ export default {
       subject: 'Subject',
       framework: 'Framework'
     }
+    switch_to_gcm: 'Switch to GCM'
+  },
+  learner: {
+    'reports' : 'reports',
+    'journeys-taken': 'journeys taken' ,
+    'proficiency' : 'proficiency',
+    'preferences' : 'preferences',
+    'markers' : 'markers',
+    'profile' : 'profile'
   }
 };

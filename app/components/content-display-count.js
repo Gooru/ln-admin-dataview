@@ -6,7 +6,7 @@ export default Ember.Component.extend({
    * Indicates the default group size of   component.
    * @type {Number}
    */
-  defaultGroupSize: 3,
+  defaultGroupSize: 4,
 
   /**
    * content data count list

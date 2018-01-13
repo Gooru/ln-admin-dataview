@@ -1,6 +1,9 @@
 import Ember from 'ember';
 import Utils from 'admin-dataview/utils/taxonomy';
-import {CONTENT_TYPES, TAXONOMY_LEVELS} from 'admin-dataview/config/config';
+import {
+  CONTENT_TYPES,
+  TAXONOMY_LEVELS
+} from 'admin-dataview/config/config';
 
 export default Ember.Controller.extend({
 
@@ -13,8 +16,8 @@ export default Ember.Controller.extend({
   taxonomyService: Ember.inject.service('taxonomy'),
 
   /**
-  * Search service to fetch content details
-  */
+   * Search service to fetch content details
+   */
   searchService: Ember.inject.service('api-sdk/search'),
 
   //-------------------------------------------------------------------------
@@ -28,23 +31,23 @@ export default Ember.Controller.extend({
   subjects: null,
 
   /**
-  * Content count of the selected node
-  */
+   * Content count of the selected node
+   */
   contentCount: null,
 
   /**
-  * Slected node data
-  */
+   * Slected node data
+   */
   nodeData: null,
 
   /**
-  * is competency level node or not
-  */
+   * is competency level node or not
+   */
   isCompetencyNode: false,
 
   /**
-  * Show loading spinner
-  */
+   * Show loading spinner
+   */
   isLoading: true,
 
   /**
@@ -139,8 +142,8 @@ export default Ember.Controller.extend({
     },
 
     /**
-    * Action triggered when clicking more info in each node
-    */
+     * Action triggered when clicking more info in each node
+     */
     onClickNodeMoreInfo: function(node) {
       let controller = this;
       let nodeInfo = Utils.getNodeInfo(node);
@@ -160,6 +163,9 @@ export default Ember.Controller.extend({
       controller.getSearchContentCount(selectedNodeData).then(function(contentCount) {
         controller.set('contentCount', contentCount);
         controller.set('isLoading', false);
+      });
+      controller.getSearchLearningMapsContent(selectedNodeData).then(function(learningMaps) {
+        controller.set('learningMap', learningMaps);
       });
     },
     /**
@@ -297,9 +303,9 @@ export default Ember.Controller.extend({
   },
 
   /**
-  * Get Content count of search results
-  * return hashed json of each content type conunt
-  */
+   * Get Content count of search results
+   * return hashed json of each content type conunt
+   */
   getSearchContentCount: function(selectedNode) {
     const contentCountData = [];
     const resourceCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(selectedNode));
@@ -308,6 +314,9 @@ export default Ember.Controller.extend({
     const collectionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchCollections(selectedNode));
     const assessmentCountPromise = Ember.RSVP.resolve(this.get('searchService').searchAssessments(selectedNode));
     const rubricCountPromise = Ember.RSVP.resolve(this.get('searchService').searchRubrics(selectedNode));
+    const unitCountPromise = Ember.RSVP.resolve(this.get('searchService').searchUnits(selectedNode));
+    const lessonsCountPromise = Ember.RSVP.resolve(this.get('searchService').searchLessons(selectedNode));
+
 
     return Ember.RSVP.hash({
       resourceCount: resourceCountPromise,
@@ -315,9 +324,13 @@ export default Ember.Controller.extend({
       courceCount: courseCountPromise,
       collectionCount: collectionCountPromise,
       assessmentCount: assessmentCountPromise,
-      rubricCount: rubricCountPromise
+      rubricCount: rubricCountPromise,
+      unitCount: unitCountPromise,
+      lessonCount: lessonsCountPromise
     }).then(function(hash) {
       contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COURSE, hash.courceCount));
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.UNIT, hash.unitCount));
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.LESSON, hash.lessonCount));
       contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.ASSESSMENT, hash.assessmentCount));
       contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COLLECTION, hash.collectionCount));
       contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RESOURCE, hash.resourceCount));
@@ -325,6 +338,28 @@ export default Ember.Controller.extend({
       contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RUBRIC, hash.rubricCount));
       return contentCountData;
     });
+  },
+
+
+  /**
+   * Get Content count of search results
+   * return hashed json of each content type conunt
+   */
+  getSearchLearningMapsContent: function(selectedNode) {
+    const learningMapsData = [];
+    const learningMapsContent = Ember.RSVP.resolve(this.get('searchService').learningMapsContent(selectedNode));
+
+    return Ember.RSVP.hash({
+      learningMapsContent: learningMapsContent
+
+    }).then(function() {
+
+      // console.log('learningMapsContent::::', hash);
+
+      return learningMapsData;
+
+    });
+
   }
 
 });
