@@ -92,11 +92,11 @@ export default Ember.Component.extend({
     return Ember.RSVP.hash({
       subjectsList: subjectsPromise
     })
-    .then(function(hash) {
-      component.set('subjects', hash.subjectsList);
-      component.set('isShowFrameworkLevel', false);
-      component.set('isShowSubjectLevel', true);
-    })
+      .then(function(hash) {
+        component.set('subjects', hash.subjectsList);
+        component.set('isShowFrameworkLevel', false);
+        component.set('isShowSubjectLevel', true);
+      });
   },
 
   /**

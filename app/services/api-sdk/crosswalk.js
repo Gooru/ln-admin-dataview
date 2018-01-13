@@ -28,9 +28,9 @@ export default Ember.Service.extend({
     let service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service.get('crosswalkAdapter').getCrosswalkData(subjectId)
-      .then(function(response) {
-        resolve(response);
-      }, reject);
+        .then(function(response) {
+          resolve(response);
+        }, reject);
     });
   }
 });

@@ -67,9 +67,9 @@ export default Ember.Controller.extend({
         frameworkList: selectedFrameworks,
         crosswalkData: crosswalkDataPromise
       })
-      .then(function(hash) {
-        return controller.updateCrosswalkTable(hash);
-      })
+        .then(function(hash) {
+          return controller.updateCrosswalkTable(hash);
+        });
     }
   },
 
@@ -81,15 +81,12 @@ export default Ember.Controller.extend({
     let controller = this;
     let crosswalkData = rawData.crosswalkData;
     let frameworkList = rawData.frameworkList;
-    // console.log('frameworkList', frameworkList);
     let tableBody = [];
     crosswalkData.map(data => {
       let tableRowData = [data.id];
       data.crosswalkCodes.forEach(crosswalkCode => {
-        // console.log('crosswalkCode', crosswalkCode);
         let frameworkPosition = frameworkList.indexOf(crosswalkCode.framework_id);
         let frameworkId = '';
-        // tableRowData[frameworkPosition] = frameworkPosition > 0 ? crosswalkCode.id : '';
         if (frameworkPosition > 0) {
           frameworkId = crosswalkCode.id;
           tableRowData[frameworkPosition] = frameworkId;
@@ -98,12 +95,10 @@ export default Ember.Controller.extend({
       tableBody.push(tableRowData);
       return true;
     });
-    // console.log('tableBody', tableBody);
     let tableData = {
       header: rawData.frameworkList,
       body: tableBody
     };
-    console.log('tableData', tableData);
     controller.set('tableData', tableData);
     controller.set('showCrosswalkTable', true);
   }
