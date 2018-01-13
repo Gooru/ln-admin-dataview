@@ -1,18 +1,16 @@
 import Ember from 'ember';
-import ConfigurationMixin from 'admin-dataview/mixins/configuration';
-import {NAVIGATION_MENUS,NAVIGATION_MENUS_INDEX} from 'admin-dataview/config/config';
-import Utils from 'admin-dataview/utils/utils';
+import {NAVIGATION_MENUS} from 'admin-dataview/config/config';
 
 /**
- * RGO navigation Tabs
+ * Subject competency Tabs
  *
- * Component responsible for enabling more flexible navigation options for RGO.
+ * Component responsible for enabling more flexible navigation options for competency subject grid.
  * For example, where {@link controllers/application.js} allows access the RGO information and navigate through the menu options.
  * @module
  * @see controllers/application.js
  * @augments ember/Component
  */
-export default Ember.Component.extend(ConfigurationMixin, {
+export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Dependencies
   i18n: Ember.inject.service(),
@@ -32,6 +30,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
      */
     onMenuItemSelection: function(item) {
       this.sendAction('onMenuItemSelection', item);
+
     }
   },
 
@@ -49,7 +48,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
   * @property {Boolean}
   */
   activeMenuIndex: Ember.computed(function() {
-    let activeMenuIndex = NAVIGATION_MENUS_INDEX[Utils.getRoutePathFirstOccurrence()];
+    let activeMenuIndex = NAVIGATION_MENUS;
     return activeMenuIndex > -1 ? activeMenuIndex : 0;
   })
 

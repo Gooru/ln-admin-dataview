@@ -8,6 +8,15 @@ export function getRoutePathLastOccurrence() {
 }
 
 /**
+ * Find the route path first occurrence
+ * @return {String}
+ */
+export function getRoutePathFirstOccurrence() {
+  let currentLocationPath = window.location.pathname;
+  return currentLocationPath.split('/')[1];
+}
+
+/**
  * Get the resource format to be App compliant
  * @function
  * @param format

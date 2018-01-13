@@ -16,12 +16,11 @@ export default {
       HT_RO: 'Drag and Drop Order',
       HT_HL: 'Highlight Text'
     },
-
     currentlyStudying: 'currently Studying',
     signatureAssessment: 'signature Assessments',
     signatureCollection: 'signature Collections',
     mostPopularProviders: 'most popular providers',
-
+    globalStatistics: 'global Statistics',
     categoryOptions: {
       k12: 'K-12',
       'higher-ed': 'Higher Education',
@@ -70,5 +69,15 @@ export default {
       framework: 'Framework'
     },
     'generate-table': 'Generate Table'
+    }
+    switch_to_gcm: 'Switch to GCM'
+  },
+  learner: {
+    'reports' : 'reports',
+    'journeys-taken': 'journeys taken' ,
+    'proficiency' : 'proficiency',
+    'preferences' : 'preferences',
+    'markers' : 'markers',
+    'profile' : 'profile'
   }
 };

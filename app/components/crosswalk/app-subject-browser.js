@@ -59,7 +59,7 @@ export default Ember.Component.extend({
       let component = this;
       return component.fetchTaxonomySubjects(category);
     },
-
+    
     /**
     * Action triggered when user click subject to pull frameworks
     */
@@ -103,6 +103,7 @@ export default Ember.Component.extend({
   * @param subject
   * Method to fetchTaxonomyFrameworks
   */
+  
   fetchTaxonomyFrameworks(subject) {
     let component = this;
     component.set('frameworks', subject.frameworks);

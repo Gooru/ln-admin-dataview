@@ -11,6 +11,7 @@
 @import 'controllers/learners';
 @import 'controllers/activities';
 @import 'controllers/suggest';
+@import 'controllers/learner';
 
 @import 'helpers/three-bounce-spinner';
 
@@ -40,3 +41,5 @@
 @import "components/performance-distribution";
 @import 'components/taxonomy/taxonomy-tree-view';
 @import 'components/taxonomy/taxonomy-category';
+@import 'components/global-statistics';
+@import 'components/learner/menu-navigation.scss';
