@@ -49,10 +49,13 @@
 
   .crosswalk-body {
     background-color: $white;
+    height: calc(100% - 40px);
+    overflow-y: auto;
     .subect-browser {
       .section-title {
         text-align: center;
         padding: 15px;
+
         .title {
           font-size: 19.5px;
           font-weight: 300;
@@ -61,8 +64,10 @@
         }
       }
     }
+
     .generate-table-btn {
       padding: 30px;
+
       .generate-btn {
         width: 160px;
         height: 50px;
@@ -71,6 +76,7 @@
         font-weight: bold;
         color: #ffffff;
         text-transform: uppercase;
+
         &.disabled {
           pointer-events: none;
         }
