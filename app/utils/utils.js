@@ -38,3 +38,41 @@ export function truncateString(text) {
   }
   return text;
 }
+
+/**
+ * Format a certain number of milliseconds to a string of the form
+ * '<hours>h <min>m or <min>m <sec>s'. If the value is falsey, a string
+ * with the value '--' is returned
+ * @param timeInMillis - time value in milliseconds
+ * @returns {String}
+ */
+export function formatTime(timeInMillis) {
+  var result = '';
+  var secs;
+
+  if (timeInMillis) {
+    secs = timeInMillis / 1000;
+    const hours = secs / 3600;
+    secs = secs % 3600;
+    const mins = secs / 60;
+    secs = secs % 60;
+
+    if (hours >= 1) {
+      result = `${Math.floor(hours)}h `;
+      if (mins >= 1) {
+        result += `${Math.floor(mins)}m`;
+      }
+    } else {
+      if (mins >= 1) {
+        result = `${Math.floor(mins)}m `;
+      }
+      if (secs >= 1) {
+        result += `${Math.floor(secs)}s`;
+      }
+    }
+  } else {
+    result = '';
+  }
+
+  return result;
+}

@@ -97,7 +97,7 @@ export default Ember.Component.extend({
 
     let data = component.get('data');
 
-    let vis = d3.select('#competencies-chart')
+    let g = d3.select('#competencies-chart')
       .append('svg')
       .data([data])
       .attr('width', width)
@@ -118,7 +118,7 @@ export default Ember.Component.extend({
         return d.value;
       });
 
-    let arcs = vis.selectAll('g.slice')
+    let arcs = g.selectAll('g.slice')
       .data(pie)
       .enter()
       .append('svg:g')
@@ -129,7 +129,7 @@ export default Ember.Component.extend({
         return color(i);
       }).attr('d', arc);
 
-    let text = vis.append('svg:foreignObject')
+    let text = g.append('svg:foreignObject')
       .attr('width', 150).attr('height', 200)
       .attr('x', -75)
       .attr('y', -115);

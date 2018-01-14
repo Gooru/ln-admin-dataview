@@ -17,8 +17,8 @@
 
   .competencies {
     .competencies-chart {
-      width: 280px;
-      height: 280px;
+      width: 270px;
+      height: 270px;
       margin: 50px auto 0;
     }
   }
@@ -27,6 +27,11 @@
     width: 500px;
     height: 482px;
     margin-right: 23px;
+    .time-spent-activities-chart {
+      width: 280px;
+      height: 280px;
+      margin: 50px auto 0;
+    }
   }
 
   .courses-performance-and-time {
