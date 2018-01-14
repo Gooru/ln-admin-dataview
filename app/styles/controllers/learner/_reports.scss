@@ -2,23 +2,25 @@
   .report-panel {
     float: left;
     margin-bottom: 23px;
+    width: 500px;
+    height: 482px;
   }
 
   .courses-independent-journey {
-    width: 500px;
-    height: 482px;
     margin-right: 23px;
-
     .courses-independent-journeys-chart {
-      width: 260px;
-      height: 260px;
+      width: 280px;
+      height: 280px;
       margin: 50px auto 0;
     }
   }
 
   .competencies {
-    width: 500px;
-    height: 482px;
+    .competencies-chart {
+      width: 280px;
+      height: 280px;
+      margin: 50px auto 0;
+    }
   }
 
   .time-spent-activities {
@@ -28,7 +30,6 @@
   }
 
   .courses-performance-and-time {
-    width: 500px;
-    height: 482px;
+
   }
 }

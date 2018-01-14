@@ -51,7 +51,7 @@ export default Ember.Component.extend({
    * Thickness of the piechart
    * @type {Number}
    */
-  thickness: 110,
+  thickness: 120,
 
   /**
    * Data of courses and independent journeys count
@@ -69,8 +69,7 @@ export default Ember.Component.extend({
     let thickness = component.get('thickness');
     let data = component.get('data');
     let radius = Math.min(width, height) / 2;
-    var color = d3.scaleOrdinal()
-      .domain([0, 1])
+    let color = d3.scaleOrdinal()
       .range(['#1C9EEE', '#2662BE']);
 
     let svg = d3.select(component.element)

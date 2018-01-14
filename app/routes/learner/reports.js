@@ -12,8 +12,18 @@ export default Ember.Route.extend({
   }
   ]),
 
+  competenciesData: Ember.A([{
+    label: 'mastered',
+    value: 1
+  },
+  {
+    label: 'in-progress',
+    value: 2
+  }]),
+
   setupController: function(controller) {
     controller.set('courseAndIndependentJourneysData', this.get('courseAndIndependentJourneysData'));
+    controller.set('competenciesData', this.get('competenciesData'));
   }
 
 });

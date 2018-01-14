@@ -25,7 +25,9 @@ export default {
       k12: 'K-12',
       'higher-ed': 'Higher Education',
       'professional-dev': 'Professional Development'
-    }
+    },
+    'in-progress': 'in progress',
+    'mastered': 'mastered'
   },
   logout: {
     name: 'Logout'
@@ -86,6 +88,7 @@ export default {
     'courses-independent-journey': 'courses & independent journey',
     'competencies': 'competencies',
     'time-spent-activities': 'time spent activities',
-    'courses-performance-and-time': 'courses : performance and time'
+    'courses-performance-and-time': 'courses : performance and time',
+    'competencies-studied': 'competencies studied'
   }
 };
