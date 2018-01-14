@@ -25,3 +25,16 @@ export function getRoutePathFirstOccurrence() {
 export function getResourceFormat(format) {
   return format ? format.split('_')[0] : undefined; // i.e video_resource to video
 }
+
+/**
+ * Truncate given string into 72 chars
+ * @function
+ * @param text
+ * @returns {string}
+ */
+export function truncateString(text) {
+  if (text.length > 100) {
+    return `${text.substring(0, 95)  }...`;
+  }
+  return text;
+}

@@ -23,10 +23,13 @@
     {{#if isShowSubjectLevel}}
       <div class="level-title">
         {{t 'crosswalk.browser-level.framework'}}
+        {{#unless isShowWarning}}
+          <span class="text-warning warning-text">{{t 'crosswalk.framework.warning-text'}}</span>
+        {{/unless}}
       </div>
       <div class="level-data">
         {{#if isShowFrameworkLevel}}
-          {{cards.app-browser-card values=frameworks type="framework" frameworkLimitExceed="frameworkLimitExceed"}}
+          {{cards.app-browser-card values=frameworks type="framework" frameworkStack="frameworkStack"}}
         {{/if}}
       </div>
     {{/if}}

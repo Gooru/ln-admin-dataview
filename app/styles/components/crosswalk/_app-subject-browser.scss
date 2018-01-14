@@ -8,6 +8,10 @@
       font-size: 13px;
       font-weight: bold;
       color: $gray;
+      .warning-text {
+        margin-left: 10px;
+        font-size: 12px;
+      }
     }
     .second-level .level-data,
     .third-level .level-data {
