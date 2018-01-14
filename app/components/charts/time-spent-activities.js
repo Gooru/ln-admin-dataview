@@ -95,7 +95,7 @@ export default Ember.Component.extend({
 
     let arc1 = d3.arc()
       .innerRadius(100)
-      .outerRadius(85);
+      .outerRadius(90);
 
     let pie1 = d3.pie()
       .value(function(d) {
