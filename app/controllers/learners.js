@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
    * Subject base learner profile distribution
    * @return {Object}
    */
-  subjects: Ember.computed.alias('learnersProfileDistribution.learnersProfileDistribution'),
+  subjects: Ember.computed.alias('learnersProfileDistribution.subjects'),
 
   /**
    * geo location based learner profile distribution

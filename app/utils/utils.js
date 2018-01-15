@@ -76,3 +76,18 @@ export function formatTime(timeInMillis) {
 
   return result;
 }
+
+/**
+ * Around value of count format
+ * @param  {Number} count
+ * @return {String} formated string of count
+ */
+export function dataCountFormat(count) {
+  return Math.abs(Number(count)) >= 1.0e+9 ?
+    `${Math.round(Math.abs(Number(count)) / 1.0e+9)  }B` :
+    Math.round(Math.abs(Number(count)) >= 1.0e+6) ?
+      `${Math.round(Math.abs(Number(count)) / 1.0e+6)  }M` :
+      Math.round(Math.abs(Number(count)) >= 1.0e+3) ?
+        `${Math.round(Math.abs(Number(count)) / 1.0e+3)  }K` :
+        Math.round(count);
+}

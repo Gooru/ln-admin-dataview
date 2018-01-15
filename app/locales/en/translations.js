@@ -21,6 +21,7 @@ export default {
     signatureCollection: 'signature Collections',
     mostPopularProviders: 'most popular providers',
     globalStatistics: 'global Statistics',
+    'learners' : 'learners',
     'explore' : 'Explore',
     categoryOptions: {
       k12: 'K-12',
