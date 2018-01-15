@@ -25,12 +25,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   model: function() {
     return Ember.RSVP.hash({
-      learnersLocationBasedCount: this.get('learnersService').getLearnersLocationBasedCount()
+      learnersProfileDistribution: this.get('learnersService').getLearnerProfileDistribution()
     });
   },
 
   setupController: function(controller, model) {
-    controller.set('learnersLocationBasedCount', model.learnersLocationBasedCount);
+    controller.set('learnersProfileDistribution', model.learnersProfileDistribution);
   }
 
 });

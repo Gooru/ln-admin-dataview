@@ -70,6 +70,12 @@ export default Ember.Component.extend({
    */
   locationDataCount: null,
 
+  /**
+   * Key name of count should show
+   * @return {String}
+   */
+  keyName: 'total',
+
   // -------------------------------------------------------------------------
   // Methods
 
@@ -77,7 +83,7 @@ export default Ember.Component.extend({
     let component = this;
     let width = component.get('width');
     let height = component.get('height');
-
+    let keyName = component.get('keyName');
     let projection = d3.geoEquirectangular()
       .scale(height / Math.PI)
       .translate([width / 2, height / 2]);
@@ -108,10 +114,11 @@ export default Ember.Component.extend({
     component.get('countriesService').getCountriesRegion().then((region) => {
       let locationDataCount = component.get('locationDataCount');
       locationDataCount.forEach(data => {
-        let countryRegion = region.findBy('country_code', data.get('country_code'));
+        let countryRegion = region.findBy('code', data.get('code'));
         data.set('longitude', countryRegion.get('longitude'));
         data.set('latitude', countryRegion.get('latitude'));
       });
+      console.log(locationDataCount);
       circles.selectAll('circle')
         .data(locationDataCount)
         .enter()
@@ -127,7 +134,7 @@ export default Ember.Component.extend({
           return projection([longitude, latitude])[1];
         })
         .attr('r', function(d) {
-          let count = d.get('count');
+          let count = d.get(keyName);
           return (count) * component.get('bubbleScalefactor');
         });
 
@@ -147,17 +154,17 @@ export default Ember.Component.extend({
           return projection([longitude, latitude])[1];
         })
         .attr('dy', function(d) {
-          let count = d.get('count');
+          let count = d.get(keyName);
           let size = Math.round((count) * component.get('bubbleTextScalefactor'));
           return (size / 2);
         })
         .attr('text-anchor', 'middle')
         .attr('style', function(d) {
-          let count = d.get('count');
+          let count = d.get(keyName);
           let size = Math.round((count) * component.get('bubbleTextScalefactor'));
           return `font-size:${  size  }px`;
         }).text(function(d) {
-          let count = d.get('count');
+          let count = d.get(keyName);
           return component.dataCountFormat(count);
         });
     });

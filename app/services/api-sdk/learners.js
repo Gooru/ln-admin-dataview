@@ -16,21 +16,93 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Fetch the learners location based count
+   * Fetch the learners profile distribution
    * @returns {Object}
    */
-  getLearnersLocationBasedCount: function() {
+  getLearnerProfileDistribution: function() {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('learnersAdapter')
-        .getLearnersLocationBasedCount()
+        .getLearnerProfileDistribution()
         .then(function(response) {
-          let result = Ember.A();
-          response.forEach(data => {
-            result.pushObject(Ember.Object.create(data));
+          let resultSet = Ember.Object.create(response);
+          Object.keys(response).forEach(key => {
+            let result = Ember.A();
+            resultSet.get(key).forEach(data => {
+              result.pushObject(Ember.Object.create(data));
+            });
+            resultSet.set(key, result);
           });
-          resolve(result);
+          resolve(resultSet);
+        }, reject);
+    });
+  },
+
+  /**
+   * Get user stats content count
+   * @returns {Promise.<[]>}
+   */
+  getUserStatsContent: function() {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('learnersAdapter')
+        .getLearnerProfileDistribution()
+        .then(function(response) {
+          resolve(Ember.Object.create(response));
+        }, reject);
+    });
+  },
+
+  /**
+   * Get user stats by courses
+   * @returns {Promise.<[]>}
+   */
+  getUserStatsByCourse: function() {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('learnersAdapter')
+        .getUserStatsByCourse()
+        .then(function(response) {
+          let resultSet = Ember.Object.create(response);
+          Object.keys(response).forEach(key => {
+            resultSet.set(key, Ember.A(resultSet.get(key)));
+          });
+          resolve(resultSet);
+        }, reject);
+    });
+  },
+
+  /**
+   * Get user  journey stats
+   * @returns {Promise.<[]>}
+   */
+  getUserJourneyStats: function() {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('learnersAdapter')
+        .getUserJourneyStats()
+        .then(function(response) {
+          resolve(Ember.Object.create(response));
+        }, reject);
+    });
+  },
+
+  /**
+   * Get user  competency  stats
+   * @returns {Promise.<[]>}
+   */
+  getUserCompetencyStats: function() {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('learnersAdapter')
+        .getUserCompetencyStats()
+        .then(function(response) {
+          resolve(Ember.Object.create(response));
         }, reject);
     });
   }

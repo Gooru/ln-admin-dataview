@@ -13,8 +13,13 @@
 @import 'controllers/suggest';
 @import 'controllers/learner';
 @import 'controllers/learner/index';
+@import 'controllers/learner/journeys-taken';
+@import 'controllers/learner/competencies';
+@import 'controllers/learner/time-spent-courses';
+@import 'controllers/learner/time-spent-activities';
 
 @import 'helpers/three-bounce-spinner';
+
 
 @import 'components/app-header';
 @import 'components/app-navigation';
