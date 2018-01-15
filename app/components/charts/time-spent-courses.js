@@ -61,7 +61,7 @@ export default Ember.Component.extend({
    * Total count of time spent
    * @return {Number}
    */
-  totalDuration: Ember.computed('data.@each', function() {
+  totalDuration: Ember.computed('data.[]', function() {
     let dataSet = this.get('data');
     let count = 0;
     dataSet.forEach(data => {

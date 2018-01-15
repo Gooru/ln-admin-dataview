@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 
-
 export default Ember.Controller.extend({
 
   // -------------------------------------------------------------------------
@@ -17,7 +16,7 @@ export default Ember.Controller.extend({
    * geo location based learner profile distribution
    * @return {Object}
    */
-  geoLocations: Ember.computed.alias('learnersProfileDistribution.geoLocations'),
+  geoLocations: Ember.computed.alias('learnersProfileDistribution.geoLocations')
 
 
   // -------------------------------------------------------------------------

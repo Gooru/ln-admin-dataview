@@ -114,17 +114,18 @@ export default Ember.Component.extend({
 
     arcs.append('svg:foreignObject')
       .attr('transform', function(d) {
-        return `translate(${  arc.centroid(d)  })`;
+        return `translate(${  arc.centroid(d)  })rotate(45)`;
       })
       .attr('width', 125).attr('height', 50)
-      .attr('y', -7)
+      .attr('y', -20)
       .attr('x', function(d) {
-        return -(d.data.name.length * 4);
+        return -(d.data.name.length * 2);
       })
       .append('xhtml:div')
       .attr('class', 'title')
       .text(function(d) {
-        return `${d.data.value  }  ${  d.data.name}`;
+        let label = component.get('i18n').t(`learner.${  d.data.name}`).string;
+        return `${d.data.value  }   ${label}`;
       });
 
   }

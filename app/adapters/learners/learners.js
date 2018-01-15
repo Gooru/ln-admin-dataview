@@ -21,7 +21,7 @@ export default Ember.Object.extend({
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
-      contentType: 'application/json; charset=utf-8',
+      contentType: 'application/json; charset=utf-8'
     };
     return Ember.RSVP.hashSettled({
       locationBasedCount: Ember.$.ajax(url, options)
@@ -42,7 +42,7 @@ export default Ember.Object.extend({
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
-      contentType: 'application/json; charset=utf-8',
+      contentType: 'application/json; charset=utf-8'
     };
     return Ember.RSVP.hashSettled({
       userStatsContent: Ember.$.ajax(url, options)
@@ -63,7 +63,7 @@ export default Ember.Object.extend({
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
-      contentType: 'application/json; charset=utf-8',
+      contentType: 'application/json; charset=utf-8'
     };
     return Ember.RSVP.hashSettled({
       userStatsByCourse: Ember.$.ajax(url, options)
@@ -84,7 +84,7 @@ export default Ember.Object.extend({
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
-      contentType: 'application/json; charset=utf-8',
+      contentType: 'application/json; charset=utf-8'
     };
     return Ember.RSVP.hashSettled({
       userJourneyStats: Ember.$.ajax(url, options)
@@ -105,7 +105,7 @@ export default Ember.Object.extend({
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
-      contentType: 'application/json; charset=utf-8',
+      contentType: 'application/json; charset=utf-8'
     };
     return Ember.RSVP.hashSettled({
       userCompetencyStats: Ember.$.ajax(url, options)

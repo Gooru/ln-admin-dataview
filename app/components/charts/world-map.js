@@ -118,7 +118,6 @@ export default Ember.Component.extend({
         data.set('longitude', countryRegion.get('longitude'));
         data.set('latitude', countryRegion.get('latitude'));
       });
-      console.log(locationDataCount);
       circles.selectAll('circle')
         .data(locationDataCount)
         .enter()

@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import LearnersAdapter from 'admin-dataview/adapters/learners/learners';
-
+import LearnersSerializer from 'admin-dataview/serializers/learners/learners';
 /**
  * Service for the learners
  *
@@ -13,6 +13,7 @@ export default Ember.Service.extend({
   init: function() {
     this._super(...arguments);
     this.set('learnersAdapter', LearnersAdapter.create(Ember.getOwner(this).ownerInjection()));
+    this.set('learnersSerializer', LearnersSerializer.create(Ember.getOwner(this).ownerInjection()));
   },
 
   /**
@@ -26,15 +27,7 @@ export default Ember.Service.extend({
         .get('learnersAdapter')
         .getLearnerProfileDistribution()
         .then(function(response) {
-          let resultSet = Ember.Object.create(response);
-          Object.keys(response).forEach(key => {
-            let result = Ember.A();
-            resultSet.get(key).forEach(data => {
-              result.pushObject(Ember.Object.create(data));
-            });
-            resultSet.set(key, result);
-          });
-          resolve(resultSet);
+          resolve(service.get('learnersSerializer').normalizeLearnerProfileDistribution(response));
         }, reject);
     });
   },
@@ -43,14 +36,14 @@ export default Ember.Service.extend({
    * Get user stats content count
    * @returns {Promise.<[]>}
    */
-  getUserStatsContent: function() {
+  getUserStatsContent: function(userId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('learnersAdapter')
-        .getLearnerProfileDistribution()
+        .getUserStatsContent(userId)
         .then(function(response) {
-          resolve(Ember.Object.create(response));
+          resolve(service.get('learnersSerializer').normalizeUserStats(response));
         }, reject);
     });
   },
@@ -59,18 +52,14 @@ export default Ember.Service.extend({
    * Get user stats by courses
    * @returns {Promise.<[]>}
    */
-  getUserStatsByCourse: function() {
+  getUserStatsByCourse: function(userId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('learnersAdapter')
-        .getUserStatsByCourse()
+        .getUserStatsByCourse(userId)
         .then(function(response) {
-          let resultSet = Ember.Object.create(response);
-          Object.keys(response).forEach(key => {
-            resultSet.set(key, Ember.A(resultSet.get(key)));
-          });
-          resolve(resultSet);
+          resolve(service.get('learnersSerializer').normalizeUserStatsBycourse(response));
         }, reject);
     });
   },
@@ -79,14 +68,14 @@ export default Ember.Service.extend({
    * Get user  journey stats
    * @returns {Promise.<[]>}
    */
-  getUserJourneyStats: function() {
+  getUserJourneyStats: function(userId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('learnersAdapter')
-        .getUserJourneyStats()
+        .getUserJourneyStats(userId)
         .then(function(response) {
-          resolve(Ember.Object.create(response));
+          resolve(service.get('learnersSerializer').normalizeUserStats(response));
         }, reject);
     });
   },
@@ -95,14 +84,14 @@ export default Ember.Service.extend({
    * Get user  competency  stats
    * @returns {Promise.<[]>}
    */
-  getUserCompetencyStats: function() {
+  getUserCompetencyStats: function(userId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('learnersAdapter')
-        .getUserCompetencyStats()
+        .getUserCompetencyStats(userId)
         .then(function(response) {
-          resolve(Ember.Object.create(response));
+          resolve(service.get('learnersSerializer').normalizeUserStats(response));
         }, reject);
     });
   }

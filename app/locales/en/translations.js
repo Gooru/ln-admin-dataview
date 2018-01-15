@@ -88,6 +88,8 @@ export default {
     'time-spent-activities': 'time spent :   activities',
     'time-spent-courses': 'time spent : courses',
     'competencies-studied': 'competencies studied',
-    'competeny-report': 'Competeny Report'
+    'competeny-report': 'Competeny Report',
+    'independentJourneys' : 'Independent Journeys',
+    'classJourneys' : 'Courses'
   }
 };

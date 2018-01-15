@@ -59,7 +59,7 @@ export default Ember.Component.extend({
    * Total count of time spent
    * @return {Number}
    */
-  totalDuration: Ember.computed('data.@each', function() {
+  totalDuration: Ember.computed('data.[]', function() {
     let dataSet = this.get('data');
     let count = 0;
     dataSet.forEach(data => {
@@ -130,7 +130,7 @@ export default Ember.Component.extend({
           .duration(500)
           .ease(d3.easeBounce)
           .attr('d', arc.innerRadius(110).outerRadius(radius));
-        component.$('.title').html(d.data.label);
+        component.$('.title').html(d.data.name);
         component.$('.duration-label').html(formatMilliseconds(d.data.value));
       })
       .on('mouseout', function() {
@@ -170,7 +170,6 @@ export default Ember.Component.extend({
       .attr('class', 'duration-label').text(formatMilliseconds(component.get('totalDuration')));
     text.append('xhtml:div')
       .attr('class', 'title').text();
-
 
   }
 
