@@ -22,7 +22,11 @@ export default {
     mostPopularProviders: 'most popular providers',
     globalStatistics: 'global Statistics',
     'learners' : 'learners',
+    'active-users' : 'Active Users',
     'explore' : 'Explore',
+    'active' : 'Active',
+    'users' : 'Users',
+    'username': 'Username',
     categoryOptions: {
       k12: 'K-12',
       'higher-ed': 'Higher Education',
@@ -91,6 +95,10 @@ export default {
     'competencies-studied': 'competencies studied',
     'competeny-report': 'Competeny Report',
     'independentJourneys' : 'Independent Journeys',
-    'classJourneys' : 'Courses'
+    'classJourneys' : 'Courses',
+    'grade': 'Grade',
+    'authority': 'Authority',
+    'reputation': 'Reputation',
+    'citizenship' : 'Citizenship'
   }
 };

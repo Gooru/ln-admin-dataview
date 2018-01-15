@@ -9,9 +9,7 @@ export default Ember.Controller.extend({
   // Actions
 
   actions:  {
-    onMenuItemSelection: function(item) {
-      this.transitionToRoute(item.label, this.get('userId'));
-    }
+
   }
 
   // --------------------------------------------------------------------------

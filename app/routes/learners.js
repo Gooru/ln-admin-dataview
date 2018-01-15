@@ -17,10 +17,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   //Properties
 
   // -------------------------------------------------------------------------
-  // Actions
-  actions: {},
-
-  // -------------------------------------------------------------------------
   // Methods
 
   model: function() {

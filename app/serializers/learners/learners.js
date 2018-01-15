@@ -1,5 +1,5 @@
 import Ember from 'ember';
-
+import {DEFAULT_IMAGES} from 'admin-dataview/config/config';
 /**
  * Serializer for Learner endpoints
  *
@@ -53,6 +53,23 @@ export default Ember.Object.extend({
         result.pushObject(Ember.Object.create(data));
       });
       resultSet.set(key, result);
+    });
+    return resultSet;
+  },
+
+  /**
+   * Normalized data of active user distrbution by subject
+   * @return {Object}
+   */
+  normalizeActiveUserDistrbutionBySubject: function(response) {
+    let resultSet = Ember.A();
+    response = Ember.A(response.users);
+    response.forEach(data => {
+      let result = Ember.Object.create(data);
+      if(!result.get('thumbnail')) {
+        result.set('thumbnail', DEFAULT_IMAGES.USER_PROFILE);
+      }
+      resultSet.pushObject(result);
     });
     return resultSet;
   }

@@ -20,10 +20,23 @@ export default Ember.Component.extend({
   title: null,
 
   /**
+   * Localize title of the panel
+   */
+  localizeTitle: null,
+
+  /**
    * Indicates back button need to show or not
    * @type {Boolean}
    */
-  showBackButton: false
+  showBackButton: false,
 
+  // -------------------------------------------------------------------------
+  // Events
+
+  actions: {
+    onClickBackButton: function() {
+      this.sendAction('onClickBackButton');
+    }
+  }
 
 });

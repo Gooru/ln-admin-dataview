@@ -9,7 +9,9 @@
     <span class="subject-learners">{{t 'common.learners'}}</span>
   </div>
   <div class="active-users">
-    <div class="subject-active-count">{{count-format subject.active}} Active Users</div>
+    <div class="subject-active-count" {{action 'onSelectActiveUsers' subject}}>
+      {{count-format subject.active}} {{t 'common.active-users'}}
+    </div>
   </div>
 </div>
 {{/each}}

@@ -20,12 +20,12 @@ export default Ember.Service.extend({
    * Fetch the learners profile distribution
    * @returns {Object}
    */
-  getLearnerProfileDistribution: function() {
+  getLearnerProfileDistribution: function(subjectId = null) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('learnersAdapter')
-        .getLearnerProfileDistribution()
+        .getLearnerProfileDistribution(subjectId)
         .then(function(response) {
           resolve(service.get('learnersSerializer').normalizeLearnerProfileDistribution(response));
         }, reject);
@@ -92,6 +92,23 @@ export default Ember.Service.extend({
         .getUserCompetencyStats(userId)
         .then(function(response) {
           resolve(service.get('learnersSerializer').normalizeUserStats(response));
+        }, reject);
+    });
+  },
+
+
+  /**
+   * Get active user distribution by subject
+   * @returns {Promise.<[]>}
+   */
+  getActiveUserDistrbutionBySubject: function(subjectId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('learnersAdapter')
+        .getActiveUserDistrbutionBySubject(subjectId)
+        .then(function(response) {
+          resolve(service.get('learnersSerializer').normalizeActiveUserDistrbutionBySubject(response));
         }, reject);
     });
   }

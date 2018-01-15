@@ -13,11 +13,11 @@ export default Ember.Object.extend({
    * Get learners profile distribution
    * @returns {Promise.<[]>}
    */
-  getLearnerProfileDistribution: function() {
+  getLearnerProfileDistribution: function(subjectId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/stats/learners-location-based-count.json`;
+    const url = `${basePath}${namespace}/stats/learners-location-based-count-${subjectId}.json`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -111,6 +111,27 @@ export default Ember.Object.extend({
       userCompetencyStats: Ember.$.ajax(url, options)
     }).then(function(hash) {
       return hash.userCompetencyStats.value;
+    });
+  },
+
+  /**
+   * Get active user distribution by subject
+   * @returns {Promise.<[]>}
+   */
+  getActiveUserDistrbutionBySubject: function(subjectId) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    const url = `${basePath}${namespace}/stats/active-user-distrbution-by-subject-${subjectId}.json`;
+    const options = {
+      type: 'GET',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8'
+    };
+    return Ember.RSVP.hashSettled({
+      activeUserDistrbutionBySubject: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.activeUserDistrbutionBySubject.value;
     });
   },
 

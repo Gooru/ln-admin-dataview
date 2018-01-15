@@ -20,6 +20,7 @@ Router.map(function() {
     this.route('time-spent-courses');
     this.route('time-spent-activites');
   });
+  this.route('leaners');
 });
 
 export default Router;

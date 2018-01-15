@@ -1,0 +1,26 @@
+{
+            "users" : [
+                {
+                    "userId": "userid",
+                    "username": "username",
+                    "firstname": "first",
+                    "lastname": "last",
+                    "thumbnail": "//dev-user-gooru-org.s3-us-west-1.amazonaws.com/d0caf3ef-55c3-444a-83de-a8dd6498c6db.jpg",
+                    "grade": "grade",
+                    "authority": 0.5,
+                    "citizenship": 0.7,
+                    "reputation": 0.9
+                },
+                {
+                    "userId": "userid",
+                    "username": "username",
+                    "firstname": "first",
+                    "lastname": "last",
+                    "thumbnail": null,
+                    "grade": "grade",
+                    "authority": 0.5,
+                    "citizenship": 0.7,
+                    "reputation": 0.9
+                }
+            ]
+        }
