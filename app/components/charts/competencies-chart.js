@@ -106,7 +106,7 @@ export default Ember.Component.extend({
       .attr('transform', `translate(${  width / 2  },${  height / 2  })`);
 
     let arc = d3.arc()
-      .innerRadius(120)
+      .innerRadius(115)
       .outerRadius(radius);
 
     let pie = d3.pie()

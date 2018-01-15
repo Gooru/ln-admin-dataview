@@ -44,12 +44,39 @@ export default Ember.Route.extend({
   }
   ]),
 
+  timeSpentCourses: Ember.A([{
+    label: 'Algebra I',
+    value: 36000
+  },
+  {
+    label: 'Algebra II',
+    value: 50090
+  },
+  {
+    label: 'Biology',
+    value: 76880
+  },
+  {
+    label: 'Zoology',
+    value: 12340
+  },
+  {
+    label: 'History',
+    value: 34500
+  },
+  {
+    label: 'Computer Science',
+    value: 34500
+  }
+  ]),
 
-  setupController: function(controller) {
+
+  setupController: function(controller, model) {
     controller.set('courseAndIndependentJourneysData', this.get('courseAndIndependentJourneysData'));
     controller.set('competenciesData', this.get('competenciesData'));
     controller.set('timeSpentActivities', this.get('timeSpentActivities'));
-
+    controller.set('timeSpentCourses', this.get('timeSpentCourses'));
+    controller.set('userId', model.userId);
   }
 
 });

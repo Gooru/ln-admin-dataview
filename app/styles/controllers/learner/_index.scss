@@ -1,13 +1,29 @@
-.learner-report {
+.learner-index {
   .report-panel {
     float: left;
     margin-bottom: 23px;
     width: 500px;
     height: 482px;
+    .report-panel-body {
+      cursor: pointer;
+    }
+    .explore-button {
+      width: 112px;
+      height: 33px;
+      margin: 50px auto 0;
+    }
+
+    .panel-title {
+      span {
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+    }
   }
 
   .courses-independent-journey {
     margin-right: 23px;
+
     .courses-independent-journeys-chart {
       width: 280px;
       height: 280px;
@@ -24,9 +40,8 @@
   }
 
   .time-spent-activities {
-    width: 500px;
-    height: 482px;
     margin-right: 23px;
+
     .time-spent-activities-chart {
       width: 280px;
       height: 280px;
@@ -34,7 +49,11 @@
     }
   }
 
-  .courses-performance-and-time {
-
+  .time-spent-courses {
+    .time-spent-courses-chart {
+      width: 280px;
+      height: 280px;
+      margin: 50px auto 0;
+    }
   }
 }

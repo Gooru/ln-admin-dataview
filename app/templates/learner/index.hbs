@@ -1,0 +1,32 @@
+<div class="learner-index">
+
+  <div class="courses-independent-journey report-panel">
+    {{#app-panel-box title="learner.courses-independent-journey" }}
+      <div class="report-panel-body" {{action 'onExploreJourneyTaken'}}>
+        {{charts.courses-independent-journey data=courseAndIndependentJourneysData}} {{learner.explore-button}}
+      </div>
+    {{/app-panel-box}}
+
+  </div>
+  <div class="competencies report-panel">
+    {{#app-panel-box title="learner.competencies" }}
+      <div class="report-panel-body" {{action 'onExploreCompetencies'}}>
+        {{charts.competencies-chart data=competenciesData}} {{learner.explore-button}}
+      </div>
+    {{/app-panel-box}}
+  </div>
+  <div class="time-spent-activities report-panel">
+    {{#app-panel-box title="learner.time-spent-activities" }}
+      <div class="report-panel-body" {{action 'onExploreTimeSpentActivities'}}>
+        {{charts.time-spent-activities data=timeSpentActivities}} {{learner.explore-button}}
+      </div>
+    {{/app-panel-box}}
+  </div>
+  <div class="time-spent-courses report-panel">
+    <div class="report-panel-body" {{action 'onExploreTimeSpentCourse'}}>
+      {{#app-panel-box title="learner.time-spent-courses" }}
+        {{charts.time-spent-courses data=timeSpentCourses}} {{learner.explore-button}}
+      {{/app-panel-box}}
+    </div>
+  </div>
+</div>

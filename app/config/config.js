@@ -169,26 +169,6 @@ export const NAVIGATION_MENUS_INDEX = {
   'learner': 2
 };
 
-export const LEARNER_NAVIGATION_MENUS = [{
-  'value': 'reports',
-  'label': 'learner.reports'
-}, {
-  'value': 'journeys-taken',
-  'label': 'learner.journeys-taken'
-}, {
-  'value': 'proficiency',
-  'label': 'learner.proficiency'
-}, {
-  'value': 'preferences',
-  'label': 'learner.preferences'
-}, {
-  'value': 'markers',
-  'label': 'learner.markers'
-}, {
-  'value': 'profile',
-  'label': 'learner.profile'
-}];
-
 export const LEARNER_NAVIGATION_MENUS_INDEX = {
   'reports': 0,
   'journeys-taken': 1,

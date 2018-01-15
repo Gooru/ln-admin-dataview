@@ -9,7 +9,21 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
-  classNames: ['app-panel-box']
+  classNames: ['app-panel-box'],
+
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * Title of the panel
+   */
+  title: null,
+
+  /**
+   * Indicates back button need to show or not
+   * @type {Boolean}
+   */
+  showBackButton: false
 
 
 });

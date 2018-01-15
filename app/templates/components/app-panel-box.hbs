@@ -1,6 +1,15 @@
 <div class="panel-header">
-  <span class="title">{{t title}}</span>
+  {{#if showBackButton}}
+  <div class="pull-left panel-back-arrow">
+    {{app-icon name="ic_arrow_back"}}
+  </div>
+  {{/if}}
+  {{#if title}}
+    <div class="pull-left panel-title">
+      <span>{{t title}}</span>
+  </div>
+  {{/if}}
 </div>
 <div class="panel-body">
-{{yield}}
+  {{yield}}
 </div>

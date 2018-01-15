@@ -21,6 +21,7 @@ export default {
     signatureCollection: 'signature Collections',
     mostPopularProviders: 'most popular providers',
     globalStatistics: 'global Statistics',
+    'explore' : 'Explore',
     categoryOptions: {
       k12: 'K-12',
       'higher-ed': 'Higher Education',
@@ -76,12 +77,6 @@ export default {
     }
   },
   learner: {
-    'reports': 'reports',
-    'journeys-taken': 'journeys taken',
-    'proficiency': 'proficiency',
-    'preferences': 'preferences',
-    'markers': 'markers',
-    'profile': 'profile',
     'yesterday': 'Yesterday',
     'last-week': 'Last Week',
     'last-month': 'Last Month',
@@ -90,8 +85,8 @@ export default {
     'from-the-beginning-of-time': 'From the Beginning of Time',
     'courses-independent-journey': 'courses & independent journey',
     'competencies': 'competencies',
-    'time-spent-activities': 'time spent activities',
-    'courses-performance-and-time': 'courses : performance and time',
+    'time-spent-activities': 'time spent :   activities',
+    'time-spent-courses': 'time spent : courses',
     'competencies-studied': 'competencies studied'
   }
 };

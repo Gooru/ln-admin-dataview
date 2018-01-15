@@ -6,10 +6,17 @@
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   padding: 20px 20px 20px 30px;
 
-  .title {
-    font-size: 15px;
-    font-weight: bold;
-    text-transform: uppercase;
-    color: $dark-800;
+  .panel-back-arrow {
+    width: 40px;
+    i {
+      margin-left: -74px;
+    }
+  }
+
+  .panel-title {
+    span {
+      font-size: 15px;
+      color: $dark-800;
+    }
   }
 }
