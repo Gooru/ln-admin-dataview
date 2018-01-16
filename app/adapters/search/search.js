@@ -146,7 +146,7 @@ export default Ember.Object.extend({
     const namespace = this.get('namespace');
     const url = `${namespace}/course`;
     let nodeType = nodeData.type;
-    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `${nodeType}Display` : `flt.${nodeType}Name`;
+    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `flt.${nodeType}Name`;
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
@@ -154,7 +154,7 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       data: {
         q: '*',
-        start: 3,
+        start: 1,
         length: 10,
         'publishStatus': 'published'
       }
@@ -176,7 +176,7 @@ export default Ember.Object.extend({
     const namespace = this.get('namespace');
     const url = `${namespace}/rubric`;
     let nodeType = nodeData.type;
-    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `${nodeType}Display` : `flt.${nodeType}Name`;
+    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `flt.${nodeType}Name`;
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
@@ -206,7 +206,7 @@ export default Ember.Object.extend({
     const namespace = this.get('namespace');
     const url = `${namespace}/unit`;
     let nodeType = nodeData.type;
-    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `${nodeType}Display` : `${nodeType}Name`;
+    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `${nodeType}Name`;
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
@@ -236,7 +236,7 @@ export default Ember.Object.extend({
     const namespace = this.get('namespace');
     const url = `${namespace}/lesson`;
     let nodeType = nodeData.type;
-    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `${nodeType}Display` : `${nodeType}Name`;
+    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `${nodeType}Name`;
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
