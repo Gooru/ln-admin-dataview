@@ -35,6 +35,16 @@ export default Ember.Controller.extend({
   subjectId: null,
 
   /**
+  * Property to store current categoryId
+  */
+  categoryId: 'k_12',
+
+  /**
+  * Property to store current subject title
+  */
+  subjectTitle: 'Science',
+
+  /**
   * Property to store complete table data
   */
   tableData: [],
@@ -42,7 +52,7 @@ export default Ember.Controller.extend({
   /**
   * Default crosswalk table header items
   */
-  defaultTableHeaderItems: ['COMPETENCY', 'GUT CODE'],
+  defaultTableHeaderItems: ['COMPETENCY'],
 
   //------------------------------------------------------------------------
   // Actions
@@ -70,12 +80,16 @@ export default Ember.Controller.extend({
       }
     },
 
-    disableGenerateBtn: function(subjectId) {
+    disableGenerateBtn: function(category, subject) {
       let controller = this;
-      let currentSubjectId = controller.get('subjectId');
-      if (subjectId !== currentSubjectId) {
-        controller.set('selectedFrameworks', []);
-        controller.set('enableGenerateTableBtn', false);
+      controller.set('categoryId', category);
+      if (subject) {
+        controller.set('subjectTitle', subject.subjectTitle);
+        let currentSubjectId = controller.get('subjectId');
+        if (subject.id !== currentSubjectId) {
+          controller.set('selectedFrameworks', []);
+          controller.set('enableGenerateTableBtn', false);
+        }
       }
     },
 
@@ -113,13 +127,20 @@ export default Ember.Controller.extend({
       let tableRowData = [];
       tableRowData.length = numberOfColumns;
       tableRowData.fill('');
-      tableRowData[0] = truncateString(data.title);
-      tableRowData[1] = data.id;
+      tableRowData[0] = {
+        id: data.id,
+        title: truncateString(data.title, 150)
+      };
+      // tableRowData[1] = data.id;
       data.crosswalkCodes.forEach(crosswalkCode => {
         let frameworkId = crosswalkCode.framework_id;
         let frameworkPosition = tableHeader.indexOf(frameworkId);
         if (frameworkList.includes(frameworkId)) {
-          tableRowData[frameworkPosition] = crosswalkCode.id;
+          let tableCellData = {
+            id: crosswalkCode.id,
+            title: truncateString(crosswalkCode.title, 150)
+          };
+          tableRowData[frameworkPosition] = tableCellData;
         }
       });
       tableBody.push(tableRowData);
@@ -131,5 +152,8 @@ export default Ember.Controller.extend({
     };
     controller.set('tableData', tableData);
     controller.set('showCrosswalkTable', true);
+    $('.crosswalk-body').animate({
+      scrollTop: 535
+    });
   }
 });
