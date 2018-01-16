@@ -15,6 +15,7 @@ export default Ember.Component.extend({
     let numberOfColumns = component.get('tableData.header').length;
     component.$('.thead .td').css('width', `calc(100% / ${numberOfColumns})`);
     component.$('tbody tr td').css('width', `calc(100% / ${numberOfColumns})`);
+    $('.table-structure').animate({scrollTop: 0});
   },
 
   // -------------------------------------------------------------------------
