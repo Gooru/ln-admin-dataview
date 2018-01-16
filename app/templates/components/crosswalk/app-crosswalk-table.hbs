@@ -1,22 +1,29 @@
 <div class="table-responsive">
-  <table class="table crosswalk-data" id="crosswalk-data">
-    <thead>
-      <tr>
-        {{#each tableData.header as |header|}}
-          <th>
-            {{header}}
-          </th>
+  <div class="crosswalk-subject">
+    {{t (concat 'common.categoryOptions.' categoryId)}} > {{subjectTitle}}
+    <span {{action "scrollTop"}}><i class="material-icons">arrow_upward</i></span>
+  </div>
+  <div class="thead">
+    {{#each tableData.header as |header|}}
+      <div class="td">
+        {{header}}
+      </div>
+    {{/each}}
+  </div>
+  <div class="table-structure">
+    <table class="table crosswalk-data" id="crosswalk-data">
+      <tbody>
+        {{#each tableData.body as |tableRow|}}
+          <tr>
+            {{#each tableRow as |tableBody|}}
+              <td>
+                <div class="id">{{tableBody.id}}</div>
+                <div class="title">{{tableBody.title}}</div>
+              </td>
+            {{/each}}
+          </tr>
         {{/each}}
-      </tr>
-    </thead>
-    <tbody>
-      {{#each tableData.body as |tableRow|}}
-        <tr>
-          {{#each tableRow as |tableBody|}}
-            <td>{{tableBody}}</td>
-          {{/each}}
-        </tr>
-      {{/each}}
-    </tbody>
-  </table>
+      </tbody>
+    </table>
+  </div>
 </div>
