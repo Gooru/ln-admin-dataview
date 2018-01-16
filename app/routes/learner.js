@@ -6,6 +6,16 @@ import Utils from 'admin-dataview/utils/utils';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
+  //------------------------------------------------------------------------
+  //Dependencies
+
+  i18n: Ember.inject.service(),
+
+  /**
+   * @requires service:profile
+   */
+  profileService: Ember.inject.service('api-sdk/profile'),
+
 
   //------------------------------------------------------------------------
   //Properties
@@ -32,11 +42,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   //Methods
 
   model: function(params) {
-    return params;
+    return Ember.RSVP.hash({
+      userProfile: this.get('profileService').readUserProfile(params.userId)
+    });
   },
 
   setupController: function(controller, model) {
-    controller.set('userId', model.userId);
+    controller.set('userId', model.userProfile.id);
+    controller.set('user', model.userProfile);
   }
 
 });
