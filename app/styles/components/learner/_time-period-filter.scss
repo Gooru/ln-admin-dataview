@@ -1,8 +1,9 @@
 .time-period-filter {
   width: 100%;
-  height: 30px;
+  height: 40px;
   margin-top: 10px;
   margin-bottom: 10px;
+  border-bottom: 1px dashed $dark-800;
 
   ul {
     li {
