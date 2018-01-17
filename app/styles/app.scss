@@ -44,6 +44,8 @@
 @import 'components/charts/competencies';
 @import 'components/charts/time-spent-courses';
 @import 'components/charts/time-spent-activities';
+@import 'components/charts/radial-progress-chart';
+@import 'components/charts/slider-chart';
 @import 'components/popular-providers';
 @import "components/signature-assessments";
 @import "components/signature-collections";
@@ -56,3 +58,4 @@
 @import 'components/learners/global-statistics';
 @import 'components/learner/time-period-filter.scss';
 @import 'components/learner/explore-button.scss';
+@import 'components/learner/user-profile.scss';

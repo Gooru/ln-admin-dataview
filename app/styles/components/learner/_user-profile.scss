@@ -1,0 +1,60 @@
+.user-profile-view-container {
+  width: 1024px;
+  margin: 0 auto;
+
+  .user-profile-info {
+    width: 750px;
+    margin: 0 auto;
+    height: 200px;
+
+    .user-profile-image {
+      width: 250px;
+
+      .img-container {
+        width: 130px;
+        height: 130px;
+        overflow: hidden;
+        border-radius: 65px;
+      }
+    }
+
+    .user-profile-more-info {
+      width: 250px;
+
+      .username {
+        font-size: 20px;
+        font-weight: bold;
+      }
+
+      .location {
+        .school-state {
+          font-size: 20px;
+        }
+
+        .school-country {
+          font-size: 15px;
+        }
+      }
+
+      .school-info {
+        .school-name {
+          font-size: 20px;
+        }
+
+        .school-district {
+          font-size: 15px;
+        }
+      }
+    }
+
+    .user-profile-reputation {
+      width: 250px;
+
+      .user-profile-stats {
+        .user-reputation-range {}
+
+        .user-reputation-name {}
+      }
+    }
+  }
+}
