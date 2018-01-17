@@ -1,0 +1,19 @@
+{
+			"collections": [{
+					"id": "collection-id",
+					"title": "Coll1 on Sharks",
+					"sessionId": "session-id",
+					"timeSpent": 245001,
+					"reaction": 5,
+					"score": null
+				},
+				{
+					"id": "collection-id",
+					"title": "Coll2 on Sharks",
+					"sessionId": "session-id",
+					"timeSpent": 345002,
+					"reaction": 4,
+					"score": null
+				}
+			]
+}

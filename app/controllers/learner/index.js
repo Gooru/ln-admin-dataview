@@ -25,7 +25,7 @@ export default Ember.Controller.extend({
   actions:  {
     onExploreJourneyTaken: function() {
       let controller = this;
-      controller.transitionToRoute('learner.journeys-taken', controller.get('userId'));
+      controller.transitionToRoute('learner.journeys', controller.get('userId'));
     },
     onExploreCompetencies: function() {
       let controller = this;
@@ -33,11 +33,11 @@ export default Ember.Controller.extend({
     },
     onExploreTimeSpentActivities: function() {
       let controller = this;
-      controller.transitionToRoute('learner.time-spent-courses', controller.get('userId'));
+      controller.transitionToRoute('learner.activites', controller.get('userId'));
     },
     onExploreTimeSpentCourse: function() {
       let controller = this;
-      controller.transitionToRoute('learner.time-spent-courses', controller.get('userId'));
+      controller.transitionToRoute('learner.courses', controller.get('userId'));
     }
   }
 

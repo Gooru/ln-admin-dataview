@@ -15,10 +15,10 @@ Router.map(function() {
   this.route('sign-in');
   this.route('crosswalk');
   this.route('learner', { path: '/learner/:userId' }, function() {
-    this.route('journeys-taken');
+    this.route('journeys');
     this.route('competencies');
-    this.route('time-spent-courses');
-    this.route('time-spent-activites');
+    this.route('courses');
+    this.route('activites');
   });
   this.route('leaners');
 });
