@@ -19,7 +19,6 @@ export default Ember.Route.extend({
   // Methods
 
   beforeModel: function(transition) {
-    console.log(transition);
     this.set('userId', transition.params.learner.userId);
   },
 
@@ -36,7 +35,6 @@ export default Ember.Route.extend({
 
   setupController: function(controller, model) {
     controller.set('userPerformanceUnits', model.userPerformanceUnits);
-    controller.set('userId', userId);
   }
 
 });

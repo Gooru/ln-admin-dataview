@@ -31,7 +31,6 @@ export default Ember.Component.extend({
     let component = this;
     component._super(...arguments);
     let user = component.get('model.user');
-    console.log('user', user);
     component.set('citizenship', user.citizenship);
     component.set('authority', user.authority);
     component.set('reputation', user.reputation);
@@ -42,7 +41,6 @@ export default Ember.Component.extend({
       userPrefsProviders: this.get('profileService').getUserPrefsProviders(userId),
       userPrefsContent: this.get('profileService').getUserPrefsContent(userId)
     }).then(function(hash) {
-      console.log('hash', hash);
       component.set('userProfile', user);
       component.set('userGrades', hash.userGrades);
       component.set('userPrefsContent', hash.userPrefsContent);
@@ -53,20 +51,20 @@ export default Ember.Component.extend({
   },
 
   didInsertElement: function() {
-    var acc = this.$(".accordion");
-var i;
+    var acc = this.$('.accordion');
+    var i;
 
-for (i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.maxHeight){
-      panel.style.maxHeight = null;
-    } else {
-      panel.style.maxHeight = panel.scrollHeight + "px";
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener('click', function() {
+        this.classList.toggle('active');
+        var panel = this.nextElementSibling;
+        if (panel.style.maxHeight){
+          panel.style.maxHeight = null;
+        } else {
+          panel.style.maxHeight = `${panel.scrollHeight  }px`;
+        }
+      });
     }
-  });
-}
   }
 
 });

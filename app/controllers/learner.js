@@ -34,7 +34,7 @@ export default Ember.Controller.extend(ModalMixin, {
       controller.send('showModal', 'modals.learner.user-profile-modal', modalData);
     }
 
-  },
+  }
 
   // --------------------------------------------------------------------------
   // Properties
