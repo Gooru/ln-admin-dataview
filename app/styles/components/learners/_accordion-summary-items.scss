@@ -1,0 +1,112 @@
+.learners.accordion-summary-items {
+  height: auto;
+  height: auto;
+  background: white;
+  margin: 0 auto;
+  // margin-top: 30px;
+  .competency-items {
+    padding: 5px 12px 0;
+    width: 100%;
+    display: table;
+    border-bottom: 2px solid $table-border-color;
+
+    .assessment {
+      float: left;
+      margin: 7px 7px 7px -25px;
+
+      i {
+        background: url("images/accordion-assessment-icon .svg");
+        width: 26px;
+        height: 15px;
+        object-fit: contain;
+        display: block;
+      }
+    }
+
+    .collection {
+      float: left;
+      margin: 7px 7px 7px -25px;
+
+      i {
+        background: url("images/accordion-collection-icon .svg");
+        width: 26px;
+        height: 15px;
+        object-fit: contain;
+        display: block;
+      }
+    }
+
+    .panel-title {
+      display: inline-block;
+      width: 70%;
+
+      .title {
+        font-weight: bold;
+
+        .caret {
+          margin-left: 100px;
+        }
+      }
+
+      .sub-title {
+        font-size: 13px;
+        color: $gray-lighter;
+      }
+    }
+
+    .panel-info {
+      float: right;
+
+      .status {
+        padding: 40px;
+        font-size: 16px;
+      }
+
+      .time {
+        padding: 40px;
+        font-size: 16px;
+      }
+    }
+  }
+
+  .panel-collapse {
+    .panel-body {
+      padding: 3px;
+
+      .panel-group {
+        .assessment {
+          float: left;
+          margin: 13px -25px;
+
+          i {
+            background: url("images/accordion-assessment-icon .svg");
+            width: 26px;
+            height: 15px;
+            object-fit: contain;
+            display: block;
+          }
+        }
+
+        .items {
+          height: 40px;
+          padding: 8px;
+          border-bottom: 1px solid $table-border-color;
+
+          .panel-info {
+            float: right;
+
+            .status {
+              padding: 40px;
+              font-size: 16px;
+            }
+
+            .time {
+              padding: 40px;
+              font-size: 16px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

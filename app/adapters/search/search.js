@@ -206,7 +206,7 @@ export default Ember.Object.extend({
     const namespace = this.get('namespace');
     const url = `${namespace}/unit`;
     let nodeType = nodeData.type;
-    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `${nodeType}Name`;
+    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `flt.${nodeType}Name`;
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
@@ -236,7 +236,7 @@ export default Ember.Object.extend({
     const namespace = this.get('namespace');
     const url = `${namespace}/lesson`;
     let nodeType = nodeData.type;
-    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `${nodeType}Name`;
+    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `flt.${nodeType}Name`;
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',

@@ -1,0 +1,42 @@
+.learners.accordion-summary {
+  height: auto;
+  background: white;
+  margin: 0 auto;
+  width: 960px;
+  // margin-top: 30px;
+  .competency {
+    padding: 5px 12px 0;
+    width: 100%;
+    display: table;
+    border-bottom: 2px solid $table-border-color;
+
+    .panel-title {
+      display: inline-block;
+      width: 60%;
+
+      .title {
+        font-weight: bold;
+      }
+
+      .sub-title {
+        font-size: 13px;
+        color: $gray-lighter;
+      }
+    }
+
+    .panel-info {
+      float: right;
+      width: 40%;
+
+      .status {
+        padding-left: 145px;
+        font-size: 16px;
+      }
+
+      .time {
+        padding-left: 55px;
+        font-size: 16px;
+      }
+    }
+  }
+}
