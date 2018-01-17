@@ -32,9 +32,9 @@ export function getResourceFormat(format) {
  * @param text
  * @returns {string}
  */
-export function truncateString(text) {
+export function truncateString(text, length = 95) {
   if (text.length > 100) {
-    return `${text.substring(0, 95)  }...`;
+    return `${text.substring(0, length)  }...`;
   }
   return text;
 }

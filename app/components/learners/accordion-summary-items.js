@@ -40,9 +40,10 @@ export default Ember.Component.extend({
      * Triggered when an menu item is selected
      * @param item
      */
-    selectCompetencyItems: function(item) {
+    selectComptencyItems: function() {
+
       //here write the selected competency details
     }
-  },
+  }
 
 });

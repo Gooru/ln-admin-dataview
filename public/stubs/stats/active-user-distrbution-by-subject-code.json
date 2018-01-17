@@ -1,7 +1,7 @@
 {
             "users" : [
                 {
-                    "userId": "userid",
+                    "userId": "user-id",
                     "username": "username",
                     "firstname": "first",
                     "lastname": "last",
@@ -12,7 +12,7 @@
                     "reputation": 0.9
                 },
                 {
-                    "userId": "userid",
+                    "userId": "user-id",
                     "username": "username",
                     "firstname": "first",
                     "lastname": "last",

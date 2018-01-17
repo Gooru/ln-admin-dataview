@@ -220,3 +220,5 @@ export const LEARNER_TIME_PERIOD_FILTER = [{
   'value': 'from-the-beginning-of-time',
   'label': 'learner.from-the-beginning-of-time'
 }];
+
+export const LEARNER_CHILD_ROUTES = ['journeys-taken', 'competencies', 'time-spent-courses', 'time-spent-activites'];

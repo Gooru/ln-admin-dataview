@@ -83,7 +83,7 @@ export default Ember.Component.extend({
       let currentCategoryId = component.get('currentCategoryId');
       if (currentCategoryId !== category) {
         component.set('currentCategoryId', category);
-        component.sendAction('disableGenerateBtn');
+        component.sendAction('disableGenerateBtn', category);
         return component.fetchTaxonomySubjects(category);
       }
       return true;
@@ -94,8 +94,9 @@ export default Ember.Component.extend({
     */
     getFrameworks: function(subject) {
       let component = this;
+      let category = component.get('currentCategoryId');
       component.set('currentSubjectId', subject.id);
-      component.sendAction('disableGenerateBtn', subject.id);
+      component.sendAction('disableGenerateBtn', category, subject);
       return component.fetchTaxonomyFrameworks(subject);
     },
 

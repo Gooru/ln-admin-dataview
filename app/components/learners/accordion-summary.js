@@ -15,7 +15,6 @@ export default Ember.Component.extend({
        */
       count: 0,
 
-
       // -------------------------------------------------------------------------
       // Actions
       actions: {
