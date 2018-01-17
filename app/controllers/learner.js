@@ -28,5 +28,4 @@ export default Ember.Controller.extend(ModalMixin, {
   // Properties
 
 
-
 });
