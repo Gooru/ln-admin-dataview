@@ -127,7 +127,8 @@ export default Ember.Component.extend({
         component.set('subjects', hash.subjectsList);
         component.set('isShowFrameworkLevel', false);
         component.set('isShowSubjectLevel', true);
-        return hash.subjectsList[0];
+        //Use Math as default subject
+        return hash.subjectsList[1];
       });
   },
 

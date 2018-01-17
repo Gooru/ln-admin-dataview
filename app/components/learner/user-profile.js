@@ -10,6 +10,12 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
-  classNames: ['user-profile-view-container']
+  classNames: ['user-profile-view-container'],
+
+  actions: {
+    onToggleUserProfilePopup: function() {
+      this.sendAction('onToggleUserProfilePopup');
+    }
+  }
 
 });

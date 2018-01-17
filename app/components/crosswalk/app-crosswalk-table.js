@@ -25,9 +25,13 @@ export default Ember.Component.extend({
     * Move the scroll to top when user click up arrow
     */
     scrollTop: function() {
-      $('.crosswalk-body').animate({
-        scrollTop: 0
+      let component = this;
+      component.sendAction('onToggleSubjectBrowser').then(function() {
+        $('.crosswalk-body').animate({
+          scrollTop: 0
+        });
       });
+
     }
   }
 });
