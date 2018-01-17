@@ -35,7 +35,8 @@ export default Ember.Controller.extend({
       let controller = this;
       controller.transitionToRoute('learner.activites', controller.get('userId'));
     },
-    onExploreTimeSpentCourse: function() {
+    onSelectCourse: function(courseId) {
+      console.log(courseId);
       let controller = this;
       controller.transitionToRoute('learner.courses', controller.get('userId'));
     }

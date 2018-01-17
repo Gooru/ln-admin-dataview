@@ -23,9 +23,9 @@
     {{/app-panel-box}}
   </div>
   <div class="time-spent-courses report-panel">
-    <div class="report-panel-body" {{action 'onExploreTimeSpentCourse'}}>
+    <div class="report-panel-body">
       {{#app-panel-box localizeTitle="learner.time-spent-courses" }}
-        {{charts.time-spent-courses data=userStatsByCourse}} {{learner.explore-button}}
+        {{charts.time-spent-courses data=userStatsByCourse userId=userId}} {{learner.explore-button}}
       {{/app-panel-box}}
     </div>
   </div>

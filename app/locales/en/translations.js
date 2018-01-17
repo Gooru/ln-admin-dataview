@@ -100,6 +100,7 @@ export default {
     'grade': 'Grade',
     'authority': 'Authority',
     'reputation': 'Reputation',
-    'citizenship' : 'Citizenship'
+    'citizenship' : 'Citizenship',
+    'course-report' : 'Course Report'
   }
 };

@@ -55,7 +55,6 @@ export default Ember.Component.extend({
       component.set('isExpanded', true);
     });
 
-    Ember.run.scheduleOnce('afterRender', this, this.parsedLocationChanged);
   }),
 
   removeSubscriptions: Ember.on('willDestroyElement', function() {
