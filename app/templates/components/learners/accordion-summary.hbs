@@ -1,0 +1,29 @@
+<div class="competency" role="tab" id="{{elementId}}-heading">
+
+  <div class="panel-title">
+    <a class="collapsed title" role="button" data-toggle="collapse" href="#{{elementId}}-content" aria-expanded="false" aria-controls="{{elementId}}-content" {{action "selectComptency" model.id}}>
+      <div class="title ellipsis"> COMPATANCY NAME GOES HERE </div>
+      <div class="sub-title ellipsis"> Course Name goes here </div>
+    </a>
+  </div>
+  <div class="panel-info">
+    <span class="status"> In Progress</span>
+    <span class="time"> Time</span>
+  </div>
+</div>
+
+<div id="{{elementId}}-content"
+ data-index="{{componentIndex}}"
+ class="panel-collapse collapse"
+ role="tabpanel" aria-labelledby="{{elementId}}-heading">
+
+  <div class="panel-body">
+    <ol class="panel-group" role="tablist" aria-multiselectable="true">
+      {{#if loading}}
+        {{three-bounce-spinner}}
+      {{else}}
+        {{learners.accordion-summary-items}}
+      {{/if}}
+    </ol>
+  </div>
+</div>
