@@ -18,7 +18,7 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     let component = this;
     component.$('#k_12').addClass('active');
-    component.$('#subject-0').addClass('active');
+    component.$('#subject-1').addClass('active');
   },
 
   // -------------------------------------------------------------------------

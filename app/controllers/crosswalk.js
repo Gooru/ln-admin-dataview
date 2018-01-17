@@ -42,12 +42,18 @@ export default Ember.Controller.extend({
   /**
   * Property to store current subject title
   */
-  subjectTitle: 'Science',
+  subjectTitle: 'Math',
 
   /**
   * Property to store complete table data
   */
   tableData: [],
+
+  /**
+  * Show Subject - Framework browser seection
+  * Toggle it if the crosswalk table visible
+  */
+  showSubjectBrowser: true,
 
   /**
   * Default crosswalk table header items
@@ -89,6 +95,7 @@ export default Ember.Controller.extend({
         if (subject.id !== currentSubjectId) {
           controller.set('selectedFrameworks', []);
           controller.set('enableGenerateTableBtn', false);
+          controller.set('showCrosswalkTable', false);
         }
       }
     },
@@ -106,8 +113,14 @@ export default Ember.Controller.extend({
         crosswalkData: crosswalkDataPromise
       })
         .then(function(hash) {
-          return controller.updateCrosswalkTable(hash);
+          controller.updateCrosswalkTable(hash);
+          return controller.set('showSubjectBrowser', false);
         });
+    },
+
+    onToggleSubjectBrowser: function() {
+      let controller = this;
+      controller.toggleProperty('showSubjectBrowser');
     }
   },
 
@@ -129,7 +142,7 @@ export default Ember.Controller.extend({
       tableRowData.fill('');
       tableRowData[0] = {
         id: data.id,
-        title: truncateString(data.title, 150)
+        title: truncateString(data.title, 180)
       };
       // tableRowData[1] = data.id;
       data.crosswalkCodes.forEach(crosswalkCode => {
@@ -138,7 +151,7 @@ export default Ember.Controller.extend({
         if (frameworkList.includes(frameworkId)) {
           let tableCellData = {
             id: crosswalkCode.id,
-            title: truncateString(crosswalkCode.title, 150)
+            title: truncateString(crosswalkCode.title, 180)
           };
           tableRowData[frameworkPosition] = tableCellData;
         }
@@ -152,8 +165,5 @@ export default Ember.Controller.extend({
     };
     controller.set('tableData', tableData);
     controller.set('showCrosswalkTable', true);
-    $('.crosswalk-body').animate({
-      scrollTop: 535
-    });
   }
 });

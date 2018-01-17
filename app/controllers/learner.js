@@ -21,8 +21,20 @@ export default Ember.Controller.extend(ModalMixin, {
       } else {
         this.transitionToRoute('learners');
       }
+    },
+
+    onClickProfileInfo: function() {
+      let controller = this;
+      let user = controller.get('user');
+
+      let modalData = {
+        user: user
+      };
+      // controller.toggleProperty('isShowProfileContainer');
+      controller.send('showModal', 'modals.learner.user-profile-modal', modalData);
     }
-  }
+
+  },
 
   // --------------------------------------------------------------------------
   // Properties

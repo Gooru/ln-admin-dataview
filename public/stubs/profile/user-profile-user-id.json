@@ -11,6 +11,8 @@
             "about": "about-me",
             "school": "school",
             "schoolDistrict": "school-district",
+            "schoolState": "school-state",
+            "schoolCountry": "school-country",
             "country": "country",
             "state": "state",
             "authority": 0.5,
