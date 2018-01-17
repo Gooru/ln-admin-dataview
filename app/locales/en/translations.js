@@ -28,7 +28,8 @@ export default {
     'users' : 'Users',
     'username': 'Username',
     categoryOptions: {
-      k12: 'K-12',
+      'k12': 'K-12',
+      'k_12': 'K-12',
       'higher-ed': 'Higher Education',
       'professional-dev': 'Professional Development'
     },
