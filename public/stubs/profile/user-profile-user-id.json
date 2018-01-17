@@ -1,0 +1,19 @@
+{
+            "userId": "user-id",
+            "username": "user-name",
+            "emailId": "email",
+            "firstname": "first-name",
+            "lastname": "last-name",
+            "userCategory": "category",
+            "clientId": "client-id",
+            "thumbnail": "//dev-user-gooru-org.s3-us-west-1.amazonaws.com/d0caf3ef-55c3-444a-83de-a8dd6498c6db.jpg",
+            "gender": "gender",
+            "about": "about-me",
+            "school": "school",
+            "schoolDistrict": "school-district",
+            "country": "country",
+            "state": "state",
+            "authority": 0.5,
+            "citizenship": 0.7,
+            "reputation": 0.9
+}

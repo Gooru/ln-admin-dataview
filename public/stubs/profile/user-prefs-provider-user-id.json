@@ -1,0 +1,14 @@
+{
+            "providers" : [
+                {
+                    "providerId": "id",
+                    "providerName": "name",
+                    "pref": 0.5
+                },
+                {
+                    "providerId": "id1",
+                    "providerName": "name1",
+                    "pref": 0.55
+                }
+                ]
+}

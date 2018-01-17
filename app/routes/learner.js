@@ -25,7 +25,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   actions: {
 
-
     onClickBackButton: function() {
       let pathname = Utils.getRoutePathLastOccurrence(window.location.pathname);
       if (LEARNER_CHILD_ROUTES.indexOf(pathname) > -1) {
@@ -43,7 +42,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   model: function(params) {
     return Ember.RSVP.hash({
-      userProfile: this.get('profileService').readUserProfile(params.userId)
+      userProfile: this.get('profileService').getUserProfile(params.userId),
+      userGrades: this.get('profileService').getUserGrades(params.userId),
+      userPrefsCurators: this.get('profileService').getUserPrefsCurators(params.userId),
+      userPrefsProviders: this.get('profileService').getUserPrefsProviders(params.userId),
+      userPrefsContent: this.get('profileService').getUserPrefsContent(params.userId)
     });
   },
 

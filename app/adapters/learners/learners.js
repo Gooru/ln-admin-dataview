@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 /**
- * Adapter to support the Lookup API 3.0 integration
+ * Adapter to support the Learner API's
  *
  * @typedef {Object} LookupAdapter
  */

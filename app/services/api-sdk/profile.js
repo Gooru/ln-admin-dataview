@@ -37,70 +37,82 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Gets the user Profile information of a given user id
-   *
-   * @returns {Promise}
+   * Fetch the User Profile
+   * @returns {Object}
    */
-  readUserProfile: function(userId) {
+  getUserProfile: function(userId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.readMultipleProfiles([userId]).then(function(profiles) {
-        resolve(profiles.length ? profiles[0] : undefined);
-      }, reject);
+      service
+        .get('profileAdapter')
+        .getUserProfile(userId)
+        .then(function(response) {
+          resolve(service.get('profileSerializer').normalizeUserProfile(response));
+        }, reject);
     });
   },
 
   /**
-   * Gets the user Profile information of a given username
-   *
-   * @returns {Promise}
+   * Fetch the User Grades
+   * @returns {Object}
    */
-  readUserProfileByUsername: function(username) {
+  getUserGrades: function(userId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('profileAdapter').readUserProfileByUsername(username).then(
-        function(response) {
-          resolve(
-            service.get('profileSerializer').normalizeReadProfile(response)
-          );
-        },
-        function(error) {
-          reject(error);
-        }
-      );
+      service
+        .get('profileAdapter')
+        .getUserGrades(userId)
+        .then(function(response) {
+          resolve(service.get('profileSerializer').normalizeUserGrades(response));
+        }, reject);
     });
   },
 
-  readMultipleProfiles: function(profileIds, max = 30) {
+  /**
+   * Fetch the User Prefs content
+   * @returns {Object}
+   */
+  getUserPrefsContent: function(userId) {
     const service = this;
-    var chunk = profileIds.length > max ? max : profileIds.length;
-    const promises = [];
-    var usersProfile = Ember.A([]);
-
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      for (let i = 0, j = profileIds.length; i < j; i += chunk) {
-        let temparray = profileIds.slice(i, i + chunk);
-        const promise = service
-          .get('profileAdapter')
-          .readMultipleProfiles(temparray);
-        promises.push(promise);
-      }
-      Ember.RSVP.all(promises).then(
-        function(values) {
-          values.forEach(function(value) {
-            usersProfile.addObjects(
-              service
-                .get('profileSerializer')
-                .normalizeReadMultipleProfiles(value)
-            );
-          });
+      service
+        .get('profileAdapter')
+        .getUserPrefsContent(userId)
+        .then(function(response) {
+          resolve(service.get('profileSerializer').normalizeUserPrefsContent(response));
+        }, reject);
+    });
+  },
 
-          resolve(usersProfile);
-        },
-        function(error) {
-          reject(error);
-        }
-      );
+  /**
+   * Fetch the User Prefs curators
+   * @returns {Object}
+   */
+  getUserPrefsCurators: function(userId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('profileAdapter')
+        .getUserPrefsCurators(userId)
+        .then(function(response) {
+          resolve(service.get('profileSerializer').normalizeUserPrefsCurators(response));
+        }, reject);
+    });
+  },
+
+  /**
+   * Fetch the User Prefs providers
+   * @returns {Object}
+   */
+  getUserPrefsProviders: function(userId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('profileAdapter')
+        .getUserPrefsProviders(userId)
+        .then(function(response) {
+          resolve(service.get('profileSerializer').normalizeUserPrefsProviders(response));
+        }, reject);
     });
   }
 

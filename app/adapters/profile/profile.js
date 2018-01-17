@@ -1,53 +1,117 @@
 import Ember from 'ember';
 
 /**
- * Adapter to support the Profile
+ * Adapter to support user profile, grades and prefs
  *
  * @typedef {Object} ProfileAdapter
  */
 export default Ember.Object.extend({
 
-  session: Ember.inject.service('session'),
-
-  namespace: '/api/nucleus/v2/profiles',
+  namespace: '/stubs',
 
   /**
-   * Gets the profile information of a given user id
-   *
-   * @param userId the unique profile user id
-   * @returns {Promise}
+   * Get User profile
+   * @returns {Promise.<[]>}
    */
-  readUserProfileByUsername: function(username) {
+  getUserProfile: function(userId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/search?username=${username}`;
+    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    const url = `${basePath}${namespace}/profile/user-profile-${userId}.json`;
     const options = {
       type: 'GET',
-      contentType: 'application/json; charset=utf-8',
-      headers: adapter.defineHeaders()
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8'
     };
-    return Ember.$.ajax(url, options);
+    return Ember.RSVP.hashSettled({
+      userProfile: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.userProfile.value;
+    });
   },
 
   /**
-   * Get basic Profile data for a list of profile IDs
-   *
-   * @param profileIds the list of profile IDs
-   * @returns {Promise}
+   * Get User grades
+   * @returns {Promise.<[]>}
    */
-  readMultipleProfiles: function(profileIds) {
+  getUserGrades: function(userId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/search`;
+    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    const url = `${basePath}${namespace}/profile/user-grade-${userId}.json`;
     const options = {
       type: 'GET',
-      contentType: 'application/json; charset=utf-8',
       headers: adapter.defineHeaders(),
-      data: {
-        userids: Ember.isArray(profileIds) ? profileIds.join() : null
-      }
+      contentType: 'application/json; charset=utf-8'
     };
-    return Ember.$.ajax(url, options);
+    return Ember.RSVP.hashSettled({
+      userGrades: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.userGrades.value;
+    });
+  },
+
+  /**
+   * Get user prefs content
+   * @returns {Promise.<[]>}
+   */
+  getUserPrefsContent: function(userId) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    const url = `${basePath}${namespace}/profile/user-prefs-content-${userId}.json`;
+    const options = {
+      type: 'GET',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8'
+    };
+    return Ember.RSVP.hashSettled({
+      userPrefsContent: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.userPrefsContent.value;
+    });
+  },
+
+  /**
+   * Get user prefs providers
+   * @returns {Promise.<[]>}
+   */
+  getUserPrefsProviders: function(userId) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    const url = `${basePath}${namespace}/profile/user-prefs-provider-${userId}.json`;
+    const options = {
+      type: 'GET',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8'
+    };
+    return Ember.RSVP.hashSettled({
+      userPrefsProviders: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.userPrefsProviders.value;
+    });
+  },
+
+  /**
+   * Get user prefs curators
+   * @returns {Promise.<[]>}
+   */
+  getUserPrefsCurators: function(userId) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    const url = `${basePath}${namespace}/profile/user-prefs-curators-${userId}.json`;
+    const options = {
+      type: 'GET',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8'
+    };
+    return Ember.RSVP.hashSettled({
+      userPrefsCurators: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.userPrefsCurators.value;
+    });
   },
 
   defineHeaders: function() {
@@ -55,4 +119,5 @@ export default Ember.Object.extend({
       Authorization: `Token ${this.get('session.accessToken')}`
     };
   }
+
 });
