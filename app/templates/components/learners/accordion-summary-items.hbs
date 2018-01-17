@@ -1,0 +1,43 @@
+<div class="competency-items" role="tab" id="{{elementId}}-heading">
+  <div class="assessment">
+    <i class="icon"></i>
+  </div>
+
+  <div class="panel-title">
+
+    <a class="collapsed title" role="button" data-toggle="collapse" href="#{{elementId}}-content" aria-expanded="false" aria-controls="{{elementId}}-content" {{action "selectComptency" model.id}}>
+      <div class="title ellipsis"> Assessment <span class="caret caret-dropup"></span> </div>
+
+    </a>
+  </div>
+  <div class="panel-info">
+    <span class="status"> 80%</span>
+    <span class="time"> 0.03</span>
+  </div>
+
+</div>
+
+<div id="{{elementId}}-content" data-index="{{componentIndex}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{elementId}}-heading">
+  <div class="panel-body">
+    <ol class="panel-group" role="tablist" aria-multiselectable="true">
+      {{#if loading}}
+        {{three-bounce-spinner}}
+      {{else}}
+        {{#each summaryData as | item |}}
+          <div class="assessment">
+            <i class="icon"></i>
+          </div>
+          <div class="items">
+            <span> test items </span>
+
+            <div class="panel-info">
+              <span class="status"> 80%</span>
+              <span class="time"> 0.03</span>
+            </div>
+
+          </div>
+        {{/each}}
+      {{/if}}
+    </ol>
+  </div>
+</div>
