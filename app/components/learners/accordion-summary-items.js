@@ -41,6 +41,7 @@ export default Ember.Component.extend({
      * @param item
      */
     selectComptencyItems: function() {
+
       //here write the selected competency details
     }
   }
