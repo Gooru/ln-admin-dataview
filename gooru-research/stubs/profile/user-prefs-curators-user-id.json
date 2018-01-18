@@ -1,0 +1,16 @@
+{
+            "curators" : [
+                {
+                    "curatorId": "id",
+                    "curatorName": "name",
+                    "pref": 0.5,
+                    "thumbnail": "//dev-user-gooru-org.s3-us-west-1.amazonaws.com/d0caf3ef-55c3-444a-83de-a8dd6498c6db.jpg"
+                },
+                {
+                    "curatorId": "id1",
+                    "curatorName": "name1",
+                    "pref": 0.55,
+                    "thumbnail": "//dev-user-gooru-org.s3-us-west-1.amazonaws.com/d0caf3ef-55c3-444a-83de-a8dd6498c6db.jpg"
+                }
+            ]
+}

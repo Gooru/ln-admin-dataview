@@ -1,0 +1,7 @@
+ {
+  "endpoint" : {
+    "url": "http://nile-qa.gooru.org",
+    "secureUrl": "http://nile-qa.gooru.org"
+  },
+  "gooru-app-url" : "//nile-qa.gooru.org"
+}

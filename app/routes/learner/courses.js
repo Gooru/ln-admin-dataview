@@ -18,17 +18,16 @@ export default Ember.Route.extend({
   // -------------------------------------------------------------------------
   // Methods
 
-  beforeModel: function(transition) {
-    this.set('userId', transition.params.learner.userId);
-  },
 
   model: function() {
+    let learnerModel = this.modelFor('learner');
+    let userId = learnerModel.userId;
     return Ember.RSVP.hash({
-      userPerformanceUnits: this.get('performanceService').getUserPerformanceUnits(this.get('userId'), 'course-id', 'class-id'),
-      userPerformanceLessons: this.get('performanceService').getUserPerformanceLessons(this.get('userId'), 'course-id', 'unit-id', 'class-id'),
-      userPerformanceCollections: this.get('performanceService').getUserPerformanceCollections(this.get('userId'), 'course-id', 'unit-id', 'lesson-id', 'class-id'),
-      userPerformanceResourceInAssessments: this.get('performanceService').getUserPerformanceResourceInAssessment(this.get('userId'), 'course-id', 'unit-id', 'lesson-id', 'collection-id', 'session-id', 'class-id'),
-      userPerformanceResourceInCollections: this.get('performanceService').getUserPerformanceResourceInCollection(this.get('userId'), 'course-id', 'unit-id', 'lesson-id', 'collection-id', 'session-id', 'class-id')
+      userPerformanceUnits: this.get('performanceService').getUserPerformanceUnits(userId, 'course-id', 'class-id'),
+      userPerformanceLessons: this.get('performanceService').getUserPerformanceLessons(userId, 'course-id', 'unit-id', 'class-id'),
+      userPerformanceCollections: this.get('performanceService').getUserPerformanceCollections(userId, 'course-id', 'unit-id', 'lesson-id', 'class-id'),
+      userPerformanceResourceInAssessments: this.get('performanceService').getUserPerformanceResourceInAssessment(userId, 'course-id', 'unit-id', 'lesson-id', 'collection-id', 'session-id', 'class-id'),
+      userPerformanceResourceInCollections: this.get('performanceService').getUserPerformanceResourceInCollection(userId, 'course-id', 'unit-id', 'lesson-id', 'collection-id', 'session-id', 'class-id')
     });
   },
 

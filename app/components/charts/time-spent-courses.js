@@ -151,8 +151,10 @@ export default Ember.Component.extend({
           .attr('d', arc.innerRadius(115).outerRadius(radius));
         component.$('.title').html('');
         component.$('.duration-label').html(formatMilliseconds(component.get('totalDuration')));
-      }).on('click', function() {
-        component.get('router').transitionTo('learners');
+      }).on('click', function(d) {
+        let courseId = d.data.courseId;
+        let queryParams = {'userId': component.get('userId'), 'courseId':courseId};
+        component.get('router').transitionTo('learner.courses', queryParams);
       }).each(function(d, i) {
         this._current = i;
       });

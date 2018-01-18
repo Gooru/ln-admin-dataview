@@ -14,10 +14,10 @@ Router.map(function() {
   this.route('suggest');
   this.route('sign-in');
   this.route('crosswalk');
-  this.route('learner', { path: '/learner/:userId' }, function() {
+  this.route('learner', { path: '/learners/:userId' }, function() {
     this.route('journeys');
     this.route('competencies');
-    this.route('courses');
+    this.route('courses', { path: '/courses/:courseId' });
     this.route('activites');
   });
   this.route('leaners');

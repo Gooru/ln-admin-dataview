@@ -1,7 +1,5 @@
 import Ember from 'ember';
 import ModalMixin from 'admin-dataview/mixins/modal';
-import {LEARNER_CHILD_ROUTES} from 'admin-dataview/config/config';
-import Utils from 'admin-dataview/utils/utils';
 
 
 export default Ember.Controller.extend(ModalMixin, {
@@ -15,11 +13,12 @@ export default Ember.Controller.extend(ModalMixin, {
   actions: {
 
     onClickBackButton: function() {
-      let pathname = Utils.getRoutePathLastOccurrence(window.location.pathname);
-      if (LEARNER_CHILD_ROUTES.indexOf(pathname) > -1) {
-        this.transitionToRoute('learner', this.get('userId'));
-      } else {
+      let pathname = window.location.pathname;
+      let pathLists = pathname.split('/');
+      if (pathLists.length === 3) {
         this.transitionToRoute('learners');
+      } else {
+        this.transitionToRoute('learner', this.get('userId'));
       }
     },
 
