@@ -1,31 +1,21 @@
 import Ember from 'ember';
-
+import {capitalizeString} from 'admin-dataview/utils/utils';
 export default Ember.Component.extend({
 
+  //------------------------------------------------------------------------
+  //Dependency
   /**
    * @requires service:profile
    */
   profileService: Ember.inject.service('api-sdk/profile'),
+
   // --------------------------------------------------------------------------
   // Attributes
 
   classNames: ['user-profile-modal'],
 
-  citizenship: 0,
-
-  authority: 0,
-
-  reputation: 0,
-
-  userGrades: [],
-
-  userProfile: [],
-
-  userPrefsCurators: [],
-
-  userPrefsProviders: [],
-
-  userPrefsContent: [],
+  // --------------------------------------------------------------------------
+  // Events
 
   init: function() {
     let component = this;
@@ -50,21 +40,100 @@ export default Ember.Component.extend({
 
   },
 
-  didInsertElement: function() {
-    var acc = this.$('.accordion');
-    var i;
+  // --------------------------------------------------------------------------
+  // Actions
 
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener('click', function() {
-        this.classList.toggle('active');
-        var panel = this.nextElementSibling;
-        if (panel.style.maxHeight){
-          panel.style.maxHeight = null;
-        } else {
-          panel.style.maxHeight = `${panel.scrollHeight  }px`;
-        }
+  actions: {
+    /**
+      * Action triggered when user click on the down arrow icon
+      */
+    onShowPanel: function(preferenceType) {
+      let component = this;
+      component.$(`.${preferenceType} .body`).show('slow', function() {
+        return true;
       });
+      let propertyValue = capitalizeString(preferenceType);
+      component.set(`is${propertyValue}Expanded`, true);
+    },
+
+    /**
+    * Action triggered when user click on the up arrow icon
+    */
+    onHidePanel: function(preferenceType) {
+      let component = this;
+      component.$(`.${preferenceType} .body`).hide('slow', function() {
+        return true;
+      });
+      let propertyValue = capitalizeString(preferenceType);
+      component.set(`is${propertyValue}Expanded`, false);
     }
-  }
+  },
+
+  // --------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * @property {Number}
+   */
+
+  citizenship: 0,
+
+  /**
+   * @property {Number}
+   */
+  authority: 0,
+
+  /**
+   * @property {Number}
+   */
+  reputation: 0,
+
+  /**
+   * List of user grades
+   * @property {Array}
+   */
+  userGrades: [],
+
+  /**
+   * Current user profile
+   * @property {Array}
+   */
+  userProfile: [],
+
+  /**
+   * List of user preference curators
+   * @property {Array}
+   */
+  userPrefsCurators: [],
+
+  /**
+   * List of user providers
+   * @property {Array}
+   */
+  userPrefsProviders: [],
+
+  /**
+   * List of user content types
+   * @property {Array}
+   */
+  userPrefsContent: [],
+
+  /**
+   * show/hide content type panel
+   * @property {Boolean}
+   */
+  isContentExpanded: false,
+
+  /**
+   * show/hide provider panel
+   * @property {Boolean}
+   */
+  isProviderExpanded: false,
+
+  /**
+   * show/hide curators panel
+   * @property {Boolean}
+   */
+  isCuratorExpanded: false
 
 });

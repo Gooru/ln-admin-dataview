@@ -101,6 +101,15 @@ export default {
     'authority': 'Authority',
     'reputation': 'Reputation',
     'citizenship' : 'Citizenship',
+    'hide': 'hide',
+    'details': 'details',
+    'grade-level': 'Grade Level',
+    'user-preferences': {
+      'preferences': 'Preferences',
+      'content-types': 'Content Types',
+      'providers': 'Providers',
+      'curators': 'Curators'
+    },
     'course-report' : 'Course Report'
   }
 };

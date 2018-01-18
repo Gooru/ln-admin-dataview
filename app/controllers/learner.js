@@ -29,7 +29,7 @@ export default Ember.Controller.extend(ModalMixin, {
       let modalData = {
         user: user
       };
-      // controller.toggleProperty('isShowProfileContainer');
+      // Open user profile info modal once user click thumbnail
       controller.send('showModal', 'modals.learner.user-profile-modal', modalData);
     }
 

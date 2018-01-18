@@ -91,3 +91,13 @@ export function dataCountFormat(count) {
         `${Math.round(Math.abs(Number(count)) / 1.0e+3)  }K` :
         Math.round(count);
 }
+
+/**
+ * Transform the given text into capitalize form
+ * @function
+ * @param text
+ * @returns {string}
+ */
+export function capitalizeString(text) {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
