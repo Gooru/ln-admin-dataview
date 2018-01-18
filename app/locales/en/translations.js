@@ -100,6 +100,15 @@ export default {
     'grade': 'Grade',
     'authority': 'Authority',
     'reputation': 'Reputation',
-    'citizenship' : 'Citizenship'
+    'citizenship' : 'Citizenship',
+    'hide': 'hide',
+    'details': 'details',
+    'grade-level': 'Grade Level',
+    'user-preferences': {
+      'preferences': 'Preferences',
+      'content-types': 'Content Types',
+      'providers': 'Providers',
+      'curators': 'Curators'
+    }
   }
 };

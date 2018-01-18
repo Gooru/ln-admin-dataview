@@ -1,12 +1,13 @@
 <div class="modal-header">
   <div class="header-info">
     <div>
-      HIDE
+      {{t 'learner.hide'}}
     </div>
-    <div data-dismiss="modal" class="img-container" style="background-image: url({{userProfile.thumbnail}})">
+    <div data-dismiss="modal" class="thumbnail-container" style="background-image: url({{userProfile.thumbnail}})">
+      <div class="clear-icon">{{app-icon name="clear"}}</div>
     </div>
     <div>
-      details
+      {{t 'learner.details'}}
     </div>
   </div>
 </div>
@@ -34,7 +35,7 @@
           {{charts.radial-progress-chart value=citizenship maxValue="1"}}
         </div>
         <div class="name">
-          Citizenship
+          {{t 'learner.citizenship'}}
         </div>
       </div>
       <div class="user-profile-stats">
@@ -42,7 +43,7 @@
           {{charts.radial-progress-chart value=authority maxValue="1"}}
         </div>
         <div class="name">
-          Authority
+          {{t 'learner.authority'}}
         </div>
       </div>
       <div class="user-profile-stats">
@@ -50,14 +51,14 @@
           {{charts.radial-progress-chart value=reputation maxValue="1"}}
         </div>
         <div class="name">
-          Reputation
+          {{t 'learner.reputation'}}
         </div>
       </div>
     </div>
   </div>
   <div class="user-grade-levels">
     <div class="user-grade-level-header">
-      Grade level
+      {{t 'learner.grade-level'}}
     </div>
     <div class="user-grade-level-body">
       {{#each userGrades as |grade|}}
@@ -70,14 +71,25 @@
   </div>
   <div class="user-preferences">
     <div class="user-preference-header">
-      Preferences
+      {{t 'learner.user-preferences.preferences'}}
     </div>
     <div class="user-preferences-body">
-      <div class="user-preference content-type">
+      <div class="user-preference content">
         <div class="title">
-          Content Types
+          {{t 'learner.user-preferences.content-types'}}
+          <div class="accordion-dropdown">
+            {{#if isContentExpanded}}
+              <span {{action "onHidePanel" 'content'}}>
+                {{app-icon name="arrow_drop_up"}}
+              </span>
+            {{else}}
+              <span {{action "onShowPanel" 'content'}}>
+                {{app-icon name="arrow_drop_down"}}
+              </span>
+            {{/if}}
+          </div>
         </div>
-        <div class="body">
+        <div class="body {{if isContentExpanded 'isExpanded' 'isCollapsed'}}">
           {{#each userPrefsContent as |content|}}
             <div class="body-content">
               <div class="data">
@@ -91,18 +103,22 @@
           {{/each}}
         </div>
       </div>
-      <div class="user-preference providers">
+      <div class="user-preference provider">
         <div class="title">
-          Providers
-          <!-- <div class="accordion-dropdown">
-            {{#if isExpanded}}
-              {{app-icon name="arrow_drop_up"}}
+          {{t 'learner.user-preferences.providers'}}
+          <div class="accordion-dropdown">
+            {{#if isProviderExpanded}}
+              <span {{action "onHidePanel" 'provider'}}>
+                {{app-icon name="arrow_drop_up"}}
+              </span>
             {{else}}
-              {{app-icon name="arrow_drop_down"}}
+              <span {{action "onShowPanel" 'provider'}}>
+                {{app-icon name="arrow_drop_down"}}
+              </span>
             {{/if}}
-          </div> -->
+          </div>
         </div>
-        <div class="body">
+        <div class="body {{if isProviderExpanded 'isExpanded' 'isCollapsed'}}">
           {{#each userPrefsProviders as |provider|}}
             <div class="body-content">
               <div class="data">
@@ -116,11 +132,22 @@
           {{/each}}
         </div>
       </div>
-      <div class="user-preference curators">
+      <div class="user-preference curator">
         <div class="title">
-          Curators
+          {{t 'learner.user-preferences.curators'}}
+          <div class="accordion-dropdown">
+            {{#if isCuratorExpanded}}
+              <span {{action "onHidePanel" 'curator'}}>
+                {{app-icon name="arrow_drop_up"}}
+              </span>
+            {{else}}
+              <span {{action "onShowPanel" 'curator'}}>
+                {{app-icon name="arrow_drop_down"}}
+              </span>
+            {{/if}}
+          </div>
         </div>
-        <div class="body">
+        <div class="body {{if isCuratorExpanded 'isExpanded' 'isCollapsed'}}">
           {{#each userPrefsCurators as |curator|}}
             <div class="body-content">
               <div class="data">
