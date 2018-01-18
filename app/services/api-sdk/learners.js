@@ -111,6 +111,24 @@ export default Ember.Service.extend({
           resolve(service.get('learnersSerializer').normalizeActiveUserDistrbutionBySubject(response));
         }, reject);
     });
+  },
+
+
+  /**
+     * Get active user distribution by subject
+     * @returns {Promise.<[]>}
+     */
+  getUserCompetencySummary: function(subjectId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('learnersAdapter')
+        .getUserCompetencySummary(subjectId)
+        .then(function(response) {
+          resolve(service.get('learnersSerializer').normalizeUserCompetencySummary(response));
+        }, reject);
+    });
   }
+
 
 });

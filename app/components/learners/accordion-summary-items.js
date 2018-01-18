@@ -32,6 +32,20 @@ export default Ember.Component.extend({
     ]);
     return groupData[0];
   }),
+
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * @property {string} go live action name
+   */
+  count: 0,
+
+  /**
+   * Data of competencies count
+   * @return {Array}
+   */
+  data: null,
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -40,7 +54,7 @@ export default Ember.Component.extend({
      * Triggered when an menu item is selected
      * @param item
      */
-    selectComptencyItems: function() {
+    selectCompetencyItems: function() {
 
       //here write the selected competency details
     }

@@ -26,7 +26,7 @@ export default Ember.Object.extend({
     return resultSet;
   },
 
-  /**
+  /**normalizeActiveUserDistrbutionBySubject
    * Normalized data of user stats by course
    * @return {Object}
    */
@@ -64,6 +64,24 @@ export default Ember.Object.extend({
   normalizeActiveUserDistrbutionBySubject: function(response) {
     let resultSet = Ember.A();
     response = Ember.A(response.users);
+    response.forEach(data => {
+      let result = Ember.Object.create(data);
+      if(!result.get('thumbnail')) {
+        result.set('thumbnail', DEFAULT_IMAGES.USER_PROFILE);
+      }
+      resultSet.pushObject(result);
+    });
+    return resultSet;
+  },
+
+
+  /**
+   * Normalized data of active user distrbution by subject
+   * @return {Object}
+   */
+  normalizeUserCompetencySummary: function(response) {
+    let resultSet = Ember.A();
+    response = Ember.A(response.competencies);
     response.forEach(data => {
       let result = Ember.Object.create(data);
       if(!result.get('thumbnail')) {

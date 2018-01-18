@@ -1,22 +1,21 @@
 .learners.accordion-summary-items {
-  height: auto;
-  height: auto;
+  height: 41px;
   background: white;
   margin: 0 auto;
-  // margin-top: 30px;
+
   .competency-items {
     padding: 5px 12px 0;
     width: 100%;
     display: table;
-    border-bottom: 2px solid $table-border-color;
+    border-bottom: 1px solid $dark-50;
 
     .assessment {
       float: left;
-      margin: 7px 7px 7px -25px;
+      margin: 2px 2px 2px -25px;
 
       i {
-        background: url("images/accordion-assessment-icon .svg");
-        width: 26px;
+        background: url("images/accordion-assessment-icon.svg");
+        width: 20px;
         height: 15px;
         object-fit: contain;
         display: block;
@@ -25,11 +24,11 @@
 
     .collection {
       float: left;
-      margin: 7px 7px 7px -25px;
+      margin: 2px 2px 2px -25px;
 
       i {
-        background: url("images/accordion-collection-icon .svg");
-        width: 26px;
+        background: url("images/accordion-collection-icon.svg");
+        width: 20px;
         height: 15px;
         object-fit: contain;
         display: block;
@@ -42,6 +41,20 @@
 
       .title {
         font-weight: bold;
+        width: 60%;
+        // width: 90px;
+        height: 20px;
+        font-family: OpenSans;
+        font-size: 15px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        text-transform: capitalize;
+        letter-spacing: normal;
+        text-align: left;
+        color: #4a4a4a;
+        float: left;
 
         .caret {
           margin-left: 100px;
@@ -69,9 +82,13 @@
     }
   }
 
+  .panel-body {
+    padding: 3px !important;
+  }
+
   .panel-collapse {
     .panel-body {
-      padding: 3px;
+      padding: 3px !important;
 
       .panel-group {
         .assessment {
@@ -79,9 +96,48 @@
           margin: 13px -25px;
 
           i {
-            background: url("images/accordion-assessment-icon .svg");
+            background: url("images/accordion-assessment-icon.svg");
             width: 26px;
-            height: 15px;
+            height: 20px;
+            object-fit: contain;
+            display: block;
+          }
+        }
+
+        .resource {
+          float: left;
+          margin: 13px -25px;
+
+          i {
+            background: url("images/competency-video-resource-green.svg");
+            width: 21px;
+            height: 20px;
+            object-fit: contain;
+            display: block;
+          }
+        }
+
+        .question {
+          float: left;
+          margin: 13px -25px;
+
+          i {
+            background: url("images/competency-question-resource-green.svg");
+            width: 21px;
+            height: 20px;
+            object-fit: contain;
+            display: block;
+          }
+        }
+
+        .webpage {
+          float: left;
+          margin: 13px -25px;
+
+          i {
+            background: url("images/competency-website-resource-green.svg");
+            width: 21px;
+            height: 20px;
             object-fit: contain;
             display: block;
           }
@@ -90,14 +146,35 @@
         .items {
           height: 40px;
           padding: 8px;
-          border-bottom: 1px solid $table-border-color;
+          border-bottom: 1px solid $dark-50;
 
           .panel-info {
             float: right;
 
-            .status {
-              padding: 40px;
-              font-size: 16px;
+            .correct {
+              margin-right: 60px;
+              float: left;
+
+              i {
+                background: url("images/tick-green.svg");
+                width: 21px;
+                height: 20px;
+                object-fit: contain;
+                display: block;
+              }
+            }
+
+            .wrong {
+              margin-right: 60px;
+              float: left;
+
+              i {
+                background: url("images/wrong-answer.svg");
+                width: 14px;
+                height: 13px;
+                object-fit: contain;
+                display: block;
+              }
             }
 
             .time {
