@@ -1,7 +1,7 @@
 {
 "courses" : [
                 {
-                    "courseId": "courseId",
+                    "courseId": "course-id",
                     "classId": "classIdCouldBeNull",
                     "completion": 30,
                     "timespent": 32000,
@@ -9,7 +9,7 @@
                     "startedInDuration": false
                 },
                 {
-                    "courseId": "courseId",
+                    "courseId": "course-id",
                     "classId": "classIdCouldBeNull",
                     "completion": 30,
                     "timespent": 19000,
@@ -17,7 +17,7 @@
                     "startedInDuration": false
                 },
                 {
-                    "courseId": "courseId",
+                    "courseId": "course-id",
                     "classId": "classIdCouldBeNull",
                     "completion": 30,
                     "timespent": 18000,
@@ -25,7 +25,7 @@
                     "startedInDuration": false
                 },
                 {
-                    "courseId": "courseId",
+                    "courseId": "course-id",
                     "classId": "classIdCouldBeNull",
                     "completion": 30,
                     "timespent": 17000,
@@ -33,7 +33,7 @@
                     "startedInDuration": false
                 },
                 {
-                    "courseId": "courseId",
+                    "courseId": "course-id",
                     "classId": "classIdCouldBeNull",
                     "completion": 30,
                     "timespent": 10000,

@@ -1,0 +1,35 @@
+ {
+			"journeys": [{
+					"classId": null,
+					"classCode": null,
+					"classTitle": null,
+					"courseId": "49652d4d-6331-4c63-89cf-0ddbb36ee3ce",
+					"courseTitle": "ILCourse on Sharks",
+					"averageScore": 70,
+					"timeSpent": 245000,
+					"assessmentsCompleted": 50,
+					"totalAssessments": 100
+				},
+				{
+					"classId": null,
+					"classCode": null,
+					"classTitle": null,
+					"courseId": "49752d4d-6331-4c63-89cf-0ddbb36ee3ce",
+					"courseTitle": "ILCourse1 on Sharks",
+					"averageScore": 80,
+					"timeSpent": 345000,
+					"assessmentsCompleted": 50,
+					"totalAssessments": 100
+				},
+				{
+					"classId": null,
+					"classCode": null,
+					"classTitle": null,
+					"courseId": "49852d4d-6331-4c63-89cf-0ddbb36ee3ce",
+					"courseTitle": "ILCourse2 on Sharks",
+					"averageScore": 100,
+					"timeSpent": 445000,
+					"assessmentsCompleted": 50,
+					"totalAssessments": 100
+				}]
+				}

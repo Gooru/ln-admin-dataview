@@ -18,13 +18,18 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   //------------------------------------------------------------------------
   //Properties
 
+  //------------------------------------------------------------------------
+  //Events
+
 
   //------------------------------------------------------------------------
   //Methods
 
+
   model: function(params) {
     return Ember.RSVP.hash({
-      userProfile: this.get('profileService').getUserProfile(params.userId)
+      userProfile: this.get('profileService').getUserProfile(params.userId),
+      userId: params.userId
     });
   },
 

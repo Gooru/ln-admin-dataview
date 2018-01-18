@@ -221,4 +221,4 @@ export const LEARNER_TIME_PERIOD_FILTER = [{
   'label': 'learner.from-the-beginning-of-time'
 }];
 
-export const LEARNER_CHILD_ROUTES = ['journeys-taken', 'competencies', 'time-spent-courses', 'time-spent-activites'];
+export const LEARNER_CHILD_ROUTES = ['journeys', 'competencies', 'courses', 'activites'];

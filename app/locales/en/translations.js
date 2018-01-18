@@ -109,6 +109,7 @@ export default {
       'content-types': 'Content Types',
       'providers': 'Providers',
       'curators': 'Curators'
-    }
+    },
+    'course-report' : 'Course Report'
   }
 };
