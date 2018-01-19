@@ -1,0 +1,63 @@
+{
+   "competencies":[
+      {
+         "name":"sample competencies goes here",
+         "coursename":"course is biology",
+         "status":"mastered",
+         "data":[
+            {
+               "assessmentName":"assessment 1",
+               "type":"assessment",
+               "score":"80",
+               "time":"02:35",
+               "assessmentDetails":[
+                  {
+                     "resourceName":"webpage",
+                     "questions":"what is the world famous actors",
+                     "answer":"correct",
+                     "time":"0:38"
+                  },
+                   {
+                     "resourceName":"question",
+                     "questions":"what is the world famous actors",
+                     "answer":"wrong",
+                     "time":"1:06"
+                  },
+                  {
+                     "resourceName":"resource",
+                     "questions":"what is the world famous players in crickets",
+                     "answer":"correct",
+                     "time":"0:30"
+                  }
+               ]
+            },
+            {
+               "assessmentName":"collection 1",
+               "score":"90",
+               "type":"collection",
+               "time":"04:35",
+               "assessmentDetails":[
+                  {
+                     "resourceName":"resources",
+                     "questions":"what is the world famous actors",
+                     "answer":"correct",
+                     "time":"0:38"
+                  },
+                   {
+                     "resourceName":"question",
+                     "questions":"what is the world famous doctors",
+                     "answer":"wrong",
+                     "time":"1:06"
+                  },
+                  {
+                     "resourceName":"webpage",
+                     "questions":"what is the world famous players in crickets",
+                     "answer":"correct",
+                     "time":"0:30"
+                  }
+               ]
+            }
+         ]
+      }
+   ]
+}
