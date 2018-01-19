@@ -115,9 +115,9 @@ export default Ember.Service.extend({
 
 
   /**
-     * Get active user distribution by subject
-     * @returns {Promise.<[]>}
-     */
+   * Get active user competency summary report
+   * @returns {Promise.<[]>}
+   */
   getUserCompetencySummary: function(subjectId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {

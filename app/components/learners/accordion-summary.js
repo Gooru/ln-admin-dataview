@@ -12,13 +12,9 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Properties
 
-  /**
-   * @property {string} go live action name
-   */
-  count: 0,
 
   /**
-   * Data of competencies count
+   * Data of competencies competencies data summary
    * @return {Array}
    */
   data: null,
@@ -38,7 +34,7 @@ export default Ember.Component.extend({
         count = count + 1;
       } else {
         if (count > 0) {
-          this.$(`#${this.get('updateElementId')}-heading > .panel-title a`).click();
+          this.$(`#${this.get('updateElementId')}-heading > .panel-title a i`).click();
           this.set('updateElementId', this.get('elementId'));
 
         } else {
@@ -50,25 +46,5 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
-
-  // setupComponent: Ember.on('didInsertElement', function() {
-  //   const component = this;
-  //
-  //   this.$().on('hide.bs.collapse', function(e) {
-  //     e.stopPropagation();
-  //     component.set('isExpanded', false);
-  //   });
-  //
-  //   this.$().on('show.bs.collapse', function(e) {
-  //     e.stopPropagation();
-  //     component.set('isExpanded', true);
-  //   });
-  //
-  // }),
-  //
-  // removeSubscriptions: Ember.on('willDestroyElement', function() {
-  //   this.$().off('hide.bs.collapse');
-  //   this.$().off('show.bs.collapse');
-  // })
 
 });

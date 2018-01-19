@@ -76,7 +76,7 @@ export default Ember.Object.extend({
 
 
   /**
-   * Normalized data of active user distrbution by subject
+   * Normalized data of active user competency summary
    * @return {Object}
    */
   normalizeUserCompetencySummary: function(response) {

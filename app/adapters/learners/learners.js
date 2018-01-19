@@ -137,7 +137,7 @@ export default Ember.Object.extend({
 
 
   /**
-   * Get user  competency  stats
+   * Get user  competency  summary report
    * @returns {Promise.<[]>}
    */
   getUserCompetencySummary: function() {
