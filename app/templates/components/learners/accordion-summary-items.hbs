@@ -1,18 +1,17 @@
 <div class="competency-items" role="tab" id="{{elementId}}-heading">
-  <div class="assessment">
+  <div class="{{data.type}}">
     <i class="icon"></i>
   </div>
 
   <div class="panel-title">
-
     <a class="collapsed title" role="button" data-toggle="collapse" href="#{{elementId}}-content" aria-expanded="false" aria-controls="{{elementId}}-content" {{action "selectCompetencyItems" model.id}}>
-      <div class="title ellipsis"> Assessment <span class="caret caret-dropup"></span> </div>
-
+      <div class="title ellipsis"> {{data.assessmentName}} </div>
+      <i class="fa fa-caret-down" aria-hidden="true"></i>
     </a>
   </div>
   <div class="panel-info">
-    <span class="status"> 80%</span>
-    <span class="time"> 0.03</span>
+    <span class="status"> {{data.score}}%</span>
+    <span class="time"> {{data.time}}</span>
   </div>
 
 </div>
@@ -23,16 +22,16 @@
       {{#if loading}}
         {{three-bounce-spinner}}
       {{else}}
-        {{#each summaryData as | item |}}
-          <div class="assessment">
-            <i class="icon"></i>
+        {{#each data.assessmentDetails as | item |}}
+          <div class="{{item.resourceName}}">
+            <i></i>
           </div>
           <div class="items">
-            <span> test items </span>
+            <span> {{item.questions}}</span>
 
             <div class="panel-info">
-              <span class="status"> 80%</span>
-              <span class="time"> 0.03</span>
+              <div class="{{item.answer}}"><i> </i></div>
+              <span class="time"> {{item.time}}</span>
             </div>
 
           </div>
