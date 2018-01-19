@@ -12,6 +12,12 @@ export default Ember.Route.extend({
    */
   learnersService: Ember.inject.service('api-sdk/learners'),
 
+  /**
+   * @requires service:competency
+   */
+  competencyService: Ember.inject.service('api-sdk/competency'),
+
+
   //------------------------------------------------------------------------
   //Properties
 
@@ -33,7 +39,7 @@ export default Ember.Route.extend({
     let userId = this.get('userId');
     return Ember.RSVP.hash({
       userCompetencyStats: this.get('learnersService').getUserCompetencyStats(userId),
-      userCompetencySummary: this.get('learnersService').getUserCompetencySummary(userId)
+      userCompetencySummary: this.get('competencyService').getUserCompetencySummary(userId, 'K12.Sc.CA')
     });
   },
 

@@ -150,27 +150,6 @@ export default Ember.Object.extend({
   },
 
 
-  /**
-   * Get user  competency  summary report
-   * @returns {Promise.<[]>}
-   */
-  getUserCompetencySummary: function() {
-    const adapter = this;
-    const namespace = adapter.get('namespace');
-    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/stats/user-competencies-accordion-summary.json`;
-    const options = {
-      type: 'GET',
-      headers: adapter.defineHeaders(),
-      contentType: 'application/json; charset=utf-8'
-    };
-    return Ember.RSVP.hashSettled({
-      userCompetencyStats: Ember.$.ajax(url, options)
-    }).then(function(hash) {
-      return hash.userCompetencyStats.value;
-    });
-  },
-
   defineHeaders: function() {
     return {
       Authorization: `Token ${this.get('session.accessToken')}`
