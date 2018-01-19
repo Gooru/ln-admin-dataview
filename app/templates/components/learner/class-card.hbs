@@ -1,0 +1,191 @@
+<div class="panel {{if course 'has-course' 'no-course'}}">
+  {{#if course}}
+    {{#if (and (gte course.averageScore 0) course.averageScore )}}
+      <div class="panel-heading" style="background-color:{{grade-color course.averageScore}}">
+        <div class="title ellipsis">
+          {{#link-to 'teacher.class.course-map' class.id}}
+            {{truncate text=course.classTitle maxLength=25}}
+          {{/link-to}}
+        </div>
+        <div class="code">
+          <div class="title">{{t 'learner.class.class-code'}}</div>
+          <div class="class-code">{{course.classCode}}</div>
+        </div>
+      </div>
+    {{else}}
+      {{#if (eq course.averageScore 0)}}
+        <div class="panel-heading" style="background-color:{{grade-color course.averageScore}}">
+          <div class="title ellipsis">
+            {{#link-to 'teacher.course.course-map' course.id}}
+              {{truncate text=course.title maxLength=25}}
+            {{/link-to}}
+          </div>
+          <div class="code">
+            <div class="title">{{t 'learner.class.class-code'}}</div>
+            <div class="class-code">{{course.classCode}}</div>
+          </div>
+        </div>
+      {{else}}
+        <div class="no-percentage-header">
+          <div class="title ellipsis">
+            {{#link-to 'teacher.course.course-map' course.id}}
+              {{truncate text=course.title maxLength=25}}
+            {{/link-to}}
+          </div>
+          <div class="code">
+            <div class="title">{{t 'learner.class.class-code'}}</div>
+            <div class="class-code">{{course.classCode}}</div>
+          </div>
+        </div>
+
+
+      {{/if}}
+    {{/if}}
+
+    <div class="panel-body" style="background-color:{{grade-color course.averageScore}}">
+      <div class="information" style="background-image: url({{course.thumbnailUrl}})">
+        <div class="current-activity">{{t "learner.resume-current-activity"}}</div>
+
+        <div class="title-section">
+          {{#if course.courseTitle}}
+            <div class="title pointer" alt="{{course.title}}">
+              {{truncate text=course.courseTitle maxLength=90}}
+            </div>
+          {{else}}
+            <span>{{t "learner.not-available"}}</span>
+          {{/if}}
+        </div>
+      </div>
+      <div class="links">
+        <ul>
+          <li class="class-activities">
+            <div class="icon-class-activities">
+              <i class="icon"> </i>
+            </div>
+            <a {{action 'selectItem' 'class-activities'}}>
+              <span>{{t 'learner.class.class-activities'}}</span>
+            </a>
+          </li>
+          <li class="course-map">
+            <div class="icon-course-map">
+              <i class="icon"> </i>
+            </div>
+            <a {{action 'selectItem' 'course-map'}}>
+              <span>{{t 'learner.class.course-map'}}</span>
+            </a>
+          </li>
+          <li class="performance">
+            <div class="icon-performance">
+              <i class="icon"> </i>
+            </div>
+            <a {{action 'selectItem' 'performance'}}>
+              <span>{{t 'learner.class.report'}}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      {{#if (and (gte course.averageScore 0) course.averageScore )}}
+        <div class="performance" style="background-color:{{grade-color course.averageScore}}">
+          <div class="code">
+            <div class="title">{{t 'learner.class.class-code'}}</div>
+            <div class="class-code">{{course.classCode}}</div>
+          </div>
+          <div class="pointer percentage">
+            {{scorePercentage}}
+          </div>
+        </div>
+      {{else}}
+        {{#if (eq course.averageScore 0)}}
+          <div class="performance" style="background-color:{{grade-color course.averageScore}}">
+            <div class="code">
+              <div class="title">{{t 'learner.class.class-code'}}</div>
+              <div class="class-code">{{course.classCode}}</div>
+            </div>
+            <div class="pointer percentage">
+              {{scorePercentage}}
+            </div>
+          </div>
+        {{else}}
+          <div class="no-performance">
+            <div class="code">
+              <div class="title">{{t 'learner.class.class-code'}}</div>
+              <div class="class-code">{{course.classCode}}</div>
+            </div>
+            {{#link-to 'teacher.course.performance' course.id class="pointer percentage no-percentage" tagName="div" }}
+              <i class="icon"> </i>
+            {{/link-to}}
+          </div>
+        {{/if}}
+      {{/if}}
+    </div>
+
+  {{else}}
+    <div class="panel-heading">
+      <div class="title">
+        {{#link-to 'teacher.course.course-map' course.id}}
+          {{truncate text=course.title maxLength=25}}
+        {{/link-to}}
+      </div>
+      <div class="code">
+        <div class="title">{{t 'learner.class.class-code'}}</div>
+        <div class="class-code">{{course.classCode}}</div>
+      </div>
+    </div>
+
+    <div class="panel-body">
+      <div class="information">
+        {{#if course}}
+          <div class="current-activity">{{t "learner.course.assigned-course"}}</div>
+        {{else}}
+          <div class="current-activity">{{t "learner.course.no-course-assigned"}}</div>
+        {{/if}}
+        <div class="title-section">
+          {{#if course.title}}
+            <div class="title pointer" alt="{{course.title}}">
+              {{truncate text=course.title maxLength=90}}
+            </div>
+          {{else}}
+            <span>{{t "learner.not-available"}}</span>
+          {{/if}}
+        </div>
+      </div>
+      <div class="links">
+        <ul>
+          <li class="class-activities">
+            <div class="icon-class-activities">
+              <i class="icon"> </i>
+            </div>
+            <a {{action 'selectItem' 'class-activities'}}>
+              <span>{{t 'learner.class.class-activities'}}</span>
+            </a>
+          </li>
+          <li class="course-map">
+            <div class="icon-course-map">
+              <i class="icon"> </i>
+            </div>
+            <a {{action 'selectItem' 'course-map'}}>
+              <span>{{t 'learner.class.course-map'}}</span>
+            </a>
+          </li>
+          <li class="performance">
+            <div class="icon-performance">
+              <i class="icon"> </i>
+            </div>
+            <a {{action 'selectItem' 'performance'}}>
+              <span>{{t 'teacher-landing.class.report'}}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="performance">
+        <div class="code">
+          <div class="title">{{t 'learner.class.class-code'}}</div>
+          <div class="class-code no-percentage-code">{{course.classCode}}</div>
+        </div>
+        {{#link-to 'teacher.course.performance' course.id class="pointer percentage no-percentage" tagName="div" }}
+          <i class="icon"> </i>
+        {{/link-to}}
+      </div>
+    </div>
+  {{/if}}
+</div>
