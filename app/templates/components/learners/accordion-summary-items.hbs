@@ -10,7 +10,7 @@
     </a>
   </div>
   <div class="panel-info">
-    <span class="status"> {{data.score}}%</span>
+    <span class="status"  style= {{safe-html (concat "color:" (grade-color data.score))}}> {{data.score}}%</span>
     <span class="time"> {{data.time}}</span>
   </div>
 
