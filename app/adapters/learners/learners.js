@@ -7,6 +7,8 @@ import Ember from 'ember';
  */
 export default Ember.Object.extend({
 
+  session: Ember.inject.service('session'),
+
   namespace: '/stubs',
 
   /**
@@ -21,7 +23,8 @@ export default Ember.Object.extend({
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
-      contentType: 'application/json; charset=utf-8'
+      contentType: 'application/json; charset=utf-8',
+      data:{subjectId:subjectId,zoom:1}
     };
     return Ember.RSVP.hashSettled({
       locationBasedCount: Ember.$.ajax(url, options)
