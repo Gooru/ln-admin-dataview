@@ -7,7 +7,9 @@ import Ember from 'ember';
  */
 export default Ember.Object.extend({
 
-  namespace: '/stubs',
+  session: Ember.inject.service('session'),
+
+  namespace: '/api/ds/users',
 
   /**
    * Get journey of user taken (courses and IL's courses)
@@ -15,13 +17,15 @@ export default Ember.Object.extend({
    */
   getUserJourneyByCourses: function(userId) {
     const adapter = this;
-    const namespace = adapter.get('namespace');
+    //const namespace = adapter.get('namespace');
     const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/journey/journey-by-courses-${userId}.json`;
+    const url = `${basePath}/stubs/journey/journey-by-courses-${userId}.json`;
+    //const url = `${namespace}/v1/user/journey`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
-      contentType: 'application/json; charset=utf-8'
+      contentType: 'application/json; charset=utf-8',
+      data: {user:userId}
     };
     return Ember.RSVP.hashSettled({
       userJourneyByCourses: Ember.$.ajax(url, options)

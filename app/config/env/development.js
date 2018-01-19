@@ -4,8 +4,13 @@
 export default {
   'appRootPath': '/', //default is root
   'endpoint' : {
-    'url': 'http://nile-qa.gooru.org',
-    'secureUrl': 'http://nile-qa.gooru.org'
+    'url': 'http://staging.gooru.org',
+    'secureUrl': 'http://staging.gooru.org'
+  },
+  'dsendpoint' : {
+    'url': 'http://staging.gooru.org',
+    'secureUrl': 'http://staging.gooru.org'
   },
   'gooru-app-url' : '//local.gooru.org'
+
 };
