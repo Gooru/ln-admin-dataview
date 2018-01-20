@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { getGradeColor } from 'admin-dataview/utils/utils';
+import { getBarGradeColor } from 'admin-dataview/utils/utils';
 
 /**
  * Get the color for the grade bracket that a score falls under per the app's grading scale (@see /app/config/config.js#GRADING_SCALE)
@@ -16,7 +16,7 @@ import { getGradeColor } from 'admin-dataview/utils/utils';
  * @returns {String} - hex color string
  */
 export function gradeColor(value /*, hash*/) {
-  return Ember.String.htmlSafe(getGradeColor(value[0]));
+  return Ember.String.htmlSafe(getBarGradeColor(value[0]));
 }
 
 export default Ember.Helper.helper(gradeColor);
