@@ -26,37 +26,40 @@ export default Ember.Component.extend({
    */
   data: null,
 
-  isFull: Ember.computed('data.[]', function() {
-    var sum = this.get('data').reduce(function(previousValue, value) {
-      return previousValue + value.percentage;
-    }, 0);
-    return sum >= 100;
-  }),
+  // isFull: Ember.computed('data.[]', function() {
+  //   var sum = this.get('data').reduce(function(previousValue, value) {
+  //     return previousValue + value.percentage;
+  //   }, 0);
+  //   return sum >= 100;
+  // }),
 
   styles: Ember.computed('data', function() {
-    return this.get('data').map(function(questionData) {
-      return Ember.String.htmlSafe(
-        `background-color: ${questionData.color}; width: ${questionData.percentage}%;`
-      );
-    });
-  }),
+    return Ember.String.htmlSafe(
+      `background-color: ${'green'}; width: ${90}%;`
+    );
+    // return this.get('data').map(function(questionData) {
+    //   return Ember.String.htmlSafe(
+    //     `background-color: ${questionData.color}; width: ${questionData.percentage}%;`
+    //   );
+    // });
+  })
 
   // -------------------------------------------------------------------------
   // Events
 
-  didInsertElement: function() {
-    if (!this.validValues()) {
-      Ember.Logger.warn('Graph values sum more than 100');
-    }
-  },
+  // didInsertElement: function() {
+  //   if (!this.validValues()) {
+  //     Ember.Logger.warn('Graph values sum more than 100');
+  //   }
+  // },
 
   /*
    * Check if the values are up 100%
    */
-  validValues: function() {
-    var sum = this.get('data').reduce(function(previousValue, value) {
-      return previousValue + parseInt(value.percentage);
-    }, 0);
-    return sum <= 100;
-  }
+  // validValues: function() {
+  //   var sum = this.get('data').reduce(function(previousValue, value) {
+  //     return previousValue + parseInt(value.percentage);
+  //   }, 0);
+  //   return sum <= 100;
+  // }
 });
