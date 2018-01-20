@@ -1,0 +1,28 @@
+<div class="lesson-content">
+  <div class="lesson-header">
+    <div class="title">
+      <span class="title-text" {{action "onClickLessonTitle" lesson.lessonId}}>
+        {{lesson.lessonTitle}}
+      </span>
+    </div>
+    <div class="lesson-status">
+      <div class="status">
+        80%
+      </div>
+      <div class="time">
+        {{timespent}}
+      </div>
+    </div>
+  </div>
+  <div class="lesson-body">
+    {{#if isLoading}}
+      {{three-bounce-spinner}}
+    {{else}}
+      <div class="collections">
+        {{#each collections as |collection|}}
+          {{learner.course-accordion-collection lessonId=lesson.lessonId collection=collection}}
+        {{/each}}
+      </div>
+    {{/if}}
+  </div>
+</div>

@@ -23,11 +23,7 @@ export default Ember.Route.extend({
     let learnerModel = this.modelFor('learner');
     let userId = learnerModel.userId;
     return Ember.RSVP.hash({
-      userPerformanceUnits: this.get('performanceService').getUserPerformanceUnits(userId, 'course-id', 'class-id'),
-      userPerformanceLessons: this.get('performanceService').getUserPerformanceLessons(userId, 'course-id', 'unit-id', 'class-id'),
-      userPerformanceCollections: this.get('performanceService').getUserPerformanceCollections(userId, 'course-id', 'unit-id', 'lesson-id', 'class-id'),
-      userPerformanceResourceInAssessments: this.get('performanceService').getUserPerformanceResourceInAssessment(userId, 'course-id', 'unit-id', 'lesson-id', 'collection-id', 'session-id', 'class-id'),
-      userPerformanceResourceInCollections: this.get('performanceService').getUserPerformanceResourceInCollection(userId, 'course-id', 'unit-id', 'lesson-id', 'collection-id', 'session-id', 'class-id')
+      userPerformanceUnits: this.get('performanceService').getUserPerformanceUnits(userId, 'course-id', 'class-id')
     });
   },
 

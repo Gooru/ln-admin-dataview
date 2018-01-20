@@ -1,0 +1,24 @@
+<div class="unit-content">
+  <div class="unit-header">
+    <div class="title">
+      <span class="title-text" {{action "onClickUnitTitle" unit.unitId}}>
+        {{unit.unitTitle}}
+      </span>
+    </div>
+    <div class="unit-status">
+      <div class="status">80%</div>
+      <div class="time">{{timespent}}</div>
+    </div>
+  </div>
+  <div class="unit-body">
+    {{#if isLoading}}
+      {{three-bounce-spinner}}
+    {{else}}
+      <div class="lessons">
+        {{#each lessons as |lesson|}}
+            {{learner.course-accordion-lesson unitId=unit.unitId lesson=lesson}}
+        {{/each}}
+      </div>
+    {{/if}}
+  </div>
+</div>
