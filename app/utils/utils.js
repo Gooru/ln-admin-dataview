@@ -1,5 +1,6 @@
-import {BARS_GRADING_SCALE} from 'admin-dataview/config/config';
-import {isNumeric} from './math';
+import { GRADING_SCALE, BARS_GRADING_SCALE } from 'admin-dataview/config/config';
+import { isNumeric } from './math';
+
 /**
  * Find the route path last occurrence
  * @return {String}

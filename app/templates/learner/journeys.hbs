@@ -1,1 +1,7 @@
-{{outlet}}
+<div class="journeys">
+  {{#app-panel-box title="Courses & Independent journeys" showBackButton=true }}
+    {{#each userJourneyByCourses as | course |}}
+      {{learner.class-card course=course}}
+    {{/each}}
+  {{/app-panel-box}}
+</div>

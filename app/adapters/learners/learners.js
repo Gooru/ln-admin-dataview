@@ -9,7 +9,7 @@ export default Ember.Object.extend({
 
   session: Ember.inject.service('session'),
 
-  namespace: '/stubs',
+  namespace: '/api/ds/users',
 
   /**
    * Get learners profile distribution
@@ -17,9 +17,10 @@ export default Ember.Object.extend({
    */
   getLearnerProfileDistribution: function(subjectId) {
     const adapter = this;
-    const namespace = adapter.get('namespace');
+    //const namespace = adapter.get('namespace');
     const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/stats/learners-location-based-count-${subjectId}.json`;
+    //const url = `/${namespace}/v1/user/distribution`;
+    const url = `${basePath}/stubs/stats/learners-location-based-count-${subjectId}.json`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -37,15 +38,17 @@ export default Ember.Object.extend({
    * Get user stats content count
    * @returns {Promise.<[]>}
    */
-  getUserStatsContent: function() {
+  getUserStatsContent: function(userId) {
     const adapter = this;
-    const namespace = adapter.get('namespace');
+    //const namespace = adapter.get('namespace');
     const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/stats/user-stats-content.json`;
+    const url = `${basePath}/stubs/stats/user-stats-content.json`;
+    //const url = `${namespace}/v1/user/stats/contents`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
-      contentType: 'application/json; charset=utf-8'
+      contentType: 'application/json; charset=utf-8',
+      data: {user: userId}
     };
     return Ember.RSVP.hashSettled({
       userStatsContent: Ember.$.ajax(url, options)
@@ -58,15 +61,17 @@ export default Ember.Object.extend({
    * Get user stats by courses
    * @returns {Promise.<[]>}
    */
-  getUserStatsByCourse: function() {
+  getUserStatsByCourse: function(userId) {
     const adapter = this;
-    const namespace = adapter.get('namespace');
+    //  const namespace = adapter.get('namespace');
     const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/stats/user-stats-by-course.json`;
+    const url = `${basePath}/stubs/stats/user-stats-by-course.json`;
+    //const url = `${namespace}/v1/user/stats/courses`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
-      contentType: 'application/json; charset=utf-8'
+      contentType: 'application/json; charset=utf-8',
+      data: {user: userId}
     };
     return Ember.RSVP.hashSettled({
       userStatsByCourse: Ember.$.ajax(url, options)
@@ -79,15 +84,17 @@ export default Ember.Object.extend({
    * Get user  journey stats
    * @returns {Promise.<[]>}
    */
-  getUserJourneyStats: function() {
+  getUserJourneyStats: function(userId) {
     const adapter = this;
-    const namespace = adapter.get('namespace');
+    //const namespace = adapter.get('namespace');
     const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/stats/user-stats-journey.json`;
+    const url = `${basePath}/stubs/stats/user-stats-journey.json`;
+    //const url = `${namespace}/v1/user/stats/journeys`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
-      contentType: 'application/json; charset=utf-8'
+      contentType: 'application/json; charset=utf-8',
+      data: {user: userId}
     };
     return Ember.RSVP.hashSettled({
       userJourneyStats: Ember.$.ajax(url, options)
@@ -100,15 +107,17 @@ export default Ember.Object.extend({
    * Get user  competency  stats
    * @returns {Promise.<[]>}
    */
-  getUserCompetencyStats: function() {
+  getUserCompetencyStats: function(userId) {
     const adapter = this;
-    const namespace = adapter.get('namespace');
+    //const namespace = adapter.get('namespace');
     const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/stats/user-stats-competency.json`;
+    const url = `${basePath}/stubs/stats/user-stats-competency.json`;
+    //const url = `${namespace}/v1/user/stats/competency`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
-      contentType: 'application/json; charset=utf-8'
+      contentType: 'application/json; charset=utf-8',
+      data: {user: userId}
     };
     return Ember.RSVP.hashSettled({
       userCompetencyStats: Ember.$.ajax(url, options)
@@ -123,13 +132,15 @@ export default Ember.Object.extend({
    */
   getActiveUserDistrbutionBySubject: function(subjectId) {
     const adapter = this;
-    const namespace = adapter.get('namespace');
+    //const namespace = adapter.get('namespace');
     const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/stats/active-user-distrbution-by-subject-${subjectId}.json`;
+    //const url = `/${namespace}/v1/user/distribution/active`;
+    const url = `${basePath}/stubs/stats/active-user-distrbution-by-subject-${subjectId}.json`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
-      contentType: 'application/json; charset=utf-8'
+      contentType: 'application/json; charset=utf-8',
+      data: {subject: subjectId}
     };
     return Ember.RSVP.hashSettled({
       activeUserDistrbutionBySubject: Ember.$.ajax(url, options)
@@ -138,27 +149,6 @@ export default Ember.Object.extend({
     });
   },
 
-
-  /**
-   * Get user  competency  summary report
-   * @returns {Promise.<[]>}
-   */
-  getUserCompetencySummary: function() {
-    const adapter = this;
-    const namespace = adapter.get('namespace');
-    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/stats/user-competencies-accordion-summary.json`;
-    const options = {
-      type: 'GET',
-      headers: adapter.defineHeaders(),
-      contentType: 'application/json; charset=utf-8'
-    };
-    return Ember.RSVP.hashSettled({
-      userCompetencyStats: Ember.$.ajax(url, options)
-    }).then(function(hash) {
-      return hash.userCompetencyStats.value;
-    });
-  },
 
   defineHeaders: function() {
     return {

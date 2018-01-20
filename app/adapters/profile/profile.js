@@ -7,7 +7,9 @@ import Ember from 'ember';
  */
 export default Ember.Object.extend({
 
-  namespace: '/stubs',
+  session: Ember.inject.service('session'),
+
+  namespace: '/api/ds/users',
 
   /**
    * Get User profile
@@ -15,13 +17,15 @@ export default Ember.Object.extend({
    */
   getUserProfile: function(userId) {
     const adapter = this;
-    const namespace = adapter.get('namespace');
+    //const namespace = adapter.get('namespace');
     const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/profile/user-profile-${userId}.json`;
+    const url = `${basePath}/stubs/profile/user-profile-${userId}.json`;
+    //const url = `${namespace}/v1/user/profile`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
-      contentType: 'application/json; charset=utf-8'
+      contentType: 'application/json; charset=utf-8',
+      data: {'user': userId}
     };
     return Ember.RSVP.hashSettled({
       userProfile: Ember.$.ajax(url, options)
@@ -36,13 +40,15 @@ export default Ember.Object.extend({
    */
   getUserGrades: function(userId) {
     const adapter = this;
-    const namespace = adapter.get('namespace');
+    //const namespace = adapter.get('namespace');
     const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/profile/user-grade-${userId}.json`;
+    const url = `${basePath}/stubs/profile/user-grade-${userId}.json`;
+    //const url =`${namespace}/v1/user/grades`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
-      contentType: 'application/json; charset=utf-8'
+      contentType: 'application/json; charset=utf-8',
+      data: {'user': userId}
     };
     return Ember.RSVP.hashSettled({
       userGrades: Ember.$.ajax(url, options)
@@ -57,13 +63,15 @@ export default Ember.Object.extend({
    */
   getUserPrefsContent: function(userId) {
     const adapter = this;
-    const namespace = adapter.get('namespace');
+    //const namespace = adapter.get('namespace');
     const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/profile/user-prefs-content-${userId}.json`;
+    const url = `${basePath}/stubs/profile/user-prefs-content-${userId}.json`;
+    //const url =`${namespace}/v1/user/prefs/content`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
-      contentType: 'application/json; charset=utf-8'
+      contentType: 'application/json; charset=utf-8',
+      data: {'user': userId}
     };
     return Ember.RSVP.hashSettled({
       userPrefsContent: Ember.$.ajax(url, options)
@@ -78,13 +86,15 @@ export default Ember.Object.extend({
    */
   getUserPrefsProviders: function(userId) {
     const adapter = this;
-    const namespace = adapter.get('namespace');
+    //const namespace = adapter.get('namespace');
     const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/profile/user-prefs-provider-${userId}.json`;
+    const url = `${basePath}/stubs/profile/user-prefs-provider-${userId}.json`;
+    //const url =`${namespace}/v1/user/prefs/providers`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
-      contentType: 'application/json; charset=utf-8'
+      contentType: 'application/json; charset=utf-8',
+      data: {'user': userId}
     };
     return Ember.RSVP.hashSettled({
       userPrefsProviders: Ember.$.ajax(url, options)
@@ -99,13 +109,15 @@ export default Ember.Object.extend({
    */
   getUserPrefsCurators: function(userId) {
     const adapter = this;
-    const namespace = adapter.get('namespace');
+    //const namespace = adapter.get('namespace');
     const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/profile/user-prefs-curators-${userId}.json`;
+    const url = `${basePath}/stubs/profile/user-prefs-curators-${userId}.json`;
+    //const url =`${namespace}/v1/user/prefs/curators`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
-      contentType: 'application/json; charset=utf-8'
+      contentType: 'application/json; charset=utf-8',
+      data: {'user': userId}
     };
     return Ember.RSVP.hashSettled({
       userPrefsCurators: Ember.$.ajax(url, options)

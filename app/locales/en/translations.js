@@ -21,11 +21,11 @@ export default {
     signatureCollection: 'signature Collections',
     mostPopularProviders: 'most popular providers',
     globalStatistics: 'global Statistics',
-    'learners' : 'learners',
-    'active-users' : 'Active Users',
-    'explore' : 'Explore',
-    'active' : 'Active',
-    'users' : 'Users',
+    'learners': 'learners',
+    'active-users': 'Active Users',
+    'explore': 'Explore',
+    'active': 'Active',
+    'users': 'Users',
     'username': 'Username',
     categoryOptions: {
       'k12': 'K-12',
@@ -95,12 +95,12 @@ export default {
     'time-spent-courses': 'time spent : courses',
     'competencies-studied': 'competencies studied',
     'competeny-report': 'Competeny Report',
-    'independentJourneys' : 'Independent Journeys',
-    'classJourneys' : 'Courses',
+    'independentJourneys': 'Independent Journeys',
+    'classJourneys': 'Courses',
     'grade': 'Grade',
     'authority': 'Authority',
     'reputation': 'Reputation',
-    'citizenship' : 'Citizenship',
+    'citizenship': 'Citizenship',
     'hide': 'hide',
     'details': 'details',
     'grade-level': 'Grade Level',
@@ -110,6 +110,19 @@ export default {
       'providers': 'Providers',
       'curators': 'Curators'
     },
-    'course-report' : 'Course Report'
+    'course-report': 'Course Report',
+    'resume-current-activity': 'Resume Current Activity',
+    course: {
+      'not-available': '-NA-'
+    },
+    class: {
+      'class-activities': 'Daily Class Activities',
+      'course-map': 'Course Map',
+      'my-report': 'My Report',
+      'class-code': 'Class Code',
+      'report': 'Report'
+    }
   }
+
+
 };
