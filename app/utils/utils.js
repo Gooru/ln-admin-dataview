@@ -1,4 +1,4 @@
-import { GRADING_SCALE, BARS_GRADING_SCALE } from 'admin-dataview/config/config';
+import { BARS_GRADING_SCALE } from 'admin-dataview/config/config';
 import { isNumeric } from './math';
 
 /**
