@@ -10,14 +10,17 @@
         font-weight: bold;
         color: $dark-800;
         text-transform: uppercase;
-        width: 79.5%;
+        width: 60%;
         .title-text {
           cursor: pointer;
         }
       }
       .lesson-status {
-        width: calc(100% - 79.5%);
+        width: calc(100% - 60%);
         display: flex;
+        .score {
+          width: 96%;
+        }
         .status, .time {
           width: 50%;
           text-align: center;

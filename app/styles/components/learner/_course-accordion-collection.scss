@@ -108,6 +108,11 @@
               width: 50%;
               text-align: center;
             }
+            .time {
+              font-size: 15px;
+              color: $dark-800;
+              text-transform: uppercase;
+            }
           }
           %content-icon-size {
             -webkit-background-size: 20px 20px;

@@ -222,3 +222,11 @@ export const LEARNER_TIME_PERIOD_FILTER = [{
 }];
 
 export const LEARNER_CHILD_ROUTES = ['journeys', 'competencies', 'courses', 'activites'];
+
+export const BARS_GRADING_SCALE = [
+  { LOWER_LIMIT: 0, COLOR: '#D82100' },
+  { LOWER_LIMIT: 60, COLOR: '#CF7400' },
+  { LOWER_LIMIT: 70, COLOR: '#CC9700' },
+  { LOWER_LIMIT: 80, COLOR: '#4B9740' },
+  { LOWER_LIMIT: 90, COLOR: '#A8C99C' }
+];

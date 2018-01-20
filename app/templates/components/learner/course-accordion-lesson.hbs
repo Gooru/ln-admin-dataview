@@ -4,10 +4,14 @@
       <span class="title-text" {{action "onClickLessonTitle" lesson.lessonId}}>
         {{lesson.lessonTitle}}
       </span>
+
     </div>
     <div class="lesson-status">
-      <div class="status">
-        80%
+      <div class="score">
+        {{charts.completion-bar score=lesson.lessonAsmtScore}}
+      </div>
+      <div class="status" style="color">
+        {{concat lesson.lessonAsmtScore '%'}}
       </div>
       <div class="time">
         {{timespent}}

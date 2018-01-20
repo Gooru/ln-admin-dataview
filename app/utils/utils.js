@@ -1,3 +1,5 @@
+import {BARS_GRADING_SCALE} from 'admin-dataview/config/config';
+import {isNumeric} from './math';
 /**
  * Find the route path last occurrence
  * @return {String}
@@ -100,4 +102,25 @@ export function dataCountFormat(count) {
  */
 export function capitalizeString(text) {
   return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+/**
+ * Find the color corresponding to the grade bracket that a specific grade belongs to
+ * @see admin-dataview/config/config#BARS_GRADING_SCALE
+ * @param grade
+ * @returns {String} - Hex color value
+ */
+export function getBarGradeColor(grade) {
+  var bracket = BARS_GRADING_SCALE.length - 1;
+  var color = '#b8bfc4'; // Default color
+
+  if (isNumeric(grade)) {
+    for (; bracket >= 0; bracket--) {
+      if (grade >= BARS_GRADING_SCALE[bracket].LOWER_LIMIT) {
+        color = BARS_GRADING_SCALE[bracket].COLOR;
+        break;
+      }
+    }
+  }
+  return color;
 }
