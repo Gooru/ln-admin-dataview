@@ -1,5 +1,4 @@
 import Ember from 'ember';
-
 /**
  * Rounds a float number and fixes the decimals to a specified number of digits.
  * @param n

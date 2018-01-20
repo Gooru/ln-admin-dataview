@@ -3,14 +3,14 @@
 					"lessonId": "lesson-id",
 					"lessonTitle": "U2L1 on Sharks",
 					"lessonAsmtTimeSpent": 145000,
-					"lessonAsmtScore": 10,
+					"lessonAsmtScore": 70,
 					"lessonCollTimeSpent": 125000
 				},
 				{
 					"lessonId": "lesson-id",
 					"lessonTitle": "U2L2 on Sharks",
 					"lessonAsmtTimeSpent": 145000,
-					"lessonAsmtScore": 10,
+					"lessonAsmtScore": 85,
 					"lessonCollTimeSpent": 125000
 				}
 			]
