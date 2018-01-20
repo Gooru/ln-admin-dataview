@@ -7,24 +7,28 @@ import Ember from 'ember';
  */
 export default Ember.Object.extend({
 
-  namespace: '/stubs',
+  session: Ember.inject.service('session'),
+
+  namespace: '/api/ds/users',
 
   /**
    * Get performance of user performance units
    * @returns {Promise.<[]>}
    */
-  getUserPerformanceUnits: function(userId, courseId, classId) {
+  getUserPerformanceUnits: function(user, courseId, classId) {
     const adapter = this;
-    const namespace = adapter.get('namespace');
+    //const namespace = adapter.get('namespace');
     const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/performance/user-performance-units-${userId}-${courseId}-${classId}.json`;
+    const url = `${basePath}/stubs/performance/user-performance-units-${user}-${courseId}-${classId}.json`;
+    //const url = `${namespace}/v1/user/performance/course`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
       contentType: 'application/json; charset=utf-8',
       data: {
         courseId,
-        classId
+        classId,
+        user
       }
     };
     return Ember.RSVP.hashSettled({
@@ -38,11 +42,12 @@ export default Ember.Object.extend({
    * Get performance of user performance lessons
    * @returns {Promise.<[]>}
    */
-  getUserPerformanceLessons: function(userId, courseId, unitId,  classId) {
+  getUserPerformanceLessons: function(user, courseId, unitId,  classId) {
     const adapter = this;
-    const namespace = adapter.get('namespace');
+    //const namespace = adapter.get('namespace');
     const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/performance/user-performance-lessons-${userId}-${courseId}-${unitId}-${classId}.json`;
+    const url = `${basePath}/stubs/performance/user-performance-lessons-${user}-${courseId}-${unitId}-${classId}.json`;
+    //const url = `${namespace}/v1/user/performance/lessons`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -50,7 +55,8 @@ export default Ember.Object.extend({
       data: {
         courseId,
         unitId,
-        classId
+        classId,
+        user
       }
     };
     return Ember.RSVP.hashSettled({
@@ -64,11 +70,12 @@ export default Ember.Object.extend({
    * Get performance of user performance collections
    * @returns {Promise.<[]>}
    */
-  getUserPerformanceCollections: function(userId, courseId, unitId, lessonId,  classId) {
+  getUserPerformanceCollections: function(user, courseId, unitId, lessonId,  classId) {
     const adapter = this;
-    const namespace = adapter.get('namespace');
+    //const namespace = adapter.get('namespace');
     const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/performance/user-performance-collections-${userId}-${courseId}-${unitId}-${lessonId}-${classId}.json`;
+    const url = `${basePath}/stubs/performance/user-performance-collections-${user}-${courseId}-${unitId}-${lessonId}-${classId}.json`;
+    //const url = `${namespace}/v1/user/performance/collections`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -77,7 +84,8 @@ export default Ember.Object.extend({
         courseId,
         unitId,
         lessonId,
-        classId
+        classId,
+        user
       }
     };
     return Ember.RSVP.hashSettled({
@@ -91,11 +99,12 @@ export default Ember.Object.extend({
    * Get performance of user  resource in assessments
    * @returns {Promise.<[]>}
    */
-  getUserPerformanceResourceInAssessment: function(userId, courseId, unitId, lessonId, collectionId, sessionId, classId) {
+  getUserPerformanceResourceInAssessment: function(user, courseId, unitId, lessonId, assessmentId, sessionId, classId) {
     const adapter = this;
-    const namespace = adapter.get('namespace');
+    //const namespace = adapter.get('namespace');
     const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/performance/user-performance-resource-in-assessment-${userId}-${courseId}-${unitId}-${lessonId}-${collectionId}-${sessionId}-${classId}.json`;
+    const url = `${basePath}/stubs/performance/user-performance-resource-in-assessment-${user}-${courseId}-${unitId}-${lessonId}-${assessmentId}-${sessionId}-${classId}.json`;
+    //const url = `${namespace}/v1/user/summary/assessment`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -104,9 +113,10 @@ export default Ember.Object.extend({
         courseId,
         unitId,
         lessonId,
-        collectionId,
+        assessmentId,
         sessionId,
-        classId
+        classId,
+        user
       }
     };
     return Ember.RSVP.hashSettled({
@@ -120,11 +130,12 @@ export default Ember.Object.extend({
    * Get performance of user  resource in collection
    * @returns {Promise.<[]>}
    */
-  getUserPerformanceResourceInCollection: function(userId, courseId, unitId, lessonId, collectionId, sessionId, classId) {
+  getUserPerformanceResourceInCollection: function(user, courseId, unitId, lessonId, collectionId, sessionId, classId) {
     const adapter = this;
-    const namespace = adapter.get('namespace');
+    //const namespace = adapter.get('namespace');
     const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/performance/user-performance-resource-in-collection-${userId}-${courseId}-${unitId}-${lessonId}-${collectionId}-${sessionId}-${classId}.json`;
+    const url = `${basePath}/stubs/performance/user-performance-resource-in-collection-${user}-${courseId}-${unitId}-${lessonId}-${collectionId}-${sessionId}-${classId}.json`;
+    //const url = `${namespace}/v1/user/summary/collection`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -135,7 +146,8 @@ export default Ember.Object.extend({
         lessonId,
         collectionId,
         sessionId,
-        classId
+        classId,
+        user
       }
     };
     return Ember.RSVP.hashSettled({

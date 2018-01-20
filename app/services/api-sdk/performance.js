@@ -97,6 +97,22 @@ export default Ember.Service.extend({
           resolve(service.get('performanceSerializer').normalizeUserPerformanceResourceInCollection(response));
         }, reject);
     });
+  },
+
+  /**
+     * Get active user competency summary report
+     * @returns {Promise.<[]>}
+     */
+  getUserCompetencySummary: function(userId, competencyCode) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('learnersAdapter')
+        .getUserCompetencySummary(userId, competencyCode)
+        .then(function(response) {
+          resolve(service.get('learnersSerializer').normalizeUserCompetencySummary(response));
+        }, reject);
+    });
   }
 
 });

@@ -1,4 +1,4 @@
-import { GRADING_SCALE } from 'admin-dataview/config/config';
+import { BARS_GRADING_SCALE } from 'admin-dataview/config/config';
 import { isNumeric } from './math';
 
 /**
@@ -105,21 +105,20 @@ export function capitalizeString(text) {
   return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
-
 /**
  * Find the color corresponding to the grade bracket that a specific grade belongs to
- * @see gooru-web/config/config#GRADING_SCALE
+ * @see admin-dataview/config/config#BARS_GRADING_SCALE
  * @param grade
  * @returns {String} - Hex color value
  */
-export function getGradeColor(grade) {
-  var bracket = GRADING_SCALE.length - 1;
-  var color = '#E3E5EA'; // Default color
+export function getBarGradeColor(grade) {
+  var bracket = BARS_GRADING_SCALE.length - 1;
+  var color = '#b8bfc4'; // Default color
 
   if (isNumeric(grade)) {
     for (; bracket >= 0; bracket--) {
-      if (grade >= GRADING_SCALE[bracket].LOWER_LIMIT) {
-        color = GRADING_SCALE[bracket].COLOR;
+      if (grade >= BARS_GRADING_SCALE[bracket].LOWER_LIMIT) {
+        color = BARS_GRADING_SCALE[bracket].COLOR;
         break;
       }
     }

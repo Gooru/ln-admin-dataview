@@ -1,9 +1,9 @@
 import Ember from 'ember';
 
 /**
- * Adapter to support the Journey API
+ * Adapter to support the Competency API
  *
- * @typedef {Object} JourneyAdapter
+ * @typedef {Object} CompetencyAdapter
  */
 export default Ember.Object.extend({
 
@@ -12,25 +12,28 @@ export default Ember.Object.extend({
   namespace: '/api/ds/users',
 
   /**
-   * Get journey of user taken (courses and IL's courses)
+   * Get user  competency  summary report
    * @returns {Promise.<[]>}
    */
-  getUserJourneyByCourses: function(userId) {
+  getUserCompetencySummary: function(user, competencyCode) {
     const adapter = this;
     //const namespace = adapter.get('namespace');
     const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}/stubs/journey/journey-by-courses-${userId}.json`;
-    //const url = `${namespace}/v1/user/journey`;
+    const url = `${basePath}/stubs/stats/user-competencies-accordion-summary.json`;
+    //const url =`${namespace}/v1/user/performance/competency/collections`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
       contentType: 'application/json; charset=utf-8',
-      data: {user:userId}
+      data: {
+        user,
+        competencyCode
+      }
     };
     return Ember.RSVP.hashSettled({
-      userJourneyByCourses: Ember.$.ajax(url, options)
+      userCompetencySummary: Ember.$.ajax(url, options)
     }).then(function(hash) {
-      return hash.userJourneyByCourses.value;
+      return hash.userCompetencySummary.value;
     });
   },
 

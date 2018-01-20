@@ -1,5 +1,7 @@
 <div class="learner-courses">
-  {{#app-panel-box localizeTitle="learner.course-report" showBackButton="true"}}
-    {{learner.course-summary-accordion}}
+  {{#app-panel-box localizeTitle="learner.course-report" showBackButton="true" onClickBackButton="onClickBackButton"}}
+    {{#each userPerformanceUnits as |unit|}}
+      {{learner.course-accordion-unit unit=unit}}
+    {{/each}}
   {{/app-panel-box}}
 </div>

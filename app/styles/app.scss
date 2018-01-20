@@ -46,6 +46,7 @@
 @import 'components/charts/time-spent-activities';
 @import 'components/charts/radial-progress-chart';
 @import 'components/charts/slider-chart';
+@import 'components/charts/completion-bar';
 @import 'components/popular-providers';
 @import "components/signature-assessments";
 @import "components/signature-collections";
@@ -62,6 +63,9 @@
 @import 'components/learner/course-summary-accordion-items';
 @import 'components/learner/class-card';
 @import 'components/learner/independent-course-card';
+@import 'components/learner/course-accordion-unit';
+@import 'components/learner/course-accordion-lesson';
+@import 'components/learner/course-accordion-collection';
 @import 'components/learners/accordion-summary';
 @import 'components/learners/accordion-summary-items';
 @import 'components/modals/learner/user-profile-modal';

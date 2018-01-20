@@ -1,37 +1,37 @@
 {
             "subjects": [
                 {
-                    "code": "code",
+                    "code": "k12.SC",
                     "name": "ELA",
                     "total": 92000,
                     "active": 50000
                 },
                 {
-                    "code": "code",
+                    "code": "k12.SC",
                     "name": "Socal Science",
                     "total": 92000,
                     "active": 20000
                 },
                 {
-                    "code": "code",
+                    "code": "k12.SC",
                     "name": "Math",
                     "total": 92000,
                     "active": 30000
                 },
                  {
-                    "code": "code",
+                    "code": "k12.SC",
                     "name": "Science",
                     "total": 9200000,
                     "active": 30000
                 },
                  {
-                    "code": "code",
+                    "code": "k12.SC",
                     "name": "Psychology",
                     "total": 100000,
                     "active": 3000
                 },
                  {
-                    "code": "code",
+                    "code": "k12.SC",
                     "name": "English",
                     "total": 100000,
                     "active": 300
