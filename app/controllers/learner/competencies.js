@@ -23,7 +23,17 @@ export default Ember.Controller.extend({
    * data of the learner
    * @type {Array}
    */
-  data: null
+  data: null,
+
+  //------------------------------------------------------------------------
+  // Events
+
+  actions: {
+
+    onClickBackButton: function() {
+      this.transitionToRoute('learner', this.get('userId'));
+    }
+  }
 
 
 });
