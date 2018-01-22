@@ -164,8 +164,9 @@ export default Ember.Controller.extend({
         controller.set('contentCount', contentCount);
         controller.set('isLoading', false);
       });
-      controller.getSearchLearningMapsContent(selectedNodeData).then(function(learningMaps) {
-        controller.set('learningMap', learningMaps);
+      controller.getSearchLearningMapsContent(selectedNodeData).then(function(learning) {
+        controller.set('signatureContents', learning.signatureContents);
+        controller.set('prerequisites', learning.prerequisites);
       });
     },
     /**
@@ -346,18 +347,11 @@ export default Ember.Controller.extend({
    * return hashed json of each content type conunt
    */
   getSearchLearningMapsContent: function(selectedNode) {
-    const learningMapsData = [];
     const learningMapsContent = Ember.RSVP.resolve(this.get('searchService').learningMapsContent(selectedNode));
-
     return Ember.RSVP.hash({
       learningMapsContent: learningMapsContent
-
-    }).then(function() {
-
-      // console.log('learningMapsContent::::', hash);
-
-      return learningMapsData;
-
+    }).then(function(hash) {
+      return hash.learningMapsContent;
     });
 
   }

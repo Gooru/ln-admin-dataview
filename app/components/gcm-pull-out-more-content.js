@@ -21,6 +21,11 @@ export default Ember.Component.extend({
   nodeData: null,
 
   /**
+  * User selected node data
+  */
+  prerequisites: null,
+
+  /**
   * Search length for fetching search items
   */
   searchLength: 3,

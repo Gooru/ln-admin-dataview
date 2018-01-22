@@ -1,20 +1,12 @@
-{{#each prerequisitesData as | groupData|}}
+{{#each prerequisites as | prerequest|}}
   <div class="col-md-12 total">
     <div class="left-node col-md-2">
       <div class="standard-tags">
-        <span> 4-ab-s </span>
+        <span> {{prerequest.code}} </span>
       </div>
     </div>
     <div class="col-md-10 right-node">
-      <span> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s </span>
+      <span> {{prerequest.title}} </span>
     </div>
-    <!-- <div class="border col-md-2">
-
-    </div>
-
-    <div class="right-node col-md-6">
-      <span> here some watch the request the available going to create iot sample projects request </span>
-    </div> -->
   </div>
-
 {{/each}}
