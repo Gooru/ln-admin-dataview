@@ -28,7 +28,7 @@
 
     <div class="summary-accordion">
       {{#each competenciesSummary as | item |}}
-        {{learners.accordion-summary data=item}}
+        {{learners.accordion-summary data=item getAssessmentItem='assessmentItem'}}
         {{/each}}
      </div>
   </div>
