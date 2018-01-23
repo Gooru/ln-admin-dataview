@@ -10,7 +10,6 @@ export default {
       crossDomain: true,
       beforeSend: function(jqXHR, settings) {
         const url = settings.url;
-        console.log(url);
         if (url.startsWith('/api') || url.startsWith('/gooru-search')) {
           const endpointUrl = EndPointsConfig.getEndpointUrl();
           settings.url = `${endpointUrl}${url}`;
