@@ -31,6 +31,7 @@ export default Ember.Route.extend({
   setupController: function(controller, model) {
 
     controller.set('userJourneyByCourses', model.userJourneyByCourses);
+    controller.set('userId', this.get('userId'));
   }
 
 });
