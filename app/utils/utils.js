@@ -16,7 +16,7 @@ export function getRoutePathLastOccurrence() {
  */
 export function getRoutePathFirstOccurrence() {
   let currentLocationPath = window.location.pathname;
-  return currentLocationPath.split('/')[1];
+  return currentLocationPath.split('/')[2];
 }
 
 /**

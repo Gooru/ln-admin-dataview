@@ -18,9 +18,8 @@ export default Ember.Object.extend({
   getLearnerProfileDistribution: function(subjectId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `/${namespace}/v1/user/distribution`;
-    // const url = `${basePath}/stubs/stats/learners-location-based-count-${subjectId}.json`;
+    const url = `${namespace}/v1/user/distribution`;
+    // const url = `/stubs/stats/learners-location-based-count-${subjectId}.json`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -41,8 +40,7 @@ export default Ember.Object.extend({
   getUserStatsContent: function(userId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    // const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    // const url = `${basePath}/stubs/stats/user-stats-content.json`;
+    //const url = `/stubs/stats/user-stats-content.json`;
     const url = `${namespace}/v1/user/stats/contents`;
     const options = {
       type: 'GET',
@@ -63,9 +61,8 @@ export default Ember.Object.extend({
    */
   getUserStatsByCourse: function(userId) {
     const adapter = this;
-     const namespace = adapter.get('namespace');
-    // const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    // const url = `${basePath}/stubs/stats/user-stats-by-course.json`;
+    const namespace = adapter.get('namespace');
+    // const url = `/stubs/stats/user-stats-by-course.json`;
     const url = `${namespace}/v1/user/stats/courses`;
     const options = {
       type: 'GET',
@@ -87,8 +84,7 @@ export default Ember.Object.extend({
   getUserJourneyStats: function(userId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    // const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    // const url = `${basePath}/stubs/stats/user-stats-journey.json`;
+    // const url = `/stubs/stats/user-stats-journey.json`;
     const url = `${namespace}/v1/user/stats/journeys`;
     const options = {
       type: 'GET',
@@ -110,8 +106,6 @@ export default Ember.Object.extend({
   getUserCompetencyStats: function(userId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    // const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    // const url = `${basePath}/stubs/stats/user-stats-competency.json`;
     const url = `${namespace}/v1/user/stats/competency`;
     const options = {
       type: 'GET',
@@ -133,9 +127,8 @@ export default Ember.Object.extend({
   getActiveUserDistrbutionBySubject: function(subjectId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    // const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `/${namespace}/v1/user/distribution/active`;
-    // const url = `${basePath}/stubs/stats/active-user-distrbution-by-subject-${subjectId}.json`;
+    const url = `${namespace}/v1/user/distribution/active`;
+    // const url = `/stubs/stats/active-user-distrbution-by-subject-${subjectId}.json`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),

@@ -16,8 +16,7 @@ export default Ember.Object.extend({
   getCountries: function() {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/countries.json`;
+    const url = `${namespace}/countries.json`;
     const options = {
       type: 'GET'
     };
@@ -35,8 +34,7 @@ export default Ember.Object.extend({
   getCountriesRegion: function() {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/countries-region.json`;
+    const url = `${namespace}/countries-region.json`;
     const options = {
       type: 'GET'
     };

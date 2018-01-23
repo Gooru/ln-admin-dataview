@@ -168,7 +168,7 @@ export default Ember.Component.extend({
     } else {
       return false;
     }
-    
+
     return maxValue;
   },
 
