@@ -37,6 +37,57 @@ export default Ember.Object.extend({
     });
   },
 
+  /**
+   * Get Competency Matrix Coordinates for Subject
+   * @returns {Promise.<[]>}
+   */
+  getCompetencyMatrixCoordinates: function(subject) {
+    const adapter = this;
+    //const namespace = adapter.get('namespace');
+    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    const url = `${basePath}/stubs/competency/CompetencyMatrixCoordinates.json`;
+    //const url =`${namespace}/v1/tx/competency/matrix/coordinates`;
+    const options = {
+      type: 'GET',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8',
+      data: {
+        subject
+      }
+    };
+    return Ember.RSVP.hashSettled({
+      competencyMatrixCoordinates: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.competencyMatrixCoordinates.value;
+    });
+  },
+
+  /**
+   * Get user competency Matrix for subject
+   * @returns {Promise.<[]>}
+   */
+  getCompetencyMatrix: function(user, subject) {
+    const adapter = this;
+    //const namespace = adapter.get('namespace');
+    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    const url = `${basePath}/stubs/competency/CompetencyMatrix.json`;
+    //const url =`${namespace}/v1/tx/competency/matrix`;
+    const options = {
+      type: 'GET',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8',
+      data: {
+        user,
+        subject
+      }
+    };
+    return Ember.RSVP.hashSettled({
+      competencyMatrix: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.competencyMatrix.value;
+    });
+  },
+
 
   defineHeaders: function() {
     return {

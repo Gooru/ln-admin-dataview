@@ -4,9 +4,51 @@ export default Ember.Controller.extend({
 
   // -------------------------------------------------------------------------
   // Properties
+
   /**
-   * @property {Class} class information
+   * @property {course} course information
    */
-  course: null
+  course: null,
+
+  /**
+   * @property {userId} user information
+   */
+  userId: null,
+
+  /**
+   * @property {object} user with class information
+   */
+  courseInClass: Ember.computed('userJourneyByCourses', function() {
+    let courses = this.get('userJourneyByCourses');
+    let resultSet = Ember.A();
+    courses.forEach(function(item) {
+      if (item.classId) {
+        resultSet.pushObject(item);
+      }
+    });
+    return resultSet;
+  }),
+
+  courseNoClass: Ember.computed('userJourneyByCourses', function() {
+    let courses = this.get('userJourneyByCourses');
+    let resultSet = Ember.A();
+    courses.forEach(function(item) {
+      if (!item.classId) {
+        resultSet.pushObject(item);
+      }
+    });
+    return resultSet;
+  }),
+
+
+  //------------------------------------------------------------------------
+  // Events
+
+  actions: {
+
+    onClickBackButton: function() {
+      this.transitionToRoute('learner', this.get('userId'));
+    }
+  }
 
 });

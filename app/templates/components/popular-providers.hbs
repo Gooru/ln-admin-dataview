@@ -1,9 +1,8 @@
 <h6> {{t "common.mostPopularProviders"}} </h6>
-{{#each groupProvidersData as | groupData|}}
-  <div class="profile">
-    <div class="img-container">
-      <img class="img-responsive" src= {{groupData.src}}>
-    </div>
-    <span class="provider-name">{{groupData.name}}</span>
+
+<div class="profile">
+  <div class="img-container">
+    <img class="img-responsive" src= {{groupData.src}}>
   </div>
-{{/each}}
+  <span class="provider-name">{{groupData.name}}</span>
+</div>

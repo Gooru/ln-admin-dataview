@@ -13,7 +13,7 @@ export default Ember.Object.extend({
 
   namespace: '/gooru-search/rest/v2/search',
 
-  namespace1: '/gooru-search/rest/v1/pedagogy-search',
+  namespace1: '/gooru-search/rest/v1/pedagogy-search/learning-maps',
 
   /**
    * Fetches the collections that match with the node
@@ -264,20 +264,14 @@ export default Ember.Object.extend({
   learningMapsContent: function(nodeData) {
     const adapter = this;
     const namespace1 = this.get('namespace1');
-    const url = `${namespace1}/learning-maps`;
-    let spliting  = nodeData.searchValue.split('.');
-    let fwCode = spliting[0];
+    const url = `${namespace1}/standard/${nodeData.code}`;
+    // let spliting  = nodeData.searchValue.split('.');
+    // let fwCode = spliting[0];
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
-      headers: adapter.defineHeaders(),
-      data: {
-        q: '*',
-        length: 1,
-        'flt.standardDisplay': nodeData.code,
-        'flt.fwCode': fwCode
-      }
+      headers: adapter.defineHeaders()
     };
     return Ember.$.ajax(url, options);
   },

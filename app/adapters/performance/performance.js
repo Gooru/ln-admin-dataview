@@ -17,10 +17,10 @@ export default Ember.Object.extend({
    */
   getUserPerformanceUnits: function(user, courseId, classId) {
     const adapter = this;
-    //const namespace = adapter.get('namespace');
-    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}/stubs/performance/user-performance-units-${user}-${courseId}-${classId}.json`;
-    //const url = `${namespace}/v1/user/performance/course`;
+    const namespace = adapter.get('namespace');
+    // const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    // const url = `${basePath}/stubs/performance/user-performance-units-${user}-${courseId}-${classId}.json`;
+    const url = `${namespace}/v1/user/performance/course`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -44,10 +44,10 @@ export default Ember.Object.extend({
    */
   getUserPerformanceLessons: function(user, courseId, unitId,  classId) {
     const adapter = this;
-    //const namespace = adapter.get('namespace');
-    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}/stubs/performance/user-performance-lessons-${user}-${courseId}-${unitId}-${classId}.json`;
-    //const url = `${namespace}/v1/user/performance/lessons`;
+    const namespace = adapter.get('namespace');
+    // const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    // const url = `${basePath}/stubs/performance/user-performance-lessons-${user}-${courseId}-${unitId}-${classId}.json`;
+    const url = `${namespace}/v1/user/performance/lessons`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -72,10 +72,10 @@ export default Ember.Object.extend({
    */
   getUserPerformanceCollections: function(user, courseId, unitId, lessonId,  classId) {
     const adapter = this;
-    //const namespace = adapter.get('namespace');
-    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}/stubs/performance/user-performance-collections-${user}-${courseId}-${unitId}-${lessonId}-${classId}.json`;
-    //const url = `${namespace}/v1/user/performance/collections`;
+    const namespace = adapter.get('namespace');
+    // const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    // const url = `${basePath}/stubs/performance/user-performance-collections-${user}-${courseId}-${unitId}-${lessonId}-${classId}.json`;
+    const url = `${namespace}/v1/user/performance/collections`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -101,10 +101,10 @@ export default Ember.Object.extend({
    */
   getUserPerformanceResourceInAssessment: function(user, courseId, unitId, lessonId, assessmentId, sessionId, classId) {
     const adapter = this;
-    //const namespace = adapter.get('namespace');
-    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}/stubs/performance/user-performance-resource-in-assessment-${user}-${courseId}-${unitId}-${lessonId}-${assessmentId}-${sessionId}-${classId}.json`;
-    //const url = `${namespace}/v1/user/summary/assessment`;
+    const namespace = adapter.get('namespace');
+    // const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    // const url = `${basePath}/stubs/performance/user-performance-resource-in-assessment-${user}-${courseId}-${unitId}-${lessonId}-${assessmentId}-${sessionId}-${classId}.json`;
+    const url = `${namespace}/v1/user/summary/assessment`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -132,10 +132,10 @@ export default Ember.Object.extend({
    */
   getUserPerformanceResourceInCollection: function(user, courseId, unitId, lessonId, collectionId, sessionId, classId) {
     const adapter = this;
-    //const namespace = adapter.get('namespace');
-    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}/stubs/performance/user-performance-resource-in-collection-${user}-${courseId}-${unitId}-${lessonId}-${collectionId}-${sessionId}-${classId}.json`;
-    //const url = `${namespace}/v1/user/summary/collection`;
+    const namespace = adapter.get('namespace');
+    // const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    // const url = `${basePath}/stubs/performance/user-performance-resource-in-collection-${user}-${courseId}-${unitId}-${lessonId}-${collectionId}-${sessionId}-${classId}.json`;
+    const url = `${namespace}/v1/user/summary/collection`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
