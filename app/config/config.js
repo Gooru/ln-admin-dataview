@@ -1,3 +1,5 @@
+import config from 'admin-dataview/config/environment';
+
 export const RESOURCE_COMPONENT_MAP = {
   'video/youtube': 'player.resources.gru-youtube-resource',
   'resource/url': 'player.resources.gru-url-resource',
@@ -30,12 +32,12 @@ export const RESOURCE_TYPES = [
 ];
 
 export const DEFAULT_IMAGES = {
-  USER_PROFILE: 'assets/images/profile.png',
-  COURSE: 'assets/images/course-default.png',
-  RUBRIC: 'assets/images/rubric-default.png',
-  COLLECTION: 'assets/images/collection-default.png',
-  ASSESSMENT: 'assets/images/assessment-default.png',
-  QUESTION_PLACEHOLDER_IMAGE: 'assets/images/question-placeholder-image.png'
+  USER_PROFILE: `${config.rootURL  }assets/images/profile.png`,
+  COURSE: `${config.rootURL  }assets/images/course-default.png`,
+  RUBRIC: `${config.rootURL  }assets/images/rubric-default.png`,
+  COLLECTION: `${config.rootURL  }assets/images/collection-default.png`,
+  ASSESSMENT: `${config.rootURL  }assets/images/assessment-default.png`,
+  QUESTION_PLACEHOLDER_IMAGE: `${config.rootURL  }assets/images/question-placeholder-image.png`
 };
 
 export const K12_CATEGORY = {

@@ -8,7 +8,7 @@ import Ember from 'ember';
 
 export default Ember.Object.extend({
 
-  namespace: '/stubs/crosswalk',
+  namespace: 'stubs/crosswalk',
 
   /**
   * @param subjectId

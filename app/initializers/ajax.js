@@ -13,7 +13,7 @@ export default {
         if (url.startsWith('/api') || url.startsWith('/gooru-search')) {
           const endpointUrl = EndPointsConfig.getEndpointUrl();
           settings.url = `${endpointUrl}${url}`;
-        } else if (url.startsWith('/config') || url.startsWith('/stubs')) {
+        } else if (url.startsWith('config/') || url.startsWith('stubs/')) {
           const basePath = (`${window.location.protocol  }//${  window.location.host}`);
           settings.url = basePath + config.rootURL + url;
         }

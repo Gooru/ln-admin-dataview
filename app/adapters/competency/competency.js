@@ -18,7 +18,7 @@ export default Ember.Object.extend({
   getUserCompetencySummary: function(user, competencyCode) {
     const adapter = this;
     //const namespace = adapter.get('namespace');
-    const url = '/stubs/stats/user-competencies-accordion-summary.json';
+    const url = 'stubs/stats/user-competencies-accordion-summary.json';
     //const url =`${namespace}/v1/user/performance/competency/collections`;
     const options = {
       type: 'GET',
@@ -43,7 +43,7 @@ export default Ember.Object.extend({
   getCompetencyMatrixCoordinates: function(subject) {
     const adapter = this;
     //const namespace = adapter.get('namespace');
-    const url = '/stubs/competency/CompetencyMatrixCoordinates.json';
+    const url = 'stubs/competency/CompetencyMatrixCoordinates.json';
     //const url =`${namespace}/v1/tx/competency/matrix/coordinates`;
     const options = {
       type: 'GET',
@@ -67,7 +67,7 @@ export default Ember.Object.extend({
   getCompetencyMatrix: function(user, subject) {
     const adapter = this;
     //const namespace = adapter.get('namespace');
-    const url = '/stubs/competency/CompetencyMatrix.json';
+    const url = 'stubs/competency/CompetencyMatrix.json';
     //const url =`${namespace}/v1/tx/competency/matrix`;
     const options = {
       type: 'GET',

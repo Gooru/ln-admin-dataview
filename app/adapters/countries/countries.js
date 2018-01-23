@@ -7,7 +7,7 @@ import Ember from 'ember';
  */
 export default Ember.Object.extend({
 
-  namespace: '/stubs',
+  namespace: 'stubs',
 
   /**
    * Get countries data

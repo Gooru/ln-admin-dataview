@@ -9,7 +9,7 @@ export default Ember.Object.extend({
 
   session: Ember.inject.service('session'),
 
-  namespace: '/config',
+  namespace: 'config',
 
   /**
    * Gets custom configuration

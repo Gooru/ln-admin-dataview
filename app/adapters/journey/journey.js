@@ -18,7 +18,7 @@ export default Ember.Object.extend({
   getUserJourneyByCourses: function(userId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    // const url = `/stubs/journey/journey-by-courses-${userId}.json`;
+    // const url = `stubs/journey/journey-by-courses-${userId}.json`;
     const url = `${namespace}/v1/user/journey`;
     const options = {
       type: 'GET',
