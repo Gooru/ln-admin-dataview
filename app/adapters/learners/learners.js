@@ -19,7 +19,7 @@ export default Ember.Object.extend({
     const adapter = this;
     const namespace = adapter.get('namespace');
     const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `/${namespace}/v1/user/distribution`;
+    const url = `${namespace}/v1/user/distribution`;
     // const url = `${basePath}/stubs/stats/learners-location-based-count-${subjectId}.json`;
     const options = {
       type: 'GET',
@@ -134,7 +134,7 @@ export default Ember.Object.extend({
     const adapter = this;
     const namespace = adapter.get('namespace');
     // const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `/${namespace}/v1/user/distribution/active`;
+    const url = `${namespace}/v1/user/distribution/active`;
     // const url = `${basePath}/stubs/stats/active-user-distrbution-by-subject-${subjectId}.json`;
     const options = {
       type: 'GET',
