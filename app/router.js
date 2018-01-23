@@ -18,7 +18,7 @@ Router.map(function() {
     this.route('journeys');
     this.route('competencies');
     this.route('courses', { path: '/courses/:courseId' });
-    this.route('activites');
+    this.route('activities');
   });
   this.route('leaners');
 });
