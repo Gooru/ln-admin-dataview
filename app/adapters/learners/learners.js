@@ -18,7 +18,7 @@ export default Ember.Object.extend({
   getLearnerProfileDistribution: function(subjectId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    // const basePath = (`${window.location.protocol  }//${  window.location.host}`);
     const url = `${namespace}/v1/user/distribution`;
     // const url = `${basePath}/stubs/stats/learners-location-based-count-${subjectId}.json`;
     const options = {
@@ -63,7 +63,7 @@ export default Ember.Object.extend({
    */
   getUserStatsByCourse: function(userId) {
     const adapter = this;
-     const namespace = adapter.get('namespace');
+    const namespace = adapter.get('namespace');
     // const basePath = (`${window.location.protocol  }//${  window.location.host}`);
     // const url = `${basePath}/stubs/stats/user-stats-by-course.json`;
     const url = `${namespace}/v1/user/stats/courses`;

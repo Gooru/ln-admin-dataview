@@ -44,10 +44,10 @@ export default Ember.Object.extend({
    */
   getUserPerformanceLessons: function(user, courseId, unitId,  classId) {
     const adapter = this;
-    const namespace = adapter.get('namespace');
-    // const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    // const url = `${basePath}/stubs/performance/user-performance-lessons-${user}-${courseId}-${unitId}-${classId}.json`;
-    const url = `${namespace}/v1/user/performance/lessons`;
+    // const namespace = adapter.get('namespace');
+    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    const url = `${basePath}/stubs/performance/user-performance-lessons-${user}-${courseId}-${unitId}-${classId}.json`;
+    // const url = `${namespace}/v1/user/performance/lessons`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),

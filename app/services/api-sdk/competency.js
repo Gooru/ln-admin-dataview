@@ -22,14 +22,30 @@ export default Ember.Service.extend({
    * Get user competency summary
    * @returns {Promise.<[]>}
    */
-  getUserCompetencySummary: function(userId, competencyCode) {
+  getUserCompetencyCourses: function(userId, competencyCode) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('competencyAdapter')
-        .getUserCompetencySummary(userId, competencyCode)
+        .getUserCompetencyCourses(userId, competencyCode)
         .then(function(response) {
-          resolve(service.get('competencySerializer').normalizeUserCompetencySummary(response));
+          resolve(service.get('competencySerializer').normalizeUserCompetencyCourses(response));
+        }, reject);
+    });
+  },
+
+  /**
+   * Get user competency summary
+   * @returns {Promise.<[]>}
+   */
+  getUserCompetencyCourseCollections: function(userId, courseId, competencyCode) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('competencyAdapter')
+        .getUserCompetencyCourseCollections(userId, courseId, competencyCode)
+        .then(function(response) {
+          resolve(service.get('competencySerializer').normalizeUserCompetencyCourseCollections(response));
         }, reject);
     });
   }

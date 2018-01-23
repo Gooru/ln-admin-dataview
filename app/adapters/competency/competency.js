@@ -15,11 +15,38 @@ export default Ember.Object.extend({
    * Get user  competency  summary report
    * @returns {Promise.<[]>}
    */
-  getUserCompetencySummary: function(user, competencyCode) {
+  getUserCompetencyCourses: function(user, competencyCode) {
     const adapter = this;
     //const namespace = adapter.get('namespace');
     const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}/stubs/stats/user-competencies-accordion-summary.json`;
+    const url = `${basePath}/stubs/stats/user-competencies-accordion-courses.json`;
+    //const url =`${namespace}/v1/user/performance/competency/collections`;
+    const options = {
+      type: 'GET',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8',
+      data: {
+        user,
+        competencyCode
+      }
+    };
+    return Ember.RSVP.hashSettled({
+      userCompetencySummary: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.userCompetencySummary.value;
+    });
+  },
+
+
+  /**
+   * Get user  competency  course collection report
+   * @returns {Promise.<[]>}
+   */
+  getUserCompetencyCourseCollections: function(user, courseId, competencyCode) {
+    const adapter = this;
+    //const namespace = adapter.get('namespace');
+    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    const url = `${basePath}/stubs/stats/user-competencies-accordion-course-collections.json`;
     //const url =`${namespace}/v1/user/performance/competency/collections`;
     const options = {
       type: 'GET',

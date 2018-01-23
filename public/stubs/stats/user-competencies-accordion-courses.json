@@ -1,0 +1,13 @@
+{
+  "competencies": [{
+      "name": "sample competencies goes here",
+      "coursename": "course is biology",
+      "status": "mastered"
+    },
+    {
+      "name": "sample competencies goes here",
+      "coursename": "course is Science",
+      "status": "inProgress"
+    }
+  ]
+}
