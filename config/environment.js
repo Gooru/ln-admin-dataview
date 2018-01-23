@@ -7,7 +7,7 @@ module.exports = function(environment) {
     modulePrefix: 'admin-dataview',
     rootElement: '#admin-dataview',
     environment: environment,
-    rootURL: '/',
+    rootURL: '/research',
     locationType: 'auto',
     exportApplicationGlobal: 'admin-dataview',
     EmberENV: {

@@ -1,0 +1,571 @@
+{
+      "userCompetencyMatrix": [
+        {
+          "courseCode": "course-code-1",
+          "domains": [
+            {
+              "domainCode": "domain-code-1",
+              "competencies": [
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 5
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                }
+
+              ]
+            },
+            {
+              "domainCode": "domain-code-2",
+              "competencies": [
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 5
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                }
+
+              ]
+            },
+            {
+              "domainCode": "domain-code-3",
+              "competencies": [
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 5
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                }
+
+              ]
+            },
+            {
+              "domainCode": "domain-code-4",
+              "competencies": [
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 5
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                }
+
+              ]
+            }
+          ]
+        },
+        {
+          "courseCode": "course-code-2",
+          "domains": [
+            {
+              "domainCode": "domain-code-5",
+              "competencies": [
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 5
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                }
+
+              ]
+            },
+            {
+              "domainCode": "domain-code-6",
+              "competencies": [
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 5
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                }
+
+              ]
+            },
+            {
+              "domainCode": "domain-code-7",
+              "competencies": [
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 5
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                }
+
+              ]
+            },
+            {
+              "domainCode": "domain-code-8",
+              "competencies": [
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 5
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                }
+
+              ]
+            }
+          ]
+        },
+        {
+          "courseCode": "course-code-3",
+          "domains": [
+            {
+              "domainCode": "domain-code-9",
+              "competencies": [
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 5
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                }
+
+              ]
+            },
+            {
+              "domainCode": "domain-code-10",
+              "competencies": [
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 5
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                }
+
+              ]
+            },
+            {
+              "domainCode": "domain-code-11",
+              "competencies": [
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 5
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                }
+
+              ]
+            },
+            {
+              "domainCode": "domain-code-12",
+              "competencies": [
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 0
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 5
+                },
+                {
+                  "competencyCode": "competency-code",
+                  "competencyName": "competency-name",
+                  "competencyDesc": "competency-desc",
+                  "competencyStudentDesc": "competencyStudentDesc",
+                  "competencySeq": 1,
+                  "status": 1
+                }
+
+              ]
+            }
+          ]
+        }
+      ]
+}

@@ -29,13 +29,9 @@ export default Ember.Component.extend({
       let lessonBody = component.$('.lesson-content .lesson-body');
       if (component.get('isExpanded')) {
         component.toggleProperty('isExpanded');
-        lessonBody.hide('slow', function() {
-          return true;
-        });
+        lessonBody.hide('slow');
       } else {
-        lessonBody.show('slow', function() {
-          return true;
-        });
+        lessonBody.show('slow');
         component.set('isLoading', true);
         let collectionPromise = Ember.RSVP.resolve(component.get('performanceService').getUserPerformanceCollections('user-id', 'course-id', 'unit-id', lessonId, 'class-id'));
         return Ember.RSVP.hash({

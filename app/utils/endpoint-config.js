@@ -23,19 +23,3 @@ export function getGooruAppUrl() {
   const configuration = ConfigurationService.configuration;
   return configuration ? configuration.get('gooru-app-url') : '';
 }
-
-/**
- * Get DS endpoint secure url from config
- */
-export function geDSEndpointSecureUrl() {
-  const configuration = ConfigurationService.configuration;
-  return configuration ? configuration.get('dsendpoint.secureUrl') : '';
-}
-
-/**
- * Get DS endpoint  url from config
- */
-export function geDSEndpointUrl() {
-  const configuration = ConfigurationService.configuration;
-  return configuration ? configuration.get('dsendpoint.url') : '';
-}

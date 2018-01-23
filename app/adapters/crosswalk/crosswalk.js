@@ -17,8 +17,7 @@ export default Ember.Object.extend({
   getCrosswalkData: function(subjectId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}${namespace}/${subjectId}.json`;
+    const url = `${namespace}/${subjectId}.json`;
     const options = {
       type: 'GET'
     };

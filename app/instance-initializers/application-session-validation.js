@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import EndPointsConfig from 'admin-dataview/utils/endpoint-config';
+
 
 /**
  * Initialize session validation function
@@ -11,7 +11,7 @@ export function initialize(instance) {
       if (sessionService.get('isAuthenticated')) {
         sessionService.invalidate();
       }
-      window.location.replace(`${EndPointsConfig.getGooruAppUrl()  }/sign-in`);
+      window.location.replace('/sign-in');
     }
   });
 }

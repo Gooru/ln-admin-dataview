@@ -121,6 +121,9 @@ export default {
       'my-report': 'My Report',
       'class-code': 'Class Code',
       'report': 'Report'
+    },
+    activities: {
+      'time-spent-activities': 'Time Spent on All Activities'
     }
   }
 

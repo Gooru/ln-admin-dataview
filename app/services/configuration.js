@@ -20,7 +20,7 @@ const ConfigurationService = Ember.Service.extend({
   },
 
 
-  loadConfiguration: function(configBaseUrl = null) {
+  loadConfiguration: function() {
     const service = this;
     const environment = Env.environment;
     const isProduction = environment === 'production';
@@ -37,7 +37,7 @@ const ConfigurationService = Ember.Service.extend({
 
     const hostname = window.location.hostname;
 
-    return service.get('configurationAdapter').loadConfiguration(hostname, configBaseUrl)
+    return service.get('configurationAdapter').loadConfiguration(hostname)
       .then(function(hostnameConfiguration){ //it looks for the specific domain configuration
         if (hostnameConfiguration) {
           service.merge(hostnameConfiguration);

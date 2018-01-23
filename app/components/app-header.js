@@ -37,7 +37,7 @@ export default Ember.Component.extend(ModalMixin, {
 
     logout: function() {
       this.get('session').invalidate();
-      window.location.href =  `${window.location.protocol + EndPointsConfig.getGooruAppUrl()  }/logout`;
+      window.location.href =  '/logout';
     },
 
     onMenuItemSelection: function(item) {
@@ -54,5 +54,14 @@ export default Ember.Component.extend(ModalMixin, {
    */
   supportSiteUrl: Ember.computed(function() {
     return Env.supportSiteUrl;
+  }),
+
+  /**
+   * Gooru application site url
+   * @property {string}
+   */
+  siteUrl: Ember.computed(function() {
+    return EndPointsConfig.getGooruAppUrl();
   })
+
 });

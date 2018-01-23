@@ -7,10 +7,7 @@ export default {
     'url': 'http://staging.gooru.org',
     'secureUrl': 'http://staging.gooru.org'
   },
-  'dsendpoint' : {
-    'url': 'http://staging.gooru.org',
-    'secureUrl': 'http://staging.gooru.org'
-  },
+
   'gooru-app-url' : '//local.gooru.org'
 
 };
