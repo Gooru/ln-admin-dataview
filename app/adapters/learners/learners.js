@@ -63,7 +63,6 @@ export default Ember.Object.extend({
   getUserStatsByCourse: function(userId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    // const basePath = (`${window.location.protocol  }//${  window.location.host}`);
     // const url = `${basePath}/stubs/stats/user-stats-by-course.json`;
     const url = `${namespace}/v1/user/stats/courses`;
     const options = {
