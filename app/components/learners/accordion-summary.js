@@ -6,6 +6,11 @@ export default Ember.Component.extend({
 
   classNames: ['learners', 'accordion-summary'],
 
+  /**
+   * @requires service:performance
+   */
+  competencyService: Ember.inject.service('api-sdk/competency'),
+
 
   classNameBindings: ['isExpanded:expanded'],
 
@@ -29,20 +34,18 @@ export default Ember.Component.extend({
      * @param item
      */
     selectCompetency: function() {
-      let count = 0;
-      if (this.get('updateElementId') === this.get('elementId')) {
-        count = count + 1;
-      } else {
-        if (count > 0) {
-          this.$(`#${this.get('updateElementId')}-heading > .panel-title a i`).click();
-          this.set('updateElementId', this.get('elementId'));
+      let component = this;
 
-        } else {
-          this.set('updateElementId', this.get('elementId'));
-        }
-      }
+      let lessonPromise = Ember.RSVP.resolve(component.get('competencyService').getUserCompetencyCourseCollections('user-id', 'course-id'));
+      return Ember.RSVP.hash({
+        lessons: lessonPromise
+      })
+        .then(function(hash) {
+          component.set('courseCollections', hash.lessons);
+        });
+
     }
-    // this.sendAction('onClickBackButton');
+
   }
 
   // -------------------------------------------------------------------------

@@ -3,6 +3,7 @@
   background: white;
   margin: 0 auto;
   width: 960px;
+
   .competency {
     padding: 5px 12px 0;
     width: 100%;
@@ -57,20 +58,33 @@
         padding-left: 145px;
         font-size: 16px;
         float: left;
+        width: 245px;
       }
 
-      .inProgress {
+      .time {
         padding-left: 55px;
         font-size: 16px;
         float: left;
         margin: 8px 0;
 
-        i {
-          background: url("images/course-icon.svg");
-          width: 32.5px;
-          height: 25px;
-          object-fit: contain;
-          display: block;
+        .inProgress {
+          i {
+            background: url("images/competencies-inProgress.svg");
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+            display: block;
+          }
+        }
+
+        .mastered {
+          i {
+            background: url("images/competencies-mastered.svg");
+            width: 30.3px;
+            height: 29.4px;
+            object-fit: contain;
+            display: block;
+          }
         }
       }
     }

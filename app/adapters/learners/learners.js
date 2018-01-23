@@ -19,7 +19,6 @@ export default Ember.Object.extend({
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v1/user/distribution`;
-    // const url = `/stubs/stats/learners-location-based-count-${subjectId}.json`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -62,7 +61,6 @@ export default Ember.Object.extend({
   getUserStatsByCourse: function(userId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    // const url = `/stubs/stats/user-stats-by-course.json`;
     const url = `${namespace}/v1/user/stats/courses`;
     const options = {
       type: 'GET',
