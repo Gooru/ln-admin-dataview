@@ -15,10 +15,10 @@ export default Ember.Object.extend({
    * Get user  competency  summary report
    * @returns {Promise.<[]>}
    */
-  getUserCompetencySummary: function(user, competencyCode) {
+  getUserCompetencyCourses: function(user, competencyCode) {
     const adapter = this;
     //const namespace = adapter.get('namespace');
-    const url = 'stubs/stats/user-competencies-accordion-summary.json';
+    const url = 'stubs/stats/user-competencies-accordion-courses.json';
     //const url =`${namespace}/v1/user/performance/competency/collections`;
     const options = {
       type: 'GET',
@@ -67,7 +67,7 @@ export default Ember.Object.extend({
   getCompetencyMatrix: function(user, subject) {
     const adapter = this;
     //const namespace = adapter.get('namespace');
-    const url = 'stubs/competency/CompetencyMatrix.json';
+    const url = '/stubs/competency/CompetencyMatrix.json';
     //const url =`${namespace}/v1/tx/competency/matrix`;
     const options = {
       type: 'GET',

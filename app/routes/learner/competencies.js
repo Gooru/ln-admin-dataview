@@ -39,7 +39,7 @@ export default Ember.Route.extend({
     let userId = this.get('userId');
     return Ember.RSVP.hash({
       userCompetencyStats: this.get('learnersService').getUserCompetencyStats(userId),
-      userCompetencySummary: this.get('competencyService').getUserCompetencySummary(userId, 'K12.Sc.CA')
+      userCompetencySummary: this.get('competencyService').getUserCompetencyCourses(userId, 'course-id', 'K12.Sc.CA')
     });
   },
 
