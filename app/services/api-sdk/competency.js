@@ -32,6 +32,38 @@ export default Ember.Service.extend({
           resolve(service.get('competencySerializer').normalizeUserCompetencySummary(response));
         }, reject);
     });
+  },
+
+  /**
+   * Get Competency Matrix Coordinates for Subject
+   * @returns {Promise.<[]>}
+   */
+  getCompetencyMatrixCoordinates: function(subject) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('competencyAdapter')
+        .getCompetencyMatrixCoordinates(subject)
+        .then(function(response) {
+          resolve(service.get('competencySerializer').normalizeCompetencyMatrixCoordinates(response));
+        }, reject);
+    });
+  },
+
+  /**
+   * Get user competency Matrix for subject
+   * @returns {Promise.<[]>}
+   */
+  getCompetencyMatrix: function(user, subject) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('competencyAdapter')
+        .getCompetencyMatrix(user, subject)
+        .then(function(response) {
+          resolve(service.get('competencySerializer').normalizeCompetencyMatrix(response));
+        }, reject);
+    });
   }
 
 });
