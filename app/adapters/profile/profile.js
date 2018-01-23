@@ -17,10 +17,10 @@ export default Ember.Object.extend({
    */
   getUserProfile: function(userId) {
     const adapter = this;
-    //const namespace = adapter.get('namespace');
-    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}/stubs/profile/user-profile-${userId}.json`;
-    //const url = `${namespace}/v1/user/profile`;
+    const namespace = adapter.get('namespace');
+    // const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    // const url = `${basePath}/stubs/profile/user-profile-${userId}.json`;
+    const url = `${namespace}/v1/user/profile`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -40,10 +40,10 @@ export default Ember.Object.extend({
    */
   getUserGrades: function(userId) {
     const adapter = this;
-    //const namespace = adapter.get('namespace');
-    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}/stubs/profile/user-grade-${userId}.json`;
-    //const url =`${namespace}/v1/user/grades`;
+    const namespace = adapter.get('namespace');
+    // const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    // const url = `${basePath}/stubs/profile/user-grade-${userId}.json`;
+    const url =`${namespace}/v1/user/grades`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -63,10 +63,10 @@ export default Ember.Object.extend({
    */
   getUserPrefsContent: function(userId) {
     const adapter = this;
-    //const namespace = adapter.get('namespace');
-    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}/stubs/profile/user-prefs-content-${userId}.json`;
-    //const url =`${namespace}/v1/user/prefs/content`;
+    const namespace = adapter.get('namespace');
+    // const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    // const url = `${basePath}/stubs/profile/user-prefs-content-${userId}.json`;
+    const url =`${namespace}/v1/user/prefs/content`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -86,10 +86,10 @@ export default Ember.Object.extend({
    */
   getUserPrefsProviders: function(userId) {
     const adapter = this;
-    //const namespace = adapter.get('namespace');
-    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}/stubs/profile/user-prefs-provider-${userId}.json`;
-    //const url =`${namespace}/v1/user/prefs/providers`;
+    const namespace = adapter.get('namespace');
+    // const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    // const url = `${basePath}/stubs/profile/user-prefs-provider-${userId}.json`;
+    const url =`${namespace}/v1/user/prefs/providers`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -109,10 +109,10 @@ export default Ember.Object.extend({
    */
   getUserPrefsCurators: function(userId) {
     const adapter = this;
-    //const namespace = adapter.get('namespace');
-    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}/stubs/profile/user-prefs-curators-${userId}.json`;
-    //const url =`${namespace}/v1/user/prefs/curators`;
+    const namespace = adapter.get('namespace');
+    // const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    // const url = `${basePath}/stubs/profile/user-prefs-curators-${userId}.json`;
+    const url =`${namespace}/v1/user/prefs/curators`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
