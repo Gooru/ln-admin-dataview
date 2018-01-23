@@ -18,8 +18,7 @@ export default Ember.Object.extend({
   getUserCompetencyCourses: function(user, competencyCode) {
     const adapter = this;
     //const namespace = adapter.get('namespace');
-    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}/stubs/stats/user-competencies-accordion-courses.json`;
+    const url = `/stubs/stats/user-competencies-accordion-courses.json`;
     //const url =`${namespace}/v1/user/performance/competency/collections`;
     const options = {
       type: 'GET',
@@ -45,8 +44,7 @@ export default Ember.Object.extend({
   getUserCompetencyCourseCollections: function(user, courseId, competencyCode) {
     const adapter = this;
     //const namespace = adapter.get('namespace');
-    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}/stubs/stats/user-competencies-accordion-course-collections.json`;
+    const url = `/stubs/stats/user-com${basePath}petencies-accordion-course-collections.json`;
     //const url =`${namespace}/v1/user/performance/competency/collections`;
     const options = {
       type: 'GET',
