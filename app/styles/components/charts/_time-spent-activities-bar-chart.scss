@@ -1,6 +1,6 @@
 .time-spent-activities-bar-chart {
   width: 500px;
-  height: 290px;
+  height: 330px;
   margin: auto;
   margin-top: 30px;
   svg {
@@ -73,6 +73,10 @@
   }
   .audio {
     background: url("../assets/images/audio-resource-dark.svg");
+    @extend %resource-icon-styles;
+  }
+  .image {
+    background: url("../assets/images/image-resource-dark.svg");
     @extend %resource-icon-styles;
   }
 }

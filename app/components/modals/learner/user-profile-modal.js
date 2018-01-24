@@ -49,9 +49,7 @@ export default Ember.Component.extend({
       */
     onShowPanel: function(preferenceType) {
       let component = this;
-      component.$(`.${preferenceType} .body`).show('slow', function() {
-        return true;
-      });
+      component.$(`.${preferenceType} .body`).slideDown();
       let propertyValue = capitalizeString(preferenceType);
       component.set(`is${propertyValue}Expanded`, true);
     },
@@ -61,9 +59,7 @@ export default Ember.Component.extend({
     */
     onHidePanel: function(preferenceType) {
       let component = this;
-      component.$(`.${preferenceType} .body`).hide('slow', function() {
-        return true;
-      });
+      component.$(`.${preferenceType} .body`).slideUp();
       let propertyValue = capitalizeString(preferenceType);
       component.set(`is${propertyValue}Expanded`, false);
     }

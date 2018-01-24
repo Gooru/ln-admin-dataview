@@ -220,6 +220,10 @@
                     background: url("../assets/images/audio-resource-dark.svg");
                     @extend %content-icon-size;
                   }
+                  .image i {
+                    background: url("../assets/images/image-resource-dark.svg");
+                    @extend %content-icon-size;
+                  }
                   .name {
                     font-size: 16px;
                     line-height: 1.5;
