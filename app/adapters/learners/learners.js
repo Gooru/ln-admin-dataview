@@ -62,8 +62,7 @@ export default Ember.Object.extend({
   getUserStatsContentByType: function(userId, contentType) {
     const adapter = this;
     //const namespace = adapter.get('namespace');
-    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
-    const url = `${basePath}/stubs/stats/user-stats-content-info.json`;
+    const url = 'stubs/stats/user-stats-content-info.json';
     //const url = `${namespace}/v1/user/stats/contents`;
     const options = {
       type: 'GET',
