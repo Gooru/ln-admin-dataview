@@ -12,7 +12,7 @@ export default Ember.Object.extend({
   namespace: '/api/ds/users',
 
   /**
-   * Get user  competency  summary report
+   * Get user  competency  course  report
    * @returns {Promise.<[]>}
    */
   getUserCompetencyCourses: function(user, competencyCode) {
@@ -35,6 +35,33 @@ export default Ember.Object.extend({
       return hash.userCompetencySummary.value;
     });
   },
+
+
+  /**
+   * Get user  competency  course collections report
+   * @returns {Promise.<[]>}
+   */
+  getUserCompetencyCourseCollections: function(user, courseId, competencyCode) {
+    const adapter = this;
+    //const namespace = adapter.get('namespace');
+    const url = 'stubs/stats/user-competencies-accordion-course-collections.json';
+    //const url =`${namespace}/v1/user/performance/competency/collections`;
+    const options = {
+      type: 'GET',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8',
+      data: {
+        user,
+        competencyCode
+      }
+    };
+    return Ember.RSVP.hashSettled({
+      userCompetencySummary: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.userCompetencySummary.value;
+    });
+  },
+
 
   /**
    * Get Competency Matrix Coordinates for Subject
