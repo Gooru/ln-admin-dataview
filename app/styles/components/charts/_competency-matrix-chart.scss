@@ -1,19 +1,131 @@
 .competency-matrix-chart {
-  rect.bordered {
-    stroke: #E6E6E6;
+  margin: 0 auto;
+  background-color: $white;
+
+  .clear {
+    clear: both;
   }
 
-  text.mono {
-    font-size: 9pt;
-    font-family: Consolas, courier;
-    fill: #aaa;
+  .subject-navigation-chart {
+    width: 100%;
+
+    .subject-list {
+      position: relative;
+      margin: 0 auto;
+      overflow: hidden;
+      padding: 5px;
+      height: 60px;
+
+      .nav-tabs > li.active > a,
+      .nav-tabs > li.active > a:focus {
+        box-shadow: inset 0 -3px 0 #2ea9e9 !important;
+        color: #2ea9e9;
+      }
+
+      .nav-tabs > li > a:hover {
+        border-width: 0;
+        border: none;
+        color: #2ea9e9 !important;
+        background: transparent;
+        box-shadow: inset 0 -3px 0 #2ea9e9 !important;
+        opacity: 0.7;
+      }
+
+      .nav-tabs > li > a {
+        padding: 15px 20px;
+      }
+
+      ul {
+        position: absolute;
+        left: 0;
+        top: 0;
+        min-width: 1050px;
+        margin-left: 12px;
+        margin-top: 0;
+        background: white;
+      }
+
+      li {
+        display: table-cell;
+        position: relative;
+        text-align: center;
+        cursor: grab;
+        cursor: -webkit-grab;
+        color: $dark-400;
+        vertical-align: middle;
+        font-size: 15px;
+      }
+    }
+
+    .subject-navigation-arrow {
+      text-align: center;
+      cursor: pointer;
+      display: none;
+      padding: 11px 7px 7px;
+      white-space: no-wrap;
+      vertical-align: middle;
+      width: 40px;
+    }
+
+    .subject-right-navigation-arrow {
+      i {
+        margin-left: -140px;
+        font-size: 40px;
+        margin-top: 2px;
+      }
+    }
+
+    .subject-left-navigation-arrow {
+      i {
+        margin-left: -128px;
+        font-size: 40px;
+        margin-top: 2px;
+      }
+    }
   }
 
-  text.axis-workweek {
-    fill: #000;
-  }
+  .competency-chart-tab-container {
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
 
-  text.axis-worktime {
-    fill: #000;
+    .courses {
+      width: 220px;
+      border-right: 1px solid #ccc;
+
+      ul {
+        padding: 0;
+        list-style: none;
+        font-size: 15px;
+        width: 100%;
+        margin: 0;
+      }
+
+      li {
+        padding-left: 20px;
+        border-bottom: 1px solid #ccc;
+        width: 100%;
+        height: 50px;
+        padding-right: 10px;
+      }
+
+      li:last-child {
+        border: none;
+      }
+    }
+
+    .matrix-chart-container {
+      width: 700px;
+    }
+
+    #competency-matrix-chart {
+      margin-left: 20px;
+      margin-bottom: 20px;
+
+      .competency {
+        stroke: #FBFBFB;
+        stroke-width: 0.5px;
+      }
+    }
   }
 }

@@ -63,7 +63,14 @@ export default Ember.Object.extend({
       let domains = course.get('domains');
       let domainSet = Ember.A();
       domains.forEach(data => {
-        domainSet.pushObject(Ember.Object.create(data));
+        let competencySet = Ember.A();
+        let domain = Ember.Object.create(data);
+        let competencies = domain.get('competencies');
+        competencies.forEach(competency => {
+          competencySet.pushObject(Ember.Object.create(competency));
+        });
+        domain.set('competencies', competencySet);
+        domainSet.pushObject(domain);
       });
       course.set('domains', domainSet);
       resultSet.pushObject(course);

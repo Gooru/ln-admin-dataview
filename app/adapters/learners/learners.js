@@ -19,7 +19,7 @@ export default Ember.Object.extend({
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v1/user/distribution`;
-    // const url = `stubs/stats/learners-location-based-count-${subjectId}.json`;
+    //const url = `stubs/stats/learners-location-based-count-${subjectId}.json`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),

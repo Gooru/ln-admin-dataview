@@ -25,6 +25,12 @@ export default Ember.Controller.extend({
    */
   data: null,
 
+  /**
+   * Indicates which mode currently Enabled
+   * @type {Boolean}
+   */
+  isGridModeEnabled: false,
+
   //------------------------------------------------------------------------
   // Events
 
@@ -32,6 +38,14 @@ export default Ember.Controller.extend({
 
     onClickBackButton: function() {
       this.transitionToRoute('learner', this.get('userId'));
+    },
+
+    onChooseListView: function() {
+      this.set('isGridModeEnabled', false);
+    },
+
+    onChooseGridView: function() {
+      this.set('isGridModeEnabled', true);
     }
   }
 

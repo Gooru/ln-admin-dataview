@@ -94,7 +94,7 @@ export default Ember.Object.extend({
   getCompetencyMatrix: function(user, subject) {
     const adapter = this;
     //const namespace = adapter.get('namespace');
-    const url = '/stubs/competency/CompetencyMatrix.json';
+    const url = 'stubs/competency/CompetencyMatrix.json';
     //const url =`${namespace}/v1/tx/competency/matrix`;
     const options = {
       type: 'GET',

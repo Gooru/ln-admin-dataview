@@ -31,6 +31,7 @@
 
     .panel-back-arrow {
       cursor: pointer;
+
       i {
         margin-left: -80px;
       }
@@ -73,7 +74,7 @@
     width: 5%;
     float: left;
     padding: 6px;
-
+    cursor: grab;
     i {
       background: url("images/competencies-list-view.svg");
       width: 17px;
@@ -81,13 +82,17 @@
       object-fit: contain;
       cursor: pointer;
       display: block;
+
+      &.active {
+        background: url("images/competencies-list-view-active.svg");
+      }
     }
   }
 
   .competencies-module-view {
     width: 10%;
     padding: 6px;
-
+    cursor: grab;
     i {
       background: url("images/competencies-module-view.svg");
       width: 17px;
@@ -95,6 +100,10 @@
       cursor: pointer;
       object-fit: contain;
       display: block;
+
+      &.active {
+        background: url("images/competencies-module-view-active.svg");
+      }
     }
   }
 
