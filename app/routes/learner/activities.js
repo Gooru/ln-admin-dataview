@@ -20,11 +20,13 @@ export default Ember.Route.extend({
     let learnerModel = this.modelFor('learner');
     let userId = learnerModel.userId;
     return Ember.RSVP.hash({
-      userStatsContent: route.get('learnersService').getUserStatsContent(userId)
+      userStatsContent: route.get('learnersService').getUserStatsContent(userId),
+      userId: userId
     });
   },
 
   setupController: function(controller, model) {
     controller.set('learnerActivities', model.userStatsContent);
+    controller.set('userId', model.userId);
   }
 });
