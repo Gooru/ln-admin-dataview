@@ -49,6 +49,24 @@ export default Ember.Service.extend({
   },
 
   /**
+   * Get user stats content count
+   * @returns {Promise.<[]>}
+   */
+  getUserStatsContentByType: function(userId, contentType) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('learnersAdapter')
+        .getUserStatsContentByType(userId, contentType)
+        .then(function(response) {
+          resolve(response);
+          //Todo, can use normalization if required with actual endpoint response
+          // resolve(service.get('learnersSerializer').normalizeUserStatsContent(response));
+        }, reject);
+    });
+  },
+
+  /**
    * Get user stats by courses
    * @returns {Promise.<[]>}
    */

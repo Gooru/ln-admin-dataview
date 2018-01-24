@@ -1,0 +1,100 @@
+{
+    "resources": {
+      "audio": [
+        {
+          "resourceId": "Re572d4d-6331-4c63-89cf-0ddbb36ee3ce",
+          "resourceTitle": "Marine Biology Resource Audio4",
+          "pathId": 0,
+          "resourceTimeSpent": 445000,
+          "resourceType": "audio"
+        },
+        {
+          "resourceId": "Re562d4d-6331-4c63-89cf-0ddbb36ee3ce",
+          "resourceTitle": "Marine Biology Resource Audio3",
+          "pathId": 1,
+          "resourceTimeSpent": 345000,
+          "resourceType": "audio"
+        }
+      ],
+      "video": [
+        {
+          "resourceId": "Re552d4d-6331-4c63-89cf-0ddbb36ee3ce",
+          "resourceTitle": "Marine Biology Resource Video",
+          "pathId": 1,
+          "resourceTimeSpent": 245000,
+          "resourceType": "video"
+        },
+        {
+          "resourceId": "Re542d4d-6331-4c63-89cf-0ddbb36ee3ce",
+          "resourceTitle": "Marine Biology Resource Video",
+          "pathId": 0,
+          "resourceTimeSpent": 145000,
+          "resourceType": "video"
+        }
+      ],
+      "text": [
+        {
+          "resourceId": "Re572d4d-6331-4c63-89cf-0ddbb36ee3ce",
+          "resourceTitle": "Marine Biology Resource Text",
+          "pathId": 0,
+          "resourceTimeSpent": 445000,
+          "resourceType": "text"
+        },
+        {
+          "resourceId": "Re562d4d-6331-4c63-89cf-0ddbb36ee3ce",
+          "resourceTitle": "Marine Biology Resource Text",
+          "pathId": 0,
+          "resourceTimeSpent": 345000,
+          "resourceType": "text"
+        }
+      ],
+      "image": [
+        {
+          "resourceId": "Re552d4d-6331-4c63-89cf-0ddbb36ee3ce",
+          "resourceTitle": "Marine Biology Resource Image",
+          "pathId": 1,
+          "resourceTimeSpent": 245000,
+          "resourceType": "image"
+        },
+        {
+          "resourceId": "Re542d4d-6331-4c63-89cf-0ddbb36ee3ce",
+          "resourceTitle": "Marine Biology Resource Image",
+          "pathId": 1,
+          "resourceTimeSpent": 145000,
+          "resourceType": "image"
+        }
+      ],
+      "interactive": [
+        {
+          "resourceId": "Re552d4d-6331-4c63-89cf-0ddbb36ee3ce",
+          "resourceTitle": "Marine Biology Resource interactive",
+          "pathId": 1,
+          "resourceTimeSpent": 245000,
+          "resourceType": "interactive"
+        },
+        {
+          "resourceId": "Re542d4d-6331-4c63-89cf-0ddbb36ee3ce",
+          "resourceTitle": "Marine Biology Resource interactive",
+          "pathId": 0,
+          "resourceTimeSpent": 145000,
+          "resourceType": "interactive"
+        }
+      ],
+      "webpage": [
+        {
+          "resourceId": "Re552d4d-6331-4c63-89cf-0ddbb36ee3ce",
+          "resourceTitle": "Marine Biology Resource webpage",
+          "pathId": 0,
+          "resourceTimeSpent": 245000,
+          "resourceType": "webpage"
+        },
+        {
+          "resourceId": "Re542d4d-6331-4c63-89cf-0ddbb36ee3ce",
+          "resourceTitle": "Marine Biology Resource webpage",
+          "pathId": 0,
+          "resourceTimeSpent": 145000,
+          "resourceType": "webpage"
+        }
+      ]
+    }
+}

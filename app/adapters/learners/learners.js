@@ -58,6 +58,30 @@ export default Ember.Object.extend({
   },
 
   /**
+   * Get user stats content count
+   * @returns {Promise.<[]>}
+   */
+  getUserStatsContentByType: function(userId, contentType) {
+    const adapter = this;
+    //const namespace = adapter.get('namespace');
+    const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+    const url = `${basePath}/stubs/stats/user-stats-content-info.json`;
+    //const url = `${namespace}/v1/user/stats/contents`;
+    const options = {
+      type: 'GET',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8',
+      data: {user: userId, contentType: contentType}
+    };
+    return Ember.RSVP.hashSettled({
+      userStatsContent: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      //Todo need to move the contentType into queryParams for actual end point
+      return hash.userStatsContent.value.resources[contentType];
+    });
+  },
+
+  /**
    * Get user stats by courses
    * @returns {Promise.<[]>}
    */

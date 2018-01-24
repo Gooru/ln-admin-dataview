@@ -28,9 +28,9 @@ export default Ember.Component.extend({
       let collectionBody = component.$('.collection-content .collection-body');
       if (component.get('isExpanded')) {
         component.toggleProperty('isExpanded');
-        collectionBody.hide('slow');
+        collectionBody.slideUp();
       } else {
-        collectionBody.show('slow');
+        collectionBody.slideDown();
         component.set('isLoading', true);
         let resourcePromise = [];
         if (collectionType === 'assessment') {
