@@ -60,8 +60,6 @@ export default Ember.Service.extend({
         .getUserStatsContentByType(userId, contentType)
         .then(function(response) {
           resolve(response);
-          //Todo, can use normalization if required with actual endpoint response
-          // resolve(service.get('learnersSerializer').normalizeUserStatsContent(response));
         }, reject);
     });
   },
@@ -127,6 +125,22 @@ export default Ember.Service.extend({
         .getActiveUserDistrbutionBySubject(subjectId)
         .then(function(response) {
           resolve(service.get('learnersSerializer').normalizeActiveUserDistrbutionBySubject(response));
+        }, reject);
+    });
+  },
+
+  /**
+   * Get user stats timespent stats
+   * @returns {Promise.<[]>}
+   */
+  getUserTimeSpentStats: function(userId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('learnersAdapter')
+        .getUserTimeSpentStats(userId)
+        .then(function(response) {
+          resolve(service.get('learnersSerializer').normalizeUserStats(response));
         }, reject);
     });
   }

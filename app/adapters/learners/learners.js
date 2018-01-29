@@ -163,6 +163,27 @@ export default Ember.Object.extend({
     });
   },
 
+  /**
+   * Get user stats content count
+   * @returns {Promise.<[]>}
+   */
+  getUserTimeSpentStats: function(userId, activeDuration='3m') {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/v1/user/stats/timespent`;
+    const options = {
+      type: 'GET',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8',
+      data: {user: userId, activeDuration:activeDuration}
+    };
+    return Ember.RSVP.hashSettled({
+      userTimeSpentStats: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.userTimeSpentStats.value;
+    });
+  },
+
 
   defineHeaders: function() {
     return {
