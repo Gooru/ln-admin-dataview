@@ -31,6 +31,7 @@ export default Ember.Component.extend({
     onShowingContentAccordion: function(contentType) {
       let component = this;
       let userId = component.get('userId');
+      let activeDuration = component.get('activeDuration');
       let accordionBody = component.$('.accordion .accordion-body');
       if (component.get('isExpanded')) {
         component.set('isLoading', false);
@@ -39,7 +40,7 @@ export default Ember.Component.extend({
       } else {
         component.set('isLoading', true);
         accordionBody.slideDown();
-        let resourcePromise = Ember.RSVP.resolve(component.get('learnersService').getUserStatsContentByType(userId, contentType));
+        let resourcePromise = Ember.RSVP.resolve(component.get('learnersService').getUserStatsContentByType(userId, contentType, activeDuration));
         return Ember.RSVP.hash({
           resourceData: resourcePromise
         })
@@ -78,6 +79,18 @@ export default Ember.Component.extend({
    * Total time spent on each resource type
    */
   resourceTimeSpent: null,
+
+  /**
+   * User id of time spent activites
+   * @type {String}
+   */
+  userId: null,
+
+  /**
+   * active duration filter
+   * @type {String}
+   */
+  activeDuration: '3m',
 
   /**
    * Observer triggerred when a component get resourceData

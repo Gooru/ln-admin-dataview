@@ -12,19 +12,42 @@ export default Ember.Route.extend({
    */
   journeyService: Ember.inject.service('api-sdk/journey'),
 
+  /**
+   * @requires service:learners
+   */
+  learnersService: Ember.inject.service('api-sdk/learners'),
+
   //-------------------------------------------------------------------------
   //Properties
 
   // -------------------------------------------------------------------------
   // Methods
 
-  beforeModel: function(transition) {
-    this.set('userId', transition.params.learner.userId);
-  },
 
   model: function() {
+    let learnerModel = this.modelFor('learner');
+    let userId = learnerModel.userId;
+    let controller = this;
+    let selectedActiveDuration= learnerModel.selectedActiveDuration;
     return Ember.RSVP.hash({
-      userJourneyByCourses: this.get('journeyService').getUserJourneyByCourses(this.get('userId'))
+      userStatsByCourse: controller.get('learnersService').getUserStatsByCourse(userId, selectedActiveDuration)
+    }).then(({userStatsByCourse}) => {
+      let classIds = Ember.A();
+      let courseIds = Ember.A();
+      userStatsByCourse.forEach(data => {
+        if (data.get('classId')) {
+          classIds.push(data.get('classId'));
+        } else {
+          courseIds.push(data.get('courseId'));
+        }
+      });
+      let requestPayLoad =  Ember.Object.create({
+        'classIds' : classIds,
+        'courseIds': courseIds
+      });
+      return Ember.RSVP.hash({
+        userJourneyByCourses: controller.get('journeyService').getUserJourneyByCourses(userId, requestPayLoad)
+      });
     });
   },
 

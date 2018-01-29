@@ -59,7 +59,7 @@ export default Ember.Service.extend({
         .get('learnersAdapter')
         .getUserStatsContentByType(userId, contentType)
         .then(function(response) {
-          resolve(response);
+          resolve(service.get('learnersSerializer').normalizeUserStatsContentByType(response));
         }, reject);
     });
   },
