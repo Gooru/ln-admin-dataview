@@ -14,21 +14,28 @@ export default Ember.Route.extend(ConfigurationMixin, {
 
 
   /**
-     * Authentication (api-sdk/session) service.
-     * @property authService
-     * @readOnly
-     */
+   * Authentication (api-sdk/session) service.
+   * @property authService
+   * @readOnly
+   */
   authService: Ember.inject.service('api-sdk/session'),
 
   /**
-     * @type {SessionService} Service to retrieve session information
-     */
+   * @type {SessionService} Service to retrieve session information
+   */
   session: Ember.inject.service(),
 
   /**
-     * @requires service:notifications
-     */
+   * @requires service:notifications
+   */
   notifications: Ember.inject.service(),
+
+  /**
+   * The session service.
+   * @property session
+   * @readOnly
+   */
+  sessionService: Ember.inject.service('session'),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -56,9 +63,16 @@ export default Ember.Route.extend(ConfigurationMixin, {
     let details = null;
     details = route.get('configurationService').loadConfiguration().then(function() {
       let accessToken = params.access_token;
+      if (route.get('session.isAuthenticated') && params.access_token) {
+        route.get('session').invalidate();
+      }
       if (accessToken) {
         route.get('authService').authenticateWithToken(accessToken).then(function() {
-          route.transitionTo('gcm', { queryParams: { access_token: undefined }});
+          route.transitionTo('gcm', {
+            queryParams: {
+              access_token: undefined
+            }
+          });
         });
       }
     });

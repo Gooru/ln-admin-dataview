@@ -16,10 +16,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
    * @returns {{accessToken, user: {username: (string|string|string)},
    *            cdnUrls:{content: *, user: *}, isAuthenticated: boolean}}
    */
-  normalizeResponse: function(payload, accessToken) {
+  normalizeResponse: function(payload, truth,  accessToken) {
     const basePath = payload.cdn_urls.user_cdn_url;
     const appRootPath = this.get('appRootPath'); //configuration appRootPath
-
     return {
       accessToken: (accessToken ? accessToken : payload.access_token),
       user: {
