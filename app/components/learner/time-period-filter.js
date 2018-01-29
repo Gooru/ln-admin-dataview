@@ -39,6 +39,6 @@ export default Ember.Component.extend({
    * selected filter item index
    * @type {Number}
    */
-  selectedIndex: 1
+  selectedIndex: 3
 
 });

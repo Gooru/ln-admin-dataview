@@ -15,12 +15,24 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   profileService: Ember.inject.service('api-sdk/profile'),
 
 
-  //------------------------------------------------------------------------
-  //Properties
+  // --------------------------------------------------------------------------
+  // Properties
+
+  /**
+   *  It will maintain the selected active duration from time period filter, by
+   *  default it will be '3m'
+   * @type {String}
+   */
+  selectedActiveDuration: '3m',
 
   //------------------------------------------------------------------------
   //Events
 
+  actions: {
+    onSelectActiveDuration: function(activeDuration) {
+      this.set('selectedActiveDuration', activeDuration);
+    }
+  },
 
   //------------------------------------------------------------------------
   //Methods
@@ -29,7 +41,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model: function(params) {
     return Ember.RSVP.hash({
       userProfile: this.get('profileService').getUserProfile(params.userId),
-      userId: params.userId
+      userId: params.userId,
+      selectedActiveDuration: this.get('selectedActiveDuration')
     });
   },
 

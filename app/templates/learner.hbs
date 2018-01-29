@@ -1,4 +1,4 @@
-<div class="learner">  
+<div class="learner">
   <div class="user-profile-container">
     <div class="user-profile-box">
       <div class="user-profile-back-arrow" {{action 'onClickBackButton'}}>
@@ -15,5 +15,5 @@
       </div>
     </div>
   </div>
-  {{learner.time-period-filter}} {{outlet}}
+  {{learner.time-period-filter onFilterSelection='onFilterSelection'}} {{outlet}}
 </div>

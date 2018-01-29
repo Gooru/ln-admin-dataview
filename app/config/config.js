@@ -205,30 +205,55 @@ export const QUESTION_TYPES = {
 
 export const LEARNER_TIME_PERIOD_FILTER = [{
   'value': 'yesterday',
-  'label': 'learner.yesterday'
+  'label': 'learner.yesterday',
+  'isActive': false
 }, {
-  'value': 'last-week',
-  'label': 'learner.last-week'
+  'value': '1w',
+  'label': 'learner.last-week',
+  'isActive': false
+
 }, {
-  'value': 'last-month',
-  'label': 'learner.last-month'
+  'value': '1m',
+  'label': 'learner.last-month',
+  'isActive': false
 }, {
-  'value': 'last-6-months',
-  'label': 'learner.last-6-months'
+  'value': '3m',
+  'label': 'learner.last-3-months',
+  'isActive': true
 }, {
-  'value': 'last-year',
-  'label': 'learner.last-year'
+  'value': '6m',
+  'label': 'learner.last-6-months',
+  'isActive': false
+}, {
+  'value': '1y',
+  'label': 'learner.last-year',
+  'isActive': false
 }, {
   'value': 'from-the-beginning-of-time',
-  'label': 'learner.from-the-beginning-of-time'
+  'label': 'learner.from-the-beginning-of-time',
+  'isActive': false
 }];
 
 export const LEARNER_CHILD_ROUTES = ['journeys', 'competencies', 'courses', 'activites'];
 
-export const BARS_GRADING_SCALE = [
-  { LOWER_LIMIT: 0, COLOR: '#D82100' },
-  { LOWER_LIMIT: 60, COLOR: '#CF7400' },
-  { LOWER_LIMIT: 70, COLOR: '#CC9700' },
-  { LOWER_LIMIT: 80, COLOR: '#4B9740' },
-  { LOWER_LIMIT: 90, COLOR: '#A8C99C' }
+export const BARS_GRADING_SCALE = [{
+  LOWER_LIMIT: 0,
+  COLOR: '#D82100'
+},
+{
+  LOWER_LIMIT: 60,
+  COLOR: '#CF7400'
+},
+{
+  LOWER_LIMIT: 70,
+  COLOR: '#CC9700'
+},
+{
+  LOWER_LIMIT: 80,
+  COLOR: '#4B9740'
+},
+{
+  LOWER_LIMIT: 90,
+  COLOR: '#A8C99C'
+}
 ];

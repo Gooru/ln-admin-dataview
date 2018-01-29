@@ -1,6 +1,6 @@
 <ul>
   {{#each filterItems as |filterItem index|}}
-    <li>
+    <li class="{{if (not filterItem.isActive) 'inactive'}}">
       <label {{ action 'onFilterSelection' filterItem}}>
      {{t filterItem.label}}
      {{#if (eq index selectedIndex)}}

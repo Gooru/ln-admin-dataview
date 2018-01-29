@@ -31,6 +31,10 @@ export default Ember.Controller.extend(ModalMixin, {
       };
       // Open user profile info modal once user click thumbnail
       controller.send('showModal', 'modals.learner.user-profile-modal', modalData);
+    },
+
+    onFilterSelection: function(activeDuration) {
+      this.send('onSelectActiveDuration', activeDuration);
     }
 
   }
