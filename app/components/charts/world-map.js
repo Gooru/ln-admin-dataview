@@ -56,7 +56,7 @@ export default Ember.Component.extend({
    * Bubbles scale factor
    * @property {Number} bubbleScalefactor
    */
-  bubbleScalefactor: 0.008,
+  bubbleScalefactor: 0.006,
 
   /**
    * Bubbles text scale factor

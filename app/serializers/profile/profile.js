@@ -9,6 +9,13 @@ import {
  */
 export default Ember.Object.extend({
 
+  // -------------------------------------------------------------------------
+  // Dependencies
+
+  /**
+   * @type {SessionService} Service to retrieve session information
+   */
+  session: Ember.inject.service(),
 
   /**
    * Normalized data of user  prefs content
@@ -34,8 +41,12 @@ export default Ember.Object.extend({
    */
   normalizeUserProfile: function(response) {
     response = Ember.A(response);
-    if (!response.get('thumbnail')) {
+    let thumbnail = response.get('thumbnail');
+    let cdnUrls = this.get('session.cdnUrls');
+    if (!thumbnail) {
       response.set('thumbnail', DEFAULT_IMAGES.USER_PROFILE);
+    } else {
+      response.set('thumbnail', cdnUrls.user + thumbnail);
     }
     return response;
   },

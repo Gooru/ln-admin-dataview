@@ -86,6 +86,7 @@ export default {
     'yesterday': 'Yesterday',
     'last-week': 'Last Week',
     'last-month': 'Last Month',
+    'last-3-months': 'Last 3 Months',
     'last-6-months': 'Last 6 Months',
     'last-year': 'Last Year',
     'from-the-beginning-of-time': 'From the Beginning of Time',

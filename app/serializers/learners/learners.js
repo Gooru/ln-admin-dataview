@@ -7,6 +7,14 @@ import {DEFAULT_IMAGES} from 'admin-dataview/config/config';
  */
 export default Ember.Object.extend({
 
+  // -------------------------------------------------------------------------
+  // Dependencies
+
+  /**
+   * @type {SessionService} Service to retrieve session information
+   */
+  session: Ember.inject.service(),
+
 
   /**
    * Normalized data of user  stats
@@ -81,11 +89,15 @@ export default Ember.Object.extend({
    */
   normalizeActiveUserDistrbutionBySubject: function(response) {
     let resultSet = Ember.A();
+    let cdnUrls = this.get('session.cdnUrls');
     response = Ember.A(response.users);
     response.forEach(data => {
       let result = Ember.Object.create(data);
-      if(!result.get('thumbnail')) {
+      let thumbnail = result.get('thumbnail');
+      if(!thumbnail) {
         result.set('thumbnail', DEFAULT_IMAGES.USER_PROFILE);
+      } else {
+        result.set('thumbnail', cdnUrls.user + thumbnail);
       }
       resultSet.pushObject(result);
     });

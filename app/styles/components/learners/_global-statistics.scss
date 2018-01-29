@@ -1,8 +1,9 @@
 .global-statistics {
   width: 1000px;
-  height: 360px;
   margin: 0 auto;
-
+  .clear {
+    clear: both;
+  }
   .section-title {
     padding: 8px 0;
     margin-bottom: 10px;
