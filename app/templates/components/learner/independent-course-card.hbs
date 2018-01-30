@@ -1,37 +1,29 @@
-<div class="panel">
+<div class="panel" {{action 'courseReport' course}}>
   <div class="panel-heading">
     <div class="card-heading" style="background-image: url({{course.thumbnail}})">
       <div class="current-activity">
         <div class="title">
           {{course.courseTitle}}
         </div>
-
         <i class="fa fa-play-circle-o fa-2x" aria-hidden="true"></i>
-
-
-
       </div>
     </div>
   </div>
   <div class="panel-body">
     <div class="items-icon">
-
-      <span><i data-toggle="tooltip" data-placement="auto" data-trigger="hover" class="collection" title="{{t 'common.unit'}}"></i> {{course.collectionCount}}</span>
-
-      <span><i data-toggle="tooltip" data-placement="auto" data-trigger="hover" class="assessment" title="{{t 'common.resource'}}"></i> {{course.assessmentCount}}</span>
-      <span><i data-toggle="tooltip" data-placement="auto" data-trigger="hover" class="bookmark" title="{{t 'common.resource'}}"></i></span>
-
+      <!-- <span><i data-toggle="tooltip" data-placement="auto" data-trigger="hover" class="collection" title="{{t 'common.unit'}}"></i> {{course.collectionCount}}</span> -->
+      <span><i data-toggle="tooltip" data-placement="auto" data-trigger="hover" class="assessment" title="{{t 'common.resource'}}"></i> {{course.totalAssessments}}</span>
+      <!-- <span><i data-toggle="tooltip" data-placement="auto" data-trigger="hover" class="bookmark" title="{{t 'common.resource'}}"></i></span> -->
     </div>
-    <div class="timestamp">
+    <!-- <div class="timestamp">
       <div class="time pull-right">
         2.30pm
       </div>
       <div class="date pull-right">
-        <!-- {{format-date course.date 'MMM d, YYYY h:mm A'}} -->
         Nov 1, 2017
       </div>
+    </div> -->
 
-    </div>
   </div>
   <div class="panel-footer">
     <div class="first-half" style="background-color:{{grade-color course.averageScore}}">
@@ -47,8 +39,8 @@
 
 
       <div class="completion-bar">
-        {{charts/gcm-x-bar-chart data=barChartData }}
-        <div class="completion-text">33% completed</div>
+        {{charts/gcm-x-bar-chart data=Performances }}
+        <div class="completion-text">{{Performances.percentage}}% completed </div>
       </div>
 
 

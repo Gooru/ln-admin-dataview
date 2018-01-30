@@ -52,7 +52,10 @@ module.exports = function (grunt) {
       },
       default : {
         files: {
-          'public/assets/emoji-one/emoji.svg': ['vendor/emoji-one/*.svg']
+          'public/assets/emoji-one/emoji.svg': ['vendor/emoji-one/*.svg'],
+          'public/assets/performance-report/report.svg': [
+            'vendor/performance-report/*.svg'
+          ]
         }
       }
     },

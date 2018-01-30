@@ -23,13 +23,10 @@
       > .title {
         width: 85%;
         padding: 6px 0;
-
-        a {
-          color: $white;
-          margin: 0;
-          font-size: $font-size-h6;
-          font-weight: bold;
-        }
+        color: $white;
+        margin: 0;
+        font-size: $font-size-h6;
+        font-weight: bold;
         $line-height: 1.3;
         $lines-to-show: 1;
 
@@ -73,11 +70,8 @@
       .title {
         width: 85%;
         padding: 6px 0;
-
-        a {
-          color: $dark-600;
-          font-weight: normal;
-        }
+        color: $dark-600;
+        font-weight: normal;
       }
 
       .code {
@@ -149,7 +143,7 @@
 
       .links {
         display: inline-block;
-        width: 167px;
+        width: 148px;
         height: 93px;
         background-color: $white;
         box-shadow: 1px -1px 4px 0 rgba(0, 0, 0, 0.5);
@@ -176,42 +170,24 @@
               padding: 2px 0 0 10px;
             }
 
-            .icon-class-activities {
-              float: left;
-              margin: 7px 15px 0 0;
-
-              i {
-                background: url("images/learner-class-activities.svg");
-                width: 10.2px;
-                height: 15.8px;
-                display: block;
-                object-fit: contain;
-              }
-            }
-
-            .icon-course-map {
-              float: left;
-              margin: 7px 10px 0 0;
-
-              i {
-                background: url("images/learner-course-map.svg");
-                width: 15.2px;
-                height: 9.5px;
-                display: block;
-                object-fit: contain;
-              }
-            }
-
             .icon-performance {
-              float: left;
-              margin: 4px 11px 0 0;
+              margin-left: 42px;
+              padding: 11px 12px 0 0;
+              margin-bottom: -9px;
 
-              i {
-                background: url("images/learner-class-report.svg");
-                width: 15.2px;
-                height: 15.8px;
-                display: block;
-                object-fit: contain;
+              svg {
+                width: 55px;
+                height: 55px;
+                display: inline-block;
+              }
+            }
+
+            a {
+              span {
+                margin-left: 46px;
+                padding: -8px -4px 0 0;
+                width: 72px;
+                color: $gray-base;
               }
             }
           }

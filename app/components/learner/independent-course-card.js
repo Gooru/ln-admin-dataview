@@ -4,6 +4,31 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Attributes
-  classNames: ['learner', 'independent-course-card']
+  classNames: ['learner', 'independent-course-card'],
+
+
+  //------------------------------------------------------------------------
+  // Events
+
+  actions: {
+
+    courseReport: function(course) {
+      this.get('router').transitionTo('learner.courses', course.courseId);
+    }
+  },
+
+
+  // -------------------------------------------------------------------------
+  // Properties
+
+  Performances: Ember.computed(function() {
+    let course = this.get('course');
+    let percentagewidth = course.assessmentsCompleted / course.totalAssessments;
+    let objects = {
+      percentage: Math.round(percentagewidth)
+    };
+    return objects;
+  })
+
 
 });

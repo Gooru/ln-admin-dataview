@@ -26,40 +26,16 @@ export default Ember.Component.extend({
    */
   data: null,
 
-  // isFull: Ember.computed('data.[]', function() {
-  //   var sum = this.get('data').reduce(function(previousValue, value) {
-  //     return previousValue + value.percentage;
-  //   }, 0);
-  //   return sum >= 100;
-  // }),
 
   styles: Ember.computed('data', function() {
+    let data = this.get('data');
+    if(data.percentage >= 100) {
+      data.percentage =  100;
+    }
     return Ember.String.htmlSafe(
-      `background-color: ${'green'}; width: ${90}%;`
+      `background-color: ${'#37424b'}; width: ${data.percentage}%;`
     );
-    // return this.get('data').map(function(questionData) {
-    //   return Ember.String.htmlSafe(
-    //     `background-color: ${questionData.color}; width: ${questionData.percentage}%;`
-    //   );
-    // });
   })
 
-  // -------------------------------------------------------------------------
-  // Events
 
-  // didInsertElement: function() {
-  //   if (!this.validValues()) {
-  //     Ember.Logger.warn('Graph values sum more than 100');
-  //   }
-  // },
-
-  /*
-   * Check if the values are up 100%
-   */
-  // validValues: function() {
-  //   var sum = this.get('data').reduce(function(previousValue, value) {
-  //     return previousValue + parseInt(value.percentage);
-  //   }, 0);
-  //   return sum <= 100;
-  // }
 });

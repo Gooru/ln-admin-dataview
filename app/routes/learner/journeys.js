@@ -41,19 +41,25 @@ export default Ember.Route.extend({
           courseIds.push(data.get('courseId'));
         }
       });
-      let requestPayLoad =  Ember.Object.create({
+      let requestPayLoadInClass =  Ember.Object.create({
         'classIds' : classIds,
+        'courseIds': []
+      });
+      let requestPayLoadIL =  Ember.Object.create({
+        'classIds' : [],
         'courseIds': courseIds
       });
       return Ember.RSVP.hash({
-        userJourneyByCourses: controller.get('journeyService').getUserJourneyByCourses(userId, requestPayLoad)
+        userJourneyByCourses: controller.get('journeyService').getUserJourneyByCourses(userId, requestPayLoadInClass),
+        userJourneyByCoursesIndependent: controller.get('journeyService').getUserJourneyByCourses(userId, requestPayLoadIL)
+
       });
     });
   },
 
   setupController: function(controller, model) {
-
-    controller.set('userJourneyByCourses', model.userJourneyByCourses);
+    controller.set('userJourneyByCoursesInClass', model.userJourneyByCourses);
+    controller.set('userJourneyByCoursesOutClass', model.userJourneyByCoursesIndependent);
     controller.set('userId', this.get('userId'));
   }
 
