@@ -30,7 +30,7 @@ export default Ember.Route.extend({
     let userId = learnerModel.userId;
     let selectedActiveDuration= learnerModel.selectedActiveDuration;
     return Ember.RSVP.hash({
-      userStatsContent: this.get('learnersService').getUserStatsContent(userId, selectedActiveDuration),
+      userTimeSpentStats: this.get('learnersService').getUserTimeSpentStats(userId, selectedActiveDuration),
       userStatsByCourse: this.get('learnersService').getUserStatsByCourse(userId, selectedActiveDuration),
       userJourneyStats: this.get('learnersService').getUserJourneyStats(userId, selectedActiveDuration),
       userCompetencyStats: this.get('learnersService').getUserCompetencyStats(userId, selectedActiveDuration),
@@ -42,7 +42,7 @@ export default Ember.Route.extend({
   setupController: function(controller, model) {
     controller.set('userJourneyStats', model.userJourneyStats);
     controller.set('competenciesData', model.userCompetencyStats);
-    controller.set('userStatsContent', model.userStatsContent);
+    controller.set('userTimeSpentStats', model.userTimeSpentStats);
     controller.set('userStatsByCourse', model.userStatsByCourse);
     controller.set('userId', model.userId);
   }

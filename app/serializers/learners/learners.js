@@ -34,25 +34,8 @@ export default Ember.Object.extend({
     return resultSet;
   },
 
-  /**
-   * Normalized data of user  stats content info
-   * @return {Object}
-   */
-  normalizeUserStatsContent: function(response) {
-    let resultSet = Ember.A();
-    response = Ember.Object.create(response);
-    Object.keys(response).forEach(key => {
-      let count = response.get(key);
-      let data = Ember.Object.create({
-        name: key,
-        value: count
-      });
-      resultSet.pushObject(data);
-    });
-    return resultSet;
-  },
 
-  /**normalizeActiveUserDistrbutionBySubject
+  /**
    * Normalized data of user stats by course
    * @return {Object}
    */
@@ -99,6 +82,20 @@ export default Ember.Object.extend({
       } else {
         result.set('thumbnail', cdnUrls.user + thumbnail);
       }
+      resultSet.pushObject(result);
+    });
+    return resultSet;
+  },
+
+  /**
+   * Normalized data of user stats by content type
+   * @return {Object}
+   */
+  normalizeUserStatsContentByType: function(response) {
+    let resultSet = Ember.A();
+    response = Ember.A(response.resources);
+    response.forEach(data => {
+      let result = Ember.Object.create(data);
       resultSet.pushObject(result);
     });
     return resultSet;

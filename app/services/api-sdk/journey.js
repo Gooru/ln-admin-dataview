@@ -22,12 +22,12 @@ export default Ember.Service.extend({
    * Get journey of user taken (courses and IL's courses)
    * @returns {Promise.<[]>}
    */
-  getUserJourneyByCourses: function(userId) {
+  getUserJourneyByCourses: function(userId, requestPayLoad) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('journeyAdapter')
-        .getUserJourneyByCourses(userId)
+        .getUserJourneyByCourses(userId, requestPayLoad)
         .then(function(response) {
           resolve(service.get('journeySerializer').normalizeUserJourneyByCourses(response));
         }, reject);

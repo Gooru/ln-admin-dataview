@@ -15,16 +15,15 @@ export default Ember.Object.extend({
    * Get journey of user taken (courses and IL's courses)
    * @returns {Promise.<[]>}
    */
-  getUserJourneyByCourses: function(userId) {
+  getUserJourneyByCourses: function(userId, requestPayLoad) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    // const url = `stubs/journey/journey-by-courses-${userId}.json`;
-    const url = `${namespace}/v1/user/journey`;
+    const url = `${namespace}/v1/user/journey?user=${userId}`;
     const options = {
-      type: 'GET',
+      type: 'POST',
       headers: adapter.defineHeaders(),
       contentType: 'application/json; charset=utf-8',
-      data: {user:userId}
+      data: JSON.stringify(requestPayLoad)
     };
     return Ember.RSVP.hashSettled({
       userJourneyByCourses: Ember.$.ajax(url, options)

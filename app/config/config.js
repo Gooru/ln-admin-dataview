@@ -37,8 +37,10 @@ export const DEFAULT_IMAGES = {
   RUBRIC: `${config.rootURL  }assets/images/rubric-default.png`,
   COLLECTION: `${config.rootURL  }assets/images/collection-default.png`,
   ASSESSMENT: `${config.rootURL  }assets/images/assessment-default.png`,
-  QUESTION_PLACEHOLDER_IMAGE: `${config.rootURL  }assets/images/question-placeholder-image.png`
+  QUESTION_PLACEHOLDER_IMAGE: `${config.rootURL  }assets/images/question-placeholder-image.png`,
+  LOADER: `${config.rootURL  }/assets/images/loader.svg`
 };
+
 
 export const K12_CATEGORY = {
   value: 'k_12',

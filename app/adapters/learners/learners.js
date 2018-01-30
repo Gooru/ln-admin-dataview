@@ -39,7 +39,6 @@ export default Ember.Object.extend({
   getUserStatsContent: function(userId, activeDuration='3m') {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    //const url = `stubs/stats/user-stats-content.json`;
     const url = `${namespace}/v1/user/stats/contents`;
     const options = {
       type: 'GET',
@@ -58,22 +57,20 @@ export default Ember.Object.extend({
    * Get user stats content count
    * @returns {Promise.<[]>}
    */
-  getUserStatsContentByType: function(userId, contentType) {
+  getUserStatsContentByType: function(userId, contentType, activeDuration='3m') {
     const adapter = this;
-    //const namespace = adapter.get('namespace');
-    const url = 'stubs/stats/user-stats-content-info.json';
-    //const url = `${namespace}/v1/user/stats/contents`;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/v1/user/stats/resources`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
       contentType: 'application/json; charset=utf-8',
-      data: {user: userId, contentType: contentType}
+      data: {user: userId, contentType: contentType, activeDuration:activeDuration}
     };
     return Ember.RSVP.hashSettled({
       userStatsContent: Ember.$.ajax(url, options)
     }).then(function(hash) {
-      //Todo need to move the contentType into queryParams for actual end point
-      return hash.userStatsContent.value.resources[contentType];
+      return hash.userStatsContent.value;
     });
   },
 
@@ -84,7 +81,6 @@ export default Ember.Object.extend({
   getUserStatsByCourse: function(userId, activeDuration='3m') {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    // const url = `stubs/stats/user-stats-by-course.json`;
     const url = `${namespace}/v1/user/stats/courses`;
     const options = {
       type: 'GET',
@@ -106,7 +102,6 @@ export default Ember.Object.extend({
   getUserJourneyStats: function(userId, activeDuration='3m') {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    // const url = `stubs/stats/user-stats-journey.json`;
     const url = `${namespace}/v1/user/stats/journeys`;
     const options = {
       type: 'GET',
@@ -160,6 +155,27 @@ export default Ember.Object.extend({
       activeUserDistrbutionBySubject: Ember.$.ajax(url, options)
     }).then(function(hash) {
       return hash.activeUserDistrbutionBySubject.value;
+    });
+  },
+
+  /**
+   * Get user stats content count
+   * @returns {Promise.<[]>}
+   */
+  getUserTimeSpentStats: function(userId, activeDuration='3m') {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/v1/user/stats/timespent`;
+    const options = {
+      type: 'GET',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8',
+      data: {user: userId, activeDuration:activeDuration}
+    };
+    return Ember.RSVP.hashSettled({
+      userTimeSpentStats: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.userTimeSpentStats.value;
     });
   },
 

@@ -18,15 +18,18 @@ export default Ember.Route.extend({
   model: function() {
     let route = this;
     let learnerModel = this.modelFor('learner');
+    let selectedActiveDuration= learnerModel.selectedActiveDuration;
     let userId = learnerModel.userId;
     return Ember.RSVP.hash({
-      userStatsContent: route.get('learnersService').getUserStatsContent(userId),
-      userId: userId
+      userTimeSpentStats: route.get('learnersService').getUserTimeSpentStats(userId, selectedActiveDuration),
+      userId: userId,
+      selectedActiveDuration: selectedActiveDuration
     });
   },
 
   setupController: function(controller, model) {
-    controller.set('learnerActivities', model.userStatsContent);
+    controller.set('learnerActivities', model.userTimeSpentStats);
     controller.set('userId', model.userId);
+    controller.set('selectedActiveDuration', model.selectedActiveDuration);
   }
 });

@@ -47,7 +47,7 @@ export default Ember.Controller.extend({
   actions: {
 
     onClickBackButton: function() {
-      this.transitionToRoute('learner', this.get('userId'));
+      this.transitionToRoute('learner');
     }
   }
 

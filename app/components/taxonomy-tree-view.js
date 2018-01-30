@@ -8,6 +8,8 @@
  */
 import Ember from 'ember';
 import d3 from 'd3';
+import {DEFAULT_IMAGES} from 'admin-dataview/config/config';
+
 
 export default Ember.Component.extend({
 
@@ -429,7 +431,7 @@ export default Ember.Component.extend({
     let component = this;
     id = id.replace(/\./g, 's');
     component.$(`.node-label-${  id  } .node-more-info`).hide();
-    component.$(`.node-label-${  id}`).append('<div class="loader"><img src="/assets/images/loader.svg"></div>');
+    component.$(`.node-label-${  id}`).append(`<div class="loader"><img src="${  DEFAULT_IMAGES.LOADER }"></div>`);
   }
 
 
