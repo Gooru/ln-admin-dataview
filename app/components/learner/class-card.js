@@ -23,7 +23,12 @@ export default Ember.Component.extend({
     },
 
     courseReport: function(course) {
-      this.get('router').transitionTo('learner.courses', course.courseId);
+      
+      let courseId =  course.courseId;
+      let queryParams = {
+        classId : course.classId
+      }
+      this.get('router').transitionTo('learner.courses', courseId, {queryParams});
     }
   },
   // -------------------------------------------------------------------------

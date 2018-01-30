@@ -9,6 +9,7 @@
     @include border-bottom-radius(4px);
     @include box-shadow(0 0 7px #ddd);
     margin: 0;
+    cursor: pointer;
 
     .panel-heading {
       background-color: $white;
