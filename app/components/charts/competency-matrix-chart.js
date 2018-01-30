@@ -38,10 +38,12 @@ export default Ember.Component.extend({
   didInsertElement: function() {
     let component = this;
     let subjectCategory = component.get('defaultSubjectCategory');
+    component.set('isLoading', true);
     component.get('taxonomyService').getSubjects(subjectCategory).then(subjects => {
       let subject = subjects.objectAt(0);
       component.set('subjects', subjects);
       this.loadDataBySubject(subject.get('id'));
+      this.set('isLoading', false);
       component.handleSubjectNavigationArrow();
     });
   },
@@ -231,6 +233,7 @@ export default Ember.Component.extend({
       let resultSet = component.parseCompetencyData(competencyMatrixs, competencyMatrixCoordinates);
       component.drawChart(resultSet);
     });
+
   },
 
   parseCompetencyData: function(competencyMatrixs, competencyMatrixCoordinates) {
