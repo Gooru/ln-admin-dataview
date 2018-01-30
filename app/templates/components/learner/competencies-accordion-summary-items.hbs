@@ -1,17 +1,17 @@
 <div class="competency-items" role="tab" id="{{elementId}}-heading">
-  <div class="{{data.type}}">
+  <div class="{{collection.collectionType}}">
     <i class="icon"></i>
   </div>
 
   <div class="panel-title">
-    <a class="collapsed title" role="button" data-toggle="collapse" href="#{{elementId}}-content" aria-expanded="false" aria-controls="{{elementId}}-content" {{action "selectCompetencyItems" model.id}}>
-      <div class="title ellipsis"> {{data.assessmentName}} </div>
+    <a class="collapsed title" role="button" data-toggle="collapse" href="#{{elementId}}-content" aria-expanded="false" aria-controls="{{elementId}}-content" {{action 'selectCompetencyItems' collection}}>
+      <div class="title ellipsis"> {{collection.title}} </div>
       <i class="fa fa-caret-down" aria-hidden="true"></i>
     </a>
   </div>
   <div class="panel-info">
-    <span class="status"  style= {{safe-html (concat "color:" (grade-color data.score))}}> {{data.score}}%</span>
-    <span class="time"> {{data.time}}</span>
+    <span class="status"  style= {{safe-html (concat "color:" (grade-color collection.score))}}> {{collection.score}}%</span>
+    <span class="time"> {{format-time collection.timeSpent}}</span>
   </div>
 
 </div>
@@ -22,18 +22,16 @@
       {{#if loading}}
         {{three-bounce-spinner}}
       {{else}}
-        {{#each data.assessmentDetails as | item |}}
-          <div class="{{item.resourceName}}">
+        {{#each resources as | resource |}}
+          <div class="{{resource.type}}">
             <i></i>
           </div>
           <div class="items">
             <span> {{item.questions}}</span>
-
             <div class="panel-info">
               <div class="{{item.answer}}"><i> </i></div>
               <span class="time"> {{item.time}}</span>
             </div>
-
           </div>
         {{/each}}
       {{/if}}

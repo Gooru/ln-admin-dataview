@@ -57,7 +57,7 @@ export default Ember.Component.extend({
   /**
    * @property {Number} height
    */
-  height: 600,
+  height: 900,
 
   /**
    * User id of competency matrix to plot
@@ -115,6 +115,7 @@ export default Ember.Component.extend({
    * @type {String}
    */
   defaultSubjectCategory: 'k_12',
+
 
   // -------------------------------------------------------------------------
   // Events
@@ -174,10 +175,12 @@ export default Ember.Component.extend({
 
   drawChart: function(data) {
     let component = this;
+    let numberOfCellsInEachRow = component.get('numberOfCellsInEachRow');
     const colorsBasedOnStatus = component.get('colorsBasedOnStatus');
     const cellWidth = component.get('cellWidth');
     const width = component.get('width');
-    const height = component.get('height');
+    const height = (Math.round(data.length / numberOfCellsInEachRow) * cellWidth);
+    component.$('#competency-matrix-chart').empty();
     const svg = d3.select('#competency-matrix-chart').append('svg')
       .attr('width', width)
       .attr('height', height)
@@ -187,7 +190,9 @@ export default Ember.Component.extend({
     cards.enter().append('rect')
       .attr('x', (d) => (d.xAxisSeq - 1) * cellWidth)
       .attr('y', (d) => (d.yAxisSeq - 1) * cellWidth)
-      .attr('class', 'competency')
+      .attr('class', (d) => {
+        return `competency ${  d.competencyCode}`;
+      })
       .attr('width', cellWidth)
       .attr('height', cellWidth)
       .merge(cards)
@@ -215,8 +220,9 @@ export default Ember.Component.extend({
 
   loadDataBySubject: function(subjectId) {
     let component = this;
+    let userId = component.get('userId');
     return Ember.RSVP.hash({
-      competencyMatrixs: component.get('competencyService').getCompetencyMatrix('user-id', subjectId),
+      competencyMatrixs: component.get('competencyService').getCompetencyMatrix(userId, subjectId),
       competencyMatrixCoordinates: component.get('competencyService').getCompetencyMatrixCoordinates(subjectId)
     }).then(({
       competencyMatrixs,
@@ -275,9 +281,9 @@ export default Ember.Component.extend({
         for (let startIndex = 0, endIndex = mergeDomainData.length; startIndex < endIndex; startIndex += numberOfCellsInEachRow) {
           splitData.pushObject(mergeDomainData.slice(startIndex, startIndex + numberOfCellsInEachRow));
         }
-        let numberOfRows = splitData.length < defaultNumberOfYaixsRow ? defaultNumberOfYaixsRow : splitData.length;
-        for (let rowIndex = numberOfRows; rowIndex >= (numberOfRows - 1); rowIndex--) {
-          let dataSet = splitData.objectAt((rowIndex - 1));
+        let numberOfRows = splitData.length > defaultNumberOfYaixsRow ? splitData.length : defaultNumberOfYaixsRow;
+        for (let rowIndex = numberOfRows; rowIndex >= 0; rowIndex--) {
+          let dataSet = splitData.objectAt(rowIndex);
           for (let index = numberOfCellsInEachRow; index >= 1; index--) {
             if (dataSet) {
               let currentIndex = (index - 1);
@@ -297,6 +303,7 @@ export default Ember.Component.extend({
                 });
                 resultSet.pushObject(dummyData);
               }
+
             } else {
               let dummyData = Ember.Object.create({
                 'courseCode': courseCode,

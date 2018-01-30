@@ -30,25 +30,23 @@ export default Ember.Route.extend({
   // -------------------------------------------------------------------------
   // Methods
 
-  beforeModel: function(transition) {
-    this.set('userId', transition.params.learner.userId);
-  },
-
 
   model: function() {
-    let userId = this.get('userId');
+    let learnerModel = this.modelFor('learner');
+    let userId = learnerModel.userId;
+    let selectedActiveDuration= learnerModel.selectedActiveDuration;
     return Ember.RSVP.hash({
       userCompetencyStats: this.get('learnersService').getUserCompetencyStats(userId),
-      userCompetencySummary: this.get('competencyService').getUserCompetencyCourses(userId, 'course-id', 'K12.Sc.CA')
+      userCompetencies: this.get('competencyService').getUserCompetencies(userId, selectedActiveDuration),
+      userId: userId
     });
   },
 
 
   setupController: function(controller, model) {
-    let userId = this.get('userId');
-    controller.set('competenciesData', model.userCompetencyStats);
-    controller.set('competenciesSummary', model.userCompetencySummary);
-    controller.set('userId', userId);
+    controller.set('userCompetencyStats', model.userCompetencyStats);
+    controller.set('userCompetencies', model.userCompetencies);
+    controller.set('userId', model.userId);
   }
 
 });

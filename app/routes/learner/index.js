@@ -12,14 +12,6 @@ export default Ember.Route.extend({
    */
   learnersService: Ember.inject.service('api-sdk/learners'),
 
-  //------------------------------------------------------------------------
-  //Properties
-
-  /**
-   * User id of the learner
-   * @type {String}
-   */
-  userId: null,
 
   // -------------------------------------------------------------------------
   // Methods
