@@ -43,6 +43,7 @@ export default Ember.Component.extend({
       let subject = subjects.objectAt(0);
       component.set('subjects', subjects);
       this.loadDataBySubject(subject.get('id'));
+      this.set('isLoading', false);
       component.handleSubjectNavigationArrow();
     });
   },
