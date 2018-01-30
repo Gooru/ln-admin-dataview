@@ -55,8 +55,10 @@ export default Ember.Component.extend({
       let sessionId = collection.get('sessionId');
       let summaryReportPromise = null;
       if (collection.get('collectionType') === 'assessment') {
-        summaryReportPromise = component.get('performanceService').getUserPerformanceResourceInAssessment(userId, 'ad8ce6e0-f21f-41f0-a96c-68985d85ee54', 'c6a6aa8e-8190-4bc2-b6e6-2b369f848830', '446698f7-23fb-44e2-9712-f1db2b64c37d', collectionId, sessionId, 'eded8314-8538-4729-90c3-7b6fa4d29cdb');
+        component.set('isAssessment', true);
+        summaryReportPromise = component.get('performanceService').getUserPerformanceResourceInAssessment(userId, null, null, null, collectionId, sessionId, null);
       } else {
+        component.set('isAssessment', false);
         summaryReportPromise = component.get('performanceService').getUserPerformanceResourceInCollection(userId, null, null, null, collectionId, sessionId, null);
       }
       Ember.RSVP.hash({

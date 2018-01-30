@@ -23,14 +23,13 @@
         {{three-bounce-spinner}}
       {{else}}
         {{#each resources as | resource |}}
-          <div class="{{resource.type}}">
+          <div class="{{if isAssessment resource.type resource.contentType}}">
             <i></i>
           </div>
           <div class="items">
-            <span> {{item.questions}}</span>
+            <span> {{safe-html resource.title}}</span>
             <div class="panel-info">
-              <div class="{{item.answer}}"><i> </i></div>
-              <span class="time"> {{item.time}}</span>
+              <span class="time"> {{format-time resource.timeSpent}}</span>
             </div>
           </div>
         {{/each}}
