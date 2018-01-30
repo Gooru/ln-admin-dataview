@@ -192,9 +192,7 @@ export default Ember.Component.extend({
     cards.enter().append('rect')
       .attr('x', (d) => (d.xAxisSeq - 1) * cellWidth)
       .attr('y', (d) => (d.yAxisSeq - 1) * cellWidth)
-      .attr('class', (d) => {
-        return `competency ${  d.competencyCode}`;
-      })
+      .attr('class', 'competency')
       .attr('width', cellWidth)
       .attr('height', cellWidth)
       .merge(cards)
@@ -239,6 +237,7 @@ export default Ember.Component.extend({
   parseCompetencyData: function(competencyMatrixs, competencyMatrixCoordinates) {
     let component = this;
     const numberOfCellsInEachRow = component.get('numberOfCellsInEachRow');
+    const cellWidth = component.get('cellWidth');
     let defaultNumberOfYaixsRow = component.get('defaultNumberOfYaixsRow');
     let courses = competencyMatrixCoordinates.get('courses').toArray().reverse();
     component.set('taxonomyCourses', courses);
@@ -284,8 +283,13 @@ export default Ember.Component.extend({
         for (let startIndex = 0, endIndex = mergeDomainData.length; startIndex < endIndex; startIndex += numberOfCellsInEachRow) {
           splitData.pushObject(mergeDomainData.slice(startIndex, startIndex + numberOfCellsInEachRow));
         }
+
         let numberOfRows = splitData.length > defaultNumberOfYaixsRow ? splitData.length : defaultNumberOfYaixsRow;
-        for (let rowIndex = numberOfRows; rowIndex >= 0; rowIndex--) {
+
+        // adjust course title cell height dynamically
+        let heightOfCourseTitleContainer = numberOfRows * cellWidth;
+        courseData.set('heightOfCourseTitleContainer', heightOfCourseTitleContainer);
+        for (let rowIndex = (numberOfRows - 1); rowIndex >= 0; rowIndex--) {
           let dataSet = splitData.objectAt(rowIndex);
           for (let index = numberOfCellsInEachRow; index >= 1; index--) {
             if (dataSet) {
