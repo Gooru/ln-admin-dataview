@@ -14,7 +14,7 @@
     <div class="courses pull-left">
       <ul>
         {{#each taxonomyCourses as |taxonomyCourse|}}
-          <li>
+          <li style="height:{{taxonomyCourse.heightOfCourseTitleContainer}}px">
             {{taxonomyCourse.courseName}}
           </li>
         {{/each}}
