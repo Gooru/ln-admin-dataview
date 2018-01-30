@@ -26,11 +26,9 @@
       .unit-status {
         width: 20%;
         display: flex;
-        .status, .time {
+        .score, .time {
           width: 50%;
           text-align: center;
-        }
-        .time {
           @extend %title-styles;
         }
       }

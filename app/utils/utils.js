@@ -53,7 +53,7 @@ export function formatTime(timeInMillis) {
   var result = '';
   var secs;
 
-  if (timeInMillis) {
+  if (timeInMillis && timeInMillis > 0) {
     secs = timeInMillis / 1000;
     const hours = secs / 3600;
     secs = secs % 3600;
@@ -74,7 +74,7 @@ export function formatTime(timeInMillis) {
       }
     }
   } else {
-    result = '';
+    result = '0s';
   }
 
   return result;

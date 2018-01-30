@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import {formatTime} from 'admin-dataview/utils/utils';
+import {formatTime, getBarGradeColor as getGradeColor} from 'admin-dataview/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -25,7 +25,10 @@ export default Ember.Component.extend({
   actions: {
     onClickLessonTitle: function(lessonId) {
       let component = this;
-      lessonId = 'lesson-id';
+      let userId = component.get('userId');
+      let courseId = component.get('courseId');
+      let unitId = component.get('unitId');
+      let classId = component.get('classId');
       let lessonBody = component.$('.lesson-content .lesson-body');
       if (component.get('isExpanded')) {
         component.toggleProperty('isExpanded');
@@ -33,7 +36,7 @@ export default Ember.Component.extend({
       } else {
         lessonBody.slideDown();
         component.set('isLoading', true);
-        let collectionPromise = Ember.RSVP.resolve(component.get('performanceService').getUserPerformanceCollections('user-id', 'course-id', 'unit-id', lessonId, 'class-id'));
+        let collectionPromise = Ember.RSVP.resolve(component.get('performanceService').getUserPerformanceCollections(userId, courseId, unitId, lessonId, classId));
         return Ember.RSVP.hash({
           collections: collectionPromise
         })
@@ -81,5 +84,15 @@ export default Ember.Component.extend({
     let assessmentTimespent = component.get('lesson.lessonAsmtTimeSpent');
     let collectionTimespent = component.get('lesson.lessonCollTimeSpent');
     return formatTime(assessmentTimespent + collectionTimespent);
+  }),
+
+  /**
+   * @property {Color}
+   * Grade color code
+   */
+  colorStyle: Ember.computed('lesson.lessonAsmtScore', function() {
+    let component = this;
+    let score = component.get('lesson.lessonAsmtScore');
+    return getGradeColor(score);
   })
 });

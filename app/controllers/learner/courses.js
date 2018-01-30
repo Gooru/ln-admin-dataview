@@ -5,9 +5,11 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Query
 
-  queryParams: ['courseId'],
+  queryParams: ['courseId', 'classId'],
 
   courseId: null,
+
+  classId: null,
 
   actions: {
     onClickBackButton: function() {

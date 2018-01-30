@@ -18,7 +18,6 @@ export default Ember.Object.extend({
   getUserPerformanceUnits: function(user, courseId, classId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    // const url = `stubs/performance/user-performance-units-${user}-${courseId}-${classId}.json`;
     const url = `${namespace}/v1/user/performance/course`;
     const options = {
       type: 'GET',
@@ -26,10 +25,12 @@ export default Ember.Object.extend({
       contentType: 'application/json; charset=utf-8',
       data: {
         courseId,
-        classId,
         user
       }
     };
+    if (classId) {
+      options.data.classId = classId;
+    }
     return Ember.RSVP.hashSettled({
       userPerformanceUnits: Ember.$.ajax(url, options)
     }).then(function(hash) {
@@ -41,10 +42,9 @@ export default Ember.Object.extend({
    * Get performance of user performance lessons
    * @returns {Promise.<[]>}
    */
-  getUserPerformanceLessons: function(user, courseId, unitId,  classId) {
+  getUserPerformanceLessons: function(user, courseId, unitId, classId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    // const url = `stubs/performance/user-performance-lessons-${user}-${courseId}-${unitId}-${classId}.json`;
     const url = `${namespace}/v1/user/performance/lessons`;
     const options = {
       type: 'GET',
@@ -53,10 +53,12 @@ export default Ember.Object.extend({
       data: {
         courseId,
         unitId,
-        classId,
         user
       }
     };
+    if (classId) {
+      options.data.classId = classId;
+    }
     return Ember.RSVP.hashSettled({
       userPerformanceLessons: Ember.$.ajax(url, options)
     }).then(function(hash) {
@@ -68,10 +70,9 @@ export default Ember.Object.extend({
    * Get performance of user performance collections
    * @returns {Promise.<[]>}
    */
-  getUserPerformanceCollections: function(user, courseId, unitId, lessonId,  classId) {
+  getUserPerformanceCollections: function(user, courseId, unitId, lessonId, classId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    // const url = `stubs/performance/user-performance-collections-${user}-${courseId}-${unitId}-${lessonId}-${classId}.json`;
     const url = `${namespace}/v1/user/performance/collections`;
     const options = {
       type: 'GET',
@@ -81,10 +82,12 @@ export default Ember.Object.extend({
         courseId,
         unitId,
         lessonId,
-        classId,
         user
       }
     };
+    if (classId) {
+      options.data.classId = classId;
+    }
     return Ember.RSVP.hashSettled({
       userPerformanceCollections: Ember.$.ajax(url, options)
     }).then(function(hash) {
@@ -99,7 +102,6 @@ export default Ember.Object.extend({
   getUserPerformanceResourceInAssessment: function(user, courseId, unitId, lessonId, assessmentId, sessionId, classId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    // const url = `stubs/performance/user-performance-resource-in-assessment-${user}-${courseId}-${unitId}-${lessonId}-${assessmentId}-${sessionId}-${classId}.json`;
     const url = `${namespace}/v1/user/summary/assessment`;
     const options = {
       type: 'GET',
@@ -110,11 +112,13 @@ export default Ember.Object.extend({
         unitId,
         lessonId,
         assessmentId,
-        sessionId,
-        classId,
-        user
+        user,
+        sessionId
       }
     };
+    if (classId) {
+      options.data.classId = classId;
+    }
     return Ember.RSVP.hashSettled({
       userResourceInAssessment: Ember.$.ajax(url, options)
     }).then(function(hash) {
@@ -129,7 +133,6 @@ export default Ember.Object.extend({
   getUserPerformanceResourceInCollection: function(user, courseId, unitId, lessonId, collectionId, sessionId, classId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    // const url = `stubs/performance/user-performance-resource-in-collection-${user}-${courseId}-${unitId}-${lessonId}-${collectionId}-${sessionId}-${classId}.json`;
     const url = `${namespace}/v1/user/summary/collection`;
     const options = {
       type: 'GET',
@@ -140,11 +143,13 @@ export default Ember.Object.extend({
         unitId,
         lessonId,
         collectionId,
-        sessionId,
-        classId,
-        user
+        user,
+        sessionId
       }
     };
+    if (classId) {
+      options.data.classId = classId;
+    }
     return Ember.RSVP.hashSettled({
       userResourceInCollection: Ember.$.ajax(url, options)
     }).then(function(hash) {

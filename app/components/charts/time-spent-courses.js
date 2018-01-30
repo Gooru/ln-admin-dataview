@@ -153,8 +153,10 @@ export default Ember.Component.extend({
         component.$('.duration-label').html(formatMilliseconds(component.get('totalDuration')));
       }).on('click', function(d) {
         let courseId = d.data.courseId;
-        // let queryParams = {'userId': component.get('userId'), 'courseId':courseId};
-        component.get('router').transitionTo('learner.courses', courseId);
+        let queryParams = {
+          classId: d.data.classId
+        };
+        component.get('router').transitionTo('learner.courses', courseId, {queryParams});
       }).each(function(d, i) {
         this._current = i;
       });

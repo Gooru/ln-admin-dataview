@@ -27,7 +27,7 @@ export default Ember.Service.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('performanceAdapter')
-        .getUserPerformanceUnits(userId, courseId,  classId)
+        .getUserPerformanceUnits(userId, courseId, classId)
         .then(function(response) {
           resolve(service.get('performanceSerializer').normalizeUserPerformanceUnits(response));
         }, reject);
@@ -43,7 +43,7 @@ export default Ember.Service.extend({
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('performanceAdapter')
-        .getUserPerformanceLessons(userId, courseId, unitId,  classId)
+        .getUserPerformanceLessons(userId, courseId, unitId, classId)
         .then(function(response) {
           resolve(service.get('performanceSerializer').normalizeUserPerformanceLessons(response));
         }, reject);
@@ -54,7 +54,7 @@ export default Ember.Service.extend({
    * Get performance of user performance collections
    * @returns {Promise.<[]>}
    */
-  getUserPerformanceCollections: function(userId, courseId, unitId, lessonId,  classId) {
+  getUserPerformanceCollections: function(userId, courseId, unitId, lessonId, classId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
