@@ -20,6 +20,15 @@ export default Ember.Component.extend({
       if (this.get('onItemSelected')) {
         this.sendAction('onItemSelected', item, classId);
       }
+    },
+
+    courseReport: function(course) {
+      
+      let courseId =  course.courseId;
+      let queryParams = {
+        classId : course.classId
+      }
+      this.get('router').transitionTo('learner.courses', courseId, {queryParams});
     }
   },
   // -------------------------------------------------------------------------
@@ -51,7 +60,7 @@ export default Ember.Component.extend({
   scorePercentage: Ember.computed('course.averageScore', function() {
     const scorePercentage = this.get('course.averageScore');
     return scorePercentage >= 0 && scorePercentage !== null ?
-      `${scorePercentage}%` :
+      `${Math.round(scorePercentage)}%` :
       '-';
   })
 

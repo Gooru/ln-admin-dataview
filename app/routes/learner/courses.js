@@ -18,6 +18,9 @@ export default Ember.Route.extend({
   queryParams: {
     courseId: {
       refreshModel: true
+    },
+    classId : {
+      refreshModel: true
     }
   },
 

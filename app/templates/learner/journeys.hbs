@@ -1,11 +1,11 @@
 <div class="journeys">
   {{#app-panel-box title="Courses & Independent journeys" showBackButton=true onClickBackButton='onClickBackButton'}}
-    {{#each courseInClass as | course |}}
+    {{#each userJourneyByCoursesInClass as | course |}}
       {{learner.class-card course=course}}
     {{/each}}
 
     <div class="idIsNull">
-      {{#each courseNoClass as | course |}}
+      {{#each userJourneyByCoursesOutClass as | course |}}
         {{learner.independent-course-card course=course}}
       {{/each}}
     </div>
