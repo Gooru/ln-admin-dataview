@@ -60,6 +60,7 @@
         width: 570px;
         margin: 0 auto;
         height: 200px;
+        display: flex;
 
         .user-profile-image {
           width: auto;
@@ -121,6 +122,9 @@
               text-transform: uppercase;
             }
           }
+        }
+        > div {
+          width: calc(100% / 3)!important;
         }
       }
       .user-grade-levels {

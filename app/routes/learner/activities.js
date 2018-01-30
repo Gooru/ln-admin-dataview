@@ -12,18 +12,29 @@ export default Ember.Route.extend({
    */
   learnersService: Ember.inject.service('api-sdk/learners'),
 
+  //-------------------------------------------------------------------------
+  //Properties
+
+  queryParams: {
+    resource: {
+      refreshModel: true
+    }
+  },
+
   //------------------------------------------------------------------------
   //Events
 
-  model: function() {
+  model: function(params) {
     let route = this;
+    let resource = params.resource;
     let learnerModel = this.modelFor('learner');
     let selectedActiveDuration= learnerModel.selectedActiveDuration;
     let userId = learnerModel.userId;
     return Ember.RSVP.hash({
       userTimeSpentStats: route.get('learnersService').getUserTimeSpentStats(userId, selectedActiveDuration),
       userId: userId,
-      selectedActiveDuration: selectedActiveDuration
+      selectedActiveDuration: selectedActiveDuration,
+      resource: resource
     });
   },
 
@@ -31,5 +42,18 @@ export default Ember.Route.extend({
     controller.set('learnerActivities', model.userTimeSpentStats);
     controller.set('userId', model.userId);
     controller.set('selectedActiveDuration', model.selectedActiveDuration);
+    controller.set('resource', model.resource);
+  },
+
+  //------------------------------------------------------------------------
+  //Actions
+  actions: {
+    /**
+     * @function afterRender
+     * Event triggerred once the controller rendered successfully
+     */
+    afterRender: function(resource) {
+      $(`.${resource} .pull-down`).click();
+    }
   }
 });

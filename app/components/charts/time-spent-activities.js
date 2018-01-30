@@ -143,6 +143,9 @@ export default Ember.Component.extend({
           .attr('d', arc.innerRadius(115).outerRadius(radius));
         component.$('.title').html('');
         component.$('.duration-label').html(formatMilliseconds(component.get('totalDuration')));
+      }).on('click', function(d) {
+        let resource = d.data.name;
+        component.get('router').transitionTo('learner.activities', {queryParams: { 'resource': resource}});
       })
       .each(function(d, i) {
         this._current = i;

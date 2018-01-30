@@ -34,6 +34,7 @@
         .time {
           @extend %title-styles;
           font-weight: bold;
+          text-transform: lowercase;
         }
       }
     }
@@ -58,6 +59,7 @@
             width: 10%;
             .time {
               @extend %title-styles;
+              text-transform: lowercase;
             }
           }
           %content-icon-size {

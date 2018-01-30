@@ -118,7 +118,7 @@ export default Ember.Component.extend({
    * show/hide content type panel
    * @property {Boolean}
    */
-  isContentExpanded: false,
+  isContentExpanded: true,
 
   /**
    * show/hide provider panel
