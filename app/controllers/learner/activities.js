@@ -6,6 +6,11 @@ export default Ember.Controller.extend({
   //Events
   classNames: ['learner-activities'],
 
+  // -------------------------------------------------------------------------
+  // Query
+
+  queryParams: ['resource'],
+
   //------------------------------------------------------------------------
   //Dependencies
 
@@ -28,6 +33,14 @@ export default Ember.Controller.extend({
    * List of resource types
    */
   resourceTypes: RESOURCE_TYPES,
+
+  //------------------------------------------------------------------------
+  //Events
+  resourceObserver: Ember.observer('resource', function() {
+    Ember.run.scheduleOnce('afterRender', this, function() {
+      this.send('afterRender', this.get('resource'));
+    });
+  }),
 
   //------------------------------------------------------------------------
   //Actions

@@ -51,7 +51,6 @@
           .time {
             font-size: 15px;
             color: $dark-800;
-            text-transform: uppercase;
           }
         }
       }
@@ -147,6 +146,12 @@
             @extend %content-icon-size;
           }
         }
+      }
+      .not-found {
+        font-size: 14px;
+        margin-left: 43%;
+        padding: 10px;
+        font-weight: bold;
       }
     }
   }

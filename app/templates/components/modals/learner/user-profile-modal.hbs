@@ -13,13 +13,13 @@
 </div>
 <div class="modal-body">
   <div class="user-profile-info">
-    <div class="user-profile-image pull-left">
+    <div class="user-profile-image">
       <div class="img-container">
         <img class="img-responsive" src="{{userProfile.thumbnail}}">
       </div>
     </div>
-    <div class="user-profile-more-info pull-left">
-      <div class="username">{{userProfile.username}}</div>
+    <div class="user-profile-more-info">
+      <div class="username ellipsis">{{concat userProfile.lastName ' ' userProfile.firstName}}</div>
       <div class="location">
         <div class="school-state">{{userProfile.schoolState}}</div>
         <div class="school-country">{{userProfile.schoolCountry}}</div>
@@ -29,7 +29,7 @@
         <div class="school-district">{{userProfile.schoolDistrict}}</div>
       </div>
     </div>
-    <div class="user-profile-range pull-left">
+    <div class="user-profile-range">
       <div class="user-profile-stats">
         <div class="range">
           {{charts.radial-progress-chart value=citizenship maxValue="1"}}

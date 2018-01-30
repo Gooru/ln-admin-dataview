@@ -69,7 +69,7 @@ export default Ember.Component.extend({
       assessmentResources: assessmentPromise
     })
       .then(function(hash) {
-        return hash.resources;
+        return hash.assessmentResources;
       });
   },
 
@@ -89,7 +89,7 @@ export default Ember.Component.extend({
       collectionResources: collectionPromise
     })
       .then(function(hash) {
-        return hash.resources;
+        return hash.collectionResources;
       });
   },
 

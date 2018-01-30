@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import {RESOURCE_TYPES} from 'admin-dataview/config/config';
 
 export default Ember.Controller.extend({
 
@@ -23,6 +24,26 @@ export default Ember.Controller.extend({
   // Actions
 
   actions:  {
+    /**
+     * @function onClickExploreButton
+     * Action triggered when user click on explore button
+     */
+    onClickExploreButton: function(routeTo) {
+      let controller = this;
+      if (routeTo === 'activities') {
+        let queryParams = {
+          'resource': RESOURCE_TYPES[0]
+        };
+        controller.transitionToRoute('learner.activities', {queryParams});
+      } else if (routeTo === 'courses') {
+        let userStatsByCourse = controller.get('userStatsByCourse');
+        let firstCourse = userStatsByCourse[0];
+        let queryParams = {
+          'classId': firstCourse.classId
+        };
+        controller.transitionToRoute('learner.courses', firstCourse.courseId, {queryParams});
+      }
+    },
     onExploreJourneyTaken: function() {
       let controller = this;
       controller.transitionToRoute('learner.journeys', controller.get('userId'));
@@ -30,14 +51,6 @@ export default Ember.Controller.extend({
     onExploreCompetencies: function() {
       let controller = this;
       controller.transitionToRoute('learner.competencies', controller.get('userId'));
-    },
-    onExploreTimeSpentActivities: function() {
-      let controller = this;
-      controller.transitionToRoute('learner.activities', controller.get('userId'));
-    },
-    onSelectCourse: function() {
-      let controller = this;
-      controller.transitionToRoute('learner.courses', controller.get('userId'));
     }
   }
 
