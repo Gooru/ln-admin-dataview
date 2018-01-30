@@ -16,7 +16,14 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
-  classNames: ['explore-button']
+  classNames: ['explore-button'],
+
+  actions: {
+    onClickExploreButton: function(routeTo) {
+      let component = this;
+      component.sendAction('onClickExploreButton', routeTo);
+    }
+  }
 
 
 });

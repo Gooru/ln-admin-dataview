@@ -18,14 +18,14 @@
   <div class="time-spent-activities report-panel">
     {{#app-panel-box localizeTitle="learner.time-spent-activities" }}
       <div class="report-panel-body">
-        {{charts.time-spent-activities data=userTimeSpentStats}} {{learner.explore-button}}
+        {{charts.time-spent-activities data=userTimeSpentStats}} {{learner.explore-button routeTo="activities" onClickExploreButton="onClickExploreButton"}}
       </div>
     {{/app-panel-box}}
   </div>
   <div class="time-spent-courses report-panel">
     <div class="report-panel-body">
       {{#app-panel-box localizeTitle="learner.time-spent-courses" }}
-        {{charts.time-spent-courses data=userStatsByCourse userId=userId}} {{learner.explore-button}}
+        {{charts.time-spent-courses data=userStatsByCourse userId=userId}} {{learner.explore-button routeTo="courses" onClickExploreButton="onClickExploreButton"}}
       {{/app-panel-box}}
     </div>
   </div>
