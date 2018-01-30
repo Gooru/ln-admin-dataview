@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import {formatTime} from 'admin-dataview/utils/utils';
+import {formatTime, getBarGradeColor as getGradeColor} from 'admin-dataview/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -23,8 +23,11 @@ export default Ember.Component.extend({
   //------------------------------------------------------------------------
   //Actions
   actions: {
-    onClickCollectionTitle: function(colectionId, collectionType) {
+    onClickCollectionTitle: function(collection) {
       let component = this;
+      let collectionId = collection.id;
+      let collectionType = collection.collectionType;
+      let sessionId = collection.sessionId;
       let collectionBody = component.$('.collection-content .collection-body');
       if (component.get('isExpanded')) {
         component.toggleProperty('isExpanded');
@@ -34,9 +37,9 @@ export default Ember.Component.extend({
         component.set('isLoading', true);
         let resourcePromise = [];
         if (collectionType === 'assessment') {
-          resourcePromise = component.fetchAssessmentResources();
+          resourcePromise = component.fetchAssessmentResources(collectionId, sessionId);
         } else if (collectionType === 'collection') {
-          resourcePromise = component.fetchCollectionResources();
+          resourcePromise = component.fetchCollectionResources(collectionId, sessionId);
         }
         return resourcePromise.then(function(resources) {
           component.set('resources', resources);
@@ -54,14 +57,19 @@ export default Ember.Component.extend({
    * @function fetchAssessmentResources
    * @return list of selected assessment resources
    */
-  fetchAssessmentResources: function() {
+  fetchAssessmentResources: function(collectionId, sessionId) {
     let component = this;
-    let assessmentPromise = Ember.RSVP.resolve(component.get('performanceService').getUserPerformanceResourceInAssessment('user-id', 'course-id', 'unit-id', 'lesson-id', 'assessment-id', 'session-id', 'class-id'));
+    let userId = component.get('userId');
+    let unitId = component.get('unitId');
+    let lessonId = component.get('lessonId');
+    let courseId = component.get('courseId');
+    let classId = component.get('classId');
+    let assessmentPromise = Ember.RSVP.resolve(component.get('performanceService').getUserPerformanceResourceInAssessment(userId, courseId, unitId, lessonId, collectionId, sessionId, classId));
     return Ember.RSVP.hash({
       assessmentResources: assessmentPromise
     })
       .then(function(hash) {
-        return hash.assessmentResources;
+        return hash.resources;
       });
   },
 
@@ -69,14 +77,19 @@ export default Ember.Component.extend({
    * @function fetchCollectionResources
    * @return list of selected collection resources
    */
-  fetchCollectionResources: function() {
+  fetchCollectionResources: function(collectionId, sessionId) {
     let component = this;
-    let collectionPromise = Ember.RSVP.resolve(component.get('performanceService').getUserPerformanceResourceInCollection('user-id', 'course-id', 'unit-id', 'lesson-id', 'collection-id', 'session-id', 'class-id'));
+    let userId = component.get('userId');
+    let unitId = component.get('unitId');
+    let lessonId = component.get('lessonId');
+    let courseId = component.get('courseId');
+    let classId = component.get('classId');
+    let collectionPromise = Ember.RSVP.resolve(component.get('performanceService').getUserPerformanceResourceInCollection(userId, courseId, unitId, lessonId, collectionId, sessionId, classId));
     return Ember.RSVP.hash({
       collectionResources: collectionPromise
     })
       .then(function(hash) {
-        return hash.collectionResources;
+        return hash.resources;
       });
   },
 
@@ -114,11 +127,15 @@ export default Ember.Component.extend({
     let component = this;
     let timespent = component.get('collection.timeSpent');
     return formatTime(timespent);
-  })
+  }),
 
-  //  resourceTimespent: Ember.computed(function() {
-  //    let component = this;
-  //    let timespent = component.get('timeSpent');
-  //    return formatTime(timespent);
-  //  })
+  /**
+   * @property {Color}
+   * Grade color code
+   */
+  colorStyle: Ember.computed('collection.score', function() {
+    let component = this;
+    let score = component.get('collection.score');
+    return getGradeColor(score);
+  })
 });

@@ -5,7 +5,7 @@
     </div>
     <div class="collection-info">
       <div class="title">
-        <div class="clickable" {{action "onClickCollectionTitle" collection.id collection.collectionType}}>
+        <div class="clickable" {{action "onClickCollectionTitle" collection}}>
           <div class="title-text">
             {{collection.title}}
           </div>
@@ -19,8 +19,8 @@
         </div>
       </div>
       <div class="collection-status">
-        <div class="status">
-          80%
+        <div class="score" style="color: {{colorStyle}};">
+          {{concat collection.score '%'}}
         </div>
         <div class="time">
           {{collectionTimespent}}
