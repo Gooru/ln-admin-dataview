@@ -6,7 +6,7 @@
       </span>
     </div>
     <div class="unit-status">
-      <div class="status">80%</div>
+      <div class="score" style="color: {{colorStyle}};">{{concat unit.unitAsmtScore '%'}}</div>
       <div class="time">{{timespent}}</div>
     </div>
   </div>
@@ -16,7 +16,7 @@
     {{else}}
       <div class="lessons">
         {{#each lessons as |lesson|}}
-            {{learner.course-accordion-lesson unitId=unit.unitId lesson=lesson}}
+            {{learner.course-accordion-lesson unitId=unit.unitId lesson=lesson userId=userId courseId=courseId classId=classId}}
         {{/each}}
       </div>
     {{/if}}

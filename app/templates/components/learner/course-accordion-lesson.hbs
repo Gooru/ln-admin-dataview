@@ -10,7 +10,7 @@
       <div class="score">
         {{charts.completion-bar score=lesson.lessonAsmtScore}}
       </div>
-      <div class="status" style="color">
+      <div class="status" style="color: {{colorStyle}};">
         {{concat lesson.lessonAsmtScore '%'}}
       </div>
       <div class="time">
@@ -24,7 +24,7 @@
     {{else}}
       <div class="collections">
         {{#each collections as |collection|}}
-          {{learner.course-accordion-collection lessonId=lesson.lessonId collection=collection}}
+          {{learner.course-accordion-collection unitId=unitId lessonId=lesson.lessonId courseId=courseId collection=collection userId=userId classId=classId}}
         {{/each}}
       </div>
     {{/if}}
