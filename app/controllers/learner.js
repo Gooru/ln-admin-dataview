@@ -15,7 +15,7 @@ export default Ember.Controller.extend(ModalMixin, {
     onClickBackButton: function() {
       let pathname = window.location.pathname;
       let pathLists = pathname.split('/');
-      if (pathLists.length === 3) {
+      if (pathLists.length === 4) {
         this.transitionToRoute('learners');
       } else {
         this.transitionToRoute('learner', this.get('userId'));

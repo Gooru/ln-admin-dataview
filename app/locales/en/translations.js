@@ -105,6 +105,8 @@ export default {
     'hide': 'hide',
     'details': 'details',
     'grade-level': 'Grade Level',
+    'completed': 'Mastered',
+    'in_progress': 'In Progress',
     'user-preferences': {
       'preferences': 'Preferences',
       'content-types': 'Content Types',

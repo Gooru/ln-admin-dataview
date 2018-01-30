@@ -30,12 +30,12 @@ export default Ember.Component.extend({
       userPrefsCurators: this.get('profileService').getUserPrefsCurators(userId),
       userPrefsProviders: this.get('profileService').getUserPrefsProviders(userId),
       userPrefsContent: this.get('profileService').getUserPrefsContent(userId)
-    }).then(function(hash) {
+    }).then(({userGrades, userPrefsCurators, userPrefsProviders, userPrefsContent}) => {
       component.set('userProfile', user);
-      component.set('userGrades', hash.userGrades);
-      component.set('userPrefsContent', hash.userPrefsContent);
-      component.set('userPrefsProviders', hash.userPrefsProviders);
-      component.set('userPrefsCurators', hash.userPrefsCurators);
+      component.set('userGrades', userGrades);
+      component.set('userPrefsContent', userPrefsContent);
+      component.set('userPrefsProviders', userPrefsProviders);
+      component.set('userPrefsCurators',  userPrefsCurators);
     });
 
   },

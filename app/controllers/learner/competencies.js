@@ -13,11 +13,6 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Properties
 
-  /**
-   * User id of the learner
-   * @type {String}
-   */
-  userId: null,
 
   /**
    * data of the learner
@@ -37,7 +32,7 @@ export default Ember.Controller.extend({
   actions: {
 
     onClickBackButton: function() {
-      this.transitionToRoute('learner', this.get('userId'));
+      this.transitionToRoute('learner');
     },
 
     onChooseListView: function() {

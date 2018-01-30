@@ -19,33 +19,33 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Get user competency summary
+   * Get user competencies
    * @returns {Promise.<[]>}
    */
-  getUserCompetencyCourses: function(userId, competencyCode) {
+  getUserCompetencies: function(userId, activeDuration) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('competencyAdapter')
-        .getUserCompetencyCourses(userId, competencyCode)
+        .getUserCompetencies(userId, activeDuration)
         .then(function(response) {
-          resolve(service.get('competencySerializer').normalizeUserCompetencyCourses(response));
+          resolve(service.get('competencySerializer').normalizeUserCompetencies(response));
         }, reject);
     });
   },
 
   /**
-   * Get user competency summary
+   * Get user performance competency collections
    * @returns {Promise.<[]>}
    */
-  getUserCompetencyCourseCollections: function(userId, courseId, competencyCode) {
+  getUserPerformanceCompetencyCollections: function(userId, competencyCode) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('competencyAdapter')
-        .getUserCompetencyCourseCollections(userId, courseId, competencyCode)
+        .getUserPerformanceCompetencyCollections(userId, competencyCode)
         .then(function(response) {
-          resolve(service.get('competencySerializer').normalizeUserCompetencyCourseCollections(response));
+          resolve(service.get('competencySerializer').normalizeUserPerformanceCompetencyCollections(response));
         }, reject);
     });
   },

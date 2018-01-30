@@ -8,12 +8,12 @@ import Ember from 'ember';
 export default Ember.Object.extend({
 
   /**
-   * Normalized data of user competency courses data
+   * Normalized data of user competencies
    * @return {Object}
    */
-  normalizeUserCompetencyCourses: function(response) {
+  normalizeUserCompetencies: function(response) {
     let resultSet = Ember.A();
-    response = Ember.A(response.competencies);
+    response = Ember.A(response.competencyList);
     response.forEach(data => {
       let result = Ember.Object.create(data);
       resultSet.pushObject(result);
@@ -22,12 +22,12 @@ export default Ember.Object.extend({
   },
 
   /**
-   * Normalized data of user competency courses collections
+   * Normalized data of user performance competency collections
    * @return {Object}
    */
-  normalizeUserCompetencyCourseCollections: function(response) {
+  normalizeUserPerformanceCompetencyCollections: function(response) {
     let resultSet = Ember.A();
-    response = Ember.A(response.data);
+    response = Ember.A(response.collections);
     response.forEach(data => {
       let result = Ember.Object.create(data);
       resultSet.pushObject(result);
@@ -56,25 +56,27 @@ export default Ember.Object.extend({
    * @return {Object}
    */
   normalizeCompetencyMatrix: function(response) {
-    let userCompetencyMatrix = Ember.A(response.userCompetencyMatrix);
     let resultSet = Ember.A();
-    userCompetencyMatrix.forEach(courseData => {
-      let course = Ember.Object.create(courseData);
-      let domains = course.get('domains');
-      let domainSet = Ember.A();
-      domains.forEach(data => {
-        let competencySet = Ember.A();
-        let domain = Ember.Object.create(data);
-        let competencies = domain.get('competencies');
-        competencies.forEach(competency => {
-          competencySet.pushObject(Ember.Object.create(competency));
+    if (response.userCompetencyMatrix) {
+      let userCompetencyMatrix = Ember.A(response.userCompetencyMatrix);
+      userCompetencyMatrix.forEach(courseData => {
+        let course = Ember.Object.create(courseData);
+        let domains = course.get('domains');
+        let domainSet = Ember.A();
+        domains.forEach(data => {
+          let competencySet = Ember.A();
+          let domain = Ember.Object.create(data);
+          let competencies = domain.get('competencies');
+          competencies.forEach(competency => {
+            competencySet.pushObject(Ember.Object.create(competency));
+          });
+          domain.set('competencies', competencySet);
+          domainSet.pushObject(domain);
         });
-        domain.set('competencies', competencySet);
-        domainSet.pushObject(domain);
+        course.set('domains', domainSet);
+        resultSet.pushObject(course);
       });
-      course.set('domains', domainSet);
-      resultSet.pushObject(course);
-    });
+    }
     return resultSet;
   }
 
