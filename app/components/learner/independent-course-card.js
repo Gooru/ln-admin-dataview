@@ -23,7 +23,7 @@ export default Ember.Component.extend({
 
   Performances: Ember.computed(function() {
     let course = this.get('course');
-    let percentagewidth = course.assessmentsCompleted / course.totalAssessments;
+    let percentagewidth = course.assessmentsCompleted / course.totalAssessments * 100;
     let objects = {
       percentage: Math.round(percentagewidth)
     };
