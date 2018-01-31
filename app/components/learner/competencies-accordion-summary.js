@@ -44,13 +44,16 @@ export default Ember.Component.extend({
      */
     selectCompetency: function(competency) {
       let component = this;
+      component.set('isLoading', true);
       let userId = component.get('userId');
       return Ember.RSVP.hash({
         collections: component.get('competencyService').getUserPerformanceCompetencyCollections(userId, competency.get('competencyCode'))
       }).then(({
         collections
       }) => {
+        component.set('isLoading', false);
         component.set('collections', collections);
+
       });
     }
   }

@@ -17,7 +17,7 @@
 
 <div id="{{elementId}}-content" data-index="{{componentIndex}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="{{elementId}}-heading">
   <ol class="panel-group" role="tablist" aria-multiselectable="true">
-    {{#if loading}}
+    {{#if isLoading}}
       {{three-bounce-spinner}}
     {{else}}
       {{#each collections as | collection |}}
