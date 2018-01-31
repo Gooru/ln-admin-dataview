@@ -1,8 +1,8 @@
 <div class="lesson-content">
   <div class="lesson-header">
     <div class="title">
-      <span class="title-text" {{action "onClickLessonTitle" lesson.lessonId}}>
-        {{lesson.lessonTitle}}
+      <span class="title-text ellipsis" {{action "onClickLessonTitle" lesson.lessonId}}>
+        {{safe-html lesson.lessonTitle}}
       </span>
 
     </div>

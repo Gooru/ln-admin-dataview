@@ -196,7 +196,7 @@
                 .data {
                   %content-icon-size {
                     -webkit-background-size: 20px 20px;
-                    background-size: 20px 20px !important;
+                    background-size: 20px 20px;
                     height: 20px;
                     width: 20px;
                     display: block;
@@ -205,27 +205,27 @@
                   width: 60%;
                   display: flex;
                   .video i{
-                    background: url("../assets/images/video-resource-dark.svg");
+                    background-image: url("../assets/images/video-resource-dark.svg");
                     @extend %content-icon-size;
                   }
                   .webpage i {
-                    background: url("../assets/images/website-resource-dark.svg");
+                    background-image: url("../assets/images/website-resource-dark.svg");
                     @extend %content-icon-size;
                   }
                   .interactive i {
-                    background: url("../assets/images/interactive-resource-dark.svg");
+                    background-image: url("../assets/images/interactive-resource-dark.svg");
                     @extend %content-icon-size;
                   }
                   .text i {
-                    background: url("../assets/images/text-resource-dark.svg");
+                    background-image: url("../assets/images/text-resource-dark.svg");
                     @extend %content-icon-size;
                   }
                   .audio i {
-                    background: url("../assets/images/audio-resource-dark.svg");
+                    background-image: url("../assets/images/audio-resource-dark.svg");
                     @extend %content-icon-size;
                   }
                   .image i {
-                    background: url("../assets/images/image-resource-dark.svg");
+                    background-image: url("../assets/images/image-resource-dark.svg");
                     @extend %content-icon-size;
                   }
                   .name {

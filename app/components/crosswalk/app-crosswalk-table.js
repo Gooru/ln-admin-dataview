@@ -26,12 +26,10 @@ export default Ember.Component.extend({
     */
     scrollTop: function() {
       let component = this;
-      component.sendAction('onToggleSubjectBrowser').then(function() {
-        $('.crosswalk-body').animate({
-          scrollTop: 0
-        });
+      $('.crosswalk-body').animate({
+        scrollTop: 0
       });
-
+      component.sendAction('onToggleSubjectBrowser');
     }
   }
 });
