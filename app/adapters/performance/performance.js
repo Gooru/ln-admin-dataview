@@ -108,9 +108,6 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       contentType: 'application/json; charset=utf-8',
       data: {
-        courseId,
-        unitId,
-        lessonId,
         assessmentId,
         user,
         sessionId
@@ -118,6 +115,15 @@ export default Ember.Object.extend({
     };
     if (classId) {
       options.data.classId = classId;
+    }
+    if(courseId) {
+      options.data.courseId = courseId;
+    }
+    if (unitId) {
+      options.data.unitId = unitId;
+    }
+    if (lessonId) {
+      options.data.lessonId = lessonId;
     }
     return Ember.RSVP.hashSettled({
       userResourceInAssessment: Ember.$.ajax(url, options)
@@ -139,9 +145,6 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       contentType: 'application/json; charset=utf-8',
       data: {
-        courseId,
-        unitId,
-        lessonId,
         collectionId,
         user,
         sessionId
@@ -149,6 +152,15 @@ export default Ember.Object.extend({
     };
     if (classId) {
       options.data.classId = classId;
+    }
+    if(courseId) {
+      options.data.courseId = courseId;
+    }
+    if (unitId) {
+      options.data.unitId = unitId;
+    }
+    if (lessonId) {
+      options.data.lessonId = lessonId;
     }
     return Ember.RSVP.hashSettled({
       userResourceInCollection: Ember.$.ajax(url, options)
