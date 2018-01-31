@@ -23,7 +23,7 @@
         {{three-bounce-spinner}}
       {{else}}
         {{#each resources as | resource |}}
-          <div class="{{if isAssessment resource.type resource.contentType}}">
+          <div class="resource-icon {{if (eq resource.type 'question') resource.type resource.contentType}}">
             <i></i>
           </div>
           <div class="items">

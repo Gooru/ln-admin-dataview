@@ -103,42 +103,51 @@
           }
         }
 
-        .resource {
-          float: left;
-          margin: 13px -25px;
-
-          i {
-            background: url("images/competency-video-resource-green.svg");
-            width: 21px;
-            height: 20px;
-            object-fit: contain;
-            display: block;
-          }
+        %content-icon-size {
+          -webkit-background-size: 20px 20px;
+          background-size: 20px 20px;
+          height: 20px;
+          width: 20px;
+          display: block;
         }
 
-        .question {
+        .resource-icon {
           float: left;
-          margin: 13px -25px;
+          margin: 9px -25px;
 
-          i {
-            background: url("images/competency-question-resource-green.svg");
-            width: 21px;
-            height: 20px;
-            object-fit: contain;
-            display: block;
+          &.video i {
+            background-image: url("../assets/images/video-resource-green.svg");
+            @extend %content-icon-size;
           }
-        }
 
-        .webpage {
-          float: left;
-          margin: 13px -25px;
+          &.webpage i {
+            background-image: url("../assets/images/website-resource-green.svg");
+            @extend %content-icon-size;
+          }
 
-          i {
-            background: url("images/competency-website-resource-green.svg");
-            width: 21px;
-            height: 20px;
-            object-fit: contain;
-            display: block;
+          &.interactive i {
+            background-image: url("../assets/images/interactive-resource-green.svg");
+            @extend %content-icon-size;
+          }
+
+          &.text i {
+            background-image: url("../assets/images/text-resource-green.svg");
+            @extend %content-icon-size;
+          }
+
+          &.audio i {
+            background-image: url("../assets/images/audio-resource-green.svg");
+            @extend %content-icon-size;
+          }
+
+          &.image i {
+            background-image: url("../assets/images/image-resource-green.svg");
+            @extend %content-icon-size;
+          }
+
+          &.question i {
+            background-image: url("../assets/images/question-resource-green.svg");
+            @extend %content-icon-size;
           }
         }
 
