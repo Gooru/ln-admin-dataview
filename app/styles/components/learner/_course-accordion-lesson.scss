@@ -15,6 +15,18 @@
           cursor: pointer;
         }
       }
+      .lesson-icon {
+        margin-right: 20px;
+        i {
+          background: url("images/lesson-icon.svg");
+          width: 21px;
+          height: 17px;
+          background-size: 21px 17px;
+          object-fit: contain;
+          display: block;
+          margin-top: 7px;
+        }
+      }
       .lesson-status {
         width: calc(100% - 60%);
         display: flex;
