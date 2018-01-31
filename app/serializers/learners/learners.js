@@ -82,6 +82,18 @@ export default Ember.Object.extend({
       } else {
         result.set('thumbnail', cdnUrls.user + thumbnail);
       }
+      let firstName = result.get('firstName');
+      let lastName = result.get('lastName');
+      let username = result.get('username');
+      if (lastName && firstName) {
+        result.set('userDisplayName', `${lastName  }  ${  firstName}`);
+      } else if (lastName && !firstName) {
+        result.set('userDisplayName', lastName);
+      } else if (firstName && !lastName) {
+        result.set('userDisplayName', firstName);
+      } else if (username) {
+        result.set('userDisplayName', username);
+      }
       resultSet.pushObject(result);
     });
     return resultSet;
