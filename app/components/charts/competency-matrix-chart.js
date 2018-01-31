@@ -37,15 +37,8 @@ export default Ember.Component.extend({
 
   didInsertElement: function() {
     let component = this;
-    let subjectCategory = component.get('defaultSubjectCategory');
-    component.set('isLoading', true);
-    component.get('taxonomyService').getSubjects(subjectCategory).then(subjects => {
-      let subject = subjects.objectAt(0);
-      component.set('subjects', subjects);
-      this.loadDataBySubject(subject.get('id'));
-      this.set('isLoading', false);
-      component.handleSubjectNavigationArrow();
-    });
+    let subjectCategory = component.get('selectedSubjectCategory');
+    component.fetchSubjectsByCategory(subjectCategory);
   },
 
   // -------------------------------------------------------------------------
@@ -110,13 +103,16 @@ export default Ember.Component.extend({
    * It will have  taxonomy subjects
    * @type {Object}
    */
-  taxonomySubjects: Ember.A(),
+  taxonomySubjects: null,
 
   /**
    * It  will have default subject category
    * @type {String}
    */
-  defaultSubjectCategory: 'k_12',
+  selectedSubjectCategory: 'k_12',
+
+
+  isLoading: false,
 
 
   // -------------------------------------------------------------------------
@@ -169,7 +165,16 @@ export default Ember.Component.extend({
     onChooseSubject: function(subject) {
       let component = this;
       component.loadDataBySubject(subject.get('id'));
+    },
+
+    /**
+     * Event will trigger when subject category selected
+     * @param  {Object} subject
+     */
+    onChooseCategory: function(category) {
+      this.fetchSubjectsByCategory(category.value);
     }
+
   },
 
   // -------------------------------------------------------------------------
@@ -221,6 +226,7 @@ export default Ember.Component.extend({
   loadDataBySubject: function(subjectId) {
     let component = this;
     let userId = component.get('userId');
+    component.set('isLoading', true);
     return Ember.RSVP.hash({
       competencyMatrixs: component.get('competencyService').getCompetencyMatrix(userId, subjectId),
       competencyMatrixCoordinates: component.get('competencyService').getCompetencyMatrixCoordinates(subjectId)
@@ -228,6 +234,7 @@ export default Ember.Component.extend({
       competencyMatrixs,
       competencyMatrixCoordinates
     }) => {
+      component.set('isLoading', false);
       let resultSet = component.parseCompetencyData(competencyMatrixs, competencyMatrixCoordinates);
       component.drawChart(resultSet);
     });
@@ -344,6 +351,17 @@ export default Ember.Component.extend({
       }
     });
     return resultSet;
+  },
+
+  fetchSubjectsByCategory: function(subjectCategory) {
+    let component = this;
+    component.set('isLoading', true);
+    component.get('taxonomyService').getSubjects(subjectCategory).then(subjects => {
+      let subject = subjects.objectAt(0);
+      component.set('taxonomySubjects', subjects);
+      component.loadDataBySubject(subject.get('id'));
+      component.handleSubjectNavigationArrow();
+    });
   }
 
 });

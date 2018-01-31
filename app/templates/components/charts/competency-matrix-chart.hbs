@@ -1,32 +1,32 @@
+{{taxonomy-category onChooseCategory='onChooseCategory'}}
+<div class="subject-navigation-chart">
+  <div class="subject-navigation-arrow subject-left-navigation-arrow pull-left" {{action 'onLeftArrowClick'}}>{{app-icon name="ic_keyboard_arrow_left"}}</div>
+  <div class=" subject-navigation-arrow subject-right-navigation-arrow pull-right" {{action 'onRightArrowClick'}}>{{app-icon name="ic_keyboard_arrow_right"}}</div>
+  <div class="subject-list">
+    <ul class="nav nav-tabs">
+      {{#each taxonomySubjects as | subject index|}}
+        <li class="{{if (eq index 0) 'active' ''}}" role="presentation" {{action 'onChooseSubject' subject}}><a href="#{{subject.id}}" aria-controls="{{subject.title}}" role="tab" data-toggle="tab">{{subject.title}}</a></li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
 {{#if isLoading}}
   {{three-bounce-spinner}}
-{{else}}
-  <div class="subject-navigation-chart">
-    <div class="subject-navigation-arrow subject-left-navigation-arrow pull-left" {{action 'onLeftArrowClick'}}>{{app-icon name="ic_keyboard_arrow_left"}}</div>
-    <div class=" subject-navigation-arrow subject-right-navigation-arrow pull-right" {{action 'onRightArrowClick'}}>{{app-icon name="ic_keyboard_arrow_right"}}</div>
-    <div class="subject-list">
-      <ul class="nav nav-tabs">
-        {{#each subjects as | subject index|}}
-          <li class="{{if (eq index 0) 'active' ''}}" role="presentation" {{action 'onChooseSubject' subject}}><a href="#{{subject.id}}" aria-controls="{{subject.title}}" role="tab" data-toggle="tab">{{subject.title}}</a></li>
+{{/if}}
+<div class="competency-chart-tab-container">
+  <div class="competency-courses-chart">
+    <div class="courses pull-left">
+      <ul>
+        {{#each taxonomyCourses as |taxonomyCourse|}}
+          <li style="height:{{if (not taxonomyCourse.heightOfCourseTitleContainer) '50' taxonomyCourse.heightOfCourseTitleContainer}}px">
+            {{taxonomyCourse.courseName}}
+          </li>
         {{/each}}
       </ul>
     </div>
-  </div>
-  <div class="competency-chart-tab-container">
-    <div class="competency-courses-chart">
-      <div class="courses pull-left">
-        <ul>
-          {{#each taxonomyCourses as |taxonomyCourse|}}
-            <li style="height:{{taxonomyCourse.heightOfCourseTitleContainer}}px">
-              {{taxonomyCourse.courseName}}
-            </li>
-          {{/each}}
-        </ul>
-      </div>
-      <div class="pull-left matrix-chart-container">
-        <div id="competency-matrix-chart"></div>
-      </div>
+    <div class="pull-left matrix-chart-container">
+      <div id="competency-matrix-chart"></div>
     </div>
-    <div class="clear"></div>
   </div>
-{{/if}}
+  <div class="clear"></div>
+</div>
