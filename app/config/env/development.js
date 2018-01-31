@@ -6,8 +6,6 @@ export default {
   'endpoint' : {
     'url': 'http://staging.gooru.org',
     'secureUrl': 'http://staging.gooru.org'
-  },
-
-  'gooru-app-url' : '//local.gooru.org'
+  }
 
 };

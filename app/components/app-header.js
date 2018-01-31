@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import ModalMixin from '../mixins/modal';
 import Env from 'admin-dataview/config/environment';
-import EndPointsConfig from 'admin-dataview/utils/endpoint-config';
+
 
 /**
  * Application header component
@@ -54,14 +54,7 @@ export default Ember.Component.extend(ModalMixin, {
    */
   supportSiteUrl: Ember.computed(function() {
     return Env.supportSiteUrl;
-  }),
-
-  /**
-   * Gooru application site url
-   * @property {string}
-   */
-  siteUrl: Ember.computed(function() {
-    return EndPointsConfig.getGooruAppUrl();
   })
+
 
 });

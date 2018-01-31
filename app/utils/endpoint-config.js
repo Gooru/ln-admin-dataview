@@ -15,11 +15,3 @@ export function getEndpointSecureUrl() {
   const configuration = ConfigurationService.configuration;
   return configuration ? configuration.get('endpoint.secureUrl') : '';
 }
-
-/**
- * Get Gooru application site avatarUrl
- */
-export function getGooruAppUrl() {
-  const configuration = ConfigurationService.configuration;
-  return configuration ? configuration.get('gooru-app-url') : '';
-}
