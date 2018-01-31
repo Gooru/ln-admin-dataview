@@ -63,7 +63,7 @@
     <div class="user-grade-level-body">
       {{#each userGrades as |grade|}}
         <div class="user-grade-level">
-          <div class="subject">{{grade.subjectName}}</div>
+          <div class="subject ellipsis">{{concat (split-text grade.subjectCode '.') ' : ' grade.subjectName}}</div>
           <div class="grade">{{grade.grade}}</div>
         </div>
       {{/each}}

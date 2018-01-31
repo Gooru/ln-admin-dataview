@@ -141,6 +141,10 @@
             background: url("../assets/images/audio-resource-green.svg");
             @extend %content-icon-size;
           }
+          .image i {
+            background: url("../assets/images/image-resource-green.svg");
+            @extend %content-icon-size;
+          }
           .question i {
             background: url("../assets/images/question-resource-green.svg");
             @extend %content-icon-size;

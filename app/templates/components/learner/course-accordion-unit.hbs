@@ -2,8 +2,8 @@
   <div class="unit-header">
     <div class="unit-icon"> <i> </i></div>
     <div class="title">
-      <span class="title-text" {{action "onClickUnitTitle" unit.unitId}}>
-        {{unit.unitTitle}}
+      <span class="title-text ellipsis" {{action "onClickUnitTitle" unit.unitId}}>
+        {{safe-html unit.unitTitle}}
       </span>
     </div>
     <div class="unit-status">

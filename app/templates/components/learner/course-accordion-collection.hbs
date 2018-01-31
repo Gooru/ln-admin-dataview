@@ -6,8 +6,8 @@
     <div class="collection-info">
       <div class="title">
         <div class="clickable" {{action "onClickCollectionTitle" collection}}>
-          <div class="title-text">
-            {{collection.title}}
+          <div class="title-text ellipsis">
+            {{safe-html collection.title}}
           </div>
           <div class="arrow-icon">
             {{#if isExpanded}}
@@ -40,8 +40,8 @@
             </div>
             <div class="resource-info">
               <div class="title">
-                <div class="title-text">
-                  {{resource.title}}
+                <div class="title-text ellipsis">
+                  {{safe-html resource.title}}
                 </div>
               </div>
               <div class="resource-report">
