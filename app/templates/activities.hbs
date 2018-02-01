@@ -1,2 +1,16 @@
 <div class="activities">
+
+  <button {{action 'getResourceInfo'}} type="button" class="btn btn-info">Info</button>
+
+
+  {{#app-pull-out showPullOut=showPullOut title=collection.title description=collection.taxonomy.id showMore=showMore isLoading=isLoading as |section|}}
+    {{#if section.isLessContent}}
+      {{activities.pull-out-body
+         collection=collection
+         isLoading=isLoading
+        }}
+        {{else if section.isMoreContent}}
+         {{activities.pull-out-more-content }}
+    {{/if}}
+  {{/app-pull-out}}
 </div>

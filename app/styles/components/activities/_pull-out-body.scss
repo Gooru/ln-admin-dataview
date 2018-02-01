@@ -1,0 +1,35 @@
+.pull-out-content {
+  .activities.pull-out-body {
+    .author {
+      display: inline-block;
+
+      img {
+        width: 20px;
+        height: 20px;
+        border-radius: 50px;
+        cursor: pointer;
+      }
+
+      div > * {
+        display: inline-block;
+      }
+
+      span {
+        cursor: pointer;
+      }
+
+      span.title {
+        margin: 2px 5px 10px 0;
+        cursor: auto;
+        font-style: italic;
+      }
+
+      .owner {
+        color: $blue-400;
+        max-width: 160px;
+        @include text-overflow;
+        vertical-align: middle;
+      }
+    }
+  }
+}
