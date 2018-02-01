@@ -128,6 +128,9 @@ export default {
     activities: {
       'time-spent-activities': 'Time Spent on All Activities'
     }
+  },
+  activities: {
+    'learning-activities-available' : 'Learning Activities Available'
   }
 
 

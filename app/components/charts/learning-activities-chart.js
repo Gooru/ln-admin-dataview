@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import d3 from 'd3';
+import Utils from 'admin-dataview/utils/utils';
 
 
 /**
@@ -18,7 +19,7 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
-  classNames: ['donut-chart'],
+  classNames: ['learning-activities-chart'],
 
   // -------------------------------------------------------------------------
   // Events
@@ -67,6 +68,19 @@ export default Ember.Component.extend({
    */
   radius: 85,
 
+  /**
+   * Total count
+   * @return {Number}
+   */
+  totalCount: Ember.computed('data.[]', function() {
+    let count = 0;
+    let dataSet = this.get('data');
+    dataSet.forEach(data => {
+      count+= data.value;
+    });
+    return count;
+  }),
+
 
   // -------------------------------------------------------------------------
   // Methods
@@ -108,6 +122,48 @@ export default Ember.Component.extend({
       .attr('fill', (d) => {
         return d.data.colorCode;
       });
+
+    arcs.append('svg:foreignObject')
+      .attr('transform', (d) => {
+        let _d = arc.centroid(d);
+        _d[0] *= 1.2;
+        _d[1] *= 1.2;
+        return `translate(${  _d  })`;
+      })
+      .attr('width', 75)
+      .attr('height', 50)
+      .attr('x', (d) => {
+        let _d = arc.centroid(d);
+        let xAxis = _d[0] * 1.2;
+        if (xAxis < 0) {
+          return -50;
+        } else {
+          return 0;
+        }
+      }).attr('y', (d) => {
+        let _d = arc.centroid(d);
+        let yAxis = _d[1] * 1.2;
+        if (yAxis < 0) {
+          return -20;
+        } else {
+          return 0;
+        }
+      })
+      .append('xhtml:div')
+      .attr('class', 'title')
+      .text((d) => {
+        return `${Utils.dataCountFormatByKilo(d.data.value)  } ${  d.data.name}`;
+      });
+    let totalCount =  component.get('totalCount');
+    let label = component.get('i18n').t('activities.learning-activities-available').string;
+    let text = g.append('svg:foreignObject')
+      .attr('width', (width / 2)).attr('height', radius)
+      .attr('x', -(width / 4))
+      .attr('y', -(radius / 4));
+    text.append('xhtml:div')
+      .attr('class', 'header-count').text(totalCount.toLocaleString('en-US'));
+    text.append('xhtml:div')
+      .attr('class', 'header-title').text(label);
   }
 
 });
