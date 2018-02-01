@@ -1,0 +1,28 @@
+.learning-activities-chart {
+  width: 600px;
+  height: 560px;
+
+  .title {
+    font-size: 15px;
+    color: $dark-800;
+    font-weight: bold;
+    width: 75px;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .header-count {
+    font-size: 65px;
+    font-weight: 300;
+    color: $dark-800;
+    text-align: center;
+    line-height: 1;
+  }
+  .header-title {
+    font-size: 25px;
+    font-weight: 300;
+    color: $dark-800;
+    text-align: center;
+    line-height: 1;
+  }
+}

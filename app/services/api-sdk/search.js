@@ -70,12 +70,12 @@ export default Ember.Service.extend({
    * @param nodeData
    * @returns {Promise.<Resource[]>}
    */
-  searchResources: function(nodeData) {
+  searchResources: function(nodeData, lenght, resourceFormat) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('searchAdapter')
-        .searchResources(nodeData)
+        .searchResources(nodeData, length, resourceFormat)
         .then(
           function(response) {
             resolve(

@@ -59,7 +59,7 @@ export default Ember.Component.extend({
    * @return {Number}
    */
   masteredCount: Ember.computed('data', function() {
-    let count = this.get('data').objectAt(0);
+    let count = this.get('data').objectAt(1);
     return count.value;
   }),
 
@@ -68,7 +68,7 @@ export default Ember.Component.extend({
    * @return {Number}
    */
   inProgressCount: Ember.computed('data', function() {
-    let count = this.get('data').objectAt(1);
+    let count = this.get('data').objectAt(0);
     return count.value;
   }),
 

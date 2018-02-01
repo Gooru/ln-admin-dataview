@@ -81,12 +81,10 @@ export default Ember.Object.extend({
    * @param nodeData the term to search
    * @returns {Promise.<Resource[]>}
    */
-  searchResources: function(nodeData, length = 1) {
+  searchResources: function(nodeData, length = 1, resourceFormat = null) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/resource`;
-    let nodeType = nodeData.type;
-    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `flt.${nodeType}Name`;
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
@@ -99,8 +97,15 @@ export default Ember.Object.extend({
         'flt.publishStatus': 'published'
       }
     };
-    if (nodeData.name) {
-      options.data[`${filterType}`] = nodeData.searchValue;
+    if (nodeData) {
+      let nodeType = nodeData.type;
+      let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `flt.${nodeType}Name`;
+      if (nodeData.name) {
+        options.data[`${filterType}`] = nodeData.searchValue;
+      }
+    }
+    if (resourceFormat) {
+      options.data['flt.resourceFormat'] = resourceFormat;
     }
     return Ember.$.ajax(url, options);
   },
@@ -115,8 +120,7 @@ export default Ember.Object.extend({
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/resource`;
-    let nodeType = nodeData.type;
-    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `flt.${nodeType}Name`;
+
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
@@ -129,8 +133,12 @@ export default Ember.Object.extend({
         'flt.publishStatus': 'published'
       }
     };
-    if (nodeData.name) {
-      options.data[`${filterType}`] = nodeData.searchValue;
+    if (nodeData) {
+      let nodeType = nodeData.type;
+      let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `flt.${nodeType}Name`;
+      if (nodeData.name) {
+        options.data[`${filterType}`] = nodeData.searchValue;
+      }
     }
     return Ember.$.ajax(url, options);
   },

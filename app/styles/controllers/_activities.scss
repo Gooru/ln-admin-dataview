@@ -1,4 +1,18 @@
 .activities {
   height: calc(100vh - 110px);
-  width: 100%;
+  width: 1024px;
+  margin: 0 auto;
+
+  .filters {
+    width: 300px;
+    height: 500px;
+  }
+
+  .activities-summary {
+    width: calc(100% - 300px);
+    .content-distribution {
+      width: 600px;
+      margin: 0 auto;
+    }
+  }
 }

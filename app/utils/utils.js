@@ -1,5 +1,9 @@
-import { GRADING_SCALE } from 'admin-dataview/config/config';
-import { isNumeric } from './math';
+import {
+  GRADING_SCALE
+} from 'admin-dataview/config/config';
+import {
+  isNumeric
+} from './math';
 
 /**
  * Find the route path last occurrence
@@ -94,6 +98,18 @@ export function dataCountFormat(count) {
         `${Math.round(Math.abs(Number(count)) / 1.0e+3)  }K` :
         Math.round(count);
 }
+
+/**
+ * Around value of count format by Kilo(thousand)
+ * @param  {Number} count
+ * @return {String} formated string of count
+ */
+export function dataCountFormatByKilo(count) {
+  const usLocale = 'en-US';
+  const countSuffix = Math.round(Math.abs(Number(count)) >= 1.0e+3) ? 'K' : '';
+  return count.toLocaleString(usLocale) + countSuffix;
+}
+
 
 /**
  * Transform the given text into capitalize form
