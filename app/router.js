@@ -21,6 +21,15 @@ Router.map(function() {
     this.route('activities');
   });
   this.route('leaners');
+
+  this.route('activity', { path: '/activities'}, function() {
+    this.route('summary');
+    this.route('courses');
+    this.route('collections');
+    this.route('assessments');
+    this.route('resources');
+    this.route('questions');
+  });
 });
 
 export default Router;
