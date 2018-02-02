@@ -1,5 +1,7 @@
 import Ember from 'ember';
 import TaxonomySerializer from 'admin-dataview/serializers/taxonomy/taxonomy';
+import {DEFAULT_IMAGES} from 'admin-dataview/config/config';
+
 
 /**
  * Serializer for activities endpoints
@@ -36,7 +38,14 @@ export default Ember.Object.extend({
    * @return {Object}
    */
   normalizeContentResourceById: function(response) {
-    response = Ember.Object.create(response);
+    response = Ember.A(response);
+    let thumbnail = response.get('thumbnail');
+    let cdnUrls = this.get('session.cdnUrls');
+    if (!thumbnail) {
+      response.set('thumbnail', DEFAULT_IMAGES.USER_PROFILE);
+    } else {
+      response.set('thumbnail', cdnUrls.user + thumbnail);
+    }
     const serializer = this;
     let taxonomy = serializer
       .get('taxonomySerializer')

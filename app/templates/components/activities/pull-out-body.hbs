@@ -1,5 +1,76 @@
-<div class="author">
-  <span class="title"> </span>
-  <img class="img-responsive" src="{{collection.owner.thumbnail}}">
-  <span class="owner">{{collection.owner.firstName}}</span>
+<div>
+  <div class="author">
+    <span class="title">  {{t "common.created-by" }} </span>
+    <img class="img-responsive" src="{{collection.owner.thumbnail}}">
+    <span class="owner">{{collection.owner.username}}</span>
+    <span class="date">on 24 December, 2016 {{collection.publish_date}}</span>
+  </div>
+
+  <div class="collection-info">
+    <span class="title"> {{collection.title}}</span>
+    {{#if (eq collection.type "resource234" )}}
+      <div class="resource-info">
+        <div class="resources-icon">
+          <div class="{{collection.content_subformat}}"> <i> </i> </div>
+        </div>
+        <div class="discription"> {{collection.description}} </div>
+      </div>
+    {{else}}
+      <div class="header-info">
+        <div class="collection-image">
+          <img class="img-responsive" src="http://cdn.gooru.org/22be8198-5182-47c0-a82d-41ddcfdcd02a.png">
+        </div>
+        <div class="discription"> {{collection.description}} </div>
+      </div>
+    {{/if}}
+  </div>
+
+
+  <div class="subject">
+    <div class="header"> {{t "common.subject"}}</div>
+    <div class="items">
+      <div class="subect-item">
+        <span>MATH </span>
+      </div>
+      <div class="subect-item">
+        <span>Absolute Positions </span>
+      </div>
+      <div class="subect-item">
+        <span>Position </span>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="course">
+    <div class="header"> {{t "common.course"}}</div>
+    <div class="items">
+      <div class="course-item">
+        <span>MATH </span>
+      </div>
+      <div class="course-item">
+        <span>Absolute Positions </span>
+      </div>
+      <div class="course-item">
+        <span>Position </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="domain">
+    <div class="header"> {{t "common.domain"}}</div>
+    <div class="items">
+      <div class="domain-item">
+        <span>MATH </span>
+      </div>
+      <div class="domain-item">
+        <span>Absolute Positions </span>
+      </div>
+      <div class="domain-item">
+        <span>Position </span>
+      </div>
+    </div>
+  </div>
+
+
 </div>

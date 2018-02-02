@@ -103,6 +103,23 @@ export default Ember.Object.extend({
       resultSet.pushObject(result);
     });
     return resultSet;
+  },
+
+
+  /**
+   * Normalized data of user profile read data
+   * @return {Object}
+   */
+  normalizeReadUserProfile: function(response) {
+    response = Ember.A(response.users[0]);
+    let thumbnail = response.get('thumbnail');
+    let cdnUrls = this.get('session.cdnUrls');
+    if (!thumbnail) {
+      response.set('thumbnail', DEFAULT_IMAGES.USER_PROFILE);
+    } else {
+      response.set('thumbnail', cdnUrls.user + thumbnail);
+    }
+    return response;
   }
 
 });
