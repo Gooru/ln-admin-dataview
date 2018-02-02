@@ -1,5 +1,11 @@
 <div class="activities">
-
+  <div class="filters pull-left">
+  </div>
+  <div class="activities-summary pull-left">
+    <div class="content-distribution">
+      {{charts.learning-activities-chart radius=200 innerRadius=180 radius1=160 innerRadius1=170 data=contentCounts}}
+    </div>
+  </div>
   {{#app-pull-out showPullOut=showPullOut title=collection.title description=collection.taxonomy.id showMore=showMore isLoading=isLoading as |section|}}
     {{#if (and section.isLessContent collection.title)}}
       {{activities.pull-out-body
@@ -10,13 +16,4 @@
          {{activities.pull-out-more-content }}
     {{/if}}
   {{/app-pull-out}}
-
-  <div class="filters pull-left">
-  </div>
-  <div class="activities-summary pull-left">
-    <div class="content-distribution">
-      {{charts.learning-activities-chart radius=200 innerRadius=180 data=contentCounts}}
-    </div>
-  </div>
-
 </div>
