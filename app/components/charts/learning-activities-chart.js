@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import d3 from 'd3';
-import Utils from 'admin-dataview/utils/utils';
 
 
 /**
@@ -68,6 +67,20 @@ export default Ember.Component.extend({
    */
   radius: 85,
 
+
+  /**
+   * Inner Radius of arc two
+   * @return {Number}
+   */
+  innerRadius1: 65,
+
+  /**
+   *  radius of arc two
+   * @return {Number}
+   */
+  radius1: 85,
+
+
   /**
    * Total count
    * @return {Number}
@@ -76,7 +89,7 @@ export default Ember.Component.extend({
     let count = 0;
     let dataSet = this.get('data');
     dataSet.forEach(data => {
-      count+= data.value;
+      count += data.value;
     });
     return count;
   }),
@@ -92,6 +105,12 @@ export default Ember.Component.extend({
     let data = component.get('data');
     let radius = component.get('radius');
     let innerRadius = component.get('innerRadius');
+    let radius1 = component.get('radius1');
+    let innerRadius1 = component.get('innerRadius1');
+
+    let totalCount = component.get('totalCount');
+    let label = component.get('i18n').t('activities.learning-activities-available').string;
+
     let svg = d3.select(component.element)
       .append('svg')
       .attr('class', 'pie')
@@ -102,6 +121,84 @@ export default Ember.Component.extend({
       .attr('transform', `translate(${  width / 2  },${  height / 2  })`);
 
     let arc = d3.arc()
+      .innerRadius(innerRadius)
+      .outerRadius(radius);
+
+    let arc1 = d3.arc()
+      .innerRadius(innerRadius1)
+      .outerRadius(radius1);
+
+    let pie1 = d3.pie()
+      .value(function(d) {
+        return d.value;
+      })
+      .sort(null);
+    pie1.padAngle(0.05);
+
+
+    let pie = d3.pie()
+      .value(function(d) {
+        return d.value;
+      })
+      .sort(null);
+    pie.padAngle(0.05);
+
+    let arcs = g.selectAll('arc')
+      .data(pie(data))
+      .enter()
+      .append('g')
+      .attr('class', 'arc');
+    arcs.append('path')
+      .attr('d', arc)
+      .attr('fill', (d) => {
+        return d.data.colorCode;
+      })
+      .on('mouseover', function(d) {
+        d3.select(this).style('cursor', 'pointer');
+        let selectedElement = component.$(`#path-arc${  d.index}`);
+        selectedElement.attr('fill', d.data.colorCode);
+        d3.select(this).transition()
+          .duration(500)
+          .ease(d3.easeBounce)
+          .attr('d', arc.innerRadius((innerRadius - 5)).outerRadius(radius));
+        component.$('.header-title').text(d.data.name);
+        component.$('.header-count').text(d.data.value.toLocaleString('en-US'));
+      })
+      .on('mouseout', function() {
+        d3.select(this)
+          .style('cursor', 'none');
+        component.$('.arc1 path').attr('fill', '#F1F2F7');
+        d3.select(this).transition()
+          .duration(500)
+          .ease(d3.easeBounce)
+          .attr('d', arc.innerRadius(innerRadius).outerRadius(radius));
+        component.$('.header-title').text(label);
+        component.$('.header-count').text(totalCount.toLocaleString('en-US'));
+      });
+
+    let arcs1 = g.selectAll('arc1')
+      .data(pie1(data))
+      .enter()
+      .append('g')
+      .attr('class', 'arc1');
+    arcs1.append('path')
+      .attr('d', arc1)
+      .attr('id', function(d) {
+        return `path-arc${  d.index}`;
+      })
+      .attr('fill', '#F1F2F7');
+
+    let text = g.append('svg:foreignObject')
+      .attr('width', (width / 2)).attr('height', radius)
+      .attr('x', -(width / 4))
+      .attr('y', -(radius / 4));
+    text.append('xhtml:div')
+      .attr('class', 'header-count').text(totalCount.toLocaleString('en-US'));
+    text.append('xhtml:div')
+      .attr('class', 'header-title').text(label);
+
+
+    /*let arc = d3.arc()
       .innerRadius(innerRadius)
       .outerRadius(radius);
 
@@ -121,41 +218,26 @@ export default Ember.Component.extend({
       .attr('d', arc)
       .attr('fill', (d) => {
         return d.data.colorCode;
+      }).on('mouseover', (d) => {
+        d3.select(this)
+          .style('cursor', 'pointer');
+        component.$('.header-count').text(d.value.toLocaleString('en-US'));
+        component.$('.header-title').text(d.data.name);
+        d3.select(this).transition()
+          .duration(500)
+          .ease(d3.easeBounce)
+          .attr('d', arc.innerRadius((innerRadius - 5)).outerRadius(radius));
+      }).on('mouseout', () => {
+        d3.select(this).transition()
+          .duration(500)
+          .ease(d3.easeBounce)
+          .attr('d', arc.innerRadius(innerRadius).outerRadius(radius));
+        d3.select(this)
+          .style('cursor', 'none');
+        component.$('.header-count').text(totalCount.toLocaleString('en-US'));
+        component.$('.header-title').text(label);
       });
 
-    arcs.append('svg:foreignObject')
-      .attr('transform', (d) => {
-        let _d = arc.centroid(d);
-        _d[0] *= 1.2;
-        _d[1] *= 1.2;
-        return `translate(${  _d  })`;
-      })
-      .attr('width', 75)
-      .attr('height', 50)
-      .attr('x', (d) => {
-        let _d = arc.centroid(d);
-        let xAxis = _d[0] * 1.2;
-        if (xAxis < 0) {
-          return -50;
-        } else {
-          return 0;
-        }
-      }).attr('y', (d) => {
-        let _d = arc.centroid(d);
-        let yAxis = _d[1] * 1.2;
-        if (yAxis < 0) {
-          return -20;
-        } else {
-          return 0;
-        }
-      })
-      .append('xhtml:div')
-      .attr('class', 'title')
-      .text((d) => {
-        return `${Utils.dataCountFormatByKilo(d.data.value)  } ${  d.data.name}`;
-      });
-    let totalCount =  component.get('totalCount');
-    let label = component.get('i18n').t('activities.learning-activities-available').string;
     let text = g.append('svg:foreignObject')
       .attr('width', (width / 2)).attr('height', radius)
       .attr('x', -(width / 4))
@@ -164,6 +246,7 @@ export default Ember.Component.extend({
       .attr('class', 'header-count').text(totalCount.toLocaleString('en-US'));
     text.append('xhtml:div')
       .attr('class', 'header-title').text(label);
+      */
   }
 
 });

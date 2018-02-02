@@ -29,7 +29,7 @@ Router.map(function() {
     this.route('resources');
     this.route('questions');
   });
-    this.route('activities');
+  this.route('activities');
 });
 
 export default Router;

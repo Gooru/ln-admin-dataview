@@ -1,1 +1,11 @@
-{{yield}}
+<ul class="subject-wise-distribution">
+  {{#each subjects as |subject|}}
+    <li>
+        <div class="subject-wise-chart">
+           {{charts.donut-chart data=subject.contentCounts}}
+        </div>
+        <div class="title">{{subject.name}}</div>
+        <div class="total-count">{{subject.totalCount}}</div>
+    </li>
+  {{/each}}
+</ul>
