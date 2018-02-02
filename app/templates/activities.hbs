@@ -1,10 +1,23 @@
 <div class="activities">
-  <div class="filters pull-left">
+  <button {{action 'getResourceInfo'}} type="button" class="btn btn-info">Info</button>
 
+  {{#app-pull-out showPullOut=showPullOut title=collection.title description=collection.taxonomy.id showMore=showMore isLoading=isLoading as |section|}}
+    {{#if section.isLessContent}}
+      {{activities.pull-out-body
+         collection=collection
+         isLoading=isLoading
+        }}
+        {{else if section.isMoreContent}}
+         {{activities.pull-out-more-content }}
+    {{/if}}
+  {{/app-pull-out}}
+
+  <div class="filters pull-left">
   </div>
   <div class="activities-summary pull-left">
     <div class="content-distribution">
       {{charts.learning-activities-chart radius=200 innerRadius=180 data=contentCounts}}
     </div>
   </div>
+
 </div>
