@@ -4,5 +4,5 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
-  classNames: ['activities', 'pull-out-more-content']
+  classNames: ['activities-pull-out-more-content']
 });
