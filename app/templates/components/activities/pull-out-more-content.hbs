@@ -1,0 +1,13 @@
+<header class="more-pull-out-header">
+  <div class="header-content">
+    {{#each groupHeader as | header |}}
+      <div {{action 'onheaderClick'  header}} class="title">
+        {{#if (eq type "resource")}}
+          <div class="oval {{header}}"> </div>
+        {{/if}}
+        <span> {{header}} </span>
+      </div>
+    {{/each}}
+  </div>
+</header>
+<div class="body"> </div>

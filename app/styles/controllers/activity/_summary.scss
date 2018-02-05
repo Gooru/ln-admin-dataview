@@ -1,0 +1,21 @@
+.activity {
+  height: calc(100vh - 110px);
+  margin: 0 auto;
+  overflow-y: auto;
+
+  .app-pull-out {
+    top: 110px;
+    height: calc(100vh - 110px);
+
+    .pull-out-more-content-container {
+      display: table;
+
+      .coming-next {
+        color: $gray;
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+      }
+    }
+  }
+}
