@@ -52,13 +52,15 @@ export default Ember.Controller.extend({
       let controller = this;
       controller.set('isLoading', true);
       controller.set('showPullOut', true);
+      let collectionType = 'resource';
       const resourceId = '2d83f8ab-787e-4d8a-8fd5-fc490a3c650a';
       return controller.get('contentService').getContentResourceById(resourceId)
         .then(function(collection) {
-          return controller.get('profileService').getUserProfile(collection.creator_id)
+          return controller.get('profileService').readUserProfile(collection.creator_id)
             .then(function(owner) {
               collection.set('owner', owner);
               controller.set('collection', collection);
+              controller.set('collection.type', collectionType);
               controller.set('isLoading', false);
               return Ember.RSVP.resolve(collection);
             });

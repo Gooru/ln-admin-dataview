@@ -34,7 +34,11 @@ export default {
       'professional-dev': 'Professional Development'
     },
     'in-progress': 'in progress',
-    'mastered': 'mastered'
+    'mastered': 'mastered',
+    'created-by': 'Created-by',
+    'subject': 'subject',
+    'course': 'course',
+    'domain': 'domain'
   },
   logout: {
     name: 'Logout'
