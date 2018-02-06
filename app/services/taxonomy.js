@@ -94,6 +94,29 @@ export default Ember.Service.extend({
   },
 
   /**
+   * Fetch courses from the Taxonomy API.
+   *
+   * @param {subject} subject - The taxonomy subject
+   * @returns {Promise}
+   */
+  getCoursesBySubject: function(subject) {
+    let service = this;
+    const apiTaxonomyService = service.get('apiTaxonomyService');
+    return new Ember.RSVP.Promise(function(resolve) {
+      if (subject) {
+        apiTaxonomyService
+          .fetchCourses(subject.frameworkId, subject.id)
+          .then(function(courses) {
+            // subject.set('courses', courses);
+            resolve(courses);
+          });
+      } else {
+        resolve(null);
+      }
+    });
+  },
+
+  /**
    * Gets the Taxonomy Domains for a Course from the cached taxonomy. If the domains are not available then fetch
    * them from the Taxonomy API.
    *

@@ -34,7 +34,10 @@ export default {
       'professional-dev': 'Professional Development'
     },
     'in-progress': 'in progress',
-    'mastered': 'mastered'
+    'mastered': 'mastered',
+    'add-century-skills': 'Add 21st Century Skills',
+    cancel: 'Cancel',
+    'select': 'Select'
   },
   logout: {
     name: 'Logout'
@@ -130,8 +133,23 @@ export default {
     }
   },
   activities: {
-    'learning-activities-available' : 'Learning Activities Available'
+    'learning-activities-available' : 'Learning Activities Available',
+    'filters': 'Filters'
+  },
+  'century-skills': {
+    legends: {
+      hewlett: 'Hewlett Deeper Learning Model',
+      conley: 'Conley Four Keys',
+      framework: 'P21 Framework',
+      national: 'National Research Center for Life and Work'
+    },
+    content: {
+      groups: {
+        cognitive: 'Key Cognitive Skills and Strategies',
+        content: 'Key Content Knowledge',
+        learning: 'Key Learning Skills and Techniques'
+      }
+    }
   }
-
 
 };
