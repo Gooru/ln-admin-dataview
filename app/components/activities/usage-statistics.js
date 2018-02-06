@@ -14,26 +14,25 @@ export default Ember.Component.extend({
   usage: Ember.computed(function() {
 
     let usageStatistics = [{
-        total: 600000,
-        name: 'average time spent'
+      total: 600000,
+      name: 'average time spent'
 
-      }, {
-        total: 1300000,
-        name: 'view count'
-      },
-      {
-        total: 4000000,
-        name: 'remixed count'
-      },
-      {
-        total: 5000,
-        name: 'times studied'
-      }
+    }, {
+      total: 1300000,
+      name: 'view count'
+    },
+    {
+      total: 4000000,
+      name: 'remixed count'
+    },
+    {
+      total: 5000,
+      name: 'times studied'
+    }
     ];
-    console.log(usageStatistics);
 
     return usageStatistics;
-  }),
+  })
 
   // -------------------------------------------------------------------------
   // Events

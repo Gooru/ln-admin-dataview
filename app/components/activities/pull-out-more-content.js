@@ -27,7 +27,6 @@ export default Ember.Component.extend({
   }),
 
 
-
   // /**
   //  * Grouping header  by key value to show
   //  */
@@ -42,21 +41,18 @@ export default Ember.Component.extend({
           let value = {
             key: itemkey,
             value: samples.get(itemkey)
-          }
+          };
           valueObject.push(value);
         }
         let response = {
           key: key,
           value: valueObject
-        }
+        };
         setResponse.push(response);
       }
     }
-    console.log('response');
     return setResponse;
   }),
-
-
 
 
   // -------------------------------------------------------------------------
@@ -64,14 +60,8 @@ export default Ember.Component.extend({
 
   actions: {
     onheaderClick: function(header) {
-      console.log(this.get('HeaderData'));
-      let datas = this.get('groupsAlice.'+header);
-      console.log('groupdatas::', datas, this.get('selectedHeadersData'));
+      let datas = this.get(`groupsAlice.${header}`);
       this.set('HeaderData', datas);
-      console.log('______________________________________________');
-
-
-      // this.sendAction('onClickHeader', header);
     }
 
 
