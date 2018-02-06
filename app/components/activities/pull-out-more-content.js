@@ -14,16 +14,8 @@ export default Ember.Component.extend({
   // /**
   //  * Grouping header indivituals  data to show more info
   //  */
-  HeaderData: Ember.computed('groupData', function() {
+  HeaderData: Ember.computed('groupData.@each', function() {
     return this.get('groupData.extracted');
-  }),
-
-
-  // /**
-  //  * alice name for the objects recieved
-  //  */
-  groupsAlice: Ember.computed('groupData', function() {
-    return this.get('groupData');
   }),
 
 
@@ -37,10 +29,11 @@ export default Ember.Component.extend({
       if (iterateKeyValue[key]) {
         let valueObject = [];
         for (var itemkey in iterateKeyValue[key]) {
-          let samples = Ember.A(iterateKeyValue[key]);
+          let samples = new Object();
+          samples = iterateKeyValue[key];
           let value = {
             key: itemkey,
-            value: samples.get(itemkey)
+            value: samples[itemkey]
           };
           valueObject.push(value);
         }
@@ -60,11 +53,9 @@ export default Ember.Component.extend({
 
   actions: {
     onheaderClick: function(header) {
-      let datas = this.get(`groupsAlice.${header}`);
+      const datas = this.get(`groupData.${header}`);
       this.set('HeaderData', datas);
     }
-
-
   }
 
 });
