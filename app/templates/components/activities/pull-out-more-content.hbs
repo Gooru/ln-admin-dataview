@@ -19,7 +19,11 @@
         {{#each parentHeader.value as | keysValue |}}
           <div class="col-md-12 ">
             <span class="col-md-6 header-lable">{{keysValue.key}} : </span>
+            {{#if keysValue.value}}
             <span class="col-md-6  header-value"> {{keysValue.value}} </span>
+            {{else}}
+            <span class="col-md-6  header-no-value"> __ </span>
+            {{/if}}
           </div>
         {{/each}}
       </div>
