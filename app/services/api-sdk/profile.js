@@ -52,6 +52,7 @@ export default Ember.Service.extend({
     });
   },
 
+
   /**
    * Fetch the User Grades
    * @returns {Object}
@@ -112,6 +113,23 @@ export default Ember.Service.extend({
         .getUserPrefsProviders(userId)
         .then(function(response) {
           resolve(service.get('profileSerializer').normalizeUserPrefsProviders(response));
+        }, reject);
+    });
+  },
+
+
+  /**
+   * Fetch the User Profile from serach FE..
+   * @returns {Object}
+   */
+  readUserProfile: function(userId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('profileAdapter')
+        .readUserProfile(userId)
+        .then(function(response) {
+          resolve(service.get('profileSerializer').normalizeReadUserProfile(response));
         }, reject);
     });
   }

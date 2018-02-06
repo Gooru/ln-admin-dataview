@@ -79,7 +79,7 @@ export default Ember.Component.extend({
    * Number default rows for each courses
    * @type {Number}
    */
-  defaultNumberOfYaixsRow: 2,
+  defaultNumberOfYaixsRow: 1,
 
   /**
    * Number of cells in each row
@@ -216,7 +216,7 @@ export default Ember.Component.extend({
     let subjectListElement = component.$('.subject-list');
     let listWidth = component.$('.subject-list ul').outerWidth();
     if ((subjectListElement.outerWidth()) < listWidth) {
-      component.$('.subject-right-navigation-arrow').show();
+      //component.$('.subject-right-navigation-arrow').show();
     } else {
       component.$('.subject-right-navigation-arrow').hide();
     }
@@ -247,7 +247,7 @@ export default Ember.Component.extend({
     const cellWidth = component.get('cellWidth');
     let defaultNumberOfYaixsRow = component.get('defaultNumberOfYaixsRow');
     let courses = competencyMatrixCoordinates.get('courses').toArray().reverse();
-    component.set('taxonomyCourses', courses);
+    let taxonomyCourses = Ember.A();
     let domains = competencyMatrixCoordinates.get('domains');
     let currentYaxis = 1;
     let resultSet = Ember.A();
@@ -258,6 +258,7 @@ export default Ember.Component.extend({
       let competencyMatrix = competencyMatrixs.findBy('courseCode', courseCode);
       let competencyMatrixByDomain = competencyMatrix ? competencyMatrix.get('domains') : [];
       if (competencyMatrix && competencyMatrixByDomain.length > 0) {
+        taxonomyCourses.pushObject(courseData);
         let mergeDomainData = Ember.A();
         competencyMatrixByDomain.forEach(domainMatrix => {
           let domainCode = domainMatrix.get('domainCode');
@@ -270,19 +271,22 @@ export default Ember.Component.extend({
             let competencyName = competency.get('competencyName');
             let competencySeq = competency.get('competencySeq');
             let status = competency.get('status');
-            let data = Ember.Object.create({
-              'courseCode': courseCode,
-              'courseName': courseName,
-              'courseSeq': courseSeq,
-              'domainName': domainName,
-              'domainCode': domainCode,
-              'domainSeq': domainSeq,
-              'competencyCode': competencyCode,
-              'competencyName': competencyName,
-              'competencySeq': competencySeq,
-              'status': status
-            });
-            mergeDomainData.pushObject(data);
+            let competencyData = competencyCode.split('-');
+            if (competencyData.length === 4) {
+              let data = Ember.Object.create({
+                'courseCode': courseCode,
+                'courseName': courseName,
+                'courseSeq': courseSeq,
+                'domainName': domainName,
+                'domainCode': domainCode,
+                'domainSeq': domainSeq,
+                'competencyCode': competencyCode,
+                'competencyName': competencyName,
+                'competencySeq': competencySeq,
+                'status': status
+              });
+              mergeDomainData.pushObject(data);
+            }
           });
         });
 
@@ -333,23 +337,9 @@ export default Ember.Component.extend({
           currentYaxis = currentYaxis + 1;
         }
 
-      } else {
-        for (let defaultNumberOfYaixsRowIndex = 1; defaultNumberOfYaixsRowIndex <= defaultNumberOfYaixsRow; defaultNumberOfYaixsRowIndex++) {
-          for (let index = 1; index <= numberOfCellsInEachRow; index++) {
-            let dummyData = Ember.Object.create({
-              'courseCode': courseCode,
-              'courseName': courseName,
-              'courseSeq': courseSeq,
-              'yAxisSeq': currentYaxis,
-              'xAxisSeq': index,
-              'status': -1
-            });
-            resultSet.pushObject(dummyData);
-          }
-          currentYaxis = currentYaxis + 1;
-        }
       }
     });
+    component.set('taxonomyCourses', taxonomyCourses);
     return resultSet;
   },
 
@@ -358,7 +348,7 @@ export default Ember.Component.extend({
     component.set('isLoading', true);
     component.get('taxonomyService').getSubjects(subjectCategory).then(subjects => {
       let subject = subjects.objectAt(0);
-      component.set('taxonomySubjects', subjects);
+      component.set('taxonomySubjects', subjects.slice(0, 4));
       component.loadDataBySubject(subject.get('id'));
       component.handleSubjectNavigationArrow();
     });

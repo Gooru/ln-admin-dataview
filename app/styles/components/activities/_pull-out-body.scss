@@ -1,13 +1,16 @@
 .pull-out-content {
   .activities-pull-out-body {
     .author {
-      display: inline-block;
+      display: flex;
+      width: 100%;
+      margin-top: 23px;
 
       img {
         width: 20px;
         height: 20px;
         border-radius: 50px;
         cursor: pointer;
+        margin-right: 10px;
       }
 
       div > * {
@@ -19,16 +22,200 @@
       }
 
       span.title {
-        margin: 2px 5px 10px 0;
+        margin: 2px 10px 10px 0;
         cursor: auto;
         font-style: italic;
+        line-height: 1;
       }
 
       .owner {
         color: $blue-400;
         max-width: 160px;
         @include text-overflow;
+        line-height: normal;
         vertical-align: middle;
+        margin-right: 10px;
+      }
+
+      .date {
+        font-family: Lato;
+        font-size: 13px;
+        font-weight: normal;
+        font-style: italic;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: left;
+        color: #666666;
+      }
+    }
+
+    .collection-info {
+      .title {
+        font-size: 15px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        text-align: left;
+        color: #4a4a4a;
+      }
+
+      .resource-info {
+        margin-top: 20px;
+        display: flex;
+
+        .resources-icon {
+          max-width: 80px;
+          height: auto;
+          margin-right: 10px;
+          margin-top: 3px;
+
+          .video_resource {
+            i {
+              background: url("images/video-resource-green.svg");
+              width: 67px;
+              height: 67px;
+              background-size: 67px 67px;
+              object-fit: contain;
+              display: block;
+            }
+          }
+        }
+
+        .description {
+          font-size: 15px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: left;
+          color: #4a4a4a;
+        }
+      }
+
+      .header-info {
+        margin-top: 20px;
+
+        .collection-image {
+          width: 139px;
+          height: 87px;
+          object-fit: contain;
+          float: left;
+          margin-right: 10px;
+          margin-top: 3px;
+        }
+
+        .discription {
+          font-size: 15px;
+          font-weight: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          color: #4a4a4a;
+        }
+      }
+    }
+
+    .subject {
+      margin-top: 50px;
+
+      .header {
+        font-size: 15px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: left;
+        color: #4a4a4a;
+        height: 35px;
+        border-bottom: 1px dashed #979797;
+      }
+
+      .items {
+        display: inline-block;
+
+        .subect-item {
+          margin: 10px;
+          text-align: center;
+          vertical-align: middle;
+          line-height: 2;
+          display: inline-block;
+          float: left;
+          height: 30px;
+          border-radius: 4px;
+          border: solid 1px #4a4a4a;
+
+          span {
+            padding: 10px;
+          }
+        }
+      }
+    }
+
+    .course {
+      margin-top: 20px;
+
+      .header {
+        font-size: 15px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: left;
+        color: #4a4a4a;
+        height: 35px;
+        border-bottom: 1px dashed #979797;
+      }
+
+      .items {
+        display: inline-block;
+
+        .course-item {
+          margin: 10px;
+          text-align: center;
+          vertical-align: middle;
+          line-height: 2;
+          display: inline-block;
+          float: left;
+          height: 30px;
+          border-radius: 4px;
+          border: solid 1px #4a4a4a;
+
+          span {
+            padding: 10px;
+          }
+        }
+      }
+    }
+
+    .domain {
+      margin-top: 20px;
+
+      .header {
+        font-size: 15px;
+        font-weight: bold;
+        text-transform: uppercase;
+        text-align: left;
+        color: #4a4a4a;
+        height: 35px;
+        border-bottom: 1px dashed #979797;
+      }
+
+      .items {
+        display: inline-block;
+
+        .domain-item {
+          margin: 10px;
+          text-align: center;
+          vertical-align: middle;
+          line-height: 2;
+          display: inline-block;
+          float: left;
+          height: 30px;
+          border-radius: 4px;
+          border: solid 1px #4a4a4a;
+
+          span {
+            padding: 10px;
+          }
+        }
       }
     }
   }

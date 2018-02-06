@@ -37,7 +37,11 @@ export default {
     'mastered': 'mastered',
     'add-century-skills': 'Add 21st Century Skills',
     cancel: 'Cancel',
-    'select': 'Select'
+    'select': 'Select',
+    'created-by': 'Created-by',
+    'subject': 'subject',
+    'course': 'course',
+    'domain': 'domain'
   },
   logout: {
     name: 'Logout'
