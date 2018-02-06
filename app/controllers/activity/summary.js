@@ -155,8 +155,6 @@ export default Ember.Controller.extend({
         .then(function(collection) {
           return controller.get('profileService').readUserProfile(collection.creator_id)
             .then(function(owner) {
-              // console.log(JSON.stringify(owner));
-              // console.log(JSON.stringify(collection));
               collection.set('owner', owner);
               controller.set('collection', collection);
               controller.set('collection.type', collectionType);
