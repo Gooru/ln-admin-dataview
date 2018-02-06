@@ -57,20 +57,43 @@
     height: calc(100vh - 210px);
     overflow-y: auto;
 
-    .section {
-      .section-title {
-        padding: 8px 0;
-        margin: 0 35px 15px;
-        font-size: 15px;
-        font-weight: bold;
-        color: $gray-29;
-        text-transform: uppercase;
-        border-bottom: dashed 2px $dark-600;
-      }
+    .header-property {
+      .headergroup {
+        margin-top: 15px;
+        margin-bottom: 15px;
 
-      .section-content {
-        margin-top: 12px;
+        .header-title {
+          font-size: 19.5px;
+          margin-bottom: 20px;
+          font-weight: bold;
+          color: #37424b;
+          display: inherit;
+          text-align: right;
+          margin-left: 20px;
+          width: 40%;
+          text-transform: capitalize;
+        }
+
+        .header-lable {
+          text-align: right;
+          font-size: 15px;
+          font-weight: bold;
+          color: #4a4a4a;
+        }
+
+        .header-value {
+          font-size: 15px;
+          text-align: left;
+          color: #4a4a4a;
+        }
       }
+    }
+
+    .usage-statistics {
+      display: inline-block;
+      width: 100%;
+      height: auto;
+      padding: 10px;
     }
   }
 }

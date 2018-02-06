@@ -10,4 +10,26 @@
     {{/each}}
   </div>
 </header>
-<div class="body"> </div>
+
+<div class="body">
+  <div class="col-md-12 header-property">
+    {{#each selectedHeadersData as | parentHeader |}}
+      <div class="col-md-6 headergroup">
+        <span class="header-title"> {{parentHeader.key}} </span>
+        {{#each parentHeader.value as | keysValue |}}
+          <div class="col-md-12 ">
+            <span class="col-md-6 header-lable">{{keysValue.key}} : </span>
+            <span class="col-md-6  header-value"> {{keysValue.value}} </span>
+          </div>
+        {{/each}}
+      </div>
+    {{/each}}
+  </div>
+
+
+  <div class="usage-statistics">
+    {{activities.usage-statistics subjects=subjects onSelectActiveUsers='onSelectActiveUsers'}}
+  </div>
+
+
+</div>

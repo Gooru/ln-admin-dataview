@@ -60,7 +60,7 @@ export default Ember.Controller.extend({
 
       let curated = {
         creation: {
-          'Published By': 'Ashokkumar',
+          'Published By': 'Gooru org',
           'Published Status': 'Published',
           Aggregator: collection.aggregator ? collection.aggregator : null,
           License: collection.license ? collection.license : null
@@ -129,6 +129,7 @@ export default Ember.Controller.extend({
     return resultSet;
   }),
 
+
   // /**
   //  * Grouping header data to show more info  in pull out
   //  */
@@ -163,12 +164,6 @@ export default Ember.Controller.extend({
               return Ember.RSVP.resolve(collection);
             });
         });
-    },
-
-
-    onClickHeader : function(header) {
-      // console.log('header', header, this.get('groupData'));
-
     }
   }
 });
