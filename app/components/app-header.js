@@ -36,6 +36,8 @@ export default Ember.Component.extend(ModalMixin, {
   actions: {
 
     logout: function() {
+      let userId = this.get('session.id');
+      localStorage.removeItem(`research_${userId}_activities_filters`);
       this.get('session').invalidate();
       window.location.href =  '/logout';
     },
