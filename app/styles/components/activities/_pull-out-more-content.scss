@@ -61,6 +61,7 @@
       .headergroup {
         margin-top: 15px;
         margin-bottom: 15px;
+        padding: 0;
 
         .header-title {
           font-size: 19.5px;
@@ -85,10 +86,12 @@
           font-size: 15px;
           text-align: left;
           color: #4a4a4a;
+          padding: 0;
         }
 
         .header-no-value {
           line-height: normal;
+          padding: 0px;
         }
       }
     }
