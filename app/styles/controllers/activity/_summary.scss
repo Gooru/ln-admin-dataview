@@ -1,7 +1,10 @@
 .activity {
   height: calc(100vh - 110px);
   margin: 0 auto;
-  overflow-y: auto;
+
+  .btn {
+    margin-top: 72px;
+  }
 
   .app-pull-out {
     top: 110px;

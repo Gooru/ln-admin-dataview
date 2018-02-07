@@ -21,7 +21,7 @@ export default {
     signatureCollection: 'signature Collections',
     mostPopularProviders: 'most popular providers',
     globalStatistics: 'global Statistics',
-    usageStatistics: "usage Statistics",
+    usageStatistics: 'usage Statistics',
     'learners': 'learners',
     'active-users': 'Active Users',
     'explore': 'Explore',
