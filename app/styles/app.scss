@@ -17,8 +17,9 @@
 @import 'controllers/learner/competencies';
 @import 'controllers/learner/courses';
 @import 'controllers/learner/activities';
-@import 'controllers/activity/summary';
 
+@import 'controllers/activity';
+@import 'controllers/activity/summary';
 
 @import 'helpers/three-bounce-spinner';
 
@@ -77,11 +78,15 @@
 
 @import 'components/learners/global-statistics';
 
+@import 'components/activities/activities-filter';
+@import 'components/activities/activities-filter-accordion';
 @import 'components/activities/pull-out-body';
 @import 'components/activities/pull-out-more-content';
 @import 'components/activities/distribution-by-subjects';
 @import 'components/activities/usage-statistics';
 
 
+@import 'components/modals/activity/century-skills-content';
+@import 'components/modals/activity/century-skills-legend';
 
 @import 'components/modals/learner/user-profile-modal';

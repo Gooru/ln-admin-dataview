@@ -13,6 +13,11 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
    */
   searchService: Ember.inject.service('api-sdk/search'),
 
+  /**
+   * Session Service
+   */
+  session: Ember.inject.service('session'),
+
   //-------------------------------------------------------------------------
   //Properties
 
@@ -87,7 +92,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   setupController: function(controller, model) {
+    let route = this;
     controller.set('contentCounts', model.contentCounts);
+    let userId = route.get('session.id');
+    let selectedFilterItems = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`));
+    //Route to summary page
+    if (selectedFilterItems.category.length > 0 && selectedFilterItems.subject.length > 0) {
+      route.transitionTo('activity.summary');
+    }
   }
 
 });

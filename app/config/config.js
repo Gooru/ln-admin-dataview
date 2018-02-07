@@ -245,3 +245,9 @@ export const BARS_GRADING_SCALE = [{
   COLOR: '#A8C99C'
 }
 ];
+
+export const CENTURY_SKILLS_GROUPS = {
+  KEY_COGNITIVE_SKILLS_AND_STRATEGIES: 'Key Cognitive Skills and Strategies',
+  KEY_CONTENT_KNOWLEDGE: 'Key Content Knowledge',
+  KEY_LEARNING_SKILLS_AND_TECHNIQUES: 'Key Learning Skills and Techniques'
+};
