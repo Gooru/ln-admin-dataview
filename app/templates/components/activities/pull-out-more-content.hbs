@@ -1,0 +1,39 @@
+<header class="more-pull-out-header">
+  <div class="header-content">
+    {{#each groupHeader as | header |}}
+      <div {{action 'onheaderClick'  header}} class="title">
+        {{#if (eq type "resource")}}
+          <div class="oval {{header}}"> </div>
+        {{/if}}
+        <span> {{header}} </span>
+      </div>
+    {{/each}}
+  </div>
+</header>
+
+<div class="body">
+  <div class="col-md-12 header-property">
+    {{#each selectedHeadersData as | parentHeader |}}
+      <div class="col-md-6 headergroup">
+        <span class="header-title"> {{parentHeader.key}} </span>
+        {{#each parentHeader.value as | keysValue |}}
+          <div class="col-md-12 ">
+            <span class="col-md-6 header-lable">{{keysValue.key}} : </span>
+            {{#if keysValue.value}}
+            <span class="col-md-6  header-value"> {{keysValue.value}} </span>
+            {{else}}
+            <span class="col-md-6  header-no-value"> __ </span>
+            {{/if}}
+          </div>
+        {{/each}}
+      </div>
+    {{/each}}
+  </div>
+
+
+  <div class="usage-statistics">
+    {{activities.usage-statistics subjects=subjects onSelectActiveUsers='onSelectActiveUsers'}}
+  </div>
+
+
+</div>

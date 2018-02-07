@@ -163,3 +163,14 @@ export function getGradeRange(score) {
   }
   return range;
 }
+
+
+/**
+ * Formats a date into a string
+ * @param {Date} date
+ * @param {string} format
+ */
+export function formatDate(date, format) {
+  format = format || 'dddd, MMMM Do, YYYY h:mm A';
+  return moment(date).format(format);
+}

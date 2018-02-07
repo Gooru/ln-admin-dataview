@@ -81,6 +81,16 @@
               display: block;
             }
           }
+          .interactive_resource {
+            i {
+              background: url("images/interactive-resource-green.svg");
+              width: 67px;
+              height: 67px;
+              background-size: 67px 67px;
+              object-fit: contain;
+              display: block;
+            }
+          }
         }
 
         .description {
@@ -135,7 +145,6 @@
 
         .subect-item {
           margin: 10px;
-          text-align: center;
           vertical-align: middle;
           line-height: 2;
           display: inline-block;
@@ -169,7 +178,6 @@
 
         .course-item {
           margin: 10px;
-          text-align: center;
           vertical-align: middle;
           line-height: 2;
           display: inline-block;
@@ -203,7 +211,6 @@
 
         .domain-item {
           margin: 10px;
-          text-align: center;
           vertical-align: middle;
           line-height: 2;
           display: inline-block;

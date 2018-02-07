@@ -9,14 +9,4 @@
       {{charts.learning-activities-chart radius=200 innerRadius=180 radius1=160 innerRadius1=170 data=contentCounts}}
     </div>
   </div>
-  {{#app-pull-out showPullOut=showPullOut title=collection.title description=collection.taxonomy.id showMore=showMore isLoading=isLoading as |section|}}
-    {{#if (and section.isLessContent collection.title)}}
-      {{activities.pull-out-body
-         collection=collection
-         isLoading=isLoading
-        }}
-        {{else if section.isMoreContent}}
-         {{activities.pull-out-more-content }}
-    {{/if}}
-  {{/app-pull-out}}
 </div>

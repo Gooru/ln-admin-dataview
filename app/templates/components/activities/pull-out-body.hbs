@@ -3,12 +3,12 @@
     <span class="title">  {{t "common.created-by" }} </span>
     <img class="img-responsive" src="{{collection.owner.thumbnail}}">
     <span class="owner">{{collection.owner.username}}</span>
-    <span class="date">on 24 December, 2016 {{collection.publish_date}}</span>
+    <span class="date">on {{format-date collection.publish_date 'DD MMMM, YYYY'}}</span>
   </div>
 
   <div class="collection-info">
     <span class="title"> {{collection.title}}</span>
-    {{#if (eq collection.type "resource234" )}}
+    {{#if (eq collection.type "resource" )}}
       <div class="resource-info">
         <div class="resources-icon">
           <div class="{{collection.content_subformat}}"> <i> </i> </div>
@@ -28,49 +28,32 @@
 
   <div class="subject">
     <div class="header"> {{t "common.subject"}}</div>
-    <div class="items">
-      <div class="subect-item">
-        <span>MATH </span>
+    {{#each collection.info.gooru_subject as | subject |}}
+      <div class="items">
+        <div class="subect-item">
+          <span>{{subject}} </span>
+        </div>
       </div>
-      <div class="subect-item">
-        <span>Absolute Positions </span>
-      </div>
-      <div class="subect-item">
-        <span>Position </span>
-      </div>
-    </div>
-
+    {{/each}}
   </div>
 
   <div class="course">
     <div class="header"> {{t "common.course"}}</div>
-    <div class="items">
-      <div class="course-item">
-        <span>MATH </span>
+    {{#each collection.info.gooru_course as | course |}}
+      <div class="items">
+        <div class="course-item">
+          <span>{{course}} </span>
+        </div>
       </div>
-      <div class="course-item">
-        <span>Absolute Positions </span>
-      </div>
-      <div class="course-item">
-        <span>Position </span>
-      </div>
-    </div>
+    {{/each}}
   </div>
 
   <div class="domain">
     <div class="header"> {{t "common.domain"}}</div>
     <div class="items">
       <div class="domain-item">
-        <span>MATH </span>
-      </div>
-      <div class="domain-item">
-        <span>Absolute Positions </span>
-      </div>
-      <div class="domain-item">
-        <span>Position </span>
+        <span>{{collection.info.domain.attribution}} </span>
       </div>
     </div>
   </div>
-
-
 </div>
