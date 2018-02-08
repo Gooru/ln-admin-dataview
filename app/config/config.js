@@ -251,3 +251,53 @@ export const CENTURY_SKILLS_GROUPS = {
   KEY_CONTENT_KNOWLEDGE: 'Key Content Knowledge',
   KEY_LEARNING_SKILLS_AND_TECHNIQUES: 'Key Learning Skills and Techniques'
 };
+
+export const ACTIVITY_FILTER = [
+  {
+    'title': 'activities.filter-types.category',
+    'code': 'category'
+  },
+  {
+    'title': 'activities.filter-types.subject',
+    'code': 'subject'
+  },
+  {
+    'title': 'activities.filter-types.course',
+    'code': 'course'
+  },
+  {
+    'title': 'activities.filter-types.21-century-skills',
+    'code': '21-century-skills'
+  },
+  {
+    'title': 'activities.filter-types.license',
+    'code': 'licenses'
+  },
+  {
+    'title': 'activities.filter-types.dok',
+    'code': 'dok'
+  },
+  {
+    'title': 'activities.filter-types.publisher',
+    'code': 'publisher'
+  },
+  {
+    'title': 'activities.filter-types.audience',
+    'code': 'audience'
+  }
+];
+
+export const ACTIVITIES_FILTER = [
+  {
+    'title': 'activities.filter-types.category',
+    'code': 'category'
+  },
+  {
+    'title': 'activities.filter-types.subject',
+    'code': 'subject'
+  },
+  {
+    'title': 'activities.filter-types.course',
+    'code': 'course'
+  }
+];

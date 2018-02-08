@@ -1,19 +1,7 @@
 import Ember from 'ember';
+import { ACTIVITIES_FILTER } from 'admin-dataview/config/config';
 
 export default Ember.Controller.extend({
 
-  filterTypes: Ember.A([
-    {
-      'title': 'Category',
-      'code': 'category'
-    },
-    {
-      'title': 'Subject',
-      'code': 'subject'
-    },
-    {
-      'title': 'Course',
-      'code': 'course'
-    }
-  ])
+  filterTypes: ACTIVITIES_FILTER
 });

@@ -24,9 +24,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   // -------------------------------------------------------------------------
   // Actions
-  actions: {
-
-  },
 
   // -------------------------------------------------------------------------
   // Methods
@@ -95,11 +92,6 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     let route = this;
     controller.set('contentCounts', model.contentCounts);
     let userId = route.get('session.id');
-    let selectedFilterItems = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`));
-    //Route to summary page
-    if (selectedFilterItems.category.length > 0 && selectedFilterItems.subject.length > 0) {
-      route.transitionTo('activity.summary');
-    }
   }
 
 });
