@@ -139,7 +139,17 @@ export default {
   },
   activities: {
     'learning-activities-available' : 'Learning Activities Available',
-    'filters': 'Filters'
+    'filters': 'Filters',
+    'filter-types': {
+      'category': 'Category',
+      'subject': 'Subject',
+      'course': 'Course',
+      '21-century-skills': '21st Century Skills',
+      'license': 'License',
+      'dok': 'Depth of Knowledge',
+      'publisher': 'Publisher',
+      'audience': 'Audience'
+    }
   },
   'century-skills': {
     legends: {
