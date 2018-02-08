@@ -11,9 +11,9 @@ export default Ember.Component.extend({
   classNames: ['signature-collection'],
 
   /**
-   * content data count list
+   * signature collections list
    * @type {Array}
    */
-  colelctionData: null
-
+  collections: null
+  
 });

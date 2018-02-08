@@ -17,8 +17,8 @@ export default {
       HT_HL: 'Highlight Text'
     },
     currentlyStudying: 'currently Studying',
-    signatureAssessment: 'signature Assessments',
-    signatureCollection: 'signature Collections',
+    'signature-assessment': 'Signature Assessments',
+    'signature-collection': 'Signature Collections',
     mostPopularProviders: 'most popular providers',
     globalStatistics: 'global Statistics',
     usageStatistics: 'usage Statistics',
