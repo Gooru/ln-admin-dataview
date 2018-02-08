@@ -198,8 +198,9 @@ export default Ember.Component.extend(ModalMixin, {
     let component = this;
     let userId = component.get('session.id');
     let selectedFilterItems = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`)) || component.get('selectedFilterItems');
-    let selectedCategory = selectedFilterItems.category[0];
+    let selectedCategory = selectedFilterItems.category;
     if (selectedCategory) {
+      selectedCategory = selectedCategory[0];
       let filterList = [];
       let subjectsPromise = Ember.RSVP.resolve(component.get('taxonomyService').getSubjects(selectedCategory.id));
       return Ember.RSVP.hash({
@@ -233,11 +234,12 @@ export default Ember.Component.extend(ModalMixin, {
     let selectedFilterItems = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`)) || component.get('selectedFilterItems');
     let selectedSubjects = selectedFilterItems.subject;
     let filterList = [];
-    if (selectedSubjects.length > 0) {
-      if (!selectedSubjects[0].frameworkId) {
-        selectedSubjects[0].frameworkId = component.get('defaultFrameworkId');
+    if (selectedSubjects) {
+      selectedSubjects = selectedSubjects[0];
+      if (!selectedSubjects.frameworkId) {
+        selectedSubjects.frameworkId = component.get('defaultFrameworkId');
       }
-      let coursePromise = Ember.RSVP.resolve(component.get('taxonomyService').getCoursesBySubject(selectedSubjects[0]));
+      let coursePromise = Ember.RSVP.resolve(component.get('taxonomyService').getCoursesBySubject(selectedSubjects));
       return Ember.RSVP.hash({
         courseList: coursePromise
       })
