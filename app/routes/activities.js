@@ -40,12 +40,18 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
    * return hashed json of each content type conunt
    */
   getSearchContentCount: function() {
-    const webpageCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(null, 1, 'webpage'));
-    const audioCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(null, 1, 'audio'));
-    const videoCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(null, 1, 'video'));
-    const imageCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(null, 1, 'image'));
-    const interactiveCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(null, 1, 'interactive'));
-    const textCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(null, 1, 'text'));
+    let webpageFilters = {'flt.resourceFormat' : 'webpage'};
+    const webpageCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(webpageFilters, 1));
+    let audioFilters = {'flt.resourceFormat' : 'audio'};
+    const audioCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(audioFilters, 1));
+    let videoFilters = {'flt.resourceFormat' : 'video'};
+    const videoCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(videoFilters, 1));
+    let imageFilters = {'flt.resourceFormat' : 'image'};
+    const imageCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(imageFilters, 1));
+    let interactiveFilters = {'flt.resourceFormat' : 'interactive'};
+    const interactiveCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(interactiveFilters, 1));
+    let textFilters = {'flt.resourceFormat' : 'text'};
+    const textCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(textFilters, 1));
     const questionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions());
     return Ember.RSVP.hash({
       questionCount: questionCountPromise,

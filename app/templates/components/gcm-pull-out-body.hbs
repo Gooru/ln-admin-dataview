@@ -5,6 +5,11 @@
 {{#if isLoading}}
   {{three-bounce-spinner}}
 {{else}}
-  {{content-display-count contentCountData=contentCountData}} {{charts.study-count-chart}} {{popular-providers }} {{signature-assessments signatureContents=signatureContents }} {{signature-collections signatureContents=signatureContents}}
-
+  {{content-display-count contentCountData=contentCountData}}
+   {{#if signatureContents}}
+    {{signature-assessments signatureContents=signatureContents }}
+   {{/if}}
+   {{#if signatureContents}}
+    {{signature-collections signatureContents=signatureContents}}
+   {{/if}}
 {{/if}}

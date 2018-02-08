@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import TaxonomyItem from 'admin-dataview/models/taxonomy/taxonomy-item';
 import BrowseItem from 'admin-dataview/models/taxonomy/browse-item';
-import { TAXONOMY_CATEGORIES } from 'admin-dataview/config/config';
+import {
+  TAXONOMY_CATEGORIES
+} from 'admin-dataview/config/config';
 
 /**
  * Generates a taxonomy tree data structure for testing
@@ -123,42 +125,71 @@ export function getDomainId(id) {
 }
 
 /**
-* Get selected node information
-* @return {json}
-*/
+ * Get selected node information
+ * @return {json}
+ */
 export function getNodeInfo(node) {
   switch (node.depth) {
   case 1:
     return {
+      id: node.data.id,
       type: 'subject',
       parent: node.data.name,
-      searchValue: node.data.name
+      searchValue: node.data.name,
+      filters: {
+        'flt.subjectName': node.data.name
+      }
     };
   case 2:
     return {
+      id: node.data.id,
       type: 'course',
       parent: node.parent.data.name,
-      searchValue: node.data.name
+      searchValue: node.data.name,
+      filters: {
+        'flt.subjectName': node.parent.data.name,
+        'flt.courseName': node.data.name
+      }
     };
   case 3:
     return {
+      id: node.data.id,
       type: 'domain',
       parent: `${node.parent.parent.data.name} > ${node.parent.data.name}`,
-      searchValue: node.data.name
+      searchValue: node.data.name,
+      filters: {
+        'flt.subjectName': node.parent.parent.data.name,
+        'flt.courseName': node.parent.data.name,
+        'flt.domainName': node.data.name
+      }
     };
   case 4:
     return {
+      id: node.data.id,
       type: 'standard',
       parent: `${node.parent.parent.parent.data.name} > ${node.parent.parent.data.name} > ${node.parent.data.name}`,
       title: node.data.title,
-      searchValue: node.data.code
+      searchValue: node.data.code,
+      filters: {
+        'flt.subjectName': node.parent.parent.parent.data.name,
+        'flt.courseName': node.parent.parent.data.name,
+        'flt.domainName': node.parent.data.name,
+        'flt.standardDisplay': node.data.code
+      }
     };
   case 5:
     return {
+      id: node.data.id,
       type: 'standard',
       parent: `${node.parent.parent.parent.parent.data.name} > ${node.parent.parent.parent.data.name} > ${node.parent.parent.data.name}  > ${node.parent.data.name}`,
       title: node.data.title,
-      searchValue: node.data.code
+      searchValue: node.data.code,
+      filters: {
+        'flt.subjectName': node.parent.parent.parent.parent.data.name,
+        'flt.courseName': node.parent.parent.parent.data.name,
+        'flt.domainName': node.parent.parent.data.name,
+        'flt.standardDisplay': node.data.code
+      }
     };
   default:
     return null;
@@ -166,9 +197,9 @@ export function getNodeInfo(node) {
 }
 
 /**
-* Get structured content count information
-* @return {json}
-*/
+ * Get structured content count information
+ * @return {json}
+ */
 export function getStructuredContentData(contentType, contentCount) {
   const usLocale = 'en-US';
   return {

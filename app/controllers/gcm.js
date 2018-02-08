@@ -154,7 +154,9 @@ export default Ember.Controller.extend({
         name: node.data.name,
         code: node.data.code,
         searchValue: nodeInfo.searchValue,
-        description: nodeDescription
+        description: nodeDescription,
+        filters: nodeInfo.filters,
+        id: nodeInfo.id
       };
       controller.set('isCompetencyNode', nodeInfo.type === TAXONOMY_LEVELS.STANDARD);
       controller.set('nodeData', selectedNodeData);
@@ -308,28 +310,29 @@ export default Ember.Controller.extend({
    * return hashed json of each content type conunt
    */
   getSearchContentCount: function(selectedNode) {
+    let filters = selectedNode.filters;
     const contentCountData = [];
-    const resourceCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(selectedNode));
-    const questionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(selectedNode));
-    const courseCountPromise = Ember.RSVP.resolve(this.get('searchService').searchCourses(selectedNode));
-    const collectionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchCollections(selectedNode));
-    const assessmentCountPromise = Ember.RSVP.resolve(this.get('searchService').searchAssessments(selectedNode));
-    const rubricCountPromise = Ember.RSVP.resolve(this.get('searchService').searchRubrics(selectedNode));
-    const unitCountPromise = Ember.RSVP.resolve(this.get('searchService').searchUnits(selectedNode));
-    const lessonsCountPromise = Ember.RSVP.resolve(this.get('searchService').searchLessons(selectedNode));
+    const resourceCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(filters));
+    const questionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(filters));
+    const courseCountPromise = Ember.RSVP.resolve(this.get('searchService').searchCourses(filters));
+    const collectionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchCollections(filters));
+    const assessmentCountPromise = Ember.RSVP.resolve(this.get('searchService').searchAssessments(filters));
+    const rubricCountPromise = Ember.RSVP.resolve(this.get('searchService').searchRubrics(filters));
+    const unitCountPromise = Ember.RSVP.resolve(this.get('searchService').searchUnits(filters));
+    const lessonsCountPromise = Ember.RSVP.resolve(this.get('searchService').searchLessons(filters));
 
 
     return Ember.RSVP.hash({
       resourceCount: resourceCountPromise,
       questionCount: questionCountPromise,
-      courceCount: courseCountPromise,
+      courseCount: courseCountPromise,
       collectionCount: collectionCountPromise,
       assessmentCount: assessmentCountPromise,
       rubricCount: rubricCountPromise,
       unitCount: unitCountPromise,
       lessonCount: lessonsCountPromise
     }).then(function(hash) {
-      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COURSE, hash.courceCount));
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COURSE, hash.courseCount));
       contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.UNIT, hash.unitCount));
       contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.LESSON, hash.lessonCount));
       contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.ASSESSMENT, hash.assessmentCount));

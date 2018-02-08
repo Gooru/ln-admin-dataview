@@ -1,7 +1,6 @@
 import Ember from 'ember';
-import {
-  TAXONOMY_LEVELS
-} from 'admin-dataview/config/config';
+
+
 /**
  * Adapter to support the Search for Collections, Assessments, Resources and Questions
  *
@@ -18,158 +17,126 @@ export default Ember.Object.extend({
   /**
    * Fetches the collections that match with the node
    *
-   * @param nodeData
+   * @param filters
    * @returns {Promise.<Collection[]>}
    */
-  searchCollections: function(nodeData, length) {
+  searchCollections: function(filters = {}, length = 1) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/scollection`;
-    let nodeType = nodeData.type;
-    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `flt.${nodeType}Name`;
+    let defaultData = {
+      q: '*',
+      length: length,
+      'flt.collectionType': 'collection'
+    };
     const options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
-      headers: adapter.defineHeaders(),
-      data: {
-        q: '*',
-        length: length,
-        'flt.collectionType': 'collection',
-        'flt.publishStatus': 'published'
-      }
+      headers: adapter.defineHeaders()
     };
-    if (nodeData.name) {
-      options.data[`${filterType}`] = nodeData.searchValue;
-    }
+    options.data = Object.assign(defaultData, filters);
+
     return Ember.$.ajax(url, options);
   },
 
   /**
    * Fetches the assessments that match with the node
    *
-   * @param nodeData the term to search
+   * @param filters
    * @returns {Promise.<Assessment[]>}
    */
-  searchAssessments: function(nodeData, length) {
+  searchAssessments: function(filters = {}, length = 1) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/scollection`;
-    let nodeType = nodeData.type;
-    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `flt.${nodeType}Name`;
+    let defaultData =  {
+      q: '*',
+      length: length,
+      'flt.collectionType': 'assessment'
+    };
     const options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
-      headers: adapter.defineHeaders(),
-      data: {
-        q: '*',
-        length: length,
-        'flt.collectionType': 'assessment',
-        'flt.publishStatus': 'published'
-      }
+      headers: adapter.defineHeaders()
     };
-    if (nodeData.name) {
-      options.data[`${filterType}`] = nodeData.searchValue;
-    }
+    options.data = Object.assign(defaultData, filters);
     return Ember.$.ajax(url, options);
   },
 
   /**
    * Fetches the resources that match with the node
    *
-   * @param nodeData the term to search
+   * @param filters
    * @returns {Promise.<Resource[]>}
    */
-  searchResources: function(nodeData, length = 1, resourceFormat = null) {
+  searchResources: function(filters = {}, length = 1) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/resource`;
+    let defaultData =  {
+      q: '*',
+      length: length,
+      'flt.contentFormat': 'resource'
+    };
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
-      headers: adapter.defineHeaders(),
-      data: {
-        q: '*',
-        length: length,
-        'flt.contentFormat': 'resource',
-        'flt.publishStatus': 'published'
-      }
+      headers: adapter.defineHeaders()
     };
-    if (nodeData) {
-      let nodeType = nodeData.type;
-      let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `flt.${nodeType}Name`;
-      if (nodeData.name) {
-        options.data[`${filterType}`] = nodeData.searchValue;
-      }
-    }
-    if (resourceFormat) {
-      options.data['flt.resourceFormat'] = resourceFormat;
-    }
+    options.data = Object.assign(defaultData, filters);
+
     return Ember.$.ajax(url, options);
   },
 
   /**
    * Fetches the questions that match with the node
    *
-   * @param nodeData the term to search
+   * @param filters
    * @returns {Promise.<Question[]>}
    */
-  searchQuestions: function(nodeData, length) {
+  searchQuestions: function(filters = {}, length = 1) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/resource`;
-
+    let defaultData =  {
+      q: '*',
+      length: length,
+      'flt.resourceFormat': 'question'
+    };
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
-      headers: adapter.defineHeaders(),
-      data: {
-        q: '*',
-        length: length,
-        'flt.resourceFormat': 'question',
-        'flt.publishStatus': 'published'
-      }
+      headers: adapter.defineHeaders()
     };
-    if (nodeData) {
-      let nodeType = nodeData.type;
-      let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `flt.${nodeType}Name`;
-      if (nodeData.name) {
-        options.data[`${filterType}`] = nodeData.searchValue;
-      }
-    }
+    options.data = Object.assign(defaultData, filters);
     return Ember.$.ajax(url, options);
   },
 
   /**
    * Fetches courses that match with the node
    *
-   * @param nodeData the term to search
+   * @param filters
    * @returns {Promise.<Course[]>}
    */
-  searchCourses: function(nodeData) {
+  searchCourses: function(filters = {}, length = 10) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/course`;
-    let nodeType = nodeData.type;
-    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `flt.${nodeType}Name`;
+    let defaultData =  {
+      q: '*',
+      length: length
+    };
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
-      headers: adapter.defineHeaders(),
-      data: {
-        q: '*',
-        start: 1,
-        length: 10,
-        'publishStatus': 'published'
-      }
+      headers: adapter.defineHeaders()
     };
-    if (nodeData.name) {
-      options.data[`${filterType}`] = nodeData.searchValue;
-    }
+    options.data = Object.assign(defaultData, filters);
     return Ember.$.ajax(url, options);
   },
 
@@ -179,26 +146,21 @@ export default Ember.Object.extend({
    * @param nodeData the term to search
    * @returns {Promise.<Course[]>}
    */
-  searchRubrics: function(nodeData) {
+  searchRubrics: function(filters = {}, length = 1) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/rubric`;
-    let nodeType = nodeData.type;
-    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `flt.${nodeType}Name`;
+    let defaultData =  {
+      q: '*',
+      length: length
+    };
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
-      headers: adapter.defineHeaders(),
-      data: {
-        q: '*',
-        length: 1,
-        'publishStatus': 'published'
-      }
+      headers: adapter.defineHeaders()
     };
-    if (nodeData.name) {
-      options.data[`${filterType}`] = nodeData.searchValue;
-    }
+    options.data = Object.assign(defaultData, filters);
     return Ember.$.ajax(url, options);
   },
 
@@ -206,29 +168,24 @@ export default Ember.Object.extend({
   /**
    * Fetches rubrics that match with the node
    *
-   * @param nodeData the term to search
+   * @param filters
    * @returns {Promise.<Course[]>}
    */
-  searchUnits: function(nodeData) {
+  searchUnits: function(filters = {}, length = 1) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/unit`;
-    let nodeType = nodeData.type;
-    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `flt.${nodeType}Name`;
+    let defaultData =  {
+      q: '*',
+      length: length
+    };
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
-      headers: adapter.defineHeaders(),
-      data: {
-        q: '*',
-        length: 1,
-        'publishStatus': 'published'
-      }
+      headers: adapter.defineHeaders()
     };
-    if (nodeData.name) {
-      options.data[`${filterType}`] = nodeData.searchValue;
-    }
+    options.data = Object.assign(defaultData, filters);
     return Ember.$.ajax(url, options);
   },
 
@@ -236,29 +193,24 @@ export default Ember.Object.extend({
   /**
    * Fetches rubrics that match with the node
    *
-   * @param nodeData the term to search
+   * @param filters
    * @returns {Promise.<Course[]>}
    */
-  searchLessons: function(nodeData) {
+  searchLessons: function(filters = {}, length = 1) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/lesson`;
-    let nodeType = nodeData.type;
-    let filterType = nodeType === TAXONOMY_LEVELS.STANDARD ? `flt.${nodeType}Display` : `flt.${nodeType}Name`;
+    let defaultData =  {
+      q: '*',
+      length: length
+    };
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
-      headers: adapter.defineHeaders(),
-      data: {
-        q: '*',
-        length: 1,
-        'publishStatus': 'published'
-      }
+      headers: adapter.defineHeaders()
     };
-    if (nodeData.name) {
-      options.data[`${filterType}`] = nodeData.searchValue;
-    }
+    options.data = Object.assign(defaultData, filters);
     return Ember.$.ajax(url, options);
   },
 
@@ -272,9 +224,7 @@ export default Ember.Object.extend({
   learningMapsContent: function(nodeData) {
     const adapter = this;
     const namespace1 = this.get('namespace1');
-    const url = `${namespace1}/standard/${nodeData.code}`;
-    // let spliting  = nodeData.searchValue.split('.');
-    // let fwCode = spliting[0];
+    const url = `${namespace1}/standard/${nodeData.id}`;
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
