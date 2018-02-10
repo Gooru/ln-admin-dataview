@@ -1,3 +1,70 @@
 .activities-distribution-by-subjects {
-  
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  ul.subject-wise-distribution {
+    height: 370px;
+
+    li {
+      float: left;
+      width: 186px;
+      list-style: none;
+      text-align: center;
+
+      .donut-chart {
+        width: 175px;
+        height: 175px;
+      }
+
+      .subject-wise-chart {
+        height: 186px;
+      }
+
+      .title {
+        font-size: 18px;
+        color: $dark-800;
+        height: 60px;
+      }
+
+      .total-count {
+        font-size: 30px;
+        color: $dark-800;
+        font-weight: 300;
+      }
+    }
+  }
+
+  ul.subject-wise-distribution-legend {
+    height: 25px;
+    li {
+      float: left;
+      width: 145px;
+      list-style: none;
+      text-align: center;
+      height: 25px;
+
+      .legend-container {
+        width: 115px;
+        height: 26px;
+        margin: 0 auto;
+
+        .title {
+          float: left;
+          font-size: 15px;
+          color: $dark-800;
+          text-transform: capitalize;
+        }
+
+        .legend-icon {
+          width: 18px;
+          border-radius: 50%;
+          height: 18px;
+          display: block;
+          float: left;
+          margin-top: 5px;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
 }

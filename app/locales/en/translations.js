@@ -149,7 +149,8 @@ export default {
       'dok': 'Depth of Knowledge',
       'publisher': 'Publisher',
       'audience': 'Audience'
-    }
+    },
+    'distribution-by-subject': 'distribution by subject'
   },
   'century-skills': {
     legends: {

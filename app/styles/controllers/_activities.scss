@@ -6,6 +6,7 @@
   .app-pull-out {
     top: 110px;
     height: calc(100vh - 110px);
+
     .pull-out-more-content-container {
       display: table;
 
@@ -19,15 +20,28 @@
   }
 
   .filters {
-    width: 300px;
+    width: 240px;
     height: 500px;
   }
 
   .activities-summary {
-    width: calc(100% - 300px);
+    width: calc(100% - 240px);
+
     .content-distribution {
-      width: 600px;
-      margin: 0 auto;
+      width: 100%;
+
+      .double-layer-donut-chart {
+        margin: 0 auto;
+      }
+    }
+
+    .content-distribution-header {
+      text-transform: uppercase;
+      font-size: 15px;
+      font-weight: bold;
+      border-bottom: 1px dashed #35424b;
+      color: $dark-800;
+      padding-bottom: 5px;
     }
   }
 }

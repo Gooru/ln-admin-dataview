@@ -59,13 +59,13 @@ export default Ember.Component.extend({
    * Inner Radius of donut chart
    * @return {Number}
    */
-  innerRadius: 65,
+  innerRadius: 60,
 
   /**
    *  radius of donut chart
    * @return {Number}
    */
-  radius: 85,
+  radius: 80,
 
 
   // -------------------------------------------------------------------------

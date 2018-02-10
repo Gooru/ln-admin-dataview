@@ -1,11 +1,22 @@
 <ul class="subject-wise-distribution">
   {{#each subjects as |subject|}}
     <li>
-        <div class="subject-wise-chart">
-           {{charts.donut-chart data=subject.contentCounts}}
-        </div>
-        <div class="title">{{subject.name}}</div>
-        <div class="total-count">{{subject.totalCount}}</div>
+      <div class="subject-wise-chart">
+        {{charts.donut-chart data=subject.contentCounts}}
+      </div>
+      <div class="title">{{subject.name}}</div>
+      <div class="total-count">{{us-locale subject.totalCount}}</div>
+    </li>
+  {{/each}}
+</ul>
+
+<ul class="subject-wise-distribution-legend">
+  {{#each contentLegends as |legend|}}
+    <li>
+      <div class="legend-container">
+        <div style="background-color:{{legend.colorCode}}" class="legend-icon"></div>
+        <div class="title">{{legend.name}}</div>
+      </div>
     </li>
   {{/each}}
 </ul>

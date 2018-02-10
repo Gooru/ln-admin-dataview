@@ -18,7 +18,7 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
-  classNames: ['learning-activities-chart'],
+  classNames: ['double-layer-donut-chart'],
 
   // -------------------------------------------------------------------------
   // Events
@@ -80,6 +80,12 @@ export default Ember.Component.extend({
    */
   radius1: 85,
 
+  /**
+   * default label  for the dounut chart
+   * @type {String}
+   */
+  defaultI18nLabel: null,
+
 
   /**
    * Total count
@@ -107,9 +113,9 @@ export default Ember.Component.extend({
     let innerRadius = component.get('innerRadius');
     let radius1 = component.get('radius1');
     let innerRadius1 = component.get('innerRadius1');
-
+    let defaultI18nLabel = component.get('defaultI18nLabel');
     let totalCount = component.get('totalCount');
-    let label = component.get('i18n').t('activities.learning-activities-available').string;
+    let label =  defaultI18nLabel ? component.get('i18n').t(defaultI18nLabel).string : '';
 
     let svg = d3.select(component.element)
       .append('svg')
