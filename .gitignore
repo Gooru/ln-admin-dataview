@@ -29,7 +29,9 @@ package-lock.js
 #tests
 report-xunit.xml
 .sass-lint.yml
+tests/
 
 admin-dataview/
+
 
 *.iml
