@@ -28,6 +28,21 @@ export default Ember.Component.extend({
       }
     }
     return groupData;
-  })
+  }),
+
+  // -------------------------------------------------------------------------
+  // Events
+
+  init: function() {
+    const component = this;
+    component._super(...arguments);
+  },
+
+  didRender() {
+    var component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    })
+  }
 
 });

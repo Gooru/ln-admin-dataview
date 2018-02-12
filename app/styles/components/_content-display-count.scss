@@ -26,7 +26,7 @@
   -webkit-flex: 1 1 auto;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
-  margin: 10px;
+  margin: 10px 10px 5px;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -60,7 +60,16 @@
       display: block;
     }
   }
+
   .lesson {
+    min-height: 24px;
+    text-align: center;
+    vertical-align: middle;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+
     i {
       background: url("images/lesson-icon.svg");
       width: 24px;
@@ -69,6 +78,7 @@
       display: block;
     }
   }
+
   .unit {
     i {
       background: url("images/unit-icon.svg");
@@ -131,4 +141,7 @@
   text-align: center;
   color: $dark-800;
   margin: 10px;
+}
+.tooltip {
+   text-transform: capitalize;
 }
