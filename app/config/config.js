@@ -149,10 +149,10 @@ export const TAXONOMY_LEVELS = {
   MICRO: 'micro-standard'
 };
 
-export const NAVIGATION_MENUS = ['gcm', 'activities', 'learners', 'suggest'];
+export const NAVIGATION_MENUS = ['competency', 'activities', 'learners', 'suggest'];
 
 export const NAVIGATION_MENUS_INDEX = {
-  'gcm': 0,
+  'competency': 0,
   'activities': 1,
   'learners': 2,
   'suggest': 3,

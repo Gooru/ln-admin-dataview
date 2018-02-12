@@ -36,12 +36,7 @@ export default Ember.Controller.extend({
         };
         controller.transitionToRoute('learner.activities', {queryParams});
       } else if (routeTo === 'courses') {
-        let userStatsByCourse = controller.get('userStatsByCourse');
-        let firstCourse = userStatsByCourse[0];
-        let queryParams = {
-          'classId': firstCourse.classId
-        };
-        controller.transitionToRoute('learner.courses', firstCourse.courseId, {queryParams});
+        controller.transitionToRoute('learner.journeys', controller.get('userId'));
       }
     },
     onExploreJourneyTaken: function() {
