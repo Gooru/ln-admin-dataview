@@ -8,7 +8,7 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('index', { path: '/'});
-  this.route('gcm');
+  this.route('competency');
   this.route('learners');
   this.route('suggest');
   this.route('sign-in');

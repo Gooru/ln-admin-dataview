@@ -98,7 +98,7 @@ export default {
     'last-6-months': 'Last 6 Months',
     'last-year': 'Last Year',
     'from-the-beginning-of-time': 'From the Beginning of Time',
-    'courses-independent-journey': 'courses & independent journey',
+    'courses-independent-journeys': 'courses & independent journeys',
     'competencies': 'competencies',
     'time-spent-activities': 'time spent :   activities',
     'time-spent-courses': 'time spent : courses',

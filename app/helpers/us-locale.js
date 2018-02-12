@@ -7,7 +7,7 @@ import Ember from 'ember';
  */
 export function usLocale(value) {
   const usLocale = 'en-US';
-  return value.toLocaleString(usLocale)
+  return value.toLocaleString(usLocale);
 }
 
 export default Ember.Helper.helper(usLocale);
