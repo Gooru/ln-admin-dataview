@@ -36,6 +36,16 @@ export default Ember.Component.extend({
    */
   subjects: Ember.A(),
 
+  /**
+   * It  indicates the state of loader icon
+   * @type {Boolean}
+   */
+  isLoading: false,
+
+  /**
+   * Content legends
+   * @type {Array}
+   */
   contentLegends: Ember.A([{
     'name': 'questions',
     'colorCode': '#BFE1DB'
@@ -59,6 +69,7 @@ export default Ember.Component.extend({
 
   renderDistributionBySubjectsCharts: function() {
     let component = this;
+    component.set('isLoading', true);
     let mathsSubjectFilter = {
       'flt.subjectName': 'math~~Mathematics'
     };
@@ -87,6 +98,7 @@ export default Ember.Component.extend({
       subjects.pushObject(component.mapContentCountsBySubject('Science', science));
       subjects.pushObject(component.mapContentCountsBySubject('Social Science', socialScience));
       subjects.pushObject(component.mapContentCountsBySubject('ELA', ela));
+      component.set('isLoading', false);
     });
   },
 

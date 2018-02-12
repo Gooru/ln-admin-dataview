@@ -16,6 +16,7 @@ export default {
       HT_RO: 'Drag and Drop Order',
       HT_HL: 'Highlight Text'
     },
+    'questions': 'Questions',
     currentlyStudying: 'currently Studying',
     'signature-assessment': 'Signature Assessments',
     'signature-collection': 'Signature Collections',

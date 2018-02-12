@@ -285,6 +285,11 @@ export default Ember.Component.extend({
                 'competencySeq': competencySeq,
                 'status': status
               });
+              if (status === 5) {
+                mergeDomainData.forEach(data => {
+                  data.set('status', 5);
+                });
+              }
               mergeDomainData.pushObject(data);
             }
           });

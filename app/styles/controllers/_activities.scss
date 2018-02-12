@@ -29,10 +29,7 @@
 
     .content-distribution {
       width: 100%;
-
-      .double-layer-donut-chart {
-        margin: 0 auto;
-      }
+      height: 370px;
     }
 
     .content-distribution-header {
@@ -42,6 +39,7 @@
       border-bottom: 1px dashed #35424b;
       color: $dark-800;
       padding-bottom: 5px;
+      margin-left: 40px;
     }
   }
 }
