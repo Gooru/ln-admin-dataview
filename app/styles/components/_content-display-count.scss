@@ -60,7 +60,10 @@
       display: block;
     }
   }
+
   .lesson {
+    margin-bottom: 20px;
+
     i {
       background: url("images/lesson-icon.svg");
       width: 24px;
@@ -69,6 +72,7 @@
       display: block;
     }
   }
+
   .unit {
     i {
       background: url("images/unit-icon.svg");
