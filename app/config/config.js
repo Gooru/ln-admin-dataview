@@ -159,13 +159,16 @@ export const NAVIGATION_MENUS_INDEX = {
   'learner': 2
 };
 
-export const LEARNER_NAVIGATION_MENUS_INDEX = {
-  'reports': 0,
-  'journeys-taken': 1,
-  'proficiency': 2,
-  'preferences': 3,
-  'markers': 4,
-  'profile': 5
+
+export const ACTIVITIES_NAVIGATION_MENUS = ['summary', 'courses', 'collections', 'assessments', 'resources', 'questions'];
+
+export const ACTIVITIES_NAVIGATION_MENUS_INDEX = {
+  'summary': 0,
+  'courses': 1,
+  'collections': 2,
+  'assessments': 3,
+  'resources': 4,
+  'questions': 4
 };
 
 

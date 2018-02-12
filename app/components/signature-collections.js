@@ -15,5 +15,5 @@ export default Ember.Component.extend({
    * @type {Array}
    */
   collections: null
-  
+
 });

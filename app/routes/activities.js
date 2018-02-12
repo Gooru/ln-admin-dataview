@@ -95,9 +95,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   setupController: function(controller, model) {
-    let route = this;
     controller.set('contentCounts', model.contentCounts);
-    let userId = route.get('session.id');
   }
 
 });

@@ -2,9 +2,15 @@
   height: calc(100vh - 110px);
   width: 1024px;
   margin: 0 auto;
-  
+
   .filters {
-    width: 300px;
+    width: 240px;
     height: 500px;
+  }
+
+  .activity-container {
+    width: calc(100% - 240px);
+    padding-left: 40px;
+    margin-top: 30px;
   }
 }
