@@ -11,19 +11,8 @@
   </div>
   <div class="panel-body">
     <div class="items-icon">
-      <!-- <span><i data-toggle="tooltip" data-placement="auto" data-trigger="hover" class="collection" title="{{t 'common.unit'}}"></i> {{course.collectionCount}}</span> -->
-      <span><i data-toggle="tooltip" data-placement="auto" data-trigger="hover" class="assessment" title="{{t 'common.resource'}}"></i> {{course.totalAssessments}}</span>
-      <!-- <span><i data-toggle="tooltip" data-placement="auto" data-trigger="hover" class="bookmark" title="{{t 'common.resource'}}"></i></span> -->
+      <span><i data-toggle="tooltip" data-placement="auto" data-trigger="hover" class="assessment" title="{{t 'learner.journeys.assessments'}}"></i> {{course.totalAssessments}}</span>
     </div>
-    <!-- <div class="timestamp">
-      <div class="time pull-right">
-        2.30pm
-      </div>
-      <div class="date pull-right">
-        Nov 1, 2017
-      </div>
-    </div> -->
-
   </div>
   <div class="panel-footer">
     <div class="first-half" style="background-color:{{grade-color course.averageScore}}">
@@ -36,16 +25,10 @@
           <div class="performance-text">Performance</div>
         </div>
       </div>
-
-
       <div class="completion-bar">
         {{charts/gcm-x-bar-chart data=Performances }}
         <div class="completion-text">{{Performances.percentage}}% completed </div>
       </div>
-
-
-
     </div>
-
   </div>
 </div>

@@ -135,10 +135,13 @@ export default {
     },
     activities: {
       'time-spent-activities': 'Time Spent on All Activities'
+    },
+    journeys: {
+      'assessments': 'Assessments'
     }
   },
   activities: {
-    'learning-activities-available' : 'Learning Activities Available',
+    'learning-activities-available': 'Learning Activities Available',
     'filters': 'Filters',
     'filter-types': {
       'category': 'Category',
