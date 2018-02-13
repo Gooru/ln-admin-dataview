@@ -42,7 +42,7 @@ export default Ember.Component.extend({
     var component = this;
     component.$('[data-toggle="tooltip"]').tooltip({
       trigger: 'hover'
-    })
+    });
   }
 
 });

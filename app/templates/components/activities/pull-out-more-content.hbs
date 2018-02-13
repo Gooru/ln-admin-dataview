@@ -18,7 +18,7 @@
         <span class="header-title"> {{parentHeader.key}} </span>
         {{#each parentHeader.value as | keysValue |}}
           <div class="col-md-12 ">
-            <span class="col-md-6 header-lable">{{keysValue.key}} : </span>
+            <span class="col-md-6 header-lable" style=" color : {{keysValue.color}}">{{keysValue.key}} :  </span>
             {{#if keysValue.value}}
             <span class="col-md-6  header-value"> {{keysValue.value}} </span>
             {{else}}

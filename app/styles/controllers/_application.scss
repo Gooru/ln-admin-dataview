@@ -1,14 +1,16 @@
-.route-application{
+.route-application {
   overflow-x: hidden;
-  &.no-vertical-scroll{
+
+  &.no-vertical-scroll {
     overflow-y: hidden;
   }
 }
+
 .app-container {
   height: 100vh;
   padding-top: 110px;
-  padding-left: 0px;
-  padding-right: 0px;
+  padding-left: 0;
+  padding-right: 0;
   @media (min-width: $screen-md) {
     padding-top: 110px;
   }
@@ -18,7 +20,6 @@
     @include flex-direction(column);
     @include align-content(flex-start);
     min-height: 100%;
-
     @media (min-width: $screen-md) {
       @include flex-direction(row);
     }
@@ -50,7 +51,7 @@
       }
     }
 
- > .channel {
+    > .channel {
       @media (min-width: $screen-md) {
         width: 25%;
       }
@@ -61,12 +62,17 @@
         background-color: transparent;
       }
     }
-
   }
 }
 
 .route-sign-in {
   .app-header {
-      display: none;
+    display: none;
+  }
+}
+
+.route-activity_summary {
+  .app-container {
+    overflow-y: auto;
   }
 }
