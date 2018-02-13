@@ -154,7 +154,8 @@ export default {
       'publisher': 'Publisher',
       'audience': 'Audience'
     },
-    'distribution-by-subject': 'distribution by subject'
+    'distribution-by-subject': 'distribution by subject',
+    'no-filters': 'No Filters Applied'
   },
   'century-skills': {
     legends: {

@@ -1,0 +1,27 @@
+<div class="box-container">
+  <div class="applied-filters">
+    <div class="visible-filters">
+      {{#each visibleFilters as |filterData|}}
+        {{activities.search-filter-tag isTagAvailable=true tag=filterData onRemoveFilter="onRemoveFilter"}}
+      {{else}}
+        {{activities.search-filter-tag isTagAvailable=false}}
+      {{/each}}
+      {{#if (gt appliedFilterList.length 3)}}
+        <button class="non-visible-tags">
+          <span>+ {{invisibleFilterCount}} More</span>
+        </button>
+      {{/if}}
+    </div>
+    <div class="non-visible-filters">
+      {{#each appliedFilterList as |filterData|}}
+        {{activities.search-filter-tag isTagAvailable=true tag=filterData onRemoveFilter="onRemoveFilter"}}
+      {{/each}}
+    </div>
+  </div>
+  <div class="input-filters">
+    <span class="search-icon">
+      {{app-icon name='search'}}
+    </span>
+    {{input type="text" class="text-input"}}
+  </div>
+</div>

@@ -63,9 +63,9 @@ export default Ember.Component.extend({
         userSelectedFilter.push(component.getStructuredDataItemsByFilterType(filterType, filterInfo));
       }
     }
-    // component.set(`${filterType}`, userSelectedFilter);
     storedFilters[`${filterType}`] = userSelectedFilter;
     localStorage.setItem(`research_${userId}_activities_filters`, JSON.stringify(storedFilters));
+    component.sendAction('onChangeFilterItems', storedFilters);
     return storedFilters;
   },
 

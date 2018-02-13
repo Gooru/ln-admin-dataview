@@ -177,7 +177,7 @@ export default Ember.Component.extend(ModalMixin, {
     const i18n = component.get('i18n');
     taxonomyCategories.map(category =>  {
       let categoryInfo = {
-        label: i18n.t(category.label),
+        label: String(i18n.t(category.label)),
         code: category.value,
         value: category.value
       };

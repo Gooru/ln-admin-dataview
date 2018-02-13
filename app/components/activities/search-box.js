@@ -1,0 +1,167 @@
+import Ember from 'ember';
+import { ACTIVITY_FILTER } from 'admin-dataview/config/config';
+
+export default Ember.Component.extend({
+
+  // -------------------------------------------------------------------------
+  // Attributes
+  classNames: ['search-box'],
+
+  // -------------------------------------------------------------------------
+  // Dependencies
+  session: Ember.inject.service('session'),
+
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * @property {Array}
+   * List of filter types
+   */
+  filterTypes: ACTIVITY_FILTER,
+
+  /**
+   * @property {Array}
+   * List of Applied filters
+   */
+  appliedFilterList: [],
+
+  /**
+   * @property {Array}
+   * List of filters should be visible to user at searchbox
+   */
+  visibleFilters: Ember.computed('selectedFilterItems', function() {
+    let component = this;
+    let appliedFilterList = component.getAppliedFilters();
+    component.set('appliedFilterList', appliedFilterList);
+    const filtersVisible = component.get('visibleFilterCount');
+    return appliedFilterList.filter(function(filter, index) {
+      return index < filtersVisible;
+    });
+  }),
+
+  /**
+   * @property {Number}
+   * Number of filter tags should visible in the search box
+   */
+  visibleFilterCount: 3,
+
+  /**
+   * @property {Number}
+   * Number of filter tags should visible in the popover content box
+   */
+  invisibleFilterCount: Ember.computed('appliedFilterList', function() {
+    let component = this;
+    return component.get('appliedFilterList.length') - component.get('visibleFilterCount');
+  }),
+
+  // -------------------------------------------------------------------------
+  // Events
+  didInsertElement: function() {
+    let component = this;
+    if (component.get('appliedFilterList.length')) {
+      component.setupTooltip();
+    }
+  },
+
+  // -------------------------------------------------------------------------
+  // Actions
+  actions: {
+
+    /**
+     * @function onRemoveFilter
+     * Action triggered when the user click on the clear button in applied filter tag
+     */
+    onRemoveFilter: function(selectedFilter) {
+      let component = this;
+      let userId = component.get('session.id');
+      let storedFilters = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`));
+      if (storedFilters) {
+        let filterType = selectedFilter.type;
+        let categorizedFilterData = storedFilters[`${filterType}`];
+        let userRemovedFilterIndex = categorizedFilterData.findIndex(function(item){
+          return item.id === selectedFilter.id;
+        });
+        //if filter already selected, then remove it from the list
+        if (userRemovedFilterIndex > -1) {
+          categorizedFilterData.splice(userRemovedFilterIndex, 1);
+        }
+        storedFilters[`${filterType}`] = categorizedFilterData;
+        localStorage.setItem(`research_${userId}_activities_filters`, JSON.stringify(storedFilters));
+        component.set('selectedFilterItems', storedFilters);
+      }
+    },
+
+    /**
+     * @function onSearchTerm
+     * Action triggered when the user hit enter on the search box
+     */
+    onSearchTerm: function() {
+      let component = this;
+      component.send('onSearchTerm');
+    }
+  },
+
+  // -------------------------------------------------------------------------
+  // Methods
+
+  /**
+   * @function getAppliedFilters
+   * Return list of applied filters
+   */
+  getAppliedFilters: function() {
+    let component = this;
+    let storedFilters = component.get('selectedFilterItems');
+    let filterTypes = component.get('filterTypes');
+    let applicableFilterList = [];
+    filterTypes.map( filterType => {
+      let filterCode = filterType.code;
+      if (filterCode !== 'category' && filterCode !== 'subject') {
+        let categorizedFilterData = storedFilters[`${filterCode}`];
+        if (categorizedFilterData) {
+          categorizedFilterData.map( filterData => {
+            if (filterData) {
+              filterData.type = filterCode;
+              applicableFilterList.push(filterData);
+            }
+          });
+        }
+      }
+    });
+    return applicableFilterList;
+  },
+
+  /**
+   * @function setupTooltip
+   * Function to show popover content box while clicking on the more button
+   */
+  setupTooltip: function() {
+    var $anchor = this.$('button.non-visible-tags');
+
+    if ($anchor.length) {
+      let component = this;
+      let placement = 'bottom';
+
+      $anchor.addClass('clickable');
+      $anchor.attr('data-html', 'true');
+      $anchor.popover({
+        placement: placement,
+        content: function() {
+          return component.$('.non-visible-filters').html();
+        },
+        trigger: 'manual'
+      });
+
+      $anchor.click(function() {
+        var $this = $(this);
+        if (!$this.hasClass('list-open')) {
+          // Close all tag-list popovers by simulating a click on them
+          $('.non-visible-tags.list-open').click();
+          $this.addClass('list-open').popover('show');
+        } else {
+          $this.removeClass('list-open').popover('hide');
+        }
+      });
+    }
+  }
+});
