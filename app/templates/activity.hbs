@@ -1,7 +1,10 @@
 <div class="activity">
+  <div>
+    {{activities.search-box selectedFilterItems=selectedFilterItems}}
+  </div>
   <div class="filters pull-left">
     <div class="filter-list">
-      {{activities.activities-filter filterTypes=filterTypes}}
+      {{activities.activities-filter filterTypes=filterTypes onChangeFilterItems="onChangeFilterItems"}}
     </div>
   </div>
   <div class="activity-container pull-left">
