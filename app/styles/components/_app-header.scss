@@ -28,6 +28,16 @@
         height: 63px;
       }
 
+      .navbar-menus {
+        @include inline-flex;
+        @include align-self(flex-start);
+        @include align-items(center);
+        @include flex-basis(111px);
+        @include flex-grow(1);
+        height: 55px;
+        min-width: 300px;
+        margin-top: 6px;
+      }
       .navbar-header {
         @include inline-flex;
         @include align-self(flex-start);
@@ -36,6 +46,7 @@
         @include flex-grow(1);
         height: 55px;
         min-width: 111px;
+
         @media (min-width: $screen-md) {
           @include flex-basis(111px);
           height: 58px;

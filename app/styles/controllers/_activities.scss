@@ -1,23 +1,7 @@
 .activities {
-  height: calc(100vh - 110px);
+  height: calc(100vh - 63px);
   width: 1024px;
   margin: 0 auto;
-
-  .app-pull-out {
-    top: 110px;
-    height: calc(100vh - 110px);
-
-    .pull-out-more-content-container {
-      display: table;
-
-      .coming-next {
-        color: $gray;
-        text-align: center;
-        display: table-cell;
-        vertical-align: middle;
-      }
-    }
-  }
 
   .filters {
     width: 240px;

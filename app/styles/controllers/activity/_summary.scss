@@ -1,24 +1,4 @@
-.activity {
-  height: calc(100vh - 110px);
+.activity-summary {
+  height: calc(100vh - 63px);
   margin: 0 auto;
-
-  .btn {
-    margin-top: 72px;
-  }
-
-  .app-pull-out {
-    top: 110px;
-    height: calc(100vh - 110px);
-
-    .pull-out-more-content-container {
-      display: table;
-
-      .coming-next {
-        color: $gray;
-        text-align: center;
-        display: table-cell;
-        vertical-align: middle;
-      }
-    }
-  }
 }

@@ -1,6 +1,5 @@
 .app-navigation {
   background-color: $white;
-  box-shadow: -3px 0 4px 0 rgba(0, 0, 0, 0.2);
   .container {
     width: 750px;
   }
@@ -10,6 +9,7 @@
     }
     > li > a {
       border: none;
+      box-shadow: none;
       color: $dark-400;
       font-size: 15px;
       font-weight: 300;
@@ -29,24 +29,26 @@
 
       &::after {
         content: "";
-        background: $blue-700;
-        height: 2px;
+        background: $white;
+        height: 1px;
         position: absolute;
         width: 100%;
         left: 0;
         bottom: -1px;
         transition: all 250ms ease 0s;
-        transform: scale(0);
+        transform: scale(1);
       }
     }
 
     li.active > a {
       font-weight: bold;
       border: none;
+      box-shadow: none;
       color: $blue-700 !important;
       background: transparent;
       &::after {
         transform: scale(1);
+        background: $white;
       }
     }
 
