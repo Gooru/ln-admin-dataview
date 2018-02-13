@@ -85,10 +85,15 @@
 @import 'components/activities/usage-statistics';
 @import 'components/activities/distribution-by-content';
 
-
 @import 'components/modals/activity/century-skills-content';
 @import 'components/modals/activity/century-skills-legend';
 @import 'components/activity/menu-navigation';
 @import 'components/activity/summary-distribution-by-content';
+
+@import 'components/activity/course-card';
+@import 'components/activity/collection-card';
+@import 'components/activity/assessment-card';
+@import 'components/activity/resource-card';
+@import 'components/activity/question-card';
 
 @import 'components/modals/learner/user-profile-modal';

@@ -115,15 +115,17 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Search for courses
-   *
-   * @param filters
-   * @returns {Promise.<Question[]>}
+   * Search courses
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Course[]>}
    */
-  searchCourses: function(filters) {
+  searchCourses: function(query, filters, start, length) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('searchAdapter').searchCourses(filters).then(
+      service.get('searchAdapter').searchCourses(query, filters, start, length).then(
         function(response) {
           resolve(
             service.get('searchSerializer').normalizeSearchContentCount(response)

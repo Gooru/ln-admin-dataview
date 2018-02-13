@@ -122,12 +122,13 @@ export default Ember.Object.extend({
    * @param filters
    * @returns {Promise.<Course[]>}
    */
-  searchCourses: function(filters = {}, length = 10) {
+  searchCourses: function(query = '*', filters = {}, start = 1,  length = 20) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/course`;
     let defaultData =  {
-      q: '*',
+      q: query,
+      start: start,
       length: length
     };
     let options = {

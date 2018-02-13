@@ -48,7 +48,7 @@ export default Ember.Component.extend({
   * @property {Boolean}
   */
   activeMenuIndex: Ember.computed(function() {
-    let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[Utils.getRoutePathFirstOccurrence()];
+    let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[Utils.getRoutePathLastOccurrence()];
     return activeMenuIndex > -1 ? activeMenuIndex : 0;
   })
 

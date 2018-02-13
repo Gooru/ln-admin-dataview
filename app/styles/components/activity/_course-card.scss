@@ -1,0 +1,45 @@
+.activity-course-card {
+  .card-panel-container {
+    width: 220px;
+    height: 384px;
+    object-fit: contain;
+    background-color: $white;
+    box-shadow: 0 0 6px 1px rgba(0, 0, 0, 0.07);
+
+    .panel-header {
+      width: 220px;
+      height: 130px;
+      object-fit: contain;
+    }
+    .unit-count-container {
+      height: 25px;
+      width: 100%;
+      border-bottom: 1px solid #ccc;
+    }
+    .course-info-container {
+      .course-user-info {
+        height: 39px;
+        cursor: default;
+        @include flexbox;
+        @include justify-content(center);
+        @include align-items(center);
+        .img-container {
+          width: 30px;
+          height: 30px;
+          overflow: hidden;
+          border-radius: 15px;
+          img {
+            width: 100%;
+          }
+        }
+        .username {
+          margin-left: 10px;
+          max-width: 170px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: block;
+        }
+      }
+    }
+  }
+}
