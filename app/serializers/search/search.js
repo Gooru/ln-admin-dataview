@@ -4,9 +4,10 @@ import ResourceModel from 'admin-dataview/models/resource/resource';
 import QuestionModel from 'admin-dataview/models/question/question';
 import CollectionModel from 'admin-dataview/models/collection/collection';
 import AssessmentModel from 'admin-dataview/models/assessment/assessment';
+import CourseModel from 'admin-dataview/models/course/course';
 import TaxonomySerializer from 'admin-dataview/serializers/taxonomy/taxonomy';
 import {
-  DEFAULT_IMAGES
+  DEFAULT_IMAGES,TAXONOMY_LEVELS
 } from 'admin-dataview/config/config';
 import ProfileModel from 'admin-dataview/models/profile/profile';
 import {
@@ -35,15 +36,60 @@ export default Ember.Object.extend(ConfigurationMixin, {
   },
 
   /**
-   * Normalize the Search response
+   * Normalize the Search course response
    *
    * @param payload is the endpoint response in JSON format
-   * @returns {contentCount}
+   * @returns {Course[]}
    */
-  normalizeSearchContentCount: function(payload) {
+  normalizeSearchCourses: function(payload) {
+    const serializer = this;
+    if (Ember.isArray(payload.searchResults)) {
+      return payload.searchResults.map(function(result) {
+        return serializer.normalizeCourse(result);
+      });
+    }
+  },
 
-    let totalHitCount = payload ? payload.totalHitCount : null;
-    return totalHitCount;
+  /**
+   * Normalizes a course
+   * @param {*} result
+   * @returns {Course}
+   */
+  normalizeCourse: function(result) {
+    const serializer = this;
+    const basePath = serializer.get('session.cdnUrls.content');
+    const appRootPath = this.get('appRootPath'); //configuration appRootPath
+    const thumbnailUrl = result.thumbnail
+      ? basePath + result.thumbnail
+      : appRootPath + DEFAULT_IMAGES.COURSE;
+    const taxonomyInfo =
+      (result.taxonomy &&
+        result.taxonomy.curriculum &&
+        result.taxonomy.curriculum.curriculumInfo) ||
+      [];
+    return CourseModel.create(Ember.getOwner(this).ownerInjection(), {
+      id: result.id,
+      title: result.title,
+      description: result.description,
+      thumbnailUrl: thumbnailUrl,
+      subject: result.subjectBucket,
+      subjectName:
+        result.taxonomy && result.taxonomy.subject
+          ? result.taxonomy.subject[0]
+          : null,
+      subjectSequence: result.subjectSequence,
+      isVisibleOnProfile: result.visibleOnProfile,
+      isPublished: result.publishStatus === 'published',
+      unitCount: result.unitCount,
+      taxonomy: serializer
+        .get('taxonomySerializer')
+        .normalizeTaxonomyArray(taxonomyInfo, TAXONOMY_LEVELS.COURSE),
+      owner: result.owner ? serializer.normalizeOwner(result.owner) : null,
+      sequence: result.sequence,
+      relevance: result.relevance,
+      efficacy: result.efficacy,
+      engagement: result.engagement
+    });
   },
 
   nomalizeSearchResourceContent: function(payload) {
@@ -335,7 +381,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
       id: ownerData.gooruUId || ownerData.id,
       firstName: ownerData.firstName,
       lastName: ownerData.lastName,
-      username: ownerData.username,
+      username: ownerData.usernameDisplay,
       avatarUrl: thumbnailUrl
     });
   }

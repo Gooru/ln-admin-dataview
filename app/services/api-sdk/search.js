@@ -128,7 +128,7 @@ export default Ember.Service.extend({
       service.get('searchAdapter').searchCourses(query, filters, start, length).then(
         function(response) {
           resolve(
-            service.get('searchSerializer').normalizeSearchContentCount(response)
+            service.get('searchSerializer').normalizeSearchCourses(response)
           );
         },
         function(error) {

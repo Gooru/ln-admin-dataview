@@ -1,0 +1,15 @@
+.activity-courses {
+  margin: 50px auto;
+
+  .course-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 45px;
+    align-items: center;
+  }
+
+  .activity-course-card {
+    width: 220px;
+    height: 384px;
+  }
+}

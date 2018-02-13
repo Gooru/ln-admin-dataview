@@ -1,23 +1,28 @@
 <div class="card-panel-container">
-  <div class="card-panel-header" style="background-image: url(https://cdn.pixabay.com/photo/2013/04/06/11/50/image-editing-101040_960_720.jpg)">
+  <div class="card-panel-header" style="background-image: url({{course.thumbnailUrl}})">
     <div class="info">
-        <div class="title">consectetur adipiscing elit, sed do eiusmod tempor incididu</div>
+      <div class="title">{{course.title}}</div>
     </div>
   </div>
   <div class="unit-count-container">
     <i class="icon"></i>
-    <span>1000</span>
+    <span>{{course.unitCount}}</span>
   </div>
   <div class="course-info-container">
     <div class="course-user-info">
-      <span class="created-by">Created by</span>
+      <div class="created-by">{{t (if course.sameOwnerAndCreator "common.created-by" "common.remixed-by")}}</div>
       <div class="img-container pull-left">
-        <img class="img-responsive" src="//usercdn.gooru.org/83971555-87e3-4a22-afc6-987666a0a414.jpg">
+        <img class="img-responsive" src="{{course.owner.avatarUrl}}">
       </div>
-      <span class="username">jwgooru</span>
+      <div class="username">{{course.owner.displayName}}</div>
     </div>
     <div class="course-description">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididu
+      {{safe-html course.description}}
+    </div>
+    <div class="course-standards ">
+      {{#if tags.length}}
+        {{taxonomy.taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
+      {{/if}}
     </div>
 
   </div>
@@ -28,17 +33,17 @@
     <div class="course-prefs-container">
       <span class="left-arc"></span>
       <span class="right-arc"></span>
-      <div class="course-prefs relevance pull-left">
-        <div class="count">0.8</div>
-        <div class="title">Relevance</div>
+      <div class="course-prefs relevance pull-left" style="background-color:rgba(0, 114, 188, {{course.relevance}})">
+        <div class="count">{{course.relevance}}</div>
+        <div class="title">{{t 'common.relevance'}}</div>
       </div>
-      <div class="course-prefs engagement pull-left">
-        <div class="count">0.6</div>
-        <div class="title">Engagement</div>
+      <div class="course-prefs engagement pull-left" style="background-color:rgba(0, 114, 188, {{course.engagement}})">
+        <div class="count">{{course.engagement}}</div>
+        <div class="title">{{t 'common.engagement'}}</div>
       </div>
-      <div class="course-prefs efficacy pull-left">
-        <div class="count">0.4</div>
-        <div class="title">Efficacy</div>
+      <div class="course-prefs efficacy pull-left" style="background-color:rgba(0, 114, 188, {{course.efficacy}})">
+        <div class="count">{{course.efficacy}}</div>
+        <div class="title">{{t 'common.efficacy'}}</div>
       </div>
     </div>
   </div>

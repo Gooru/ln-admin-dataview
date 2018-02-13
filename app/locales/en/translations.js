@@ -40,10 +40,13 @@ export default {
     'add-century-skills': 'Add 21st Century Skills',
     cancel: 'Cancel',
     'select': 'Select',
-    'created-by': 'Created-by',
+    'created-by': 'Created by',
     'subject': 'subject',
     'course': 'course',
-    'domain': 'domain'
+    'domain': 'domain',
+    'relevance': 'Relevance',
+    'engagement': 'Engagement',
+    'efficacy': 'Efficacy'
   },
   logout: {
     name: 'Logout'

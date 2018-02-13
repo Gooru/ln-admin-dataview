@@ -20,6 +20,11 @@
 
 @import 'controllers/activity';
 @import 'controllers/activity/summary';
+@import 'controllers/activity/courses';
+@import 'controllers/activity/collections';
+@import 'controllers/activity/assessments';
+@import 'controllers/activity/resources';
+@import 'controllers/activity/questions';
 
 @import 'helpers/three-bounce-spinner';
 

@@ -1,8 +1,4 @@
 .activity-course-card {
-  margin-left: 50px;
-  margin-top: 20px;
-  margin-bottom: 20px;
-
   .card-panel-container {
     width: 220px;
     height: 384px;
@@ -86,7 +82,7 @@
 
         .created-by {
           font-style: italic;
-          margin-right: 10px;
+          width: 60px;
         }
 
         .img-container {
@@ -94,6 +90,7 @@
           height: 20px;
           overflow: hidden;
           border-radius: 50px;
+          margin-left: 10px;
 
           img {
             width: 100%;
@@ -102,7 +99,7 @@
 
         .username {
           margin-left: 10px;
-          max-width: 170px;
+          max-width: 92px;
           overflow: hidden;
           text-overflow: ellipsis;
           display: block;
@@ -111,7 +108,26 @@
       }
 
       .course-description {
-        line-height: 1.5;
+        $line-height: 1.5;
+        $lines-to-show: 3;
+        @include ellipsis($font-size: 13px, $line-height: $line-height, $lines-to-show: $lines-to-show);
+      }
+
+      .course-standards {
+        margin-top: 10px;
+
+        .taxonomy-tag {
+          .content {
+            font-size: 12px;
+            width: 130px;
+            height: 32px;
+          }
+        }
+
+        .non-visible-tags {
+          padding: 2px;
+          font-size: 12px;
+        }
       }
     }
 
