@@ -1,16 +1,20 @@
 .activity {
   height: calc(100vh - 63px);
-  width: 1024px;
-  margin: 0 auto;
+  overflow-y: auto;
 
-  .filters {
-    width: 240px;
-    height: 500px;
-  }
+  .wrapper {
+    width: 1024px;
+    margin: 0 auto;
 
-  .activity-container {
-    width: calc(100% - 240px);
-    padding-left: 40px;
-    margin-top: 15px;
+    .filters {
+      width: 240px;
+      height: 500px;
+    }
+
+    .activity-container {
+      width: calc(100% - 240px);
+      padding-left: 40px;
+      margin-top: 15px;
+    }
   }
 }

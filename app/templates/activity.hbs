@@ -1,17 +1,16 @@
 <div class="activity">
-  <div>
+  <div class="wrapper">
     {{activities.search-box selectedFilterItems=selectedFilterItems}}
-  </div>
-  <div class="filters pull-left">
-    <div class="filter-list">
-      {{activities.activities-filter filterTypes=filterTypes onChangeFilterItems="onChangeFilterItems"}}
+    <div class="filters pull-left">
+      <div class="filter-list">
+        {{activities.activities-filter filterTypes=filterTypes onChangeFilterItems="onChangeFilterItems"}}
+      </div>
     </div>
-  </div>
-  <div class="activity-container pull-left">
-    {{activity.menu-navigation onMenuItemSelection='onMenuItemSelection'}}
-    <div class="content-container">
+    <div class="activity-container pull-left">
+      {{activity.menu-navigation onMenuItemSelection='onMenuItemSelection'}}
+      <div class="content-container">
         {{outlet}}
+      </div>
     </div>
   </div>
-
 </div>

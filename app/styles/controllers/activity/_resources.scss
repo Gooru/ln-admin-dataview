@@ -1,5 +1,21 @@
 .activity-resources {
   margin: 50px auto;
+  height: calc(100vh - 63px);
+
+  .app-pull-out {
+    top: 63px;
+    height: calc(100vh - 63px);
+    .pull-out-more-content-container {
+      display: table;
+
+      .coming-next {
+        color: $gray;
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+      }
+    }
+  }
 
   .resource-cards {
     display: grid;

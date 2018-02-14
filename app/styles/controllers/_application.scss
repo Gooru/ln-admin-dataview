@@ -1,3 +1,7 @@
+html {
+  overflow: hidden;
+  height: 100%;
+}
 .route-application {
   overflow-x: hidden;
 
@@ -71,7 +75,7 @@
   }
 }
 
-.route-activity_summary {
+.route-activity_resources {
   .app-container {
     overflow-y: auto;
   }
