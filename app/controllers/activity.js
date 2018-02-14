@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import {
   ACTIVITY_FILTER,
-  ACTIVITIES_NAVIGATION_MENUS,
   ACTIVITIES_NAVIGATION_MENUS_INDEX
 } from 'admin-dataview/config/config';
 import Utils from 'admin-dataview/utils/utils';
@@ -27,9 +26,9 @@ export default Ember.Controller.extend({
     onMenuItemSelection(item) {
       let term = this.get('searchTerm');
       if (term) {
-        this.transitionToRoute('/activities/' + item + '?term=' + term);
+        this.transitionToRoute(`/activities/${  item  }?term=${  term}`);
       } else {
-        this.transitionToRoute('/activities/' + item);
+        this.transitionToRoute(`/activities/${  item}`);
       }
     },
 
@@ -42,9 +41,9 @@ export default Ember.Controller.extend({
       let routeName = Utils.getRoutePathLastOccurrence();
       let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
       if (activeMenuIndex > -1) {
-        this.transitionToRoute('/activities/' + routeName + '?term=' + term);
+        this.transitionToRoute(`/activities/${  routeName  }?term=${  term}`);
       } else {
-        this.transitionToRoute('/activities/courses?term=' + term);
+        this.transitionToRoute(`/activities/courses?term=${  term}`);
       }
     },
 

@@ -132,7 +132,6 @@ export default Ember.Component.extend({
       if (!isIncorrectTermSize) {
         this.set('term', term);
         this.set('isInvalidSearchTerm', false);
-          console.log(term);
         this.sendAction('onSearch', this.get('term'));
       }
     },

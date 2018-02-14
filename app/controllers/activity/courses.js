@@ -25,21 +25,11 @@ export default Ember.Controller.extend({
    * It maintains the list of course data
    * @type {Array}
    */
-  courses: Ember.A(),
+  courses: Ember.A()
 
   // -------------------------------------------------------------------------
   // Actions
 
-
-  actions: {
-    /**
-     * Action get triggered when search
-     * @param  {Object} course
-     */
-    onSearch: function(term) {
-      console.log('sdsdwer');
-    }
-  }
 
   // -------------------------------------------------------------------------
   // Methods

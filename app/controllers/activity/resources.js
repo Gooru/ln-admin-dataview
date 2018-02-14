@@ -53,6 +53,11 @@ export default Ember.Controller.extend({
    */
   isLoading: false,
 
+  /**
+   * It maintains the list of resources data
+   * @type {Array}
+   */
+  resources: Ember.A(),
 
   /**
    * Grouping the data to show more info  in pull out
@@ -153,6 +158,7 @@ export default Ember.Controller.extend({
 
   // -------------------------------------------------------------------------
   // Actions
+
   actions: {
 
     /**
@@ -177,31 +183,10 @@ export default Ember.Controller.extend({
         });
     }
   }
-  
-  /**
-   * It maintains the list of resources data
-   * @type {Array}
-   */
-  resourcess: Ember.A(),
 
-  // -------------------------------------------------------------------------
-  // Actions
-
-
-  actions: {
-    /**
-     * Action get triggered when search
-     * @param  {Object} resources
-     */
-    onSearch: function(term) {
-      
-    }
-  }
 
   // -------------------------------------------------------------------------
   // Methods
-
-
 
 
 });

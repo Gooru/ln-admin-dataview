@@ -25,25 +25,14 @@ export default Ember.Controller.extend({
    * It maintains the list of assessment data
    * @type {Array}
    */
-  assessments: Ember.A(),
+  assessments: Ember.A()
 
   // -------------------------------------------------------------------------
   // Actions
 
 
-  actions: {
-    /**
-     * Action get triggered when search
-     * @param  {Object} assessment
-     */
-    onSearch: function(term) {
-      console.log(term);
-    }
-  }
-
   // -------------------------------------------------------------------------
   // Methods
-
 
 
 });

@@ -25,25 +25,14 @@ export default Ember.Controller.extend({
    * It maintains the list of question data
    * @type {Array}
    */
-  questions: Ember.A(),
+  questions: Ember.A()
 
   // -------------------------------------------------------------------------
   // Actions
 
 
-  actions: {
-    /**
-     * Action get triggered when search
-     * @param  {Object} question
-     */
-    onSearch: function(term) {
-      console.log(term);
-    }
-  }
-
   // -------------------------------------------------------------------------
   // Methods
-
 
 
 });
