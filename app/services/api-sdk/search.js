@@ -69,14 +69,14 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Search courses
+   * Search Resources
    * @param  {String} query
    * @param  {Object} filters
    * @param  {Number} start
    * @param  {Number} length
    * @return {Promise.<Resource[]>}
    */
-  searchResources: function(query, filters, start, length, isOnlyHitCount = false) {
+  searchResources: function(query, filters, start, length) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
@@ -84,9 +84,8 @@ export default Ember.Service.extend({
         .searchResources(query, filters, start, length)
         .then(
           function(response) {
-            let result = isOnlyHitCount ? service.get('searchSerializer').normalizeSearchContentCount(response) : service.get('searchSerializer').nomalizeSearchResources(response);
             resolve(
-              result
+              service.get('searchSerializer').nomalizeSearchResources(response)
             );
           },
           function(error) {
@@ -97,21 +96,23 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Search for questions
-   *
-   * @param filters
-   * @returns {Promise.<Question[]>}
+   * Search Questions
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Question[]>}
    */
-  searchQuestions: function(filters) {
+  searchQuestions: function(query, filters, start, length) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('searchAdapter')
-        .searchQuestions(filters)
+        .searchQuestions(query, filters, start, length)
         .then(
           function(response) {
             resolve(
-              service.get('searchSerializer').normalizeSearchContentCount(response)
+              service.get('searchSerializer').normalizeSearchQuestions(response)
             );
           },
           function(error) {
@@ -146,15 +147,17 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Search for rubcris
-   *
-   * @param filters
-   * @returns {Promise.<Question[]>}
+   * Search Rubrics
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Rubric[]>}
    */
-  searchRubrics: function(filters) {
+  searchRubrics: function(query, filters, start, length) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('searchAdapter').searchRubrics(filters).then(
+      service.get('searchAdapter').searchRubrics(query, filters, start, length).then(
         function(response) {
           resolve(
             service.get('searchSerializer').normalizeSearchContentCount(response)

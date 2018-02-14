@@ -47,7 +47,9 @@ export default {
     'domain': 'domain',
     'relevance': 'Relevance',
     'engagement': 'Engagement',
-    'efficacy': 'Efficacy'
+    'efficacy': 'Efficacy',
+    'visibility-tooltip': 'Not visible to others',
+    'visibility-available': 'Visible to others'
   },
   logout: {
     name: 'Logout'

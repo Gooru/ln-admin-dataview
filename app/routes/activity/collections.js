@@ -48,7 +48,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
 
   setupController: function(controller, model) {
-    controller.set('collections', model.collections);
+    controller.set('collections', model.collections.get('searchResults'));
+    controller.set('hitCount', model.collections.get('hitCount'));
   }
 
 });

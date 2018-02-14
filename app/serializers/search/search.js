@@ -45,11 +45,17 @@ export default Ember.Object.extend(ConfigurationMixin, {
    */
   normalizeSearchCourses: function(payload) {
     const serializer = this;
+    let resultSet = Ember.Object.create({
+      searchResults: Ember.A(),
+      hitCount: payload.totalHitCount
+    });
     if (Ember.isArray(payload.searchResults)) {
-      return payload.searchResults.map(function(result) {
+      let results = payload.searchResults.map(function(result) {
         return serializer.normalizeCourse(result);
       });
+      resultSet.set('searchResults', results);
     }
+    return resultSet;
   },
 
   /**
@@ -93,11 +99,17 @@ export default Ember.Object.extend(ConfigurationMixin, {
 
   nomalizeSearchResources: function(payload) {
     const serializer = this;
+    let resultSet = Ember.Object.create({
+      searchResults: Ember.A(),
+      hitCount: payload.totalHitCount
+    });
     if (Ember.isArray(payload.searchResults)) {
-      return payload.searchResults.map(function(result) {
+      let results = payload.searchResults.map(function(result) {
         return serializer.normalizeResource(result);
       });
+      resultSet.set('searchResults', results);
     }
+    return resultSet;
   },
 
   normalizeResource: function(resource) {
@@ -138,11 +150,17 @@ export default Ember.Object.extend(ConfigurationMixin, {
    */
   normalizeSearchCollection: function(payload) {
     const serializer = this;
+    let resultSet = Ember.Object.create({
+      searchResults: Ember.A(),
+      hitCount: payload.totalHitCount
+    });
     if (Ember.isArray(payload.searchResults)) {
-      return payload.searchResults.map(function(result) {
+      let results = payload.searchResults.map(function(result) {
         return serializer.normalizeCollection(result);
       });
+      resultSet.set('searchResults', results);
     }
+    return resultSet;
   },
 
   /**
@@ -208,18 +226,24 @@ export default Ember.Object.extend(ConfigurationMixin, {
   },
 
   /**
-   * Normalize the Search collections response
+   * Normalize the Search assessments response
    *
    * @param payload is the endpoint response in JSON format
-   * @returns {Collection[]}
+   * @returns {Assessment[]}
    */
   normalizeSearchAssessments: function(payload) {
     const serializer = this;
+    let resultSet = Ember.Object.create({
+      searchResults: Ember.A(),
+      hitCount: payload.totalHitCount
+    });
     if (Ember.isArray(payload.searchResults)) {
-      return payload.searchResults.map(function(result) {
+      let results = payload.searchResults.map(function(result) {
         return serializer.normalizeAssessment(result);
       });
+      resultSet.set('searchResults', results);
     }
+    return resultSet;
   },
 
   /**
@@ -284,13 +308,19 @@ export default Ember.Object.extend(ConfigurationMixin, {
     });
   },
 
-  normalizeSearchQuestionContent: function(payload) {
+  normalizeSearchQuestions: function(payload) {
     const serializer = this;
+    let resultSet = Ember.Object.create({
+      searchResults: Ember.A(),
+      hitCount: payload.totalHitCount
+    });
     if (Ember.isArray(payload.searchResults)) {
-      return payload.searchResults.map(function(result) {
+      let results = payload.searchResults.map(function(result) {
         return serializer.normalizeQuestion(result);
       });
+      resultSet.set('searchResults', results);
     }
+    return resultSet;
   },
 
   /**

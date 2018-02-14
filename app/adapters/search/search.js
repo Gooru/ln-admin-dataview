@@ -15,10 +15,12 @@ export default Ember.Object.extend({
   namespace1: '/gooru-search/rest/v1/pedagogy-search/learning-maps',
 
   /**
-   * Fetches the collections that match with the node
-   *
-   * @param filters
-   * @returns {Promise.<Collection[]>}
+   * Search collections
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Collection[]>}
    */
   searchCollections: function(query = '*', filters = {}, start = 1, length = 20) {
     const adapter = this;
@@ -42,10 +44,12 @@ export default Ember.Object.extend({
   },
 
   /**
-   * Fetches the assessments that match with the node
-   *
-   * @param filters
-   * @returns {Promise.<Assessment[]>}
+   * Search assessments
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Assessment[]>}
    */
   searchAssessments: function(query = '*', filters = {}, start = 1, length = 20) {
     const adapter = this;
@@ -68,10 +72,12 @@ export default Ember.Object.extend({
   },
 
   /**
-   * Fetches the resources that match with the node
-   *
-   * @param filters
-   * @returns {Promise.<Resource[]>}
+   * Search resource
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Resource[]>}
    */
   searchResources: function(query = '*', filters = {}, start = 1, length = 20) {
     const adapter = this;
@@ -95,18 +101,21 @@ export default Ember.Object.extend({
   },
 
   /**
-   * Fetches the questions that match with the node
-   *
-   * @param filters
-   * @returns {Promise.<Question[]>}
+   * Search question
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Question[]>}
    */
-  searchQuestions: function(filters = {}, length = 1) {
+  searchQuestions: function(query = '*', filters = {}, start = 1, length = 20) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/resource`;
     let defaultData = {
-      q: '*',
+      q: query,
       length: length,
+      start: start,
       'flt.resourceFormat': 'question'
     };
     let options = {
@@ -120,10 +129,12 @@ export default Ember.Object.extend({
   },
 
   /**
-   * Fetches courses that match with the node
-   *
-   * @param filters
-   * @returns {Promise.<Course[]>}
+   * Search courses
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Course[]>}
    */
   searchCourses: function(query = '*', filters = {}, start = 1, length = 20) {
     const adapter = this;
@@ -145,18 +156,21 @@ export default Ember.Object.extend({
   },
 
   /**
-   * Fetches rubrics that match with the node
-   *
-   * @param nodeData the term to search
-   * @returns {Promise.<Course[]>}
+   * Search rubrics
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Rubric[]>}
    */
-  searchRubrics: function(filters = {}, length = 1) {
+  searchRubrics: function(query = '*', filters = {}, start = 1, length = 20) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/rubric`;
     let defaultData = {
-      q: '*',
-      length: length
+      q: query,
+      length: length,
+      start: start
     };
     let options = {
       type: 'GET',
@@ -170,18 +184,21 @@ export default Ember.Object.extend({
 
 
   /**
-   * Fetches rubrics that match with the node
-   *
-   * @param filters
-   * @returns {Promise.<Course[]>}
+   * Search units
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Unit[]>}
    */
-  searchUnits: function(filters = {}, length = 1) {
+  searchUnits: function(query = '*', filters = {}, start = 1, length = 20) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/unit`;
     let defaultData = {
-      q: '*',
-      length: length
+      q: query,
+      length: length,
+      start: start
     };
     let options = {
       type: 'GET',
@@ -195,18 +212,21 @@ export default Ember.Object.extend({
 
 
   /**
-   * Fetches rubrics that match with the node
-   *
-   * @param filters
-   * @returns {Promise.<Course[]>}
+   * Search lessons
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Lesson[]>}
    */
-  searchLessons: function(filters = {}, length = 1) {
+  searchLessons: function(query = '*', filters = {}, start = 1, length = 20) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/lesson`;
     let defaultData = {
-      q: '*',
-      length: length
+      q: query,
+      length: length,
+      start: start
     };
     let options = {
       type: 'GET',
@@ -223,7 +243,7 @@ export default Ember.Object.extend({
    * Fetches learningMapsContent
    *
    * @param nodeData the term to search
-   * @returns {Promise.<Course[]>}
+   * @returns {Promise.<Content[]>}
    */
   learningMapsContent: function(nodeData) {
     const adapter = this;

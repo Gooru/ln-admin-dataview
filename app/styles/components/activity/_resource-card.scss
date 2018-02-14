@@ -1,5 +1,4 @@
 .activity-resource-card {
-
   .card-panel-container {
     width: 220px;
     height: 384px;
@@ -87,6 +86,13 @@
       span {
         font-size: 14px;
         text-transform: capitalize;
+        float: left;
+      }
+
+      .visibility {
+        i {
+          margin-right: 20px;
+        }
       }
     }
 
