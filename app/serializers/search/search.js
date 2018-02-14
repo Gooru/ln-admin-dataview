@@ -219,6 +219,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
         avatarUrl: creatorThumbnailUrl,
         username: collectionData.creatornameDisplay
       }),
+      taxonomySet: collectionData.taxonomySet,
+      createdData: collectionData.addDate,
       efficacy: collectionData.efficacy ? collectionData.efficacy : null,
       relevance: collectionData.relevance ? collectionData.relevance : null,
       engagement: collectionData.engagement ? collectionData.engagement : null

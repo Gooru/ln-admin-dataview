@@ -1,0 +1,73 @@
+<div>
+  <div class="header">
+    <div class="author-info">
+      <span class="created-by">  {{t "common.created-by" }} </span>
+      <img class="img-responsive thumbnail-img" src="{{collection.creator.avatarUrl}}">
+      <span class="username">{{collection.creator.username}}</span>
+      <span class="publish-date">on {{format-date collection.createdData 'DD MMMM, YYYY'}}</span>
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="collection-info">
+      <div class="title">
+        {{collection.title}}
+      </div>
+      <div class="description">
+        <div class="thumbnail-img">
+          <img class="img-responsive" src="{{collection.thumbnailUrl}}"/>
+        </div>
+        <div class="content">
+          {{collection.description}}
+        </div>
+      </div>
+    </div>
+
+    <div class="taxonomy-info">
+      <div class="title">
+        {{t "activities.pull-out.taxonomy-title"}}
+      </div>
+      <div class="items">
+        {{#if collection.taxonomySet.subject}}
+          <div class="subject item-box">
+            {{#each collection.taxonomySet.subject as |subject|}}
+              {{subject}}
+            {{/each}}
+            {{#each collection.taxonomySet.course as |course|}}
+              > {{course}}
+            {{/each}}
+          </div>
+        {{else}}
+          <div class="subject item-box">
+            No Subject Available
+          </div>
+        {{/if}}
+        {{#if collection.taxonomySet.domain}}
+          <div class="domain item-box">
+            {{#each collection.taxonomySet.domain as |domain|}}
+              {{domain}}
+            {{/each}}
+          </div>
+        {{/if}}
+      </div>
+    </div>
+
+    <div class="content-info">
+      <div class="title">
+        {{t 'activities.pull-out.content'}}
+      </div>
+      <div class="items">
+        {{#each collectionData.content as |content|}}
+          <div class="content-item">
+            <div class="{{if (eq content.content_format 'question') content.content_format content.content_subformat}}">
+              <i class="icon"> </i>
+            </div>
+            <div class="content-title">
+                {{content.title}}
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  </div>
+</div>
