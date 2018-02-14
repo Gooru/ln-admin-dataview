@@ -1,23 +1,28 @@
 <div class="card-panel-container">
-  <div class="card-panel-header" style="background-image: url(https://cdn.pixabay.com/photo/2013/04/06/11/50/image-editing-101040_960_720.jpg)">
+  <div class="card-panel-header" style="background-image: url({{assessment.thumbnailUrl}})">
     <div class="info">
-      <div class="title">consectetur adipiscing elit, sed do eiusmod tempor incididu</div>
+      <div class="title">{{assessment.title}}</div>
     </div>
   </div>
   <div class="question-count-container">
     <i class="icon"></i>
-    <span>25</span>
+    <span>{{assessment.questionCount}}</span>
   </div>
   <div class="assessment-info-container">
     <div class="assessment-user-info">
-      <span class="created-by">Created by</span>
+      <div class="created-by">{{t (if assessment.sameOwnerAndCreator "common.created-by" "common.remixed-by")}}</div>
       <div class="img-container pull-left">
-        <img class="img-responsive" src="//usercdn.gooru.org/83971555-87e3-4a22-afc6-987666a0a414.jpg">
+        <img class="img-responsive" src="{{assessment.owner.avatarUrl}}">
       </div>
-      <span class="username">jwgooru</span>
+      <div class="username">{{assessment.owner.displayName}}</div>
     </div>
     <div class="assessment-description">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididu
+      {{safe-html assessment.description}}
+    </div>
+    <div class="assessment-standards ">
+      {{#if tags.length}}
+        {{taxonomy.taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
+      {{/if}}
     </div>
 
   </div>
@@ -28,17 +33,17 @@
     <div class="assessment-prefs-container">
       <span class="left-arc"></span>
       <span class="right-arc"></span>
-      <div class="assessment-prefs relevance pull-left">
-        <div class="count">0.8</div>
-        <div class="title">Relevance</div>
+      <div class="assessment-prefs relevance pull-left" style="background-color:rgba(0, 114, 188, {{assessment.relevance}})">
+        <div class="count">{{assessment.relevance}}</div>
+        <div class="title">{{t 'common.relevance'}}</div>
       </div>
-      <div class="assessment-prefs engagement pull-left">
-        <div class="count">0.6</div>
-        <div class="title">Engagement</div>
+      <div class="assessment-prefs engagement pull-left" style="background-color:rgba(0, 114, 188, {{assessment.engagement}})">
+        <div class="count">{{assessment.engagement}}</div>
+        <div class="title">{{t 'common.engagement'}}</div>
       </div>
-      <div class="assessment-prefs efficacy pull-left">
-        <div class="count">0.4</div>
-        <div class="title">Efficacy</div>
+      <div class="assessment-prefs efficacy pull-left" style="background-color:rgba(0, 114, 188, {{assessment.efficacy}})">
+        <div class="count">{{assessment.efficacy}}</div>
+        <div class="title">{{t 'common.efficacy'}}</div>
       </div>
     </div>
   </div>

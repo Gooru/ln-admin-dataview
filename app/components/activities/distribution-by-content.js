@@ -56,33 +56,34 @@ export default Ember.Component.extend({
    * return hashed json of each content subformats
    */
   getSearchContentCount: function() {
+    let term = '*';
     let component = this;
     component.set('isLoading', true);
     // Resources
     let webpageFilters = {
       'flt.resourceFormat': 'webpage'
     };
-    const webpageCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(webpageFilters, 1));
+    const webpageCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, webpageFilters, 1, 1, true));
     let audioFilters = {
       'flt.resourceFormat': 'audio'
     };
-    const audioCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(audioFilters, 1));
+    const audioCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, audioFilters, 1, 1, true));
     let videoFilters = {
       'flt.resourceFormat': 'video'
     };
-    const videoCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(videoFilters, 1));
+    const videoCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, videoFilters, 1, 1, true));
     let imageFilters = {
       'flt.resourceFormat': 'image'
     };
-    const imageCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(imageFilters, 1));
+    const imageCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, imageFilters, 1, 1, true));
     let interactiveFilters = {
       'flt.resourceFormat': 'interactive'
     };
-    const interactiveCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(interactiveFilters, 1));
+    const interactiveCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, interactiveFilters, 1, 1, true));
     let textFilters = {
       'flt.resourceFormat': 'text'
     };
-    const textCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(textFilters, 1));
+    const textCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, textFilters, 1, 1, true));
 
     // Questions
     let multipleChoiceFilters = {

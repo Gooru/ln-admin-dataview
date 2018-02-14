@@ -41,6 +41,7 @@ export default {
     cancel: 'Cancel',
     'select': 'Select',
     'created-by': 'Created by',
+    'remixed-by': 'Remixed by',
     'subject': 'subject',
     'course': 'course',
     'domain': 'domain',

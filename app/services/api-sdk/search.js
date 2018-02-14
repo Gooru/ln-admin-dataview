@@ -25,61 +25,68 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Search for collections
-   *
-   * @param filters
-   * @returns {Promise}
+   * Search collections
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Collection[]>}
    */
-  searchCollections: function(filters) {
+  searchCollections: function(query, filters, start, length) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('searchAdapter')
-        .searchCollections(filters)
+        .searchCollections(query, filters, start, length)
         .then(function(response) {
           resolve(
-            service.get('searchSerializer').normalizeSearchContentCount(response)
+            service.get('searchSerializer').normalizeSearchCollection(response)
           );
         }, reject);
     });
   },
 
   /**
-   * Search for assessments
-   *
-   * @param filters
-   * @returns {Promise}
+   * Search assessments
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Assessment[]>}
    */
-  searchAssessments: function(filters) {
+  searchAssessments: function(query, filters, start, length) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('searchAdapter')
-        .searchAssessments(filters)
+        .searchAssessments(query, filters, start, length)
         .then(function(response) {
           resolve(
-            service.get('searchSerializer').normalizeSearchContentCount(response)
+            service.get('searchSerializer').normalizeSearchAssessments(response)
           );
         }, reject);
     });
   },
 
   /**
-   * Search for resources
-   *
-   * @param filters
-   * @returns {Promise.<Resource[]>}
+   * Search courses
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Resource[]>}
    */
-  searchResources: function(filters, length) {
+  searchResources: function(query, filters, start, length, isOnlyHitCount = false) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('searchAdapter')
-        .searchResources(filters, length)
+        .searchResources(query, filters, start, length)
         .then(
           function(response) {
+            let result = isOnlyHitCount ? service.get('searchSerializer').normalizeSearchContentCount(response) : service.get('searchSerializer').nomalizeSearchResources(response);
             resolve(
-              service.get('searchSerializer').normalizeSearchContentCount(response)
+              result
             );
           },
           function(error) {
@@ -238,7 +245,7 @@ export default Ember.Service.extend({
     });
   },
 
-  getAssessmentContent: function(filters, length =1) {
+  getAssessmentContent: function(filters, length = 1) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service.get('searchAdapter').searchAssessments(filters, length).then(

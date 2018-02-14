@@ -1,29 +1,34 @@
 <div class="card-panel-container">
-  <div class="card-panel-header" style="background-image: url(https://cdn.pixabay.com/photo/2013/04/06/11/50/image-editing-101040_960_720.jpg)">
+  <div class="card-panel-header" style="background-image: url({{collection.thumbnailUrl}})">
     <div class="info">
-      <div class="title">consectetur adipiscing elit, sed do eiusmod tempor incididu</div>
+      <div class="title">{{collection.title}}</div>
     </div>
   </div>
   <div class="content-count-container">
     <div class="question pull-left">
       <i class="icon"></i>
-      <span>10</span>
+      <span>{{collection.questionCount}}</span>
     </div>
     <div class="resource pull-left">
       <i class="icon"></i>
-      <span>15</span>
+      <span>{{collection.resourceCount}}</span>
     </div>
   </div>
   <div class="collection-info-container">
     <div class="collection-user-info">
-      <span class="created-by">Created by</span>
+      <div class="created-by">{{t (if collection.sameOwnerAndCreator "common.created-by" "common.remixed-by")}}</div>
       <div class="img-container pull-left">
-        <img class="img-responsive" src="//usercdn.gooru.org/83971555-87e3-4a22-afc6-987666a0a414.jpg">
+        <img class="img-responsive" src="{{collection.owner.avatarUrl}}">
       </div>
-      <span class="username">jwgooru</span>
+      <div class="username">{{collection.owner.displayName}}</div>
     </div>
     <div class="collection-description">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididu
+      {{safe-html collection.description}}
+    </div>
+    <div class="collection-standards ">
+      {{#if tags.length}}
+        {{taxonomy.taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
+      {{/if}}
     </div>
 
   </div>
@@ -34,17 +39,17 @@
     <div class="collection-prefs-container">
       <span class="left-arc"></span>
       <span class="right-arc"></span>
-      <div class="collection-prefs relevance pull-left">
-        <div class="count">0.8</div>
-        <div class="title">Relevance</div>
+      <div class="collection-prefs relevance pull-left" style="background-color:rgba(0, 114, 188, {{collection.relevance}})">
+        <div class="count">{{collection.relevance}}</div>
+        <div class="title">{{t 'common.relevance'}}</div>
       </div>
-      <div class="collection-prefs engagement pull-left">
-        <div class="count">0.6</div>
-        <div class="title">Engagement</div>
+      <div class="collection-prefs engagement pull-left" style="background-color:rgba(0, 114, 188, {{collection.engagement}})">
+        <div class="count">{{collection.engagement}}</div>
+        <div class="title">{{t 'common.engagement'}}</div>
       </div>
-      <div class="collection-prefs efficacy pull-left">
-        <div class="count">0.4</div>
-        <div class="title">Efficacy</div>
+      <div class="collection-prefs efficacy pull-left" style="background-color:rgba(0, 114, 188, {{collection.efficacy}})">
+        <div class="count">{{collection.efficacy}}</div>
+        <div class="title">{{t 'common.efficacy'}}</div>
       </div>
     </div>
   </div>

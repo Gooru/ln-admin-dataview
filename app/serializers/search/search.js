@@ -7,7 +7,8 @@ import AssessmentModel from 'admin-dataview/models/assessment/assessment';
 import CourseModel from 'admin-dataview/models/course/course';
 import TaxonomySerializer from 'admin-dataview/serializers/taxonomy/taxonomy';
 import {
-  DEFAULT_IMAGES,TAXONOMY_LEVELS
+  DEFAULT_IMAGES,
+  TAXONOMY_LEVELS
 } from 'admin-dataview/config/config';
 import ProfileModel from 'admin-dataview/models/profile/profile';
 import {
@@ -35,6 +36,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     );
   },
 
+
   /**
    * Normalize the Search course response
    *
@@ -59,24 +61,21 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const serializer = this;
     const basePath = serializer.get('session.cdnUrls.content');
     const appRootPath = this.get('appRootPath'); //configuration appRootPath
-    const thumbnailUrl = result.thumbnail
-      ? basePath + result.thumbnail
-      : appRootPath + DEFAULT_IMAGES.COURSE;
+    const thumbnailUrl = result.thumbnail ?
+      basePath + result.thumbnail :
+      appRootPath + DEFAULT_IMAGES.COURSE;
     const taxonomyInfo =
       (result.taxonomy &&
         result.taxonomy.curriculum &&
-        result.taxonomy.curriculum.curriculumInfo) ||
-      [];
+        result.taxonomy.curriculum.curriculumInfo) || [];
     return CourseModel.create(Ember.getOwner(this).ownerInjection(), {
       id: result.id,
       title: result.title,
       description: result.description,
       thumbnailUrl: thumbnailUrl,
       subject: result.subjectBucket,
-      subjectName:
-        result.taxonomy && result.taxonomy.subject
-          ? result.taxonomy.subject[0]
-          : null,
+      subjectName: result.taxonomy && result.taxonomy.subject ?
+        result.taxonomy.subject[0] : null,
       subjectSequence: result.subjectSequence,
       isVisibleOnProfile: result.visibleOnProfile,
       isPublished: result.publishStatus === 'published',
@@ -92,7 +91,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     });
   },
 
-  nomalizeSearchResourceContent: function(payload) {
+  nomalizeSearchResources: function(payload) {
     const serializer = this;
     if (Ember.isArray(payload.searchResults)) {
       return payload.searchResults.map(function(result) {
@@ -104,7 +103,6 @@ export default Ember.Object.extend(ConfigurationMixin, {
   normalizeResource: function(resource) {
     const serializer = this;
     const basePath = serializer.get('session.cdnUrls.content');
-    const appRootPath = this.get('appRootPath'); //configuration appRootPath
     const format = getResourceFormat(resource.contentSubFormat);
     const taxonomyInfo =
       (resource.taxonomySet &&
@@ -117,7 +115,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
       format: format,
       url: resource.url,
       thumbnailUrl: resource.thumbnail ?
-        basePath + resource.thumbnail : appRootPath + DEFAULT_IMAGES.RESOURCE,
+        basePath + resource.thumbnail : DEFAULT_IMAGES.RESOURCE,
       creator: resource.creator ? serializer.normalizeOwner(resource.creator) : null,
       owner: resource.user ? serializer.normalizeOwner(resource.user) : null,
       type: 'resource',
@@ -138,7 +136,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
    * @param payload is the endpoint response in JSON format
    * @returns {Collection[]}
    */
-  normalizeSearchCollectionContent: function(payload) {
+  normalizeSearchCollection: function(payload) {
     const serializer = this;
     if (Ember.isArray(payload.searchResults)) {
       return payload.searchResults.map(function(result) {
@@ -156,16 +154,16 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const serializer = this;
     const basePath = serializer.get('session.cdnUrls.content');
     const userBasePath = serializer.get('session.cdnUrls.user');
-    const appRootPath = this.get('appRootPath'); //configuration appRootPath
+
     const thumbnailUrl = collectionData.thumbnail ?
       basePath + collectionData.thumbnail :
-      appRootPath + DEFAULT_IMAGES.COLLECTION;
+      DEFAULT_IMAGES.COLLECTION;
     const userThumbnailUrl = collectionData.userProfileImage ?
       userBasePath + collectionData.userProfileImage :
-      appRootPath + DEFAULT_IMAGES.USER_PROFILE;
+      DEFAULT_IMAGES.USER_PROFILE;
     const creatorThumbnailUrl = collectionData.creatorProfileImage ?
       userBasePath + collectionData.creatorProfileImage :
-      appRootPath + DEFAULT_IMAGES.USER_PROFILE;
+      DEFAULT_IMAGES.USER_PROFILE;
     const taxonomyInfo =
       (collectionData.taxonomySet &&
         collectionData.taxonomySet.curriculum &&
@@ -215,7 +213,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
    * @param payload is the endpoint response in JSON format
    * @returns {Collection[]}
    */
-  normalizeSearchAssessmentContent: function(payload) {
+  normalizeSearchAssessments: function(payload) {
     const serializer = this;
     if (Ember.isArray(payload.searchResults)) {
       return payload.searchResults.map(function(result) {
@@ -233,16 +231,15 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const serializer = this;
     const basePath = serializer.get('session.cdnUrls.content');
     const userBasePath = serializer.get('session.cdnUrls.user');
-    const appRootPath = this.get('appRootPath'); //configuration appRootPath
     const thumbnailUrl = assessmentData.thumbnail ?
       basePath + assessmentData.thumbnail :
-      appRootPath + DEFAULT_IMAGES.ASSESSMENT;
+      DEFAULT_IMAGES.ASSESSMENT;
     const ownerThumbnailUrl = assessmentData.userProfileImage ?
       userBasePath + assessmentData.userProfileImage :
-      appRootPath + DEFAULT_IMAGES.USER_PROFILE;
+      DEFAULT_IMAGES.USER_PROFILE;
     const creatorThumbnailUrl = assessmentData.creatorProfileImage ?
       userBasePath + assessmentData.creatorProfileImage :
-      appRootPath + DEFAULT_IMAGES.USER_PROFILE;
+      DEFAULT_IMAGES.USER_PROFILE;
     const taxonomyInfo =
       (assessmentData.taxonomySet &&
         assessmentData.taxonomySet.curriculum &&
@@ -372,10 +369,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
   normalizeOwner: function(ownerData) {
     const serializer = this;
     const basePath = serializer.get('session.cdnUrls.user');
-    const appRootPath = this.get('appRootPath'); //configuration appRootPath
     const thumbnailUrl = ownerData.profileImage ?
-      basePath + ownerData.profileImage :
-      appRootPath + DEFAULT_IMAGES.USER_PROFILE;
+      basePath + ownerData.profileImage : DEFAULT_IMAGES.USER_PROFILE;
 
     return ProfileModel.create(Ember.getOwner(this).ownerInjection(), {
       id: ownerData.gooruUId || ownerData.id,
@@ -384,6 +379,18 @@ export default Ember.Object.extend(ConfigurationMixin, {
       username: ownerData.usernameDisplay,
       avatarUrl: thumbnailUrl
     });
+  },
+
+  /**
+   * Normalize the Search response
+   *
+   * @param payload is the endpoint response in JSON format
+   * @returns {contentCount}
+   */
+  normalizeSearchContentCount: function(payload) {
+
+    let totalHitCount = payload ? payload.totalHitCount : null;
+    return totalHitCount;
   }
 
 });

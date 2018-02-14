@@ -1,7 +1,4 @@
 .activity-resource-card {
-  margin-left: 50px;
-  margin-top: 20px;
-  margin-bottom: 20px;
 
   .card-panel-container {
     width: 220px;
@@ -22,11 +19,11 @@
       position: relative;
       border-top-left-radius: 4px;
       border-top-right-radius: 4px;
-      background-size: 85px 85px;
-      background-position-x: 65px;
+      background-size: 70px 70px;
+      background-position-x: 75px;
       background-position-y: 6px;
 
-      &.website {
+      &.webpage {
         background-image: url("../assets/images/website-resource-green.svg");
       }
 
@@ -56,13 +53,14 @@
         z-index: 10;
 
         .title {
-          line-height: 1.5;
           padding-left: 10px;
           padding-right: 10px;
           width: 100%;
           height: 42px;
           margin-top: 88px;
-          font-size: 13px;
+          $line-height: 1.5;
+          $lines-to-show: 2;
+          @include ellipsis($font-size: 13px, $line-height: $line-height, $lines-to-show: $lines-to-show);
         }
       }
     }
@@ -88,6 +86,7 @@
 
       span {
         font-size: 14px;
+        text-transform: capitalize;
       }
     }
 
@@ -128,7 +127,9 @@
       }
 
       .resource-description {
-        line-height: 1.5;
+        $line-height: 1.5;
+        $lines-to-show: 3;
+        @include ellipsis($font-size: 13px, $line-height: $line-height, $lines-to-show: $lines-to-show);
       }
     }
 

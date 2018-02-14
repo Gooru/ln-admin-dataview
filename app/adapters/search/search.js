@@ -20,13 +20,14 @@ export default Ember.Object.extend({
    * @param filters
    * @returns {Promise.<Collection[]>}
    */
-  searchCollections: function(filters = {}, length = 1) {
+  searchCollections: function(query = '*', filters = {}, start = 1, length = 20) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/scollection`;
     let defaultData = {
-      q: '*',
+      q: query,
       length: length,
+      start: start,
       'flt.collectionType': 'collection'
     };
     const options = {
@@ -46,13 +47,14 @@ export default Ember.Object.extend({
    * @param filters
    * @returns {Promise.<Assessment[]>}
    */
-  searchAssessments: function(filters = {}, length = 1) {
+  searchAssessments: function(query = '*', filters = {}, start = 1, length = 20) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/scollection`;
-    let defaultData =  {
-      q: '*',
+    let defaultData = {
+      q: query,
       length: length,
+      start:start,
       'flt.collectionType': 'assessment'
     };
     const options = {
@@ -71,13 +73,14 @@ export default Ember.Object.extend({
    * @param filters
    * @returns {Promise.<Resource[]>}
    */
-  searchResources: function(filters = {}, length = 1) {
+  searchResources: function(query = '*', filters = {}, start = 1, length = 20) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/resource`;
-    let defaultData =  {
-      q: '*',
+    let defaultData = {
+      q: query,
       length: length,
+      start: start,
       'flt.contentFormat': 'resource'
     };
     let options = {
@@ -101,7 +104,7 @@ export default Ember.Object.extend({
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/resource`;
-    let defaultData =  {
+    let defaultData = {
       q: '*',
       length: length,
       'flt.resourceFormat': 'question'
@@ -122,11 +125,11 @@ export default Ember.Object.extend({
    * @param filters
    * @returns {Promise.<Course[]>}
    */
-  searchCourses: function(query = '*', filters = {}, start = 1,  length = 20) {
+  searchCourses: function(query = '*', filters = {}, start = 1, length = 20) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/course`;
-    let defaultData =  {
+    let defaultData = {
       q: query,
       start: start,
       length: length
@@ -151,7 +154,7 @@ export default Ember.Object.extend({
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/rubric`;
-    let defaultData =  {
+    let defaultData = {
       q: '*',
       length: length
     };
@@ -176,7 +179,7 @@ export default Ember.Object.extend({
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/unit`;
-    let defaultData =  {
+    let defaultData = {
       q: '*',
       length: length
     };
@@ -201,7 +204,7 @@ export default Ember.Object.extend({
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/lesson`;
-    let defaultData =  {
+    let defaultData = {
       q: '*',
       length: length
     };
