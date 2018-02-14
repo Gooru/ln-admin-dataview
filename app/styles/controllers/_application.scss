@@ -1,6 +1,9 @@
-.route-application {
-  overflow-x: hidden;
 
+.route-competency,
+ .route-activity {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  
   &.no-vertical-scroll {
     overflow-y: hidden;
   }
@@ -71,7 +74,7 @@
   }
 }
 
-.route-activity_summary {
+.route-activity_resources {
   .app-container {
     overflow-y: auto;
   }

@@ -81,9 +81,32 @@
               display: block;
             }
           }
+
           .interactive_resource {
             i {
               background: url("images/interactive-resource-green.svg");
+              width: 67px;
+              height: 67px;
+              background-size: 67px 67px;
+              object-fit: contain;
+              display: block;
+            }
+          }
+
+          .webpage_resource {
+            i {
+              background: url("images/website-resource-green.svg");
+              width: 67px;
+              height: 67px;
+              background-size: 67px 67px;
+              object-fit: contain;
+              display: block;
+            }
+          }
+
+          .text_resource {
+            i {
+              background: url("images/text-resource-green.svg");
               width: 67px;
               height: 67px;
               background-size: 67px 67px;
