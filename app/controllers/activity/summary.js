@@ -48,22 +48,22 @@ export default Ember.Controller.extend({
     let collection = this.get('collection');
     let resultSet = Ember.A();
     if (collection) {
-      let extracted = {
+      resultSet = {
         descriptive: {
           title: collection.title,
           description: collection.description
         },
-        media: {
-          format: collection.content_subformat
-        }
-      };
 
-      let curated = {
+
         creation: {
           'Published By': 'Gooru org',
           'Published Status': 'Published',
           Aggregator: collection.aggregator ? collection.aggregator : null,
-          License: collection.license ? collection.license : null
+          License: collection.license ? collection.license : null,
+          'creator Name': collection.owner.username,
+          'created On': collection.publish_date,
+          'modeified On': collection.modeified_date ? collection.modeified_date : null,
+          modified_by: collection.modified_by
         },
 
         educational: {
@@ -74,56 +74,39 @@ export default Ember.Controller.extend({
           'age-range': null,
           'Editorial Range': null,
           signature: collection.signature ? collection.signature : null,
-          keywords: collection.info.keywords ? collection.info.keywords[0] : null
+          keywords: collection.info.keywords ? collection.info.keywords[0] : null,
+          audience: collection.metadata.audience
         },
+
+
         media: {
+          format: collection.content_subformat,
           'media Fearures': collection.media ? collection.media : null,
           'access hazard': collection.accesshazard ? collection.accesshazard : null,
           advertisement_level: collection.metadata.advertisement_level,
-          framebreaker: collection.display_guide.is_frame_breaker
-        }
-      };
-
-      let tagged = {
-        educational: {
-          audience: collection.metadata.audience
+          framebreaker: collection.display_guide.is_frame_breaker,
+          isBroken: collection.publish_date.is_broken,
+          address: collection.address ? collection.address : null
         },
+
 
         instructional: {
           depthofknowledge: collection.depthofknowledge,
           '21st Century Skills': collection.skills
         },
+
         framework: {
           subject: collection.info.crawled_subject,
           course: collection.info.gooru_course ? collection.info.gooru_course[0] : null,
           domain: collection.info.domain.attribution,
           standard: collection.taxonomy ? collection.taxonomy.id : null
-        }
-      };
+        },
 
-      let computed = {
-        creation: {
-          creatorName: collection.owner.username,
-          createdOn: collection.publish_date,
-          modeifiedOn: collection.modeified_date ? collection.modeified_date : null,
-          modified_by: collection.modified_by
-        },
-        media: {
-          isBroken: collection.publish_date.is_broken,
-          address: collection.address ? collection.address : null
-        },
         vector: {
           relevance: null,
           engagment: null,
           efficacy: null
         }
-      };
-
-      resultSet = {
-        extracted: extracted,
-        curated: curated,
-        tagged: tagged,
-        computed: computed
       };
     }
     return resultSet;
@@ -134,8 +117,25 @@ export default Ember.Controller.extend({
   //  * Grouping header data to show more info  in pull out
   //  */
   groupHeader: Ember.computed('groupData', function() {
-    let infoObject = ['extracted', 'curated', 'tagged', 'computed'];
-    return infoObject;
+    let resultHeader = Ember.A();
+    resultHeader = [Ember.Object.create({
+      header: 'extracted',
+      isEnabled: true
+    }),
+    Ember.Object.create({
+      header: 'curated',
+      isEnabled: false
+    }),
+    Ember.Object.create({
+      header: 'tagged',
+      isEnabled: true
+    }),
+    Ember.Object.create({
+      header: 'computed',
+      isEnabled: true
+    })
+    ];
+    return resultHeader;
   }),
 
   // -------------------------------------------------------------------------
