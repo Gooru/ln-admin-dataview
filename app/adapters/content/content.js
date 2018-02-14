@@ -35,6 +35,24 @@ export default Ember.Object.extend({
     });
   },
 
+  /**
+   * Reads a collection by id
+   *
+   * @param {string} resourceId
+   * @returns {Promise}
+   */
+  getCollectionById: function(collectionId) {
+    const adapter = this;
+    const namespace = adapter.get('namespaceResource');
+    const resource = 'collections';
+    const url = `${namespace}/${resource}/${collectionId}`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
 
   defineHeaders: function() {
     return {

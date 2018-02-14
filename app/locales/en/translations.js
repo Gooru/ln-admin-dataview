@@ -161,7 +161,11 @@ export default {
       'audience': 'Audience'
     },
     'distribution-by-subject': 'distribution by subject',
-    'no-filters': 'No Filters Applied'
+    'no-filters': 'No Filters Applied',
+    'pull-out': {
+      'taxonomy-title': 'Subject, Course and Domain',
+      'content': 'Content'
+    }
   },
   'century-skills': {
     legends: {
