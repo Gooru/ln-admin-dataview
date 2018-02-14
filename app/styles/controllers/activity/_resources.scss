@@ -1,0 +1,15 @@
+.activity-resources {
+  margin: 50px auto;
+
+  .resource-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 45px;
+    align-items: center;
+  }
+
+  .activity-resource-card {
+    width: 220px;
+    height: 384px;
+  }
+}

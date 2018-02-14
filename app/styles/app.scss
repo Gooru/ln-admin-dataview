@@ -20,6 +20,11 @@
 
 @import 'controllers/activity';
 @import 'controllers/activity/summary';
+@import 'controllers/activity/courses';
+@import 'controllers/activity/collections';
+@import 'controllers/activity/assessments';
+@import 'controllers/activity/resources';
+@import 'controllers/activity/questions';
 
 @import 'helpers/three-bounce-spinner';
 
@@ -84,10 +89,18 @@
 @import 'components/activities/distribution-by-subjects';
 @import 'components/activities/usage-statistics';
 @import 'components/activities/distribution-by-content';
-
+@import 'components/activities/search-box';
+@import 'components/activities/search-filter-tag';
 
 @import 'components/modals/activity/century-skills-content';
 @import 'components/modals/activity/century-skills-legend';
 @import 'components/activity/menu-navigation';
+@import 'components/activity/summary-distribution-by-content';
+
+@import 'components/activity/course-card';
+@import 'components/activity/collection-card';
+@import 'components/activity/assessment-card';
+@import 'components/activity/resource-card';
+@import 'components/activity/question-card';
 
 @import 'components/modals/learner/user-profile-modal';

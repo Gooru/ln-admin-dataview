@@ -1,1 +1,7 @@
-{{outlet}}
+<div class="activity-assessments">
+  <div class="assessment-cards">
+    {{#each assessments as |assessment|}}
+      {{activity.assessment-card assessment=assessment}}
+    {{/each}}
+  </div>
+</div>

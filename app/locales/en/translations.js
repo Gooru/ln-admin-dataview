@@ -40,10 +40,16 @@ export default {
     'add-century-skills': 'Add 21st Century Skills',
     cancel: 'Cancel',
     'select': 'Select',
-    'created-by': 'Created-by',
+    'created-by': 'Created by',
+    'remixed-by': 'Remixed by',
     'subject': 'subject',
     'course': 'course',
-    'domain': 'domain'
+    'domain': 'domain',
+    'relevance': 'Relevance',
+    'engagement': 'Engagement',
+    'efficacy': 'Efficacy',
+    'visibility-tooltip': 'Not visible to others',
+    'visibility-available': 'Visible to others'
   },
   logout: {
     name: 'Logout'
@@ -154,7 +160,8 @@ export default {
       'publisher': 'Publisher',
       'audience': 'Audience'
     },
-    'distribution-by-subject': 'distribution by subject'
+    'distribution-by-subject': 'distribution by subject',
+    'no-filters': 'No Filters Applied'
   },
   'century-skills': {
     legends: {

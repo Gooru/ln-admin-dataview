@@ -93,11 +93,12 @@ export default Ember.Component.extend({
       socialScience,
       ela
     }) => {
-      let subjects = component.get('subjects');
+      let subjects = Ember.A();
       subjects.pushObject(component.mapContentCountsBySubject('Maths', maths));
       subjects.pushObject(component.mapContentCountsBySubject('Science', science));
       subjects.pushObject(component.mapContentCountsBySubject('Social Science', socialScience));
       subjects.pushObject(component.mapContentCountsBySubject('ELA', ela));
+      component.set('subjects', subjects);
       component.set('isLoading', false);
     });
   },

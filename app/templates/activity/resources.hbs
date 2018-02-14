@@ -1,1 +1,7 @@
-{{outlet}}
+<div class="activity-resources">
+  <div class="resource-cards">
+    {{#each resources as |resource|}}
+      {{activity.resource-card resource=resource}}
+    {{/each}}
+  </div>
+</div>

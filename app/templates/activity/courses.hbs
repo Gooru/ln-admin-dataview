@@ -1,1 +1,7 @@
-{{outlet}}
+<div class="activity-courses">
+  <div class="course-cards">
+    {{#each courses as |course|}}
+      {{activity.course-card course=course}}
+    {{/each}}
+  </div>
+</div>

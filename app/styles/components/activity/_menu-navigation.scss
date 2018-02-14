@@ -55,15 +55,12 @@
         color: $gray-base !important;
         background: transparent;
         opacity: 0.8;
-        &::after {
-         height: 3px;
-        }
       }
 
       &::after {
         content: "";
-        background: $gray-base;
-        height: 2px;
+        background: $gray;
+        height: 3px;
         position: absolute;
         width: 100%;
         left: 0;
@@ -81,6 +78,7 @@
       &::after {
         transform: scale(1);
         height: 3px;
+        background: $gray-base;
       }
     }
 

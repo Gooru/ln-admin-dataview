@@ -25,61 +25,67 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Search for collections
-   *
-   * @param filters
-   * @returns {Promise}
+   * Search collections
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Collection[]>}
    */
-  searchCollections: function(filters) {
+  searchCollections: function(query, filters, start, length) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('searchAdapter')
-        .searchCollections(filters)
+        .searchCollections(query, filters, start, length)
         .then(function(response) {
           resolve(
-            service.get('searchSerializer').normalizeSearchContentCount(response)
+            service.get('searchSerializer').normalizeSearchCollection(response)
           );
         }, reject);
     });
   },
 
   /**
-   * Search for assessments
-   *
-   * @param filters
-   * @returns {Promise}
+   * Search assessments
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Assessment[]>}
    */
-  searchAssessments: function(filters) {
+  searchAssessments: function(query, filters, start, length) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('searchAdapter')
-        .searchAssessments(filters)
+        .searchAssessments(query, filters, start, length)
         .then(function(response) {
           resolve(
-            service.get('searchSerializer').normalizeSearchContentCount(response)
+            service.get('searchSerializer').normalizeSearchAssessments(response)
           );
         }, reject);
     });
   },
 
   /**
-   * Search for resources
-   *
-   * @param filters
-   * @returns {Promise.<Resource[]>}
+   * Search Resources
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Resource[]>}
    */
-  searchResources: function(filters, length) {
+  searchResources: function(query, filters, start, length) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('searchAdapter')
-        .searchResources(filters, length)
+        .searchResources(query, filters, start, length)
         .then(
           function(response) {
             resolve(
-              service.get('searchSerializer').normalizeSearchContentCount(response)
+              service.get('searchSerializer').nomalizeSearchResources(response)
             );
           },
           function(error) {
@@ -90,21 +96,23 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Search for questions
-   *
-   * @param filters
-   * @returns {Promise.<Question[]>}
+   * Search Questions
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Question[]>}
    */
-  searchQuestions: function(filters) {
+  searchQuestions: function(query, filters, start, length) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('searchAdapter')
-        .searchQuestions(filters)
+        .searchQuestions(query, filters, start, length)
         .then(
           function(response) {
             resolve(
-              service.get('searchSerializer').normalizeSearchContentCount(response)
+              service.get('searchSerializer').normalizeSearchQuestions(response)
             );
           },
           function(error) {
@@ -115,18 +123,20 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Search for courses
-   *
-   * @param filters
-   * @returns {Promise.<Question[]>}
+   * Search courses
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Course[]>}
    */
-  searchCourses: function(filters) {
+  searchCourses: function(query, filters, start, length) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('searchAdapter').searchCourses(filters).then(
+      service.get('searchAdapter').searchCourses(query, filters, start, length).then(
         function(response) {
           resolve(
-            service.get('searchSerializer').normalizeSearchContentCount(response)
+            service.get('searchSerializer').normalizeSearchCourses(response)
           );
         },
         function(error) {
@@ -137,15 +147,17 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Search for rubcris
-   *
-   * @param filters
-   * @returns {Promise.<Question[]>}
+   * Search Rubrics
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Rubric[]>}
    */
-  searchRubrics: function(filters) {
+  searchRubrics: function(query, filters, start, length) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('searchAdapter').searchRubrics(filters).then(
+      service.get('searchAdapter').searchRubrics(query, filters, start, length).then(
         function(response) {
           resolve(
             service.get('searchSerializer').normalizeSearchContentCount(response)
@@ -236,7 +248,7 @@ export default Ember.Service.extend({
     });
   },
 
-  getAssessmentContent: function(filters, length =1) {
+  getAssessmentContent: function(filters, length = 1) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service.get('searchAdapter').searchAssessments(filters, length).then(

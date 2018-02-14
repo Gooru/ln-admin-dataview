@@ -20,6 +20,11 @@ export default Ember.Controller.extend({
    */
   searchService: Ember.inject.service('api-sdk/search'),
 
+  /**
+   * activities service to fetch content details
+   */
+  activitiesService: Ember.inject.service('api-sdk/activities'),
+
   //-------------------------------------------------------------------------
   //Properties
 
@@ -312,34 +317,31 @@ export default Ember.Controller.extend({
   getSearchContentCount: function(selectedNode) {
     let filters = selectedNode.filters;
     const contentCountData = [];
-    const resourceCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(filters));
-    const questionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(filters));
-    const courseCountPromise = Ember.RSVP.resolve(this.get('searchService').searchCourses(filters));
-    const collectionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchCollections(filters));
-    const assessmentCountPromise = Ember.RSVP.resolve(this.get('searchService').searchAssessments(filters));
-    const rubricCountPromise = Ember.RSVP.resolve(this.get('searchService').searchRubrics(filters));
-    const unitCountPromise = Ember.RSVP.resolve(this.get('searchService').searchUnits(filters));
-    const lessonsCountPromise = Ember.RSVP.resolve(this.get('searchService').searchLessons(filters));
+    const culcaqrCountPromise = Ember.RSVP.resolve(this.get('activitiesService').getLearningMaps(filters));
 
 
     return Ember.RSVP.hash({
-      resourceCount: resourceCountPromise,
-      questionCount: questionCountPromise,
-      courseCount: courseCountPromise,
-      collectionCount: collectionCountPromise,
-      assessmentCount: assessmentCountPromise,
-      rubricCount: rubricCountPromise,
-      unitCount: unitCountPromise,
-      lessonCount: lessonsCountPromise
-    }).then(function(hash) {
-      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COURSE, hash.courseCount));
-      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.UNIT, hash.unitCount));
-      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.LESSON, hash.lessonCount));
-      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.ASSESSMENT, hash.assessmentCount));
-      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COLLECTION, hash.collectionCount));
-      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RESOURCE, hash.resourceCount));
-      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.QUESTION, hash.questionCount));
-      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RUBRIC, hash.rubricCount));
+      culcaqrCount: culcaqrCountPromise
+    }).then(({
+      culcaqrCount
+    }) => {
+      let courseCount = culcaqrCount.course ? culcaqrCount.course.get('totalHitCount') : 0;
+      let unitCount = culcaqrCount.unit ? culcaqrCount.unit.get('totalHitCount') : 0;
+      let lessonCount = culcaqrCount.lesson ? culcaqrCount.lesson.get('totalHitCount') : 0;
+      let collectionCount = culcaqrCount.collection ? culcaqrCount.collection.get('totalHitCount') : 0;
+      let assessmentCount = culcaqrCount.assessment ? culcaqrCount.assessment.get('totalHitCount') : 0;
+      let resourceCount = culcaqrCount.resource ? culcaqrCount.resource.get('totalHitCount') : 0;
+      let questionCount = culcaqrCount.question ? culcaqrCount.question.get('totalHitCount') : 0;
+      let rubricCount = culcaqrCount.rubric ? culcaqrCount.rubric.get('totalHitCount') : 0;
+
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COURSE, courseCount));
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.UNIT, unitCount));
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.LESSON, lessonCount));
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.ASSESSMENT, assessmentCount));
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COLLECTION, collectionCount));
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RESOURCE, resourceCount));
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.QUESTION, questionCount));
+      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RUBRIC, rubricCount));
       return contentCountData;
     });
   },

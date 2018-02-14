@@ -1,1 +1,7 @@
-{{outlet}}
+<div class="activity-collections">
+  <div class="collection-cards">
+    {{#each collections as |collection|}}
+      {{activity.collection-card collection=collection}}
+    {{/each}}
+  </div>
+</div>

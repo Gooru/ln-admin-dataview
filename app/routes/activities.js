@@ -12,7 +12,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   /**
    * Session Service
    */
-  session: Ember.inject.service('session')
+  session: Ember.inject.service('session'),
 
   //-------------------------------------------------------------------------
   //Properties
@@ -24,5 +24,14 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   // -------------------------------------------------------------------------
   // Methods
 
+  setupController: function() {
+    let route = this;
+    let userId = route.get('session.id');
+    let userFilterItems = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`));
+    //redirect into the summary page, if user have selected category and subject filters
+    if (userFilterItems && userFilterItems.category && userFilterItems.subject) {
+      route.transitionTo('activity.summary');
+    }
+  }
 
 });

@@ -1,0 +1,10 @@
+{{#if isTagAvailable}}
+  <div class="tag-label">
+    <span class="ellipsis">{{tag.label}}</span>
+    <span {{action "onRemoveFilter" tag}}>{{app-icon name="clear"}}</span>
+  </div>
+{{else}}
+  <div class="tag-label empty">
+    {{t 'activities.no-filters'}}
+  </div>
+{{/if}}

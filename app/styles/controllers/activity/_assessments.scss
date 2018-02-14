@@ -1,0 +1,15 @@
+.activity-assessments {
+  margin: 50px auto;
+
+  .assessment-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 45px;
+    align-items: center;
+  }
+
+  .activity-assessment-card {
+    width: 220px;
+    height: 384px;
+  }
+}
