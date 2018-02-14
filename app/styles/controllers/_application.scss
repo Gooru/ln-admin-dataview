@@ -1,10 +1,9 @@
-html {
-  overflow: hidden;
-  height: 100%;
-}
-.route-application {
-  overflow-x: hidden;
 
+.route-competency,
+ .route-activity {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  
   &.no-vertical-scroll {
     overflow-y: hidden;
   }
