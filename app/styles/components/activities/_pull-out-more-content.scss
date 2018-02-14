@@ -50,6 +50,10 @@
           cursor: pointer;
         }
       }
+
+      .unselected {
+        opacity: 0.3;
+      }
     }
   }
 
@@ -80,6 +84,7 @@
           font-size: 15px;
           font-weight: bold;
           color: #4a4a4a;
+          text-transform: capitalize;
         }
 
         .header-value {
@@ -91,7 +96,7 @@
 
         .header-no-value {
           line-height: normal;
-          padding: 0px;
+          padding: 0;
         }
       }
     }
