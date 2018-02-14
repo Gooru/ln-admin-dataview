@@ -39,10 +39,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   // -------------------------------------------------------------------------
   // Methods
 
-  model: function() {
+  model: function(params) {
     let route = this;
+    let term = params.term ? params.term : '*';
+    let filters = {'flt.publishStatus': 'published'};
     return Ember.RSVP.hash({
-      resources: route.get('searchService').searchResources('water')
+      resources: route.get('searchService').searchResources(term, filters)
     });
   },
 

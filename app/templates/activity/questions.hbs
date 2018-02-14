@@ -1,1 +1,7 @@
-{{outlet}}
+<div class="activity-questions">
+  <div class="question-cards">
+    {{#each questions as |question|}}
+      {{activity.question-card question=question}}
+    {{/each}}
+  </div>
+</div>

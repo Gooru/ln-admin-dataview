@@ -168,7 +168,7 @@ export const ACTIVITIES_NAVIGATION_MENUS_INDEX = {
   'collections': 2,
   'assessments': 3,
   'resources': 4,
-  'questions': 4
+  'questions': 5
 };
 
 

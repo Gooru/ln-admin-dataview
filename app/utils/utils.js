@@ -10,7 +10,7 @@ import {
  * @return {String}
  */
 export function getRoutePathLastOccurrence() {
-  let currentLocationPath = window.location.href;
+  let currentLocationPath = window.location.pathname;
   return currentLocationPath.substr(currentLocationPath.lastIndexOf('/') + 1);
 }
 

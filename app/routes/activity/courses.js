@@ -39,10 +39,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   // -------------------------------------------------------------------------
   // Methods
 
-  model: function() {
+  model: function(params) {
     let route = this;
+    let term = params.term ? params.term : '*';
+    let filters = {'flt.publishStatus': 'published'};
     return Ember.RSVP.hash({
-      courses: route.get('searchService').searchCourses()
+      courses: route.get('searchService').searchCourses(term, filters)
     });
   },
 
