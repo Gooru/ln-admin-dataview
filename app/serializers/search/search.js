@@ -350,7 +350,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
       standards: serializer.get('taxonomySerializer').normalizeTaxonomyArray(taxonomyInfo),
       efficacy: questionData.efficacy ? questionData.efficacy : null,
       relevance: questionData.relevance ? questionData.relevance : null,
-      engagement: questionData.engagement ? questionData.engagement : null
+      engagement: questionData.engagement ? questionData.engagement : null,
+      contentSubFormat: questionData.contentSubFormat
     });
   },
 

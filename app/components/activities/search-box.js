@@ -1,5 +1,7 @@
 import Ember from 'ember';
-import { ACTIVITY_FILTER } from 'admin-dataview/config/config';
+import {
+  ACTIVITY_FILTER
+} from 'admin-dataview/config/config';
 
 export default Ember.Component.extend({
 
@@ -55,6 +57,38 @@ export default Ember.Component.extend({
     return component.get('appliedFilterList.length') - component.get('visibleFilterCount');
   }),
 
+  /**
+   * Validate if the property term has the correct number of characters
+   * @property
+   */
+  isIncorrectTermSize: Ember.computed('tempTerm', function() {
+    var term = $.trim(this.get('tempTerm'));
+    return !term || term.length < 3;
+  }),
+
+  /**
+   * @property {?string} action to send up when searching for a term
+   */
+  onSearch: null,
+
+
+  /**
+   * Search term
+   * @property {string}
+   */
+  term: null,
+
+  /**
+   * isTyping
+   * @property {Boolean}
+   */
+  isTyping: null,
+
+  isInvalidSearchTerm: false,
+
+  tempTerm: Ember.computed.oneWay('term'),
+
+
   // -------------------------------------------------------------------------
   // Events
   didInsertElement: function() {
@@ -79,7 +113,7 @@ export default Ember.Component.extend({
       if (storedFilters) {
         let filterType = selectedFilter.type;
         let categorizedFilterData = storedFilters[`${filterType}`];
-        let userRemovedFilterIndex = categorizedFilterData.findIndex(function(item){
+        let userRemovedFilterIndex = categorizedFilterData.findIndex(function(item) {
           return item.id === selectedFilter.id;
         });
         //if filter already selected, then remove it from the list
@@ -92,13 +126,19 @@ export default Ember.Component.extend({
       }
     },
 
-    /**
-     * @function onSearchTerm
-     * Action triggered when the user hit enter on the search box
-     */
-    onSearchTerm: function() {
-      let component = this;
-      component.send('onSearchTerm');
+    searchTerm: function() {
+      var term = $.trim(this.get('tempTerm'));
+      var isIncorrectTermSize = this.get('isIncorrectTermSize');
+      if (!isIncorrectTermSize) {
+        this.set('term', term);
+        this.set('isInvalidSearchTerm', false);
+          console.log(term);
+        this.sendAction('onSearch', this.get('term'));
+      }
+    },
+
+    inputValueChange: function() {
+      this.set('isTyping', false);
     }
   },
 
@@ -114,12 +154,12 @@ export default Ember.Component.extend({
     let storedFilters = component.get('selectedFilterItems');
     let filterTypes = component.get('filterTypes');
     let applicableFilterList = [];
-    filterTypes.map( filterType => {
+    filterTypes.map(filterType => {
       let filterCode = filterType.code;
       if (filterCode !== 'category' && filterCode !== 'subject') {
         let categorizedFilterData = storedFilters[`${filterCode}`];
         if (categorizedFilterData) {
-          categorizedFilterData.map( filterData => {
+          categorizedFilterData.map(filterData => {
             if (filterData) {
               filterData.type = filterCode;
               applicableFilterList.push(filterData);
