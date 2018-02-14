@@ -219,6 +219,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
         avatarUrl: creatorThumbnailUrl,
         username: collectionData.creatornameDisplay
       }),
+      taxonomySet: collectionData.taxonomySet,
+      createdData: collectionData.addDate,
       efficacy: collectionData.efficacy ? collectionData.efficacy : null,
       relevance: collectionData.relevance ? collectionData.relevance : null,
       engagement: collectionData.engagement ? collectionData.engagement : null
@@ -348,7 +350,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
       standards: serializer.get('taxonomySerializer').normalizeTaxonomyArray(taxonomyInfo),
       efficacy: questionData.efficacy ? questionData.efficacy : null,
       relevance: questionData.relevance ? questionData.relevance : null,
-      engagement: questionData.engagement ? questionData.engagement : null
+      engagement: questionData.engagement ? questionData.engagement : null,
+      contentSubFormat: questionData.contentSubFormat
     });
   },
 

@@ -34,6 +34,21 @@ export default Ember.Component.extend({
       });
       return TaxonomyTag.getTaxonomyTags(standards);
     }
-  )
+  ),
+
+  // -------------------------------------------------------------------------
+  // Actions
+
+  actions: {
+
+    /**
+     * @function onPlayCollection
+     * Action triggered when the user click on the play icon
+     */
+    onPlayCollection(collection) {
+      let component = this;
+      component.sendAction('onPlayCollection', collection);
+    }
+  }
 
 });

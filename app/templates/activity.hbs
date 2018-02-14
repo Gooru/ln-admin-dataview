@@ -1,6 +1,6 @@
 <div class="activity">
   <div class="wrapper">
-    {{activities.search-box selectedFilterItems=selectedFilterItems}}
+    {{activities.search-box selectedFilterItems=selectedFilterItems onSearch='onSearch'}}
     <div class="filters pull-left">
       <div class="filter-list">
         {{activities.activities-filter filterTypes=filterTypes onChangeFilterItems="onChangeFilterItems"}}

@@ -138,27 +138,27 @@ export default Ember.Component.extend({
       let resourceCounts = Ember.A([{
         'name': 'Audio',
         'value': hash.audioCount.get('hitCount'),
-        'colorCode': '#76C8BC'
+        'colorCode': '#93999E'
       }, {
         'name': 'Videos',
         'value': hash.videoCount.get('hitCount'),
-        'colorCode': '#3EB6A6'
+        'colorCode': '#6E767D'
       }, {
         'name': 'Interactive',
         'value': hash.interactiveCount.get('hitCount'),
-        'colorCode': '#76C8BC'
+        'colorCode': '#93999E'
       }, {
         'name': 'Images',
         'value': hash.imageCount.get('hitCount'),
-        'colorCode': '#76C8BC'
+        'colorCode': '#93999E'
       }, {
         'name': 'Webpages',
         'value': hash.webpageCount.get('hitCount'),
-        'colorCode': '#009A87'
+        'colorCode': '#3A434D'
       }, {
         'name': 'Text',
         'value': hash.textCount.get('hitCount'),
-        'colorCode': '#76C8BC'
+        'colorCode': '#93999E'
       }]);
       component.set('resources', resourceCounts);
 

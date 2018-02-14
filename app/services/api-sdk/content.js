@@ -30,6 +30,22 @@ export default Ember.Service.extend({
           resolve(service.get('contentSerializer').normalizeContentResourceById(response));
         }, reject);
     });
+  },
+
+  /**
+   * Fetch the collection content info by id
+   * @returns {Object}
+   */
+  getCollectionById: function(collectionId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('contentAdapter')
+        .getCollectionById(collectionId)
+        .then(function(response) {
+          resolve(service.get('contentSerializer').normalizeCollectionContent(response));
+        }, reject);
+    });
   }
 
 

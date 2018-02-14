@@ -52,6 +52,14 @@ export default Ember.Object.extend({
       .normalizeTaxonomyObject(response.taxonomy);
     response.taxonomy = taxonomy[0];
     return response;
+  },
+
+  /**
+   * Normalized data of collection by id
+   * @return {Object}
+   */
+  normalizeCollectionContent: function(collectionData) {
+    return collectionData ? collectionData : {};
   }
 
 

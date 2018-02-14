@@ -1,6 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
+  // -------------------------------------------------------------------------
+  // Query
+
+  queryParams: ['term'],
 
   //------------------------------------------------------------------------
   //Dependencies
@@ -18,9 +22,18 @@ export default Ember.Controller.extend({
   profileService: Ember.inject.service('api-sdk/profile'),
 
 
+  //------------------------------------------------------------------------
+  //Dependencies
+
+  i18n: Ember.inject.service(),
+
+  /**
+   * @requires service:search
+   */
+  searchService: Ember.inject.service('api-sdk/search'),
+
   //-------------------------------------------------------------------------
   //Properties
-
 
   /**
    * show pull out .
@@ -146,7 +159,6 @@ export default Ember.Controller.extend({
      * Action triggered when the user invoke the collection in pull out.
      */
     getResourceInfo: function(resource) {
-      console.log('resource:::::::::::::::::::::::::::::', resource);
       let controller = this;
       controller.set('isLoading', true);
       controller.set('showPullOut', true);
@@ -165,4 +177,31 @@ export default Ember.Controller.extend({
         });
     }
   }
+  
+  /**
+   * It maintains the list of resources data
+   * @type {Array}
+   */
+  resourcess: Ember.A(),
+
+  // -------------------------------------------------------------------------
+  // Actions
+
+
+  actions: {
+    /**
+     * Action get triggered when search
+     * @param  {Object} resources
+     */
+    onSearch: function(term) {
+      
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // Methods
+
+
+
+
 });

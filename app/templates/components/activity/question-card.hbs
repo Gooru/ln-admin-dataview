@@ -1,21 +1,36 @@
 <div class="card-panel-container">
-  <div class="card-panel-header" style="background-image: url(https://cdn.pixabay.com/photo/2013/04/06/11/50/image-editing-101040_960_720.jpg)">
-
+  <div class="card-panel-header {{question.contentSubFormat}}">
+    <div class="info">
+      <div class="title">{{question.title}}</div>
+    </div>
   </div>
-  <div class="unit-count-container">
-    <i class="icon"></i>
-    <span>1000</span>
+  <div class="question-format-container">
+    <span>{{question.format}}</span>
+    {{#if (not question.isVisibleOnProfile)}}
+      <div class="visibility  visible_false" title="{{t 'common.visibility-tooltip'}}" data-toggle="tooltip" data-placement="top" data-trigger="hover">
+        {{app-icon name="visibility" class='pull-right cca-eye-icon'}}
+      </div>
+    {{else}}
+      <div class="visibility visible_true" title="{{t 'common.visibility-available'}}" data-toggle="tooltip" data-placement="top" data-trigger="hover">
+        {{app-icon name="visibility" class='pull-right cca-eye-icon'}}
+      </div>
+    {{/if}}
   </div>
   <div class="question-info-container">
     <div class="question-user-info">
-      <span class="created-by">Created by</span>
+      <div class="created-by">{{t (if question.sameOwnerAndCreator "common.created-by" "common.remixed-by")}}</div>
       <div class="img-container pull-left">
-        <img class="img-responsive" src="//usercdn.gooru.org/83971555-87e3-4a22-afc6-987666a0a414.jpg">
+        <img class="img-responsive" src="{{question.owner.avatarUrl}}">
       </div>
-      <span class="username">jwgooru</span>
+      <div class="username">{{question.owner.displayName}}</div>
     </div>
     <div class="question-description">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididu
+      {{safe-html question.description}}
+    </div>
+    <div class="question-standards ">
+      {{#if tags.length}}
+        {{taxonomy.taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
+      {{/if}}
     </div>
 
   </div>
@@ -26,17 +41,17 @@
     <div class="question-prefs-container">
       <span class="left-arc"></span>
       <span class="right-arc"></span>
-      <div class="question-prefs relevance pull-left">
-        <div class="count">0.8</div>
-        <div class="title">Relevance</div>
+      <div class="question-prefs relevance pull-left" style="background-color:rgba(0, 114, 188, {{question.relevance}})">
+        <div class="count">{{question.relevance}}</div>
+        <div class="title">{{t 'common.relevance'}}</div>
       </div>
-      <div class="question-prefs engagement pull-left">
-        <div class="count">0.6</div>
-        <div class="title">Engagement</div>
+      <div class="question-prefs engagement pull-left" style="background-color:rgba(0, 114, 188, {{question.engagement}})">
+        <div class="count">{{question.engagement}}</div>
+        <div class="title">{{t 'common.engagement'}}</div>
       </div>
-      <div class="question-prefs efficacy pull-left">
-        <div class="count">0.4</div>
-        <div class="title">Efficacy</div>
+      <div class="question-prefs efficacy pull-left" style="background-color:rgba(0, 114, 188, {{question.efficacy}})">
+        <div class="count">{{question.efficacy}}</div>
+        <div class="title">{{t 'common.efficacy'}}</div>
       </div>
     </div>
   </div>

@@ -1,7 +1,14 @@
 <div class="activity-collections">
   <div class="collection-cards">
     {{#each collections as |collection|}}
-      {{activity.collection-card collection=collection}}
+      {{activity.collection-card collection=collection onPlayCollection="onPlayCollection"}}
     {{/each}}
   </div>
+  {{#app-pull-out showPullOut=showPullOut title=selectedCollection.title showMore=true as |section| }}
+    {{#if section.isLessContent}}
+      {{activities.collection-pull-out-body collection=selectedCollection collectionData=collectionPullOutData}}
+    {{else if section.isMoreContent}}
+      {{activities.collection-pull-out-more-content}}
+    {{/if}}
+  {{/app-pull-out}}
 </div>
