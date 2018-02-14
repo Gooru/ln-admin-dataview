@@ -117,8 +117,25 @@ export default Ember.Controller.extend({
   //  * Grouping header data to show more info  in pull out
   //  */
   groupHeader: Ember.computed('groupData', function() {
-    let infoObject = ['extracted', 'curated', 'tagged', 'computed'];
-    return infoObject;
+    let resultHeader = Ember.A();
+    resultHeader = [Ember.Object.create({
+      header: 'extracted',
+      isEnabled: true
+    }),
+    Ember.Object.create({
+      header: 'curated',
+      isEnabled: false
+    }),
+    Ember.Object.create({
+      header: 'tagged',
+      isEnabled: true
+    }),
+    Ember.Object.create({
+      header: 'computed',
+      isEnabled: true
+    })
+    ];
+    return resultHeader;
   }),
 
   // -------------------------------------------------------------------------
