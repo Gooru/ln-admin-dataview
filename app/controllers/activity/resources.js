@@ -174,8 +174,8 @@ export default Ember.Controller.extend({
       let controller = this;
       controller.set('isLoading', true);
       controller.set('showPullOut', true);
+      controller.set('showMore', true);
       let collectionType = 'resource';
-      // const resourceId = 'acc51351-401c-4301-a642-d1b27a01bac2';
       return controller.get('contentService').getContentResourceById(resource.id)
         .then(function(collection) {
           return controller.get('profileService').readUserProfile(collection.creator_id)

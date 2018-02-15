@@ -1,7 +1,7 @@
 <header class="more-pull-out-header">
   <div class="header-content">
     {{#each groupHeader as | header |}}
-      <div {{action 'onheaderClick'  header}} class="title {{if header.isEnabled ''  'unselected'}}">
+      <div {{action 'onheaderClick'  header}} class="title {{if header.isEnabled 'enable'  'disable'}}">
         {{#if (eq type "resource")}}
           <div class="oval {{header.header}}"> </div>
         {{/if}}
