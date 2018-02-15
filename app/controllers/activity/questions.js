@@ -75,15 +75,13 @@ export default Ember.Controller.extend({
           title: collection.title,
           description: collection.description
         },
-
-
         creation: {
           'Published By': 'Gooru org',
           'Published Status': 'Published',
           Aggregator: collection.aggregator ? collection.aggregator : null,
           License: collection.license ? collection.license : null,
           'creator Name': collection.owner.username,
-          'created On': collection.publish_date,
+          'created On': collection.publish_date ? moment(collection.publish_date).format('YYYY-MM-DD') : null,
           'modeified On': collection.modeified_date ? collection.modeified_date : null,
           modified_by: collection.modified_by
         },
