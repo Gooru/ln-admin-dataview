@@ -111,6 +111,39 @@ export default Ember.Object.extend({
       resultSet.pushObject(result);
     });
     return resultSet;
+  },
+
+  /**
+   * Normalized data of learner user profiles
+   * @return {Object}
+   */
+  normalizeLearnerUserProfiles: function(payload) {
+    let resultSet = Ember.A();
+    let cdnUrls = this.get('session.cdnUrls');
+    let response = Ember.A(payload.users);
+    response.forEach(data => {
+      let result = Ember.Object.create(data);
+      let thumbnail = result.get('thumbnail');
+      if(!thumbnail) {
+        result.set('thumbnail', DEFAULT_IMAGES.USER_PROFILE);
+      } else {
+        result.set('thumbnail', cdnUrls.user + thumbnail);
+      }
+      let firstName = result.get('firstName');
+      let lastName = result.get('lastName');
+      let username = result.get('username');
+      if (lastName && firstName) {
+        result.set('userDisplayName', `${lastName  }  ${  firstName}`);
+      } else if (lastName && !firstName) {
+        result.set('userDisplayName', lastName);
+      } else if (firstName && !lastName) {
+        result.set('userDisplayName', firstName);
+      } else if (username) {
+        result.set('userDisplayName', username);
+      }
+      resultSet.pushObject(result);
+    });
+    return resultSet;
   }
 
 });

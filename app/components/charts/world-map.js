@@ -117,6 +117,7 @@ export default Ember.Component.extend({
         let countryRegion = region.findBy('code', data.get('code'));
         data.set('longitude', countryRegion.get('longitude'));
         data.set('latitude', countryRegion.get('latitude'));
+        data.set('percentage', countryRegion.get('totalPercentage'));
       });
       circles.selectAll('circle')
         .data(locationDataCount)
@@ -134,7 +135,7 @@ export default Ember.Component.extend({
         })
         .attr('r', function(d) {
           let count = d.get(keyName);
-          return (count) * component.get('bubbleScalefactor');
+          return keyName === 'active' ? (count) * component.get('bubbleScalefactor') : count / 100000 * d.get('percentage');
         });
 
       labels.selectAll('labels')
@@ -155,16 +156,19 @@ export default Ember.Component.extend({
         .attr('dy', function(d) {
           let count = d.get(keyName);
           let size = Math.round((count) * component.get('bubbleTextScalefactor'));
-          return (size / 2);
+          //TODO should update the logic of calculatiing dy position
+          return keyName === 'active' ? (size / 2) : 0;
         })
         .attr('text-anchor', 'middle')
         .attr('style', function(d) {
           let count = d.get(keyName);
-          let size = Math.round((count) * component.get('bubbleTextScalefactor'));
-          return `font-size:${  size  }px`;
+          //TODO should update the logic of calculatiing font size
+          let size = keyName === 'active' ? Math.round((count) * component.get('bubbleTextScalefactor')) : 16;
+          return `font-size:${ size   }px`;
         }).text(function(d) {
           let count = d.get(keyName);
-          return component.dataCountFormat(count);
+          //TODO change text calculation logic
+          return keyName === 'active' ? component.dataCountFormat(count) : component.dataCountFormat(count / 100 * d.get('percentage'));
         });
     });
   },

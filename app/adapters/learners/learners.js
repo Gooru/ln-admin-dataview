@@ -179,6 +179,26 @@ export default Ember.Object.extend({
     });
   },
 
+  /**
+   * Get learner User profiles
+   * @returns {Promise.<[]>}
+   */
+  getLearnerUserProfiles: function() {
+    const adapter = this;
+    const namespace = 'stubs';
+    const url = `${namespace}/learners/user-profiles.json`;
+    const options = {
+      type: 'GET',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8'
+    };
+    return Ember.RSVP.hashSettled({
+      learnerProfiles: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.learnerProfiles.value;
+    });
+  },
+
 
   defineHeaders: function() {
     return {
