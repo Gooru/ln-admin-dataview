@@ -3,7 +3,7 @@
 </div>
 <div class="display-pictures">
     {{#each userProfiles as |user|}}
-      <img class="picture img-responsive" src="{{user.thumbnail}}" {{action "onSelectUser" user}} />
+      <img class="picture img-responsive"  data-toggle="tooltip" title="{{concat user.firstName ' ' user.lastName}}" src="{{user.thumbnail}}" {{action "onSelectUser" user}} />
     {{/each}}
 </div>
 <div class="arrow right-arrow" {{action "onClickArrow" 'right'}}>

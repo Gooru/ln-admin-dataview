@@ -6,6 +6,13 @@ export default Ember.Component.extend({
   // Attributes
   classNames: ['user-profile-pictures'],
 
+  // -------------------------------------------------------------------------
+  // Events
+
+  didRender() {
+    var component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+  },
 
   // -------------------------------------------------------------------------
   // Actions
