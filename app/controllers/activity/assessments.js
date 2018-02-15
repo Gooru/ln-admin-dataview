@@ -25,7 +25,13 @@ export default Ember.Controller.extend({
    * It maintains the list of assessment data
    * @type {Array}
    */
-  assessments: Ember.A()
+  assessments: Ember.A(),
+
+  /**
+   * It maintains the search total hitcount
+   * @type {Number}
+   */
+  hitCount: 0,
 
   // -------------------------------------------------------------------------
   // Actions
@@ -33,6 +39,22 @@ export default Ember.Controller.extend({
 
   // -------------------------------------------------------------------------
   // Methods
+
+  onChangeSearchTerm: Ember.observer('term', function() {
+    let controller = this;
+    let term = controller.get('term') ? controller.get('term') : '*';
+    let filters = {
+      'flt.publishStatus': 'published'
+    };
+    Ember.RSVP.hash({
+      assessments: controller.get('searchService').searchAssessments(term, filters)
+    }).then(({
+      assessments
+    }) => {
+      controller.set('assessments', assessments.get('searchResults'));
+      controller.set('hitCount', assessments.get('hitCount'));
+    });
+  })
 
 
 });

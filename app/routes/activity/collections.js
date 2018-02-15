@@ -16,25 +16,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   //-------------------------------------------------------------------------
   //Properties
 
-  /**
-   * It maintains the list of collection data
-   * @type {Array}
-   */
-  collections: Ember.A(),
-
   // -------------------------------------------------------------------------
   // Actions
 
-
-  actions: {
-    /**
-     * Action get triggered when card got clicked
-     * @param  {Object} collection
-     */
-    //onClickCard: function(collection) {
-
-    //}
-  },
 
   // -------------------------------------------------------------------------
   // Methods

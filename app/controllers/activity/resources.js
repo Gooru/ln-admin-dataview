@@ -60,6 +60,12 @@ export default Ember.Controller.extend({
   resources: Ember.A(),
 
   /**
+   * It maintains the search total hitcount
+   * @type {Number}
+   */
+  hitCount: 0,
+
+  /**
    * Grouping the data to show more info  in pull out
    */
   groupData: Ember.computed('collection', function() {
@@ -131,9 +137,9 @@ export default Ember.Controller.extend({
   }),
 
 
-  // /**
-  //  * Grouping header data to show more info  in pull out
-  //  */
+  /**
+   * Grouping header data to show more info  in pull out
+   */
   groupHeader: Ember.computed('groupData', function() {
     let resultHeader = Ember.A();
     resultHeader = [Ember.Object.create({
@@ -182,11 +188,26 @@ export default Ember.Controller.extend({
             });
         });
     }
-  }
-
+  },
 
   // -------------------------------------------------------------------------
   // Methods
+
+  onChangeSearchTerm: Ember.observer('term', function() {
+    let controller = this;
+    let term = controller.get('term') ? controller.get('term') : '*';
+    let filters = {
+      'flt.publishStatus': 'published'
+    };
+    Ember.RSVP.hash({
+      resources: controller.get('searchService').searchResources(term, filters)
+    }).then(({
+      resources
+    }) => {
+      controller.set('resources', resources.get('searchResults'));
+      controller.set('hitCount', resources.get('hitCount'));
+    });
+  })
 
 
 });

@@ -16,25 +16,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   //-------------------------------------------------------------------------
   //Properties
 
-  /**
-   * It maintains the list of assessment data
-   * @type {Array}
-   */
-  assessments: Ember.A(),
-
   // -------------------------------------------------------------------------
   // Actions
 
-
-  actions: {
-    /**
-     * Action get triggered when card got clicked
-     * @param  {Object} assessment
-     */
-    //onClickCard: function(assessment) {
-
-    //}
-  },
 
   // -------------------------------------------------------------------------
   // Methods
@@ -42,7 +26,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   model: function(params) {
     let route = this;
     let term = params.term ? params.term : '*';
-    let filters = {'flt.publishStatus': 'published'};
+    let filters = {
+      'flt.publishStatus': 'published'
+    };
     return Ember.RSVP.hash({
       assessments: route.get('searchService').searchAssessments(term, filters)
     });

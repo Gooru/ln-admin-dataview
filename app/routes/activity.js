@@ -1,4 +1,18 @@
 import Ember from 'ember';
+import AuthenticatedRouteMixin from 'admin-dataview/mixins/authenticated-route-mixin';
 
-export default Ember.Route.extend({
+export default Ember.Route.extend(AuthenticatedRouteMixin, {
+
+  // -------------------------------------------------------------------------
+  // Methods
+
+  model: function(params) {
+    return params;
+  },
+
+
+  setupController: function(controller, model) {
+    controller.set('searchTerm', model.term);
+  }
+
 });

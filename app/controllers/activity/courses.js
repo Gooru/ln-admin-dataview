@@ -25,13 +25,27 @@ export default Ember.Controller.extend({
    * It maintains the list of course data
    * @type {Array}
    */
-  courses: Ember.A()
+  courses: Ember.A(),
 
-  // -------------------------------------------------------------------------
-  // Actions
-
+  /**
+   * It maintains the search total hitcount
+   * @type {Number}
+   */
+  hitCount: 0,
 
   // -------------------------------------------------------------------------
   // Methods
+
+  onChangeSearchTerm: Ember.observer('term', function() {
+    let controller = this;
+    let term = controller.get('term') ? controller.get('term') : '*';
+    let filters = {'flt.publishStatus': 'published'};
+    Ember.RSVP.hash({
+      courses: controller.get('searchService').searchCourses(term, filters)
+    }).then(({courses}) => {
+      controller.set('courses', courses.get('searchResults'));
+      controller.set('hitCount', courses.get('hitCount'));
+    });
+  })
 
 });

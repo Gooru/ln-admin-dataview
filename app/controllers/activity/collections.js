@@ -35,6 +35,16 @@ export default Ember.Controller.extend({
 
   collectionPullOutData: null,
 
+  /**
+   * It maintains the search total hitcount
+   * @type {Number}
+   */
+  hitCount: 0,
+
+
+  // -------------------------------------------------------------------------
+  // Methods
+
   fetchCollectionPullOutData(collectionId) {
     let controller = this;
     let collectionPromise = Ember.RSVP.resolve(controller.get('contentService').getCollectionById(collectionId));
@@ -45,6 +55,22 @@ export default Ember.Controller.extend({
         controller.set('collectionPullOutData', hash.collection);
       });
   },
+
+  onChangeSearchTerm: Ember.observer('term', function() {
+    let controller = this;
+    let term = controller.get('term') ? controller.get('term') : '*';
+    let filters = {
+      'flt.publishStatus': 'published'
+    };
+    Ember.RSVP.hash({
+      collections: controller.get('searchService').searchCollections(term, filters)
+    }).then(({
+      collections
+    }) => {
+      controller.set('collections', collections.get('searchResults'));
+      controller.set('hitCount', collections.get('hitCount'));
+    });
+  }),
 
   // -------------------------------------------------------------------------
   // Actions
@@ -58,5 +84,6 @@ export default Ember.Controller.extend({
       controller.set('showPullOut', true);
     }
   }
+
 
 });
