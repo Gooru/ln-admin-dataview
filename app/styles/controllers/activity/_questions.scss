@@ -1,6 +1,22 @@
 .activity-questions {
   margin: 50px auto;
 
+  .app-pull-out {
+    top: 63px;
+    height: calc(100vh - 63px);
+
+    .pull-out-more-content-container {
+      display: table;
+
+      .coming-next {
+        color: $gray;
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+      }
+    }
+  }
+
   .question-cards {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

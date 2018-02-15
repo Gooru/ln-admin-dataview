@@ -94,7 +94,7 @@ export default Ember.Controller.extend({
           language: collection.info.language,
           'edicational use': collection.metadata.educational_use,
           accessbility: collection.accessibility,
-          grade: collection.metadata.grade[0],
+          grade: collection.metadata.grade ? collection.metadata.grade[0] : null,
           'age-range': null,
           'Editorial Range': null,
           signature: collection.signature ? collection.signature : null,
@@ -176,7 +176,7 @@ export default Ember.Controller.extend({
       controller.set('showPullOut', true);
       controller.set('showMore', true);
       let collectionType = 'resource';
-      return controller.get('contentService').getContentResourceById(resource.id)
+      return controller.get('contentService').getResourceById(resource.id)
         .then(function(collection) {
           return controller.get('profileService').readUserProfile(collection.creator_id)
             .then(function(owner) {

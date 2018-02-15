@@ -16,18 +16,19 @@ export default Ember.Service.extend({
     this.set('contentSerializer', contentSerializer.create(Ember.getOwner(this).ownerInjection()));
   },
 
+
   /**
    * Fetch the content resource info by id
    * @returns {Object}
    */
-  getContentResourceById: function(resourceId) {
+  getResourceById: function(resourceId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('contentAdapter')
-        .getContentResourceById(resourceId)
+        .getResourceById(resourceId)
         .then(function(response) {
-          resolve(service.get('contentSerializer').normalizeContentResourceById(response));
+          resolve(service.get('contentSerializer').normalizeResourceContent(response));
         }, reject);
     });
   },
@@ -44,6 +45,22 @@ export default Ember.Service.extend({
         .getCollectionById(collectionId)
         .then(function(response) {
           resolve(service.get('contentSerializer').normalizeCollectionContent(response));
+        }, reject);
+    });
+  },
+
+  /**
+   * Fetch the content question info by id
+   * @returns {Object}
+   */
+  getQuestionById: function(questionId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('contentAdapter')
+        .getQuestionById(questionId)
+        .then(function(response) {
+          resolve(service.get('contentSerializer').normalizeQuestionContent(response));
         }, reject);
     });
   }

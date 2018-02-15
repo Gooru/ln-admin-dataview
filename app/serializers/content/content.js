@@ -37,7 +37,7 @@ export default Ember.Object.extend({
    * Normalized data of resource by id
    * @return {Object}
    */
-  normalizeContentResourceById: function(response) {
+  normalizeResourceContent: function(response) {
     response = Ember.A(response);
     let thumbnail = response.get('thumbnail');
     let cdnUrls = this.get('session.cdnUrls');
@@ -60,6 +60,21 @@ export default Ember.Object.extend({
    */
   normalizeCollectionContent: function(collectionData) {
     return collectionData ? collectionData : {};
+  },
+
+
+  /**
+   * Normalized data of resource by id
+   * @return {Object}
+   */
+  normalizeQuestionContent: function(response) {
+    response = Ember.A(response);
+    const serializer = this;
+    let taxonomy = serializer
+      .get('taxonomySerializer')
+      .normalizeTaxonomyObject(response.taxonomy);
+    response.taxonomy = taxonomy[0];
+    return response;
   }
 
 
