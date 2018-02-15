@@ -21,11 +21,13 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   model: function() {
     return Ember.RSVP.hash({
-      learnersProfileDistribution: this.get('learnersService').getLearnerProfileDistribution()
+      learnersProfileDistribution: this.get('learnersService').getLearnerProfileDistribution(),
+      learnerUserProfiles: this.get('learnersService').getLearnerUserProfiles()
     });
   },
 
   setupController: function(controller, model) {
+    controller.set('learnerUserProfiles', model.learnerUserProfiles);
     controller.set('learnersProfileDistribution', model.learnersProfileDistribution);
   }
 

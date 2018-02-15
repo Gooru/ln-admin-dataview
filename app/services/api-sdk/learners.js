@@ -143,6 +143,22 @@ export default Ember.Service.extend({
           resolve(service.get('learnersSerializer').normalizeUserStats(response));
         }, reject);
     });
+  },
+
+  /**
+   * Get learner user profiles
+   * @returns {Promise.<[]>}
+   */
+  getLearnerUserProfiles: function() {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('learnersAdapter')
+        .getLearnerUserProfiles()
+        .then(function(response) {
+          resolve(service.get('learnersSerializer').normalizeLearnerUserProfiles(response));
+        }, reject);
+    });
   }
 
 });

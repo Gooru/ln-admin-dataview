@@ -13,7 +13,8 @@
 }, {
   "code": "AFR",
   "latitude": "5.82",
-  "longitude": "16.8"
+  "longitude": "16.8",
+  "totalPercentage": "2"
 }, {
   "code": "LA",
   "latitude": "-15",
@@ -25,7 +26,8 @@
 }, {
   "code": "EUR",
   "latitude": "51.68",
-  "longitude": "39"
+  "longitude": "39",
+  "totalPercentage": "12"
 }, {
   "code": "FUS",
   "latitude": "61.3",
@@ -42,15 +44,18 @@
 {
   "code": "ASI",
   "latitude": "48.26",
-  "longitude": "81.21"
+  "longitude": "81.21",
+  "totalPercentage": "16"
 },
 {
   "code": "AME",
   "latitude": "36.07",
-  "longitude": "-90.70"
+  "longitude": "-90.70",
+  "totalPercentage": "30"
 },
 {
   "code": "OCE",
-  "latitude": "-3.1",
-  "longitude": "123.7"
+  "latitude": "-23.55",
+  "longitude": "132.5",
+  "totalPercentage": "10"
 }]

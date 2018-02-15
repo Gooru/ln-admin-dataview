@@ -1,5 +1,7 @@
 <div class="learners">
-
+  <div class="student-profiles">
+    {{learners.user-profile-pictures userProfiles=learnerUserProfiles onSelectUser="onSelectUser"}}
+  </div>
   <div id="world-map">
     {{#unless selectedSubject}}
       {{charts.world-map locationDataCount=geoLocations keyName='total'}}

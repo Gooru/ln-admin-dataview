@@ -72,7 +72,7 @@ export default Ember.Controller.extend({
   activeUserDistrbutionBySubject: null,
 
   // -------------------------------------------------------------------------
-  // Events
+  // actions
 
   actions: {
     onSelectActiveUsers: function(subject) {
