@@ -63,10 +63,10 @@ export default Ember.Component.extend({
     let filters = nodeData.filters;
     let q = '*';
     let start = 1;
-    let resourcePromise = Ember.RSVP.resolve(component.get('searchService').getResourceContent(q, filters, start, searchLength));
-    let collectionPromise = Ember.RSVP.resolve(component.get('searchService').getCollectionContent(q, filters, start, searchLength));
-    let assessmentPromise = Ember.RSVP.resolve(component.get('searchService').getAssessmentContent(q, filters, start, searchLength));
-    let questionPromise = Ember.RSVP.resolve(component.get('searchService').getQuestionContent(q, filters, start, searchLength));
+    let resourcePromise = Ember.RSVP.resolve(component.get('searchService').searchResources(q, filters, start, searchLength));
+    let collectionPromise = Ember.RSVP.resolve(component.get('searchService').searchCollections(q, filters, start, searchLength));
+    let assessmentPromise = Ember.RSVP.resolve(component.get('searchService').searchAssessments(q, filters, start, searchLength));
+    let questionPromise = Ember.RSVP.resolve(component.get('searchService').searchQuestions(q, filters, start, searchLength));
     return Ember.RSVP.hash({
       resourceContent: resourcePromise,
       collectionContent: collectionPromise,
