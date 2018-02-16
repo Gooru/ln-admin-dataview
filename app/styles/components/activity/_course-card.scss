@@ -154,23 +154,25 @@
           display: block;
           height: 15px;
           width: 9px;
-          position: absolute;
+          position: relative;
           background: #F1F2F7;
-          margin-top: -9px;
           border-top-right-radius: 12.5px;
           border-bottom-right-radius: 12.5px;
+          z-index: 1;
+          top: -8px;
         }
 
         .right-arc {
           display: block;
           height: 15px;
           width: 9px;
-          position: absolute;
+          position: relative;
           background: #F1F2F7;
-          margin-top: -9px;
           border-top-left-radius: 12.5px;
           border-bottom-left-radius: 12.5px;
           margin-left: 211px;
+          z-index: 1;
+          top: -22px;
         }
 
         .course-prefs {
@@ -178,6 +180,8 @@
           height: 43px;
           float: left;
           background-color: #0072bc;
+          position: relative;
+          top: -30px;
 
           .count {
             font-size: 15px;
