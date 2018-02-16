@@ -108,7 +108,7 @@ export default Ember.Object.extend({
    * @param  {Number} length
    * @return {Promise.<Question[]>}
    */
-  searchQuestions: function(query = '*', filters = {}, start = 1, length = 20) {
+  searchQuestions: function( query = '*',  filters = {}, start = 1, length = 20) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/resource`;

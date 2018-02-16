@@ -216,13 +216,13 @@ export default Ember.Service.extend({
     });
   },
 
-  getResourceContent: function(filters, length = 1) {
+  getResourceContent: function(query, filters, start, length = 1) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('searchAdapter').searchResources(filters, length).then(
+      service.get('searchAdapter').searchResources(query, filters, start, length).then(
         function(response) {
           resolve(
-            service.get('searchSerializer').nomalizeSearchResourceContent(response)
+            service.get('searchSerializer').nomalizeSearchResources(response)
           );
         },
         function(error) {
@@ -232,13 +232,13 @@ export default Ember.Service.extend({
     });
   },
 
-  getCollectionContent: function(filters, length = 1) {
+  getCollectionContent: function(query, filters, start, length = 1) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('searchAdapter').searchCollections(filters, length).then(
+      service.get('searchAdapter').searchCollections(query, filters, start, length).then(
         function(response) {
           resolve(
-            service.get('searchSerializer').normalizeSearchCollectionContent(response)
+            service.get('searchSerializer').normalizeSearchCollection(response)
           );
         },
         function(error) {
@@ -248,13 +248,13 @@ export default Ember.Service.extend({
     });
   },
 
-  getAssessmentContent: function(filters, length = 1) {
+  getAssessmentContent: function(query, filters, start, length = 1) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('searchAdapter').searchAssessments(filters, length).then(
+      service.get('searchAdapter').searchAssessments(query, filters, start, length).then(
         function(response) {
           resolve(
-            service.get('searchSerializer').normalizeSearchAssessmentContent(response)
+            service.get('searchSerializer').normalizeSearchAssessments(response)
           );
         },
         function(error) {
@@ -264,13 +264,13 @@ export default Ember.Service.extend({
     });
   },
 
-  getQuestionContent: function(filters, length) {
+  getQuestionContent: function(query, filters, start, length = 1) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('searchAdapter').searchQuestions(filters, length).then(
+      service.get('searchAdapter').searchQuestions(query, filters, start, length).then(
         function(response) {
           resolve(
-            service.get('searchSerializer').normalizeSearchQuestionContent(response)
+            service.get('searchSerializer').normalizeSearchQuestions(response)
           );
         },
         function(error) {
