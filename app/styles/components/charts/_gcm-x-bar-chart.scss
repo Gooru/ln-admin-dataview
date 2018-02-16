@@ -6,6 +6,7 @@
   .segment {
     height: 100%;
     float: left;
+     border-radius: 3px;
     &:first-child {
       border-bottom-left-radius: 4px;
       border-top-left-radius: 4px;

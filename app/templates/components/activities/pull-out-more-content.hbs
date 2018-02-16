@@ -20,7 +20,7 @@
           <div class="col-md-12 ">
             <span class="col-md-6 header-lable" style=" color : {{keysValue.color}}">{{keysValue.key}} :  </span>
             {{#if keysValue.value}}
-              <span class="col-md-6  header-value"> {{keysValue.value}} </span>
+              <span class="col-md-6  header-value"> {{safe-html keysValue.value}} </span>
             {{else}}
               <span class="col-md-6  header-no-value"> __ </span>
             {{/if}}
@@ -30,10 +30,7 @@
     {{/each}}
   </div>
 
-
   <div class="usage-statistics">
     {{activities.usage-statistics subjects=subjects onSelectActiveUsers='onSelectActiveUsers'}}
   </div>
-
-
 </div>

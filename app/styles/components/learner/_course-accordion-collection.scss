@@ -35,7 +35,7 @@
           .title-text, .arrow-icon {
             cursor: pointer;
           }
-          width: 78.2%;
+          width: 86.2%;
           font-size: 15px;
           color: $dark-800;
 
@@ -75,7 +75,7 @@
             color: $dark-800;
             padding-left: 7px;
             display: flex;
-            width: 76.8%;
+            width: 86.8%;
           }
           .resource-report {
             width: calc(100% - 76.8%);
@@ -110,7 +110,7 @@
             .time {
               font-size: 15px;
               color: $dark-800;
-              text-transform: uppercase;
+              text-transform: lowercase;
             }
           }
           %content-icon-size {

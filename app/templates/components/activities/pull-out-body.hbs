@@ -8,17 +8,22 @@
 
   <div class="collection-info">
     <span class="title"> {{collection.title}}</span>
-    {{#if (eq collection.type "resource" )}}
+    {{#if (or (eq collection.type "resource") (eq collection.type "question") )}}
       <div class="resource-info">
         <div class="resources-icon">
-          <div class="{{collection.content_subformat}}"> <i> </i> </div>
+          {{#if (eq collection.type "question") }}
+            <div class="multiple_choice_question"> <i> </i> </div>
+          {{else}}
+            <div class="{{collection.content_subformat}}"> <i> </i> </div>
+          {{/if}}
+
         </div>
-        <div class="discription"> {{collection.description}} </div>
+        <div class="discription"> {{ safe-html collection.description}} </div>
       </div>
-    {{else}}
+      {{else }}
       <div class="header-info">
         <div class="collection-image">
-          <img class="img-responsive" src="http://cdn.gooru.org/22be8198-5182-47c0-a82d-41ddcfdcd02a.png">
+          <img class="img-responsive" src="{{collection.url}}">
         </div>
         <div class="discription"> {{collection.description}} </div>
       </div>
@@ -26,34 +31,33 @@
   </div>
 
 
-  <div class="subject">
-    <div class="header"> {{t "common.subject"}}</div>
-    {{#each collection.info.gooru_subject as | subject |}}
-      <div class="items">
-        <div class="subect-item">
-          <span>{{subject}} </span>
-        </div>
-      </div>
-    {{/each}}
-  </div>
-
-  <div class="course">
-    <div class="header"> {{t "common.course"}}</div>
-    {{#each collection.info.gooru_course as | course |}}
-      <div class="items">
-        <div class="course-item">
-          <span>{{course}} </span>
-        </div>
-      </div>
-    {{/each}}
-  </div>
-
-  <div class="domain">
-    <div class="header"> {{t "common.domain"}}</div>
+  <div class="taxonomy-info">
+    <div class="title">
+      {{t "activities.pull-out.taxonomy-title"}}
+    </div>
     <div class="items">
-      <div class="domain-item">
-        <span>{{collection.info.domain.attribution}} </span>
-      </div>
+      {{#if collection.info.gooru_subject}}
+        <div class="subject item-box">
+          {{#each collection.info.gooru_subject as | subject |}}
+            {{subject}}
+          {{/each}}
+          {{#each collection.info.gooru_course as | course |}}
+            > {{course}}
+          {{/each}}
+        </div>
+      {{else}}
+        <div class="subject item-box">
+          No Subject Available
+        </div>
+      {{/if}}
+      {{#if collection.info.domain}}
+        <div class="domain item-box">
+          {{collection.info.domain.attribution}}
+          <!-- {{#each collection.info.domain as |domain|}}
+            {{domain.attribution}}
+          {{/each}} -->
+        </div>
+      {{/if}}
     </div>
   </div>
 </div>

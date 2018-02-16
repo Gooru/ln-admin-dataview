@@ -85,7 +85,7 @@ export default Ember.Controller.extend({
           Aggregator: collection.aggregator ? collection.aggregator : null,
           License: collection.license ? collection.license : null,
           'creator Name': collection.owner.username,
-          'created On': collection.publish_date,
+          'created On': collection.publish_date ? moment(collection.publish_date).format('YYYY-MM-DD') : null,
           'modeified On': collection.modeified_date ? collection.modeified_date : null,
           modified_by: collection.modified_by
         },
@@ -94,7 +94,7 @@ export default Ember.Controller.extend({
           language: collection.info.language,
           'edicational use': collection.metadata.educational_use,
           accessbility: collection.accessibility,
-          grade: collection.metadata.grade[0],
+          grade: collection.metadata.grade ? collection.metadata.grade[0] : null,
           'age-range': null,
           'Editorial Range': null,
           signature: collection.signature ? collection.signature : null,
@@ -176,7 +176,7 @@ export default Ember.Controller.extend({
       controller.set('showPullOut', true);
       controller.set('showMore', true);
       let collectionType = 'resource';
-      return controller.get('contentService').getContentResourceById(resource.id)
+      return controller.get('contentService').getResourceById(resource.id)
         .then(function(collection) {
           return controller.get('profileService').readUserProfile(collection.creator_id)
             .then(function(owner) {
