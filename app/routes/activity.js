@@ -4,7 +4,7 @@ import AuthenticatedRouteMixin from 'admin-dataview/mixins/authenticated-route-m
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   // -------------------------------------------------------------------------
-  // Methods
+  // Events
 
   model: function(params) {
     return params;

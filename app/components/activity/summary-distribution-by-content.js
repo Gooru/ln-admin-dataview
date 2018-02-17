@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { ACTIVITY_FILTER } from 'admin-dataview/config/config';
 
 export default Ember.Component.extend({
 
@@ -17,6 +18,11 @@ export default Ember.Component.extend({
    */
   searchService: Ember.inject.service('api-sdk/search'),
 
+  /**
+   * Session service to fetch current session information
+   */
+  session: Ember.inject.service('session'),
+
 
   /**
    * activities service dependency injection
@@ -32,6 +38,14 @@ export default Ember.Component.extend({
     this._super(...arguments);
     this.getSearchContentCount();
   },
+
+  /**
+   * observer event triggered when the user hit search box
+   */
+  onChangeSearchTerm: Ember.observer('term', function() {
+    let component = this;
+    component.getSearchContentCount();
+  }),
 
   // -------------------------------------------------------------------------
   // Properties
@@ -61,7 +75,6 @@ export default Ember.Component.extend({
    */
   culcaCounts: Ember.A(),
 
-
   // -------------------------------------------------------------------------
   // Methods
 
@@ -70,71 +83,87 @@ export default Ember.Component.extend({
    * return hashed json of each content subformats
    */
   getSearchContentCount: function() {
-    let term = '*';
     let component = this;
+    let appliedFilters = component.getAppliedFilters();
+    let term = component.get('term') || '*';
     component.set('isLoading', true);
     // Resources
     let webpageFilters = {
       'flt.resourceFormat': 'webpage'
     };
+    webpageFilters = Object.assign(webpageFilters, appliedFilters);
     const webpageCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, webpageFilters, 1, 1));
     let audioFilters = {
       'flt.resourceFormat': 'audio'
     };
+    audioFilters = Object.assign(audioFilters, appliedFilters);
     const audioCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, audioFilters, 1, 1));
     let videoFilters = {
       'flt.resourceFormat': 'video'
     };
+    videoFilters = Object.assign(videoFilters, appliedFilters);
     const videoCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, videoFilters, 1, 1));
     let imageFilters = {
       'flt.resourceFormat': 'image'
     };
+    imageFilters = Object.assign(imageFilters, appliedFilters);
     const imageCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, imageFilters, 1, 1));
     let interactiveFilters = {
       'flt.resourceFormat': 'interactive'
     };
+    interactiveFilters = Object.assign(interactiveFilters, appliedFilters);
     const interactiveCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, interactiveFilters, 1, 1));
     let textFilters = {
       'flt.resourceFormat': 'text'
     };
+    textFilters = Object.assign(textFilters, appliedFilters);
     const textCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, textFilters, 1, 1));
 
     // Questions
     let multipleChoiceFilters = {
       'flt.resourceFormat': 'multiple_choice_question'
     };
+    multipleChoiceFilters = Object.assign(multipleChoiceFilters, appliedFilters);
     const multipleChoiceCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, multipleChoiceFilters, 1, 1));
     let multipleAnswerFilters = {
       'flt.resourceFormat': 'multiple_answer_question'
     };
+    multipleAnswerFilters = Object.assign(multipleAnswerFilters, appliedFilters);
     const multipleAnswerCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, multipleAnswerFilters, 1, 1));
     let trueOrFalseFilters = {
       'flt.resourceFormat': 'true_false_question'
     };
+    trueOrFalseFilters = Object.assign(trueOrFalseFilters, appliedFilters);
     const trueOrFalseCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, trueOrFalseFilters, 1, 1));
     let fillInTheBlankFilters = {
       'flt.resourceFormat': 'fill_in_the_blank_question'
     };
+    fillInTheBlankFilters = Object.assign(fillInTheBlankFilters, appliedFilters);
     const fillInTheBlankCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, fillInTheBlankFilters, 1, 1));
     let multipleSelectImageFilters = {
       'flt.resourceFormat': 'hot_spot_image_question'
     };
+    multipleSelectImageFilters = Object.assign(multipleSelectImageFilters, appliedFilters);
     const multipleSelectImageCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, multipleSelectImageFilters, 1, 1));
     let multipleSelectTextFilters = {
       'flt.resourceFormat': 'hot_spot_text_question'
     };
+    multipleSelectTextFilters = Object.assign(multipleSelectTextFilters, appliedFilters);
     const multipleSelectTextCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, multipleSelectTextFilters, 1, 1));
     let highlightTextFilters = {
       'flt.resourceFormat': 'hot_text_highlight_question'
     };
+    highlightTextFilters = Object.assign(highlightTextFilters, appliedFilters);
     const highlightTextCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, highlightTextFilters, 1, 1));
     let dragAndDropOrderFilters = {
       'flt.resourceFormat': 'hot_text_reorder_question'
     };
+    dragAndDropOrderFilters = Object.assign(dragAndDropOrderFilters, appliedFilters);
     const dragAndDropOrderCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, dragAndDropOrderFilters, 1, 1));
 
     let culacFilters = {'flt.subjectName' : 'Math'};
     // Course, Unit, Lesson, Assessments and Collections
+    culacFilters = Object.assign(culacFilters, appliedFilters);
     const culacCountPromise = component.get('activityService').getLearningMaps(culacFilters);
 
     return Ember.RSVP.hash({
@@ -243,6 +272,83 @@ export default Ember.Component.extend({
 
       component.set('isLoading', false);
     });
-  }
+  },
 
+  /**
+   * @function getAppliedFilters
+   * Get user applied filters from the local storage
+   */
+  getAppliedFilters() {
+    let controller = this;
+    let userId = controller.get('session.id');
+    let appliedFilters = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`));
+    let filterTypes = ACTIVITY_FILTER;
+    let formattedFilters = {};
+    if (appliedFilters) {
+      filterTypes.map( filterTypeInfo => {
+        let filterType = filterTypeInfo.code;
+        let categorizedFilter = appliedFilters[`${filterType}`] || null;
+        if (categorizedFilter) {
+          formattedFilters = Object.assign(formattedFilters, controller.getFormattedSearchFilters(filterType, categorizedFilter));
+        }
+      });
+    }
+    return formattedFilters;
+  },
+
+  /**
+   * @function getFormattedSearchFilters
+   * Get formatted filters
+   */
+  getFormattedSearchFilters(filterType, categorizedFilterData) {
+    let controller = this;
+    let formattedFilters = {};
+    let delimiter = ',';
+    switch (filterType) {
+    case 'subject':
+      categorizedFilterData.map( filterData => {
+        formattedFilters['flt.subjectName'] = filterData.label;
+      });
+      break;
+    case 'course':
+      delimiter = '~~';
+      formattedFilters['flt.courseName'] = controller.getConcatenatedFilterString(categorizedFilterData, delimiter);
+      break;
+    case 'audience':
+      formattedFilters['flt.audience'] = controller.getConcatenatedFilterString(categorizedFilterData);
+      break;
+    case '21-century-skills':
+      delimiter = '~~';
+      formattedFilters['flt.21CenturySkills'] = controller.getConcatenatedFilterString(categorizedFilterData, delimiter);
+      break;
+    case 'licenses':
+      delimiter = ',';
+      formattedFilters['flt.licenseCode'] = controller.getConcatenatedFilterString(categorizedFilterData, delimiter, 'id');
+      break;
+    case 'dok':
+      formattedFilters['flt.dok'] = controller.getConcatenatedFilterString(categorizedFilterData);
+      break;
+    case 'publisher':
+      delimiter = '~~';
+      formattedFilters['flt.publisher'] = controller.getConcatenatedFilterString(categorizedFilterData, delimiter);
+      break;
+    }
+    return formattedFilters;
+  },
+
+  /**
+   * @function getConcatenatedFilterString
+   * Get search filter using applied filters
+   */
+  getConcatenatedFilterString( filterInfo, delimiter = ',', keyName = 'label' ) {
+    let label = '';
+    if (Ember.isArray(filterInfo)) {
+      filterInfo.map( filterData => {
+        label += delimiter + filterData[`${keyName}`] ;
+      });
+      let numOfCharsRemove = delimiter === ',' ? 1 : 2;
+      return label.substring(numOfCharsRemove);
+    }
+    return label;
+  }
 });

@@ -49,7 +49,11 @@ export default {
     'engagement': 'Engagement',
     'efficacy': 'Efficacy',
     'visibility-tooltip': 'Not visible to others',
-    'visibility-available': 'Visible to others'
+    'visibility-available': 'Visible to others',
+    'no-results': 'No results found',
+    'no-results-message':
+      'Check your spelling. We all make mistakes!<br/>Go broader and remove some filters.<br/> Or try searching for a similar word instead.',
+    'show-more-results': 'Show More Results'
   },
   logout: {
     name: 'Logout'

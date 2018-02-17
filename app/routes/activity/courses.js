@@ -27,8 +27,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     let route = this;
     let term = params.term ? params.term : '*';
     let filters = {'flt.publishStatus': 'published'};
+    let offset = 1;
+    let pageSize = 8;
+    let appliedFilters = route.controllerFor('activity').getAppliedFilters();
+    let courseFilters = Object.assign(filters, appliedFilters);
     return Ember.RSVP.hash({
-      courses: route.get('searchService').searchCourses(term, filters)
+      courses: route.get('searchService').searchCourses(term, courseFilters, offset, pageSize)
     });
   },
 
@@ -36,6 +40,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   setupController: function(controller, model) {
     controller.set('courses', model.courses.get('searchResults'));
     controller.set('hitCount', model.courses.get('hitCount'));
+    controller.set('OFFSET', model.courses.get('searchResults').length);
   }
 
 });

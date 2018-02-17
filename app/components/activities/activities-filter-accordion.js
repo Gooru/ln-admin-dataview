@@ -107,7 +107,7 @@ export default Ember.Component.extend(ModalMixin, {
       //Route to summary page, once the user selected subject filter
       //It should route only, if it doesn't have subject filters and should have category filters
       if ((selectedFilterItems.category.length > 0 && filterType === 'subject') || selectedFilterItems.category.length > 0 && selectedFilterItems.subject.length > 0) {
-        component.get('router').transitionTo('activity.summary');
+        component.get('router').transitionTo('/activities/summary');
       }
     }
   },
