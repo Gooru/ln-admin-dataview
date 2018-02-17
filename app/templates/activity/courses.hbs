@@ -1,7 +1,20 @@
 <div class="activity-courses">
-  <div class="course-cards">
-    {{#each courses as |course|}}
-      {{activity.course-card course=course}}
-    {{/each}}
-  </div>
+  {{#if isLoading}}
+    {{three-bounce-spinner}}
+  {{else}}
+    {{#if courses}}
+      <div class="course-cards">
+        {{#each courses as |course|}}
+          {{activity.course-card course=course}}
+        {{/each}}
+      </div>
+      {{#if isShowMoreVisible}}
+        <div class="col-xs-12 show-more">
+          <span class="show-more-results" {{action 'showMoreResults'}}>{{t "common.show-more-results"}}</span>
+        </div>
+      {{/if}}
+    {{else}}
+      {{no-result-found}}
+    {{/if}}
+  {{/if}}
 </div>

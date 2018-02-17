@@ -1,7 +1,20 @@
 <div class="activity-assessments">
-  <div class="assessment-cards">
-    {{#each assessments as |assessment|}}
-      {{activity.assessment-card assessment=assessment}}
-    {{/each}}
-  </div>
+  {{#if isLoading}}
+    {{three-bounce-spinner}}
+  {{else}}
+    {{#if assessments}}
+      <div class="assessment-cards">
+        {{#each assessments as |assessment|}}
+          {{activity.assessment-card assessment=assessment}}
+        {{/each}}
+      </div>
+      {{#if isShowMoreVisible}}
+        <div class="col-xs-12 show-more">
+          <span class="show-more-results" {{action 'showMoreResults'}}>{{t "common.show-more-results"}}</span>
+        </div>
+      {{/if}}
+    {{else}}
+      {{no-result-found}}
+    {{/if}}
+  {{/if}}
 </div>

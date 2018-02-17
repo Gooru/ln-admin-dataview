@@ -20,6 +20,11 @@ export default Ember.Controller.extend({
 
   contentService: Ember.inject.service('api-sdk/content'),
 
+  /**
+   * @requires controller:activity
+   */
+  activityController: Ember.inject.controller('activity'),
+
   //-------------------------------------------------------------------------
   //Properties
 
@@ -41,6 +46,35 @@ export default Ember.Controller.extend({
    */
   hitCount: 0,
 
+  /**
+   * @property {Number}
+   * Defines how many results should fetch
+   */
+  PAGE_SIZE: 8,
+
+  /**
+   * @property {Number}
+   * Maintain current offset of the search API
+   */
+  OFFSET: 1,
+
+  /**
+   * @property {Boolean}
+   * Toggle show/hide view of three bounce spinner
+   */
+  isLoading: false,
+
+  /**
+   * @property {Boolean}
+   * Show/Hide show more button
+   */
+  isShowMoreVisible: Ember.computed('collections', function() {
+    let controller = this;
+    let offset = controller.get('OFFSET');
+    let collections = controller.get('collections');
+    return (collections.length >= offset);
+  }),
+
 
   // -------------------------------------------------------------------------
   // Methods
@@ -58,19 +92,34 @@ export default Ember.Controller.extend({
 
   onChangeSearchTerm: Ember.observer('term', function() {
     let controller = this;
+    controller.set('isLoading', true);
+    controller.set('OFFSET', 1);
+    controller.set('collections', Ember.A());
+    controller.fetchSearchCollections();
+  }),
+
+  fetchSearchCollections() {
+    let controller = this;
     let term = controller.get('term') ? controller.get('term') : '*';
+    let pageSize = controller.get('PAGE_SIZE');
+    let offset = controller.get('OFFSET');
     let filters = {
       'flt.publishStatus': 'published'
     };
+    let appliedFilters = controller.get('activityController').getAppliedFilters();
+    let collectionFilters = Object.assign(filters, appliedFilters);
     Ember.RSVP.hash({
-      collections: controller.get('searchService').searchCollections(term, filters)
+      collections: controller.get('searchService').searchCollections(term, collectionFilters, offset, pageSize)
     }).then(({
       collections
     }) => {
-      controller.set('collections', collections.get('searchResults'));
+      let fetchedCollections = controller.get('collections');
+      controller.set('collections', fetchedCollections.concat(collections.get('searchResults')));
+      controller.set('OFFSET', offset + pageSize);
+      controller.set('isLoading', false);
       controller.set('hitCount', collections.get('hitCount'));
     });
-  }),
+  },
 
   // -------------------------------------------------------------------------
   // Actions
@@ -82,6 +131,11 @@ export default Ember.Controller.extend({
       controller.fetchCollectionPullOutData(collection.id);
       controller.set('selectedCollection', collection);
       controller.set('showPullOut', true);
+    },
+
+    showMoreResults: function() {
+      let controller = this;
+      controller.fetchSearchCollections();
     }
   }
 

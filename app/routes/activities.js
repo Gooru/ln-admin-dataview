@@ -29,8 +29,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     let userId = route.get('session.id');
     let userFilterItems = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`));
     //redirect into the summary page, if user have selected category and subject filters
-    if (userFilterItems && userFilterItems.category && userFilterItems.subject) {
-      route.transitionTo('activity.summary');
+    if (userFilterItems && userFilterItems.category && userFilterItems.subject && userFilterItems.subject.length > 0) {
+      route.transitionTo('/activities/summary');
     }
   }
 

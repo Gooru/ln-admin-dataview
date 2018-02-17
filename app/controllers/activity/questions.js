@@ -29,6 +29,11 @@ export default Ember.Controller.extend({
    */
   profileService: Ember.inject.service('api-sdk/profile'),
 
+  /**
+   * @requires controller:activity
+   */
+  activityController: Ember.inject.controller('activity'),
+
   //-------------------------------------------------------------------------
   //Properties
   /**
@@ -43,13 +48,6 @@ export default Ember.Controller.extend({
    */
   showMore: true,
 
-
-  /**
-   * Show loading spinner
-   */
-  isLoading: false,
-
-
   /**
    * It maintains the list of question data
    * @type {Array}
@@ -61,6 +59,35 @@ export default Ember.Controller.extend({
    * @type {Number}
    */
   hitCount: 0,
+
+  /**
+   * @property {Number}
+   * Defines how many results should fetch
+   */
+  PAGE_SIZE: 8,
+
+  /**
+   * @property {Number}
+   * Maintain current offset of the search API
+   */
+  OFFSET: 1,
+
+  /**
+   * @property {Boolean}
+   * Toggle show/hide view of three bounce spinner
+   */
+  isLoading: false,
+
+  /**
+   * @property {Boolean}
+   * Show/Hide show more button
+   */
+  isShowMoreVisible: Ember.computed('questions', function() {
+    let controller = this;
+    let offset = controller.get('OFFSET');
+    let questions = controller.get('questions');
+    return (questions.length >= offset);
+  }),
 
 
   /**
@@ -185,6 +212,15 @@ export default Ember.Controller.extend({
               return Ember.RSVP.resolve(collection);
             });
         });
+    },
+
+    /**
+     * @function showMoreResults
+     * Action triggered when the user click on the show more button
+     */
+    showMoreResults() {
+      let controller = this;
+      controller.fetchSearchQuestions();
     }
   },
 
@@ -194,18 +230,33 @@ export default Ember.Controller.extend({
 
   onChangeSearchTerm: Ember.observer('term', function() {
     let controller = this;
+    controller.set('isLoading', true);
+    controller.set('OFFSET', 1);
+    controller.set('questions', Ember.A());
+    controller.fetchSearchQuestions();
+  }),
+
+  /**
+   * @function fetchSearchQuestions
+   * Fetch courses by appliying search filters
+   */
+  fetchSearchQuestions() {
+    let controller = this;
     let term = controller.get('term') ? controller.get('term') : '*';
-    let filters = {
-      'flt.publishStatus': 'published'
-    };
+    let filters = {'flt.publishStatus': 'published'};
+    let pageSize = controller.get('PAGE_SIZE');
+    let offset = controller.get('OFFSET');
+    let appliedFilters = controller.get('activityController').getAppliedFilters();
+    let questionFilters = Object.assign(filters, appliedFilters);
     Ember.RSVP.hash({
-      questions: controller.get('searchService').searchQuestions(term, filters)
-    }).then(({
-      questions
-    }) => {
-      controller.set('questions', questions.get('searchResults'));
+      questions: controller.get('searchService').searchQuestions(term, questionFilters, offset, pageSize)
+    }).then(({questions}) => {
+      let fetchedQuestions = controller.get('questions');
+      controller.set('questions', fetchedQuestions.concat(questions.get('searchResults')));
+      controller.set('OFFSET', offset + pageSize);
       controller.set('hitCount', questions.get('hitCount'));
+      controller.set('isLoading', false);
     });
-  })
+  }
 
 });
