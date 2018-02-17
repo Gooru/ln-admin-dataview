@@ -28,6 +28,25 @@
         </div>
       </div>
     </header>
+    {{#if competency}}
+      <div class="learner-competency">
+        <div class="competency-text">
+          <span class="text">{{competency.status}}</span>
+          <span class="date">Earned on {{competency.date}}</span>
+        </div>
+        <div class="icons">
+          <span class="{{competency.status}}"> <i> </i></span>
+        </div>
+      </div>
+      <div class="competency-description">
+        <div class="text">
+        <span> when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+          It has survived not only five centuries, but also the leap into electronic typesetting,
+           remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets
+           containing</span>
+         </div>
+      </div>
+    {{/if}}
   {{/if}}
   <div class="pull-out-content">
     {{yield lessContent}}

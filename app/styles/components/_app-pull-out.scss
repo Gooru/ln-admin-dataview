@@ -35,8 +35,7 @@
         padding-top: 20px;
         width: calc(100% - 30px);
         height: 100%;
-        margin: 0 auto;
-        margin-right: 5px;
+        margin: 0 5px 0 auto;
       }
 
       .info {
@@ -48,7 +47,6 @@
           text-align: left;
           color: $dark-700;
           @include ellipsis($font-size: 20px, $line-height: 1.13, $lines-to-show: 1);
-
         }
 
         .description {
@@ -68,9 +66,11 @@
           opacity: 0.8;
           cursor: pointer;
           width: 50px;
+
           &:hover {
             opacity: 1;
           }
+
           i {
             margin-left: -81px;
             pointer-events: none;
@@ -107,6 +107,74 @@
             line-height: 13px;
             margin-left: 4px;
           }
+        }
+      }
+    }
+
+    .learner-competency {
+      width: 100%;
+      display: inline-block;
+      padding: 13px;
+      border-bottom: 1px solid #979797;
+
+      .competency-text {
+        display: grid;
+        margin-left: 15px;
+        width: 80%;
+        float: left;
+
+        .text {
+          font-size: 16px;
+          text-align: left;
+          color: #29323a;
+          text-transform: capitalize;
+        }
+
+        .date {
+          font-size: 13px;
+          color: #29323a;
+        }
+      }
+
+      .icons {
+        float: right;
+        margin-right: 15px;
+        margin-top: 14px;
+
+        .in_progress {
+          i {
+            background: url("images/competencies-inProgress.svg");
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+            display: block;
+          }
+        }
+
+        .mastered {
+          i {
+            background: url("images/competencies-mastered.svg");
+            width: 30.3px;
+            height: 30.2px;
+            object-fit: contain;
+            display: block;
+          }
+        }
+      }
+    }
+
+    .competency-description {
+      border-bottom: dashed 1px;
+
+      .text {
+        margin-left: 27px;
+        margin-right: 27px;
+        span {
+          font-family: OpenSans;
+          font-size: 15px;
+          line-height: normal;
+          text-align: left;
+          color: #29323a;
         }
       }
     }
