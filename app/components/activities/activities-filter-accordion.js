@@ -1,5 +1,6 @@
 import Ember from 'ember';
-import { TAXONOMY_CATEGORIES } from 'admin-dataview/config/config';
+import { TAXONOMY_CATEGORIES, ACTIVITIES_NAVIGATION_MENUS_INDEX } from 'admin-dataview/config/config';
+import Utils from 'admin-dataview/utils/utils';
 import ModalMixin from 'admin-dataview/mixins/modal';
 
 export default Ember.Component.extend(ModalMixin, {
@@ -104,9 +105,11 @@ export default Ember.Component.extend(ModalMixin, {
       let userId = component.get('session.id');
       component.sendAction('onClickCheckbox', filterInfo, filterType);
       let selectedFilterItems = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`)) || component.get('selectedFilterItems');
+      let routeName = Utils.getRoutePathLastOccurrence();
+      let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
       //Route to summary page, once the user selected subject filter
       //It should route only, if it doesn't have subject filters and should have category filters
-      if ((selectedFilterItems.category.length > 0 && filterType === 'subject') || selectedFilterItems.category.length > 0 && selectedFilterItems.subject.length > 0) {
+      if (selectedFilterItems.category.length > 0 && filterType === 'subject') {
         component.get('router').transitionTo('/activities/summary');
       }
     }

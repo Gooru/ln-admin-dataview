@@ -79,14 +79,20 @@ export default Ember.Controller.extend({
   isLoading: false,
 
   /**
+   * @property {Number}
+   * Holds currently fetched results count
+   */
+  CUR_ITERATION_COUNT: 0,
+
+  /**
    * @property {Boolean}
    * Show/Hide show more button
    */
   isShowMoreVisible: Ember.computed('questions', function() {
     let controller = this;
-    let offset = controller.get('OFFSET');
-    let questions = controller.get('questions');
-    return (questions.length >= offset);
+    let CUR_ITERATION_COUNT = controller.get('CUR_ITERATION_COUNT');
+    let PAGE_SIZE = controller.get('PAGE_SIZE');
+    return (PAGE_SIZE <= CUR_ITERATION_COUNT);
   }),
 
 
@@ -243,17 +249,17 @@ export default Ember.Controller.extend({
   fetchSearchQuestions() {
     let controller = this;
     let term = controller.get('term') ? controller.get('term') : '*';
-    let filters = {'flt.publishStatus': 'published'};
-    let pageSize = controller.get('PAGE_SIZE');
-    let offset = controller.get('OFFSET');
-    let appliedFilters = controller.get('activityController').getAppliedFilters();
-    let questionFilters = Object.assign(filters, appliedFilters);
+    let PAGE_SIZE = controller.get('PAGE_SIZE');
+    let OFFSET = controller.get('OFFSET');
+    let questionFilters = controller.get('activityController').getAppliedFilters();
     Ember.RSVP.hash({
-      questions: controller.get('searchService').searchQuestions(term, questionFilters, offset, pageSize)
+      questions: controller.get('searchService').searchQuestions(term, questionFilters, OFFSET, PAGE_SIZE)
     }).then(({questions}) => {
       let fetchedQuestions = controller.get('questions');
+      let CUR_ITERATION_COUNT = questions.get('searchResults').length;
       controller.set('questions', fetchedQuestions.concat(questions.get('searchResults')));
-      controller.set('OFFSET', offset + pageSize);
+      controller.set('CUR_ITERATION_COUNT', CUR_ITERATION_COUNT);
+      controller.set('OFFSET', OFFSET + CUR_ITERATION_COUNT);
       controller.set('hitCount', questions.get('hitCount'));
       controller.set('isLoading', false);
     });

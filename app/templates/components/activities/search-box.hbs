@@ -3,8 +3,8 @@
     <div class="visible-filters">
       {{#each visibleFilters as |filterData|}}
         {{activities.search-filter-tag isTagAvailable=true tag=filterData onRemoveFilter="onRemoveFilter"}}
-        {{else}}
-          {{activities.search-filter-tag isTagAvailable=false}}
+      {{else}}
+        {{activities.search-filter-tag isTagAvailable=false}}
       {{/each}}
       {{#if (gt appliedFilterList.length 3)}}
         <button class="non-visible-tags">

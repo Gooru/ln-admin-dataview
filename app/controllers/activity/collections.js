@@ -65,14 +65,20 @@ export default Ember.Controller.extend({
   isLoading: false,
 
   /**
+   * @property {Number}
+   * Holds currently fetched results count
+   */
+  CUR_ITERATION_COUNT: 0,
+
+  /**
    * @property {Boolean}
    * Show/Hide show more button
    */
   isShowMoreVisible: Ember.computed('collections', function() {
     let controller = this;
-    let offset = controller.get('OFFSET');
-    let collections = controller.get('collections');
-    return (collections.length >= offset);
+    let CUR_ITERATION_COUNT = controller.get('CUR_ITERATION_COUNT');
+    let PAGE_SIZE = controller.get('PAGE_SIZE');
+    return (PAGE_SIZE <= CUR_ITERATION_COUNT);
   }),
 
 
@@ -101,21 +107,19 @@ export default Ember.Controller.extend({
   fetchSearchCollections() {
     let controller = this;
     let term = controller.get('term') ? controller.get('term') : '*';
-    let pageSize = controller.get('PAGE_SIZE');
-    let offset = controller.get('OFFSET');
-    let filters = {
-      'flt.publishStatus': 'published'
-    };
-    let appliedFilters = controller.get('activityController').getAppliedFilters();
-    let collectionFilters = Object.assign(filters, appliedFilters);
+    let PAGE_SIZE = controller.get('PAGE_SIZE');
+    let OFFSET = controller.get('OFFSET');
+    let collectionFilters = controller.get('activityController').getAppliedFilters();
     Ember.RSVP.hash({
-      collections: controller.get('searchService').searchCollections(term, collectionFilters, offset, pageSize)
+      collections: controller.get('searchService').searchCollections(term, collectionFilters, OFFSET, PAGE_SIZE)
     }).then(({
       collections
     }) => {
       let fetchedCollections = controller.get('collections');
+      let CUR_ITERATION_COUNT = collections.get('searchResults').length;
       controller.set('collections', fetchedCollections.concat(collections.get('searchResults')));
-      controller.set('OFFSET', offset + pageSize);
+      controller.set('CUR_ITERATION_COUNT', CUR_ITERATION_COUNT);
+      controller.set('OFFSET', OFFSET + CUR_ITERATION_COUNT);
       controller.set('isLoading', false);
       controller.set('hitCount', collections.get('hitCount'));
     });

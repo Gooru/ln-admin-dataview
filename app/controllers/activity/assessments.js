@@ -67,14 +67,20 @@ export default Ember.Controller.extend({
   isLoading: false,
 
   /**
+   * @property {Number}
+   * Holds currently fetched results count
+   */
+  CUR_ITERATION_COUNT: 0,
+
+  /**
    * @property {Boolean}
    * Show/Hide show more button
    */
   isShowMoreVisible: Ember.computed('assessments', function() {
     let controller = this;
-    let offset = controller.get('OFFSET');
-    let assessments = controller.get('assessments');
-    return (assessments.length >= offset);
+    let CUR_ITERATION_COUNT = controller.get('CUR_ITERATION_COUNT');
+    let PAGE_SIZE = controller.get('PAGE_SIZE');
+    return (PAGE_SIZE <= CUR_ITERATION_COUNT);
   }),
 
   // -------------------------------------------------------------------------
@@ -99,17 +105,17 @@ export default Ember.Controller.extend({
   fetchSearchAssessments() {
     let controller = this;
     let term = controller.get('term') ? controller.get('term') : '*';
-    let filters = {'flt.publishStatus': 'published'};
-    let pageSize = controller.get('PAGE_SIZE');
-    let offset = controller.get('OFFSET');
-    let appliedFilters = controller.get('activityController').getAppliedFilters();
-    let assessmentFilters = Object.assign(filters, appliedFilters);
+    let PAGE_SIZE = controller.get('PAGE_SIZE');
+    let OFFSET = controller.get('OFFSET');
+    let assessmentFilters = controller.get('activityController').getAppliedFilters();
     Ember.RSVP.hash({
-      assessments: controller.get('searchService').searchAssessments(term, assessmentFilters, offset, pageSize)
+      assessments: controller.get('searchService').searchAssessments(term, assessmentFilters, OFFSET, PAGE_SIZE)
     }).then(({assessments}) => {
       let fetchedAssessments = controller.get('assessments');
+      let CUR_ITERATION_COUNT = assessments.get('searchResults').length;
       controller.set('assessments', fetchedAssessments.concat(assessments.get('searchResults')));
-      controller.set('OFFSET', offset + pageSize);
+      controller.set('CUR_ITERATION_COUNT', CUR_ITERATION_COUNT);
+      controller.set('OFFSET', OFFSET + CUR_ITERATION_COUNT);
       controller.set('hitCount', assessments.get('hitCount'));
       controller.set('isLoading', false);
     });
