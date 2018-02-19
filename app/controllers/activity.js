@@ -55,15 +55,8 @@ export default Ember.Controller.extend({
     onChangeFilterItems: function(filterItems) {
       let controller = this;
       controller.set('selectedFilterItemsBuffer', filterItems);
-      let term =  controller.get('term');
-      this.set('searchTerm', term);
-      let routeName = Utils.getRoutePathLastOccurrence();
-      let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
-      if (activeMenuIndex > -1) {
-        this.transitionToRoute(`/activities/${  routeName  }`);
-      } else {
-        this.transitionToRoute('/activities/courses');
-      }
+      //TODO temporary fix, need to refresh only selected route instead of reloading url
+      location.reload();
     }
   },
 

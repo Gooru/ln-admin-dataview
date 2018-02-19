@@ -82,14 +82,20 @@ export default Ember.Controller.extend({
   isLoading: false,
 
   /**
+   * @property {Number}
+   * Holds currently fetched results count
+   */
+  CUR_ITERATION_COUNT: 0,
+
+  /**
    * @property {Boolean}
    * Show/Hide show more button
    */
   isShowMoreVisible: Ember.computed('resources', function() {
     let controller = this;
-    let offset = controller.get('OFFSET');
-    let resources = controller.get('resources');
-    return (resources.length >= offset);
+    let CUR_ITERATION_COUNT = controller.get('CUR_ITERATION_COUNT');
+    let PAGE_SIZE = controller.get('PAGE_SIZE');
+    return (PAGE_SIZE <= CUR_ITERATION_COUNT);
   }),
 
 
@@ -245,21 +251,19 @@ export default Ember.Controller.extend({
   fetchSearchResources() {
     let controller = this;
     let term = controller.get('term') ? controller.get('term') : '*';
-    let filters = {
-      'flt.publishStatus': 'published'
-    };
-    let pageSize = controller.get('PAGE_SIZE');
-    let offset = controller.get('OFFSET');
-    let appliedFilters = controller.get('activityController').getAppliedFilters();
-    let resourceFilters = Object.assign(filters, appliedFilters);
+    let PAGE_SIZE = controller.get('PAGE_SIZE');
+    let OFFSET = controller.get('OFFSET');
+    let resourceFilters = controller.get('activityController').getAppliedFilters();
     Ember.RSVP.hash({
-      resources: controller.get('searchService').searchResources(term, resourceFilters, offset, pageSize)
+      resources: controller.get('searchService').searchResources(term, resourceFilters, OFFSET, PAGE_SIZE)
     }).then(({
       resources
     }) => {
       let fetchedResources = controller.get('resources');
+      let CUR_ITERATION_COUNT = resources.get('searchResults').length;
       controller.set('resources', fetchedResources.concat(resources.get('searchResults')));
-      controller.set('OFFSET', offset + pageSize);
+      controller.set('CUR_ITERATION_COUNT', CUR_ITERATION_COUNT);
+      controller.set('OFFSET', OFFSET + CUR_ITERATION_COUNT);
       controller.set('hitCount', resources.get('hitCount'));
       controller.set('isLoading', false);
     });

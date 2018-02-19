@@ -67,14 +67,20 @@ export default Ember.Controller.extend({
   isLoading: false,
 
   /**
+   * @property {Number}
+   * Holds currently fetched results count
+   */
+  CUR_ITERATION_COUNT: 0,
+
+  /**
    * @property {Boolean}
    * Show/Hide show more button
    */
   isShowMoreVisible: Ember.computed('courses', function() {
     let controller = this;
-    let offset = controller.get('OFFSET');
-    let courses = controller.get('courses');
-    return (courses.length >= offset);
+    let CUR_ITERATION_COUNT = controller.get('CUR_ITERATION_COUNT');
+    let PAGE_SIZE = controller.get('PAGE_SIZE');
+    return (PAGE_SIZE <= CUR_ITERATION_COUNT);
   }),
 
   // -------------------------------------------------------------------------
@@ -83,8 +89,8 @@ export default Ember.Controller.extend({
   onChangeSearchTerm: Ember.observer('term', function() {
     let controller = this;
     controller.set('isLoading', true);
-    controller.set('OFFSET', 1);
     controller.set('courses', Ember.A());
+    controller.set('OFFSET', 1);
     controller.fetchSearchCourses();
   }),
 
@@ -95,17 +101,17 @@ export default Ember.Controller.extend({
   fetchSearchCourses() {
     let controller = this;
     let term = controller.get('term') ? controller.get('term') : '*';
-    let filters = {'flt.publishStatus': 'published'};
-    let pageSize = controller.get('PAGE_SIZE');
-    let offset = controller.get('OFFSET');
-    let appliedFilters = controller.get('activityController').getAppliedFilters();
-    let courseFilters = Object.assign(filters, appliedFilters);
+    let PAGE_SIZE = controller.get('PAGE_SIZE');
+    let OFFSET = controller.get('OFFSET');
+    let courseFilters = controller.get('activityController').getAppliedFilters();
     Ember.RSVP.hash({
-      courses: controller.get('searchService').searchCourses(term, courseFilters, offset, pageSize)
+      courses: controller.get('searchService').searchCourses(term, courseFilters, OFFSET, PAGE_SIZE)
     }).then(({courses}) => {
       let fetchedCourses = controller.get('courses');
+      let CUR_ITERATION_COUNT = courses.get('searchResults').length;
       controller.set('courses', fetchedCourses.concat(courses.get('searchResults')));
-      controller.set('OFFSET', offset + pageSize);
+      controller.set('CUR_ITERATION_COUNT', CUR_ITERATION_COUNT);
+      controller.set('OFFSET', OFFSET + CUR_ITERATION_COUNT);
       controller.set('hitCount', courses.get('hitCount'));
       controller.set('isLoading', false);
     });

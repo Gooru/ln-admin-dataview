@@ -24,25 +24,15 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   // Methods
 
   model: function(params) {
-    let route = this;
     let term = params.term ? params.term : '*';
-    let filters = {
-      'flt.publishStatus': 'published'
+    return {
+      term: term
     };
-    let offset = 1;
-    let pageSize = 8;
-    let appliedFilters = route.controllerFor('activity').getAppliedFilters();
-    let assessmentFilters = Object.assign(filters, appliedFilters);
-    return Ember.RSVP.hash({
-      assessments: route.get('searchService').searchAssessments(term, assessmentFilters, offset, pageSize)
-    });
   },
 
 
   setupController: function(controller, model) {
-    controller.set('assessments', model.assessments.get('searchResults'));
-    controller.set('hitCount', model.assessments.get('hitCount'));
-    controller.set('OFFSET', model.assessments.get('searchResults').length);
+    controller.set('term', model.term);
   }
 
 });

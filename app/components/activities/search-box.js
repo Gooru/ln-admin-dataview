@@ -123,6 +123,8 @@ export default Ember.Component.extend({
         storedFilters[`${filterType}`] = categorizedFilterData;
         localStorage.setItem(`research_${userId}_activities_filters`, JSON.stringify(storedFilters));
         component.set('selectedFilterItems', storedFilters);
+        //Trigger action to update the search results
+        component.sendAction('onChangeFilterItems', storedFilters);
       }
     },
 

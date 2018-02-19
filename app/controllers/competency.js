@@ -317,6 +317,13 @@ export default Ember.Controller.extend({
   getSearchContentCount: function(selectedNode) {
     let filters = selectedNode.filters;
     const contentCountData = [];
+
+    //TODO shouldn't handle it manually, just a quick fix to fetch search results
+    if (selectedNode.type === 'subject' && selectedNode.name === 'Math') {
+      filters = {
+        'flt.subjectName': 'Math~~Mathematics'
+      };
+    }
     const culcaqrCountPromise = Ember.RSVP.resolve(this.get('activitiesService').getLearningMaps(filters));
 
 
