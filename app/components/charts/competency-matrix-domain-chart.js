@@ -1,6 +1,6 @@
 
 /**
- * Comptency matrix chart
+ * Comptency matrix domain chart
  *
  * @module
  * @augments ember/Component
@@ -48,7 +48,7 @@ export default Ember.Component.extend({
   /**
    * @property {Number} width
    */
-  width: 700,
+  width: 680,
 
   /**
    * @property {Number} height
@@ -184,14 +184,12 @@ export default Ember.Component.extend({
   drawChart: function(data) {
     let component = this;
     let cellSizeInRow = component.get('taxonomyDomains');
-    // console.log(cellSizeInRow.length, data);
     let numberOfCellsInEachRow = cellSizeInRow.length;
     const colorsBasedOnStatus = component.get('colorsBasedOnStatus');
     const cellWidth = 40;
     const cellHeight = 20;
     const width = component.get('width');
     const height = (Math.round(data.length / numberOfCellsInEachRow) * cellWidth);
-    // console.log('widht::::::', width, 'height::', height);
     component.$('#competency-matrix-domain-chart').empty();
     const svg = d3.select('#competency-matrix-domain-chart').append('svg')
       .attr('width', width)
@@ -205,6 +203,9 @@ export default Ember.Component.extend({
       .attr('class', 'competency')
       .attr('width', cellWidth)
       .attr('height', cellHeight)
+      .on('click', function(d) {
+        component.sendAction('onCompetencyPullOut', d);
+      })
       .merge(cards)
       .style('fill', '#EAEAEA')
       .transition()
@@ -253,7 +254,7 @@ export default Ember.Component.extend({
     let defaultNumberOfYaixsRow = component.get('defaultNumberOfYaixsRow');
     let taxonomyDomain = Ember.A();
     let domains = competencyMatrixCoordinates.get('domains');
-    let currentYaxis = 1;
+    let currentXaxis = -1;
     let resultSet = Ember.A();
     domains.forEach(domainData => {
       let domainCode = domainData.get('domainCode');
@@ -288,29 +289,23 @@ export default Ember.Component.extend({
             mergeDomainData.pushObject(data);
           }
         });
-        // console.log('Merge domain::', mergeDomainData);
         let splitData = Ember.A();
         for (let startIndex = 0, endIndex = mergeDomainData.length; startIndex < endIndex; startIndex += numberOfCellsInEachRow) {
           splitData.pushObject(mergeDomainData.slice(startIndex, startIndex + numberOfCellsInEachRow));
         }
-        // console.log(splitData);
         let numberOfRows = splitData.length > defaultNumberOfYaixsRow ? splitData.length : defaultNumberOfYaixsRow;
 
         // adjust course title cell height dynamically
         let heightOfCourseTitleContainer = numberOfRows * cellWidth;
-        // console.log(heightOfCourseTitleContainer, numberOfRows);
         domainData.set('heightOfCourseTitleContainer', heightOfCourseTitleContainer);
         for (let rowIndex = (numberOfRows - 1); rowIndex >= 0; rowIndex--) {
           let dataSet = splitData.objectAt(rowIndex);
           for (let index = numberOfCellsInEachRow; index >= 1; index--) {
             if (dataSet) {
-              // console.log('index',index);
               let currentIndex = (index - 1);
               let data = dataSet[currentIndex];
-              // console.log('data:::', data)
               if (data) {
-                // console.log('currentYaxis', currentYaxis);
-                data.set('xAxisSeq', currentYaxis);
+                data.set('xAxisSeq', currentXaxis);
                 data.set('yAxisSeq', index);
                 resultSet.pushObject(data);
               } else {
@@ -319,7 +314,7 @@ export default Ember.Component.extend({
                   'domainName': domainName,
                   'domainSeq': domainSeq,
                   'yAxisSeq': index,
-                  'xAxisSeq': currentYaxis,
+                  'xAxisSeq': currentXaxis,
                   'status': -1
                 });
                 resultSet.pushObject(dummyData);
@@ -331,13 +326,13 @@ export default Ember.Component.extend({
                 'domainName': domainName,
                 'domainSeq': domainSeq,
                 'yAxisSeq': index,
-                'xAxisSeq': currentYaxis,
+                'xAxisSeq': currentXaxis,
                 'status': -1
               });
               resultSet.pushObject(dummyData);'';
             }
           }
-          currentYaxis = currentYaxis + 1;
+          currentXaxis = currentXaxis + 1;
         }
 
       }

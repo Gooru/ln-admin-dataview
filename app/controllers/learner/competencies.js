@@ -44,6 +44,12 @@ export default Ember.Controller.extend({
    */
   showMore: true,
 
+  /**
+   * Toggle the couse and tomain view  .
+   * @type {boolean}
+   */
+  isShowCourseMatrix: true,
+
 
   /**
    * Show loading spinner
@@ -109,6 +115,7 @@ export default Ember.Controller.extend({
     onChangeHeaderView(selectedView) {
       let controller = this;
       controller.set('isShowCourseMatrix', selectedView === 'course');
+
     }
   }
 

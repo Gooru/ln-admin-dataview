@@ -27,11 +27,13 @@ export default Ember.Object.extend({
    */
   normalizeUserPerformanceCompetencyCollections: function(response) {
     let resultSet = Ember.A();
-    response = Ember.A(response.collections);
-    response.forEach(data => {
-      let result = Ember.Object.create(data);
-      resultSet.pushObject(result);
-    });
+    if (response) {
+      response = Ember.A(response.collections);
+      response.forEach(data => {
+        let result = Ember.Object.create(data);
+        resultSet.pushObject(result);
+      });
+    }
     return resultSet;
   },
 

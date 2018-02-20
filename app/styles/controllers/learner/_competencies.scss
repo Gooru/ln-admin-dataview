@@ -5,13 +5,11 @@
   background-color: #fff;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   padding: 20px 20px 20px 30px;
-
-
   // height: calc(100vh - 63px);
-
   .app-pull-out {
     top: 63px;
     height: calc(100vh - 63px);
+
     .pull-out-more-content-container {
       display: table;
 
@@ -23,13 +21,14 @@
       }
     }
   }
-
   //TODO quick fix for toggle matrix view
   .header {
     display: flex;
+
     .nav-header {
       .competencies-header {
         display: flex;
+
         div {
           padding-right: 10px;
           color: $dark-400;
@@ -72,6 +71,29 @@
     }
   }
 
+  .nav-header {
+    z-index: 9;
+
+    .competencies-matric-header {
+      .competencies-header {
+        .domain-section {
+          width: 67px;
+          text-align: center;
+        }
+
+        .course-section {
+          width: 67px;
+          text-align: center;
+        }
+
+        .courseActive,
+        .domainActive {
+          color: #2ea9e9;
+        }
+      }
+    }
+  }
+
   .calendar {
     width: 100%;
     height: 50px;
@@ -108,6 +130,7 @@
     float: left;
     padding: 6px;
     cursor: grab;
+
     i {
       background: url("images/competencies-list-view.svg");
       width: 17px;
@@ -126,6 +149,7 @@
     width: 10%;
     padding: 6px;
     cursor: grab;
+
     i {
       background: url("images/competencies-module-view.svg");
       width: 17px;
