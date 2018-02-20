@@ -210,7 +210,7 @@ export default Ember.Component.extend({
       .style('fill', (d) => {
         return colorsBasedOnStatus.get(d.status.toString());
       })
-      .style("cursor", "pointer");
+      .style('cursor', 'pointer');
     cards.exit().remove();
   },
 

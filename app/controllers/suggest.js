@@ -7,7 +7,6 @@ export default Ember.Controller.extend({
   // Dependencies
 
 
-
   // -------------------------------------------------------------------------
   // Actions
 

@@ -24,6 +24,23 @@
     }
   }
 
+  //TODO quick fix for toggle matrix view
+  .header {
+    display: flex;
+    .nav-header {
+      .competencies-header {
+        display: flex;
+        div {
+          padding-right: 10px;
+          color: $dark-400;
+          font-weight: bold;
+          font-size: 15px;
+          cursor: pointer;
+        }
+      }
+    }
+  }
+
   .panel-header {
     display: flex;
     width: 100%;

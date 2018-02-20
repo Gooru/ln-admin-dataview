@@ -1,17 +1,24 @@
 <div class="competencies-report">
-  <div class="panel-header">
-    <div class="pull-left panel-back-arrow" {{action 'onClickBackButton'}}>
-      {{app-icon name='ic_arrow_back'}}
+  <div class="header">
+    <div class="panel-header">
+      <div class="pull-left panel-back-arrow" {{action 'onClickBackButton'}}>
+        {{app-icon name='ic_arrow_back'}}
+      </div>
+      <div class="pull-left panel-title">
+        <span>Competency Report</span>
+      </div>
+      <div class="competencies-list-view" {{action 'onChooseListView'}}>
+        <i class="icon {{unless isGridModeEnabled 'active'}}"> </i>
+      </div>
+      <div class="competencies-module-view" {{action 'onChooseGridView'}}>
+        <i class="icon {{if isGridModeEnabled 'active'}}"> </i>
+      </div>
     </div>
-    <div class="pull-left panel-title">
-      <span>Competency Report</span>
-    </div>
-    <div class="competencies-list-view" {{action 'onChooseListView'}}>
-      <i class="icon {{unless isGridModeEnabled 'active'}}"> </i>
-    </div>
-    <div class="competencies-module-view" {{action 'onChooseGridView'}}>
-      <i class="icon {{if isGridModeEnabled 'active'}}"> </i>
-    </div>
+    {{#if isGridModeEnabled}}
+      <div class="nav-header">
+        {{learner.competencies-matrix-header onChangeHeaderView="onChangeHeaderView"}}
+      </div>
+    {{/if}}
   </div>
   {{#unless isGridModeEnabled}}
     <div class="report-panel">
@@ -26,7 +33,11 @@
       </div>
     </div>
     {{else}}
-      {{charts.competency-matrix-chart userId=userId onCompetencyPullOut='onCompetencyPullOut'}}
+      {{#if isShowCourseMatrix}}
+        {{charts.competency-matrix-chart userId=userId onCompetencyPullOut='onCompetencyPullOut'}}
+      {{else}}
+        {{charts.competency-matrix-domain-chart userId=userId onCompetencyPullOut='onCompetencyPullOut'}}
+      {{/if}}
   {{/unless}}
   {{#app-pull-out showPullOut=showPullOut title=description description=title competency=competency showMore=showMore isLoading=isLoading as |section|}}
     {{#if section.isLessContent}}

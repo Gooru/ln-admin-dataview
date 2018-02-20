@@ -187,7 +187,8 @@ export default Ember.Component.extend({
     // console.log(cellSizeInRow.length, data);
     let numberOfCellsInEachRow = cellSizeInRow.length;
     const colorsBasedOnStatus = component.get('colorsBasedOnStatus');
-    const cellWidth = component.get('cellWidth');
+    const cellWidth = 40;
+    const cellHeight = 20;
     const width = component.get('width');
     const height = (Math.round(data.length / numberOfCellsInEachRow) * cellWidth);
     // console.log('widht::::::', width, 'height::', height);
@@ -200,10 +201,10 @@ export default Ember.Component.extend({
       .data(data);
     cards.enter().append('rect')
       .attr('x', (d) => (d.xAxisSeq - 1) * cellWidth)
-      .attr('y', (d) => (d.yAxisSeq - 1) * cellWidth)
+      .attr('y', (d) => (d.yAxisSeq - 1) * cellHeight)
       .attr('class', 'competency')
       .attr('width', cellWidth)
-      .attr('height', cellWidth)
+      .attr('height', cellHeight)
       .merge(cards)
       .style('fill', '#EAEAEA')
       .transition()

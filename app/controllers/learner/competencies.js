@@ -104,6 +104,11 @@ export default Ember.Controller.extend({
         controller.set('competency', competency);
 
       });
+    },
+
+    onChangeHeaderView(selectedView) {
+      let controller = this;
+      controller.set('isShowCourseMatrix', selectedView === 'course');
     }
   }
 
