@@ -6,6 +6,12 @@ export default Ember.Controller.extend({
   // Dependencies
   i18n: Ember.inject.service(),
 
+  /**
+   * @requires service:competency
+   */
+  competencyService: Ember.inject.service('api-sdk/competency'),
+
+
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -26,6 +32,25 @@ export default Ember.Controller.extend({
    */
   isGridModeEnabled: false,
 
+  /**
+   * show pull out .
+   * @type {boolean}
+   */
+  showPullOut: false,
+
+  /**
+   * pull out show more options  .
+   * @type {boolean}
+   */
+  showMore: true,
+
+
+  /**
+   * Show loading spinner
+   */
+  isLoading: false,
+
+
   //------------------------------------------------------------------------
   // Events
 
@@ -41,6 +66,44 @@ export default Ember.Controller.extend({
 
     onChooseGridView: function() {
       this.set('isGridModeEnabled', true);
+    },
+
+
+    /**
+     *
+     * Triggered when an menu item is selected
+     * @param item
+     */
+    onCompetencyPullOut: function(data) {
+      let controller = this;
+      controller.set('isLoading', true);
+      controller.set('showPullOut', true);
+      controller.set('showMore', false);
+      let userId = controller.get('userId');
+      controller.set('userId', userId);
+      return Ember.RSVP.hash({
+        collections: controller.get('competencyService').getUserPerformanceCompetencyCollections(userId, data.competencyCode)
+      }).then(({
+        collections
+      }) => {
+        controller.set('isLoading', false);
+        controller.set('collection', collections);
+        controller.set('title', data.courseName);
+        controller.set('description', data.competencyCode);
+        let status;
+        if (data.status === 5) {
+          status = 'mastered';
+        } else {
+          status = 'in_progress';
+        }
+        let competency = {
+          status: status,
+          date: data.date,
+          competencyName: data.competencyName
+        };
+        controller.set('competency', competency);
+
+      });
     }
   }
 

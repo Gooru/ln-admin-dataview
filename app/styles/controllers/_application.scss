@@ -1,9 +1,9 @@
-
+.route-activity,
 .route-competency,
- .route-activity {
+.route-learner {
   overflow-x: hidden;
   overflow-y: hidden;
-  
+
   &.no-vertical-scroll {
     overflow-y: hidden;
   }
@@ -12,8 +12,8 @@
 .app-container {
   height: 100vh;
   padding-top: 63px;
-  padding-left: 0px;
-  padding-right: 0px;
+  padding-left: 0;
+  padding-right: 0;
   @media (min-width: $screen-md) {
     padding-top: 63px;
   }
@@ -74,7 +74,8 @@
   }
 }
 
-.route-activity_resources {
+.route-activity_resources,
+.route-learner {
   .app-container {
     overflow-y: auto;
   }

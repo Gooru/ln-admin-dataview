@@ -200,6 +200,9 @@ export default Ember.Component.extend({
       .attr('class', 'competency')
       .attr('width', cellWidth)
       .attr('height', cellWidth)
+      .on('click', function(d) {
+        component.sendAction('onCompetencyPullOut', d);
+      })
       .merge(cards)
       .style('fill', '#EAEAEA')
       .transition()

@@ -21,6 +21,9 @@ export default Ember.Route.extend({
     },
     classId : {
       refreshModel: true
+    },
+    courseTitle : {
+      refreshModel: true
     }
   },
 
@@ -39,12 +42,14 @@ export default Ember.Route.extend({
     let userId = learnerModel.userId;
     let courseId = route.get('courseId');
     let classId = params.classId;
+    let courseName = params.courseTitle;
     let unitsPromise = Ember.RSVP.resolve(route.get('performanceService').getUserPerformanceUnits(userId, courseId, classId));
     return Ember.RSVP.hash({
       userPerformanceUnits: unitsPromise,
       courseId: courseId,
       userId: userId,
-      classId: classId
+      classId: classId,
+      courseName : courseName
     })
       .then(function(hash) {
         return hash;
@@ -57,6 +62,7 @@ export default Ember.Route.extend({
     controller.set('userId', model.userId);
     controller.set('courseId', model.courseId);
     controller.set('classId', model.classId);
+    controller.set('currrentCourseName',model.courseName);
   }
 
 });
