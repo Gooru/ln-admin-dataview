@@ -80,6 +80,22 @@ export default Ember.Service.extend({
           resolve(service.get('competencySerializer').normalizeCompetencyMatrix(response));
         }, reject);
     });
+  },
+
+  /**
+   * Get user competency Matrix for subject
+   * @returns {Promise.<[]>}
+   */
+  getCompetencyMatrixDomain: function(user, subject) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('competencyAdapter')
+        .getCompetencyMatrixDomain(user, subject)
+        .then(function(response) {
+          resolve(service.get('competencySerializer').normalizeCompetencyMatrixDomain(response));
+        }, reject);
+    });
   }
 
 });
