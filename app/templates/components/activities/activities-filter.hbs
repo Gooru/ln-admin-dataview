@@ -3,6 +3,6 @@
     {{t 'activities.filters'}}
   </div>
   {{#each filterTypes as |filterType|}}
-    {{activities.activities-filter-accordion filterType=filterType selectedFilterItems=selectedFilterItems onClickCheckbox="onClickCheckbox"}}
+    {{activities.activities-filter-accordion filterType=filterType selectedFilterItems=selectedFilterItems onClickCheckbox="onClickCheckbox" onSelectCenturySkills="onSelectCenturySkills"}}
   {{/each}}
 </div>

@@ -81,6 +81,16 @@ export default Ember.Controller.extend({
     return (PAGE_SIZE <= CUR_ITERATION_COUNT);
   }),
 
+  // -------------------------------------------------------------------------
+  // Events
+  init() {
+    let controller = this;
+    controller.set('isLoading', true);
+    controller.set('collections', Ember.A());
+    controller.set('OFFSET', 1);
+    controller.fetchSearchCollections();
+  },
+
 
   // -------------------------------------------------------------------------
   // Methods

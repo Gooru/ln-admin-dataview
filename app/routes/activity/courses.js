@@ -24,7 +24,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   // Methods
 
   model: function(params) {
-    let term = params.term ? params.term : '*';
+    let term = params.term ? params.term : '';
     return {
       term : term
     };
@@ -32,7 +32,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
 
   setupController: function(controller, model) {
-    controller.set('term', model.term);
+    //Set search term only if available
+    if ( model.term !== '') {
+      controller.set('term', model.term);
+    }
   }
 
 });

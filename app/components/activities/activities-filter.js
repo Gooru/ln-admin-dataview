@@ -35,6 +35,11 @@ export default Ember.Component.extend({
         component.$('.course .header .toggle-dropdown').click();
       }
       localStorage.setItem(`research_${userId}_activities_filters`, JSON.stringify(selectedFilterItems));
+    },
+
+    onSelectCenturySkills(storedFilters) {
+      let component = this;
+      component.sendAction('onChangeFilterItems', storedFilters);
     }
   },
 
