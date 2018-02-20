@@ -1,5 +1,8 @@
 import Ember from 'ember';
-import { TAXONOMY_CATEGORIES, ACTIVITIES_NAVIGATION_MENUS_INDEX } from 'admin-dataview/config/config';
+import {
+  TAXONOMY_CATEGORIES,
+  ACTIVITIES_NAVIGATION_MENUS_INDEX
+} from 'admin-dataview/config/config';
 import Utils from 'admin-dataview/utils/utils';
 import ModalMixin from 'admin-dataview/mixins/modal';
 
@@ -84,8 +87,8 @@ export default Ember.Component.extend(ModalMixin, {
   //Actions
   actions: {
     /**
-    * Action triggered when the user toggle the expanded/collapsed view
-    */
+     * Action triggered when the user toggle the expanded/collapsed view
+     */
     onToggleExpandedView: function(filterType) {
       let component = this;
       let filter = filterType || component.get('filterType');
@@ -106,10 +109,12 @@ export default Ember.Component.extend(ModalMixin, {
       component.sendAction('onClickCheckbox', filterInfo, filterType);
       let selectedFilterItems = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`)) || component.get('selectedFilterItems');
       let routeName = Utils.getRoutePathLastOccurrence();
-      // let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
-      //Route to summary page, once the user selected subject filter
-      //It should route only, if it doesn't have subject filters and should have category filters
-      if (selectedFilterItems.category.length > 0 && filterType === 'subject') {
+      let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
+      //Route to current route if it's load inside activity route
+      //Otherwise redirect into summary page by default
+      if (selectedFilterItems.category.length > 0 && filterType === 'subject' && activeMenuIndex !== undefined) {
+        component.get('router').transitionTo(`/activities/${routeName}`);
+      } else {
         component.get('router').transitionTo('/activities/summary');
       }
     }
@@ -125,31 +130,31 @@ export default Ember.Component.extend(ModalMixin, {
   fetchMethodByType: function(filterType) {
     let component = this;
     switch (filterType) {
-    case 'category':
-      component.fetchCategoryFilters();
-      break;
-    case 'subject':
-      component.fetchSubjectFilters();
-      break;
-    case 'course':
-      component.fetchCourseFilters();
-      break;
-    case 'audience':
-      component.fetchAudienceFilters();
-      break;
-    case '21-century-skills':
-      component.fetchCenturySkillFilters();
-      break;
-    case 'licenses':
-      component.fetchLicenses();
-      break;
-    case 'dok':
-      component.fetchDok();
-      break;
-    case 'publisher':
-      component.fetchPublisherFilters();
-      break;
-    default:
+      case 'category':
+        component.fetchCategoryFilters();
+        break;
+      case 'subject':
+        component.fetchSubjectFilters();
+        break;
+      case 'course':
+        component.fetchCourseFilters();
+        break;
+      case 'audience':
+        component.fetchAudienceFilters();
+        break;
+      case '21-century-skills':
+        component.fetchCenturySkillFilters();
+        break;
+      case 'licenses':
+        component.fetchLicenses();
+        break;
+      case 'dok':
+        component.fetchDok();
+        break;
+      case 'publisher':
+        component.fetchPublisherFilters();
+        break;
+      default:
     }
   },
 
@@ -178,7 +183,7 @@ export default Ember.Component.extend(ModalMixin, {
     let selectedFilterItems = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`)) || component.get('selectedFilterItems');
     let filterList = [];
     const i18n = component.get('i18n');
-    taxonomyCategories.map(category =>  {
+    taxonomyCategories.map(category => {
       let categoryInfo = {
         label: String(i18n.t(category.label)),
         code: category.value,
@@ -207,10 +212,10 @@ export default Ember.Component.extend(ModalMixin, {
       let filterList = [];
       let subjectsPromise = Ember.RSVP.resolve(component.get('taxonomyService').getSubjects(selectedCategory.id));
       return Ember.RSVP.hash({
-        subjectList: subjectsPromise
-      })
+          subjectList: subjectsPromise
+        })
         .then(function(hash) {
-          hash.subjectList.map(subject=> {
+          hash.subjectList.map(subject => {
             let subjectInfo = {
               label: subject.title,
               code: subject.code,
@@ -244,8 +249,8 @@ export default Ember.Component.extend(ModalMixin, {
       }
       let coursePromise = Ember.RSVP.resolve(component.get('taxonomyService').getCoursesBySubject(selectedSubjects));
       return Ember.RSVP.hash({
-        courseList: coursePromise
-      })
+          courseList: coursePromise
+        })
         .then(function(hash) {
           hash.courseList.map(course => {
             let courseInfo = {
@@ -274,8 +279,8 @@ export default Ember.Component.extend(ModalMixin, {
     let selectedFilterItems = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`)) || component.get('selectedFilterItems');
     let audiencePromise = Ember.RSVP.resolve(component.get('lookupService').readAudiences());
     return Ember.RSVP.hash({
-      audienceFilters: audiencePromise
-    })
+        audienceFilters: audiencePromise
+      })
       .then(function(hash) {
         hash.audienceFilters.map(audience => {
           let audienceInfo = {
@@ -304,8 +309,8 @@ export default Ember.Component.extend(ModalMixin, {
     if (component.get('isToggleExpanded')) {
       let centurySkillsPromise = Ember.RSVP.resolve(component.get('lookupService').read21CenturySkills());
       return Ember.RSVP.hash({
-        centurySkills: centurySkillsPromise
-      })
+          centurySkills: centurySkillsPromise
+        })
         .then(function(hash) {
           let modalData = {
             centurySkills: hash.centurySkills,
@@ -324,7 +329,9 @@ export default Ember.Component.extend(ModalMixin, {
                 });
                 storedFilters['21-century-skills'] = filterList;
                 localStorage.setItem(`research_${userId}_activities_filters`, JSON.stringify(storedFilters));
+                component.sendAction('onSelectCenturySkills', storedFilters);
                 component.set('filterList', filterList);
+
               }
             }
           };
@@ -347,8 +354,8 @@ export default Ember.Component.extend(ModalMixin, {
     let selectedFilterItems = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`)) || component.get('selectedFilterItems');
     let licensesPromise = Ember.RSVP.resolve(component.get('lookupService').readLicenses());
     return Ember.RSVP.hash({
-      licenseList: licensesPromise
-    })
+        licenseList: licensesPromise
+      })
       .then(function(hash) {
         hash.licenseList.map(license => {
           let licenseInfo = {
@@ -376,8 +383,8 @@ export default Ember.Component.extend(ModalMixin, {
     let selectedFilterItems = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`)) || component.get('selectedFilterItems');
     let dokPromise = Ember.RSVP.resolve(component.get('lookupService').readDepthOfKnowledgeItems());
     return Ember.RSVP.hash({
-      dokItems: dokPromise
-    })
+        dokItems: dokPromise
+      })
       .then(function(hash) {
         hash.dokItems.map(dok => {
           let dokInfo = {
@@ -405,8 +412,8 @@ export default Ember.Component.extend(ModalMixin, {
     let selectedFilterItems = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`)) || component.get('selectedFilterItems');
     let publisherPromise = Ember.RSVP.resolve(component.get('profileService').getUserPrefsProviders(userId));
     return Ember.RSVP.hash({
-      publisherList: publisherPromise
-    })
+        publisherList: publisherPromise
+      })
       .then(function(hash) {
         hash.publisherList.map(publisher => {
           let publisherInfo = {

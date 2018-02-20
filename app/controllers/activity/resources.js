@@ -234,6 +234,16 @@ export default Ember.Controller.extend({
   },
 
   // -------------------------------------------------------------------------
+  // Events
+  init() {
+    let controller = this;
+    controller.set('isLoading', true);
+    controller.set('resources', Ember.A());
+    controller.set('OFFSET', 1);
+    controller.fetchSearchResources();
+  },
+
+  // -------------------------------------------------------------------------
   // Methods
 
   onChangeSearchTerm: Ember.observer('term', function() {

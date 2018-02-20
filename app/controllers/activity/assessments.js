@@ -33,6 +33,16 @@ export default Ember.Controller.extend({
     }
   },
 
+  // -------------------------------------------------------------------------
+  // Events
+  init() {
+    let controller = this;
+    controller.set('isLoading', true);
+    controller.set('assessments', Ember.A());
+    controller.set('OFFSET', 1);
+    controller.fetchSearchAssessments();
+  },
+
   //-------------------------------------------------------------------------
   //Properties
 

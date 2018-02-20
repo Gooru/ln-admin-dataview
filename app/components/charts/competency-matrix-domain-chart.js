@@ -250,7 +250,6 @@ export default Ember.Component.extend({
     const numberOfCellsInEachRow = component.get('numberOfCellsInEachRow');
     const cellWidth = component.get('cellWidth');
     let defaultNumberOfYaixsRow = component.get('defaultNumberOfYaixsRow');
-    // let courses = competencyMatrixCoordinates.get('courses').toArray().reverse();
     let taxonomyDomain = Ember.A();
     let domains = competencyMatrixCoordinates.get('domains');
     let currentYaxis = 1;
@@ -260,42 +259,35 @@ export default Ember.Component.extend({
       let domainName = domainData.get('domainName');
       let domainSeq = domainData.get('domainSeq');
       let competencyMatrix = competencyMatrixs.findBy('domainCode', domainCode);
-      let competencyMatrixByDomain = competencyMatrix ? competencyMatrix.get('domains') : [];
-      if (competencyMatrix && competencyMatrixByDomain.length > 0) {
+      let competencyMatrixByCompetency = competencyMatrix ? competencyMatrix.get('competencies') : [];
+      if (competencyMatrix && competencyMatrixByCompetency.length > 0) {
         taxonomyDomain.pushObject(domainData);
         let mergeDomainData = Ember.A();
-        competencyMatrixByDomain.forEach(domainMatrix => {
-          let domainCode = domainMatrix.get('domainCode');
-          let domain = domains.findBy('domainCode', domainCode);
-          let domainName = domain.get('domainName');
-          let domainSeq = domain.get('domainSeq');
-          let competencies = domainMatrix.get('competencies');
-          competencies.forEach(competency => {
-            let competencyCode = competency.get('competencyCode');
-            let competencyName = competency.get('competencyName');
-            let competencySeq = competency.get('competencySeq');
-            let status = competency.get('status');
-            let competencyData = competencyCode.split('-');
-            if (competencyData.length === 4) {
-              let data = Ember.Object.create({
-                'domainName': domainName,
-                'domainCode': domainCode,
-                'domainSeq': domainSeq,
-                'competencyCode': competencyCode,
-                'competencyName': competencyName,
-                'competencySeq': competencySeq,
-                'status': status
+        competencyMatrixByCompetency.forEach(competency => {
+          let competencyCode = competency.get('competencyCode');
+          let competencyName = competency.get('competencyName');
+          let competencySeq = competency.get('competencySeq');
+          let status = competency.get('status');
+          let competencyData = competencyCode.split('-');
+          if (competencyData.length === 4) {
+            let data = Ember.Object.create({
+              'domainName': domainName,
+              'domainCode': domainCode,
+              'domainSeq': domainSeq,
+              'competencyCode': competencyCode,
+              'competencyName': competencyName,
+              'competencySeq': competencySeq,
+              'status': status
+            });
+            if (status === 5) {
+              mergeDomainData.forEach(data => {
+                data.set('status', 5);
               });
-              if (status === 5) {
-                mergeDomainData.forEach(data => {
-                  data.set('status', 5);
-                });
-              }
-              mergeDomainData.pushObject(data);
             }
-          });
+            mergeDomainData.pushObject(data);
+          }
         });
-
+        // console.log('Merge domain::', mergeDomainData);
         let splitData = Ember.A();
         for (let startIndex = 0, endIndex = mergeDomainData.length; startIndex < endIndex; startIndex += numberOfCellsInEachRow) {
           splitData.pushObject(mergeDomainData.slice(startIndex, startIndex + numberOfCellsInEachRow));
@@ -314,6 +306,7 @@ export default Ember.Component.extend({
               // console.log('index',index);
               let currentIndex = (index - 1);
               let data = dataSet[currentIndex];
+              // console.log('data:::', data)
               if (data) {
                 // console.log('currentYaxis', currentYaxis);
                 data.set('xAxisSeq', currentYaxis);
