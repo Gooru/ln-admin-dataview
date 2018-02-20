@@ -78,6 +78,32 @@ export default Ember.Object.extend({
       });
     }
     return resultSet;
+  },
+
+  /**
+   * Normalized data of user competency matrix
+   * @return {Object}
+   */
+  normalizeCompetencyMatrixDomain: function(response) {
+    let resultSet = Ember.A();
+    if (response.userCompetencyMatrix) {
+      let userCompetencyMatrix = Ember.A(response.userCompetencyMatrix);
+      userCompetencyMatrix.forEach(damainData => {
+        let domain = Ember.Object.create(damainData);
+        let competencies = domain.get('competencies');
+        let domainSet = Ember.A();
+        let competencySet = Ember.A();
+        competencies.forEach(data => {
+          competencySet.pushObject(Ember.Object.create(data));
+        });
+        domain.set('competencies', competencySet);
+        domainSet.pushObject(domain);
+        domain.set('domains', domainSet);
+        resultSet.pushObject(domain);
+      });
+    }
+    return resultSet;
+
   }
 
 });

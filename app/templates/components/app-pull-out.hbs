@@ -28,6 +28,26 @@
         </div>
       </div>
     </header>
+    {{#if competency}}
+      <div class="learner-competency">
+        <div class="competency-text">
+          <span class="text">{{competency.status}}</span>
+          {{#if (eq competency.status 'mastered') }}
+            <span class="date">Earned on {{competency.date}}</span>
+          {{else}}
+            <span class="date">Started on {{competency.date}}</span>
+          {{/if}}
+        </div>
+        <div class="icons">
+          <span class="{{competency.status}}"> <i> </i></span>
+        </div>
+      </div>
+      <div class="competency-description">
+        <div class="text">
+          <span> {{competency.competencyName}}</span>
+        </div>
+      </div>
+    {{/if}}
   {{/if}}
   <div class="pull-out-content">
     {{yield lessContent}}

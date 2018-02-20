@@ -6,6 +6,24 @@
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   padding: 20px 20px 20px 30px;
 
+
+  // height: calc(100vh - 63px);
+
+  .app-pull-out {
+    top: 63px;
+    height: calc(100vh - 63px);
+    .pull-out-more-content-container {
+      display: table;
+
+      .coming-next {
+        color: $gray;
+        text-align: center;
+        display: table-cell;
+        vertical-align: middle;
+      }
+    }
+  }
+
   .panel-header {
     display: flex;
     width: 100%;

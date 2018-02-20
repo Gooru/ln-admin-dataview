@@ -26,6 +26,16 @@
       </div>
     </div>
     {{else}}
-      {{charts.competency-matrix-chart userId=userId}}
+      {{charts.competency-matrix-chart userId=userId onCompetencyPullOut='onCompetencyPullOut'}}
   {{/unless}}
+  {{#app-pull-out showPullOut=showPullOut title=description description=title competency=competency showMore=showMore isLoading=isLoading as |section|}}
+    {{#if section.isLessContent}}
+      {{learner.competencies-pull-out-body
+       collection=collection
+       userId=userId
+       isLoading=isLoading
+     }}
+    {{/if}}
+  {{/app-pull-out}}
+
 </div>

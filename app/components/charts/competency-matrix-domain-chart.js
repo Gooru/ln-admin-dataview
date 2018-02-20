@@ -1,3 +1,4 @@
+
 /**
  * Comptency matrix chart
  *
@@ -30,7 +31,7 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
-  classNames: ['competency-matrix-chart'],
+  classNames: ['competency-matrix-domain-chart'],
 
   // -------------------------------------------------------------------------
   // Events
@@ -97,7 +98,7 @@ export default Ember.Component.extend({
    * It will have selected taxonomy subject courses
    * @type {Object}
    */
-  taxonomyCourses: Ember.A(),
+  taxonomyDomains: Ember.A(),
 
   /**
    * It will have  taxonomy subjects
@@ -182,13 +183,16 @@ export default Ember.Component.extend({
 
   drawChart: function(data) {
     let component = this;
-    let numberOfCellsInEachRow = component.get('numberOfCellsInEachRow');
+    let cellSizeInRow = component.get('taxonomyDomains');
+    // console.log(cellSizeInRow.length, data);
+    let numberOfCellsInEachRow = cellSizeInRow.length;
     const colorsBasedOnStatus = component.get('colorsBasedOnStatus');
     const cellWidth = component.get('cellWidth');
     const width = component.get('width');
     const height = (Math.round(data.length / numberOfCellsInEachRow) * cellWidth);
-    component.$('#competency-matrix-chart').empty();
-    const svg = d3.select('#competency-matrix-chart').append('svg')
+    // console.log('widht::::::', width, 'height::', height);
+    component.$('#competency-matrix-domain-chart').empty();
+    const svg = d3.select('#competency-matrix-domain-chart').append('svg')
       .attr('width', width)
       .attr('height', height)
       .append('g');
@@ -200,9 +204,6 @@ export default Ember.Component.extend({
       .attr('class', 'competency')
       .attr('width', cellWidth)
       .attr('height', cellWidth)
-      .on('click', function(d) {
-        component.sendAction('onCompetencyPullOut', d);
-      })
       .merge(cards)
       .style('fill', '#EAEAEA')
       .transition()
@@ -231,7 +232,7 @@ export default Ember.Component.extend({
     let userId = component.get('userId');
     component.set('isLoading', true);
     return Ember.RSVP.hash({
-      competencyMatrixs: component.get('competencyService').getCompetencyMatrix(userId, subjectId),
+      competencyMatrixs: component.get('competencyService').getCompetencyMatrixDomain(userId, subjectId),
       competencyMatrixCoordinates: component.get('competencyService').getCompetencyMatrixCoordinates(subjectId)
     }).then(({
       competencyMatrixs,
@@ -249,19 +250,19 @@ export default Ember.Component.extend({
     const numberOfCellsInEachRow = component.get('numberOfCellsInEachRow');
     const cellWidth = component.get('cellWidth');
     let defaultNumberOfYaixsRow = component.get('defaultNumberOfYaixsRow');
-    let courses = competencyMatrixCoordinates.get('courses').toArray().reverse();
-    let taxonomyCourses = Ember.A();
+    // let courses = competencyMatrixCoordinates.get('courses').toArray().reverse();
+    let taxonomyDomain = Ember.A();
     let domains = competencyMatrixCoordinates.get('domains');
     let currentYaxis = 1;
     let resultSet = Ember.A();
-    courses.forEach(courseData => {
-      let courseCode = courseData.get('courseCode');
-      let courseName = courseData.get('courseName');
-      let courseSeq = courseData.get('courseSeq');
-      let competencyMatrix = competencyMatrixs.findBy('courseCode', courseCode);
+    domains.forEach(domainData => {
+      let domainCode = domainData.get('domainCode');
+      let domainName = domainData.get('domainName');
+      let domainSeq = domainData.get('domainSeq');
+      let competencyMatrix = competencyMatrixs.findBy('domainCode', domainCode);
       let competencyMatrixByDomain = competencyMatrix ? competencyMatrix.get('domains') : [];
       if (competencyMatrix && competencyMatrixByDomain.length > 0) {
-        taxonomyCourses.pushObject(courseData);
+        taxonomyDomain.pushObject(domainData);
         let mergeDomainData = Ember.A();
         competencyMatrixByDomain.forEach(domainMatrix => {
           let domainCode = domainMatrix.get('domainCode');
@@ -277,9 +278,6 @@ export default Ember.Component.extend({
             let competencyData = competencyCode.split('-');
             if (competencyData.length === 4) {
               let data = Ember.Object.create({
-                'courseCode': courseCode,
-                'courseName': courseName,
-                'courseSeq': courseSeq,
                 'domainName': domainName,
                 'domainCode': domainCode,
                 'domainSeq': domainSeq,
@@ -302,29 +300,32 @@ export default Ember.Component.extend({
         for (let startIndex = 0, endIndex = mergeDomainData.length; startIndex < endIndex; startIndex += numberOfCellsInEachRow) {
           splitData.pushObject(mergeDomainData.slice(startIndex, startIndex + numberOfCellsInEachRow));
         }
-
+        // console.log(splitData);
         let numberOfRows = splitData.length > defaultNumberOfYaixsRow ? splitData.length : defaultNumberOfYaixsRow;
 
         // adjust course title cell height dynamically
         let heightOfCourseTitleContainer = numberOfRows * cellWidth;
-        courseData.set('heightOfCourseTitleContainer', heightOfCourseTitleContainer);
+        // console.log(heightOfCourseTitleContainer, numberOfRows);
+        domainData.set('heightOfCourseTitleContainer', heightOfCourseTitleContainer);
         for (let rowIndex = (numberOfRows - 1); rowIndex >= 0; rowIndex--) {
           let dataSet = splitData.objectAt(rowIndex);
           for (let index = numberOfCellsInEachRow; index >= 1; index--) {
             if (dataSet) {
+              // console.log('index',index);
               let currentIndex = (index - 1);
               let data = dataSet[currentIndex];
               if (data) {
-                data.set('xAxisSeq', index);
-                data.set('yAxisSeq', currentYaxis);
+                // console.log('currentYaxis', currentYaxis);
+                data.set('xAxisSeq', currentYaxis);
+                data.set('yAxisSeq', index);
                 resultSet.pushObject(data);
               } else {
                 let dummyData = Ember.Object.create({
-                  'courseCode': courseCode,
-                  'courseName': courseName,
-                  'courseSeq': courseSeq,
-                  'yAxisSeq': currentYaxis,
-                  'xAxisSeq': index,
+                  'domainCode': domainCode,
+                  'domainName': domainName,
+                  'domainSeq': domainSeq,
+                  'yAxisSeq': index,
+                  'xAxisSeq': currentYaxis,
                   'status': -1
                 });
                 resultSet.pushObject(dummyData);
@@ -332,14 +333,14 @@ export default Ember.Component.extend({
 
             } else {
               let dummyData = Ember.Object.create({
-                'courseCode': courseCode,
-                'courseName': courseName,
-                'courseSeq': courseSeq,
-                'yAxisSeq': currentYaxis,
-                'xAxisSeq': index,
+                'domainCode': domainCode,
+                'domainName': domainName,
+                'domainSeq': domainSeq,
+                'yAxisSeq': index,
+                'xAxisSeq': currentYaxis,
                 'status': -1
               });
-              resultSet.pushObject(dummyData);
+              resultSet.pushObject(dummyData);'';
             }
           }
           currentYaxis = currentYaxis + 1;
@@ -347,7 +348,7 @@ export default Ember.Component.extend({
 
       }
     });
-    component.set('taxonomyCourses', taxonomyCourses);
+    component.set('taxonomyDomains', taxonomyDomain);
     return resultSet;
   },
 

@@ -109,6 +109,31 @@ export default Ember.Object.extend({
   },
 
 
+  /**
+     * Get user competency Matrix for subject
+     * @returns {Promise.<[]>}
+     */
+  getCompetencyMatrixDomain: function(user, subject) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url =`${namespace}/v1/tx/competency/matrix/domain`;
+    const options = {
+      type: 'GET',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8',
+      data: {
+        user,
+        subject
+      }
+    };
+    return Ember.RSVP.hashSettled({
+      competencyMatrix: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.competencyMatrix.value;
+    });
+  },
+
+
   defineHeaders: function() {
     return {
       Authorization: `Token ${this.get('session.accessToken')}`
