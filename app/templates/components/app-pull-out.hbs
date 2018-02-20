@@ -33,9 +33,9 @@
         <div class="competency-text">
           <span class="text">{{competency.status}}</span>
           {{#if (eq competency.status 'mastered') }}
-            <span class="date">Earned on {{competency.date}}</span>
+            <span class="date">{{competency.date}}</span>
           {{else}}
-            <span class="date">Started on {{competency.date}}</span>
+            <span class="date">{{competency.date}}</span>
           {{/if}}
         </div>
         <div class="icons">

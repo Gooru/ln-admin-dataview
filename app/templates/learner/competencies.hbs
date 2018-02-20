@@ -38,6 +38,7 @@
       {{else}}
         {{charts.competency-matrix-domain-chart userId=userId onCompetencyPullOut='onCompetencyPullOut'}}
       {{/if}}
+      
   {{/unless}}
   {{#app-pull-out showPullOut=showPullOut title=description description=title competency=competency showMore=showMore isLoading=isLoading as |section|}}
     {{#if section.isLessContent}}

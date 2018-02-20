@@ -1,8 +1,8 @@
 <div class="competencies-header">
-  <div class="domain-section" {{action "onChangeHeaderView" 'domain'}}>
+  <div class="domain-section {{if isDomainView 'domainActive' ''}}" {{action "onChangeHeaderView" 'domain'}}>
     Domain
   </div>
-  <div class="course-section" {{action "onChangeHeaderView" 'course'}}>
+  <div class="course-section {{if isCourseView 'courseActive' ''}}" {{action "onChangeHeaderView" 'course'}}>
     Course
   </div>
 </div>
