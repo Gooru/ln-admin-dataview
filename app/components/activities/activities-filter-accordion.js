@@ -107,9 +107,11 @@ export default Ember.Component.extend(ModalMixin, {
       let selectedFilterItems = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`)) || component.get('selectedFilterItems');
       let routeName = Utils.getRoutePathLastOccurrence();
       let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
-      //Route to summary page, once the user selected subject filter
-      //It should route only, if it doesn't have subject filters and should have category filters
-      if (selectedFilterItems.category.length > 0 && filterType === 'subject') {
+      //Route to current route if it's load inside activity route
+      //Otherwise redirect into summary page by default
+      if (selectedFilterItems.category.length > 0 && filterType === 'subject' && activeMenuIndex !== undefined) {
+        component.get('router').transitionTo(`/activities/${routeName}`);
+      } else {
         component.get('router').transitionTo('/activities/summary');
       }
     }
@@ -324,7 +326,9 @@ export default Ember.Component.extend(ModalMixin, {
                 });
                 storedFilters['21-century-skills'] = filterList;
                 localStorage.setItem(`research_${userId}_activities_filters`, JSON.stringify(storedFilters));
+                component.sendAction('onSelectCenturySkills', storedFilters);
                 component.set('filterList', filterList);
+
               }
             }
           };

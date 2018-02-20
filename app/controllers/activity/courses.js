@@ -33,6 +33,16 @@ export default Ember.Controller.extend({
     }
   },
 
+  // -------------------------------------------------------------------------
+  // Events
+  init() {
+    let controller = this;
+    controller.set('isLoading', true);
+    controller.set('courses', Ember.A());
+    controller.set('OFFSET', 1);
+    controller.fetchSearchCourses();
+  },
+
   //-------------------------------------------------------------------------
   //Properties
 

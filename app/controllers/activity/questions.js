@@ -230,6 +230,16 @@ export default Ember.Controller.extend({
     }
   },
 
+  // -------------------------------------------------------------------------
+  // Events
+  init() {
+    let controller = this;
+    controller.set('isLoading', true);
+    controller.set('questions', Ember.A());
+    controller.set('OFFSET', 1);
+    controller.fetchSearchQuestions();
+  },
+
 
   // -------------------------------------------------------------------------
   // Methods

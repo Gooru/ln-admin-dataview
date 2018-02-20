@@ -131,7 +131,6 @@ export default Ember.Component.extend({
       .on('mouseover', function(d, i) {
         d3.select(this)
           .style('cursor', 'pointer');
-
         let selectedElement = component.$(`#path-arc${  d.index}`);
         selectedElement.attr('fill', color(i));
         d3.select(this).transition()
