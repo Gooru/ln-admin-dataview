@@ -79,16 +79,18 @@
         .domain-section {
           width: 67px;
           text-align: center;
+          color: #b3b3b3;
         }
 
         .course-section {
           width: 67px;
           text-align: center;
+          color: #b3b3b3;
         }
 
         .courseActive,
         .domainActive {
-          color: #2ea9e9;
+          color: #000000 !important;
         }
       }
     }
