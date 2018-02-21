@@ -13,7 +13,7 @@ export default Ember.Component.extend({
    * data of the learner
    * @type {Array}
    */
-  isCourseView: true,
+  isDomainView: true,
 
   actions: {
     onChangeHeaderView(selectedView) {

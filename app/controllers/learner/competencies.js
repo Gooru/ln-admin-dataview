@@ -48,7 +48,7 @@ export default Ember.Controller.extend({
    * Toggle the couse and tomain view  .
    * @type {boolean}
    */
-  isShowCourseMatrix: true,
+  isShowCourseMatrix: false,
 
 
   /**
@@ -94,7 +94,7 @@ export default Ember.Controller.extend({
       }) => {
         controller.set('isLoading', false);
         controller.set('collection', collections);
-        controller.set('title', data.courseName);
+        controller.set('title', data.courseName ? data.courseName : data.domainName);
         controller.set('description', data.competencyCode);
         let status;
         if (data.status === 5) {

@@ -130,6 +130,31 @@
 
     .matrix-chart-container {
       width: 700px;
+      overflow-x: auto;
+
+      .domain-list {
+        margin-left: 20px;
+        display: inline-block;
+        // width: 700px;
+        .domain-counts {
+          float: left;
+          display: inline-block;
+          width: 35px;
+          text-align: center;
+          margin-top: 0;
+        }
+      }
+    }
+
+    .matrix-chart-container::-webkit-scrollbar {
+      height: 6px;
+      width: 8px;
+    }
+
+    .matrix-chart-container::-webkit-scrollbar-thumb {
+      background: $gray-light;
+      border: 1px solid $gray-light;
+      border-radius: 5px;
     }
 
     #competency-matrix-domain-chart {
@@ -138,7 +163,7 @@
       margin-left: 20px;
       margin-bottom: 20px;
       transform: rotateX(+180deg);
-      height: 600px;
+      height: 805px;
       cursor: pointer;
       -webkit-transition: -webkit-transform 0.6s ease-in;
       transition: transform 0.6s ease-in;

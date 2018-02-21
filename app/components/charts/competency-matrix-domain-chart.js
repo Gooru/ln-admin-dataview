@@ -1,4 +1,3 @@
-
 /**
  * Comptency matrix domain chart
  *
@@ -48,7 +47,7 @@ export default Ember.Component.extend({
   /**
    * @property {Number} width
    */
-  width: 680,
+  width: 780,
 
   /**
    * @property {Number} height
@@ -86,13 +85,13 @@ export default Ember.Component.extend({
    * Number of cells in each row
    * @type {Number}
    */
-  numberOfCellsInEachRow: 30,
+  numberOfCellsInEachRow: 40,
 
   /**
    * Width of the cell
    * @type {Number}
    */
-  cellWidth: 25,
+  cellWidth: 35,
 
   /**
    * It will have selected taxonomy subject courses
@@ -186,9 +185,10 @@ export default Ember.Component.extend({
     let cellSizeInRow = component.get('taxonomyDomains');
     let numberOfCellsInEachRow = cellSizeInRow.length;
     const colorsBasedOnStatus = component.get('colorsBasedOnStatus');
-    const cellWidth = 40;
+    const cellWidth = component.get('cellWidth');
     const cellHeight = 20;
-    const width = component.get('width');
+    const width = (Math.round(numberOfCellsInEachRow * cellWidth));
+    component.set('domainWidth', width);
     const height = (Math.round(data.length / numberOfCellsInEachRow) * cellWidth);
     component.$('#competency-matrix-domain-chart').empty();
     const svg = d3.select('#competency-matrix-domain-chart').append('svg')
@@ -251,10 +251,10 @@ export default Ember.Component.extend({
     let component = this;
     const numberOfCellsInEachRow = component.get('numberOfCellsInEachRow');
     const cellWidth = component.get('cellWidth');
-    let defaultNumberOfYaixsRow = component.get('defaultNumberOfYaixsRow');
+    // let defaultNumberOfYaixsRow = component.get('defaultNumberOfYaixsRow');
     let taxonomyDomain = Ember.A();
     let domains = competencyMatrixCoordinates.get('domains');
-    let currentXaxis = -1;
+    let currentXaxis = 1;
     let resultSet = Ember.A();
     domains.forEach(domainData => {
       let domainCode = domainData.get('domainCode');
@@ -293,7 +293,7 @@ export default Ember.Component.extend({
         for (let startIndex = 0, endIndex = mergeDomainData.length; startIndex < endIndex; startIndex += numberOfCellsInEachRow) {
           splitData.pushObject(mergeDomainData.slice(startIndex, startIndex + numberOfCellsInEachRow));
         }
-        let numberOfRows = splitData.length > defaultNumberOfYaixsRow ? splitData.length : defaultNumberOfYaixsRow;
+        let numberOfRows = 1;
 
         // adjust course title cell height dynamically
         let heightOfCourseTitleContainer = numberOfRows * cellWidth;
@@ -329,7 +329,8 @@ export default Ember.Component.extend({
                 'xAxisSeq': currentXaxis,
                 'status': -1
               });
-              resultSet.pushObject(dummyData);'';
+              resultSet.pushObject(dummyData);
+              '';
             }
           }
           currentXaxis = currentXaxis + 1;
