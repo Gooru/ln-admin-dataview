@@ -324,6 +324,14 @@ export default Ember.Controller.extend({
       filters = {
         'flt.subjectName': 'Math~~Mathematics'
       };
+    } else if (selectedNode.type === 'subject' && selectedNode.name === 'English Language Arts') {
+      filters = {
+        'flt.subjectName': 'English Language Arts & Literacy~~English Language Arts~~English Language Arts/Literacy~~English Language Arts and Reading~~ELA'
+      };
+    } else if (selectedNode.type === 'subject' && selectedNode.name === 'Social Sciences') {
+      filters = {
+        'flt.subjectName': 'Social Studies~~History~~History-Social Science~~Social Sciences'
+      };
     }
 
     const resourceCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(query, filters));
