@@ -56,6 +56,11 @@ export default Ember.Controller.extend({
    */
   isLoading: false,
 
+  /**
+   * Show loading spinner
+   */
+  competencyStatus: ['Not Started', 'in_progress', 'Inferred', 'Asserted', 'Earned', 'Earned'],
+
 
   //------------------------------------------------------------------------
   // Events
@@ -93,18 +98,32 @@ export default Ember.Controller.extend({
         collections
       }) => {
         controller.set('isLoading', false);
-        controller.set('collection', collections);
+        let collectionData = Ember.A();
+        let status;
+        let statusMastered;
+        if (data.status === 2 || data.status === 3 || data.status === 4 || data.status === 5) {
+          status = 'Mastered';
+          statusMastered = controller.get('competencyStatus') ? controller.get('competencyStatus')[data.status] : null;
+          collections.forEach(collection => {
+            let type = collection.get('collectionType');
+            let score = collection.get('score');
+            if (type === 'assessment' && score >= 80) {
+              collectionData.push(collection);
+            }
+          });
+        } else if (data.status === 1) {
+          status = 'in_progress'
+          collectionData = collections;
+        } else {
+          status = 'Not Started'
+        }
+        controller.set('collection', collectionData);
         controller.set('title', data.courseName ? data.courseName : data.domainName);
         controller.set('description', data.competencyCode);
-        let status;
-        if (data.status === 5) {
-          status = 'mastered';
-        } else {
-          status = 'in_progress';
-        }
         let competency = {
-          status: status,
+          status: status ? status : 'NA',
           date: data.date,
+          statusMastered: statusMastered ? statusMastered : null,
           competencyName: data.competencyName
         };
         controller.set('competency', competency);
