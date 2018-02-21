@@ -1,17 +1,19 @@
 {{#if isLoading}}
   {{three-bounce-spinner}}
 {{else}}
-  <ul class="subject-wise-distribution">
+  <div class="subject-wise-distribution">
     {{#each subjects as |subject|}}
-      <li>
-        <div class="subject-wise-chart">
-          {{charts.donut-chart data=subject.contentCounts}}
+      <div class="subject-chart">
+        <div class="subject-name">
+          {{subject.name}}
         </div>
-        <div class="title">{{subject.name}}</div>
-        <div class="total-count">{{us-locale subject.totalCount}}</div>
-      </li>
+        <div class="subject-wise-chart">
+          {{charts.double-layer-donut-chart defaultI18nLabel='activities.learning-activities-available' width=350 height=350 radius=110 innerRadius=100 radius1=90 innerRadius1=80 data=subject.contentCounts}}
+        </div>
+        
+      </div>
     {{/each}}
-  </ul>
+  </div>
 
   <ul class="subject-wise-distribution-legend">
     {{#each contentLegends as |legend|}}

@@ -1,23 +1,16 @@
 .activities-distribution-by-subjects {
-  margin-top: 50px;
   margin-bottom: 50px;
 
-  ul.subject-wise-distribution {
-    height: 370px;
+  .subject-wise-distribution {
 
-    li {
+    .subject-chart {
       float: left;
-      width: 186px;
+      width: 50%;
       list-style: none;
       text-align: center;
 
-      .donut-chart {
-        width: 175px;
-        height: 175px;
-      }
-
-      .subject-wise-chart {
-        height: 186px;
+      .double-layer-donut-chart {
+        display: grid;
       }
 
       .title {
@@ -31,6 +24,10 @@
         color: $dark-800;
         font-weight: 300;
       }
+    }
+    .subject-name {
+      font-size: 20px;
+      margin-top: 15px;
     }
   }
 

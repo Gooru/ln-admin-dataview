@@ -13,6 +13,7 @@
         color: $dark-400;
       }
       .toggle-dropdown {
+        z-index: 999;
         cursor: pointer;
       }
     }

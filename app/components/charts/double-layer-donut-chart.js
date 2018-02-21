@@ -114,9 +114,9 @@ export default Ember.Component.extend({
     let radius1 = component.get('radius1');
     let innerRadius1 = component.get('innerRadius1');
     let defaultI18nLabel = component.get('defaultI18nLabel');
+    let defaultLabel = component.get('defaultLabel') || '';
     let totalCount = component.get('totalCount');
-    let label =  defaultI18nLabel ? component.get('i18n').t(defaultI18nLabel).string : '';
-
+    let label =  defaultI18nLabel ? component.get('i18n').t(defaultI18nLabel).string : defaultLabel;
     let svg = d3.select(component.element)
       .append('svg')
       .attr('class', 'pie')
