@@ -18,7 +18,6 @@ export default Ember.Component.extend({
    */
   activityService: Ember.inject.service('api-sdk/activities'),
 
-
   // -------------------------------------------------------------------------
   // Events
 
@@ -77,10 +76,10 @@ export default Ember.Component.extend({
       'flt.subjectName': 'science'
     };
     let socialScienceSubjectFilter = {
-      'flt.subjectName': 'Social Sciences'
+      'flt.subjectName': 'Social Studies~~History~~History-Social Science~~Social Sciences'
     };
     let ELAScienceSubjectFilter = {
-      'flt.subjectName': 'English Language Arts'
+      'flt.subjectName': 'English Language Arts & Literacy~~English Language Arts~~English Language Arts/Literacy~~English Language Arts and Reading~~ELA'
     };
     Ember.RSVP.hash({
       maths: component.get('activityService').getLearningMaps(mathsSubjectFilter),

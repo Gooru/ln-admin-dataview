@@ -21,9 +21,9 @@ export default Ember.Component.extend({
     let component = this;
     component._super(...arguments);
     let user = component.get('model.user');
-    component.set('citizenship', user.citizenship);
-    component.set('authority', user.authority);
-    component.set('reputation', user.reputation);
+    component.set('citizenship', user.citizenship.toFixed(2));
+    component.set('authority', user.authority.toFixed(2));
+    component.set('reputation', user.reputation.toFixed(2));
     let userId = user.userId;
     return Ember.RSVP.hash({
       userGrades: this.get('profileService').getUserGrades(userId),

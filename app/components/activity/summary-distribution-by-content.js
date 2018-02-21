@@ -34,6 +34,11 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Events
 
+  didRender() {
+    var component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+  },
+
   init: function() {
     this._super(...arguments);
     this.getSearchContentCount();
@@ -161,10 +166,7 @@ export default Ember.Component.extend({
     dragAndDropOrderFilters = Object.assign(dragAndDropOrderFilters, appliedFilters);
     const dragAndDropOrderCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, dragAndDropOrderFilters, 1, 1));
 
-    let culacFilters = {'flt.subjectName' : 'Math'};
-    // Course, Unit, Lesson, Assessments and Collections
-    culacFilters = Object.assign(culacFilters, appliedFilters);
-    const culacCountPromise = component.get('activityService').getLearningMaps(culacFilters);
+    const culacCountPromise = component.get('activityService').getLearningMaps(appliedFilters);
 
     return Ember.RSVP.hash({
       webpageCount: webpageCountPromise,

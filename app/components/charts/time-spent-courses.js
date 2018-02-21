@@ -137,7 +137,7 @@ export default Ember.Component.extend({
           .duration(500)
           .ease(d3.easeBounce)
           .attr('d', arc.innerRadius(110).outerRadius(radius));
-        component.$('.title').html(d.data.name);
+        component.$('.title').html(d.data.courseTitle);
         component.$('.duration-label').html(formatMilliseconds(d.data.value));
       })
       .on('mouseout', function() {
