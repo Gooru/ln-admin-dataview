@@ -56,8 +56,9 @@ export default Ember.Component.extend({
    * return hashed json of each content subformats
    */
   getSearchContentCount: function() {
-    let term = '*';
     let component = this;
+    let term = component.get('term');
+    term = term !== '' ? term : '*';
     component.set('isLoading', true);
     // Resources
     let webpageFilters = {
@@ -119,6 +120,11 @@ export default Ember.Component.extend({
     };
     const dragAndDropOrderCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, dragAndDropOrderFilters, 1, 1));
 
+    let openEndedQuestionFilters = {
+      'flt.resourceFormat': 'open_ended_question'
+    };
+    const openEndedQuestionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, openEndedQuestionFilters, 1, 1));
+
     return Ember.RSVP.hash({
       webpageCount: webpageCountPromise,
       audioCount: audioCountPromise,
@@ -133,6 +139,7 @@ export default Ember.Component.extend({
       multipleSelectImageCount: multipleSelectImageCountPromise,
       multipleSelectTextCount: multipleSelectTextCountPromise,
       highlightTextCount: highlightTextCountPromise,
+      openEndedQuestionCount: openEndedQuestionCountPromise,
       dragAndDropOrderCount: dragAndDropOrderCountPromise
     }).then((hash) => {
       let resourceCounts = Ember.A([{
@@ -193,6 +200,10 @@ export default Ember.Component.extend({
       }, {
         'name': 'Drag And Drop Order',
         'value': hash.dragAndDropOrderCount.get('hitCount'),
+        'colorCode': '#3A434D'
+      }, {
+        'name': 'Open Ended',
+        'value': hash.openEndedQuestionCount.get('hitCount'),
         'colorCode': '#3A434D'
       }]);
       component.set('questions', questionCounts);

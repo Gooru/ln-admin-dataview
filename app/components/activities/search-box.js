@@ -152,23 +152,25 @@ export default Ember.Component.extend({
    */
   getAppliedFilters: function() {
     let component = this;
-    let storedFilters = component.get('selectedFilterItems');
+    let storedFilters = component.get('selectedFilterItems') || null;
     let filterTypes = component.get('filterTypes');
     let applicableFilterList = [];
-    filterTypes.map(filterType => {
-      let filterCode = filterType.code;
-      if (filterCode !== 'category' && filterCode !== 'subject') {
-        let categorizedFilterData = storedFilters[`${filterCode}`];
-        if (categorizedFilterData) {
-          categorizedFilterData.map(filterData => {
-            if (filterData) {
-              filterData.type = filterCode;
-              applicableFilterList.push(filterData);
-            }
-          });
+    if (storedFilters) {
+      filterTypes.map(filterType => {
+        let filterCode = filterType.code;
+        if (filterCode !== 'category' && filterCode !== 'subject') {
+          let categorizedFilterData = storedFilters[`${filterCode}`];
+          if (categorizedFilterData) {
+            categorizedFilterData.map(filterData => {
+              if (filterData) {
+                filterData.type = filterCode;
+                applicableFilterList.push(filterData);
+              }
+            });
+          }
         }
-      }
-    });
+      });
+    }
     return applicableFilterList;
   },
 

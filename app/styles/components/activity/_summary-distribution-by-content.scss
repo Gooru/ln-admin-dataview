@@ -11,15 +11,19 @@
     width: 360px;
   }
 
+  .culca-count {
+    margin-top: 20px;
+  }
+
   ul {
     list-style: none;
-    border-top: 2px solid #afb7bd;
+    border-top: 2px solid $light-100;
     padding-top: 10px;
     padding-left: 0px;
     padding-bottom: 0px;
     padding-right: 0px;
     height: 50px;
-    border-bottom: 2px solid #afb7bd;
+    border-bottom: 1px solid $dark-400;
     li {
       float: left;
       width: 148px;

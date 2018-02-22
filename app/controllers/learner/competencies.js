@@ -112,10 +112,10 @@ export default Ember.Controller.extend({
             }
           });
         } else if (data.status === 1) {
-          status = 'in_progress'
+          status = 'in_progress';
           collectionData = collections;
         } else {
-          status = 'Not Started'
+          status = 'Not Started';
         }
         controller.set('collection', collectionData);
         controller.set('title', data.courseName ? data.courseName : data.domainName);
