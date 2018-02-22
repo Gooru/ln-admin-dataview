@@ -76,22 +76,16 @@ export default Ember.Component.extend({
 
 
   /**
-   * Number default rows for each courses
-   * @type {Number}
-   */
-  defaultNumberOfYaixsRow: 1,
-
-  /**
-   * Number of cells in each row
-   * @type {Number}
-   */
-  numberOfCellsInEachRow: 40,
-
-  /**
    * Width of the cell
    * @type {Number}
    */
   cellWidth: 35,
+
+  /**
+   * height of the cell
+   * @type {Number}
+   */
+  cellHeight: 15,
 
   /**
    * It will have selected taxonomy subject courses
@@ -186,10 +180,10 @@ export default Ember.Component.extend({
     let numberOfCellsInEachRow = cellSizeInRow.length;
     const colorsBasedOnStatus = component.get('colorsBasedOnStatus');
     const cellWidth = component.get('cellWidth');
-    const cellHeight = 20;
+    const cellHeight = component.get('cellHeight');
     const width = (Math.round(numberOfCellsInEachRow * cellWidth));
-    component.set('domainWidth', width);
-    const height = (Math.round(data.length / numberOfCellsInEachRow) * cellWidth);
+    component.set('width', width);
+    const height = component.get('height');
     component.$('#competency-matrix-domain-chart').empty();
     const svg = d3.select('#competency-matrix-domain-chart').append('svg')
       .attr('width', width)
@@ -201,6 +195,7 @@ export default Ember.Component.extend({
       .attr('x', (d) => (d.xAxisSeq - 1) * cellWidth)
       .attr('y', (d) => (d.yAxisSeq - 1) * cellHeight)
       .attr('class', 'competency')
+      .attr('title', (d) => d.skyline)
       .attr('width', cellWidth)
       .attr('height', cellHeight)
       .on('click', function(d) {
@@ -213,6 +208,14 @@ export default Ember.Component.extend({
       .style('fill', (d) => {
         return colorsBasedOnStatus.get(d.status.toString());
       });
+    cards.enter().append('circle')
+      .attr('cx', (d) => (((d.xAxisSeq - 1) * cellWidth) + (cellWidth / 2)))
+      .attr('cy', (d) => (((d.yAxisSeq - 1) * cellHeight) + (cellHeight / 2)))
+      .attr('class', 'competency-skyline')
+      .attr('title', (d) => d.skyline)
+      .attr('r', (d) => d.skyline ? 2 : 0)
+      .attr('fill', '#fff');
+
     cards.exit().remove();
   },
 
@@ -249,13 +252,12 @@ export default Ember.Component.extend({
 
   parseCompetencyData: function(competencyMatrixs, competencyMatrixCoordinates) {
     let component = this;
-    const numberOfCellsInEachRow = component.get('numberOfCellsInEachRow');
-    const cellWidth = component.get('cellWidth');
-    // let defaultNumberOfYaixsRow = component.get('defaultNumberOfYaixsRow');
+    const cellHeight = component.get('cellHeight');
     let taxonomyDomain = Ember.A();
     let domains = competencyMatrixCoordinates.get('domains');
     let currentXaxis = 1;
     let resultSet = Ember.A();
+    let numberOfCellsInEachColumn = Ember.A();
     domains.forEach(domainData => {
       let domainCode = domainData.get('domainCode');
       let domainName = domainData.get('domainName');
@@ -289,55 +291,27 @@ export default Ember.Component.extend({
             mergeDomainData.pushObject(data);
           }
         });
-        let splitData = Ember.A();
-        for (let startIndex = 0, endIndex = mergeDomainData.length; startIndex < endIndex; startIndex += numberOfCellsInEachRow) {
-          splitData.pushObject(mergeDomainData.slice(startIndex, startIndex + numberOfCellsInEachRow));
-        }
-        let numberOfRows = 1;
-
-        // adjust course title cell height dynamically
-        let heightOfCourseTitleContainer = numberOfRows * cellWidth;
-        domainData.set('heightOfCourseTitleContainer', heightOfCourseTitleContainer);
-        for (let rowIndex = (numberOfRows - 1); rowIndex >= 0; rowIndex--) {
-          let dataSet = splitData.objectAt(rowIndex);
-          for (let index = numberOfCellsInEachRow; index >= 1; index--) {
-            if (dataSet) {
-              let currentIndex = (index - 1);
-              let data = dataSet[currentIndex];
-              if (data) {
-                data.set('xAxisSeq', currentXaxis);
-                data.set('yAxisSeq', index);
-                resultSet.pushObject(data);
-              } else {
-                let dummyData = Ember.Object.create({
-                  'domainCode': domainCode,
-                  'domainName': domainName,
-                  'domainSeq': domainSeq,
-                  'yAxisSeq': index,
-                  'xAxisSeq': currentXaxis,
-                  'status': -1
-                });
-                resultSet.pushObject(dummyData);
-              }
-
-            } else {
-              let dummyData = Ember.Object.create({
-                'domainCode': domainCode,
-                'domainName': domainName,
-                'domainSeq': domainSeq,
-                'yAxisSeq': index,
-                'xAxisSeq': currentXaxis,
-                'status': -1
-              });
-              resultSet.pushObject(dummyData);
-              '';
-            }
-          }
-          currentXaxis = currentXaxis + 1;
+        let masteredCompetencies =  mergeDomainData.filterBy('status', 5);
+        if (masteredCompetencies && masteredCompetencies.length === 0) {
+          mergeDomainData.objectAt(0).set('skyline', true);
+        } else {
+          let numberOfMasteredCompetency = (masteredCompetencies.length - 1);
+          mergeDomainData.objectAt(numberOfMasteredCompetency).set('skyline', true);
         }
 
+        let cellIndex = 1;
+        numberOfCellsInEachColumn.push(mergeDomainData.length);
+        mergeDomainData.forEach(data => {
+          data.set('xAxisSeq', currentXaxis);
+          data.set('yAxisSeq', cellIndex);
+          resultSet.pushObject(data);
+          cellIndex++;
+        });
+        currentXaxis = currentXaxis + 1;
       }
     });
+    let height = cellHeight * (Math.max(...numberOfCellsInEachColumn));
+    component.set('height', height);
     component.set('taxonomyDomains', taxonomyDomain);
     return resultSet;
   },
