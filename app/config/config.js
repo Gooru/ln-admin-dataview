@@ -273,12 +273,12 @@ export const ACTIVITY_FILTER = [
     'code': '21-century-skills'
   },
   {
-    'title': 'activities.filter-types.license',
-    'code': 'licenses'
-  },
-  {
     'title': 'activities.filter-types.dok',
     'code': 'dok'
+  },
+  {
+    'title': 'activities.filter-types.license',
+    'code': 'licenses'
   },
   {
     'title': 'activities.filter-types.publisher',

@@ -312,10 +312,11 @@ export default Ember.Controller.extend({
 
   /**
    * Get Content count of search results
-   * return hashed json of each content type conunt
+   * return hashed json of each content type count
    */
   getSearchContentCount: function(selectedNode) {
     let filters = selectedNode.filters;
+    let query = '*';
     const contentCountData = [];
 
     //TODO shouldn't handle it manually, just a quick fix to fetch search results
@@ -323,23 +324,43 @@ export default Ember.Controller.extend({
       filters = {
         'flt.subjectName': 'Math~~Mathematics'
       };
+    } else if (selectedNode.type === 'subject' && selectedNode.name === 'English Language Arts') {
+      filters = {
+        'flt.subjectName': 'English Language Arts & Literacy~~English Language Arts~~English Language Arts/Literacy~~English Language Arts and Reading~~ELA'
+      };
+    } else if (selectedNode.type === 'subject' && selectedNode.name === 'Social Sciences') {
+      filters = {
+        'flt.subjectName': 'Social Studies~~History~~History-Social Science~~Social Sciences'
+      };
     }
-    const culcaqrCountPromise = Ember.RSVP.resolve(this.get('activitiesService').getLearningMaps(filters));
 
+    const resourceCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(query, filters));
+    const questionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(query, filters));
+    const courseCountPromise = Ember.RSVP.resolve(this.get('searchService').searchCourses(query, filters));
+    const collectionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchCollections(query, filters));
+    const assessmentCountPromise = Ember.RSVP.resolve(this.get('searchService').searchAssessments(query, filters));
+    const rubricCountPromise = Ember.RSVP.resolve(this.get('searchService').searchRubrics(query, filters));
+    const unitCountPromise = Ember.RSVP.resolve(this.get('searchService').searchUnits(query, filters));
+    const lessonsCountPromise = Ember.RSVP.resolve(this.get('searchService').searchLessons(query, filters));
 
     return Ember.RSVP.hash({
-      culcaqrCount: culcaqrCountPromise
-    }).then(({
-      culcaqrCount
-    }) => {
-      let courseCount = culcaqrCount.course ? culcaqrCount.course.get('totalHitCount') : 0;
-      let unitCount = culcaqrCount.unit ? culcaqrCount.unit.get('totalHitCount') : 0;
-      let lessonCount = culcaqrCount.lesson ? culcaqrCount.lesson.get('totalHitCount') : 0;
-      let collectionCount = culcaqrCount.collection ? culcaqrCount.collection.get('totalHitCount') : 0;
-      let assessmentCount = culcaqrCount.assessment ? culcaqrCount.assessment.get('totalHitCount') : 0;
-      let resourceCount = culcaqrCount.resource ? culcaqrCount.resource.get('totalHitCount') : 0;
-      let questionCount = culcaqrCount.question ? culcaqrCount.question.get('totalHitCount') : 0;
-      let rubricCount = culcaqrCount.rubric ? culcaqrCount.rubric.get('totalHitCount') : 0;
+      resource: resourceCountPromise,
+      question: questionCountPromise,
+      course: courseCountPromise,
+      collection: collectionCountPromise,
+      assessment: assessmentCountPromise,
+      rubric: rubricCountPromise,
+      unit: unitCountPromise,
+      lesson: lessonsCountPromise
+    }).then(function(culcaqrCount) {
+      let courseCount = culcaqrCount.course ? culcaqrCount.course.get('hitCount') : 0;
+      let unitCount = culcaqrCount.unit ? culcaqrCount.unit : 0;
+      let lessonCount = culcaqrCount.lesson ? culcaqrCount.lesson : 0;
+      let collectionCount = culcaqrCount.collection ? culcaqrCount.collection.get('hitCount') : 0;
+      let assessmentCount = culcaqrCount.assessment ? culcaqrCount.assessment.get('hitCount') : 0;
+      let resourceCount = culcaqrCount.resource ? culcaqrCount.resource.get('hitCount') : 0;
+      let questionCount = culcaqrCount.question ? culcaqrCount.question.get('hitCount') : 0;
+      let rubricCount = culcaqrCount.rubric ? culcaqrCount.rubric : 0;
 
       contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COURSE, courseCount));
       contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.UNIT, unitCount));

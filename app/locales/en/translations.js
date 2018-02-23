@@ -153,6 +153,7 @@ export default {
   },
   activities: {
     'learning-activities-available': 'Learning Activities Available',
+    'resources-available': 'Resources Available',
     'filters': 'Filters',
     'filter-types': {
       'category': 'Category',
@@ -164,6 +165,7 @@ export default {
       'publisher': 'Publisher',
       'audience': 'Audience'
     },
+    'catalog-distribution': 'Catalog Distribution',
     'distribution-by-subject': 'distribution by subject',
     'no-filters': 'No Filters Applied',
     'pull-out': {

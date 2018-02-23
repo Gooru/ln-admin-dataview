@@ -163,9 +163,8 @@
       margin-bottom: 20px;
       margin-left: 20px;
       margin-bottom: 20px;
-      transform: rotateX(+180deg);
-      height: 805px;
       cursor: pointer;
+      transform: rotateX(180deg);
       -webkit-transition: -webkit-transform 0.6s ease-in;
       transition: transform 0.6s ease-in;
       -webkit-transform-style: preserve-3d;

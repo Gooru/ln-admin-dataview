@@ -114,9 +114,9 @@ export default Ember.Component.extend({
     let radius1 = component.get('radius1');
     let innerRadius1 = component.get('innerRadius1');
     let defaultI18nLabel = component.get('defaultI18nLabel');
+    let defaultLabel = component.get('defaultLabel') || '';
     let totalCount = component.get('totalCount');
-    let label =  defaultI18nLabel ? component.get('i18n').t(defaultI18nLabel).string : '';
-
+    let label =  defaultI18nLabel ? component.get('i18n').t(defaultI18nLabel).string : defaultLabel;
     let svg = d3.select(component.element)
       .append('svg')
       .attr('class', 'pie')
@@ -173,7 +173,7 @@ export default Ember.Component.extend({
       .on('mouseout', function() {
         d3.select(this)
           .style('cursor', 'none');
-        component.$('.arc1 path').attr('fill', '#F1F2F7');
+        component.$('.arc1 path').attr('fill', '#FFF');
         d3.select(this).transition()
           .duration(500)
           .ease(d3.easeBounce)
@@ -192,7 +192,7 @@ export default Ember.Component.extend({
       .attr('id', function(d) {
         return `path-arc${  d.index}`;
       })
-      .attr('fill', '#F1F2F7');
+      .attr('fill', '#FFF');
 
     let text = g.append('svg:foreignObject')
       .attr('width', (width / 2)).attr('height', radius)
