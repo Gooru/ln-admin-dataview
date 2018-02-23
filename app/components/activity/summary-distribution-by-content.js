@@ -166,7 +166,14 @@ export default Ember.Component.extend({
     dragAndDropOrderFilters = Object.assign(dragAndDropOrderFilters, appliedFilters);
     const dragAndDropOrderCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, dragAndDropOrderFilters, 1, 1));
 
-    const culacCountPromise = component.get('activityService').getLearningMaps(appliedFilters);
+    let openEndedQuestionFilters = {
+      'flt.resourceFormat': 'open_ended_question'
+    };
+    openEndedQuestionFilters = Object.assign(openEndedQuestionFilters, appliedFilters);
+    const openEndedQuestionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, openEndedQuestionFilters, 1, 1));
+
+
+    const culacCountPromise = component.get('activityService').getLearningMaps(appliedFilters, term);
 
     return Ember.RSVP.hash({
       webpageCount: webpageCountPromise,
@@ -183,6 +190,7 @@ export default Ember.Component.extend({
       multipleSelectTextCount: multipleSelectTextCountPromise,
       highlightTextCount: highlightTextCountPromise,
       dragAndDropOrderCount: dragAndDropOrderCountPromise,
+      openEndedQuestionCount: openEndedQuestionCountPromise,
       culacCount: culacCountPromise
     }).then((hash) => {
       let resourceCounts = Ember.A([{
@@ -243,6 +251,10 @@ export default Ember.Component.extend({
       }, {
         'name': 'Drag And Drop Order',
         'value': hash.dragAndDropOrderCount.get('hitCount'),
+        'colorCode': '#3A434D'
+      }, {
+        'name': 'Open Ended',
+        'value': hash.openEndedQuestionCount.get('hitCount'),
         'colorCode': '#3A434D'
       }]);
       component.set('questions', questionCounts);

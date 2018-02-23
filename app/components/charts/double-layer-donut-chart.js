@@ -173,7 +173,7 @@ export default Ember.Component.extend({
       .on('mouseout', function() {
         d3.select(this)
           .style('cursor', 'none');
-        component.$('.arc1 path').attr('fill', '#F1F2F7');
+        component.$('.arc1 path').attr('fill', '#FFF');
         d3.select(this).transition()
           .duration(500)
           .ease(d3.easeBounce)
@@ -192,7 +192,7 @@ export default Ember.Component.extend({
       .attr('id', function(d) {
         return `path-arc${  d.index}`;
       })
-      .attr('fill', '#F1F2F7');
+      .attr('fill', '#FFF');
 
     let text = g.append('svg:foreignObject')
       .attr('width', (width / 2)).attr('height', radius)
