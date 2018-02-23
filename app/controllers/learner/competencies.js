@@ -59,7 +59,7 @@ export default Ember.Controller.extend({
   /**
    * Show loading spinner
    */
-  competencyStatus: ['Not Started', 'in_progress', 'Inferred', 'Asserted', 'Earned', 'Earned'],
+  competencyStatus: ['Not Started', 'in progress', 'Inferred', 'Asserted', 'Earned', 'Earned'],
 
 
   //------------------------------------------------------------------------
@@ -91,7 +91,6 @@ export default Ember.Controller.extend({
       controller.set('showPullOut', true);
       controller.set('showMore', false);
       let userId = controller.get('userId');
-      controller.set('userId', userId);
       return Ember.RSVP.hash({
         collections: controller.get('competencyService').getUserPerformanceCompetencyCollections(userId, data.competencyCode)
       }).then(({
@@ -112,7 +111,7 @@ export default Ember.Controller.extend({
             }
           });
         } else if (data.status === 1) {
-          status = 'in_progress';
+          status = 'in progress';
           collectionData = collections;
         } else {
           status = 'Not Started';

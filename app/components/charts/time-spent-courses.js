@@ -153,9 +153,12 @@ export default Ember.Component.extend({
       }).on('click', function(d) {
         let courseId = d.data.courseId;
         let queryParams = {
-          classId: d.data.classId
+          classId: d.data.classId,
+          courseTitle: d.data.courseTitle
         };
-        component.get('router').transitionTo('learner.courses', courseId, {queryParams});
+        component.get('router').transitionTo('learner.courses', courseId, {
+          queryParams
+        });
       }).each(function(d, i) {
         this._current = i;
       });
