@@ -112,7 +112,7 @@ export default Ember.Component.extend(ModalMixin, {
       let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
       //Route to current route if it's load inside activity route
       //Otherwise redirect into summary page by default
-      if (selectedFilterItems.category.length > 0 && filterType === 'subject' && activeMenuIndex !== undefined) {
+      if (activeMenuIndex !== undefined) {
         component.get('router').transitionTo(`/activities/${routeName}`);
       } else {
         component.get('router').transitionTo('/activities/summary');
