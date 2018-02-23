@@ -1,0 +1,35 @@
+<div class="panel-tabs">
+  <div class="competencies-header">
+    <li class="{{if isCompetency 'tab-active' ''}}" {{action 'competencyMatrixTabs' 'competency' }}>
+      <span> Comptency  </span> </li>
+    <li class="{{if isJourney 'tab-active' ''}}" {{action 'competencyMatrixTabs' 'journey' }}>
+      <span>Journeys </span> </li>
+  </div>
+
+  {{#if isCompetency}}
+    <ul class="competency-group">
+      {{#each subjectClassifications as | subject index |}}
+        <li class="{{if (eq subject.subjectTitle  isSelectedSubject) 'subject-active' ''}}">
+          <div class="competency-title" {{action 'chooseSubject' subject index}}>
+            <span>{{subject.subjectTitle}} </span>
+          </div>
+          <div class="competency-badge"></div>
+        </li>
+      {{/each}}
+    </ul>
+  {{else}}
+
+    <ul class="competency-group">
+      {{#each subjectClassifications as | subject |}}
+        <li class="{{if (eq subject.subjectTitle  isSelectedSubject) 'subject-active' ''}}">
+          <div class="competency-title" {{action 'chooseSubject' subject index}}>
+            <span>{{subject.subjectTitle}} </span>
+          </div>
+          <div class="competency-badge"></div>
+        </li>
+      {{/each}}
+    </ul>
+  {{/if}}
+
+
+</div>

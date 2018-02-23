@@ -1,0 +1,133 @@
+.competencies-report-panel {
+  .panel-tabs {
+    width: 240px;
+    border-radius: 4px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+
+    .competencies-header {
+      width: 100%;
+      display: inline-block;
+      background: white;
+      border-bottom: 1px solid #cccac6;
+
+      li {
+        display: inline-block;
+        width: 120px;
+        height: auto;
+        float: left;
+        cursor: pointer;
+        font-size: 20px;
+        text-align: center;
+
+        span {
+          width: 61px;
+          opacity: 0.5;
+          font-size: 15px;
+          text-align: center;
+          color: #4a4a4a;
+        }
+      }
+
+      .tab-active {
+        border-bottom: 2px solid #0072bc;
+
+        span {
+          width: 117px;
+          font-size: 20px;
+          text-align: center;
+          opacity: 1;
+          color: #0072bc;
+        }
+      }
+    }
+
+    .competency-group {
+      list-style: none;
+      padding: 0 0 20px;
+      position: relative;
+      margin-top: -15px;
+
+      li:nth-last-child(2) {
+        top: inherit;
+        bottom: 2px !important;
+      }
+
+      .subject-active {
+        .competency-title {
+          span {
+            font-size: 13px;
+            color: #37424b;
+            opacity: 1;
+            font-weight: bold;
+          }
+        }
+
+        .competency-badge {
+          width: 25px;
+          height: 25px;
+          right: 14px;
+          top: 22px;
+          background-color: #2ea9e9;
+        }
+      }
+    }
+
+    .competency-group:before {
+      top: 30px;
+      bottom: 28px;
+      position: absolute;
+      content: " ";
+      width: 1px;
+      background-color: #ccc;
+      right: 25px;
+    }
+
+    .competency-group > li,
+    .competency-group > li > .competency-title {
+      margin-bottom: 5px;
+      position: relative;
+    }
+
+    .competency-group > li:after,
+    .competency-group > li:before {
+      content: " ";
+      display: table;
+    }
+
+    .competency-group > li:after {
+      clear: both;
+    }
+
+    .competency-group > li > .competency-title {
+      text-align: right;
+      top: 19px;
+      padding: 4px 10px 8px 15px;
+      border-radius: 5px;
+      width: 80%;
+      cursor: pointer;
+
+      span {
+        opacity: 0.3;
+        line-height: normal;
+        text-align: right;
+        color: #37424b;
+      }
+    }
+
+    .competency-group > li > .competency-badge {
+      width: 10px;
+      height: 10px;
+      line-height: 36px;
+      font-size: 1.2em;
+      text-align: center;
+      position: absolute;
+      top: 30px;
+      right: 20px;
+      background-color: #ccc;
+      z-index: 100;
+      border-radius: 50%;
+      border: 1px solid #d4d4d4;
+    }
+  }
+}

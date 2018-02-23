@@ -3,14 +3,16 @@
   margin: 0 auto;
 
   .competency-items {
-    padding: 5px 12px 0;
+    padding: 10px 12px 0;
     width: 100%;
     display: table;
+    height: 40px;
+    border-bottom: 1px solid #cacaca;
     border-bottom: 1px solid $dark-50;
 
     .assessment {
       float: left;
-      margin: 2px 2px 2px -25px;
+      margin: 2px 2px 2px -35px;
 
       i {
         background: url("images/accordion-assessment-icon.svg");
@@ -23,7 +25,7 @@
 
     .collection {
       float: left;
-      margin: 2px 2px 2px -25px;
+      margin: 2px 2px 2px -35px;
 
       i {
         background: url("images/accordion-collection-icon.svg");
