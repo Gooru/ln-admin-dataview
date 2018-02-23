@@ -14,6 +14,11 @@
       width: calc(100% - 240px);
       padding-left: 40px;
       margin-top: 15px;
+      .content-container {
+        > div {
+          margin: 22px -15px;
+        }
+      }
     }
   }
 }
