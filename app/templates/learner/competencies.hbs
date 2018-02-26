@@ -8,39 +8,30 @@
         <div class="pull-left panel-title">
           <span>Competency Report</span>
         </div>
-        <div class="competencies-list-view" {{action 'onChooseListView'}}>
-          <i class="icon {{unless isGridModeEnabled 'active'}}"> </i>
-        </div>
-        <div class="competencies-module-view" {{action 'onChooseGridView'}}>
-          <i class="icon {{if isGridModeEnabled 'active'}}"> </i>
-        </div>
       </div>
-      {{#if isGridModeEnabled}}
-        <div class="nav-header">
-          {{learner.competencies-matrix-header onChangeHeaderView="onChangeHeaderView"}}
-        </div>
-      {{/if}}
+      <div class="nav-header">
+        {{learner.competencies-matrix-header onChangeHeaderView="onChangeHeaderView"}}
+      </div>
     </div>
-    {{#unless isGridModeEnabled}}
+
+    {{#if isListModeEnabled}}
       <div class="report-panel">
         <div class="report-panel-body">
           {{charts.competencies-chart data=userCompetencyStats}}
         </div>
-
         <div class="summary-accordion">
           {{#each userCompetencies as | competency |}}
             {{learner.competencies-accordion-summary competency=competency userId=userId}}
           {{/each}}
         </div>
       </div>
-      {{else}}
-        {{#if isShowCourseMatrix}}
-          {{charts.competency-matrix-chart userId=userId onCompetencyPullOut='onCompetencyPullOut'}}
-        {{else}}
-          {{charts.competency-matrix-domain-chart userId=userId onCompetencyPullOut='onCompetencyPullOut'}}
-        {{/if}}
 
-    {{/unless}}
+    {{else if isCourseModeEnabled }}
+      {{charts.competency-matrix-chart userId=userId subjectId=subjectId onCompetencyPullOut='onCompetencyPullOut'}}
+    {{else}}
+      {{charts.competency-matrix-domain-chart userId=userId  subjectId=subjectId onCompetencyPullOut='onCompetencyPullOut'}}
+    {{/if}}
+
     {{#app-pull-out showPullOut=showPullOut title=description description=title competency=competency showMore=showMore isLoading=isLoading as |section|}}
       {{#if section.isLessContent}}
         {{learner.competencies-pull-out-body
@@ -55,7 +46,7 @@
   <div class="center-cap"> </div>
 
   <div class="right-panel">
-    {{learner.competencies-report-panel}}
+    {{learner.competencies-report-panel taxonomySubjects=taxonomySubjects subjectChange='subjectChange'}}
   </div>
 
 </div>

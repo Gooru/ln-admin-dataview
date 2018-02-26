@@ -11,6 +11,12 @@ export default Ember.Controller.extend({
    */
   competencyService: Ember.inject.service('api-sdk/competency'),
 
+  /**
+   * taxonomy service dependency injection
+   * @type {Object}
+   */
+  taxonomyService: Ember.inject.service('taxonomy'),
+
 
   // -------------------------------------------------------------------------
   // Attributes
@@ -30,7 +36,19 @@ export default Ember.Controller.extend({
    * Indicates which mode currently Enabled
    * @type {Boolean}
    */
-  isGridModeEnabled: false,
+  isListModeEnabled: false,
+
+  /**
+   * Indicates which mode currently Enabled
+   * @type {Boolean}
+   */
+  isCourseModeEnabled: false,
+
+  /**
+   * Indicates which mode currently Enabled
+   * @type {Boolean}
+   */
+  isDomainModeEnabled: true,
 
   /**
    * show pull out .
@@ -61,24 +79,21 @@ export default Ember.Controller.extend({
    */
   competencyStatus: ['Not Started', 'in progress', 'Inferred', 'Asserted', 'Earned', 'Earned'],
 
+  /**
+   * It  will have default subject category
+   * @type {String}
+   */
+  selectedSubjectCategory: 'k_12',
+
 
   //------------------------------------------------------------------------
-  // Events
+  // actions
 
   actions: {
 
     onClickBackButton: function() {
       this.transitionToRoute('learner');
     },
-
-    onChooseListView: function() {
-      this.set('isGridModeEnabled', false);
-    },
-
-    onChooseGridView: function() {
-      this.set('isGridModeEnabled', true);
-    },
-
 
     /**
      *
@@ -132,9 +147,36 @@ export default Ember.Controller.extend({
 
     onChangeHeaderView(selectedView) {
       let controller = this;
-      controller.set('isShowCourseMatrix', selectedView === 'course');
+      controller.set('isCourseModeEnabled', selectedView === 'course');
+      controller.set('isListModeEnabled', selectedView === 'list');
+    },
+
+    subjectChange: function(subject) {
+      let controller = this;
+      controller.set('subjectId', subject.id);
+
 
     }
+  },
+
+  // -------------------------------------------------------------------------
+  // Events
+
+  init: function() {
+    this._super(...arguments);
+    let controller = this;
+    let subjectCategory = controller.get('selectedSubjectCategory');
+    controller.fetchSubjectsByCategory(subjectCategory);
+  },
+
+
+  fetchSubjectsByCategory: function(subjectCategory) {
+    let controller = this;
+    controller.get('taxonomyService').getSubjects(subjectCategory).then(subjects => {
+      let subject = subjects.objectAt(0);
+      controller.set('taxonomySubjects', subjects);
+      controller.set('subjectId', subject.id);
+    });
   }
 
 

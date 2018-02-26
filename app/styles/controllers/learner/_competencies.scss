@@ -29,6 +29,8 @@
     //TODO quick fix for toggle matrix view
     .header {
       display: flex;
+      height: 40px;
+      border-bottom: 1px solid #cccccc;
 
       .nav-header {
         .competencies-header {
@@ -81,20 +83,17 @@
 
       .competencies-matric-header {
         .competencies-header {
-          .domain-section {
-            width: 67px;
-            text-align: center;
-            color: #b3b3b3;
-          }
-
-          .course-section {
+          .course-section,
+          .domain-section,
+          .list-section {
             width: 67px;
             text-align: center;
             color: #b3b3b3;
           }
 
           .courseActive,
-          .domainActive {
+          .domainActive,
+          .listActive {
             color: #000000 !important;
           }
         }

@@ -25,6 +25,18 @@ export default Ember.Component.extend({
    */
   selectedSubjectCategory: 'k_12',
 
+  /**
+   * It  will have Subject
+   * @type {Object}
+   */
+  taxonomySubjects: null,
+
+  /**
+   * It  will have Subject
+   * @type {Object}
+   */
+  currentSubject: null,
+
 
   isCompetency: true,
 
@@ -37,27 +49,14 @@ export default Ember.Component.extend({
       let component = this;
       component.set('isCompetency', tabs === 'competency');
       component.set('isJourney', tabs === 'journey');
+    },
+
+
+    selectedSubject: function(subject) {
+      let component = this;
+      component.sendAction('subjectChange', subject);
     }
 
-  },
-
-
-  // -------------------------------------------------------------------------
-  // Events
-
-  didInsertElement: function() {
-    let component = this;
-    let subjectCategory = component.get('selectedSubjectCategory');
-    component.fetchSubjectsByCategory(subjectCategory);
-  },
-
-
-  fetchSubjectsByCategory: function(subjectCategory) {
-    let component = this;
-    component.set('isLoading', true);
-    component.get('taxonomyService').getSubjects(subjectCategory).then(subjects => {
-      component.set('subjectClassifications', subjects);
-    });
   }
 
 });

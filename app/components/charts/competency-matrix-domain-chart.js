@@ -35,11 +35,11 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Events
 
-  didInsertElement: function() {
-    let component = this;
-    let subjectCategory = component.get('selectedSubjectCategory');
-    component.fetchSubjectsByCategory(subjectCategory);
-  },
+  // didInsertElement: function() {
+  //   let component = this;
+  //   let subjectCategory = component.get('selectedSubjectCategory');
+  //   // component.fetchSubjectsByCategory(subjectCategory);
+  // },
 
   // -------------------------------------------------------------------------
   // Properties
@@ -109,67 +109,15 @@ export default Ember.Component.extend({
   isLoading: false,
 
 
-  // -------------------------------------------------------------------------
-  // Events
+  /**
+   * subjectId  change will call the function
+   */
+  onChange: Ember.observer('subjectId', function() {
+    let component = this;
+    component.loadDataBySubject(component.get('subjectId'));
+    return null;
+  }),
 
-
-  actions: {
-
-    /**
-     *
-     * Triggered when an tab right side arrow clicked
-     */
-    onRightArrowClick: function() {
-      let component = this;
-      component.$('.subject-left-navigation-arrow').fadeIn('slow');
-      let width = component.$('.subject-list').outerWidth();
-      component.$('.subject-list ul').animate({
-        left: `-=${  width  }px`
-      }, 'slow', function() {
-        let scrolledWidth = width + Math.abs(component.$('.subject-list ul').position().left);
-        let totalWidth = component.$('.subject-list ul').outerWidth();
-        if (scrolledWidth >= totalWidth) {
-          component.$('.subject-right-navigation-arrow').fadeOut('slow');
-        }
-      });
-    },
-
-    /**
-     *
-     * Triggered when an tab left side arrow clicked
-     */
-    onLeftArrowClick: function() {
-      let component = this;
-      let left = component.$('.subject-list ul').position().left;
-      $('.subject-list ul').animate({
-        left: `-=${  left  }px`
-      }, 'slow', function() {
-        let left = component.$('.subject-list ul').position().left;
-        if (left === 0) {
-          component.$('.subject-right-navigation-arrow').fadeIn('slow');
-          component.$('.subject-left-navigation-arrow').fadeOut('slow');
-        }
-      });
-    },
-
-    /**
-     * Event will trigger when subject get selected
-     * @param  {Object} subject
-     */
-    onChooseSubject: function(subject) {
-      let component = this;
-      component.loadDataBySubject(subject.get('id'));
-    },
-
-    /**
-     * Event will trigger when subject category selected
-     * @param  {Object} subject
-     */
-    onChooseCategory: function(category) {
-      this.fetchSubjectsByCategory(category.value);
-    }
-
-  },
 
   // -------------------------------------------------------------------------
   // Methods
@@ -228,18 +176,6 @@ export default Ember.Component.extend({
       svg.append('circle').attr('cx', x1).attr('cy', y1).attr('r', 3).attr('fill', '#fff');
     });
     cards.exit().remove();
-  },
-
-
-  handleSubjectNavigationArrow: function() {
-    let component = this;
-    let subjectListElement = component.$('.subject-list');
-    let listWidth = component.$('.subject-list ul').outerWidth();
-    if ((subjectListElement.outerWidth()) < listWidth) {
-      //component.$('.subject-right-navigation-arrow').show();
-    } else {
-      component.$('.subject-right-navigation-arrow').hide();
-    }
   },
 
 
@@ -323,17 +259,6 @@ export default Ember.Component.extend({
     component.set('height', height);
     component.set('taxonomyDomains', taxonomyDomain);
     return resultSet;
-  },
-
-  fetchSubjectsByCategory: function(subjectCategory) {
-    let component = this;
-    component.set('isLoading', true);
-    component.get('taxonomyService').getSubjects(subjectCategory).then(subjects => {
-      let subject = subjects.objectAt(0);
-      component.set('taxonomySubjects', subjects.slice(0, 4));
-      component.loadDataBySubject(subject.get('id'));
-      component.handleSubjectNavigationArrow();
-    });
   }
 
 });

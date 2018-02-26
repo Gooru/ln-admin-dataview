@@ -1,14 +1,3 @@
-<div class="subject-navigation-chart">
-  <div class="subject-navigation-arrow subject-left-navigation-arrow pull-left" {{action 'onLeftArrowClick'}}>{{app-icon name="ic_keyboard_arrow_left"}}</div>
-  <div class=" subject-navigation-arrow subject-right-navigation-arrow pull-right" {{action 'onRightArrowClick'}}>{{app-icon name="ic_keyboard_arrow_right"}}</div>
-  <div class="subject-list">
-    <ul class="nav nav-tabs">
-      {{#each taxonomySubjects as | subject index|}}
-        <li class="{{if (eq index 0) 'active' ''}}" role="presentation" {{action 'onChooseSubject' subject}}><a href="#{{subject.id}}" aria-controls="{{subject.title}}" role="tab" data-toggle="tab">{{subject.title}}</a></li>
-      {{/each}}
-    </ul>
-  </div>
-</div>
 {{#if isLoading}}
   {{three-bounce-spinner}}
 {{/if}}

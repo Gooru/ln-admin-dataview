@@ -21,6 +21,8 @@ export default Ember.Component.extend({
       component.sendAction('onChangeHeaderView', selectedView);
       component.set('isCourseView', selectedView === 'course');
       component.set('isDomainView', selectedView === 'domain');
+      component.set('isListView', selectedView === 'list');
+
     }
   }
 });
