@@ -120,6 +120,14 @@ export default Ember.Component.extend({
 
 
   // -------------------------------------------------------------------------
+  // Events
+
+  didInsertElement: function() {
+    let component = this;
+    component.loadDataBySubject(component.get('subjectId'));
+  },
+
+  // -------------------------------------------------------------------------
   // Methods
 
   drawChart: function(data) {
