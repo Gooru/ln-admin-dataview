@@ -195,7 +195,6 @@ export default Ember.Component.extend({
       .attr('x', (d) => (d.xAxisSeq - 1) * cellWidth)
       .attr('y', (d) => (d.yAxisSeq - 1) * cellHeight)
       .attr('class', 'competency')
-      .attr('title', (d) => d.skyline)
       .attr('width', cellWidth)
       .attr('height', cellHeight)
       .on('click', function(d) {
@@ -210,12 +209,24 @@ export default Ember.Component.extend({
       });
     cards.enter().append('circle')
       .attr('cx', (d) => (((d.xAxisSeq - 1) * cellWidth) + (cellWidth / 2)))
-      .attr('cy', (d) => (((d.yAxisSeq - 1) * cellHeight) + (cellHeight / 2)))
-      .attr('class', 'competency-skyline')
-      .attr('title', (d) => d.skyline)
+      .attr('cy', (d) => (((d.yAxisSeq - 1) * cellHeight + (d.mastered ? (cellHeight/ 2) : 2))))
+      .attr('class', (d) => d.skyline ? 'competency-skyline' : '')
       .attr('r', (d) => d.skyline ? 2 : 0)
       .attr('fill', '#fff');
 
+    let skylineElements = component.$('.competency-skyline');
+    let indexSize = component.$(skylineElements).length;
+    component.$('circle').remove();
+    skylineElements.each(function(index) {
+      let x1 = parseInt(component.$(skylineElements[index]).attr('cx'));
+      let y1 = component.$(skylineElements[index]).attr('cy');
+      if (index < (indexSize - 1)) {
+        let x2 = parseInt(component.$(skylineElements[(index + 1)]).attr('cx'));
+        let y2 = component.$(skylineElements[(index + 1)]).attr('cy');
+        svg.append('line').attr('x1', x1).attr('y1', y1).attr('x2', x2).attr('y2',y2).attr('class', 'skyline');
+      }
+      svg.append('circle').attr('cx', x1).attr('cy', y1).attr('r', 2).attr('fill', '#fff');
+    });
     cards.exit().remove();
   },
 
@@ -291,12 +302,13 @@ export default Ember.Component.extend({
             mergeDomainData.pushObject(data);
           }
         });
-        let masteredCompetencies =  mergeDomainData.filterBy('status', 5);
+        let masteredCompetencies = mergeDomainData.filterBy('status', 5);
         if (masteredCompetencies && masteredCompetencies.length === 0) {
           mergeDomainData.objectAt(0).set('skyline', true);
         } else {
           let numberOfMasteredCompetency = (masteredCompetencies.length - 1);
           mergeDomainData.objectAt(numberOfMasteredCompetency).set('skyline', true);
+          mergeDomainData.objectAt(numberOfMasteredCompetency).set('mastered', true);
         }
 
         let cellIndex = 1;
