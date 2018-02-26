@@ -5,14 +5,14 @@
   .competency-items {
     padding: 10px 12px 0;
     width: 100%;
-    display: table;
+    display: flex;
     height: 40px;
     border-bottom: 1px solid #cacaca;
     border-bottom: 1px solid $dark-50;
 
     .assessment {
       float: left;
-      margin: 2px 2px 2px -35px;
+      margin: 7px 8px 7px -35px;
 
       i {
         background: url("images/accordion-assessment-icon.svg");
@@ -25,7 +25,7 @@
 
     .collection {
       float: left;
-      margin: 2px 2px 2px -35px;
+      margin: 7px 8px 7px -35px;
 
       i {
         background: url("images/accordion-collection-icon.svg");
@@ -42,15 +42,11 @@
 
       .title {
         font-weight: bold;
-        width: 60%;
-        height: 20px;
+        height: 30px;
+        margin-right: 25px;
         font-size: 15px;
         font-weight: bold;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
         text-transform: capitalize;
-        letter-spacing: normal;
         text-align: left;
         color: #4a4a4a;
         float: left;
@@ -68,18 +64,17 @@
 
     .panel-info {
       float: right;
+      display: flex;
 
       .status {
         font-size: 16px;
-        width: 90px;
         display: inline-block;
         text-align: center;
+        width: 50px;
       }
 
       .time {
-        width: 100px;
-        margin-right: 45px;
-        display: inline-block;
+        width: 110px;
         font-size: 16px;
         text-align: right;
       }

@@ -2,8 +2,7 @@
   height: auto;
   background: white;
   margin: 0 auto;
-  width: 960px;
-
+  // width: 960px;
   .competency {
     padding: 5px 12px 0;
     width: 100%;
@@ -16,14 +15,10 @@
       width: 60%;
 
       .title {
-        width: 437px;
+        width: 380px;
         height: 20px;
         font-size: 15px;
         font-weight: bold;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
         text-align: left;
         color: $dark-800;
         text-transform: uppercase;
@@ -37,10 +32,6 @@
         width: 139px;
         height: 17px;
         font-size: 12px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
         text-transform: capitalize;
         letter-spacing: normal;
         text-align: left;
@@ -50,20 +41,18 @@
 
     .panel-info {
       float: right;
-      width: 40%;
-      height: 45px;
+      display: flex;
+      width: 36%;
 
       .status {
-        padding-left: 145px;
+        margin-left: 30px;
         font-size: 16px;
         float: left;
-        width: 245px;
+        width: 150px;
       }
 
       .time {
-        padding-left: 55px;
         font-size: 16px;
-        float: left;
         margin: 8px 0;
 
         .in_progress {
