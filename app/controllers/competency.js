@@ -317,6 +317,8 @@ export default Ember.Controller.extend({
   getSearchContentCount: function(selectedNode) {
     let filters = selectedNode.filters;
     let query = '*';
+    let start = 1;
+    let length = 3;
     const contentCountData = [];
 
     //TODO shouldn't handle it manually, just a quick fix to fetch search results
@@ -334,14 +336,14 @@ export default Ember.Controller.extend({
       };
     }
 
-    const resourceCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(query, filters));
-    const questionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(query, filters));
-    const courseCountPromise = Ember.RSVP.resolve(this.get('searchService').searchCourses(query, filters));
-    const collectionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchCollections(query, filters));
-    const assessmentCountPromise = Ember.RSVP.resolve(this.get('searchService').searchAssessments(query, filters));
-    const rubricCountPromise = Ember.RSVP.resolve(this.get('searchService').searchRubrics(query, filters));
-    const unitCountPromise = Ember.RSVP.resolve(this.get('searchService').searchUnits(query, filters));
-    const lessonsCountPromise = Ember.RSVP.resolve(this.get('searchService').searchLessons(query, filters));
+    const resourceCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(query, filters, start, length));
+    const questionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(query, filters, start, length));
+    const courseCountPromise = Ember.RSVP.resolve(this.get('searchService').searchCourses(query, filters, start, length));
+    const collectionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchCollections(query, filters, start, length));
+    const assessmentCountPromise = Ember.RSVP.resolve(this.get('searchService').searchAssessments(query, filters, start, length));
+    const rubricCountPromise = Ember.RSVP.resolve(this.get('searchService').searchRubrics(query, filters, start, length));
+    const unitCountPromise = Ember.RSVP.resolve(this.get('searchService').searchUnits(query, filters, start, length));
+    const lessonsCountPromise = Ember.RSVP.resolve(this.get('searchService').searchLessons(query, filters, start, length));
 
     return Ember.RSVP.hash({
       resource: resourceCountPromise,
