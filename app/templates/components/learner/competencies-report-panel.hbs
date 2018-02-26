@@ -7,29 +7,8 @@
   </div>
 
   {{#if isCompetency}}
-    <ul class="competency-group">
-      {{#each subjectClassifications as | subject index |}}
-        <li class="{{if (eq subject.subjectTitle  isSelectedSubject) 'subject-active' ''}}">
-          <div class="competency-title" {{action 'chooseSubject' subject index}}>
-            <span>{{subject.subjectTitle}} </span>
-          </div>
-          <div class="competency-badge"></div>
-        </li>
-      {{/each}}
-    </ul>
+    {{learner.competencies-journeys-list subjectClassifications=subjectClassifications}}
   {{else}}
-
-    <ul class="competency-group">
-      {{#each subjectClassifications as | subject |}}
-        <li class="{{if (eq subject.subjectTitle  isSelectedSubject) 'subject-active' ''}}">
-          <div class="competency-title" {{action 'chooseSubject' subject index}}>
-            <span>{{subject.subjectTitle}} </span>
-          </div>
-          <div class="competency-badge"></div>
-        </li>
-      {{/each}}
-    </ul>
+    {{learner.competencies-journeys-list subjectClassifications=subjectClassifications}}
   {{/if}}
-
-
 </div>

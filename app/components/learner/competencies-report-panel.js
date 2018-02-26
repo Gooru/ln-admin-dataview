@@ -37,11 +37,6 @@ export default Ember.Component.extend({
       let component = this;
       component.set('isCompetency', tabs === 'competency');
       component.set('isJourney', tabs === 'journey');
-    },
-
-    chooseSubject:  function(subject){
-      let component = this;
-      component.set('isSelectedSubject', subject.subjectTitle);
     }
 
   },
