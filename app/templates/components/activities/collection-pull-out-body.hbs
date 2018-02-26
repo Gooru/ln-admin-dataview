@@ -58,13 +58,13 @@
       </div>
       <div class="items">
         {{#each collectionData.content as |content|}}
-          <div class="content-item">
+          <div class="content-item ellipsis">
             <div class="{{if (eq content.content_format 'question') content.content_format content.content_subformat}}">
               <i class="icon"> </i>
             </div>
-            <div class="content-title">
+            <span class="content-title">
                 {{content.title}}
-            </div>
+            </span>
           </div>
         {{/each}}
       </div>
