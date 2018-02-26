@@ -68,22 +68,10 @@ export default Ember.Component.extend({
 
 
   /**
-   * Number default rows for each courses
-   * @type {Number}
-   */
-  defaultNumberOfYaixsRow: 1,
-
-  /**
-   * Number of cells in each row
-   * @type {Number}
-   */
-  numberOfCellsInEachRow: 30,
-
-  /**
    * Width of the cell
    * @type {Number}
    */
-  cellWidth: 25,
+  cellWidth: 15,
 
   /**
    * It will have selected taxonomy subject courses
@@ -132,11 +120,11 @@ export default Ember.Component.extend({
 
   drawChart: function(data) {
     let component = this;
-    let numberOfCellsInEachRow = component.get('numberOfCellsInEachRow');
     const colorsBasedOnStatus = component.get('colorsBasedOnStatus');
     const cellWidth = component.get('cellWidth');
     const width = component.get('width');
-    const height = (Math.round(data.length / numberOfCellsInEachRow) * cellWidth);
+    const numberOfCourses = component.get('taxonomyCourses').length;
+    const height = cellWidth * (numberOfCourses * 2);
     component.$('#competency-matrix-chart').empty();
     const svg = d3.select('#competency-matrix-chart').append('svg')
       .attr('width', width)
@@ -185,9 +173,6 @@ export default Ember.Component.extend({
 
   parseCompetencyData: function(competencyMatrixs, competencyMatrixCoordinates) {
     let component = this;
-    const numberOfCellsInEachRow = component.get('numberOfCellsInEachRow');
-    const cellWidth = component.get('cellWidth');
-    let defaultNumberOfYaixsRow = component.get('defaultNumberOfYaixsRow');
     let courses = competencyMatrixCoordinates.get('courses').toArray().reverse();
     let taxonomyCourses = Ember.A();
     let domains = competencyMatrixCoordinates.get('domains');
@@ -213,78 +198,37 @@ export default Ember.Component.extend({
             let competencyName = competency.get('competencyName');
             let competencySeq = competency.get('competencySeq');
             let status = competency.get('status');
-            let competencyData = competencyCode.split('-');
-            if (competencyData.length === 4) {
-              let data = Ember.Object.create({
-                'courseCode': courseCode,
-                'courseName': courseName,
-                'courseSeq': courseSeq,
-                'domainName': domainName,
-                'domainCode': domainCode,
-                'domainSeq': domainSeq,
-                'competencyCode': competencyCode,
-                'competencyName': competencyName,
-                'competencySeq': competencySeq,
-                'status': status
+            let data = Ember.Object.create({
+              'courseCode': courseCode,
+              'courseName': courseName,
+              'courseSeq': courseSeq,
+              'domainName': domainName,
+              'domainCode': domainCode,
+              'domainSeq': domainSeq,
+              'competencyCode': competencyCode,
+              'competencyName': competencyName,
+              'competencySeq': competencySeq,
+              'status': status
+            });
+            if (status === 5) {
+              mergeDomainData.forEach(data => {
+                data.set('status', 5);
               });
-              if (status === 5) {
-                mergeDomainData.forEach(data => {
-                  data.set('status', 5);
-                });
-              }
-              mergeDomainData.pushObject(data);
             }
+            mergeDomainData.pushObject(data);
+
           });
         });
-
-        let splitData = Ember.A();
-        for (let startIndex = 0, endIndex = mergeDomainData.length; startIndex < endIndex; startIndex += numberOfCellsInEachRow) {
-          splitData.pushObject(mergeDomainData.slice(startIndex, startIndex + numberOfCellsInEachRow));
-        }
-
-        let numberOfRows = splitData.length > defaultNumberOfYaixsRow ? splitData.length : defaultNumberOfYaixsRow;
-
-        // adjust course title cell height dynamically
-        let heightOfCourseTitleContainer = numberOfRows * cellWidth;
-        courseData.set('heightOfCourseTitleContainer', heightOfCourseTitleContainer);
-        for (let rowIndex = (numberOfRows - 1); rowIndex >= 0; rowIndex--) {
-          let dataSet = splitData.objectAt(rowIndex);
-          for (let index = numberOfCellsInEachRow; index >= 1; index--) {
-            if (dataSet) {
-              let currentIndex = (index - 1);
-              let data = dataSet[currentIndex];
-              if (data) {
-                data.set('xAxisSeq', index);
-                data.set('yAxisSeq', currentYaxis);
-                resultSet.pushObject(data);
-              } else {
-                let dummyData = Ember.Object.create({
-                  'courseCode': courseCode,
-                  'courseName': courseName,
-                  'courseSeq': courseSeq,
-                  'yAxisSeq': currentYaxis,
-                  'xAxisSeq': index,
-                  'status': -1
-                });
-                resultSet.pushObject(dummyData);
-              }
-
-            } else {
-              let dummyData = Ember.Object.create({
-                'courseCode': courseCode,
-                'courseName': courseName,
-                'courseSeq': courseSeq,
-                'yAxisSeq': currentYaxis,
-                'xAxisSeq': index,
-                'status': -1
-              });
-              resultSet.pushObject(dummyData);
-            }
-          }
-          currentYaxis = currentYaxis + 1;
-        }
-
+        let cellIndex = 1;
+        mergeDomainData.forEach(data => {
+          data.set('xAxisSeq', cellIndex);
+          data.set('yAxisSeq', currentYaxis);
+          resultSet.pushObject(data);
+          cellIndex++;
+        });
+        currentYaxis = currentYaxis + 2;
       }
+
     });
     component.set('taxonomyCourses', taxonomyCourses);
     return resultSet;

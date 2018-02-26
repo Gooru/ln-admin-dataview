@@ -81,6 +81,100 @@ export default Ember.Controller.extend({
     return (PAGE_SIZE <= CUR_ITERATION_COUNT);
   }),
 
+  /**
+   * Grouping the data to show more info  in pull out
+   */
+  groupData: Ember.computed('selectedCollection', function() {
+    let collection = this.get('selectedCollection');
+    let resultSet = Ember.A();
+    if (collection) {
+      resultSet = {
+        descriptive: {
+          title: collection.title,
+          description: collection.description
+        },
+
+        creation: {
+          'Creator ID': collection.creator.id,
+          'Publisher': 'Gooru Org',
+          'Collaborator': collection.collaboratorIDs,
+          'Instance Creator': collection.owner.username,
+          'Original Creator': collection.creator.username,
+          Aggregator: collection.aggregator ? collection.aggregator : null,
+          'Date Modified': moment(collection.lastModified).format('LLLL') || null,
+          'Modified by': collection.lastModifiedBy,
+          License: collection.license ? collection.license : null,
+          'Created': collection.owner.username,
+          'Owner ID': collection.owner.id
+        },
+
+        educational: {
+          'Audience': collection.audience,
+          'Time Required': null,
+          'Grade Level': collection.gradd,
+          'Learning Objective': collection.learningObjectives
+        },
+
+        media: {
+          'Keywords': collection.keyPoints,
+          'Visibility': null
+        },
+
+
+        instructional: {
+          'Instructional Model': collection.instructionalModel,
+          '21st Century Skills': collection.skills
+        },
+
+        framework: {
+          subject: collection.taxonomySet.subject,
+          course: collection.taxonomySet.course,
+          domain: collection.taxonomySet.domain,
+          standard: null
+        },
+
+        Internal: {
+          'ID': collection.id,
+          'Deleted': null,
+          'Flagged': null
+        },
+
+        vector: {
+          relevance: collection.relevance,
+          engagment: collection.engagment,
+          efficacy: collection.efficacy
+        }
+      };
+    }
+    return resultSet;
+  }),
+
+
+  /**
+   * Grouping header data to show more info  in pull out
+   */
+  groupHeader: Ember.computed('groupData', function() {
+    let resultHeader = Ember.A();
+    resultHeader = [Ember.Object.create({
+      header: 'extracted',
+      isEnabled: true
+    }),
+    Ember.Object.create({
+      header: 'curated',
+      isEnabled: true
+    }),
+    Ember.Object.create({
+      header: 'tagged',
+      isEnabled: true
+    }),
+    Ember.Object.create({
+      header: 'computed',
+      isEnabled: true
+    })
+    ];
+    return resultHeader;
+  }),
+
   // -------------------------------------------------------------------------
   // Events
   init() {

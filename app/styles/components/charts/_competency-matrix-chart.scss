@@ -97,8 +97,6 @@
 
   .competency-chart-tab-container {
     padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
 
     .courses {
       width: 220px;
@@ -114,11 +112,12 @@
 
       li {
         padding-left: 20px;
-        border-bottom: 1px solid #ccc;
         width: 100%;
-        height: 50px;
         padding-right: 10px;
         line-height: 18px;
+        height: 30px;
+        text-align: right;
+        font-size: 13px;
       }
 
       li:last-child {
@@ -127,7 +126,18 @@
     }
 
     .matrix-chart-container {
-      width: 700px;
+      width: 450px;
+      overflow-x: auto;
+    }
+    .matrix-chart-container::-webkit-scrollbar {
+      height: 6px;
+      width: 8px;
+    }
+
+    .matrix-chart-container::-webkit-scrollbar-thumb {
+      background: $gray-light;
+      border: 1px solid $gray-light;
+      border-radius: 5px;
     }
 
     #competency-matrix-chart {

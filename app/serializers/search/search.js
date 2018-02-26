@@ -220,7 +220,15 @@ export default Ember.Object.extend(ConfigurationMixin, {
         username: collectionData.creatornameDisplay
       }),
       taxonomySet: collectionData.taxonomySet,
-      createdData: collectionData.addDate,
+      createdDate: collectionData.addDate,
+      collaboratorIDs: collectionData.collaboratorIds,
+      grade: collectionData.grade,
+      instructionalModel: collectionData.instructionalMethod,
+      lastModified: collectionData.lastModified,
+      lastModifiedBy: collectionData.lastModifiedBy,
+      license: collectionData.license,
+      audience: collectionData.audience,
+      keyPoints: collectionData.keyPoints,
       efficacy: collectionData.efficacy ? collectionData.efficacy : null,
       relevance: collectionData.relevance ? collectionData.relevance : null,
       engagement: collectionData.engagement ? collectionData.engagement : null

@@ -173,7 +173,7 @@ export default Ember.Component.extend({
         let y2 = component.$(skylineElements[(index + 1)]).attr('cy');
         svg.append('line').attr('x1', x1).attr('y1', y1).attr('x2', x2).attr('y2', y2).attr('class', 'skyline');
       }
-      svg.append('circle').attr('cx', x1).attr('cy', y1).attr('r', 2).attr('fill', '#fff');
+      svg.append('circle').attr('cx', x1).attr('cy', y1).attr('r', 3).attr('fill', '#fff');
     });
     cards.exit().remove();
   },
@@ -219,24 +219,21 @@ export default Ember.Component.extend({
           let competencyName = competency.get('competencyName');
           let competencySeq = competency.get('competencySeq');
           let status = competency.get('status');
-          let competencyData = competencyCode.split('-');
-          if (competencyData.length === 4) {
-            let data = Ember.Object.create({
-              'domainName': domainName,
-              'domainCode': domainCode,
-              'domainSeq': domainSeq,
-              'competencyCode': competencyCode,
-              'competencyName': competencyName,
-              'competencySeq': competencySeq,
-              'status': status
+          let data = Ember.Object.create({
+            'domainName': domainName,
+            'domainCode': domainCode,
+            'domainSeq': domainSeq,
+            'competencyCode': competencyCode,
+            'competencyName': competencyName,
+            'competencySeq': competencySeq,
+            'status': status
+          });
+          if (status === 5) {
+            mergeDomainData.forEach(data => {
+              data.set('status', 5);
             });
-            if (status === 5) {
-              mergeDomainData.forEach(data => {
-                data.set('status', 5);
-              });
-            }
-            mergeDomainData.pushObject(data);
           }
+          mergeDomainData.pushObject(data);
         });
         let masteredCompetencies = mergeDomainData.filterBy('status', 5);
         if (masteredCompetencies && masteredCompetencies.length === 0) {
