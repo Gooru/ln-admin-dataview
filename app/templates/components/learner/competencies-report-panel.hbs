@@ -7,8 +7,8 @@
   </div>
 
   {{#if isCompetency}}
-    {{learner.competencies-journeys-list subjectClassifications=subjectClassifications}}
+    {{learner.competencies-journeys-list taxonomySubjects=taxonomySubjects selectedSubject='selectedSubject'}}
   {{else}}
-    {{learner.competencies-journeys-list subjectClassifications=subjectClassifications}}
+    {{learner.competencies-journeys-list taxonomySubjects=taxonomySubjects  selectedSubject='selectedSubject'}}
   {{/if}}
 </div>
