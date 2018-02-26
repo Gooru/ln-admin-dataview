@@ -35,11 +35,6 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Events
 
-  // didInsertElement: function() {
-  //   let component = this;
-  //   let subjectCategory = component.get('selectedSubjectCategory');
-  //   // component.fetchSubjectsByCategory(subjectCategory);
-  // },
 
   // -------------------------------------------------------------------------
   // Properties
@@ -65,13 +60,12 @@ export default Ember.Component.extend({
    * @type {Object}
    */
   colorsBasedOnStatus: Ember.Object.create({
-    '0': '#CCD0D5',
-    '1': '#67C1F8',
-    '2': '#67C1F8',
-    '3': '#67C1F8',
-    '4': '#67C1F8',
-    '5': '#1C9EEE',
-    '-1': '#EAEAEA'
+    '0': '#e7e8e9',
+    '1': '#1aa9eb',
+    '2': '#1aa9eb',
+    '3': '#1aa9eb',
+    '4': '#1aa9eb',
+    '5': '#006eb5'
   }),
 
 
