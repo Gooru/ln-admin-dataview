@@ -99,11 +99,9 @@
 
   .competency-chart-tab-container {
     padding-top: 20px;
-    padding-left: 20px;
-    padding-right: 20px;
 
     .courses {
-      width: 233px;
+      width: 200px;
 
       ul {
         padding: 0;
@@ -130,13 +128,12 @@
     }
 
     .matrix-chart-container {
-      width: 700px;
+      width: 450px;
       overflow-x: auto;
 
       .domain-list {
         margin-left: 20px;
         display: inline-block;
-        // width: 700px;
         .domain-counts {
           float: left;
           display: inline-block;
