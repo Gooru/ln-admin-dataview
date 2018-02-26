@@ -91,86 +91,88 @@ export default Ember.Component.extend({
     let component = this;
     let appliedFilters = component.getAppliedFilters();
     let term = component.get('term') || '*';
+    let start = 1;
+    let length = 0;
     component.set('isLoading', true);
     // Resources
     let webpageFilters = {
       'flt.resourceFormat': 'webpage'
     };
     webpageFilters = Object.assign(webpageFilters, appliedFilters);
-    const webpageCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, webpageFilters, 1, 1));
+    const webpageCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, webpageFilters, start, length));
     let audioFilters = {
       'flt.resourceFormat': 'audio'
     };
     audioFilters = Object.assign(audioFilters, appliedFilters);
-    const audioCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, audioFilters, 1, 1));
+    const audioCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, audioFilters, start, length));
     let videoFilters = {
       'flt.resourceFormat': 'video'
     };
     videoFilters = Object.assign(videoFilters, appliedFilters);
-    const videoCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, videoFilters, 1, 1));
+    const videoCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, videoFilters, start, length));
     let imageFilters = {
       'flt.resourceFormat': 'image'
     };
     imageFilters = Object.assign(imageFilters, appliedFilters);
-    const imageCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, imageFilters, 1, 1));
+    const imageCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, imageFilters, start, length));
     let interactiveFilters = {
       'flt.resourceFormat': 'interactive'
     };
     interactiveFilters = Object.assign(interactiveFilters, appliedFilters);
-    const interactiveCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, interactiveFilters, 1, 1));
+    const interactiveCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, interactiveFilters, start, length));
     let textFilters = {
       'flt.resourceFormat': 'text'
     };
     textFilters = Object.assign(textFilters, appliedFilters);
-    const textCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, textFilters, 1, 1));
+    const textCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, textFilters, start, length));
 
     // Questions
     let multipleChoiceFilters = {
       'flt.resourceFormat': 'multiple_choice_question'
     };
     multipleChoiceFilters = Object.assign(multipleChoiceFilters, appliedFilters);
-    const multipleChoiceCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, multipleChoiceFilters, 1, 1));
+    const multipleChoiceCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, multipleChoiceFilters, start, length));
     let multipleAnswerFilters = {
       'flt.resourceFormat': 'multiple_answer_question'
     };
     multipleAnswerFilters = Object.assign(multipleAnswerFilters, appliedFilters);
-    const multipleAnswerCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, multipleAnswerFilters, 1, 1));
+    const multipleAnswerCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, multipleAnswerFilters, start, length));
     let trueOrFalseFilters = {
       'flt.resourceFormat': 'true_false_question'
     };
     trueOrFalseFilters = Object.assign(trueOrFalseFilters, appliedFilters);
-    const trueOrFalseCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, trueOrFalseFilters, 1, 1));
+    const trueOrFalseCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, trueOrFalseFilters, start, length));
     let fillInTheBlankFilters = {
       'flt.resourceFormat': 'fill_in_the_blank_question'
     };
     fillInTheBlankFilters = Object.assign(fillInTheBlankFilters, appliedFilters);
-    const fillInTheBlankCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, fillInTheBlankFilters, 1, 1));
+    const fillInTheBlankCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, fillInTheBlankFilters, start, length));
     let multipleSelectImageFilters = {
       'flt.resourceFormat': 'hot_spot_image_question'
     };
     multipleSelectImageFilters = Object.assign(multipleSelectImageFilters, appliedFilters);
-    const multipleSelectImageCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, multipleSelectImageFilters, 1, 1));
+    const multipleSelectImageCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, multipleSelectImageFilters, start, length));
     let multipleSelectTextFilters = {
       'flt.resourceFormat': 'hot_spot_text_question'
     };
     multipleSelectTextFilters = Object.assign(multipleSelectTextFilters, appliedFilters);
-    const multipleSelectTextCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, multipleSelectTextFilters, 1, 1));
+    const multipleSelectTextCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, multipleSelectTextFilters, start, length));
     let highlightTextFilters = {
       'flt.resourceFormat': 'hot_text_highlight_question'
     };
     highlightTextFilters = Object.assign(highlightTextFilters, appliedFilters);
-    const highlightTextCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, highlightTextFilters, 1, 1));
+    const highlightTextCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, highlightTextFilters, start, length));
     let dragAndDropOrderFilters = {
       'flt.resourceFormat': 'hot_text_reorder_question'
     };
     dragAndDropOrderFilters = Object.assign(dragAndDropOrderFilters, appliedFilters);
-    const dragAndDropOrderCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, dragAndDropOrderFilters, 1, 1));
+    const dragAndDropOrderCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, dragAndDropOrderFilters, start, length));
 
     let openEndedQuestionFilters = {
       'flt.resourceFormat': 'open_ended_question'
     };
     openEndedQuestionFilters = Object.assign(openEndedQuestionFilters, appliedFilters);
-    const openEndedQuestionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, openEndedQuestionFilters, 1, 1));
+    const openEndedQuestionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, openEndedQuestionFilters, start, length));
 
 
     const culacCountPromise = component.get('activityService').getLearningMaps(appliedFilters, term);

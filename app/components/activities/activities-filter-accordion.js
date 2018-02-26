@@ -105,9 +105,7 @@ export default Ember.Component.extend(ModalMixin, {
      */
     onClickCheckbox: function(filterInfo, filterType) {
       let component = this;
-      let userId = component.get('session.id');
       component.sendAction('onClickCheckbox', filterInfo, filterType);
-      let selectedFilterItems = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`)) || component.get('selectedFilterItems');
       let routeName = Utils.getRoutePathLastOccurrence();
       let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
       //Route to current route if it's load inside activity route
