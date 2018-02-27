@@ -108,7 +108,9 @@ export default Ember.Component.extend({
    */
   onChange: Ember.observer('subjectId', function() {
     let component = this;
-    component.loadDataBySubject(component.get('subjectId'));
+    if (component.get('subjectId')) {
+      component.loadDataBySubject(component.get('subjectId'));
+    }
     return null;
   }),
 
@@ -118,7 +120,9 @@ export default Ember.Component.extend({
 
   didInsertElement: function() {
     let component = this;
-    component.loadDataBySubject(component.get('subjectId'));
+    if (component.get('subjectId')) {
+      component.loadDataBySubject(component.get('subjectId'));
+    }
   },
 
   // -------------------------------------------------------------------------
