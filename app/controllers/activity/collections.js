@@ -50,7 +50,7 @@ export default Ember.Controller.extend({
    * @property {Number}
    * Defines how many results should fetch
    */
-  PAGE_SIZE: 8,
+  PAGE_SIZE: 9,
 
   /**
    * @property {Number}
@@ -103,7 +103,7 @@ export default Ember.Controller.extend({
           Aggregator: collection.aggregator ? collection.aggregator : null,
           'Date Modified': moment(collection.lastModified).format('LLLL') || null,
           'Modified by': collection.lastModifiedBy,
-          License: collection.license ? collection.license : null,
+          License: collection.license ? collection.license.code : null,
           'Created': collection.owner.username,
           'Owner ID': collection.owner.id
         },
@@ -111,7 +111,7 @@ export default Ember.Controller.extend({
         educational: {
           'Audience': collection.audience,
           'Time Required': null,
-          'Grade Level': collection.gradd,
+          'Grade Level': collection.grade,
           'Learning Objective': collection.learningObjectives
         },
 
@@ -177,14 +177,10 @@ export default Ember.Controller.extend({
 
   // -------------------------------------------------------------------------
   // Events
-  init() {
-    let controller = this;
-    controller.set('isLoading', true);
-    controller.set('collections', Ember.A());
-    controller.set('OFFSET', 1);
-    controller.fetchSearchCollections();
-  },
 
+  init() {
+    this.set('isLoading', true);
+  },
 
   // -------------------------------------------------------------------------
   // Methods

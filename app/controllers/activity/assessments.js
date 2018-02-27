@@ -19,6 +19,11 @@ export default Ember.Controller.extend({
   searchService: Ember.inject.service('api-sdk/search'),
 
   /**
+   * @requires service:content
+   */
+  contentService: Ember.inject.service('api-sdk/content'),
+
+  /**
    * @requires controller:activity
    */
   activityController: Ember.inject.controller('activity'),
@@ -30,17 +35,21 @@ export default Ember.Controller.extend({
     showMoreResults: function() {
       let controller = this;
       controller.fetchSearchAssessments();
+    },
+
+    onPlayCollection(assessment) {
+      let controller = this;
+      controller.fetchAssessmentPullOutData(assessment.id);
+      controller.set('selectedAssessment', assessment);
+      controller.set('showPullOut', true);
     }
   },
 
   // -------------------------------------------------------------------------
   // Events
+
   init() {
-    let controller = this;
-    controller.set('isLoading', true);
-    controller.set('assessments', Ember.A());
-    controller.set('OFFSET', 1);
-    controller.fetchSearchAssessments();
+    this.set('isLoading', true);
   },
 
   //-------------------------------------------------------------------------
@@ -62,7 +71,7 @@ export default Ember.Controller.extend({
    * @property {Number}
    * Defines how many results should fetch
    */
-  PAGE_SIZE: 8,
+  PAGE_SIZE: 9,
 
   /**
    * @property {Number}
@@ -93,6 +102,115 @@ export default Ember.Controller.extend({
     return (PAGE_SIZE <= CUR_ITERATION_COUNT);
   }),
 
+  /**
+   * @property {Boolean}
+   * Show/Hide pull out
+   */
+  showPullOut: false,
+
+  /**
+   * Currently selected assessment data
+   */
+  selectedAssessment: null,
+
+  /**
+   * Asssessment Pullout Data
+   */
+  assessmentPullOutData: null,
+
+  /**
+   * Grouping the data to show more info  in pull out
+   */
+  groupData: Ember.computed('selectedAssessment', function() {
+    let assessment = this.get('selectedAssessment');
+    let resultSet = Ember.A();
+    if (assessment) {
+      resultSet = {
+        descriptive: {
+          title: assessment.title,
+          description: assessment.description
+        },
+
+        creation: {
+          'Creator ID': assessment.creator.id,
+          'Publisher': 'Gooru Org',
+          'Collaborator': assessment.collaboratorIDs,
+          'Instance Creator': assessment.owner.username,
+          'Original Creator': assessment.creator.username,
+          Aggregator: assessment.aggregator ? assessment.aggregator : null,
+          'Date Modified': moment(assessment.lastModified).format('LLLL') || null,
+          'Modified by': assessment.lastModifiedBy,
+          License: assessment.license ? assessment.license.code : null,
+          'Created': assessment.owner.username,
+          'Owner ID': assessment.owner.id
+        },
+
+        educational: {
+          'Audience': assessment.audience,
+          'Time Required': null,
+          'Grade Level': assessment.grade,
+          'Learning Objective': assessment.learningObjectives
+        },
+
+        media: {
+          'Keywords': assessment.keyPoints,
+          'Visibility': null
+        },
+
+
+        instructional: {
+          'Instructional Model': assessment.instructionalModel,
+          '21st Century Skills': assessment.skills
+        },
+
+        framework: {
+          subject: assessment.taxonomySet.subject,
+          course: assessment.taxonomySet.course,
+          domain: assessment.taxonomySet.domain,
+          standard: null
+        },
+
+        Internal: {
+          'ID': assessment.id,
+          'Deleted': null,
+          'Flagged': null
+        },
+
+        vector: {
+          relevance: assessment.relevance,
+          engagment: assessment.engagment,
+          efficacy: assessment.efficacy
+        }
+      };
+    }
+    return resultSet;
+  }),
+
+
+  /**
+   * Grouping header data to show more info  in pull out
+   */
+  groupHeader: Ember.computed('groupData', function() {
+    let resultHeader = Ember.A();
+    resultHeader = [Ember.Object.create({
+      header: 'extracted',
+      isEnabled: true
+    }),
+    Ember.Object.create({
+      header: 'curated',
+      isEnabled: true
+    }),
+    Ember.Object.create({
+      header: 'tagged',
+      isEnabled: true
+    }),
+    Ember.Object.create({
+      header: 'computed',
+      isEnabled: true
+    })
+    ];
+    return resultHeader;
+  }),
   // -------------------------------------------------------------------------
   // Actions
 
@@ -129,6 +247,17 @@ export default Ember.Controller.extend({
       controller.set('hitCount', assessments.get('hitCount'));
       controller.set('isLoading', false);
     });
+  },
+
+  fetchAssessmentPullOutData(assessmentId) {
+    let controller = this;
+    let assessmentPromise = Ember.RSVP.resolve(controller.get('contentService').getAssessmentById(assessmentId));
+    return Ember.RSVP.hash({
+      assessment: assessmentPromise
+    })
+      .then(function(hash) {
+        controller.set('assessmentPullOutData', hash.assessment);
+      });
   }
 
 

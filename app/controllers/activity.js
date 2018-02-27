@@ -126,9 +126,12 @@ export default Ember.Controller.extend({
     let formattedFilters = {};
     let delimiter = ',';
     switch (filterType) {
+    case 'category':
+      formattedFilters['flt.subjectClassification'] = categorizedFilterData[0] ? categorizedFilterData[0].id : '';
+      break;
     case 'subject':
       categorizedFilterData.map( filterData => {
-        formattedFilters['flt.subjectName'] = filterData.label;
+        formattedFilters['flt.subjectName'] = Utils.getSearchFilterTextBySubjectName(filterData.label);
       });
       break;
     case 'course':
@@ -147,7 +150,7 @@ export default Ember.Controller.extend({
       formattedFilters['flt.licenseCode'] = controller.getConcatenatedFilterString(categorizedFilterData, delimiter, 'id');
       break;
     case 'dok':
-      formattedFilters['flt.dok'] = controller.getConcatenatedFilterString(categorizedFilterData);
+      formattedFilters['flt.depthOfKnowledge'] = controller.getConcatenatedFilterString(categorizedFilterData);
       break;
     case 'publisher':
       delimiter = '~~';

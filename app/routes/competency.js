@@ -33,6 +33,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       route.set('selectedCategory', category.value);
       return route.loadTaxonomyData().then(({subjects}) => {
         let controller = this.get('controller');
+        controller.set('selectedCategory', category.value);
         controller.set('subjects', subjects);
         controller.incrementProperty('reloadCount');
       });
@@ -69,7 +70,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   },
 
   setupController: function(controller, model) {
+    let route = this;
     controller.set('subjects', model.subjects);
+    controller.set('selectedCategory', route.get('selectedCategory'));
   }
 
 });

@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { getSearchFilterTextBySubjectName } from 'admin-dataview/utils/utils';
 
 export default Ember.Component.extend({
 
@@ -72,16 +73,16 @@ export default Ember.Component.extend({
     term = term !== '' ? term : '*';
     component.set('isLoading', true);
     let mathsSubjectFilter = {
-      'flt.subjectName': 'math~~Mathematics'
+      'flt.subjectName': getSearchFilterTextBySubjectName('Math')
     };
     let scienceSubjectFilter = {
-      'flt.subjectName': 'science'
+      'flt.subjectName': getSearchFilterTextBySubjectName('science')
     };
     let socialScienceSubjectFilter = {
-      'flt.subjectName': 'Social Studies~~History~~History-Social Science~~Social Sciences'
+      'flt.subjectName': getSearchFilterTextBySubjectName('Social Sciences')
     };
     let ELAScienceSubjectFilter = {
-      'flt.subjectName': 'English Language Arts & Literacy~~English Language Arts~~English Language Arts/Literacy~~English Language Arts and Reading~~ELA'
+      'flt.subjectName': getSearchFilterTextBySubjectName('English Language Arts')
     };
     Ember.RSVP.hash({
       maths: component.get('activityService').getLearningMaps(mathsSubjectFilter, term),

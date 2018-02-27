@@ -5,7 +5,7 @@
     {{#if courses}}
       <div class="course-cards">
         {{#each courses as |course|}}
-          {{activity.course-card course=course}}
+          {{activity.course-card course=course onPlayCourse="onPlayCourse"}}
         {{/each}}
       </div>
       {{#if isShowMoreVisible}}
@@ -16,5 +16,12 @@
     {{else}}
       {{no-result-found}}
     {{/if}}
+    {{#app-pull-out showPullOut=showPullOut title=selectedCourse.title showMore=true as |section| }}
+      {{#if section.isLessContent}}
+        {{activities.course-pull-out-body course=selectedCourse courseData=coursePullOutData}}
+      {{else if section.isMoreContent}}
+        {{activities.course-pull-out-more-content}}
+      {{/if}}
+    {{/app-pull-out}}
   {{/if}}
 </div>

@@ -19,6 +19,10 @@ export default Ember.Controller.extend({
   searchService: Ember.inject.service('api-sdk/search'),
 
   /**
+   * @requires service:content
+   */
+  contentService: Ember.inject.service('api-sdk/content'),
+  /**
    * @requires controller:activity
    */
   activityController: Ember.inject.controller('activity'),
@@ -30,17 +34,19 @@ export default Ember.Controller.extend({
     showMoreResults: function() {
       let controller = this;
       controller.fetchSearchCourses();
+    },
+
+    onPlayCourse: function(course) {
+      let controller = this;
+      controller.set('selectedCourse', course);
     }
   },
 
   // -------------------------------------------------------------------------
   // Events
+
   init() {
-    let controller = this;
-    controller.set('isLoading', true);
-    controller.set('courses', Ember.A());
-    controller.set('OFFSET', 1);
-    controller.fetchSearchCourses();
+    this.set('isLoading', true);
   },
 
   //-------------------------------------------------------------------------
@@ -62,7 +68,7 @@ export default Ember.Controller.extend({
    * @property {Number}
    * Defines how many results should fetch
    */
-  PAGE_SIZE: 8,
+  PAGE_SIZE: 9,
 
   /**
    * @property {Number}
@@ -91,6 +97,107 @@ export default Ember.Controller.extend({
     let CUR_ITERATION_COUNT = controller.get('CUR_ITERATION_COUNT');
     let PAGE_SIZE = controller.get('PAGE_SIZE');
     return (PAGE_SIZE <= CUR_ITERATION_COUNT);
+  }),
+
+  /**
+   * @property {Array}
+   * Selectee course data
+   */
+  selectedCourse: null,
+
+  /**
+   * Grouping the data to show more info  in pull out
+   */
+  groupData: Ember.computed('selectedCourse', function() {
+    let course = this.get('selectedCourse');
+    let resultSet = Ember.A();
+    if (course) {
+      // resultSet = {
+      //   descriptive: {
+      //     title: course.title,
+      //     description: course.description
+      //   },
+      //
+      //   creation: {
+      //     'Creator ID': course.creatorId,
+      //     'Created On': moment(course.createdDate).format('LLLL') || null,
+      //     'Publisher': 'Gooru Org',
+      //     'Collaborator': course.collaboratorIDs,
+      //     'Instance Creator': course.owner.username,
+      //     'Original Creator': course.creator.username,
+      //     Aggregator: course.aggregator ? course.aggregator : null,
+      //     'Modified On': moment(course.lastModified).format('LLLL') || null,
+      //     'Modified by': course.lastModifiedBy,
+      //     License: course.license ? course.license.code : null,
+      //     'Created': course.owner.username,
+      //     'Owner ID': course.owner.id
+      //   },
+      //
+      //   educational: {
+      //     'Audience': course.audience,
+      //     'Time Required': null,
+      //     'Grade Level': course.grade,
+      //     'Learning Objective': course.learningObjectives
+      //   },
+      //
+      //   media: {
+      //     'Keywords': course.keyPoints,
+      //     'Visibility': null
+      //   },
+      //
+      //
+      //   instructional: {
+      //     'Instructional Model': course.instructionalModel,
+      //     '21st Century Skills': course.skills
+      //   },
+      //
+      //   framework: {
+      //     subject: course.taxonomySet.subject,
+      //     course: course.taxonomySet.course,
+      //     domain: course.taxonomySet.domain,
+      //     standard: null
+      //   },
+      //
+      //   Internal: {
+      //     'ID': course.id,
+      //     'Deleted': null,
+      //     'Flagged': null
+      //   },
+      //
+      //   vector: {
+      //     relevance: course.relevance,
+      //     engagment: course.engagment,
+      //     efficacy: course.efficacy
+      //   }
+      // };
+    }
+    return resultSet;
+  }),
+
+
+  /**
+   * Grouping header data to show more info  in pull out
+   */
+  groupHeader: Ember.computed('groupData', function() {
+    let resultHeader = Ember.A();
+    resultHeader = [Ember.Object.create({
+      header: 'extracted',
+      isEnabled: true
+    }),
+    Ember.Object.create({
+      header: 'curated',
+      isEnabled: true
+    }),
+    Ember.Object.create({
+      header: 'tagged',
+      isEnabled: true
+    }),
+    Ember.Object.create({
+      header: 'computed',
+      isEnabled: true
+    })
+    ];
+    return resultHeader;
   }),
 
   // -------------------------------------------------------------------------

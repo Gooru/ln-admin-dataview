@@ -28,6 +28,12 @@ export default Ember.Component.extend({
     function() {
       return TaxonomyTag.getTaxonomyTags(this.get('course.taxonomy'));
     }
-  )
+  ),
+
+  actions: {
+    onPlayCourse: function(course) {
+      this.sendAction('onPlayCourse', course);
+    }
+  }
 
 });
