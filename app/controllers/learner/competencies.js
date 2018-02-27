@@ -154,8 +154,7 @@ export default Ember.Controller.extend({
     subjectChange: function(subject) {
       let controller = this;
       controller.set('subjectId', subject.id);
-
-
+      controller.set('subjectTitle', subject.subjectTitle);
     }
   },
 
@@ -176,6 +175,7 @@ export default Ember.Controller.extend({
       let subject = subjects.objectAt(0);
       controller.set('taxonomySubjects', subjects);
       controller.set('subjectId', subject.id);
+      controller.set('subjectTitle', subject.subjectTitle);
     });
   }
 

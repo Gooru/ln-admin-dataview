@@ -1,46 +1,51 @@
 <div class="competencies-report">
   <div class="left-panel">
-    <div class="header">
-      <div class="panel-header">
-        <div class="pull-left panel-back-arrow" {{action 'onClickBackButton'}}>
-          {{app-icon name='ic_arrow_back'}}
-        </div>
+    <div class="header {{if (or isCourseModeEnabled isListModeEnabled) ''  'domain-header'}}">
+      <div class="panel-header {{if (or isCourseModeEnabled isListModeEnabled) 'course-list-view'  'domain-view'}}">
         <div class="pull-left panel-title">
-          <span>Competency Report</span>
+          <span>{{subjectTitle}}</span>
         </div>
       </div>
+      {{#if (or isCourseModeEnabled isListModeEnabled)}}
+      {{else}}
+        <div class="skyline">
+          <span class="text">Skyline </span>
+          <label class="switch"> <input type="checkbox">  <span class="slider round"></span>  </label>
+        </div>
+      {{/if}}
       <div class="nav-header">
         {{learner.competencies-matrix-header onChangeHeaderView="onChangeHeaderView"}}
       </div>
     </div>
 
-    {{#if isListModeEnabled}}
-      <div class="report-panel">
-        <div class="report-panel-body">
-          {{charts.competencies-chart data=userCompetencyStats}}
+    <div class="body">
+      {{#if isListModeEnabled}}
+        <div class="report-panel">
+          <div class="report-panel-body">
+            {{charts.competencies-chart data=userCompetencyStats}}
+          </div>
+          <div class="summary-accordion">
+            {{#each userCompetencies as | competency |}}
+              {{learner.competencies-accordion-summary competency=competency userId=userId}}
+            {{/each}}
+          </div>
         </div>
-        <div class="summary-accordion">
-          {{#each userCompetencies as | competency |}}
-            {{learner.competencies-accordion-summary competency=competency userId=userId}}
-          {{/each}}
-        </div>
-      </div>
 
-    {{else if isCourseModeEnabled }}
-      {{charts.competency-matrix-chart userId=userId subjectId=subjectId onCompetencyPullOut='onCompetencyPullOut'}}
-    {{else}}
-      {{charts.competency-matrix-domain-chart userId=userId  subjectId=subjectId onCompetencyPullOut='onCompetencyPullOut'}}
-    {{/if}}
+        {{else if isCourseModeEnabled }} {{charts.competency-matrix-chart userId=userId subjectId=subjectId onCompetencyPullOut='onCompetencyPullOut'}}
+      {{else}}
+        {{charts.competency-matrix-domain-chart userId=userId  subjectId=subjectId onCompetencyPullOut='onCompetencyPullOut'}}
+      {{/if}}
 
-    {{#app-pull-out showPullOut=showPullOut title=description description=title competency=competency showMore=showMore isLoading=isLoading as |section|}}
-      {{#if section.isLessContent}}
-        {{learner.competencies-pull-out-body
+      {{#app-pull-out showPullOut=showPullOut title=description description=title competency=competency showMore=showMore isLoading=isLoading as |section|}}
+        {{#if section.isLessContent}}
+          {{learner.competencies-pull-out-body
        collection=collection
        userId=userId
        isLoading=isLoading
      }}
-      {{/if}}
-    {{/app-pull-out}}
+        {{/if}}
+      {{/app-pull-out}}
+    </div>
   </div>
 
   <div class="right-panel">
