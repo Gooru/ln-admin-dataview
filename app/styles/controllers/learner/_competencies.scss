@@ -89,7 +89,7 @@
       .switch {
         position: relative;
         display: inline-block;
-        width: 35px;
+        width: 30px;
         height: 13px;
         margin-top: 10px;
       }
@@ -131,9 +131,9 @@
       }
 
       input:checked + .slider:before {
-        -webkit-transform: translateX(26px);
-        -ms-transform: translateX(26px);
-        transform: translateX(26px);
+        -webkit-transform: translateX(17px);
+        -ms-transform: translateX(17px);
+        transform: translateX(17px);
       }
 
       .slider.round {
