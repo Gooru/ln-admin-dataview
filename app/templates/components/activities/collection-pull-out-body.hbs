@@ -57,13 +57,13 @@
         {{t 'activities.pull-out.content'}}
       </div>
       <div class="items">
-        {{#each collectionData.content as |content|}}
+        {{#each (or collectionData.content collectionData.question) as |content|}}
           <div class="content-item ellipsis">
-            <div class="{{if (eq content.content_format 'question') content.content_format content.content_subformat}}">
+            <div class="{{if (eq type 'assessment') 'question'}} {{if (eq content.content_format 'question') content.content_format content.content_subformat}}">
               <i class="icon"> </i>
             </div>
             <span class="content-title">
-                {{content.title}}
+                {{safe-html content.title}}
             </span>
           </div>
         {{/each}}

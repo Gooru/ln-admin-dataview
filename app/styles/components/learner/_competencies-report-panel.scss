@@ -1,14 +1,12 @@
 .competencies-report-panel {
   .panel-tabs {
     width: 240px;
-    border-radius: 4px;
-    background-color: #ffffff;
-    // box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+
     .competencies-header {
       width: 100%;
       display: inline-block;
-      background: white;
       border-bottom: 1px solid #cccac6;
+      padding: 0;
 
       li {
         display: inline-block;
@@ -34,7 +32,7 @@
 
         span {
           width: 117px;
-          font-size: 20px;
+          font-size: 15px;
           text-align: center;
           opacity: 1;
           color: #0072bc;

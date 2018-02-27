@@ -6,7 +6,7 @@
     <div class="courses pull-left">
       <ul>
         {{#each taxonomyDomains as |taxonomyDomain index |}}
-          <li style="height:{{if (not taxonomyCourse.heightOfCourseTitleContainer) '50' taxonomyCourse.heightOfCourseTitleContainer}}px">
+          <li>
            {{taxonomyDomain.domainSeq}}.  {{taxonomyDomain.domainName}}
           </li>
         {{/each}}

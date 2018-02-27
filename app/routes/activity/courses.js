@@ -35,6 +35,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     //Set search term only if available
     if ( model.term !== '') {
       controller.set('term', model.term);
+    } else {
+      //Show search results wihout query term
+      controller.fetchSearchCourses();
     }
   }
 

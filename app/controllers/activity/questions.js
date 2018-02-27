@@ -64,7 +64,7 @@ export default Ember.Controller.extend({
    * @property {Number}
    * Defines how many results should fetch
    */
-  PAGE_SIZE: 8,
+  PAGE_SIZE: 9,
 
   /**
    * @property {Number}
@@ -232,12 +232,9 @@ export default Ember.Controller.extend({
 
   // -------------------------------------------------------------------------
   // Events
+
   init() {
-    let controller = this;
-    controller.set('isLoading', true);
-    controller.set('questions', Ember.A());
-    controller.set('OFFSET', 1);
-    controller.fetchSearchQuestions();
+    this.set('isLoading', true);
   },
 
 

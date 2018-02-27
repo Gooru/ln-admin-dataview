@@ -2,13 +2,16 @@
   width: inherit;
   height: inherit;
   border-radius: 4px;
-  // box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
   padding: 20px 20px 20px 0;
   display: flex;
-  // height: calc(100vh - 63px);
   .left-panel {
-    width: 716px;
-    background-color: #fff;
+    width: 716px
+    padding: 20px;
+    border-radius: 4px;
+    background-color: $white;
+    box-shadow: 2px -1px 4px 0 rgba(0, 0, 0, 0.1);
+    margin-right: 60px;
+
 
     .app-pull-out {
       top: 63px;
@@ -269,6 +272,8 @@
 
   .right-panel {
     float: right;
-    background: #fff;
+    background: $white;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
   }
 }

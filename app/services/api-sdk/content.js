@@ -63,6 +63,38 @@ export default Ember.Service.extend({
           resolve(service.get('contentSerializer').normalizeQuestionContent(response));
         }, reject);
     });
+  },
+
+  /**
+   * Fetch the assessment content info by id
+   * @returns {Object}
+   */
+  getAssessmentById: function(assessmentId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('contentAdapter')
+        .getAssessmentById(assessmentId)
+        .then(function(response) {
+          resolve(service.get('contentSerializer').normalizeAssessmentContent(response));
+        }, reject);
+    });
+  },
+
+  /**
+   * Fetch the course content info by id
+   * @returns {Object}
+   */
+  getCourseById: function(courseId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('contentAdapter')
+        .getCourseById(courseId)
+        .then(function(response) {
+          resolve(service.get('contentSerializer').normalizeCourseContent(response));
+        }, reject);
+    });
   }
 
 

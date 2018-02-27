@@ -1,0 +1,55 @@
+<div>
+  <div class="header">
+    <div class="author-info">
+      <span class="created-by">  {{t "common.created-by" }} </span>
+      <img class="img-responsive thumbnail-img" src="{{course.creator.avatarUrl}}">
+      <span class="username">{{course.creator.username}}</span>
+      <span class="publish-date">on {{format-date course.createdData 'DD MMMM, YYYY'}}</span>
+    </div>
+  </div>
+
+  <div class="body">
+    <div class="course-info">
+      <div class="title">
+        {{course.title}}
+      </div>
+      <div class="description">
+        <div class="thumbnail-img">
+          <img class="img-responsive" src="{{course.thumbnailUrl}}"/>
+        </div>
+        <div class="content">
+          {{course.description}}
+        </div>
+      </div>
+    </div>
+
+    <div class="taxonomy-info">
+      <div class="title">
+        {{t "activities.pull-out.taxonomy-title"}}
+      </div>
+      <div class="items">
+        {{#if course.taxonomySet.subject}}
+          <div class="subject item-box">
+            {{#each course.taxonomySet.subject as |subject|}}
+              {{subject}}
+            {{/each}}
+            {{#each course.taxonomySet.course as |course|}}
+              > {{course}}
+            {{/each}}
+          </div>
+        {{else}}
+          <div class="subject item-box">
+            No Subject Available
+          </div>
+        {{/if}}
+        {{#if course.taxonomySet.domain}}
+          <div class="domain item-box">
+            {{#each course.taxonomySet.domain as |domain|}}
+              {{domain}}
+            {{/each}}
+          </div>
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</div>
