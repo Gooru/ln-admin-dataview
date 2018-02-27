@@ -1,16 +1,18 @@
 <div class="competencies-report">
   <div class="left-panel">
-    <div class="header">
-      <div class="panel-header">
+    <div class="header {{if (or isCourseModeEnabled isListModeEnabled) ''  'domain-header'}}">
+      <div class="panel-header {{if (or isCourseModeEnabled isListModeEnabled) 'course-list-view'  'domain-view'}}">
         <div class="pull-left panel-title">
           <span>{{subjectTitle}}</span>
         </div>
       </div>
-      <div class="skyline">
-        <span class="text">Skyline </span>
-        <label class="switch"> <input type="checkbox">  <span class="slider round"></span>  </label>
-
-      </div>
+      {{#if (or isCourseModeEnabled isListModeEnabled)}}
+      {{else}}
+        <div class="skyline">
+          <span class="text">Skyline </span>
+          <label class="switch"> <input type="checkbox">  <span class="slider round"></span>  </label>
+        </div>
+      {{/if}}
       <div class="nav-header">
         {{learner.competencies-matrix-header onChangeHeaderView="onChangeHeaderView"}}
       </div>
