@@ -174,3 +174,23 @@ export function formatDate(date, format) {
   format = format || 'dddd, MMMM Do, YYYY h:mm A';
   return moment(date).format(format);
 }
+
+/**
+ * TODO customized search text for limited subjects on search
+ * @param {String} subjectName
+ */
+export function getSearchFilterTextBySubjectName(subjectName) {
+  let subjectfilter = subjectName;
+  switch (subjectName) {
+  case 'Math':
+    subjectfilter = 'Math~~Mathematics';
+    break;
+  case 'English Language Arts':
+    subjectfilter = 'English Language Arts & Literacy~~English Language Arts~~English Language Arts/Literacy~~English Language Arts and Reading~~ELA';
+    break;
+  case 'Social Sciences':
+    subjectfilter = 'Social Studies~~History~~History-Social Science~~Social Sciences';
+    break;
+  }
+  return subjectfilter;
+}

@@ -62,6 +62,14 @@ export default Ember.Object.extend({
     return collectionData ? collectionData : {};
   },
 
+  /**
+   * Normalized data of assessment by id
+   * @return {Object}
+   */
+  normalizeAssessmentContent: function(assessmentData) {
+    return assessmentData ? assessmentData : {};
+  },
+
 
   /**
    * Normalized data of resource by id

@@ -34,6 +34,12 @@ export default Ember.Component.extend({
       });
       return TaxonomyTag.getTaxonomyTags(standards);
     }
-  )
+  ),
+
+  actions: {
+    onPlayCollection: function(assessment) {
+      this.sendAction('onPlayCollection', assessment);
+    }
+  }
 
 });

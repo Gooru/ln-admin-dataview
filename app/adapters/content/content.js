@@ -9,7 +9,7 @@ export default Ember.Object.extend({
 
   session: Ember.inject.service('session'),
 
-  namespaceResource: '/api/nucleus/v1',
+  namespace: '/api/nucleus/v1',
 
 
   /**
@@ -20,7 +20,7 @@ export default Ember.Object.extend({
    */
   getResourceById: function(resourceId) {
     const adapter = this;
-    const namespace = adapter.get('namespaceResource');
+    const namespace = adapter.get('namespace');
     const resource = 'resources';
     const url = `${namespace}/${resource}/${resourceId}`;
     const options = {
@@ -43,9 +43,27 @@ export default Ember.Object.extend({
    */
   getCollectionById: function(collectionId) {
     const adapter = this;
-    const namespace = adapter.get('namespaceResource');
+    const namespace = adapter.get('namespace');
     const resource = 'collections';
     const url = `${namespace}/${resource}/${collectionId}`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Reads a assessment by id
+   *
+   * @param {string} resourceId
+   * @returns {Promise}
+   */
+  getAssessmentById: function(assessmentId) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/assessments/${assessmentId}`;
     const options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
@@ -63,7 +81,7 @@ export default Ember.Object.extend({
    */
   getQuestionById: function(questionId) {
     const adapter = this;
-    const namespace = adapter.get('namespaceResource');
+    const namespace = adapter.get('namespace');
     const question = 'questions';
     const url = `${namespace}/${question}/${questionId}`;
     const options = {

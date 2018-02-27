@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import Utils from 'admin-dataview/utils/taxonomy';
+import { getSearchFilterTextBySubjectName } from 'admin-dataview/utils/utils';
 import {
   CONTENT_TYPES,
   TAXONOMY_LEVELS
@@ -316,25 +317,15 @@ export default Ember.Controller.extend({
    */
   getSearchContentCount: function(selectedNode) {
     let filters = selectedNode.filters;
+    let selectedCategory = this.get('selectedCategory');
     let query = '*';
     let start = 1;
     let length = 3;
     const contentCountData = [];
 
     //TODO shouldn't handle it manually, just a quick fix to fetch search results
-    if (selectedNode.type === 'subject' && selectedNode.name === 'Math') {
-      filters = {
-        'flt.subjectName': 'Math~~Mathematics'
-      };
-    } else if (selectedNode.type === 'subject' && selectedNode.name === 'English Language Arts') {
-      filters = {
-        'flt.subjectName': 'English Language Arts & Literacy~~English Language Arts~~English Language Arts/Literacy~~English Language Arts and Reading~~ELA'
-      };
-    } else if (selectedNode.type === 'subject' && selectedNode.name === 'Social Sciences') {
-      filters = {
-        'flt.subjectName': 'Social Studies~~History~~History-Social Science~~Social Sciences'
-      };
-    }
+    filters['flt.subjectName'] = selectedNode.type === 'subject' ? getSearchFilterTextBySubjectName(selectedNode.name) : '';
+    filters['flt.subjectClassification'] = selectedCategory;
 
     const resourceCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(query, filters, start, length));
     const questionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(query, filters, start, length));

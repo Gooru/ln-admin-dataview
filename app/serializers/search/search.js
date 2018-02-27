@@ -78,7 +78,10 @@ export default Ember.Object.extend(ConfigurationMixin, {
       id: result.id,
       title: result.title,
       description: result.description,
+      createdDate: result.addDate,
       thumbnailUrl: thumbnailUrl,
+      lastModified: result.lastModified,
+      lastModifiedBy: result.lastModifiedBy,
       subject: result.subjectBucket,
       subjectName: result.taxonomy && result.taxonomy.subject ?
         result.taxonomy.subject[0] : null,
@@ -86,6 +89,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
       isVisibleOnProfile: result.visibleOnProfile,
       isPublished: result.publishStatus === 'published',
       unitCount: result.unitCount,
+      assessmentCount: result.assessmentCount,
+      collectionCount: result.collectionCount,
+      lessonCount: result.lessonCount,
       taxonomy: serializer
         .get('taxonomySerializer')
         .normalizeTaxonomyArray(taxonomyInfo, TAXONOMY_LEVELS.COURSE),
@@ -312,6 +318,16 @@ export default Ember.Object.extend(ConfigurationMixin, {
         avatarUrl: creatorThumbnailUrl,
         username: assessmentData.creatornameDisplay
       }),
+      taxonomySet: assessmentData.taxonomySet,
+      createdDate: assessmentData.addDate,
+      collaboratorIDs: assessmentData.collaboratorIds,
+      grade: assessmentData.grade,
+      instructionalModel: assessmentData.instructionalMethod,
+      lastModified: assessmentData.lastModified,
+      lastModifiedBy: assessmentData.lastModifiedBy,
+      license: assessmentData.license,
+      audience: assessmentData.audience,
+      keyPoints: assessmentData.keyPoints,
       efficacy: assessmentData.efficacy ? assessmentData.efficacy : null,
       relevance: assessmentData.relevance ? assessmentData.relevance : null,
       engagement: assessmentData.engagement ? assessmentData.engagement : null
