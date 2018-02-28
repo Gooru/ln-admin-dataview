@@ -150,7 +150,7 @@ export default Ember.Component.extend({
       });
     } else {
       skylineElements.each(function(index, element) {
-        component.$(element).attr('class', 'skyline hidden');
+        component.$(element).attr('class', 'skyline disable-skyline');
       });
     }
   }),
@@ -218,9 +218,9 @@ export default Ember.Component.extend({
       if (index < (indexSize - 1)) {
         let x2 = parseInt(component.$(skylineElements[(index + 1)]).attr('cx'));
         let y2 = component.$(skylineElements[(index + 1)]).attr('cy');
-        svg.append('line').attr('x1', x1).attr('y1', y1).attr('x2', x2).attr('y2', y2).attr('class', 'skyline hidden');
+        svg.append('line').attr('x1', x1).attr('y1', y1).attr('x2', x2).attr('y2', y2).attr('class', 'skyline disable-skyline');
       }
-      svg.append('circle').attr('cx', x1).attr('cy', y1).attr('r', 3).attr('fill', '#fff').attr('class', 'skyline hidden');
+      svg.append('circle').attr('cx', x1).attr('cy', y1).attr('r', 3).attr('fill', '#fff').attr('class', 'skyline disable-skyline');
     });
     cards.exit().remove();
   },
