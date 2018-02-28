@@ -16,6 +16,21 @@
     clear: both;
   }
 
+  .block-container {
+    position: absolute;
+    display: block;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    cursor: default;
+
+    .selected-competency {
+      box-shadow: 0 0 6px 5px rgba(255, 255, 255, 0.5);
+      position: relative;
+    }
+  }
+
   .subject-navigation-chart {
     width: 100%;
 
@@ -129,6 +144,7 @@
       width: 440px;
       overflow-x: auto;
     }
+
     .matrix-chart-container::-webkit-scrollbar {
       height: 6px;
       width: 8px;
@@ -143,6 +159,7 @@
     #competency-matrix-chart {
       margin-left: 20px;
       margin-bottom: 20px;
+      position: relative;
 
       .competency {
         stroke: #FBFBFB;
