@@ -1,4 +1,8 @@
 import Ember from 'ember';
+import {
+  RESOURCE_TYPES
+} from 'admin-dataview/config/config';
+
 
 export default Ember.Controller.extend({
 
@@ -85,6 +89,12 @@ export default Ember.Controller.extend({
    */
   selectedSubjectCategory: 'k_12',
 
+  /**
+   * It  will have default competency page Enabled
+   * @type {String}
+   */
+  isCompetency: true,
+
 
   //------------------------------------------------------------------------
   // actions
@@ -155,6 +165,33 @@ export default Ember.Controller.extend({
       let controller = this;
       controller.set('subjectId', subject.id);
       controller.set('subjectTitle', subject.subjectTitle);
+    },
+
+    competencyTabs: function(tabs) {
+      let controller = this;
+      controller.set('isCompetency', tabs === 'competency');
+      controller.set('isJourney', tabs === 'journey');
+    },
+    /**
+     * @function onClickExploreButton
+     * Action triggered when user click on explore button
+     */
+    onClickExploreButton: function(routeTo) {
+      let controller = this;
+      if (routeTo === 'activities') {
+        let queryParams = {
+          'resource': RESOURCE_TYPES[0]
+        };
+        controller.transitionToRoute('learner.activities', {
+          queryParams
+        });
+      } else if (routeTo === 'courses') {
+        controller.transitionToRoute('learner.journeys', controller.get('userId'));
+      }
+    },
+    onExploreJourneyTaken: function() {
+      let controller = this;
+      controller.transitionToRoute('learner.journeys', controller.get('userId'));
     }
   },
 

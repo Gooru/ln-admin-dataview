@@ -1,7 +1,7 @@
 <ul class="competency-group">
-  {{#each taxonomySubjects as | subject index |}}
+  {{#each taxonomySubjects as | subject |}}
     <li class="{{if (eq subject.subjectTitle  isSelectedSubject) 'subject-active' ''}}">
-      <div class="competency-title" {{action 'chooseSubject' subject index}}>
+      <div class="competency-title" {{action 'chooseSubject' subject }}>
         <span>{{subject.subjectTitle}} </span>
       </div>
       <div class="competency-badge"></div>

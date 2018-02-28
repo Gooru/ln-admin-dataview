@@ -1,55 +1,76 @@
 <div class="competencies-report">
   <div class="left-panel">
-    <div class="header {{if (or isCourseModeEnabled isListModeEnabled) ''  'domain-header'}}">
-      <div class="panel-header {{if (or isCourseModeEnabled isListModeEnabled) 'course-list-view'  'domain-view'}}">
-        <div class="pull-left panel-title">
-          <span>{{subjectTitle}}</span>
-        </div>
-      </div>
-      {{#if (or isCourseModeEnabled isListModeEnabled)}}
-      {{else}}
-        <div class="skyline">
-          <span class="text">Skyline </span>
-          <label class="switch"> <input type="checkbox">  <span class="slider round"></span>  </label>
-        </div>
-      {{/if}}
-      <div class="nav-header">
-        {{learner.competencies-matrix-header onChangeHeaderView="onChangeHeaderView"}}
-      </div>
-    </div>
-
-    <div class="body">
-      {{#if isListModeEnabled}}
-        <div class="report-panel">
-          <div class="report-panel-body">
-            {{charts.competencies-chart data=userCompetencyStats}}
-          </div>
-          <div class="summary-accordion">
-            {{#each userCompetencies as | competency |}}
-              {{learner.competencies-accordion-summary competency=competency userId=userId}}
-            {{/each}}
+    {{#if isCompetency}}
+      <div class="header {{if (or isCourseModeEnabled isListModeEnabled) ''  'domain-header'}}">
+        <div class="panel-header {{if (or isCourseModeEnabled isListModeEnabled) 'course-list-view'  'domain-view'}}">
+          <div class="pull-left panel-title">
+            <span>{{subjectTitle}}</span>
           </div>
         </div>
+        {{#if (or isCourseModeEnabled isListModeEnabled)}}
+        {{else}}
+          <div class="skyline">
+            <span class="text">Skyline </span>
+            <label class="switch"> <input type="checkbox">  <span class="slider round"></span>  </label>
+          </div>
+        {{/if}}
+        <div class="nav-header">
+          {{learner.competencies-matrix-header onChangeHeaderView="onChangeHeaderView"}}
+        </div>
+      </div>
+      <div class="body">
+        {{#if isListModeEnabled}}
+          <div class="report-panel">
+            <div class="report-panel-body">
+              {{charts.competencies-chart data=userCompetencyStats}}
+            </div>
+            <div class="summary-accordion">
+              {{#each userCompetencies as | competency |}}
+                {{learner.competencies-accordion-summary competency=competency userId=userId}}
+              {{/each}}
+            </div>
+          </div>
 
-        {{else if isCourseModeEnabled }} {{charts.competency-matrix-chart userId=userId subjectId=subjectId onCompetencyPullOut='onCompetencyPullOut'}}
-      {{else}}
-        {{charts.competency-matrix-domain-chart userId=userId  subjectId=subjectId onCompetencyPullOut='onCompetencyPullOut'}}
-      {{/if}}
+          {{else if isCourseModeEnabled }} {{charts.competency-matrix-chart userId=userId subjectId=subjectId onCompetencyPullOut='onCompetencyPullOut'}}
+        {{else}}
+          {{charts.competency-matrix-domain-chart userId=userId  subjectId=subjectId onCompetencyPullOut='onCompetencyPullOut'}}
+        {{/if}}
 
-      {{#app-pull-out showPullOut=showPullOut title=description description=title competency=competency showMore=showMore isLoading=isLoading as |section|}}
-        {{#if section.isLessContent}}
-          {{learner.competencies-pull-out-body
+        {{#app-pull-out showPullOut=showPullOut title=description description=title competency=competency showMore=showMore isLoading=isLoading as |section|}}
+          {{#if section.isLessContent}}
+            {{learner.competencies-pull-out-body
        collection=collection
        userId=userId
        isLoading=isLoading
      }}
-        {{/if}}
-      {{/app-pull-out}}
-    </div>
+          {{/if}}
+        {{/app-pull-out}}
+      </div>
+    {{else}}
+      <div class="time-spent-activities report-panel">
+        <span>{{t "learner.time-spent-activities"}} </span>
+        <div class="report-panel-body">
+          {{charts.time-spent-activities data=userTimeSpentStats}} {{learner.explore-button routeTo="activities" onClickExploreButton="onClickExploreButton"}}
+        </div>
+      </div>
+      <div class="time-spent-courses report-panel">
+        <span>{{t "learner.time-spent-activities"}} </span>
+        <div class="report-panel-body">
+          {{charts.time-spent-courses data=userStatsByCourse userId=userId}} {{learner.explore-button routeTo="courses" onClickExploreButton="onClickExploreButton"}}
+        </div>
+      </div>
+
+      <div class="courses-independent-journey report-panel">
+        <span>{{t "learner.courses-independent-journeys"}} </span>
+          <div class="report-panel-body" {{action 'onExploreJourneyTaken'}}>
+            {{charts.courses-independent-journey data=userJourneyStats}} {{learner.explore-button}}
+          </div>
+      </div>
+    {{/if}}
   </div>
 
   <div class="right-panel">
-    {{learner.competencies-report-panel taxonomySubjects=taxonomySubjects subjectChange='subjectChange'}}
+    {{learner.competencies-report-panel taxonomySubjects=taxonomySubjects subjectChange='subjectChange' competencyTabs='competencyTabs'}}
   </div>
 
 </div>
