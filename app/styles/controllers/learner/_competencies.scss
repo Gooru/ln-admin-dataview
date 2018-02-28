@@ -94,64 +94,6 @@
         font-size: 16px;
         color: #b3b3be;
       }
-
-      .switch {
-        position: relative;
-        display: inline-block;
-        width: 30px;
-        height: 13px;
-        margin-top: 10px;
-      }
-      /* The slider */
-      .slider {
-        position: absolute;
-        cursor: pointer;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background-color: #ccc;
-        -webkit-transition: 0.4s;
-        transition: 0.4s;
-      }
-
-      .slider:before {
-        position: absolute;
-        content: "";
-        height: 15px;
-        width: 15px;
-        left: 0;
-        bottom: -1px;
-        background-color: #006eb5;
-        -webkit-transition: 0.4s;
-        transition: 0.4s;
-      }
-
-      .switch input {
-        display: none;
-      }
-
-      input:checked + .slider {
-        background-color: #2196F3;
-      }
-
-      input:focus + .slider {
-        box-shadow: 0 0 1px #2196F3;
-      }
-
-      input:checked + .slider:before {
-        -webkit-transform: translateX(17px);
-        -ms-transform: translateX(17px);
-        transform: translateX(17px);
-      }
-
-      .slider.round {
-        border-radius: 34px;
-      }
-
-      .slider.round:before {
-        border-radius: 50%;
-      }
     }
 
     .nav-header {
@@ -315,7 +257,6 @@
         font-size: 15px;
         text-align: center;
         color: #4a4a4a;
-        
       }
 
       .report-panel-body {

@@ -95,6 +95,12 @@ export default Ember.Controller.extend({
    */
   isCompetency: true,
 
+  /**
+   * It will indicates the state of skyline.
+   * @type {Boolean}
+   */
+  isSkylineEnabled: false,
+
 
   //------------------------------------------------------------------------
   // actions
@@ -103,6 +109,13 @@ export default Ember.Controller.extend({
 
     onClickBackButton: function() {
       this.transitionToRoute('learner');
+    },
+
+    /**
+     * Trigger when skyline toggle button got changed
+     */
+    onChangeSkyline: function(value) {
+      this.set('isSkylineEnabled', value);
     },
 
     /**

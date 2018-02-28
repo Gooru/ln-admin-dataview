@@ -11,7 +11,8 @@
         {{else}}
           <div class="skyline">
             <span class="text">Skyline </span>
-            <label class="switch"> <input type="checkbox">  <span class="slider round"></span>  </label>
+            {{app-switch  onOptionSwitch='onChangeSkyline'}}
+
           </div>
         {{/if}}
         <div class="nav-header">
@@ -33,7 +34,7 @@
 
         {{else if isCourseModeEnabled }} {{charts.competency-matrix-chart userId=userId subjectId=subjectId onCompetencyPullOut='onCompetencyPullOut' showPullOut=showPullOut}}
       {{else}}
-        {{charts.competency-matrix-domain-chart userId=userId  subjectId=subjectId onCompetencyPullOut='onCompetencyPullOut' showPullOut=showPullOut}}
+        {{charts.competency-matrix-domain-chart userId=userId  subjectId=subjectId onCompetencyPullOut='onCompetencyPullOut' showPullOut=showPullOut isSkylineEnabled=isSkylineEnabled}}
       {{/if}}
 
         {{#app-pull-out showPullOut=showPullOut title=description description=title competency=competency showMore=showMore isLoading=isLoading as |section|}}

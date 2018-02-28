@@ -15,7 +15,8 @@
     width: 100%;
     height: 100%;
     z-index: 1;
-   cursor: default;
+    cursor: default;
+
     .selected-competency {
       box-shadow: 0 0 6px 5px rgba(255, 255, 255, 0.5);
       position: relative;
@@ -183,10 +184,23 @@
         stroke-width: 0.5px;
       }
 
-      .skyline {
+      line {
         stroke: #FFFFFF;
         stroke-width: 2;
         opacity: 0.7;
+      }
+
+      .skyline-data {
+        transition-property: visibility, opacity;
+        transition-duration: 0s, 1s;
+
+        .hidden {
+          opacity: 0;
+          visibility: hidden;
+          transition-property: opacity, visibility;
+          transition-duration: 1s, 0s;
+          transition-delay: 0s, 1s;
+        }
       }
     }
   }

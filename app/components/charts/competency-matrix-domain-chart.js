@@ -123,11 +123,35 @@ export default Ember.Component.extend({
   /**
    * Trigger whenever pull out state got changed.
    */
-  onShowPullOut: Ember.observer('showPullOut', function() {
+  onChangeShowPullOut: Ember.observer('showPullOut', function() {
     let component = this;
     let showPullOut = component.get('showPullOut');
     if (!showPullOut) {
       component.$('.block-container').remove();
+    }
+  }),
+
+  /**
+   * It will indicates the state of skyline.
+   * @type {Boolean}
+   */
+  isSkylineEnabled: false,
+
+  /**
+   * Trigger whenever skyline toggle state got changed.
+   */
+  onChangeSkylineToggle: Ember.observer('isSkylineEnabled', function() {
+    let component = this;
+    let isSkylineEnabled = component.get('isSkylineEnabled');
+    let skylineElements =  component.$('.skyline');
+    if (isSkylineEnabled) {
+      skylineElements.each(function(index, element) {
+        component.$(element).attr('class', 'skyline');
+      });
+    } else {
+      skylineElements.each(function(index, element) {
+        component.$(element).attr('class', 'skyline hidden');
+      });
     }
   }),
 
@@ -194,9 +218,9 @@ export default Ember.Component.extend({
       if (index < (indexSize - 1)) {
         let x2 = parseInt(component.$(skylineElements[(index + 1)]).attr('cx'));
         let y2 = component.$(skylineElements[(index + 1)]).attr('cy');
-        svg.append('line').attr('x1', x1).attr('y1', y1).attr('x2', x2).attr('y2', y2).attr('class', 'skyline');
+        svg.append('line').attr('x1', x1).attr('y1', y1).attr('x2', x2).attr('y2', y2).attr('class', 'skyline hidden');
       }
-      svg.append('circle').attr('cx', x1).attr('cy', y1).attr('r', 3).attr('fill', '#fff');
+      svg.append('circle').attr('cx', x1).attr('cy', y1).attr('r', 3).attr('fill', '#fff').attr('class', 'skyline hidden');
     });
     cards.exit().remove();
   },
