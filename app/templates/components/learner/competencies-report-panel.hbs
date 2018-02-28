@@ -5,10 +5,9 @@
     <li class="{{if isJourney 'tab-active' ''}}" {{action 'competencyMatrixTabs' 'journey' }}>
       <span>Journeys </span> </li>
   </ul>
-
   {{#if isCompetency}}
     {{learner.competencies-journeys-list taxonomySubjects=taxonomySubjects selectedSubject='selectedSubject'}}
   {{else}}
-    {{learner.competencies-journeys-list   selectedSubject='selectedSubject'}}
+    {{learner.competencies-journeys-list  taxonomySubjects=journeysList  selectedSubject='selectedSubject'}}
   {{/if}}
 </div>

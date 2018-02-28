@@ -40,15 +40,25 @@ export default Ember.Component.extend({
 
   isCompetency: true,
 
+  journeysList: Ember.computed(function() {
+    let arrayList = [{
+      subjectTitle: 'Journeys Summary'
+    }
+    ];
+    return  Ember.A(arrayList);
+  }),
+
   //------------------------------------------------------------------------
   // actions
 
   actions: {
 
     competencyMatrixTabs: function(tabs) {
+
       let component = this;
       component.set('isCompetency', tabs === 'competency');
       component.set('isJourney', tabs === 'journey');
+      component.sendAction('competencyTabs', tabs);
     },
 
 
