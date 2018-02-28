@@ -114,6 +114,22 @@ export default Ember.Component.extend({
     return null;
   }),
 
+  /**
+   * Maintains the pull out state.
+   * @type {Boolean}
+   */
+  showPullOut: false,
+
+  /**
+   * Trigger whenever pull out state got changed.
+   */
+  onShowPullOut: Ember.observer('showPullOut', function() {
+    let component = this;
+    let showPullOut = component.get('showPullOut');
+    if (!showPullOut) {
+      component.$('.block-container').remove();
+    }
+  }),
 
   // -------------------------------------------------------------------------
   // Events
@@ -152,6 +168,7 @@ export default Ember.Component.extend({
       .attr('width', cellWidth)
       .attr('height', cellHeight)
       .on('click', function(d) {
+        component.blockChartContainer(d);
         component.sendAction('onCompetencyPullOut', d);
       })
       .merge(cards)
@@ -265,6 +282,22 @@ export default Ember.Component.extend({
     component.set('height', height);
     component.set('taxonomyDomains', taxonomyDomain);
     return resultSet;
+  },
+
+  blockChartContainer: function(selectedCompetency) {
+    let component = this;
+    const cellWidth = component.get('cellWidth');
+    const cellHeight = component.get('cellHeight');
+    const width = component.get('width');
+    let xAxisSeq = (selectedCompetency.xAxisSeq - 1) * cellWidth;
+    let yAxisSeq = (selectedCompetency.yAxisSeq - 1) * cellHeight;
+    const colorsBasedOnStatus = component.get('colorsBasedOnStatus');
+    let color = colorsBasedOnStatus.get(selectedCompetency.status.toString());
+    component.$('.block-container').remove();
+    let container = `<div class="block-container" style="width:${  width  }px">`;
+    container += `<div class="selected-competency"  style="width:${  cellWidth  }px; height:${  cellHeight  }px; background-color:${  color  };top:${  yAxisSeq  }px; left:${  xAxisSeq  }px"></div>`;
+    container += '</div>';
+    component.$('#competency-matrix-domain-chart').prepend(container);
   }
 
 });

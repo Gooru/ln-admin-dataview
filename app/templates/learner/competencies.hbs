@@ -31,10 +31,10 @@
             </div>
           </div>
 
-          {{else if isCourseModeEnabled }} {{charts.competency-matrix-chart userId=userId subjectId=subjectId onCompetencyPullOut='onCompetencyPullOut'}}
-        {{else}}
-          {{charts.competency-matrix-domain-chart userId=userId  subjectId=subjectId onCompetencyPullOut='onCompetencyPullOut'}}
-        {{/if}}
+        {{else if isCourseModeEnabled }} {{charts.competency-matrix-chart userId=userId subjectId=subjectId onCompetencyPullOut='onCompetencyPullOut' showPullOut=showPullOut}}
+      {{else}}
+        {{charts.competency-matrix-domain-chart userId=userId  subjectId=subjectId onCompetencyPullOut='onCompetencyPullOut' showPullOut=showPullOut}}
+      {{/if}}
 
         {{#app-pull-out showPullOut=showPullOut title=description description=title competency=competency showMore=showMore isLoading=isLoading as |section|}}
           {{#if section.isLessContent}}
