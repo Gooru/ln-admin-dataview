@@ -70,6 +70,21 @@ export default Ember.Object.extend({
     return assessmentData ? assessmentData : {};
   },
 
+  /**
+   * Normalized data of course by id
+   * @return {Object}
+   */
+  normalizeCourseContent: function(courseData) {
+    const serializer = this;
+    let serializedCourseData = courseData;
+    let taxonomy = serializer
+      .get('taxonomySerializer')
+      .normalizeTaxonomyObject(courseData.taxonomy);
+    serializedCourseData.taxonomy = taxonomy;
+    return serializedCourseData;
+  },
+
+
 
   /**
    * Normalized data of resource by id

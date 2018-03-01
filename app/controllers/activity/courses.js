@@ -38,7 +38,9 @@ export default Ember.Controller.extend({
 
     onPlayCourse: function(course) {
       let controller = this;
+      controller.getCourseContentById(course.id);
       controller.set('selectedCourse', course);
+      controller.set('showPullOut', true);
     }
   },
 
@@ -105,71 +107,72 @@ export default Ember.Controller.extend({
    */
   selectedCourse: null,
 
+  coursePullOutData: null,
+
   /**
    * Grouping the data to show more info  in pull out
    */
-  groupData: Ember.computed('selectedCourse', function() {
-    let course = this.get('selectedCourse');
+  groupData: Ember.computed('coursePullOutData', function() {
+    let controller = this;
+    let course = controller.get('selectedCourse');
     let resultSet = Ember.A();
+    console.log('course', course);
     if (course) {
-      // resultSet = {
-      //   descriptive: {
-      //     title: course.title,
-      //     description: course.description
-      //   },
-      //
-      //   creation: {
-      //     'Creator ID': course.creatorId,
-      //     'Created On': moment(course.createdDate).format('LLLL') || null,
-      //     'Publisher': 'Gooru Org',
-      //     'Collaborator': course.collaboratorIDs,
-      //     'Instance Creator': course.owner.username,
-      //     'Original Creator': course.creator.username,
-      //     Aggregator: course.aggregator ? course.aggregator : null,
-      //     'Modified On': moment(course.lastModified).format('LLLL') || null,
-      //     'Modified by': course.lastModifiedBy,
-      //     License: course.license ? course.license.code : null,
-      //     'Created': course.owner.username,
-      //     'Owner ID': course.owner.id
-      //   },
-      //
-      //   educational: {
-      //     'Audience': course.audience,
-      //     'Time Required': null,
-      //     'Grade Level': course.grade,
-      //     'Learning Objective': course.learningObjectives
-      //   },
-      //
-      //   media: {
-      //     'Keywords': course.keyPoints,
-      //     'Visibility': null
-      //   },
-      //
-      //
-      //   instructional: {
-      //     'Instructional Model': course.instructionalModel,
-      //     '21st Century Skills': course.skills
-      //   },
-      //
-      //   framework: {
-      //     subject: course.taxonomySet.subject,
-      //     course: course.taxonomySet.course,
-      //     domain: course.taxonomySet.domain,
-      //     standard: null
-      //   },
-      //
-      //   Internal: {
-      //     'ID': course.id,
-      //     'Deleted': null,
-      //     'Flagged': null
-      //   },
-      //
-      //   vector: {
-      //     relevance: course.relevance,
-      //     engagment: course.engagment,
-      //     efficacy: course.efficacy
-      //   }
-      // };
+      let coursePullOutData = controller.get('coursePullOutData');
+      console.log('courseContent', coursePullOutData);
+      resultSet = {
+        descriptive: {
+          title: course.title,
+          description: course.description
+        },
+
+        creation: {
+          'Creator ID': coursePullOutData.creator_id,
+          'Created On': moment(course.createdDate).format('LLLL') || null,
+          'Publisher': 'Gooru Org',
+          'Publish Status': course.isPublished ? 'Published' : 'Unpublished',
+          Aggregator: course.aggregator ? course.aggregator : null,
+          'Modified On': moment(course.lastModified).format('LLLL') || null,
+          'Modified By': course.lastModifiedBy,
+          License: coursePullOutData.license ? coursePullOutData.license.code : null,
+          'Host': null
+        },
+
+        educational: {
+          'Audience': coursePullOutData.metadata.audience,
+          'Grade Level': null
+        },
+
+        media: {
+          'Keywords': null,
+          'Visibility': coursePullOutData.visible_on_profile
+        },
+
+
+        instructional: {
+          'Depth of Knowledge': null,
+          '21st Century Skills': null
+        },
+
+        framework: {
+          subject: course.subjectName,
+          'Taxonomy Course': coursePullOutData.taxonomy.parentTitle,
+          domain: null,
+          Standards: coursePullOutData.taxonomy.code
+        },
+
+        Internal: {
+          'ID': course.id,
+          'Deleted': null,
+          'Flagged': null
+        },
+
+        vector: {
+          relevance: course.relevance,
+          engagment: course.engagment,
+          efficacy: course.efficacy
+        }
+      };
     }
     return resultSet;
   }),
@@ -231,6 +234,16 @@ export default Ember.Controller.extend({
       controller.set('OFFSET', OFFSET + CUR_ITERATION_COUNT);
       controller.set('hitCount', courses.get('hitCount'));
       controller.set('isLoading', false);
+    });
+  },
+
+  getCourseContentById(courseId) {
+    let controller = this;
+    return Ember.RSVP.hash({
+      course: Ember.RSVP.resolve(controller.get('contentService').getCourseById(courseId))
+    })
+    .then(function(courseData) {
+      controller.set('coursePullOutData', courseData.course);
     });
   }
 });

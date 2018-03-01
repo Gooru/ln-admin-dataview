@@ -32,7 +32,7 @@ export default Ember.Object.extend({
       locationBasedCount: Ember.$.ajax(url, options)
     }).then(function(hash) {
       return hash.locationBasedCount.value;
-    });
+    })
   },
 
   /**
@@ -90,6 +90,29 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders()
     };
     return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Reads a course by id
+   *
+   * @param {string} resourceId
+   * @returns {Promise}
+   */
+  getCourseById: function(courseId) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const course = 'courses';
+    const url = `${namespace}/${course}/${courseId}`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.RSVP.hashSettled({
+      courseContent: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.courseContent.value;
+    });
   },
 
   defineHeaders: function() {
