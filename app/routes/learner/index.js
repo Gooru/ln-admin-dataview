@@ -12,6 +12,20 @@ export default Ember.Route.extend({
    */
   learnersService: Ember.inject.service('api-sdk/learners'),
 
+  /**
+   * @requires service:competency
+   */
+  competencyService: Ember.inject.service('api-sdk/competency'),
+
+
+  //------------------------------------------------------------------------
+  //Properties
+
+  /**
+   * User id of the learner
+   * @type {String}
+   */
+  userId: null,
 
   // -------------------------------------------------------------------------
   // Methods
@@ -22,20 +36,23 @@ export default Ember.Route.extend({
     let userId = learnerModel.userId;
     let selectedActiveDuration= learnerModel.selectedActiveDuration;
     return Ember.RSVP.hash({
+      userCompetencyStats: this.get('learnersService').getUserCompetencyStats(userId),
+      userCompetencies: this.get('competencyService').getUserCompetencies(userId, selectedActiveDuration),
       userTimeSpentStats: this.get('learnersService').getUserTimeSpentStats(userId, selectedActiveDuration),
       userStatsByCourse: this.get('learnersService').getUserStatsByCourse(userId, selectedActiveDuration),
       userJourneyStats: this.get('learnersService').getUserJourneyStats(userId, selectedActiveDuration),
-      userCompetencyStats: this.get('learnersService').getUserCompetencyStats(userId, selectedActiveDuration),
       userId: userId
     });
   },
 
 
   setupController: function(controller, model) {
-    controller.set('userJourneyStats', model.userJourneyStats);
-    controller.set('competenciesData', model.userCompetencyStats);
+
+    controller.set('userCompetencyStats', model.userCompetencyStats);
+    controller.set('userCompetencies', model.userCompetencies);
     controller.set('userTimeSpentStats', model.userTimeSpentStats);
     controller.set('userStatsByCourse', model.userStatsByCourse);
+    controller.set('userJourneyStats', model.userJourneyStats);
     controller.set('userId', model.userId);
   }
 

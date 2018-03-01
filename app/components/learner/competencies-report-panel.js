@@ -40,13 +40,6 @@ export default Ember.Component.extend({
 
   isCompetency: true,
 
-  journeysList: Ember.computed(function() {
-    let arrayList = [{
-      subjectTitle: 'Journeys Summary'
-    }
-    ];
-    return  Ember.A(arrayList);
-  }),
 
   //------------------------------------------------------------------------
   // actions
@@ -65,6 +58,12 @@ export default Ember.Component.extend({
     selectedSubject: function(subject) {
       let component = this;
       component.sendAction('subjectChange', subject);
+    },
+
+    selectedCourse: function(course) {
+      let component = this;
+      component.sendAction('courseChange', course);
+
     }
 
   }
