@@ -6,7 +6,7 @@
   {{#each collectionContents as |content|}}
     <div class="content">
       <span class="{{if isCollection content.content_subformat 'question'}}"><i class="icon"></i></span>
-      <span class="title ellipsis">{{content.title}}</span>
+      <span class="title ellipsis">{{safe-html content.title}}</span>
     </div>
   {{/each}}
 </div>
