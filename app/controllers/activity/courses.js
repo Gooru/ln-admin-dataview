@@ -116,10 +116,8 @@ export default Ember.Controller.extend({
     let controller = this;
     let course = controller.get('selectedCourse');
     let resultSet = Ember.A();
-    console.log('course', course);
     if (course) {
       let coursePullOutData = controller.get('coursePullOutData');
-      console.log('courseContent', coursePullOutData);
       resultSet = {
         descriptive: {
           title: course.title,
@@ -242,8 +240,8 @@ export default Ember.Controller.extend({
     return Ember.RSVP.hash({
       course: Ember.RSVP.resolve(controller.get('contentService').getCourseById(courseId))
     })
-    .then(function(courseData) {
-      controller.set('coursePullOutData', courseData.course);
-    });
+      .then(function(courseData) {
+        controller.set('coursePullOutData', courseData.course);
+      });
   }
 });

@@ -32,7 +32,7 @@ export default Ember.Object.extend({
       locationBasedCount: Ember.$.ajax(url, options)
     }).then(function(hash) {
       return hash.locationBasedCount.value;
-    })
+    });
   },
 
   /**
@@ -112,6 +112,39 @@ export default Ember.Object.extend({
       courseContent: Ember.$.ajax(url, options)
     }).then(function(hash) {
       return hash.courseContent.value;
+    });
+  },
+
+
+  getLessonByUnitId: function(courseId, unitId) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/courses/${courseId}/units/${unitId}`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.RSVP.hashSettled({
+      lessons: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.lessons.value;
+    });
+  },
+
+  getCollectionByLessonId: function(courseId, unitId, lessonId) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/courses/${courseId}/units/${unitId}/lessons/${lessonId}`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.RSVP.hashSettled({
+      collections: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.collections.value;
     });
   },
 

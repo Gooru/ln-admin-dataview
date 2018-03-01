@@ -65,11 +65,9 @@
       <div class="content-title">
         Content
       </div>
-      {{#each courseData.unit_summary as |unit|}}
-        <div class="unit">
-          {{learner.course-accordion-unit userId=courseData.creator_id courseId=courseData.id classId=null}}
-        </div>
-      {{/each}}
+      <div class="content-list">
+        {{activities.course-accordion units=courseData.unit_summary courseId=courseData.id}}
+      </div>
     </div>
   </div>
 </div>

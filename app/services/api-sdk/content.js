@@ -95,6 +95,30 @@ export default Ember.Service.extend({
           resolve(service.get('contentSerializer').normalizeCourseContent(response));
         }, reject);
     });
+  },
+
+  getLessonByUnitId: function(courseId, unitId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('contentAdapter')
+        .getLessonByUnitId(courseId, unitId)
+        .then(function(response) {
+          resolve(service.get('contentSerializer').normalizeLessonSummary(response));
+        }, reject);
+    });
+  },
+
+  getCollectionByLessonId: function(courseId, unitId, lessonId) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('contentAdapter')
+        .getCollectionByLessonId(courseId, unitId, lessonId)
+        .then(function(response) {
+          resolve(service.get('contentSerializer').normalizeCollectionSummary(response));
+        }, reject);
+    });
   }
 
 

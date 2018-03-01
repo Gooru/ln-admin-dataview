@@ -85,7 +85,6 @@ export default Ember.Object.extend({
   },
 
 
-
   /**
    * Normalized data of resource by id
    * @return {Object}
@@ -98,6 +97,26 @@ export default Ember.Object.extend({
       .normalizeTaxonomyObject(response.taxonomy);
     response.taxonomy = taxonomy[0];
     return response;
+  },
+
+  normalizeLessonSummary: function(lessonData) {
+    let serializedLessonData = Ember.A();
+    if (lessonData) {
+      serializedLessonData = {
+        lessonSummary: lessonData.lesson_summary,
+        title: lessonData.title      };
+    }
+    return serializedLessonData;
+  },
+
+  normalizeCollectionSummary: function(collectionData) {
+    let serializedCollectionData = Ember.A();
+    if (collectionData) {
+      return serializedCollectionData = {
+        collectionSummary: collectionData.collection_summary
+      };
+    }
+    return serializedCollectionData;
   }
 
 
