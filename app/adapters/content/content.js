@@ -92,6 +92,62 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  /**
+   * Reads a course by id
+   *
+   * @param {string} resourceId
+   * @returns {Promise}
+   */
+  getCourseById: function(courseId) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const course = 'courses';
+    const url = `${namespace}/${course}/${courseId}`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.RSVP.hashSettled({
+      courseContent: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.courseContent.value;
+    });
+  },
+
+
+  getLessonByUnitId: function(courseId, unitId) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/courses/${courseId}/units/${unitId}`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.RSVP.hashSettled({
+      lessons: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.lessons.value;
+    });
+  },
+
+  getCollectionByLessonId: function(courseId, unitId, lessonId) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/courses/${courseId}/units/${unitId}/lessons/${lessonId}`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.RSVP.hashSettled({
+      collections: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.collections.value;
+    });
+  },
+
   defineHeaders: function() {
     return {
       Authorization: `Token ${this.get('session.accessToken')}`

@@ -70,6 +70,20 @@ export default Ember.Object.extend({
     return assessmentData ? assessmentData : {};
   },
 
+  /**
+   * Normalized data of course by id
+   * @return {Object}
+   */
+  normalizeCourseContent: function(courseData) {
+    const serializer = this;
+    let serializedCourseData = courseData;
+    let taxonomy = serializer
+      .get('taxonomySerializer')
+      .normalizeTaxonomyObject(courseData.taxonomy);
+    serializedCourseData.taxonomy = taxonomy;
+    return serializedCourseData;
+  },
+
 
   /**
    * Normalized data of resource by id
@@ -83,6 +97,26 @@ export default Ember.Object.extend({
       .normalizeTaxonomyObject(response.taxonomy);
     response.taxonomy = taxonomy[0];
     return response;
+  },
+
+  normalizeLessonSummary: function(lessonData) {
+    let serializedLessonData = Ember.A();
+    if (lessonData) {
+      serializedLessonData = {
+        lessonSummary: lessonData.lesson_summary,
+        title: lessonData.title      };
+    }
+    return serializedLessonData;
+  },
+
+  normalizeCollectionSummary: function(collectionData) {
+    let serializedCollectionData = Ember.A();
+    if (collectionData) {
+      return serializedCollectionData = {
+        collectionSummary: collectionData.collection_summary
+      };
+    }
+    return serializedCollectionData;
   }
 
 
