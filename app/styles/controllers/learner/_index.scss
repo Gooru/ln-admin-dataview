@@ -1,59 +1,365 @@
-.learner-index {
-  .report-panel {
-    float: left;
-    margin-bottom: 23px;
-    width: 500px;
-    height: 482px;
-    .report-panel-body {
-      cursor: pointer;
+.competencies-report {
+  width: inherit;
+  height: inherit;
+  border-radius: 4px;
+  padding: 20px 20px 20px 0;
+  display: flex;
+
+  .left-panel {
+    width: 716px;
+    border-radius: 4px;
+    background-color: $white;
+    box-shadow: 2px -1px 4px 0 rgba(0, 0, 0, 0.1);
+    margin-right: 60px;
+
+    .app-pull-out {
+      top: 63px;
+      height: calc(100vh - 63px);
+
+      .pull-out-more-content-container {
+        display: table;
+
+        .coming-next {
+          color: $gray;
+          text-align: center;
+          display: table-cell;
+          vertical-align: middle;
+        }
+      }
     }
-    .explore-button {
-      width: 112px;
-      height: 33px;
-      margin: 50px auto 0;
+    //TODO quick fix for toggle matrix view
+    .header {
+      display: flex;
+      height: 47px;
+      padding: 5px;
+      margin-top: 10px;
+
+      .nav-header {
+        .competencies-header {
+          display: flex;
+
+          div {
+            padding-right: 10px;
+            color: $dark-400;
+            font-weight: bold;
+            font-size: 15px;
+            cursor: pointer;
+          }
+        }
+      }
     }
 
-    .panel-title {
+    .domain-header {
+      border-bottom: 1px solid #cccccc;
+    }
+
+    .panel-header {
+      display: flex;
+      width: 50%;
+      float: left;
+      margin-left: 20px;
+
+      .panel-title {
+        margin: 0 20px;
+
+        span {
+          width: 186px;
+          height: 27px;
+          font-size: 20px;
+          line-height: normal;
+          text-align: left;
+          color: #4a4a4a;
+        }
+      }
+
+      .panel-back-arrow {
+        cursor: pointer;
+
+        i {
+          margin-left: -80px;
+        }
+      }
+    }
+
+    .course-list-view {
+      width: 100%;
+    }
+
+    .skyline {
+      width: 50%;
+      display: flex;
+
+      .text {
+        width: 25%;
+        font-size: 16px;
+        color: #b3b3be;
+      }
+    }
+
+    .nav-header {
+      z-index: 9;
+
+      .competencies-matric-header {
+        .competencies-header {
+          .course-section,
+          .domain-section,
+          .list-section {
+            width: 67px;
+            text-align: center;
+            color: #b3b3b3;
+          }
+
+          .courseActive,
+          .domainActive,
+          .listActive {
+            color: #000000 !important;
+          }
+        }
+      }
+    }
+
+    .body {
+      padding: 20px;
+
+      .calendar {
+        width: 100%;
+        height: 50px;
+        text-align: -webkit-center;
+        margin: auto 0;
+        display: inline-block;
+
+        i {
+          background: url("images/competencies-calendar.svg");
+          width: 34px;
+          height: 38px;
+          object-fit: contain;
+          opacity: 0.2;
+          display: block;
+        }
+
+        span {
+          width: 103px;
+          height: 20px;
+          opacity: 0.2;
+          font-size: 15px;
+          font-weight: bold;
+          line-height: normal;
+          text-align: center;
+          color: #4a4a4a;
+        }
+      }
+
+      .competencies-list-view {
+        width: 5%;
+        float: left;
+        padding: 6px;
+        cursor: grab;
+
+        i {
+          background: url("images/competencies-list-view.svg");
+          width: 17px;
+          height: 14px;
+          object-fit: contain;
+          cursor: pointer;
+          display: block;
+
+          &.active {
+            background: url("images/competencies-list-view-active.svg");
+          }
+        }
+      }
+
+      .competencies-module-view {
+        width: 10%;
+        padding: 6px;
+        cursor: grab;
+
+        i {
+          background: url("images/competencies-module-view.svg");
+          width: 17px;
+          height: 13px;
+          cursor: pointer;
+          object-fit: contain;
+          display: block;
+
+          &.active {
+            background: url("images/competencies-module-view-active.svg");
+          }
+        }
+      }
+
+      .report-panel {
+        .report-panel-body {
+          .competencies-chart {
+            width: 270px;
+            height: 270px;
+            margin: 50px auto 0;
+          }
+        }
+
+        .summary-accordion {
+          margin-top: 50px;
+        }
+      }
+    }
+
+    .time-spent-activities {
+      width: 330px;
+      float: left;
+      text-align: center;
+      margin-top: 25px;
+
       span {
         text-transform: uppercase;
-        font-weight: bold;
+        font-weight: 700;
+        font-size: 15px;
+        color: #4a4a4a;
+      }
+
+      .report-panel-body {
+        .explore-button {
+          display: inline-block;
+        }
+      }
+    }
+
+    .time-spent-courses {
+      width: 330px;
+      float: left;
+      text-align: center;
+      margin-top: 25px;
+      display: inline-block;
+
+      span {
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 15px;
+        color: #4a4a4a;
+      }
+
+      .report-panel-body {
+        .explore-button {
+          display: inline-block;
+        }
+      }
+    }
+
+    .courses-independent-journey {
+      width: 100%;
+      height: auto;
+      display: inline-block;
+      text-align: center;
+      margin-top: 50px;
+
+      span {
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: 15px;
+        text-align: center;
+        color: #4a4a4a;
+      }
+
+      .report-panel-body {
+        margin-top: 40px;
+
+        .courses-independent-journeys-chart {
+          width: 100%;
+          height: 300px;
+        }
+
+        .explore-button {
+          display: inline-block;
+          margin-top: 20px;
+        }
+      }
+    }
+
+    .app-panel-box {
+      box-shadow: none;
+      padding: 20px 20px 20 10px !important;
+
+      .panel-header {
+        width: 100%;
+      }
+
+      .panel-body {
+        .course-accordion-unit {
+          width: 100%;
+
+          .unit-content {
+            .unit-header {
+              .title {
+                width: 65%;
+              }
+
+              .unit-status {
+                width: 35%;
+              }
+            }
+          }
+
+          .unit-body {
+            .lessons {
+              .course-accordion-lesson {
+                .lesson-content {
+                  .lesson-header {
+                    .title {
+                      width: 45%;
+                    }
+
+                    .lesson-status {
+                      width: calc(100% - 45%);
+
+                      .score {
+                        width: 56%;
+                      }
+                    }
+                  }
+                }
+
+                .lesson-body {
+                  .collections {
+                    .course-accordion-collection {
+                      .collection-content {
+                        .collection-header {
+                          .collection-info {
+                            .title {
+                              width: 67.2%;
+                            }
+
+                            .collection-status {
+                              width: calc(100% - 65.2%);
+                            }
+                          }
+                        }
+
+                        .collection-body {
+                          .resource-content {
+                            .resource-header {
+                              margin-right: 20px;
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
 
-  .courses-independent-journey {
-    margin-right: 23px;
-
-    .courses-independent-journeys-chart {
-      width: 280px;
-      height: 280px;
-      margin: 50px auto 0;
-    }
+  .center-cap {
+    width: 50px;
   }
 
-  .competencies {
-    .competencies-chart {
-      width: 270px;
-      height: 270px;
-      margin: 50px auto 0;
-    }
-  }
-
-  .time-spent-activities {
-    margin-right: 23px;
-
-    .time-spent-activities-chart {
-      width: 280px;
-      height: 280px;
-      margin: 50px auto 0;
-    }
-  }
-
-  .time-spent-courses {
-    .time-spent-courses-chart {
-      width: 280px;
-      height: 280px;
-      margin: 50px auto 0;
-    }
+  .right-panel {
+    float: right;
+    background: $white;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
   }
 }

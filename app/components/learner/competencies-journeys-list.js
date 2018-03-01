@@ -21,6 +21,15 @@ export default Ember.Component.extend({
   }),
 
 
+  /**
+   * It  will have Subject
+   * @type {Object}
+   */
+  isSelectedCourse: Ember.computed('journeyCourses', function() {
+    return 'Journeys Summary';
+  }),
+
+
   //------------------------------------------------------------------------
   // actions
 
@@ -29,6 +38,12 @@ export default Ember.Component.extend({
       let component = this;
       component.set('isSelectedSubject', subject.subjectTitle);
       component.sendAction('selectedSubject', subject);
+    },
+
+    chooseCourse: function(course) {
+      let component = this;
+      component.set('isSelectedCourse', course.courseTitle);
+      component.sendAction('selectedCourse', course);
     }
   }
 });
