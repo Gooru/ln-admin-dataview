@@ -1,14 +1,19 @@
-.pull-out-content {
-  .competencies-pull-out-body {
-    min-height: 900px;
+.competencies-pull-out-body {
+  min-height: 900px;
 
-    .learner-competency {
-      width: 100%;
+  .learner-competency {
+    width: 100%;
+    display: inline-block;
+    padding: 13px;
+    border-bottom: 1px solid #979797;
+
+    .competency-text {
       display: grid;
-      padding: 9px;
       margin-left: 15px;
+      width: 80%;
+      float: left;
 
-      .mastered {
+      .text {
         font-size: 16px;
         text-align: left;
         color: #29323a;
@@ -17,41 +22,38 @@
 
       .date {
         font-size: 13px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: normal;
-        text-align: left;
         color: #29323a;
       }
+    }
+    .icons {
+      padding-left: 55px;
+      font-size: 16px;
+      float: left;
+      margin: 8px 0;
 
-      .time {
-        padding-left: 55px;
-        font-size: 16px;
-        float: left;
-        margin: 8px 0;
-
-        .in_progress {
-          i {
-            background: url("images/competencies-inProgress.svg");
-            width: 30px;
-            height: 30px;
-            object-fit: contain;
-            display: block;
-          }
+      .in_progress {
+        i {
+          background: url("images/competencies-inProgress.svg");
+          width: 30px;
+          height: 30px;
+          object-fit: contain;
+          display: block;
         }
+      }
 
-        .completed {
-          i {
-            background: url("images/competencies-mastered.svg");
-            width: 30.3px;
-            height: 30.2px;
-            object-fit: contain;
-            display: block;
-          }
+      .completed {
+        i {
+          background: url("images/competencies-mastered.svg");
+          width: 30.3px;
+          height: 30.2px;
+          object-fit: contain;
+          display: block;
         }
       }
     }
+  }
+
+  .competency-accordion {
+    padding-left: 40px;
   }
 }

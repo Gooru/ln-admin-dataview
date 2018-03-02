@@ -62,9 +62,9 @@ export default Ember.Component.extend({
   colorsBasedOnStatus: Ember.Object.create({
     '0': '#e7e8e9',
     '1': '#1aa9eb',
-    '2': '#1aa9eb',
-    '3': '#1aa9eb',
-    '4': '#1aa9eb',
+    '2': '#006eb5',
+    '3': '#006eb5',
+    '4': '#006eb5',
     '5': '#006eb5'
   }),
 
@@ -275,18 +275,19 @@ export default Ember.Component.extend({
             'competencySeq': competencySeq,
             'status': status
           });
-          if (status === 5) {
+          if (status === 2 || status === 3 || status === 4 || status === 5) {
             mergeDomainData.forEach(data => {
-              data.set('status', 5);
+              data.set('status', status);
+              data.set('isMastery', true);
             });
           }
           mergeDomainData.pushObject(data);
         });
-        let masteredCompetencies = mergeDomainData.filterBy('status', 5);
+        let masteredCompetencies = mergeDomainData.filterBy('isMastery', true);
         if (masteredCompetencies && masteredCompetencies.length === 0) {
           mergeDomainData.objectAt(0).set('skyline', true);
         } else {
-          let numberOfMasteredCompetency = (masteredCompetencies.length - 1);
+          let numberOfMasteredCompetency = (masteredCompetencies.length);
           mergeDomainData.objectAt(numberOfMasteredCompetency).set('skyline', true);
           mergeDomainData.objectAt(numberOfMasteredCompetency).set('mastered', true);
         }

@@ -92,7 +92,7 @@ export default Ember.Controller.extend({
   /**
    * Show loading spinner
    */
-  competencyStatus: ['Not Started', 'in progress', 'Inferred', 'Asserted', 'Earned', 'Earned'],
+  competencyStatus: ['Not Started', 'In progress', 'Inferred', 'Asserted', 'Inferred', 'Earned'],
 
   /**
    * It  will have default subject category

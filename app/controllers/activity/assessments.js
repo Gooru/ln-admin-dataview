@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { truncateString } from 'admin-dataview/utils/utils';
 
 export default Ember.Controller.extend({
 
@@ -128,7 +129,7 @@ export default Ember.Controller.extend({
       resultSet = {
         descriptive: {
           title: assessment.title,
-          description: assessment.description
+          description: truncateString(assessment.description)
         },
 
         creation: {
