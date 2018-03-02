@@ -8,6 +8,14 @@
     align-items: center;
   }
 
+  .app-pull-out {
+    top: 63px;
+    height: calc(100vh - 63px);
+    .pull-out-more-content-container {
+      display: table;
+    }
+  }
+
   .activity-collection-card {
     width: 220px;
     height: 384px;

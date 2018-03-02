@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { truncateString } from 'admin-dataview/utils/utils';
 
 export default Ember.Component.extend({
 
@@ -17,6 +18,8 @@ export default Ember.Component.extend({
     this.selectedHeadersData();
     return this.get('groupData');
   }),
+
+  isShowMore: true,
 
   // /**
   //  * Grouping header  by key value to show
@@ -137,6 +140,14 @@ export default Ember.Component.extend({
         }
       });
       this.selectedHeadersData();
+    },
+
+    onShowMore(description) {
+      let component = this;
+      let isShowMore = component.get('isShowMore');
+      let descriptionToShow = isShowMore ? description : truncateString(description);
+      component.$('.description .text').html(descriptionToShow);
+      component.toggleProperty('isShowMore');
     }
   }
 });
