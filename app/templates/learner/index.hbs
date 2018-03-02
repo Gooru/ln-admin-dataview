@@ -35,16 +35,6 @@
         {{else}}
           {{charts.competency-matrix-domain-chart userId=userId  subjectId=subjectId onCompetencyPullOut='onCompetencyPullOut' showPullOut=showPullOut isSkylineEnabled=isSkylineEnabled}}
         {{/if}}
-
-        {{#app-pull-out showPullOut=showPullOut title=description description=title competency=competency showMore=showMore isLoading=isLoading as |section|}}
-          {{#if section.isLessContent}}
-            {{learner.competencies-pull-out-body
-       collection=collection
-       userId=userId
-       isLoading=isLoading
-     }}
-          {{/if}}
-        {{/app-pull-out}}
       </div>
       {{else if isJourney}}
       <div class="time-spent-activities report-panel">
@@ -73,10 +63,24 @@
         {{/each}}
       {{/app-panel-box}}
     {{/if}}
+
+    <div class="left-panel-nav-1"></div>
+    <div class="left-panel-nav-2"></div>
+    <div class="left-panel-nav-3"></div>
+
   </div>
 
   <div class="right-panel">
     {{learner.competencies-report-panel taxonomySubjects=taxonomySubjects  journeyCourses=journeyCourses subjectChange='subjectChange' courseChange='courseChange' competencyTabs='competencyTabs'}}
   </div>
 
+  {{#app-pull-out showPullOut=showPullOut title=description description=title competency=competency showMore=showMore isLoading=isLoading as |section|}}
+    {{#if section.isLessContent}}
+      {{learner.competencies-pull-out-body
+  collection=collection
+  userId=userId
+  isLoading=isLoading
+  }}
+    {{/if}}
+  {{/app-pull-out}}
 </div>
