@@ -3,28 +3,29 @@
 
   .learner-competency {
     width: 100%;
-    display: grid;
-    padding: 9px;
+    display: inline-block;
+    padding: 13px;
+    border-bottom: 1px solid #979797;
 
-    .mastered {
-      font-size: 16px;
-      text-align: left;
-      color: #29323a;
-      text-transform: capitalize;
+    .competency-text {
+      display: grid;
+      margin-left: 15px;
+      width: 80%;
+      float: left;
+
+      .text {
+        font-size: 16px;
+        text-align: left;
+        color: #29323a;
+        text-transform: capitalize;
+      }
+
+      .date {
+        font-size: 13px;
+        color: #29323a;
+      }
     }
-
-    .date {
-      font-size: 13px;
-      font-weight: normal;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: normal;
-      letter-spacing: normal;
-      text-align: left;
-      color: #29323a;
-    }
-
-    .time {
+    .icons {
       padding-left: 55px;
       font-size: 16px;
       float: left;
