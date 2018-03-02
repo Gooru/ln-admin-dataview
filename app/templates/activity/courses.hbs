@@ -20,7 +20,7 @@
       {{#if section.isLessContent}}
         {{activities.course-pull-out-body course=selectedCourse courseData=coursePullOutData}}
       {{else if section.isMoreContent}}
-        {{activities.course-pull-out-more-content groupData=groupData groupHeader=groupHeader}}
+        {{activities.course-pull-out-more-content groupData=groupData groupHeader=groupHeader description=selectedCourse.description}}
       {{/if}}
     {{/app-pull-out}}
   {{/if}}

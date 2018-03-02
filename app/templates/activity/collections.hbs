@@ -20,7 +20,7 @@
       {{#if section.isLessContent}}
         {{activities.collection-pull-out-body collection=selectedCollection collectionData=collectionPullOutData}}
       {{else if section.isMoreContent}}
-        {{activities.collection-pull-out-more-content  groupData=groupData groupHeader=groupHeader type="collection"}}
+        {{activities.collection-pull-out-more-content  groupData=groupData groupHeader=groupHeader type="collection" description=selectedCollection.description}}
       {{/if}}
     {{/app-pull-out}}
   {{/if}}
