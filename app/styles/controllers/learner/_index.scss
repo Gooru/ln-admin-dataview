@@ -392,14 +392,9 @@
     top: 63px;
     height: calc(100vh - 63px);
 
-    .pull-out-more-content-container {
-      display: table;
-
-      .coming-next {
-        color: $gray;
-        text-align: center;
-        display: table-cell;
-        vertical-align: middle;
+    .pull-out-less-content-container {
+      .pull-out-content {
+        padding: 0;
       }
     }
   }

@@ -74,11 +74,12 @@
     {{learner.competencies-report-panel taxonomySubjects=taxonomySubjects  journeyCourses=journeyCourses subjectChange='subjectChange' courseChange='courseChange' competencyTabs='competencyTabs'}}
   </div>
 
-  {{#app-pull-out showPullOut=showPullOut title=description description=title competency=competency showMore=showMore isLoading=isLoading as |section|}}
+  {{#app-pull-out showPullOut=showPullOut title=description description=title showMore=showMore isLoading=isLoading as |section|}}
     {{#if section.isLessContent}}
       {{learner.competencies-pull-out-body
   collection=collection
   userId=userId
+  competency=competency
   isLoading=isLoading
   }}
     {{/if}}
