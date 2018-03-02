@@ -112,6 +112,27 @@ export default Ember.Controller.extend({
    */
   isSkylineEnabled: false,
 
+  /**
+   * It will have  couse item selected default .
+   * @type {string}
+   */
+  isSelectedCourse: Ember.computed(function() {
+    return 'Journeys Summary';
+  }),
+
+
+  /**
+   * It will have  subject item selected default .
+   * @type {string}
+   */
+  isSelectedSubject: Ember.computed('taxonomySubjects', function() {
+    let controller = this;
+    let subjects = controller.get('taxonomySubjects');
+    if (subjects) {
+      let subject = subjects.objectAt(0);
+      return subject.subjectTitle;
+    }
+  }),
 
   //------------------------------------------------------------------------
   // actions
@@ -159,6 +180,9 @@ export default Ember.Controller.extend({
               collectionData.push(collection);
             }
           });
+          if (!collectionData.length >= 1) {
+            statusMastered = controller.get('competencyStatus') ? controller.get('competencyStatus')[2] : null;
+          }
         } else if (data.status === 1) {
           status = 'in progress';
           collectionData = collections;
@@ -194,8 +218,14 @@ export default Ember.Controller.extend({
 
     courseChange: function(course) {
       let controller = this;
+      controller.set('isSelectedCourse', course.courseTitle);
+      if (course.courseTitle === 'Journeys Summary') {
+        controller.set('isJourney', true);
+      } else {
+        controller.set('isCompetency', false);
+        controller.set('isJourney', false);
+      }
       controller.set('isCompetency', false);
-      controller.set('isJourney', false);
       if (course.classId) {
         controller.courseInClass(course);
       } else {
@@ -238,6 +268,7 @@ export default Ember.Controller.extend({
       let controller = this;
       controller.set('isCompetency', false);
       controller.set('isJourney', true);
+      controller.set('isSelectedCourse', 'Journeys Summary');
     }
 
   },
@@ -283,6 +314,7 @@ export default Ember.Controller.extend({
 
   courseInClass: function(course) {
     let controller = this;
+    controller.set('isLoading', true);
     let courseId = course.courseId;
     let classId = course.classId;
     let userId = controller.get('userId');
@@ -291,12 +323,14 @@ export default Ember.Controller.extend({
       controller.set('courseId', course.courseId);
       controller.set('classId', course.classId);
       controller.set('courseTitle', course.courseTitle);
-    });
+      controller.set('isLoading', false);
 
+    });
   },
 
   courseOutClass: function(course) {
     let controller = this;
+    controller.set('isLoading', true);
     let courseId = course.courseId;
     let classId = course.classId;
     let userId = controller.get('userId');
@@ -305,8 +339,9 @@ export default Ember.Controller.extend({
       controller.set('courseId', course.courseId);
       controller.set('classId', course.classId);
       controller.set('courseTitle', course.courseTitle);
-    });
+      controller.set('isLoading', false);
 
+    });
   }
 
 

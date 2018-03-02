@@ -6,8 +6,8 @@
       <span>Journeys </span> </li>
   </ul>
   {{#if isCompetency}}
-    {{learner.competencies-journeys-list taxonomySubjects=taxonomySubjects isCompetency=isCompetency selectedSubject='selectedSubject'}}
+    {{learner.competencies-journeys-list taxonomySubjects=taxonomySubjects isSelectedSubject=isSelectedSubject isCompetency=isCompetency selectedSubject='selectedSubject'}}
   {{else}}
-    {{learner.competencies-journeys-list  journeyCourses=journeyCourses  isJourney=isJourney selectedCourse='selectedCourse'}}
+    {{learner.competencies-journeys-list  journeyCourses=journeyCourses  isSelectedCourse=isSelectedCourse isSelectedSubject=isSelectedSubject isJourney=isJourney selectedCourse='selectedCourse'}}
   {{/if}}
 </div>

@@ -38,7 +38,21 @@ export default Ember.Component.extend({
   currentSubject: null,
 
 
-  isCompetency: true,
+  isCompetency: null,
+
+  isJourney: null,
+
+  /**
+   * It  will have course title
+   * @type {Object}
+   */
+  isSelectedCourse: null,
+
+  /**
+   * It  will have Subject title
+   * @type {Object}
+   */
+  isSelectedSubject: null,
 
 
   //------------------------------------------------------------------------
@@ -63,7 +77,6 @@ export default Ember.Component.extend({
     selectedCourse: function(course) {
       let component = this;
       component.sendAction('courseChange', course);
-
     }
 
   }

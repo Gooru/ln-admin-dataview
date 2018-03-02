@@ -266,6 +266,10 @@
 
       .panel-header {
         width: 100%;
+
+        .panel-back-arrow {
+          margin-top: -5px;
+        }
       }
 
       .panel-body {
@@ -291,6 +295,11 @@
                   .lesson-header {
                     .title {
                       width: 45%;
+                      display: inherit;
+
+                      .title-text {
+                        width: 475px;
+                      }
                     }
 
                     .lesson-status {
@@ -298,6 +307,7 @@
 
                       .score {
                         width: 56%;
+                        margin-top: 11px;
                       }
                     }
                   }
@@ -386,6 +396,11 @@
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     border-radius: 4px;
     margin-bottom: -60px;
+  }
+
+  .right-panel.disabled {
+    opacity: 0.5;
+    pointer-events: none;
   }
 
   .app-pull-out {

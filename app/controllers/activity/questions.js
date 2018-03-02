@@ -80,6 +80,12 @@ export default Ember.Controller.extend({
   isLoading: false,
 
   /**
+   * @property {Boolean}
+   * Toggle show/hide view of three bounce spinner
+   */
+  isLoadingPullOut: false,
+
+  /**
    * @property {Number}
    * Holds currently fetched results count
    */
@@ -122,7 +128,7 @@ export default Ember.Controller.extend({
 
         educational: {
           language: collection.info ? collection.info.language : null,
-          'edicational use':collection.metadata ?  collection.metadata.educational_use : null,
+          'edicational use': collection.metadata ? collection.metadata.educational_use : null,
           accessbility: collection.accessibility,
           grade: collection.metadata ? collection.metadata.grade : null,
           'age-range': collection.age ? collection.age : null,
@@ -178,7 +184,7 @@ export default Ember.Controller.extend({
     }),
     Ember.Object.create({
       header: 'curated',
-      isEnabled: false
+      isEnabled: true
     }),
     Ember.Object.create({
       header: 'tagged',
@@ -203,7 +209,7 @@ export default Ember.Controller.extend({
      */
     getQuestionInfo: function(id) {
       let controller = this;
-      controller.set('isLoading', true);
+      controller.set('isLoadingPullOut', true);
       controller.set('showPullOut', true);
       controller.set('showMore', true);
       let collectionType = 'question';
@@ -215,7 +221,7 @@ export default Ember.Controller.extend({
               collection.set('owner', owner);
               controller.set('question', collection);
               controller.set('question.type', collectionType);
-              controller.set('isLoading', false);
+              controller.set('isLoadingPullOut', false);
               return Ember.RSVP.resolve(collection);
             });
         });
@@ -262,7 +268,9 @@ export default Ember.Controller.extend({
     let questionFilters = controller.get('activityController').getAppliedFilters();
     Ember.RSVP.hash({
       questions: controller.get('searchService').searchQuestions(term, questionFilters, OFFSET, PAGE_SIZE)
-    }).then(({questions}) => {
+    }).then(({
+      questions
+    }) => {
       let fetchedQuestions = controller.get('questions');
       let CUR_ITERATION_COUNT = questions.get('searchResults').length;
       controller.set('questions', fetchedQuestions.concat(questions.get('searchResults')));
