@@ -38,9 +38,15 @@ export default Ember.Component.extend({
   currentSubject: null,
 
 
-  isCompetency: null,
+  isCompetency: Ember.computed('isCompetencyTabs', function() {
+    let component = this;
+    return component.get('isCompetencyTabs');
+  }),
 
-  isJourney: null,
+  isJourney: Ember.computed('isJourneyTabs', function() {
+    let component = this;
+    return component.get('isJourneyTabs');
+  }),
 
   /**
    * It  will have course title
