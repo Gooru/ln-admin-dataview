@@ -15,7 +15,6 @@ Router.map(function() {
   this.route('crosswalk');
   this.route('learner', { path: '/learners/:userId' }, function() {
     this.route('journeys');
-    this.route('competencies');
     this.route('courses', { path: '/courses/:courseId' });
     this.route('activities');
   });
