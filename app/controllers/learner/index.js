@@ -107,6 +107,19 @@ export default Ember.Controller.extend({
   isCompetency: true,
 
   /**
+   * It  will have default competency page Enabled
+   * @type {String}
+   */
+  isCompetencyTabs: true,
+
+  /**
+   * It  will have default competency page Enabled
+   * @type {String}
+   */
+  isJourneyTabs: false,
+
+
+  /**
    * It will indicates the state of skyline.
    * @type {Boolean}
    */
@@ -237,6 +250,8 @@ export default Ember.Controller.extend({
       let controller = this;
       controller.set('isCompetency', tabs === 'competency');
       controller.set('isJourney', tabs === 'journey');
+      controller.set('isCompetencyTabs', tabs === 'competency');
+      controller.set('isJourneyTabs', tabs === 'journey');
       if (controller.get('isJourney')) {
         controller.fetchJourneyByUser();
       }
