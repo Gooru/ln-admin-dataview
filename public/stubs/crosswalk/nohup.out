@@ -1,0 +1,304 @@
+Fri, 02 Mar 2018 04:48:51 GMT | starting dump
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 100)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 200)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 300)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 400)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 500)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 600)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 700)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 800)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 900)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 1000)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 1100)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 1200)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 1300)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 1400)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 1500)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 1600)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 1700)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 1800)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 1900)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 2000)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 2100)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 98 objects from source elasticsearch (offset: 2200)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 98 objects to destination file, wrote 98
+Fri, 02 Mar 2018 04:48:51 GMT | got 0 objects from source elasticsearch (offset: 2298)
+Fri, 02 Mar 2018 04:48:51 GMT | Total Writes: 2298
+Fri, 02 Mar 2018 04:48:51 GMT | dump complete
+Fri, 02 Mar 2018 04:48:51 GMT | starting dump
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 100)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 200)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 300)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 400)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 500)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 600)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 700)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 800)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 900)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 1000)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 1100)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:51 GMT | got 100 objects from source elasticsearch (offset: 1200)
+Fri, 02 Mar 2018 04:48:51 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 1300)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 1400)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 1500)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 1600)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 1700)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 1800)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 1900)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 2000)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 2100)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 2200)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 2300)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 2400)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 2500)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 2600)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 2700)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 2800)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 2900)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 3000)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 3100)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 3200)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 3300)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 3400)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 58 objects from source elasticsearch (offset: 3500)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 58 objects to destination file, wrote 58
+Fri, 02 Mar 2018 04:48:52 GMT | got 0 objects from source elasticsearch (offset: 3558)
+Fri, 02 Mar 2018 04:48:52 GMT | Total Writes: 3558
+Fri, 02 Mar 2018 04:48:52 GMT | dump complete
+Fri, 02 Mar 2018 04:48:52 GMT | starting dump
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 100)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 200)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 300)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 400)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 500)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 600)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 700)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 800)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 900)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 1000)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 100 objects from source elasticsearch (offset: 1100)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:52 GMT | got 43 objects from source elasticsearch (offset: 1200)
+Fri, 02 Mar 2018 04:48:52 GMT | sent 43 objects to destination file, wrote 43
+Fri, 02 Mar 2018 04:48:52 GMT | got 0 objects from source elasticsearch (offset: 1243)
+Fri, 02 Mar 2018 04:48:52 GMT | Total Writes: 1243
+Fri, 02 Mar 2018 04:48:52 GMT | dump complete
+Fri, 02 Mar 2018 04:48:53 GMT | starting dump
+Fri, 02 Mar 2018 04:48:53 GMT | got 100 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:53 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:53 GMT | got 100 objects from source elasticsearch (offset: 100)
+Fri, 02 Mar 2018 04:48:53 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:53 GMT | got 100 objects from source elasticsearch (offset: 200)
+Fri, 02 Mar 2018 04:48:53 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:53 GMT | got 100 objects from source elasticsearch (offset: 300)
+Fri, 02 Mar 2018 04:48:53 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:53 GMT | got 100 objects from source elasticsearch (offset: 400)
+Fri, 02 Mar 2018 04:48:53 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:53 GMT | got 100 objects from source elasticsearch (offset: 500)
+Fri, 02 Mar 2018 04:48:53 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:53 GMT | got 100 objects from source elasticsearch (offset: 600)
+Fri, 02 Mar 2018 04:48:53 GMT | sent 100 objects to destination file, wrote 100
+Fri, 02 Mar 2018 04:48:53 GMT | got 84 objects from source elasticsearch (offset: 700)
+Fri, 02 Mar 2018 04:48:53 GMT | sent 84 objects to destination file, wrote 84
+Fri, 02 Mar 2018 04:48:53 GMT | got 0 objects from source elasticsearch (offset: 784)
+Fri, 02 Mar 2018 04:48:53 GMT | Total Writes: 784
+Fri, 02 Mar 2018 04:48:53 GMT | dump complete
+Fri, 02 Mar 2018 04:48:53 GMT | starting dump
+Fri, 02 Mar 2018 04:48:53 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:53 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:48:53 GMT | dump complete
+Fri, 02 Mar 2018 04:48:54 GMT | starting dump
+Fri, 02 Mar 2018 04:48:54 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:54 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:48:54 GMT | dump complete
+Fri, 02 Mar 2018 04:48:54 GMT | starting dump
+Fri, 02 Mar 2018 04:48:54 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:54 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:48:54 GMT | dump complete
+Fri, 02 Mar 2018 04:48:54 GMT | starting dump
+Fri, 02 Mar 2018 04:48:54 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:54 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:48:54 GMT | dump complete
+Fri, 02 Mar 2018 04:48:55 GMT | starting dump
+Fri, 02 Mar 2018 04:48:55 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:55 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:48:55 GMT | dump complete
+Fri, 02 Mar 2018 04:48:55 GMT | starting dump
+Fri, 02 Mar 2018 04:48:55 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:55 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:48:55 GMT | dump complete
+Fri, 02 Mar 2018 04:48:55 GMT | starting dump
+Fri, 02 Mar 2018 04:48:55 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:55 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:48:55 GMT | dump complete
+Fri, 02 Mar 2018 04:48:56 GMT | starting dump
+Fri, 02 Mar 2018 04:48:56 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:56 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:48:56 GMT | dump complete
+Fri, 02 Mar 2018 04:48:56 GMT | starting dump
+Fri, 02 Mar 2018 04:48:56 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:56 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:48:56 GMT | dump complete
+Fri, 02 Mar 2018 04:48:56 GMT | starting dump
+Fri, 02 Mar 2018 04:48:56 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:56 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:48:56 GMT | dump complete
+Fri, 02 Mar 2018 04:48:57 GMT | starting dump
+Fri, 02 Mar 2018 04:48:57 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:57 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:48:57 GMT | dump complete
+Fri, 02 Mar 2018 04:48:57 GMT | starting dump
+Fri, 02 Mar 2018 04:48:57 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:57 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:48:57 GMT | dump complete
+Fri, 02 Mar 2018 04:48:57 GMT | starting dump
+Fri, 02 Mar 2018 04:48:58 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:58 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:48:58 GMT | dump complete
+Fri, 02 Mar 2018 04:48:58 GMT | starting dump
+Fri, 02 Mar 2018 04:48:58 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:58 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:48:58 GMT | dump complete
+Fri, 02 Mar 2018 04:48:58 GMT | starting dump
+Fri, 02 Mar 2018 04:48:58 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:58 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:48:58 GMT | dump complete
+Fri, 02 Mar 2018 04:48:59 GMT | starting dump
+Fri, 02 Mar 2018 04:48:59 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:59 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:48:59 GMT | dump complete
+Fri, 02 Mar 2018 04:48:59 GMT | starting dump
+Fri, 02 Mar 2018 04:48:59 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:59 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:48:59 GMT | dump complete
+Fri, 02 Mar 2018 04:48:59 GMT | starting dump
+Fri, 02 Mar 2018 04:48:59 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:48:59 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:48:59 GMT | dump complete
+Fri, 02 Mar 2018 04:49:00 GMT | starting dump
+Fri, 02 Mar 2018 04:49:00 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:49:00 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:49:00 GMT | dump complete
+Fri, 02 Mar 2018 04:49:00 GMT | starting dump
+Fri, 02 Mar 2018 04:49:00 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:49:00 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:49:00 GMT | dump complete
+Fri, 02 Mar 2018 04:49:00 GMT | starting dump
+Fri, 02 Mar 2018 04:49:00 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:49:00 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:49:00 GMT | dump complete
+Fri, 02 Mar 2018 04:49:01 GMT | starting dump
+Fri, 02 Mar 2018 04:49:01 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:49:01 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:49:01 GMT | dump complete
+Fri, 02 Mar 2018 04:49:01 GMT | starting dump
+Fri, 02 Mar 2018 04:49:01 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:49:01 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:49:01 GMT | dump complete
+Fri, 02 Mar 2018 04:49:01 GMT | starting dump
+Fri, 02 Mar 2018 04:49:01 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:49:02 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:49:02 GMT | dump complete
+Fri, 02 Mar 2018 04:49:02 GMT | starting dump
+Fri, 02 Mar 2018 04:49:02 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:49:02 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:49:02 GMT | dump complete
+Fri, 02 Mar 2018 04:49:02 GMT | starting dump
+Fri, 02 Mar 2018 04:49:02 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:49:02 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:49:02 GMT | dump complete
+Fri, 02 Mar 2018 04:49:03 GMT | starting dump
+Fri, 02 Mar 2018 04:49:03 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:49:03 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:49:03 GMT | dump complete
+Fri, 02 Mar 2018 04:49:03 GMT | starting dump
+Fri, 02 Mar 2018 04:49:03 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:49:03 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:49:03 GMT | dump complete
+Fri, 02 Mar 2018 04:49:03 GMT | starting dump
+Fri, 02 Mar 2018 04:49:03 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:49:03 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:49:03 GMT | dump complete
+Fri, 02 Mar 2018 04:49:04 GMT | starting dump
+Fri, 02 Mar 2018 04:49:04 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:49:04 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:49:04 GMT | dump complete
+Fri, 02 Mar 2018 04:49:04 GMT | starting dump
+Fri, 02 Mar 2018 04:49:04 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:49:04 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:49:04 GMT | dump complete
+Fri, 02 Mar 2018 04:49:04 GMT | starting dump
+Fri, 02 Mar 2018 04:49:04 GMT | got 0 objects from source elasticsearch (offset: 0)
+Fri, 02 Mar 2018 04:49:04 GMT | Total Writes: 0
+Fri, 02 Mar 2018 04:49:04 GMT | dump complete
