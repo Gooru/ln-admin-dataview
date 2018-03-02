@@ -57,11 +57,16 @@
         </div>
       </div>
     {{else}}
-      {{#app-panel-box localizeTitle=courseTitle courseReport="true" showBackButton="true" onClickBackButton="onClickCourseBackButton" }}
-        {{#each userPerformanceUnits as |unit|}}
-          {{learner.course-accordion-unit unit=unit courseId=courseId userId=userId classId=classId}}
-        {{/each}}
-      {{/app-panel-box}}
+      {{#if isLoading}}
+        {{three-bounce-spinner}}
+      {{else}}
+        {{#app-panel-box localizeTitle=courseTitle courseReport="true" showBackButton="true" onClickBackButton="onClickCourseBackButton" }}
+          {{#each userPerformanceUnits as |unit|}}
+            {{learner.course-accordion-unit unit=unit courseId=courseId userId=userId classId=classId}}
+          {{/each}}
+        {{/app-panel-box}}
+      {{/if}}
+
     {{/if}}
 
     <div class="left-panel-nav-1"></div>
@@ -70,17 +75,17 @@
 
   </div>
 
-  <div class="right-panel">
-    {{learner.competencies-report-panel taxonomySubjects=taxonomySubjects  journeyCourses=journeyCourses subjectChange='subjectChange' courseChange='courseChange' competencyTabs='competencyTabs'}}
+  <div class="right-panel {{if isListModeEnabled 'disabled' ''}}">
+    {{learner.competencies-report-panel taxonomySubjects=taxonomySubjects isCompetency=isCompetency isJourney=isJourney isSelectedSubject=isSelectedSubject isSelectedCourse=isSelectedCourse journeyCourses=journeyCourses subjectChange='subjectChange' courseChange='courseChange' competencyTabs='competencyTabs'}}
   </div>
 
   {{#app-pull-out showPullOut=showPullOut title=description description=title competency=competency showMore=showMore isLoading=isLoading as |section|}}
     {{#if section.isLessContent}}
       {{learner.competencies-pull-out-body
-  collection=collection
-  userId=userId
-  isLoading=isLoading
-  }}
+          collection=collection
+          userId=userId
+          isLoading=isLoading
+      }}
     {{/if}}
   {{/app-pull-out}}
 </div>

@@ -9,25 +9,17 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Properties
 
+  /**
+   * It  will have Subject
+   * @type {String}
+   */
+  isSelectedSubject: null,
 
   /**
    * It  will have Subject
-   * @type {Object}
+   * @type {String}
    */
-  isSelectedSubject: Ember.computed('taxonomySubjects', function() {
-    let component = this;
-    let subject = component.get('taxonomySubjects').objectAt(0);
-    return subject.subjectTitle;
-  }),
-
-
-  /**
-   * It  will have Subject
-   * @type {Object}
-   */
-  isSelectedCourse: Ember.computed('journeyCourses', function() {
-    return 'Journeys Summary';
-  }),
+  isSelectedCourse: null,
 
 
   //------------------------------------------------------------------------

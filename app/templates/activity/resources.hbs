@@ -18,7 +18,7 @@
     {{/if}}
 
   {{/if}}
-  {{#app-pull-out showPullOut=showPullOut title=collection.title description=collection.taxonomy.id showMore=showMore isLoading=isLoading as |section|}}
+  {{#app-pull-out showPullOut=showPullOut title=collection.title description=collection.taxonomy.id showMore=showMore isLoading=isLoadingPullOut as |section|}}
     {{#if (and section.isLessContent collection.title)}}
       {{activities.pull-out-body
        collection=collection

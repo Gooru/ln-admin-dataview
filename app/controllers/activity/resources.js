@@ -81,6 +81,13 @@ export default Ember.Controller.extend({
    */
   isLoading: false,
 
+
+  /**
+   * @property {Boolean}
+   * Toggle show/hide view of three bounce spinner
+   */
+  isLoadingPullOut: false,
+
   /**
    * @property {Number}
    * Holds currently fetched results count
@@ -182,7 +189,7 @@ export default Ember.Controller.extend({
     }),
     Ember.Object.create({
       header: 'curated',
-      isEnabled: false
+      isEnabled: true
     }),
     Ember.Object.create({
       header: 'tagged',
@@ -206,7 +213,7 @@ export default Ember.Controller.extend({
      */
     getResourceInfo: function(resource) {
       let controller = this;
-      controller.set('isLoading', true);
+      controller.set('isLoadingPullOut', true);
       controller.set('showPullOut', true);
       controller.set('showMore', true);
       let collectionType = 'resource';
@@ -217,7 +224,7 @@ export default Ember.Controller.extend({
               collection.set('owner', owner);
               controller.set('collection', collection);
               controller.set('collection.type', collectionType);
-              controller.set('isLoading', false);
+              controller.set('isLoadingPullOut', false);
               return Ember.RSVP.resolve(collection);
             });
         });
