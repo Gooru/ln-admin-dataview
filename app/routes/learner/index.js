@@ -47,13 +47,13 @@ export default Ember.Route.extend({
 
 
   setupController: function(controller, model) {
-
     controller.set('userCompetencyStats', model.userCompetencyStats);
     controller.set('userCompetencies', model.userCompetencies);
     controller.set('userTimeSpentStats', model.userTimeSpentStats);
     controller.set('userStatsByCourse', model.userStatsByCourse);
     controller.set('userJourneyStats', model.userJourneyStats);
     controller.set('userId', model.userId);
+    controller.init();
   }
 
 });
