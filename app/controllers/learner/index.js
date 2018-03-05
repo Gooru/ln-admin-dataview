@@ -263,6 +263,9 @@ export default Ember.Controller.extend({
       controller.set('isJourneyTabs', tabs === 'journey');
       if (controller.get('isJourney')) {
         controller.fetchJourneyByUser();
+        controller.set('isSelectedCourseId', 1);
+          controller.set('isSelectedCourse', 'Journeys Summary');
+
       }
     },
     /**
