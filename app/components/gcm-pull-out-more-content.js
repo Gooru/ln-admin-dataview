@@ -9,52 +9,52 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Dependencies
   /**
-  * Search service to fetch content details
-  */
+   * Search service to fetch content details
+   */
   searchService: Ember.inject.service('api-sdk/search'),
 
   // -------------------------------------------------------------------------
   // Properties
   /**
-  * User selected node data
-  */
+   * User selected node data
+   */
   nodeData: null,
 
   /**
-  * User selected node data
-  */
+   * User selected node data
+   */
   prerequisites: null,
 
   /**
-  * Search length for fetching search items
-  */
+   * Search length for fetching search items
+   */
   searchLength: 3,
 
   /**
-  * List of resource contents
-  */
+   * List of resource contents
+   */
   resourceContent: null,
 
   /**
-  * List of collection contents
-  */
+   * List of collection contents
+   */
   collectionContent: null,
 
   /*
-  * List of assessment contents
-  */
+   * List of assessment contents
+   */
   assessmentContent: null,
 
   /*
-  * List of question contents
-  */
+   * List of question contents
+   */
   questionContent: null,
 
   // -------------------------------------------------------------------------
   // Events
   /**
-  * Trigger observer when user select a node
-  */
+   * Trigger observer when user select a node
+   */
   nodeDataObserver: Ember.observer('nodeData', function() {
     let component = this;
     component._super(...arguments);
