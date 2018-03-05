@@ -267,6 +267,7 @@ export default Ember.Controller.extend({
         controller.set('isSelectedCourse', 'Journeys Summary');
       }
     },
+
     /**
      * @function onClickExploreButton
      * Action triggered when user click on explore button

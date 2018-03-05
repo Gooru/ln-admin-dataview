@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import Utils from 'admin-dataview/utils/taxonomy';
-import { getSearchFilterTextBySubjectName } from 'admin-dataview/utils/utils';
+import {
+  getSearchFilterTextBySubjectName
+} from 'admin-dataview/utils/utils';
 import {
   CONTENT_TYPES,
   TAXONOMY_LEVELS
@@ -152,6 +154,7 @@ export default Ember.Controller.extend({
      */
     onClickNodeMoreInfo: function(node) {
       let controller = this;
+      let nodeDepth = node.depth;
       let nodeInfo = Utils.getNodeInfo(node);
       let nodeDescription = nodeInfo.title ? nodeInfo.title : null;
       let selectedNodeData = {
@@ -168,11 +171,39 @@ export default Ember.Controller.extend({
       controller.set('nodeData', selectedNodeData);
       controller.set('isLoading', true);
       controller.set('showPullOut', true);
-      controller.getSearchContentCount(selectedNodeData).then(function(contentCount) {
-        controller.set('contentCount', contentCount);
-        controller.set('isLoading', false);
-      });
+      if (nodeDepth < 4) {
+        controller.getSearchContentCount(selectedNodeData).then(function(contentCount) {
+          controller.set('contentCount', contentCount);
+          controller.set('isLoading', false);
+        });
+      }
+
       controller.getSearchLearningMapsContent(selectedNodeData).then(function(learning) {
+        let culcaqrCount = Ember.A();
+        let contentCountData = Ember.A();
+        culcaqrCount = learning.contents;
+        if (nodeDepth >= 4) {
+          let courseCount = culcaqrCount.course ? culcaqrCount.course.totalHitCount : 0;
+          let unitCount = culcaqrCount.unit ? culcaqrCount.unit.totalHitCount : 0;
+          let lessonCount = culcaqrCount.lesson ? culcaqrCount.lesson.totalHitCount : 0;
+          let collectionCount = culcaqrCount.collection ? culcaqrCount.collection.totalHitCount : 0;
+          let assessmentCount = culcaqrCount.assessment ? culcaqrCount.assessment.totalHitCount : 0;
+          let resourceCount = culcaqrCount.resource ? culcaqrCount.resource.totalHitCount : 0;
+          let questionCount = culcaqrCount.question ? culcaqrCount.question.totalHitCount : 0;
+          let rubricCount = culcaqrCount.rubric ? culcaqrCount.rubric.totalHitCount : 0;
+
+          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COURSE, courseCount));
+          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.UNIT, unitCount));
+          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.LESSON, lessonCount));
+          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.ASSESSMENT, assessmentCount));
+          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COLLECTION, collectionCount));
+          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RESOURCE, resourceCount));
+          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.QUESTION, questionCount));
+          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RUBRIC, rubricCount));
+          controller.set('contentCount', contentCountData);
+        }
+
+        controller.set('isLoading', false);
         controller.set('signatureContents', learning.signatureContents);
         controller.set('prerequisites', learning.prerequisites);
       });
