@@ -37,6 +37,12 @@ export default Ember.Component.extend({
    */
   currentSubject: null,
 
+  /**
+   * It  will have selected courseId
+   * @type {Object}
+   */
+  isSelectedCourseId: null,
+
 
   isCompetency: Ember.computed('isCompetencyTabs', function() {
     let component = this;

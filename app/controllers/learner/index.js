@@ -133,6 +133,14 @@ export default Ember.Controller.extend({
     return 'Journeys Summary';
   }),
 
+  /**
+   * It will have  couse item selected default .
+   * @type {string}
+   */
+  isSelectedCourseId: Ember.computed(function() {
+    return 1;
+  }),
+
 
   /**
    * It will have  subject item selected default .
@@ -232,6 +240,7 @@ export default Ember.Controller.extend({
     courseChange: function(course) {
       let controller = this;
       controller.set('isSelectedCourse', course.courseTitle);
+      controller.set('isSelectedCourseId', course.courseId);
       if (course.courseTitle === 'Journeys Summary') {
         controller.set('isJourney', true);
       } else {
@@ -319,7 +328,8 @@ export default Ember.Controller.extend({
     controller.get('learnersService').getUserStatsByCourse(userId, '3m').then(journeys => {
       let journeyCourse = Ember.A();
       let arrayList = [{
-        courseTitle: 'Journeys Summary'
+        courseTitle: 'Journeys Summary',
+        courseId: 1
       }];
       journeys.forEach(course => {
         arrayList.push(course);
