@@ -10,7 +10,7 @@
     {{/each}}
   {{else}}
     {{#each journeyCourses as | course |}}
-      <li class="{{if (eq course.courseTitle  isSelectedCourse) 'subject-active' ''}}">
+      <li class="{{if (and (eq course.courseTitle  isSelectedCourse) (eq course.courseId  isSelectedCourseId) )'subject-active' ''}}">
         <div class="competency-title" {{action 'chooseCourse' course }}>
           <span>{{course.courseTitle}} </span>
         </div>

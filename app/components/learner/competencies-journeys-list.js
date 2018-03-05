@@ -22,6 +22,13 @@ export default Ember.Component.extend({
   isSelectedCourse: null,
 
 
+  /**
+   * It  will have selected courseId
+   * @type {String}
+   */
+  isSelectedCourseId: null,
+
+
   //------------------------------------------------------------------------
   // actions
 
