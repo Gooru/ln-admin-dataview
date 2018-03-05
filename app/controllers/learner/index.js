@@ -295,6 +295,8 @@ export default Ember.Controller.extend({
     this._super(...arguments);
     let controller = this;
     controller.set('isCompetency', true);
+    controller.set('isCompetencyTabs', true);
+    controller.set('isJourneyTabs', false);
     let subjectCategory = controller.get('selectedSubjectCategory');
     controller.fetchSubjectsByCategory(subjectCategory);
   },
