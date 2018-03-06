@@ -40,7 +40,7 @@ export function getResourceFormat(format) {
  * @returns {string}
  */
 export function truncateString(text, length = 95) {
-  if (text.length > 100) {
+  if (text && text.length > 100) {
     return `${text.substring(0, length)  }...`;
   }
   return text;

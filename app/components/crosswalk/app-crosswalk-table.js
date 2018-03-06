@@ -30,6 +30,52 @@ export default Ember.Component.extend({
         scrollTop: 0
       });
       component.sendAction('onToggleSubjectBrowser');
+    },
+
+    /**
+     * Action triggered when the user select respective framework to search
+     */
+    onClickSearchIcon(frameworkId, headerPosition) {
+      let component = this;
+      let tableData = component.get('tableData');
+      let crosswakCodeByFrameworkId = [];
+      tableData.body.map( crosswalkItem => {
+        let crosswalkCodeItem = crosswalkItem[headerPosition];
+        if (crosswalkCodeItem !== '') {
+          crosswakCodeByFrameworkId.push(crosswalkCodeItem);
+        }
+      });
+      component.set('selectedFramework', frameworkId);
+      component.set('crosswakCodeByFrameworkId', crosswakCodeByFrameworkId);
+      component.set('isShowTableSearch', true);
+    },
+
+    /**
+     * Action triggered when the user click back icon
+     */
+    onBackToCrosswalk() {
+      let component = this;
+      component.set('crosswakCodeByFrameworkId', null);
+      component.set('isShowTableSearch', false);
     }
-  }
+  },
+
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * Show/Hide crosswalk table search
+   */
+  isShowTableSearch: false,
+
+  /**
+   * Currently selected frmework id
+   */
+  selectedFramework: null,
+
+  /**
+   * List of crosswalk codes by framework id
+   */
+  crosswakCodeByFrameworkId: null
+
 });

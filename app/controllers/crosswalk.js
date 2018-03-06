@@ -60,6 +60,7 @@ export default Ember.Controller.extend({
   */
   defaultTableHeaderItems: ['COMPETENCY'],
 
+
   //------------------------------------------------------------------------
   // Actions
 
