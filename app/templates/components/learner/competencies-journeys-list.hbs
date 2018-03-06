@@ -1,8 +1,8 @@
 <ul class="competency-group">
   {{#if isCompetency}}
     {{#each taxonomySubjects as | subject |}}
-      <li class="{{if (eq subject.subjectTitle  isSelectedSubject) 'subject-active' ''}}">
-        <div class="competency-title" {{action 'chooseSubject' subject }}>
+      <li class="list {{if (eq subject.subjectTitle  isSelectedSubject) 'subject-active' ''}}" {{action 'chooseSubject' subject }}>
+        <div class="competency-title" >
           <span>{{subject.subjectTitle}} </span>
         </div>
         <div class="competency-badge"></div>

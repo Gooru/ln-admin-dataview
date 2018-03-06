@@ -194,13 +194,7 @@ export default Ember.Controller.extend({
         if (data.status === 2 || data.status === 3 || data.status === 4 || data.status === 5) {
           status = 'Mastered';
           statusMastered = controller.get('competencyStatus') ? controller.get('competencyStatus')[data.status] : null;
-          collections.forEach(collection => {
-            let type = collection.get('collectionType');
-            let score = collection.get('score');
-            if (type === 'assessment' && score >= 80) {
-              collectionData.push(collection);
-            }
-          });
+          collectionData = collections;
           if (!collectionData.length >= 1) {
             statusMastered = controller.get('competencyStatus') ? controller.get('competencyStatus')[2] : null;
           }
@@ -220,7 +214,6 @@ export default Ember.Controller.extend({
           competencyName: data.competencyName
         };
         controller.set('competency', competency);
-
       });
     },
 

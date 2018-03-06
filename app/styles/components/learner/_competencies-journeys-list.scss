@@ -5,6 +5,10 @@
     position: relative;
     margin-top: -15px;
 
+    .list {
+      cursor: pointer;
+    }
+
     li:nth-last-child(2) {
       top: inherit;
       bottom: 2px !important;
