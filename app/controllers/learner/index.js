@@ -309,6 +309,8 @@ export default Ember.Controller.extend({
     controller.set('isCompetency', true);
     controller.set('isCompetencyTabs', true);
     controller.set('isJourneyTabs', false);
+    controller.set('isCourseModeEnabled', false);
+    controller.set('isListModeEnabled', false);
     let subjectCategory = controller.get('selectedSubjectCategory');
     controller.fetchSubjectsByCategory(subjectCategory);
   },
