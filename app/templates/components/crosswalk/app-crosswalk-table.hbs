@@ -3,10 +3,16 @@
     {{t (concat 'common.categoryOptions.' categoryId)}} > {{subjectTitle}}
     <span {{action "scrollTop"}}><i class="material-icons">arrow_upward</i></span>
   </div>
+
+  {{#if isShowTableSearch}}
+    {{crosswalk.crosswalk-table-search onBackToCrosswalk="onBackToCrosswalk" crosswalkCodes=crosswakCodeByFrameworkId selectedFramework=selectedFramework}}
+  {{/if}}
+
   <div class="thead">
-    {{#each tableData.header as |header|}}
+    {{#each tableData.header as |header headerIndex|}}
       <div class="td">
         {{header}}
+        <span {{action "onClickSearchIcon" header headerIndex}}>{{app-icon name="search"}}</span>
       </div>
     {{/each}}
   </div>
