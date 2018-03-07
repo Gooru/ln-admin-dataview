@@ -60,6 +60,11 @@ export default Ember.Controller.extend({
   */
   defaultTableHeaderItems: ['COMPETENCY'],
 
+  /**
+   * Show Loading spinner
+   */
+  isLoading: false,
+
 
   //------------------------------------------------------------------------
   // Actions
@@ -108,6 +113,7 @@ export default Ember.Controller.extend({
       let controller = this;
       let selectedFrameworks = controller.get('selectedFrameworks');
       let subjectId = controller.get('subjectId');
+      controller.set('isLoading', true);
       let crosswalkDataPromise = Ember.RSVP.resolve(controller.get('crosswalkService').getCrosswalkData(subjectId));
       return Ember.RSVP.hash({
         frameworkList: selectedFrameworks,
@@ -166,5 +172,6 @@ export default Ember.Controller.extend({
     };
     controller.set('tableData', tableData);
     controller.set('showCrosswalkTable', true);
+    controller.set('isLoading', false);
   }
 });

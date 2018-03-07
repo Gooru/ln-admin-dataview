@@ -41,11 +41,6 @@ export default Ember.Component.extend({
   isLoading: false,
 
   /**
-   * Show/Hide selected standard's content info
-   */
-  isShowContentInfo: false,
-
-  /**
    * Show/Hide selected standard info
    */
   isShowStandardInfo: false,
@@ -118,9 +113,15 @@ export default Ember.Component.extend({
       .then(function(hash) {
         component.set('contentCountData', component.getContentCountData(hash.learningMapsContent.contents));
         component.set('signatureContents', hash.learningMapsContent.signatureContents);
+        component.set('prerequisites', hash.learningMapsContent.prerequisites);
         component.set('description', hash.learningMapsContent.title);
         component.set('GUT', hash.learningMapsContent.gutCode);
         component.set('isShowStandardInfo', true);
+        component.set('assessmentContent', hash.learningMapsContent.learningMapsContent.assessment);
+        component.set('collectionContent', hash.learningMapsContent.learningMapsContent.collection);
+        component.set('courseContent', hash.learningMapsContent.learningMapsContent.course);
+        component.set('resourceContent', hash.learningMapsContent.learningMapsContent.resource);
+        component.set('questionContent', hash.learningMapsContent.learningMapsContent.question);
         component.set('isLoading', false);
       });
   },

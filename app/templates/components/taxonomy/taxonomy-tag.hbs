@@ -1,7 +1,7 @@
 {{#if model.isReadonly}}
   <div class="content">
     <b class="tag-label">{{model.data.label}}</b>
-    <span class="tag-caption">{{model.data.caption}}</span>
+    <span class="tag-caption ellipsis">{{model.data.caption}}</span>
   </div>
 
   {{#if hasTooltip}}
@@ -14,7 +14,7 @@
   <button class="toggle" {{action 'selectTag'}}>
     <div>
       <b class="tag-label">{{model.data.label}}</b>
-      <span class="tag-caption">{{model.data.caption}}</span>
+      <span class="tag-caption ellipsis">{{model.data.caption}}</span>
     </div>
   </button>
 {{/if}}

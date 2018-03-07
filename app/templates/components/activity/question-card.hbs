@@ -5,7 +5,7 @@
     </div>
   </div>
   <div class="question-format-container">
-    <span>{{question.format}}</span>
+    <span>{{t (concat "common.question-type." question.format)}}</span>
     {{#if (not question.isVisibleOnProfile)}}
       <div class="visibility  visible_false" title="{{t 'common.visibility-tooltip'}}" data-toggle="tooltip" data-placement="top" data-trigger="hover">
         {{app-icon name="visibility" class='pull-right cca-eye-icon'}}

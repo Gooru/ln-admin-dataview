@@ -365,7 +365,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
       id: questionData.gooruOid,
       title: questionData.title,
       description: questionData.description,
-      type: questionData.resourceFormat.value,
+      type: questionData.resourceFormat ? questionData.resourceFormat.value : null,
       format: format,
       publisher: null, //TODO missing publisher at API response,
       thumbnailUrl: questionData.thumbnail,
@@ -405,6 +405,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
           appRootPath + DEFAULT_IMAGES.COLLECTION;
       });
     }
+
     const returnObjects = {
       owner: Ember.getOwner(this).ownerInjection(),
       title: learningMapsContent.title,
@@ -412,9 +413,76 @@ export default Ember.Object.extend(ConfigurationMixin, {
       gutCode: learningMapsContent.gutCode,
       contents: learningMapsContent.contents,
       prerequisites: learningMapsContent.prerequisites,
-      signatureContents: signatureData
+      signatureContents: signatureData,
+      learningMapsContent: serializer.normalizeSearchLearningMapsContentInfo(learningMapsContent.contents)
     };
     return returnObjects;
+  },
+
+  /**
+   * @function normalizeSearchLearningMapsContentInfo
+   * Serialize each content type from the learning map API
+   */
+  normalizeSearchLearningMapsContentInfo(contents) {
+    let serializer = this;
+    let serializedContentData = {};
+    let assessmentData = [];
+    let collectionData = [];
+    let courseData = [];
+    let resourceData = [];
+    let questionData = [];
+
+    if (contents.assessment) {
+      contents.assessment.searchResults.map( assessment => {
+        let assessmentInfo = serializer.normalizeAssessment(assessment);
+        assessmentInfo.description = assessment.learningObjective;
+        assessmentInfo.creator = serializer.normalizeOwner(assessment.creator);
+        assessmentInfo.owner = serializer.normalizeOwner(assessment.user);
+        assessmentInfo.standards = serializer.get('taxonomySerializer').normalizeLearningMapsTaxonomyArray(assessment.taxonomy, TAXONOMY_LEVELS.ASSESSMENT);
+        assessmentData.push(assessmentInfo);
+      });
+    }
+
+    if (contents.collection) {
+      contents.collection.searchResults.map( collection => {
+        let collectionInfo = serializer.normalizeCollection(collection);
+        collectionInfo.description = collection.learningObjective;
+        collectionInfo.creator = serializer.normalizeOwner(collection.creator);
+        collectionInfo.owner = serializer.normalizeOwner(collection.user);
+        collectionInfo.standards = serializer.get('taxonomySerializer').normalizeLearningMapsTaxonomyArray(collection.taxonomy, TAXONOMY_LEVELS.COLLECTION);
+        collectionData.push(collectionInfo);
+      });
+    }
+
+    if (contents.course) {
+      contents.course.searchResults.map( course => {
+        let courseInfo = serializer.normalizeCourse(course);
+        courseInfo.taxonomy = serializer.get('taxonomySerializer').normalizeLearningMapsTaxonomyArray(course.taxonomy, TAXONOMY_LEVELS.COURSE);
+        courseData.push(courseInfo);
+      });
+    }
+
+    if (contents.resource) {
+      contents.resource.searchResults.map( resource => {
+        let resourceInfo = serializer.normalizeResource(resource);
+        resourceInfo.standards = serializer.get('taxonomySerializer').normalizeLearningMapsTaxonomyArray(resource.taxonomy, TAXONOMY_LEVELS.RESOURCE);
+        resourceData.push(resourceInfo);
+      });
+    }
+
+    if (contents.question) {
+      contents.question.searchResults.map( question => {
+        let questionInfo = serializer.normalizeQuestion(question);
+        questionInfo.standards = serializer.get('taxonomySerializer').normalizeLearningMapsTaxonomyArray(question.taxonomy, TAXONOMY_LEVELS.QUESTION);
+        questionData.push(questionInfo);
+      });
+    }
+    serializedContentData.assessment = assessmentData;
+    serializedContentData.collection = collectionData;
+    serializedContentData.course = courseData;
+    serializedContentData.resource = resourceData;
+    serializedContentData.question = questionData;
+    return serializedContentData;
   },
 
 

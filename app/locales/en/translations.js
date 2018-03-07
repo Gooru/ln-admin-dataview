@@ -53,7 +53,8 @@ export default {
     'no-results': 'No results found',
     'no-results-message':
       'Check your spelling. We all make mistakes!<br/>Go broader and remove some filters.<br/> Or try searching for a similar word instead.',
-    'show-more-results': 'Show More Results'
+    'show-more-results': 'Show More Results',
+    'prerequisites': 'Prerequisites'
   },
   logout: {
     name: 'Logout'
@@ -99,6 +100,19 @@ export default {
     'generate-table': 'Generate Table',
     framework: {
       'warning-text': 'Select up to 5 Frameworks'
+    },
+    search: {
+      information: 'Information',
+      competency: 'COMPETENCY'
+    },
+    'pull-out': {
+      section: {
+        'assessments': 'Assessments',
+        'collections': 'Collections',
+        'questions': 'Questions',
+        'resources': 'Resources',
+        'courses': 'Courses'
+      }
     }
   },
   learner: {
