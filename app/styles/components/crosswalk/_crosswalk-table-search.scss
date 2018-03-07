@@ -62,7 +62,7 @@
           .gut-code {
             font-weight: bold;
           }
-          .content-count, .signature-assessments, .signature-collections {
+          .content-count, .signature-assessments, .signature-collections, .prerequisites {
             padding: 15px 0;
           }
         }
@@ -70,7 +70,7 @@
           .section-content {
             .section-title {
               padding: 8px 0;
-              margin: 0px 35px 15px 35px;
+              margin: 0px 24px 15px 15px;
               font-size: 15px;
               font-weight: bold;
               color: $gray-29;

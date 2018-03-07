@@ -8,6 +8,11 @@
     </div>
   </header>
   <div class="crosswalk-body">
+    {{#if isLoading}}
+      <div class="loading">
+        {{three-bounce-spinner}}
+      </div>
+    {{/if}}
     <div class="crosswalk-browser-view {{if showSubjectBrowser 'visible' 'hidden'}}">
       <div class="subect-browser">
         <div class="section-title">
