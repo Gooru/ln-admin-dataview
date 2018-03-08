@@ -171,6 +171,14 @@ export const ACTIVITIES_NAVIGATION_MENUS_INDEX = {
   'questions': 5
 };
 
+export const COMPETENCY_NAVIGATION_MENUS = ['matrix', 'crosswalk', 'tree'];
+
+export const COMPETENCY_NAVIGATION_MENUS_INDEX = {
+  'matrix': 0,
+  'crosswalk': 1,
+  'tree': 2
+};
+
 
 export const CODE_TYPES = {
   STANDARD_CATEGORY: 'standard_level_0',

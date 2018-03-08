@@ -1,6 +1,11 @@
 import Ember from 'ember';
+import AuthenticatedRouteMixin from 'admin-dataview/mixins/authenticated-route-mixin';
 
-export default Ember.Route.extend({
+
+export default Ember.Route.extend(AuthenticatedRouteMixin, {
+
+  //Methods
+  //-------------------------------------------------------------------------
 
   setupController: function(controller) {
     controller.set('enableGenerateTableBtn', false);
@@ -8,4 +13,5 @@ export default Ember.Route.extend({
     controller.set('showSubjectBrowser', true);
     controller.set('selectedFrameworks', []);
   }
+
 });

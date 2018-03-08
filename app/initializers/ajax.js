@@ -11,7 +11,10 @@ export default {
       beforeSend: function(jqXHR, settings) {
         const url = settings.url;
         if (url.startsWith('/api') || url.startsWith('/gooru-search')) {
-          const endpointUrl = EndPointsConfig.getEndpointUrl();
+          let endpointUrl = EndPointsConfig.getEndpointUrl();
+          if (window.location.protocol === 'https:') {
+            endpointUrl = EndPointsConfig.getEndpointSecureUrl();
+          }
           settings.url = `${endpointUrl}${url}`;
         } else if (url.startsWith('config/') || url.startsWith('stubs/')) {
           const basePath = (`${window.location.protocol  }//${  window.location.host}`);

@@ -6,8 +6,10 @@
 @import 'common';
 
 @import 'controllers/application';
-@import 'controllers/gcm';
-@import 'controllers/crosswalk';
+@import 'controllers/competency';
+@import 'controllers/competency/matrix';
+@import 'controllers/competency/crosswalk';
+@import 'controllers/competency/tree';
 @import 'controllers/learners';
 @import 'controllers/activities';
 @import 'controllers/suggest';
@@ -36,6 +38,7 @@
 @import 'components/validation/app-input';
 @import 'components/content-display-count';
 @import 'components/gcm-pull-out-more-content';
+@import 'components/competency-menu-navigation';
 @import 'components/cards/content-card';
 @import 'components/taxonomy/taxonomy-tag-list';
 @import 'components/taxonomy/taxonomy-tag';
