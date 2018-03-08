@@ -12,9 +12,13 @@
         {{/each}}
       </ul>
     </div>
-    <div class="pull-left matrix-chart-container">
+    <div class="pull-left matrix-chart-container {{if istaxonomyCourses 'scroll-view' 'no-scroll'}}">
       <div id="competency-matrix-chart"></div>
     </div>
+
+    {{#if (and (not isLoading) (not istaxonomyCourses) ) }}
+      <span class="no-data">No Data Found</span>
+    {{/if}}
   </div>
   <div class="clear"></div>
 </div>

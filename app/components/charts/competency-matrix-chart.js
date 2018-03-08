@@ -120,6 +120,17 @@ export default Ember.Component.extend({
   }),
 
 
+  /**
+   * It  will have chart value width scroll width handling
+   * @type {String}
+   */
+  istaxonomyCourses: Ember.computed('taxonomyCourses', function() {
+    let component = this;
+    let length = component.get('taxonomyCourses').length;
+    return length > 0;
+  }),
+
+
   // -------------------------------------------------------------------------
   // Events
 
