@@ -175,7 +175,7 @@ export default Ember.Component.extend({
     let userId = component.get('userId');
     component.set('isLoading', true);
     return Ember.RSVP.hash({
-      competencyMatrixs: component.get('competencyService').getCompetencyMatrix(userId, subjectId),
+      competencyMatrixs: component.get('competencyService').getCompetencyMatrixCourse(userId, subjectId),
       competencyMatrixCoordinates: component.get('competencyService').getCompetencyMatrixCoordinates(subjectId)
     }).then(({
       competencyMatrixs,
@@ -192,53 +192,39 @@ export default Ember.Component.extend({
     let component = this;
     let courses = competencyMatrixCoordinates.get('courses').toArray().reverse();
     let taxonomyCourses = Ember.A();
-    let domains = competencyMatrixCoordinates.get('domains');
     let currentYaxis = 1;
     let resultSet = Ember.A();
     courses.forEach(courseData => {
       let courseCode = courseData.get('courseCode');
-      let courseName = courseData.get('courseName');
-      let courseSeq = courseData.get('courseSeq');
       let competencyMatrix = competencyMatrixs.findBy('courseCode', courseCode);
-      let competencyMatrixByDomain = competencyMatrix ? competencyMatrix.get('domains') : [];
-      if (competencyMatrix && competencyMatrixByDomain.length > 0) {
+      let competencies = competencyMatrix ? competencyMatrix.get('competencies') : [];
+      if (competencyMatrix && competencies.length > 0) {
         taxonomyCourses.pushObject(courseData);
-        let mergeDomainData = Ember.A();
-        competencyMatrixByDomain.forEach(domainMatrix => {
-          let domainCode = domainMatrix.get('domainCode');
-          let domain = domains.findBy('domainCode', domainCode);
-          let domainName = domain.get('domainName');
-          let domainSeq = domain.get('domainSeq');
-          let competencies = domainMatrix.get('competencies');
-          competencies.forEach(competency => {
-            let competencyCode = competency.get('competencyCode');
-            let competencyName = competency.get('competencyName');
-            let competencySeq = competency.get('competencySeq');
-            let status = competency.get('status');
-            let data = Ember.Object.create({
-              'courseCode': courseCode,
-              'courseName': courseName,
-              'courseSeq': courseSeq,
-              'domainName': domainName,
-              'domainCode': domainCode,
-              'domainSeq': domainSeq,
-              'competencyCode': competencyCode,
-              'competencyName': competencyName,
-              'competencySeq': competencySeq,
-              'status': status
-            });
-            if (status === 2 || status === 3 || status === 4 || status === 5) {
-              mergeDomainData.forEach(data => {
-                data.set('status', status);
-              });
-            }
-
-            mergeDomainData.pushObject(data);
-
+        let competencyData = Ember.A();
+        competencies.forEach(competency => {
+          let competencyCode = competency.get('competencyCode');
+          let competencyName = competency.get('competencyName');
+          let competencySeq = competency.get('competencySeq');
+          let status = competency.get('status');
+          let data = Ember.Object.create({
+            'courseCode': courseCode,
+            'competencyCode': competencyCode,
+            'competencyName': competencyName,
+            'competencySeq': competencySeq,
+            'status': status
           });
+          if (status === 2 || status === 3 || status === 4 || status === 5) {
+            competencyData.forEach(data => {
+              data.set('status', status);
+            });
+          }
+
+          competencyData.pushObject(data);
+
         });
+
         let cellIndex = 1;
-        mergeDomainData.forEach(data => {
+        competencyData.forEach(data => {
           data.set('xAxisSeq', cellIndex);
           data.set('yAxisSeq', currentYaxis);
           resultSet.pushObject(data);

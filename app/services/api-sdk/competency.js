@@ -67,23 +67,23 @@ export default Ember.Service.extend({
   },
 
   /**
-   * Get user competency Matrix for subject
+   * Get user competency Matrix for courses by subject
    * @returns {Promise.<[]>}
    */
-  getCompetencyMatrix: function(user, subject) {
+  getCompetencyMatrixCourse: function(user, subject) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('competencyAdapter')
-        .getCompetencyMatrix(user, subject)
+        .getCompetencyMatrixCourse(user, subject)
         .then(function(response) {
-          resolve(service.get('competencySerializer').normalizeCompetencyMatrix(response));
+          resolve(service.get('competencySerializer').normalizeCompetencyMatrixCourse(response));
         }, reject);
     });
   },
 
   /**
-   * Get user competency Matrix for subject
+   * Get user competency Matrix for domains by subject
    * @returns {Promise.<[]>}
    */
   getCompetencyMatrixDomain: function(user, subject) {

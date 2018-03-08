@@ -54,28 +54,22 @@ export default Ember.Object.extend({
   },
 
   /**
-   * Normalized data of user competency matrix
+   * Normalized data of user course competency matrix
    * @return {Object}
    */
-  normalizeCompetencyMatrix: function(response) {
+  normalizeCompetencyMatrixCourse: function(response) {
     let resultSet = Ember.A();
     if (response.userCompetencyMatrix) {
-      let userCompetencyMatrix = Ember.A(response.userCompetencyMatrix);
-      userCompetencyMatrix.forEach(courseData => {
+      let userCourseCompetencyMatrix = Ember.A(response.userCompetencyMatrix);
+      userCourseCompetencyMatrix.forEach(courseData => {
         let course = Ember.Object.create(courseData);
-        let domains = course.get('domains');
-        let domainSet = Ember.A();
-        domains.forEach(data => {
-          let competencySet = Ember.A();
-          let domain = Ember.Object.create(data);
-          let competencies = domain.get('competencies');
-          competencies.forEach(competency => {
-            competencySet.pushObject(Ember.Object.create(competency));
-          });
-          domain.set('competencies', competencySet);
-          domainSet.pushObject(domain);
+        let competencies = course.get('competencies');
+        let competencySet = Ember.A();
+        competencies.forEach(data => {
+          let competency = Ember.Object.create(data);
+          competencySet.pushObject(competency);
         });
-        course.set('domains', domainSet);
+        course.set('competencies', competencySet);
         resultSet.pushObject(course);
       });
     }
@@ -83,7 +77,7 @@ export default Ember.Object.extend({
   },
 
   /**
-   * Normalized data of user competency matrix
+   * Normalized data of user  domain competency matrix
    * @return {Object}
    */
   normalizeCompetencyMatrixDomain: function(response) {

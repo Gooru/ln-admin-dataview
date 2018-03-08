@@ -85,13 +85,13 @@ export default Ember.Object.extend({
   },
 
   /**
-   * Get user competency Matrix for subject
+   * Get user competency Matrix for courses by subject
    * @returns {Promise.<[]>}
    */
-  getCompetencyMatrix: function(user, subject) {
+  getCompetencyMatrixCourse: function(user, subject) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url =`${namespace}/v1/tx/competency/matrix`;
+    const url =`${namespace}/v1/tx/competency/matrix/course`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -102,15 +102,15 @@ export default Ember.Object.extend({
       }
     };
     return Ember.RSVP.hashSettled({
-      competencyMatrix: Ember.$.ajax(url, options)
+      competencyMatrixCourse: Ember.$.ajax(url, options)
     }).then(function(hash) {
-      return hash.competencyMatrix.value;
+      return hash.competencyMatrixCourse.value;
     });
   },
 
 
   /**
-     * Get user competency Matrix for subject
+     * Get user competency Matrix for domains by subjects
      * @returns {Promise.<[]>}
      */
   getCompetencyMatrixDomain: function(user, subject) {
