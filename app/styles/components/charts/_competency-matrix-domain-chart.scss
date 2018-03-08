@@ -140,9 +140,6 @@
     }
 
     .matrix-chart-container {
-      width: 440px;
-      overflow-x: auto;
-
       .domain-list {
         margin-left: 20px;
         display: inline-block;
@@ -155,6 +152,19 @@
           margin-top: 0;
         }
       }
+    }
+
+    .scroll-view {
+      width: 440px;
+      overflow-x: auto;
+    }
+
+    .no-data {
+      width: 100%;
+      display: inline-block;
+      text-align: center;
+      font-size: 25px;
+      color: #b2abab;
     }
 
     .matrix-chart-container::-webkit-scrollbar {

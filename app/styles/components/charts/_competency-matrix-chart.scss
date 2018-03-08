@@ -142,7 +142,19 @@
 
     .matrix-chart-container {
       width: 440px;
+    }
+
+    .scroll-view {
+      width: 440px;
       overflow-x: auto;
+    }
+
+    .no-data {
+      width: 100%;
+      display: inline-block;
+      text-align: center;
+      font-size: 25px;
+      color: #b2abab;
     }
 
     .matrix-chart-container::-webkit-scrollbar {

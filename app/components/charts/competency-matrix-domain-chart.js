@@ -102,6 +102,16 @@ export default Ember.Component.extend({
 
   isLoading: false,
 
+  /**
+   * It  will have chart value width scroll width handling
+   * @type {String}
+   */
+  istaxonomyDomains : Ember.computed('taxonomyDomains', function() {
+    let component = this;
+    let length = component.get('taxonomyDomains').length;
+    return length > 0;
+  }),
+
 
   /**
    * subjectId  change will call the function
@@ -143,7 +153,7 @@ export default Ember.Component.extend({
   onChangeSkylineToggle: Ember.observer('isSkylineEnabled', function() {
     let component = this;
     let isSkylineEnabled = component.get('isSkylineEnabled');
-    let skylineElements =  component.$('.skyline');
+    let skylineElements = component.$('.skyline');
     if (isSkylineEnabled) {
       skylineElements.each(function(index, element) {
         component.$(element).attr('class', 'skyline');
