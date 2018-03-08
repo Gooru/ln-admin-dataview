@@ -8,7 +8,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   actions: {
     onMenuItemSelection(item) {
-      this.transitionTo('competency.' + item);
+      this.transitionTo(`competency.${  item}`);
     }
   }
 
