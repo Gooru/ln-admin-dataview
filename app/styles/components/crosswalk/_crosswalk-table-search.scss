@@ -35,6 +35,12 @@
             color: $dark-400;
             border: none;
           }
+          &.unavailable {
+            font-size: 15px;
+            margin: auto;
+            text-align: center;
+            padding-top: 40px;
+          }
         }
       }
 

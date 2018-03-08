@@ -45,6 +45,11 @@ export default Ember.Component.extend({
    */
   isShowStandardInfo: false,
 
+  /**
+   * Is crosswalk available or not
+   */
+  isCrosswalkAvailable: false,
+
   //-------------------------------------------------------------------------
   //Actions
   actions: {
@@ -62,6 +67,7 @@ export default Ember.Component.extend({
         }
         return matchingCrosswalkCodes.length === 3;
       });
+      component.set('isCrosswalkAvailable', matchingCrosswalkCodes.length > 0);
       component.set('matchingCrosswalkCodes', matchingCrosswalkCodes);
     },
 
