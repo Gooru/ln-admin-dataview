@@ -103,7 +103,8 @@ export default {
     },
     search: {
       information: 'Information',
-      competency: 'COMPETENCY'
+      competency: 'COMPETENCY',
+      unavailable: 'No Crosswalk Available'
     },
     'pull-out': {
       section: {
