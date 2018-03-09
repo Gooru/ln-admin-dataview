@@ -36,26 +36,25 @@
       {{t "activities.pull-out.taxonomy-title"}}
     </div>
     <div class="items">
-      {{#if collection.info.gooru_subject}}
-        <div class="subject item-box">
-          {{#each collection.info.gooru_subject as | subject |}}
-            {{subject}}
-          {{/each}}
-          {{#each collection.info.gooru_course as | course |}}
-            > {{course}}
-          {{/each}}
-        </div>
+      {{#if selectedItem.taxonomySubject}}
+        {{#each selectedItem.taxonomySubject as |subject|}}
+          <div class="subject item-box">
+            <div class="ellipsis">{{subject}}</div>
+          </div>
+        {{/each}}
+        {{#each selectedItem.taxonomyCourse as |course|}}
+          <div class="course item-box">
+            <div class="ellipsis">{{course}}</div>
+          </div>
+        {{/each}}
+        {{#each selectedItem.taxonomyDomain as |domain|}}
+          <div class="domain item-box">
+            <div class="ellipsis">{{domain}}</div>
+          </div>
+        {{/each}}
       {{else}}
         <div class="subject item-box">
           No Subject Available
-        </div>
-      {{/if}}
-      {{#if collection.info.domain}}
-        <div class="domain item-box">
-          {{collection.info.domain.attribution}}
-          <!-- {{#each collection.info.domain as |domain|}}
-            {{domain.attribution}}
-          {{/each}} -->
         </div>
       {{/if}}
     </div>

@@ -22,6 +22,7 @@
     {{#if (and section.isLessContent collection.title)}}
       {{activities.pull-out-body
        collection=collection
+       selectedItem=selectedResource
        isLoading=isLoading
      }} {{else if section.isMoreContent}} {{activities.pull-out-more-content groupData=groupData groupHeader=groupHeader type="resource" description=collection.description}}
     {{/if}}

@@ -144,10 +144,15 @@
           padding: 0 10px;
           margin-right: 5px;
           font-size: 16px;
+          margin-top: 8px;
+          max-width: 48%;
         }
-        .subject, .course {
-          margin: 0 10px 10px 0;
+        .subject,  {
           background-color: $dark-400;
+          color: $white;
+        }
+        .course {
+          background-color: $dark-200;
           color: $white;
         }
 

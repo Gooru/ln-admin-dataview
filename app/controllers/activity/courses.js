@@ -153,9 +153,9 @@ export default Ember.Controller.extend({
         },
 
         framework: {
-          subject: course.subjectName,
-          'Taxonomy Course': coursePullOutData.taxonomy.parentTitle,
-          domain: null,
+          subject: course.taxonomySubject,
+          'Taxonomy Course': course.taxonomyCourse,
+          domain: course.taxonomyDomain,
           Standards: coursePullOutData.taxonomy.code
         },
 

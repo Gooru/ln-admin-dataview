@@ -29,14 +29,16 @@
       </div>
       <div class="items">
         {{#if collection.taxonomySet.subject}}
-          <div class="subject item-box">
-            {{#each collection.taxonomySet.subject as |subject|}}
-              {{subject}}
-            {{/each}}
-            {{#each collection.taxonomySet.course as |course|}}
-              > {{course}}
-            {{/each}}
-          </div>
+          {{#each collection.taxonomySet.subject as |subject|}}
+            <div class="subject item-box">
+              <div class="ellipsis">{{subject}}</div>
+            </div>
+          {{/each}}
+          {{#each collection.taxonomySet.course as |course|}}
+            <div class="course item-box">
+              <div class="ellipsis">{{course}}</div>
+            </div>
+          {{/each}}
         {{else}}
           <div class="subject item-box">
             No Subject Available
@@ -45,7 +47,7 @@
         {{#if collection.taxonomySet.domain}}
           <div class="domain item-box">
             {{#each collection.taxonomySet.domain as |domain|}}
-              {{domain}}
+              <div class="ellipsis">{{domain}}</div>
             {{/each}}
           </div>
         {{/if}}
