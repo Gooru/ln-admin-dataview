@@ -13,7 +13,12 @@ export default Ember.Component.extend({
   actions: {
 
     courseReport: function(course) {
-      this.get('router').transitionTo('learner.courses', course.courseId);
+      let queryParams = {
+        courseTitle: course.courseTitle
+      };
+      this.get('router').transitionTo('learner.courses', course.courseId, {
+        queryParams
+      });
     }
   },
 
