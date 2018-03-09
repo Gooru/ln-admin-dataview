@@ -28,7 +28,11 @@ export default Ember.Controller.extend(ConfigurationMixin, {
 
   actions: {
     onMenuItemSelection(item) {
-      this.transitionToRoute(item);
+      if (item === 'competency') {
+        this.transitionToRoute(item + '.tree');
+      } else {
+        this.transitionToRoute(item);
+      }
     }
   }
 
