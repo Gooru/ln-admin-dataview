@@ -107,7 +107,9 @@ export default Ember.Controller.extend({
    * Grouping the data to show more info  in pull out
    */
   groupData: Ember.computed('question', function() {
+    let controller = this;
     let collection = this.get('question');
+    let selectedQuestion = controller.get('selectedQuestion');
     let resultSet = Ember.A();
     if (collection) {
       resultSet = {
@@ -156,9 +158,9 @@ export default Ember.Controller.extend({
         },
 
         framework: {
-          subject: collection.info ? collection.info.crawled_subject : null,
-          course: collection.info ? collection.info.gooru_course[0] : null,
-          domain: collection.info ? collection.info.domain.attribution : null,
+          subject: selectedQuestion.taxonomySubject,
+          course: selectedQuestion.taxonomyCourse,
+          domain: selectedQuestion.taxonomyDomain,
           standard: collection.taxonomy ? collection.taxonomy.id : null
         },
 
@@ -207,14 +209,14 @@ export default Ember.Controller.extend({
     /**
      * Action triggered when the user invoke the collection in pull out.
      */
-    getQuestionInfo: function(id) {
+    getQuestionInfo: function(question) {
       let controller = this;
       controller.set('isLoadingPullOut', true);
       controller.set('showPullOut', true);
       controller.set('showMore', true);
       let collectionType = 'question';
-      // f9477835-3f72-41de-8b85-997239ed19f6
-      return controller.get('contentService').getQuestionById(id)
+      controller.set('selectedQuestion', question);
+      return controller.get('contentService').getQuestionById(question.id)
         .then(function(collection) {
           return controller.get('profileService').readUserProfile(collection.creator_id)
             .then(function(owner) {

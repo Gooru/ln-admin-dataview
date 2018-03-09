@@ -37,9 +37,25 @@
         {{t "activities.pull-out.taxonomy-title"}}
       </div>
       <div class="items">
-        <div class="subject item-box">
-          {{if course.subjectName course.subjectName 'No Subject Available'}}
-        </div>
+        {{#each course.taxonomySubject as |subject|}}
+          <div class="subject item-box">
+            <div class="ellipsis">{{subject}}</div>
+          </div>
+        {{else}}
+          <div class="subject item-box">
+            No Subject Available
+          </div>
+        {{/each}}
+        {{#each course.taxonomyCourse as |course|}}
+          <div class="course item-box">
+            <div class="ellipsis">{{course}}</div>
+          </div>
+        {{/each}}
+        {{#each course.taxonomyDomain as |domain|}}
+          <div class="domain item-box">
+            <div class="ellipsis">{{domain}}</div>
+          </div>
+        {{/each}}
       </div>
     </div>
 

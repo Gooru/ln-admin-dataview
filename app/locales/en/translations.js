@@ -167,8 +167,8 @@ export default {
     }
   },
   activities: {
-    'learning-activities-available': 'Learning Activities Available',
-    'resources-available': 'Resources Available',
+    'learning-activities-available': 'Learning Activities',
+    'resources-available': 'Resources',
     'filters': 'Filters',
     'filter-types': {
       'category': 'Category',

@@ -111,8 +111,10 @@ export default Ember.Controller.extend({
    * Grouping the data to show more info  in pull out
    */
   groupData: Ember.computed('collection', function() {
+    let controller = this;
     let collection = this.get('collection');
     let resultSet = Ember.A();
+    let selectedResource = controller.get('selectedResource');
     if (collection) {
       resultSet = {
         descriptive: {
@@ -162,9 +164,9 @@ export default Ember.Controller.extend({
         },
 
         framework: {
-          subject: collection.info.crawled_subject,
-          course: collection.info.gooru_course ? collection.info.gooru_course[0] : null,
-          domain: collection.info.domain.attribution,
+          subject: selectedResource.taxonomySubject,
+          course: selectedResource.taxonomyCourse,
+          domain: selectedResource.taxonomyDomain,
           standard: collection.taxonomy ? collection.taxonomy.id : null
         },
 
@@ -217,6 +219,7 @@ export default Ember.Controller.extend({
       controller.set('isLoadingPullOut', true);
       controller.set('showPullOut', true);
       controller.set('showMore', true);
+      controller.set('selectedResource', resource);
       let collectionType = 'resource';
       return controller.get('contentService').getResourceById(resource.id)
         .then(function(collection) {

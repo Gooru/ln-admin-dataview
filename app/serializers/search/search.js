@@ -83,8 +83,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
       lastModified: result.lastModified,
       lastModifiedBy: result.lastModifiedBy,
       subject: result.subjectBucket,
-      subjectName: result.taxonomy && result.taxonomy.subject ?
-        result.taxonomy.subject[0] : null,
+      taxonomySubject: result.taxonomy.subject || null,
+      taxonomyCourse: result.taxonomy.course || null,
+      taxonomyDomain: result.taxonomy.taxonomyDomain || null,
       subjectSequence: result.subjectSequence,
       isVisibleOnProfile: result.visibleOnProfile,
       isPublished: result.publishStatus === 'published',
@@ -140,6 +141,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
       standards: serializer
         .get('taxonomySerializer')
         .normalizeTaxonomyArray(taxonomyInfo),
+      taxonomySubject: resource.taxonomySet.subject || null,
+      taxonomyCourse: resource.taxonomySet.course || null,
+      taxonomyDomain: resource.taxonomySet.domain || null,
       publishStatus: resource.publishStatus,
       publisher: resource.publisher ? resource.publisher[0] : null,
       efficacy: resource.efficacy ? resource.efficacy : null,
@@ -372,6 +376,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
       creator: questionData.creator ? serializer.normalizeOwner(questionData.creator) : null,
       owner: questionData.user ? serializer.normalizeOwner(questionData.user) : null,
       standards: serializer.get('taxonomySerializer').normalizeTaxonomyArray(taxonomyInfo),
+      taxonomySubject: questionData.taxonomySet.subject || null,
+      taxonomyCourse: questionData.taxonomySet.course || null,
+      taxonomyDomain: questionData.taxonomySet.domain || null,
       efficacy: questionData.efficacy ? questionData.efficacy : null,
       relevance: questionData.relevance ? questionData.relevance : null,
       engagement: questionData.engagement ? questionData.engagement : null,
