@@ -32,91 +32,13 @@
     clear: both;
   }
 
-  .subject-navigation-chart {
-    width: 100%;
-
-    .subject-list {
-      position: relative;
-      margin: 0 auto;
-      overflow: hidden;
-      padding: 5px;
-      height: 60px;
-      z-index: 9;
-
-      .nav-tabs > li.active > a,
-      .nav-tabs > li.active > a:focus {
-        box-shadow: inset 0 -3px 0 #2ea9e9 !important;
-        color: #2ea9e9;
-      }
-
-      .nav-tabs > li > a:hover {
-        border-width: 0;
-        border: none;
-        color: #2ea9e9 !important;
-        background: transparent;
-        box-shadow: inset 0 -3px 0 #2ea9e9 !important;
-        opacity: 0.7;
-      }
-
-      .nav-tabs > li > a {
-        padding: 15px 20px;
-      }
-
-      ul {
-        position: absolute;
-        left: 0;
-        top: 0;
-        min-width: 1050px;
-        margin-left: 12px;
-        margin-top: 0;
-        background: $white;
-        border-bottom: 1px solid #ddd;
-      }
-
-      li {
-        display: table-cell;
-        position: relative;
-        text-align: center;
-        cursor: grab;
-        cursor: -webkit-grab;
-        color: $dark-400;
-        vertical-align: middle;
-        font-size: 15px;
-      }
-    }
-
-    .subject-navigation-arrow {
-      text-align: center;
-      cursor: pointer;
-      display: none;
-      padding: 11px 7px 7px;
-      white-space: no-wrap;
-      vertical-align: middle;
-      width: 40px;
-    }
-
-    .subject-right-navigation-arrow {
-      i {
-        margin-left: -140px;
-        font-size: 40px;
-        margin-top: 2px;
-      }
-    }
-
-    .subject-left-navigation-arrow {
-      i {
-        margin-left: -128px;
-        font-size: 40px;
-        margin-top: 2px;
-      }
-    }
-  }
-
-  .competency-chart-tab-container {
+  .course-domain-matrix-chart-container {
     padding-top: 20px;
 
     .courses {
-      width: 220px;
+      width: 35%;
+      padding-left: 30px;
+      padding-bottom: 10px;
 
       ul {
         padding: 0;
@@ -124,14 +46,23 @@
         font-size: 15px;
         width: 100%;
         margin: 0;
+        border-right: 1px solid #d7d7d7;
       }
 
       li {
         width: 100%;
-        line-height: 18px;
-        font-size: 12px;
-        text-align: left;
-        margin-bottom: 15px;
+        font-size: 15px;
+        text-align: right;
+        height: 45px;
+        padding-right: 14px;
+        display: table;
+
+        .course-name {
+          vertical-align: middle;
+          display: table-cell;
+          text-align: right;
+          border-bottom: 1px solid #d7d7d7;
+        }
       }
 
       li:last-child {
@@ -155,8 +86,11 @@
     }
 
     .scroll-view {
-      width: 440px;
+      width: 60%;
       overflow-x: auto;
+      height: 800px;
+      background-image: url("../assets/images/grid-view.png");
+      margin-left: 20px;
     }
 
     .no-data {
@@ -178,7 +112,7 @@
       border-radius: 5px;
     }
 
-    #competency-matrix-domain-chart {
+    #course-domain-matrix-chart {
       margin-left: 20px;
       margin-bottom: 20px;
       position: relative;

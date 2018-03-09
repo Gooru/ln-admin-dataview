@@ -85,7 +85,7 @@ export default Ember.Component.extend({
    * It will have selected taxonomy subject courses
    * @type {Object}
    */
-  taxonomyDomains: Ember.A(),
+  taxonomyCourses: Ember.A(),
 
   /**
    * It will have  taxonomy subjects
@@ -106,9 +106,9 @@ export default Ember.Component.extend({
    * It  will have chart value width scroll width handling
    * @type {String}
    */
-  istaxonomyDomains : Ember.computed('taxonomyDomains', function() {
+  isTaxonomyCourses : Ember.computed('taxonomyCourses', function() {
     let component = this;
-    let length = component.get('taxonomyDomains').length;
+    let length = component.get('taxonomyCourses').length;
     return length > 0;
   }),
 
@@ -180,7 +180,7 @@ export default Ember.Component.extend({
 
   drawChart: function(data) {
     let component = this;
-    let cellSizeInRow = component.get('taxonomyDomains');
+    let cellSizeInRow = component.get('taxonomyCourses');
     let numberOfCellsInEachRow = cellSizeInRow.length;
     const colorsBasedOnStatus = component.get('colorsBasedOnStatus');
     const cellWidth = component.get('cellWidth');
@@ -188,8 +188,8 @@ export default Ember.Component.extend({
     const width = (Math.round(numberOfCellsInEachRow * cellWidth));
     component.set('width', width);
     const height = component.get('height');
-    component.$('#competency-matrix-domain-chart').empty();
-    const svg = d3.select('#competency-matrix-domain-chart').append('svg')
+    component.$('#course-domain-matrix-chart').empty();
+    const svg = d3.select('#course-domain-matrix-chart').append('svg')
       .attr('width', width)
       .attr('height', height)
       .append('g');
@@ -242,23 +242,24 @@ export default Ember.Component.extend({
     component.set('isLoading', true);
     return Ember.RSVP.hash({
       competencyMatrixs: component.get('competencyService').getCompetencyMatrixDomain(userId, subjectId),
-      competencyMatrixCoordinates: component.get('competencyService').getCompetencyMatrixCoordinates(subjectId)
+      matrixCoordinates: component.get('competencyService').getCompetencyMatrixCoordinates(subjectId)
     }).then(({
       competencyMatrixs,
-      competencyMatrixCoordinates
+      matrixCoordinates
     }) => {
       component.set('isLoading', false);
-      let resultSet = component.parseCompetencyData(competencyMatrixs, competencyMatrixCoordinates);
-      component.drawChart(resultSet);
+      let resultSet = component.parseCourseDomainData(competencyMatrixs, matrixCoordinates);
+      //component.drawChart(resultSet);
     });
 
   },
 
-  parseCompetencyData: function(competencyMatrixs, competencyMatrixCoordinates) {
+  parseCourseDomainData: function(competencyMatrixs, matrixCoordinates) {
     let component = this;
     const cellHeight = component.get('cellHeight');
-    let taxonomyDomain = Ember.A();
-    let domains = competencyMatrixCoordinates.get('domains');
+    let courses = matrixCoordinates.get('courses').toArray().reverse();
+    component.set('taxonomyCourses', courses);
+    let domains = matrixCoordinates.get('domains');
     let currentXaxis = 1;
     let resultSet = Ember.A();
     let numberOfCellsInEachColumn = Ember.A();
@@ -269,7 +270,6 @@ export default Ember.Component.extend({
       let competencyMatrix = competencyMatrixs.findBy('domainCode', domainCode);
       let competencyMatrixByCompetency = competencyMatrix ? competencyMatrix.get('competencies') : [];
       if (competencyMatrix && competencyMatrixByCompetency.length > 0) {
-        taxonomyDomain.pushObject(domainData);
         let mergeDomainData = Ember.A();
         competencyMatrixByCompetency.forEach(competency => {
           let competencyCode = competency.get('competencyCode');
@@ -315,7 +315,6 @@ export default Ember.Component.extend({
     });
     let height = cellHeight * (Math.max(...numberOfCellsInEachColumn));
     component.set('height', height);
-    component.set('taxonomyDomains', taxonomyDomain);
     return resultSet;
   },
 
@@ -332,7 +331,7 @@ export default Ember.Component.extend({
     let container = `<div class="block-container" style="width:${  width  }px">`;
     container += `<div class="selected-competency"  style="width:${  cellWidth  }px; height:${  cellHeight  }px; background-color:${  color  };top:${  yAxisSeq  }px; left:${  xAxisSeq  }px"></div>`;
     container += '</div>';
-    component.$('#competency-matrix-domain-chart').prepend(container);
+    component.$('#course-domain-matrix-chart').prepend(container);
   }
 
 });

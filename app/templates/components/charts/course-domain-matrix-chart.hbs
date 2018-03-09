@@ -1,29 +1,24 @@
 {{#if isLoading}}
   {{three-bounce-spinner}}
 {{/if}}
-<div class="competency-chart-tab-container">
-  <div class="competency-courses-chart">
+<div class="course-domain-matrix-chart-container">
+  <div class="course-domain-matrix">
     <div class="courses pull-left">
       <ul>
-        {{#each taxonomyDomains as |taxonomyDomain index |}}
+        {{#each taxonomyCourses as |taxonomyCourse index |}}
           <li>
-            {{taxonomyDomain.domainSeq}}. {{taxonomyDomain.domainName}}
+            <span class="course-name">
+              {{taxonomyCourse.courseName}}
+            </span>
           </li>
         {{/each}}
       </ul>
     </div>
-    <div class="pull-left matrix-chart-container {{if istaxonomyDomains 'scroll-view' ''}}">
-      <div id="competency-matrix-domain-chart"></div>
-      <div class="domain-list" style="width:{{width}}px">
-        {{#each taxonomyDomains as |taxonomyDomain index |}}
-          <li class="domain-counts">
-            {{taxonomyDomain.domainSeq}}
-          </li>
-        {{/each}}
-      </div>
+    <div class="pull-left matrix-chart-container {{if isTaxonomyCourses 'scroll-view' ''}}">
+      <div id="course-domain-matrix-chart"></div>
     </div>
 
-    {{#if (and (not isLoading) (not istaxonomyDomains) ) }}
+    {{#if (and (not isLoading) (not isTaxonomyCourses) ) }}
       <span class="no-data">No Data Found</span>
     {{/if}}
   </div>
