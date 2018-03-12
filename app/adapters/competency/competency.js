@@ -18,7 +18,7 @@ export default Ember.Object.extend({
   getUserCompetencies: function(user, activeDuration = '3m') {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url =`${namespace}/v1/user/competency`;
+    const url = `${namespace}/v1/user/competency`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -43,7 +43,7 @@ export default Ember.Object.extend({
   getUserPerformanceCompetencyCollections: function(user, competencyCode) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url =`${namespace}/v1/user/performance/competency/collections`;
+    const url = `${namespace}/v1/user/performance/competency/collections`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -68,7 +68,7 @@ export default Ember.Object.extend({
   getCompetencyMatrixCoordinates: function(subject) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url =`${namespace}/v1/tx/competency/matrix/coordinates`;
+    const url = `${namespace}/v1/tx/competency/matrix/coordinates`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -91,7 +91,7 @@ export default Ember.Object.extend({
   getCompetencyMatrixCourse: function(user, subject) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url =`${namespace}/v1/tx/competency/matrix/course`;
+    const url = `${namespace}/v1/tx/competency/matrix/course`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -110,13 +110,37 @@ export default Ember.Object.extend({
 
 
   /**
-     * Get user competency Matrix for domains by subjects
-     * @returns {Promise.<[]>}
-     */
+   * Get user competency Matrix for domains by subjects
+   * @returns {Promise.<[]>}
+   */
   getCompetencyMatrixDomain: function(user, subject) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url =`${namespace}/v1/tx/competency/matrix/domain`;
+    const url = `${namespace}/v1/tx/competency/matrix/domain`;
+    const options = {
+      type: 'GET',
+      headers: adapter.defineHeaders(),
+      contentType: 'application/json; charset=utf-8',
+      data: {
+        user,
+        subject
+      }
+    };
+    return Ember.RSVP.hashSettled({
+      competencyMatrix: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.competencyMatrix.value;
+    });
+  },
+
+  /**
+   * Get user competency Matrix  by subjects
+   * @returns {Promise.<[]>}
+   */
+  getCompetencyMatrix: function(user, subject) {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/v1/tx/competency/matrix`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),

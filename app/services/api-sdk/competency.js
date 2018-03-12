@@ -96,6 +96,22 @@ export default Ember.Service.extend({
           resolve(service.get('competencySerializer').normalizeCompetencyMatrixDomain(response));
         }, reject);
     });
+  },
+
+  /**
+   * Get  competency Matrix  by subject
+   * @returns {Promise.<[]>}
+   */
+  getCompetencyMatrix: function(user, subject) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('competencyAdapter')
+        .getCompetencyMatrix(user, subject)
+        .then(function(response) {
+          resolve(service.get('competencySerializer').normalizeCompetencyMatrix(response));
+        }, reject);
+    });
   }
 
 });

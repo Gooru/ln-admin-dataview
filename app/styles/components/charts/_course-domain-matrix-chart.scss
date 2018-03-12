@@ -36,7 +36,7 @@
     padding-top: 20px;
 
     .courses {
-      width: 35%;
+      width: 32%;
       padding-left: 30px;
       padding-bottom: 10px;
 
@@ -86,11 +86,11 @@
     }
 
     .scroll-view {
-      width: 60%;
+      width: 63%;
       overflow-x: auto;
-      height: 800px;
       background-image: url("../assets/images/grid-view.png");
       margin-left: 20px;
+      margin-right: 20px;
     }
 
     .no-data {
@@ -113,38 +113,17 @@
     }
 
     #course-domain-matrix-chart {
-      margin-left: 20px;
-      margin-bottom: 20px;
       position: relative;
-      cursor: pointer;
       transform: rotateX(180deg);
       -webkit-transition: -webkit-transform 0.6s ease-in;
       transition: transform 0.6s ease-in;
       -webkit-transform-style: preserve-3d;
       transform-style: preserve-3d;
 
-      .competency {
-        stroke: #FBFBFB;
-        stroke-width: 0.5px;
-      }
-
-      line {
-        stroke: #FFFFFF;
-        stroke-width: 3;
-        opacity: 0.8;
-      }
-
-      .skyline {
-        transition-property: visibility, opacity;
-        transition-duration: 0s, 1s;
-
-        &.disable-skyline {
-          opacity: 0;
-          visibility: hidden;
-          transition-property: opacity, visibility;
-          transition-duration: 1s, 0s;
-          transition-delay: 0s, 1s;
-        }
+      .course-domain-cell {
+        stroke-width: 2;
+        stroke: $white;
+        cursor: pointer;
       }
     }
   }

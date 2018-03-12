@@ -84,8 +84,8 @@ export default Ember.Object.extend({
     let resultSet = Ember.A();
     if (response.userCompetencyMatrix) {
       let userCompetencyMatrix = Ember.A(response.userCompetencyMatrix);
-      userCompetencyMatrix.forEach(damainData => {
-        let domain = Ember.Object.create(damainData);
+      userCompetencyMatrix.forEach(domainData => {
+        let domain = Ember.Object.create(domainData);
         let competencies = domain.get('competencies');
         let domainSet = Ember.A();
         let competencySet = Ember.A();
@@ -100,6 +100,37 @@ export default Ember.Object.extend({
     }
     return resultSet;
 
+  },
+
+  /**
+   * Normalized data of competency matrix
+   * @return {Object}
+   */
+  normalizeCompetencyMatrix: function(response) {
+    let resultSet = Ember.A();
+    if (response.userCompetencyMatrix) {
+      let userCompetencyMatrix = Ember.A(response.userCompetencyMatrix);
+      userCompetencyMatrix.forEach(courseData => {
+        let course = Ember.Object.create(courseData);
+        let domains = course.get('domains');
+        let domainSet = Ember.A();
+        domains.forEach(domainData => {
+          let domain = Ember.Object.create(domainData);
+          let competencies = domain.get('competencies');
+          let competencySet = Ember.A();
+          competencies.forEach(competencyData => {
+            let competency = Ember.Object.create(competencyData);
+            competencySet.pushObject(competency);
+          });
+          domain.set('competencies', competencySet);
+          domainSet.pushObject(domain);
+
+        });
+        course.set('domains', domainSet);
+        resultSet.pushObject(course);
+      });
+    }
+    return resultSet;
   }
 
 });

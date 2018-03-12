@@ -8,14 +8,14 @@
         {{#each taxonomyCourses as |taxonomyCourse index |}}
           <li>
             <span class="course-name">
-              {{taxonomyCourse.courseName}}
+            {{taxonomyCourse.courseName}}
             </span>
           </li>
         {{/each}}
       </ul>
     </div>
     <div class="pull-left matrix-chart-container {{if isTaxonomyCourses 'scroll-view' ''}}">
-      <div id="course-domain-matrix-chart"></div>
+      <div id="course-domain-matrix-chart" style="height:{{height}}px"></div>
     </div>
 
     {{#if (and (not isLoading) (not isTaxonomyCourses) ) }}
