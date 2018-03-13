@@ -172,15 +172,17 @@ export default Ember.Service.extend({
 
 
   /**
-   * Search for units
-   *
-   * @param filters
-   * @returns {Promise.<Question[]>}
+   * Search Units
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Unit[]>}
    */
-  searchUnits: function(filters) {
+  searchUnits: function(query, filters, start, length) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('searchAdapter').searchUnits(filters).then(
+      service.get('searchAdapter').searchUnits(query, filters, start, length).then(
         function(response) {
           resolve(
             service.get('searchSerializer').normalizeSearchContentCount(response)
@@ -195,15 +197,17 @@ export default Ember.Service.extend({
 
 
   /**
-   * Search for units
-   *
-   * @param filters
-   * @returns {Promise.<Question[]>}
+   * Search Lessons
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Lesson[]>}
    */
-  searchLessons: function(filters) {
+  searchLessons: function(query, filters, start, length) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('searchAdapter').searchLessons(filters).then(
+      service.get('searchAdapter').searchLessons(query, filters, start, length).then(
         function(response) {
           resolve(
             service.get('searchSerializer').normalizeSearchContentCount(response)

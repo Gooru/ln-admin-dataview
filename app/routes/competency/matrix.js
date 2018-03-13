@@ -14,6 +14,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
   selectedCategory: 'k_12',
 
+  defaultFrameworkId: 'GDT',
+
 
   //----------------------------------------------------------------------------
   //Methods
@@ -22,6 +24,21 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     let route = this;
     return Ember.RSVP.hash({
       subjects: this.get('taxonomyService').getSubjects(route.get('selectedCategory'))
+    }).then(({
+      subjects
+    }) => {
+      let promises = Ember.A();
+      subjects.forEach(subject => {
+        if (!subject.get('frameworkId')) {
+          subject.set('frameworkId', route.get('defaultFrameworkId'));
+        }
+        promises.pushObject(this.get('taxonomyService').getCourses(subject));
+      });
+      return Ember.RSVP.all(promises).then(function() {
+        return Ember.RSVP.hash({
+          subjects: subjects
+        });
+      });
     });
   },
 

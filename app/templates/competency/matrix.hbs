@@ -1,6 +1,6 @@
-<div class="competency-container-matrix">
+<div class="competency-container-matrix {{if showPullOut 'pull-out-active'}}">
   <div class="matrix-left-panel">
-    {{charts.course-domain-matrix-chart userId=userId  subjectId=selectedSubject.id onCompetencyPullOut='onCompetencyPullOut' showPullOut=showPullOut isSkylineEnabled=isSkylineEnabled}}
+    {{charts.course-domain-matrix-chart userId=userId  subjectId=selectedSubject.id selectedSubject=selectedSubject onChooseDomain='onChooseDomain' showPullOut=showPullOut isSkylineEnabled=isSkylineEnabled}}
     <div class="matrix-left-panel-nav-1"></div>
     <div class="matrix-left-panel-nav-2"></div>
     <div class="matrix-left-panel-nav-3"></div>
@@ -15,4 +15,14 @@
       {{/each}}
     </ul>
   </div>
+  {{#app-pull-out showPullOut=showPullOut title=selectedDomainData.code description=selectedDomainData.name  as |section| }}
+    {{#if section.isLessContent}}
+      {{gcm-pull-out-body
+       contentCountData=contentCount
+       isLoading=isLoading
+       nodeData=selectedDomainData
+       breadcrumb=selectedDomainData.parent
+      }}
+    {{/if}}
+  {{/app-pull-out}}
 </div>

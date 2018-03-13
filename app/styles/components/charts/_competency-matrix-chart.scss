@@ -31,7 +31,6 @@
     }
   }
 
-  
   .competency-chart-tab-container {
     padding-top: 20px;
 
@@ -97,7 +96,8 @@
 
       .competency {
         stroke: #FBFBFB;
-        stroke-width: 0.5px;
+        stroke-width: 1;
+        shape-rendering: crispedges;
       }
     }
   }

@@ -3,6 +3,13 @@
   padding: 15px;
   overflow-y: auto;
   clear: both;
+  &.pull-out-active {
+    direction: rtl;
+  }
+  .app-pull-out {
+    top: 63px;
+    height: calc(100vh - 63px);
+  }
 
   .matrix-left-panel {
     width: calc(75% - 80px);
@@ -14,6 +21,7 @@
     min-height: 450px;
     float: left;
     margin-bottom: 150px;
+    direction: ltr;
 
     %matrix-left-panel-nav {
       width: 100%;
@@ -52,6 +60,7 @@
     border-radius: 4px;
     float: left;
     background: $white;
+    direction: ltr;
 
     ul {
       list-style: none;
