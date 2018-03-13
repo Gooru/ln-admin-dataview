@@ -141,15 +141,55 @@ export default Ember.Object.extend(ConfigurationMixin, {
       standards: serializer
         .get('taxonomySerializer')
         .normalizeTaxonomyArray(taxonomyInfo),
-      taxonomySubject: resource.taxonomySet.subject || null,
-      taxonomyCourse: resource.taxonomySet.course || null,
-      taxonomyDomain: resource.taxonomySet.domain || null,
+      taxonomySubject: resource.taxonomySet ? resource.taxonomySet.subject : null,
+      taxonomyCourse: resource.taxonomySet ? resource.taxonomySet.course : null,
+      taxonomyDomain: resource.taxonomySet ? resource.taxonomySet.domain : null,
       publishStatus: resource.publishStatus,
       publisher: resource.publisher ? resource.publisher[0] : null,
       efficacy: resource.efficacy ? resource.efficacy : null,
       relevance: resource.relevance ? resource.relevance : null,
       engagement: resource.engagement ? resource.engagement : null
     });
+  },
+
+  /**
+   * @function normalizeAggregatedResources
+   * This function will handle the aggregated resource response
+   */
+  normalizeAggregatedResources: function(resourceData) {
+    let normalizedResourceData = Ember.Object.create({
+      resourceCount: {},
+      hitCount: resourceData.stats.totalHitCount
+    });
+    if (Ember.isArray(resourceData.aggregations)) {
+      let countByResourceType = {};
+      resourceData.aggregations.map(resource => {
+        countByResourceType[`${resource.key}`] = resource.doc_count;
+        return countByResourceType;
+      });
+      normalizedResourceData.set('resourceCount', countByResourceType);
+    }
+    return normalizedResourceData;
+  },
+
+  /**
+   * @function normalizeAggregatedQuestions
+   * This function will handle the aggregated question response
+   */
+  normalizeAggregatedQuestions: function(questionData) {
+    let normalizedQuestionData = Ember.Object.create({
+      questionCount: {},
+      hitCount: questionData.stats.totalHitCount
+    });
+    if (Ember.isArray(questionData.aggregations)) {
+      let countByQuestionType = {};
+      questionData.aggregations.map(question => {
+        countByQuestionType[`${question.key}`] = question.doc_count;
+        return countByQuestionType;
+      });
+      normalizedQuestionData.set('questionCount', countByQuestionType);
+    }
+    return normalizedQuestionData;
   },
 
   /**
@@ -376,9 +416,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
       creator: questionData.creator ? serializer.normalizeOwner(questionData.creator) : null,
       owner: questionData.user ? serializer.normalizeOwner(questionData.user) : null,
       standards: serializer.get('taxonomySerializer').normalizeTaxonomyArray(taxonomyInfo),
-      taxonomySubject: questionData.taxonomySet.subject || null,
-      taxonomyCourse: questionData.taxonomySet.course || null,
-      taxonomyDomain: questionData.taxonomySet.domain || null,
+      taxonomySubject: questionData.taxonomySet ? questionData.taxonomySet.subject : null,
+      taxonomyCourse: questionData.taxonomySet ? questionData.taxonomySet.course : null,
+      taxonomyDomain: questionData.taxonomySet ? questionData.taxonomySet.domain : null,
       efficacy: questionData.efficacy ? questionData.efficacy : null,
       relevance: questionData.relevance ? questionData.relevance : null,
       engagement: questionData.engagement ? questionData.engagement : null,

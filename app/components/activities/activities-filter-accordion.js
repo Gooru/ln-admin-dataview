@@ -108,11 +108,8 @@ export default Ember.Component.extend(ModalMixin, {
       component.sendAction('onClickCheckbox', filterInfo, filterType);
       let routeName = Utils.getRoutePathLastOccurrence();
       let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
-      //Route to current route if it's load inside activity route
-      //Otherwise redirect into summary page by default
-      if (activeMenuIndex !== undefined) {
-        component.get('router').transitionTo(`/activities/${routeName}`);
-      } else {
+      //Route to summary page once the user select a subject from filter
+      if (filterType === 'subject' && activeMenuIndex === undefined) {
         component.get('router').transitionTo('/activities/summary');
       }
     }

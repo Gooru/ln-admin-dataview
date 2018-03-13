@@ -96,6 +96,60 @@ export default Ember.Service.extend({
   },
 
   /**
+   * Search Resources
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Resource[]>}
+   */
+  searchAggregatedResources: function(query, filters, start, length) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('searchAdapter')
+        .searchResources(query, filters, start, length)
+        .then(
+          function(response) {
+            resolve(
+              service.get('searchSerializer').normalizeAggregatedResources(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * Search Questions
+   * @param  {String} query
+   * @param  {Object} filters
+   * @param  {Number} start
+   * @param  {Number} length
+   * @return {Promise.<Question[]>}
+   */
+  searchAggregatedQuestions: function(query, filters, start, length) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('searchAdapter')
+        .searchQuestions(query, filters, start, length)
+        .then(
+          function(response) {
+            resolve(
+              service.get('searchSerializer').normalizeAggregatedQuestions(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
    * Search Questions
    * @param  {String} query
    * @param  {Object} filters
