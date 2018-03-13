@@ -157,7 +157,6 @@ export default Ember.Object.extend(ConfigurationMixin, {
    * This function will handle the aggregated resource response
    */
   normalizeAggregatedResources: function(resourceData) {
-    const serializer = this;
     let normalizedResourceData = Ember.Object.create({
       resourceCount: {},
       hitCount: resourceData.stats.totalHitCount
@@ -178,7 +177,6 @@ export default Ember.Object.extend(ConfigurationMixin, {
    * This function will handle the aggregated question response
    */
   normalizeAggregatedQuestions: function(questionData) {
-    const serializer = this;
     let normalizedQuestionData = Ember.Object.create({
       questionCount: {},
       hitCount: questionData.stats.totalHitCount
