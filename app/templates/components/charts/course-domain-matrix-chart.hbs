@@ -16,16 +16,22 @@
             </div>
           </div>
           {{#each taxonomyDomainCompetencies as |taxonomyDomainCompetency index|}}
-            <div class="domain-competency-info-container">
+            <div class="domain-competency-info-container {{if (eq index 0) 'micro-competency-enabled'}}">
               <div class="competency-info">
                 <div class="competency-info-icon">
-                  {{app-icon name="ic_info_outline"}}
+                  {{app-icon name="ic_info_outline" class="more-info"}}
+                  <div class="competency-info-tile">
+                    <i class="competency-info-tile-icon" />
+                    <i class="competency-info-tile-icon" />
+                    <i class="competency-info-tile-icon" />
+                    <i class="competency-info-tile-icon" />
+                  </div>
                 </div>
                 <div class="competency-name">
                   <p>{{taxonomyDomainCompetency.title}}</p>
                 </div>
               </div>
-              <div class="micro-competency-container">
+              <div class="micro-competency-container {{if (eq index 0) 'micro-competency-enabled'}}">
                 {{#each taxonomyDomainCompetency.microCompetencies as |microCompeteny index|}}
                   <div class="micro-competency-info">
                     <div class="micro-competency-info-icon">
