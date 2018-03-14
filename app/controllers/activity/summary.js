@@ -10,5 +10,23 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Properties
 
-  term: ''
+  term: '',
+
+  /**
+   * @property {Boolean}
+   * Just a observer property to watch filter changes
+   */
+  onRefreshItems: false,
+
+  // -------------------------------------------------------------------------
+  // Methods
+
+  /**
+   * @function refreshItems
+   * Method to refresh search items
+   */
+  refreshItems() {
+    let controller = this;
+    controller.toggleProperty('onRefreshItems');
+  }
 });

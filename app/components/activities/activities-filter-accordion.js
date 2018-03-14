@@ -324,7 +324,7 @@ export default Ember.Component.extend(ModalMixin, {
                 });
                 storedFilters['21-century-skills'] = filterList;
                 localStorage.setItem(`research_${userId}_activities_filters`, JSON.stringify(storedFilters));
-                component.sendAction('onSelectCenturySkills', storedFilters);
+                component.sendAction('onSelectCenturySkills', storedFilters, selectedCenturySkills);
                 component.set('filterList', filterList);
 
               }

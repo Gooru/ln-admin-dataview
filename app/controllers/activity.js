@@ -23,6 +23,36 @@ export default Ember.Controller.extend({
 
   session: Ember.inject.service('session'),
 
+  /**
+   * Inject activity/collections controller
+   */
+  collectionsController: Ember.inject.controller('activity/collections'),
+
+  /**
+   * Inject activity/assessments controller
+   */
+  assessmentsController: Ember.inject.controller('activity/assessments'),
+
+  /**
+   * Inject activity/resources controller
+   */
+  resourcesController: Ember.inject.controller('activity/resources'),
+
+  /**
+   * Inject activity/questions controller
+   */
+  questionsController: Ember.inject.controller('activity/questions'),
+
+  /**
+   * Inject activity/summary controller
+   */
+  summaryController: Ember.inject.controller('activity/summary'),
+
+  /**
+   * Inject activity/courses controller
+   */
+  coursesController: Ember.inject.controller('activity/courses'),
+
 
   // -------------------------------------------------------------------------
   // Actions
@@ -52,11 +82,18 @@ export default Ember.Controller.extend({
       }
     },
 
-    onChangeFilterItems: function(filterItems) {
+    onChangeFilterItems: function(filterItems, updatedFilter) {
       let controller = this;
+      if (updatedFilter) {
+        let isChecked = Ember.$(`.${updatedFilter.type} .body .filter-name .${updatedFilter.id} input`).prop('checked');
+        Ember.$(`.${updatedFilter.type} .body .filter-name .${updatedFilter.id} input`).prop('checked', !isChecked);
+      }
       controller.set('selectedFilterItemsBuffer', filterItems);
-      //TODO temporary fix, need to refresh only selected route instead of reloading url
-      location.reload();
+      let routeName = Utils.getRoutePathLastOccurrence();
+      let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
+      if (activeMenuIndex > -1) {
+        controller.get(`${routeName}Controller`).refreshItems();
+      }
     }
   },
 

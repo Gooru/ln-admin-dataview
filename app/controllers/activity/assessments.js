@@ -221,11 +221,20 @@ export default Ember.Controller.extend({
 
   onChangeSearchTerm: Ember.observer('term', function() {
     let controller = this;
+    controller.refreshItems();
+  }),
+
+  /**
+   * @function refreshItems
+   * Method to refresh search items
+   */
+  refreshItems() {
+    let controller = this;
     controller.set('isLoading', true);
     controller.set('OFFSET', 1);
     controller.set('assessments', Ember.A());
     controller.fetchSearchAssessments();
-  }),
+  },
 
   /**
    * @function fetchSearchCourses

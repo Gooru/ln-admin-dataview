@@ -62,150 +62,79 @@ export default Ember.Component.extend({
     let length = 0;
     let start = 0;
     component.set('isLoading', true);
-    // Resources
-    let webpageFilters = {
-      'flt.resourceFormat': 'webpage'
+    let aggregatedFilters = {
+      'aggBy': 'contentSubFormat'
     };
-    const webpageCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, webpageFilters, start, length));
-    let audioFilters = {
-      'flt.resourceFormat': 'audio'
-    };
-    const audioCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, audioFilters, start, length));
-    let videoFilters = {
-      'flt.resourceFormat': 'video'
-    };
-    const videoCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, videoFilters, start, length));
-    let imageFilters = {
-      'flt.resourceFormat': 'image'
-    };
-    const imageCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, imageFilters, start, length));
-    let interactiveFilters = {
-      'flt.resourceFormat': 'interactive'
-    };
-    const interactiveCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, interactiveFilters, start, length));
-    let textFilters = {
-      'flt.resourceFormat': 'text'
-    };
-    const textCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(term, textFilters, start, length));
-
-    // Questions
-    let multipleChoiceFilters = {
-      'flt.resourceFormat': 'multiple_choice_question'
-    };
-    const multipleChoiceCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, multipleChoiceFilters, start, length));
-    let multipleAnswerFilters = {
-      'flt.resourceFormat': 'multiple_answer_question'
-    };
-    const multipleAnswerCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, multipleAnswerFilters, start, length));
-    let trueOrFalseFilters = {
-      'flt.resourceFormat': 'true_false_question'
-    };
-    const trueOrFalseCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, trueOrFalseFilters, start, length));
-    let fillInTheBlankFilters = {
-      'flt.resourceFormat': 'fill_in_the_blank_question'
-    };
-    const fillInTheBlankCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, fillInTheBlankFilters, start, length));
-    let multipleSelectImageFilters = {
-      'flt.resourceFormat': 'hot_spot_image_question'
-    };
-    const multipleSelectImageCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, multipleSelectImageFilters, start, length));
-    let multipleSelectTextFilters = {
-      'flt.resourceFormat': 'hot_spot_text_question'
-    };
-    const multipleSelectTextCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, multipleSelectTextFilters, start, length));
-    let highlightTextFilters = {
-      'flt.resourceFormat': 'hot_text_highlight_question'
-    };
-    const highlightTextCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, highlightTextFilters, start, length));
-    let dragAndDropOrderFilters = {
-      'flt.resourceFormat': 'hot_text_reorder_question'
-    };
-    const dragAndDropOrderCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, dragAndDropOrderFilters, start, length));
-
-    let openEndedQuestionFilters = {
-      'flt.resourceFormat': 'open_ended_question'
-    };
-    const openEndedQuestionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(term, openEndedQuestionFilters, start, length));
-
+    let aggregatedResourcePromise = Ember.RSVP.resolve(component.get('searchService').searchAggregatedResources(term, aggregatedFilters, start, length));
+    let aggregatedQuestionPromise = Ember.RSVP.resolve(component.get('searchService').searchAggregatedQuestions(term, aggregatedFilters, start, length));
     return Ember.RSVP.hash({
-      webpageCount: webpageCountPromise,
-      audioCount: audioCountPromise,
-      videoCount: videoCountPromise,
-      imageCount: imageCountPromise,
-      textCount: textCountPromise,
-      interactiveCount: interactiveCountPromise,
-      multipleChoiceCount: multipleChoiceCountPromise,
-      multipleAnswerCount: multipleAnswerCountPromise,
-      trueOrFalseCount: trueOrFalseCountPromise,
-      fillInTheBlankCount: fillInTheBlankCountPromise,
-      multipleSelectImageCount: multipleSelectImageCountPromise,
-      multipleSelectTextCount: multipleSelectTextCountPromise,
-      highlightTextCount: highlightTextCountPromise,
-      openEndedQuestionCount: openEndedQuestionCountPromise,
-      dragAndDropOrderCount: dragAndDropOrderCountPromise
+      aggregatedResourceCount: aggregatedResourcePromise,
+      aggregatedQuestionCount: aggregatedQuestionPromise
     }).then((hash) => {
+      let resourceCount = hash.aggregatedResourceCount.get('resourceCount');
       let resourceCounts = Ember.A([{
         'name': 'Audio',
-        'value': hash.audioCount.get('hitCount'),
+        'value': resourceCount.audio_resource || 0,
         'colorCode': '#93999E'
       }, {
         'name': 'Videos',
-        'value': hash.videoCount.get('hitCount'),
+        'value': resourceCount.video_resource || 0,
         'colorCode': '#6E767D'
       }, {
         'name': 'Interactive',
-        'value': hash.interactiveCount.get('hitCount'),
+        'value': resourceCount.interactive_resource || 0,
         'colorCode': '#93999E'
       }, {
         'name': 'Images',
-        'value': hash.imageCount.get('hitCount'),
+        'value': resourceCount.image_resource || 0,
         'colorCode': '#93999E'
       }, {
         'name': 'Webpages',
-        'value': hash.webpageCount.get('hitCount'),
+        'value': resourceCount.webpage_resource || 0,
         'colorCode': '#3A434D'
       }, {
         'name': 'Text',
-        'value': hash.textCount.get('hitCount'),
+        'value': resourceCount.text_resource || 0,
         'colorCode': '#93999E'
       }]);
       component.set('resources', resourceCounts);
 
+      let questionCount = hash.aggregatedQuestionCount.get('questionCount');
       let questionCounts = Ember.A([{
         'name': 'Multiple Choice',
-        'value': hash.multipleChoiceCount.get('hitCount'),
+        'value': questionCount.multiple_choice_question || 0,
         'colorCode': '#3A434D'
       }, {
         'name': 'Multiple Answer',
-        'value': hash.multipleAnswerCount.get('hitCount'),
+        'value': questionCount.multiple_answer_question || 0,
         'colorCode': '#6E767D'
       }, {
         'name': 'True Or False',
-        'value': hash.trueOrFalseCount.get('hitCount'),
+        'value': questionCount.true_false_question || 0,
         'colorCode': '#93999E'
       }, {
         'name': 'Fill In The Blank',
-        'value': hash.fillInTheBlankCount.get('hitCount'),
+        'value': questionCount.fill_in_the_blank_question || 0,
         'colorCode': '#3A434D'
       }, {
         'name': 'Multiple Select - Image',
-        'value': hash.multipleSelectImageCount.get('hitCount'),
+        'value': questionCount.hot_spot_image_question || 0,
         'colorCode': '#3A434D'
       }, {
         'name': 'Multiple Select - Text',
-        'value': hash.multipleSelectTextCount.get('hitCount'),
+        'value': questionCount.hot_spot_text_question || 0,
         'colorCode': '#93999E'
       }, {
         'name': 'Highlight Text',
-        'value': hash.highlightTextCount.get('hitCount'),
+        'value': questionCount.hot_text_highlight_question || 0,
         'colorCode': '#93999E'
       }, {
         'name': 'Drag And Drop Order',
-        'value': hash.dragAndDropOrderCount.get('hitCount'),
+        'value': questionCount.hot_text_reorder_question || 0,
         'colorCode': '#3A434D'
       }, {
         'name': 'Open Ended',
-        'value': hash.openEndedQuestionCount.get('hitCount'),
+        'value': questionCount.open_ended_question || 0,
         'colorCode': '#3A434D'
       }]);
       component.set('questions', questionCounts);

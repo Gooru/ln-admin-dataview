@@ -29,10 +29,12 @@ export default Ember.Component.extend({
       if (filterType === 'category') {
         selectedFilterItems.course = [];
         selectedFilterItems.subject = [];
+        component.toggleCheckboxProperty(filterType, filterInfo.code);
         component.$('.subject .header .toggle-dropdown, .course .header .toggle-dropdown').click();
       } else if (filterType === 'subject') {
         selectedFilterItems.course = [];
         component.$('.course .header .toggle-dropdown').click();
+        component.toggleCheckboxProperty(filterType, filterInfo.code);
       }
       localStorage.setItem(`research_${userId}_activities_filters`, JSON.stringify(selectedFilterItems));
     },
@@ -93,5 +95,15 @@ export default Ember.Component.extend({
       };
     }
     return userSelectedFilterItem;
+  },
+
+  /**
+   * @function toggleCheckboxProperty
+   * Method to toggle checkbox checked property
+   */
+  toggleCheckboxProperty(filterType, id) {
+    let component = this;
+    component.$(`.${filterType} .body .filter-name div input`).prop('checked', false);
+    component.$(`.${filterType} .body .filter-name .${id} input`).prop('checked', true);
   }
 });

@@ -53,6 +53,14 @@ export default Ember.Component.extend({
     component.getSearchContentCount();
   }),
 
+  /**
+  * Observer to watch user event on filter changes
+  */
+  refreshItemsObserver: Ember.observer('onRefreshItems', function() {
+    let component = this;
+    component.getSearchContentCount();
+  }),
+
   // -------------------------------------------------------------------------
   // Properties
 
