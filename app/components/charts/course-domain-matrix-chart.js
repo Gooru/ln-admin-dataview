@@ -195,6 +195,10 @@ export default Ember.Component.extend({
           component.$(domainCompetencyContainer).removeClass('micro-competency-enabled');
         });
       }
+    },
+
+    domainCompetencyPullOut: function(comptency) {
+      this.sendAction('domainCompetencyPullOut', comptency);
     }
   },
 

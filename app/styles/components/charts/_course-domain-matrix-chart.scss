@@ -133,6 +133,7 @@
           .competency-info-icon {
             width: 30px;
             float: left;
+            cursor: pointer;
 
             .more-info {
               margin-left: -57px;
@@ -206,6 +207,7 @@
               font-size: 13px;
               color: #4a4a4a;
               border-bottom: 1px solid #e3e5ea;
+              cursor: pointer;
 
               p {
                 $line-height: 1.3;
