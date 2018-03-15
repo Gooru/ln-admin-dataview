@@ -1,6 +1,5 @@
 .taxonomy-tree-view {
-  margin-left: -200px;
-
+   margin-left: -200px;
   .node-no-child {
     cursor: default !important;
 
@@ -18,6 +17,9 @@
     box-shadow: 0 0 4px 2px rgba(74, 74, 74, 0.2);
     cursor: pointer;
     display: flex;
+    &.disable-events {
+      pointer-events: none;
+    }
 
     .loader {
       margin-left: -14px;
@@ -83,6 +85,9 @@
       .node-more-info {
         visibility: hidden;
       }
+    }
+    &.node-0 {
+      display: none;
     }
 
 
