@@ -179,8 +179,7 @@
 
         .micro-competency-container {
           display: none;
-          // overflow: hidden;
-          // height: 0px;
+          height: 0px;
           &.micro-competency-enabled {
             display: block;
           }
