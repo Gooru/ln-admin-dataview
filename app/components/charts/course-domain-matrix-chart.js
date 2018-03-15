@@ -112,6 +112,7 @@ export default Ember.Component.extend({
   onChange: Ember.observer('subjectId', function() {
     let component = this;
     if (component.get('subjectId')) {
+      component.set('isDomainViewEnabled', false);
       component.loadDataBySubject(component.get('subjectId'));
     }
     return null;
