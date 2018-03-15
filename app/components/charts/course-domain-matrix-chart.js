@@ -155,10 +155,10 @@ export default Ember.Component.extend({
   isDomainViewEnabled: false,
 
   /**
-   * It maintains the state of domain competency...
-   * @type {Boolean}
+   * default height of competency container
+   * @type {Number}
    */
-  domainCompetencyIndex: 0,
+  defaultHeightOfCompetencyContainer: 56,
 
 
   // -------------------------------------------------------------------------
@@ -180,14 +180,20 @@ export default Ember.Component.extend({
       this.set('showPullOut', false);
     },
 
-    enableMicroCompetency: function(competency, index) {
+    showMicroCompetency: function(competency, index) {
       let component = this;
-      let height = competency.microCompetencies.length * 49;
-      let competencyEnabled = component.$(`.micro-competency-container-${  index}`);
-      if (component.get('domainCompetencyIndex') !== index) {
-        component.$(competencyEnabled).animate({ height: '0px'}, { duration: 'slow' }, { transition: 'all 500ms ease' });
-        component.set('domainCompetencyIndex', index);
-        component.$(competencyEnabled).animate({ height: `${height  }px`}, { duration: 'slow' }, { transition: 'all 500ms ease' });
+      let defaultHeightOfCompetencyContainer = component.get('defaultHeightOfCompetencyContainer');
+      let domainCompetencyContainer = component.$(`.domain-competency-info-container-${  index}`);
+      let height = component.$(domainCompetencyContainer).find('.micro-competency-container').height() + (defaultHeightOfCompetencyContainer + 10);
+      let isEnabled = component.$(domainCompetencyContainer).hasClass('micro-competency-enabled');
+      if (!isEnabled) {
+        component.$(domainCompetencyContainer).animate({ height: `${height  }px`}, function() {
+          component.$(domainCompetencyContainer).addClass('micro-competency-enabled');
+        });
+      } else {
+        component.$(domainCompetencyContainer).animate({ height: `${defaultHeightOfCompetencyContainer  }px`}, function() {
+          component.$(domainCompetencyContainer).removeClass('micro-competency-enabled');
+        });
       }
     }
   },

@@ -206,24 +206,24 @@ export default Ember.Controller.extend({
           let culcaqrCount = Ember.A();
           let contentCountData = Ember.A();
           culcaqrCount = learning.contents;
-            let courseCount = culcaqrCount.course ? culcaqrCount.course.totalHitCount : 0;
-            let unitCount = culcaqrCount.unit ? culcaqrCount.unit.totalHitCount : 0;
-            let lessonCount = culcaqrCount.lesson ? culcaqrCount.lesson.totalHitCount : 0;
-            let collectionCount = culcaqrCount.collection ? culcaqrCount.collection.totalHitCount : 0;
-            let assessmentCount = culcaqrCount.assessment ? culcaqrCount.assessment.totalHitCount : 0;
-            let resourceCount = culcaqrCount.resource ? culcaqrCount.resource.totalHitCount : 0;
-            let questionCount = culcaqrCount.question ? culcaqrCount.question.totalHitCount : 0;
-            let rubricCount = culcaqrCount.rubric ? culcaqrCount.rubric.totalHitCount : 0;
+          let courseCount = culcaqrCount.course ? culcaqrCount.course.totalHitCount : 0;
+          let unitCount = culcaqrCount.unit ? culcaqrCount.unit.totalHitCount : 0;
+          let lessonCount = culcaqrCount.lesson ? culcaqrCount.lesson.totalHitCount : 0;
+          let collectionCount = culcaqrCount.collection ? culcaqrCount.collection.totalHitCount : 0;
+          let assessmentCount = culcaqrCount.assessment ? culcaqrCount.assessment.totalHitCount : 0;
+          let resourceCount = culcaqrCount.resource ? culcaqrCount.resource.totalHitCount : 0;
+          let questionCount = culcaqrCount.question ? culcaqrCount.question.totalHitCount : 0;
+          let rubricCount = culcaqrCount.rubric ? culcaqrCount.rubric.totalHitCount : 0;
 
-            contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COURSE, courseCount));
-            contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.UNIT, unitCount));
-            contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.LESSON, lessonCount));
-            contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.ASSESSMENT, assessmentCount));
-            contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COLLECTION, collectionCount));
-            contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RESOURCE, resourceCount));
-            contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.QUESTION, questionCount));
-            contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RUBRIC, rubricCount));
-            controller.set('contentCount', contentCountData);
+          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COURSE, courseCount));
+          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.UNIT, unitCount));
+          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.LESSON, lessonCount));
+          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.ASSESSMENT, assessmentCount));
+          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COLLECTION, collectionCount));
+          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RESOURCE, resourceCount));
+          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.QUESTION, questionCount));
+          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RUBRIC, rubricCount));
+          controller.set('contentCount', contentCountData);
           controller.set('isLoading', false);
           controller.set('signatureContents', learning.signatureContents);
           controller.set('prerequisites', learning.prerequisites);
@@ -422,7 +422,6 @@ export default Ember.Controller.extend({
     const rubricCountPromise = Ember.RSVP.resolve(this.get('searchService').searchRubrics(query, filters, start, length));
     const unitCountPromise = Ember.RSVP.resolve(this.get('searchService').searchUnits(query, filters, start, length));
     const lessonsCountPromise = Ember.RSVP.resolve(this.get('searchService').searchLessons(query, filters, start, length));
-    console.log("ss1");
     return Ember.RSVP.hash({
       resource: resourceCountPromise,
       question: questionCountPromise,
@@ -433,7 +432,6 @@ export default Ember.Controller.extend({
       unit: unitCountPromise,
       lesson: lessonsCountPromise
     }).then(function(culcaqrCount) {
-      console.log("ss");
       let courseCount = culcaqrCount.course ? culcaqrCount.course.get('hitCount') : 0;
       let unitCount = culcaqrCount.unit ? culcaqrCount.unit : 0;
       let lessonCount = culcaqrCount.lesson ? culcaqrCount.lesson : 0;
@@ -451,7 +449,6 @@ export default Ember.Controller.extend({
       contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RESOURCE, resourceCount));
       contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.QUESTION, questionCount));
       contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RUBRIC, rubricCount));
-      console.log(contentCountData);
       return contentCountData;
     });
   },
