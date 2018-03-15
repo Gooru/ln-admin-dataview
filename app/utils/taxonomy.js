@@ -96,6 +96,15 @@ export function getCategoryFromSubjectId(subjectId) {
 
 
 /**
+ * Parse and read category id for given string
+ * @param  {String} id
+ * @return {String}
+ */
+export function getCategoryId(id) {
+  return id.substring(0, id.indexOf('.'));
+}
+
+/**
  * Parse and read subject id for given string
  * @param  {String} id
  * @return {String}
@@ -130,32 +139,32 @@ export function getDomainId(id) {
  */
 export function getNodeInfo(node) {
   switch (node.depth) {
-  case 1:
+  case 2:
     return {
       id: node.data.id,
       type: 'subject',
-      parent: node.data.name,
+      parent: `${node.parent.data.name  } > ${  node.data.name}`,
       searchValue: node.data.name,
       filters: {
         'flt.subjectName': node.data.name
       }
     };
-  case 2:
+  case 3:
     return {
       id: node.data.id,
       type: 'course',
-      parent: node.parent.data.name,
+      parent: `${node.parent.parent.data.name  } > ${  node.parent.data.name}`,
       searchValue: node.data.name,
       filters: {
         'flt.subjectName': node.parent.data.name,
         'flt.courseName': node.data.name
       }
     };
-  case 3:
+  case 4:
     return {
       id: node.data.id,
       type: 'domain',
-      parent: `${node.parent.parent.data.name} > ${node.parent.data.name}`,
+      parent: `${node.parent.parent.parent.data.name} > ${node.parent.parent.data.name} > ${node.parent.data.name}`,
       searchValue: node.data.name,
       filters: {
         'flt.subjectName': node.parent.parent.data.name,
@@ -163,11 +172,11 @@ export function getNodeInfo(node) {
         'flt.domainName': node.data.name
       }
     };
-  case 4:
+  case 5:
     return {
       id: node.data.id,
       type: 'standard',
-      parent: `${node.parent.parent.parent.data.name} > ${node.parent.parent.data.name} > ${node.parent.data.name}`,
+      parent: `${node.parent.parent.parent.parent.data.name} > ${node.parent.parent.parent.data.name} > ${node.parent.parent.data.name} > ${node.parent.data.name}`,
       title: node.data.title,
       searchValue: node.data.code,
       filters: {
@@ -177,11 +186,11 @@ export function getNodeInfo(node) {
         'flt.standardDisplay': node.data.code
       }
     };
-  case 5:
+  case 6:
     return {
       id: node.data.id,
       type: 'standard',
-      parent: `${node.parent.parent.parent.parent.data.name} > ${node.parent.parent.parent.data.name} > ${node.parent.parent.data.name}  > ${node.parent.data.name}`,
+      parent: `${node.parent.parent.parent.parent.parent.data.name} > ${node.parent.parent.parent.parent.data.name} > ${node.parent.parent.parent.data.name} > ${node.parent.parent.data.name}  > ${node.parent.data.name}`,
       title: node.data.title,
       searchValue: node.data.code,
       filters: {

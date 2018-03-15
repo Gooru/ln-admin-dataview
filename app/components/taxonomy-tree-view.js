@@ -78,21 +78,6 @@ export default Ember.Component.extend({
    */
   duration: 750,
 
-  /**
-   * It will maintain value of number of times taxonomy subject category was choosen.
-   * @type {Number}
-   */
-  reloadCount: 0,
-
-  // -------------------------------------------------------------------------
-  // Observer
-
-  /**
-   * This method get executed whenever the reload count get updated.
-   */
-  onReload: Ember.observer('reloadCount', function() {
-    this.renderTreeView();
-  }),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -119,6 +104,10 @@ export default Ember.Component.extend({
     root.children.forEach(collapse);
     component.set('root', root);
     this.update(root, 0);
+    let children = root.children[0];
+    component.sendAction('onClickNode', root.children[0], component);
+    component.appendLoader(children.data.id);
+
   },
 
   update: function(source, depth) {
@@ -156,7 +145,7 @@ export default Ember.Component.extend({
     d3.select('svg').remove();
 
     let svg = d3.select(component.element).append('svg')
-      .attr('width', width + margin.right + margin.left + 400)
+      .attr('width', width + margin.right + margin.left + 600)
       .attr('height', newHeight + margin.top + margin.bottom)
       .append('g')
       .attr('transform', `translate(${  margin.left  },${  margin.top  })`);
@@ -283,10 +272,10 @@ export default Ember.Component.extend({
     let linkEnter = link.enter().insert('path', 'g')
       .attr('class', function(d) {
         let id = d.data.id.replace(/\./g, 's');
-        return `${'link link-'}${id}`;
+        return `${'link link-'}${id}${' link-'}${d.depth}`;
       }).attr('copyclass', function(d) {
         let id = d.data.id.replace(/\./g, 's');
-        return `${'link link-'}${id}`;
+        return `${'link link-'}${id}${' link-'}${d.depth}`;
       })
       .attr('d', function() {
         var o = {
@@ -371,7 +360,7 @@ export default Ember.Component.extend({
         return 240;
       } else if (depth === 4) {
         return 260;
-      } else if (depth === 5) {
+      } else if (depth === 5 || depth === 6) {
         return 280;
       }
     }
@@ -390,7 +379,7 @@ export default Ember.Component.extend({
         return 100;
       } else if (depth === 4) {
         return 120;
-      } else if (depth === 5) {
+      } else if (depth === 5 || depth === 6) {
         return 140;
       }
     }

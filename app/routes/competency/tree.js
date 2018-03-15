@@ -1,5 +1,9 @@
 import Ember from 'ember';
 import AuthenticatedRouteMixin from 'admin-dataview/mixins/authenticated-route-mixin';
+import {
+  TAXONOMY_CATEGORIES
+} from 'admin-dataview/config/config';
+
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
 
@@ -16,29 +20,30 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   //-------------------------------------------------------------------------
   //Properties
 
-  selectedCategory: 'k_12',
 
   defaultFrameworkId: 'GDT',
 
 
-  // -------------------------------------------------------------------------
-  // Actions
-  actions: {
-    /**
-     * Action get triggered when subject category is choosen
-     * @param  {Object} category
-     */
-    chooseCategory: function(category) {
-      let route = this;
-      route.set('selectedCategory', category.value);
-      return route.loadTaxonomyData().then(({subjects}) => {
-        let controller = this.get('controller');
-        controller.set('selectedCategory', category.value);
-        controller.set('subjects', subjects);
-        controller.incrementProperty('reloadCount');
+  /**
+   * categories list of taxonomy
+   * @return {Object}
+   */
+  categories: Ember.computed(function() {
+    let controller = this;
+    let categories = Ember.A();
+    TAXONOMY_CATEGORIES.forEach(category => {
+      let data = Ember.Object.create({
+        'title': controller.get('i18n').t(category.label).string,
+        'type': 'category',
+        'id': category.apiCode,
+        'code': category.value,
+        'subjects': Ember.A()
       });
-    }
-  },
+      categories.pushObject(data);
+    });
+    return categories;
+  }),
+
 
   // -------------------------------------------------------------------------
   // Methods
@@ -50,29 +55,33 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   loadTaxonomyData: function() {
     let route = this;
     return Ember.RSVP.hash({
-      subjects: this.get('taxonomyService').getSubjects(route.get('selectedCategory'))
+      categories: route.get('categories'),
+      subjects: this.get('taxonomyService').getSubjects()
     }).then(({
-      subjects
+      categories
     }) => {
       let promises = Ember.A();
-      subjects.forEach(subject => {
-        if (!subject.get('frameworkId')) {
-          subject.set('frameworkId', route.get('defaultFrameworkId'));
-        }
-        promises.pushObject(this.get('taxonomyService').getCourses(subject));
+      categories.forEach(category => {
+        let categoryId = category.get('code');
+        this.get('taxonomyService').getSubjects(categoryId).then(subjects => {
+          subjects.forEach(subject => {
+            if (!subject.get('frameworkId')) {
+              subject.set('frameworkId', route.get('defaultFrameworkId'));
+            }
+          });
+          category.set('subjects', subjects);
+        });
       });
       return Ember.RSVP.all(promises).then(function() {
         return Ember.RSVP.hash({
-          subjects: subjects
+          categories: categories
         });
       });
     });
   },
 
   setupController: function(controller, model) {
-    let route = this;
-    controller.set('subjects', model.subjects);
-    controller.set('selectedCategory', route.get('selectedCategory'));
+    controller.set('categories', model.categories);
   }
 
 });
