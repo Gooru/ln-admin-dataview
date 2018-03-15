@@ -116,8 +116,7 @@ export default Ember.Controller.extend({
         } else {
           component.updateData(node, subjectNodes);
         }
-      }
-      else if (node.depth === 2) {
+      } else if (node.depth === 2) {
         let categoryNodes = taxonomyTreeViewData.get('children');
         let category = categoryNodes.findBy('id', Utils.getCategoryId(id));
         let subjectNodes = category.get('children');
@@ -197,18 +196,16 @@ export default Ember.Controller.extend({
       controller.set('nodeData', selectedNodeData);
       controller.set('isLoading', true);
       controller.set('showPullOut', true);
-      if (nodeDepth < 4) {
+      if (nodeDepth < 5) {
         controller.getSearchContentCount(selectedNodeData).then(function(contentCount) {
           controller.set('contentCount', contentCount);
           controller.set('isLoading', false);
         });
-      }
-
-      controller.getSearchLearningMapsContent(selectedNodeData).then(function(learning) {
-        let culcaqrCount = Ember.A();
-        let contentCountData = Ember.A();
-        culcaqrCount = learning.contents;
-        if (nodeDepth >= 4) {
+      } else {
+        controller.getSearchLearningMapsContent(selectedNodeData).then(function(learning) {
+          let culcaqrCount = Ember.A();
+          let contentCountData = Ember.A();
+          culcaqrCount = learning.contents;
           let courseCount = culcaqrCount.course ? culcaqrCount.course.totalHitCount : 0;
           let unitCount = culcaqrCount.unit ? culcaqrCount.unit.totalHitCount : 0;
           let lessonCount = culcaqrCount.lesson ? culcaqrCount.lesson.totalHitCount : 0;
@@ -227,12 +224,11 @@ export default Ember.Controller.extend({
           contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.QUESTION, questionCount));
           contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RUBRIC, rubricCount));
           controller.set('contentCount', contentCountData);
-        }
-
-        controller.set('isLoading', false);
-        controller.set('signatureContents', learning.signatureContents);
-        controller.set('prerequisites', learning.prerequisites);
-      });
+          controller.set('isLoading', false);
+          controller.set('signatureContents', learning.signatureContents);
+          controller.set('prerequisites', learning.prerequisites);
+        });
+      }
     },
     /**
      * Action get triggered when subject category is choosen
@@ -426,7 +422,6 @@ export default Ember.Controller.extend({
     const rubricCountPromise = Ember.RSVP.resolve(this.get('searchService').searchRubrics(query, filters, start, length));
     const unitCountPromise = Ember.RSVP.resolve(this.get('searchService').searchUnits(query, filters, start, length));
     const lessonsCountPromise = Ember.RSVP.resolve(this.get('searchService').searchLessons(query, filters, start, length));
-
     return Ember.RSVP.hash({
       resource: resourceCountPromise,
       question: questionCountPromise,

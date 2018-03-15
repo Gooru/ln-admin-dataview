@@ -107,8 +107,11 @@ export default Ember.Component.extend({
     component.set('root', root);
     this.update(root, 0);
     let children = root.children[0];
-    component.sendAction('onClickNode', root.children[0], component);
-    component.appendLoader(children.data.id);
+    let node = root.children[0];
+    component.sendAction('onClickNode', node, component);
+    if (!node.children) {
+      component.appendLoader(children.data.id);
+    }
 
   },
 
