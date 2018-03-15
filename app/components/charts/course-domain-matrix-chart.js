@@ -1,5 +1,5 @@
 /**
- * Comptency matrix domain chart
+ * Competency matrix domain chart
  *
  * @module
  * @augments ember/Component
@@ -201,8 +201,8 @@ export default Ember.Component.extend({
       }
     },
 
-    domainCompetencyPullOut: function(comptency) {
-      this.sendAction('domainCompetencyPullOut', comptency);
+    domainCompetencyPullOut: function(competency) {
+      this.sendAction('domainCompetencyPullOut', competency);
     }
   },
 
