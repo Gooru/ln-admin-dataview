@@ -8,7 +8,9 @@
  */
 import Ember from 'ember';
 import d3 from 'd3';
-import {DEFAULT_IMAGES} from 'admin-dataview/config/config';
+import {
+  DEFAULT_IMAGES
+} from 'admin-dataview/config/config';
 
 
 export default Ember.Component.extend({
@@ -76,7 +78,7 @@ export default Ember.Component.extend({
    * Tree node links animation duration.
    * @type {Number}
    */
-  duration: 750,
+  duration: 0,
 
 
   // -------------------------------------------------------------------------
@@ -161,11 +163,31 @@ export default Ember.Component.extend({
         component.set('index', ++index);
         return d.id || (d.id = component.get('index'));
       });
+
     /**
      * Click handling on when each node get choosed
      */
     function click(d) {
-      if (d.depth > 0 && d.data.hasChild) {
+      if (d.depth > 1 && d.data.hasChild) {
+        component.appendLoader(d.data.id);
+        if (d.children) {
+          d._children = d.children;
+          d.children = null;
+          component.update(d, d.depth);
+        } else {
+          component.sendAction('onClickNode', d, component);
+        }
+      } else if (d.depth === 1 && d.data.hasChild && !d.children) {
+        let root = component.get('root');
+        let children = root.children;
+        for (let index = 0; index < children.length; index++) {
+          let node = children[index];
+          if (node.children) {
+            node._children = node.children;
+            node.children = null;
+          }
+          children[index] = node;
+        }
         component.appendLoader(d.data.id);
         if (d.children) {
           d._children = d.children;
@@ -189,27 +211,10 @@ export default Ember.Component.extend({
 
     let nodeEnter = node.enter().append('g')
       .attr('class', 'node')
-      .attr('transform', function() {
-        return `translate(${source.y0 },${  source.x0  })`;
-      })
       .on('click', click);
 
     let nodeText = nodeEnter.append('svg:foreignObject')
-      .attr('y', function(d) {
-        if (d.depth === 0) {
-          return -12;
-        } else {
-          return -18;
-        }
-      }).attr('x', function(d) {
-        if (d.depth === 0) {
-          return 0;
-        } else if (d.depth === 1 || d.depth === 2) {
-          return 0;
-        } else if (d.depth === 3) {
-          return 0;
-        }
-      }).attr('text-anchor', function(d) {
+      .attr('text-anchor', function(d) {
         return d.children || d._children ? 'end' : 'start';
       })
       .style('fill-opacity', 1e-6)
@@ -236,8 +241,9 @@ export default Ember.Component.extend({
     nodeUpdate.transition()
       .duration(duration)
       .attr('transform', function(d) {
-        let sourceY = d.y + component.normalizeY1PostionBasedOnDepth(d.depth);
-        return `translate(${  sourceY  },${  d.x  })`;
+        let sourceY = d.y + component.normalizeYPostionBasedOnDepth((d.depth - 1));
+        let sourceX = d.x - 20;
+        return `translate(${  sourceY  },${  sourceX  })`;
       });
 
 
@@ -245,7 +251,8 @@ export default Ember.Component.extend({
       .duration(duration)
       .attr('transform', function(d) {
         let sourceY = source.y + component.normalizeYPostionBasedOnDepth(d.depth);
-        return `translate(${  sourceY  },${  source.x  })`;
+        let sourceX = d.x - 20;
+        return `translate(${  sourceY  },${  sourceX  })`;
       })
       .remove();
 
@@ -260,7 +267,7 @@ export default Ember.Component.extend({
       let sourceX = s.x;
       let sourceY = s.y + component.normalizeYPostionBasedOnDepth(d.depth);
       let selectedNodeX = d.x;
-      let selectedNodeY = d.y + component.normalizeYPostionBasedOnDepth(d.depth);
+      let selectedNodeY = d.y + component.normalizeYPostionBasedOnDepth(d.depth) + component.normalizePathPostionBasedOnDepth(d.depth);
       let path = `M ${sourceY} ${sourceX}
               C ${(sourceY + selectedNodeY) / 2} ${sourceX},
                 ${(sourceY + selectedNodeY) / 2} ${selectedNodeX},
@@ -308,7 +315,10 @@ export default Ember.Component.extend({
       d.x0 = d.x;
       d.y0 = d.y;
     });
-
+    if (depth === 1) {
+      component.$('.node-1').removeClass('disable-events');
+      component.$(`.node-label-${  source.data.id}`).addClass('disable-events');
+    }
   },
 
   data: null,
@@ -367,20 +377,18 @@ export default Ember.Component.extend({
     return 0;
   },
 
-  normalizeY1PostionBasedOnDepth: function(depth) {
+  normalizePathPostionBasedOnDepth: function(depth) {
     if (depth >= 0) {
-      if (depth === 0) {
-        return -40;
-      } else if (depth === 1) {
+      if (depth === 0 || depth === 1) {
         return 0;
       } else if (depth === 2) {
-        return 80;
+        return 105;
       } else if (depth === 3) {
-        return 100;
-      } else if (depth === 4) {
-        return 120;
-      } else if (depth === 5 || depth === 6) {
         return 140;
+      } else if (depth === 4) {
+        return 210;
+      } else if (depth === 5 || depth === 6) {
+        return 220;
       }
     }
     return 0;

@@ -183,13 +183,11 @@ export default Ember.Component.extend({
     enableMicroCompetency: function(competency, index) {
       let component = this;
       let height = competency.microCompetencies.length * 49;
-      let competencyEnabled = component.$('.micro-competency-container-' + index);
-      let competencyDisabled = component.$('.micro-competency-container-' + component.get('domainCompetencyIndex'));
-      if (component.get('domainCompetencyIndex') === index) {
-      } else {
-        component.$(competencyEnabled).animate({ height: "0px"}, { duration: 'slow' }, { transition: 'all 500ms ease' });
+      let competencyEnabled = component.$(`.micro-competency-container-${  index}`);
+      if (component.get('domainCompetencyIndex') !== index) {
+        component.$(competencyEnabled).animate({ height: '0px'}, { duration: 'slow' }, { transition: 'all 500ms ease' });
         component.set('domainCompetencyIndex', index);
-        component.$(competencyEnabled).animate({ height: height + "px"}, { duration: 'slow' }, { transition: 'all 500ms ease' });
+        component.$(competencyEnabled).animate({ height: `${height  }px`}, { duration: 'slow' }, { transition: 'all 500ms ease' });
       }
     }
   },
