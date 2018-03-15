@@ -154,6 +154,13 @@ export default Ember.Component.extend({
    */
   isDomainViewEnabled: false,
 
+  /**
+   * It maintains the state of domain competency...
+   * @type {Boolean}
+   */
+  domainCompetencyIndex: 0,
+
+
   // -------------------------------------------------------------------------
   // Events
 
@@ -171,6 +178,19 @@ export default Ember.Component.extend({
     backToCourseView: function() {
       this.set('isDomainViewEnabled', false);
       this.set('showPullOut', false);
+    },
+
+    enableMicroCompetency: function(competency, index) {
+      let component = this;
+      let height = competency.microCompetencies.length * 49;
+      let competencyEnabled = component.$('.micro-competency-container-' + index);
+      let competencyDisabled = component.$('.micro-competency-container-' + component.get('domainCompetencyIndex'));
+      if (component.get('domainCompetencyIndex') === index) {
+      } else {
+        component.$(competencyEnabled).animate({ height: "0px"}, { duration: 'slow' }, { transition: 'all 500ms ease' });
+        component.set('domainCompetencyIndex', index);
+        component.$(competencyEnabled).animate({ height: height + "px"}, { duration: 'slow' }, { transition: 'all 500ms ease' });
+      }
     }
   },
 
