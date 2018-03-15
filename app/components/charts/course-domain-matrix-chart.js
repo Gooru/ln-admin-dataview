@@ -8,7 +8,6 @@ import Ember from 'ember';
 import d3 from 'd3';
 
 export default Ember.Component.extend({
-
   //------------------------------------------------------------------------
   //Dependencies
 
@@ -26,7 +25,6 @@ export default Ember.Component.extend({
    */
   taxonomyService: Ember.inject.service('taxonomy'),
 
-
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -34,7 +32,6 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
-
 
   // -------------------------------------------------------------------------
   // Properties
@@ -54,7 +51,6 @@ export default Ember.Component.extend({
    * @type {String}
    */
   userId: null,
-
 
   /**
    * Width of the cell
@@ -86,7 +82,6 @@ export default Ember.Component.extend({
    */
   taxonomyDomainCompetencies: Ember.A(),
 
-
   /**
    * It will have  taxonomy subjects
    * @type {Object}
@@ -99,7 +94,6 @@ export default Ember.Component.extend({
    */
   selectedSubjectCategory: 'k_12',
 
-
   isLoading: false,
 
   /**
@@ -111,7 +105,6 @@ export default Ember.Component.extend({
     let length = component.get('taxonomyCourses').length;
     return length > 0;
   }),
-
 
   /**
    * subjectId  change will call the function
@@ -131,18 +124,6 @@ export default Ember.Component.extend({
   showPullOut: false,
 
   /**
-   * Trigger whenever pull out state got changed.
-   */
-  onChangeShowPullOut: Ember.observer('showPullOut', function() {
-    let component = this;
-    let showPullOut = component.get('showPullOut');
-    if (!showPullOut) {
-      component.$('.block-container').remove();
-      component.set('isDomainViewEnabled', false);
-    }
-  }),
-
-  /**
    * It maintains the data of selected domain.
    * @type {Object}
    */
@@ -160,7 +141,6 @@ export default Ember.Component.extend({
    */
   defaultHeightOfCompetencyContainer: 56,
 
-
   // -------------------------------------------------------------------------
   // Events
 
@@ -176,24 +156,48 @@ export default Ember.Component.extend({
 
   actions: {
     backToCourseView: function() {
-      this.set('isDomainViewEnabled', false);
-      this.set('showPullOut', false);
+      let component = this;
+      component.set('isDomainViewEnabled', false);
+      component.set('showPullOut', false);
+      component.$('.block-container').remove();
     },
 
     showMicroCompetency: function(competency, index) {
       let component = this;
-      let defaultHeightOfCompetencyContainer = component.get('defaultHeightOfCompetencyContainer');
-      let domainCompetencyContainer = component.$(`.domain-competency-info-container-${  index}`);
-      let height = component.$(domainCompetencyContainer).find('.micro-competency-container').height() + (defaultHeightOfCompetencyContainer + 10);
-      let isEnabled = component.$(domainCompetencyContainer).hasClass('micro-competency-enabled');
+      let defaultHeightOfCompetencyContainer = component.get(
+        'defaultHeightOfCompetencyContainer'
+      );
+      let domainCompetencyContainer = component.$(
+        `.domain-competency-info-container-${index}`
+      );
+      let height =
+        component
+          .$(domainCompetencyContainer)
+          .find('.micro-competency-container')
+          .height() +
+        (defaultHeightOfCompetencyContainer + 10);
+      let isEnabled = component
+        .$(domainCompetencyContainer)
+        .hasClass('micro-competency-enabled');
       if (!isEnabled) {
-        component.$(domainCompetencyContainer).animate({ height: `${height  }px`}, function() {
-          component.$(domainCompetencyContainer).addClass('micro-competency-enabled');
-        });
+        component
+          .$(domainCompetencyContainer)
+          .animate({ height: `${height}px` }, function() {
+            component
+              .$(domainCompetencyContainer)
+              .addClass('micro-competency-enabled');
+          });
       } else {
-        component.$(domainCompetencyContainer).animate({ height: `${defaultHeightOfCompetencyContainer  }px`}, function() {
-          component.$(domainCompetencyContainer).removeClass('micro-competency-enabled');
-        });
+        component
+          .$(domainCompetencyContainer)
+          .animate(
+            { height: `${defaultHeightOfCompetencyContainer}px` },
+            function() {
+              component
+                .$(domainCompetencyContainer)
+                .removeClass('micro-competency-enabled');
+            }
+          );
       }
     },
 
@@ -214,15 +218,18 @@ export default Ember.Component.extend({
     let width = component.get('taxonomyDomains').length * cellWidth;
     component.set('width', width);
     component.$('#course-domain-matrix-chart').empty();
-    const svg = d3.select('#course-domain-matrix-chart').append('svg')
+    const svg = d3
+      .select('#course-domain-matrix-chart')
+      .append('svg')
       .attr('width', width)
       .attr('height', height)
       .append('g');
-    const cards = svg.selectAll('.course-domain-cell')
-      .data(data);
-    cards.enter().append('rect')
-      .attr('x', (d) => (d.domainSeq - 1) * cellWidth)
-      .attr('y', (d) => (d.courseSeq - 1) * cellHeight)
+    const cards = svg.selectAll('.course-domain-cell').data(data);
+    cards
+      .enter()
+      .append('rect')
+      .attr('x', d => (d.domainSeq - 1) * cellWidth)
+      .attr('y', d => (d.courseSeq - 1) * cellHeight)
       .attr('class', 'course-domain-cell')
       .attr('width', cellWidth)
       .attr('height', cellHeight)
@@ -239,28 +246,33 @@ export default Ember.Component.extend({
       .style('fill', '#1aa9eb');
   },
 
-
   loadDataBySubject: function(subjectId) {
     let component = this;
     let userId = component.get('userId');
     component.set('isLoading', true);
     return Ember.RSVP.hash({
-      competencyMatrixs: component.get('competencyService').getCompetencyMatrix(userId, subjectId),
-      matrixCoordinates: component.get('competencyService').getCompetencyMatrixCoordinates(subjectId)
-    }).then(({
-      competencyMatrixs,
-      matrixCoordinates
-    }) => {
+      competencyMatrixs: component
+        .get('competencyService')
+        .getCompetencyMatrix(userId, subjectId),
+      matrixCoordinates: component
+        .get('competencyService')
+        .getCompetencyMatrixCoordinates(subjectId)
+    }).then(({ competencyMatrixs, matrixCoordinates }) => {
       component.set('isLoading', false);
-      let resultSet = component.parseCourseDomainData(competencyMatrixs, matrixCoordinates);
+      let resultSet = component.parseCourseDomainData(
+        competencyMatrixs,
+        matrixCoordinates
+      );
       component.drawChart(resultSet);
     });
-
   },
 
   parseCourseDomainData: function(competencyMatrixs, matrixCoordinates) {
     let component = this;
-    let courses = matrixCoordinates.get('courses').toArray().reverse();
+    let courses = matrixCoordinates
+      .get('courses')
+      .toArray()
+      .reverse();
     component.set('taxonomyCourses', courses);
     let resultSet = Ember.A();
     let domains = matrixCoordinates.get('domains');
@@ -274,17 +286,20 @@ export default Ember.Component.extend({
         let courseSeq = courseData.get('courseSeq');
         let courseName = courseData.get('courseName');
         let courseDomainsData = coursesData.get('domains');
-        let courseDomainData = courseDomainsData.findBy('domainCode', domainCode);
+        let courseDomainData = courseDomainsData.findBy(
+          'domainCode',
+          domainCode
+        );
         if (courseDomainData) {
           let domainSeq = domain.get('domainSeq');
           let domainName = domain.get('domainName');
           let data = Ember.Object.create({
-            'courseSeq': courseSeq,
-            'courseCode': courseCode,
-            'courseName': courseName,
-            'domainCode': domainCode,
-            'domainSeq': domainSeq,
-            'domainName': domainName
+            courseSeq: courseSeq,
+            courseCode: courseCode,
+            courseName: courseName,
+            domainCode: domainCode,
+            domainSeq: domainSeq,
+            domainName: domainName
           });
           resultSet.pushObject(data);
         }
@@ -300,11 +315,11 @@ export default Ember.Component.extend({
     const cellWidth = actualCellWidth + 2;
     const cellHeight = actuaCellHeight + 2;
     const width = component.get('width') + 2;
-    let xAxisSeq = (((selectedDomain.domainSeq - 1) * actualCellWidth) - 1);
-    let yAxisSeq = (((selectedDomain.courseSeq - 1) * actuaCellHeight) - 1);
+    let xAxisSeq = (selectedDomain.domainSeq - 1) * actualCellWidth - 1;
+    let yAxisSeq = (selectedDomain.courseSeq - 1) * actuaCellHeight - 1;
     component.$('.block-container').remove();
-    let container = `<div class="block-container" style="width:${  width  }px">`;
-    container += `<div class="selected-domain"  style="width:${  cellWidth  }px; height:${  cellHeight  }px;top:${  yAxisSeq  }px; left:${  xAxisSeq  }px"></div>`;
+    let container = `<div class="block-container" style="width:${width}px">`;
+    container += `<div class="selected-domain"  style="width:${cellWidth}px; height:${cellHeight}px;top:${yAxisSeq}px; left:${xAxisSeq}px"></div>`;
     container += '</div>';
     component.$('#course-domain-matrix-chart').prepend(container);
   },
@@ -313,47 +328,61 @@ export default Ember.Component.extend({
     let component = this;
     let subject = component.get('selectedSubject');
     let courseId = selectedDomain.courseCode;
-    let domainId = `${selectedDomain.courseCode  }-${  selectedDomain.domainCode}`;
+    let domainId = `${selectedDomain.courseCode}-${selectedDomain.domainCode}`;
     component.set('isLoading', true);
-    component.get('taxonomyService').getCourseDomains(subject, courseId).then(() => {
-      component.get('taxonomyService').getDomainCodes(subject, courseId, domainId).then(competencyData => {
-        let taxonomyDomainCompetencies = Ember.A();
-        if (competencyData && competencyData.length > 0) {
-          let competencies = competencyData.objectAt(0);
-          let data = competencies.get('children');
-          data.forEach(competency => {
-            let competencyDataNode = Ember.Object.create({
-              'title': competency.get('title'),
-              'id': competency.get('id'),
-              'code': competency.get('code'),
-              'microCompetencies': Ember.A()
-            });
-            let competenciesChildren = competency.get('children');
-            if (competenciesChildren && competenciesChildren.length > 0) {
-              let competenciesChildData = competenciesChildren[0];
-              if (competenciesChildData) {
-                let microCompetenciesDataNode = Ember.A();
-                let microCompetencies = competenciesChildData.get('children');
-                microCompetencies.forEach(microCompetency => {
-                  let microCompetencyDataNode = Ember.Object.create({
-                    'title': microCompetency.get('title'),
-                    'id': microCompetency.get('id'),
-                    'code': microCompetency.get('code')
-                  });
-                  microCompetenciesDataNode.pushObject(microCompetencyDataNode);
-
+    component
+      .get('taxonomyService')
+      .getCourseDomains(subject, courseId)
+      .then(() => {
+        component
+          .get('taxonomyService')
+          .getDomainCodes(subject, courseId, domainId)
+          .then(competencyData => {
+            let taxonomyDomainCompetencies = Ember.A();
+            if (competencyData && competencyData.length > 0) {
+              let competencies = competencyData.objectAt(0);
+              let data = competencies.get('children');
+              data.forEach(competency => {
+                let competencyDataNode = Ember.Object.create({
+                  title: competency.get('title'),
+                  id: competency.get('id'),
+                  code: competency.get('code'),
+                  microCompetencies: Ember.A()
                 });
-                competencyDataNode.set('microCompetencies', microCompetenciesDataNode);
-                taxonomyDomainCompetencies.pushObject(competencyDataNode);
-              }
+                let competenciesChildren = competency.get('children');
+                if (competenciesChildren && competenciesChildren.length > 0) {
+                  let competenciesChildData = competenciesChildren[0];
+                  if (competenciesChildData) {
+                    let microCompetenciesDataNode = Ember.A();
+                    let microCompetencies = competenciesChildData.get(
+                      'children'
+                    );
+                    microCompetencies.forEach(microCompetency => {
+                      let microCompetencyDataNode = Ember.Object.create({
+                        title: microCompetency.get('title'),
+                        id: microCompetency.get('id'),
+                        code: microCompetency.get('code')
+                      });
+                      microCompetenciesDataNode.pushObject(
+                        microCompetencyDataNode
+                      );
+                    });
+                    competencyDataNode.set(
+                      'microCompetencies',
+                      microCompetenciesDataNode
+                    );
+                    taxonomyDomainCompetencies.pushObject(competencyDataNode);
+                  }
+                }
+              });
             }
+            component.set(
+              'taxonomyDomainCompetencies',
+              taxonomyDomainCompetencies
+            );
+            component.set('isLoading', false);
+            component.set('isDomainViewEnabled', true);
           });
-        }
-        component.set('taxonomyDomainCompetencies', taxonomyDomainCompetencies);
-        component.set('isLoading', false);
-        component.set('isDomainViewEnabled', true);
       });
-    });
   }
-
 });
