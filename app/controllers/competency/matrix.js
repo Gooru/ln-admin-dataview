@@ -69,6 +69,12 @@ export default Ember.Controller.extend({
   isLoading: true,
 
 
+  /**
+   * is competency level node or not
+   */
+  showMore: false,
+
+
   //---------------------------------------------------------------------------
   //Actions
 
@@ -111,6 +117,42 @@ export default Ember.Controller.extend({
       controller.getSearchContentCount(selectedDomainData).then(function(contentCount) {
         controller.set('contentCount', contentCount);
         controller.set('isLoading', false);
+      });
+    },
+
+    domainCompetencyPullOut: function(competency) {
+      let controller = this;
+      let nodeData = {
+        code: competency.code,
+        id: competency.id
+      };
+      controller.set('isLoading', true);
+      controller.getSearchLearningMapsContent(nodeData).then(function(learningData) {
+        let culcaqrCount = Ember.A();
+        let contentCountData = Ember.A();
+        culcaqrCount = learningData.contents;
+        let courseCount = culcaqrCount.course ? culcaqrCount.course.totalHitCount : 0;
+        let unitCount = culcaqrCount.unit ? culcaqrCount.unit.totalHitCount : 0;
+        let lessonCount = culcaqrCount.lesson ? culcaqrCount.lesson.totalHitCount : 0;
+        let collectionCount = culcaqrCount.collection ? culcaqrCount.collection.totalHitCount : 0;
+        let assessmentCount = culcaqrCount.assessment ? culcaqrCount.assessment.totalHitCount : 0;
+        let resourceCount = culcaqrCount.resource ? culcaqrCount.resource.totalHitCount : 0;
+        let questionCount = culcaqrCount.question ? culcaqrCount.question.totalHitCount : 0;
+        let rubricCount = culcaqrCount.rubric ? culcaqrCount.rubric.totalHitCount : 0;
+
+        contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COURSE, courseCount));
+        contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.UNIT, unitCount));
+        contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.LESSON, lessonCount));
+        contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.ASSESSMENT, assessmentCount));
+        contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COLLECTION, collectionCount));
+        contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RESOURCE, resourceCount));
+        contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.QUESTION, questionCount));
+        contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RUBRIC, rubricCount));
+        controller.set('contentCount', contentCountData);
+
+        controller.set('isLoading', false);
+        controller.set('signatureContents', learningData.signatureContents);
+        controller.set('prerequisites', learningData.prerequisites);
       });
     }
 
@@ -169,6 +211,22 @@ export default Ember.Controller.extend({
       contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.QUESTION, questionCount));
       contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RUBRIC, rubricCount));
       return contentCountData;
+    });
+  },
+
+
+  /**
+   * Get Content count of search results
+   * return hashed json of each content type conunt
+   */
+  getSearchLearningMapsContent: function(selectedNode) {
+    let controller = this;
+    controller.set('showMore', true);
+    const learningMapsContent = Ember.RSVP.resolve(this.get('searchService').learningMapsContent(selectedNode, 3));
+    return Ember.RSVP.hash({
+      learningMapsContent: learningMapsContent
+    }).then(function(hash) {
+      return hash.learningMapsContent;
     });
   }
 });

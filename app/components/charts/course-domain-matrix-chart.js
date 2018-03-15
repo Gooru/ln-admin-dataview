@@ -185,10 +185,14 @@ export default Ember.Component.extend({
       let height = competency.microCompetencies.length * 49;
       let competencyEnabled = component.$(`.micro-competency-container-${  index}`);
       if (component.get('domainCompetencyIndex') !== index) {
-        component.$(competencyEnabled).animate({ height: '0px'}, { duration: 'slow' }, { transition: 'all 500ms ease' });
+        component.$(competencyEnabled).animate({ height: '0px'}, { duration: 'fast' });
         component.set('domainCompetencyIndex', index);
         component.$(competencyEnabled).animate({ height: `${height  }px`}, { duration: 'slow' }, { transition: 'all 500ms ease' });
       }
+    },
+
+    domainCompetencyPullOut: function(comptency) {
+      this.sendAction('domainCompetencyPullOut', comptency);
     }
   },
 

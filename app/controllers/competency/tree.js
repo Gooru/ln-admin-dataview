@@ -470,7 +470,6 @@ export default Ember.Controller.extend({
     }).then(function(hash) {
       return hash.learningMapsContent;
     });
-
   }
 
 });
