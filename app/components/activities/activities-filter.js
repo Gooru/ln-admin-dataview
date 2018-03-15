@@ -30,10 +30,8 @@ export default Ember.Component.extend({
         selectedFilterItems.course = [];
         selectedFilterItems.subject = [];
         component.toggleCheckboxProperty(filterType, filterInfo.code);
-        component.$('.subject .header .toggle-dropdown, .course .header .toggle-dropdown').click();
       } else if (filterType === 'subject') {
         selectedFilterItems.course = [];
-        component.$('.course .header .toggle-dropdown').click();
         component.toggleCheckboxProperty(filterType, filterInfo.code);
       }
       localStorage.setItem(`research_${userId}_activities_filters`, JSON.stringify(selectedFilterItems));
@@ -58,7 +56,8 @@ export default Ember.Component.extend({
     let storedFilters = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`)) || component.get('selectedFilterItems');
     let userSelectedFilter = storedFilters[`${filterType}`] || [];
     let userSelectedFilterIndex = userSelectedFilter.findIndex(function(item){
-      return item.id === filterInfo.code;
+      let filterId = filterInfo.id || filterInfo.code;
+      return item.id === filterId;
     });
     //if filter already selected, then remove it from the list
     if (userSelectedFilterIndex > -1) {
@@ -88,7 +87,13 @@ export default Ember.Component.extend({
         label: filterInfo.label,
         frameworkId: filterInfo.value.frameworkId
       };
-    } else {
+    } else if (filterType === 'licenses') {
+      userSelectedFilterItem = {
+        code: filterInfo.code,
+        label: filterInfo.label,
+        id: filterInfo.id
+      };
+    }else {
       userSelectedFilterItem = {
         id: filterInfo.code,
         label: filterInfo.label

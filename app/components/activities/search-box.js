@@ -35,6 +35,7 @@ export default Ember.Component.extend({
   filtersObserver: Ember.observer('selectedFilterItems', function() {
     let component = this;
     component.refreshVisibleFilterItems();
+    component.setupTooltip();
   }),
 
   /**
@@ -168,14 +169,26 @@ export default Ember.Component.extend({
     return applicableFilterList;
   },
 
+  refreshVisibleFilterItems() {
+    let component = this;
+    let appliedFilterList = component.getAppliedFilters();
+    component.set('appliedFilterList', appliedFilterList);
+    const filtersVisible = component.get('visibleFilterCount');
+    let visibleFilters = appliedFilterList.filter(function(filter, index) {
+      return index < filtersVisible;
+    });
+    component.set('visibleFilters', visibleFilters);
+  },
+
   /**
    * @function setupTooltip
    * Function to show popover content box while clicking on the more button
    */
   setupTooltip: function() {
-    var $anchor = this.$('button.non-visible-tags');
-    if ($anchor.length === 0 ) {
-      let component = this;
+    let component = this;
+    var $anchor = component.$('button.non-visible-tags');
+
+    if ($anchor.length) {
       let placement = 'bottom';
       $anchor.addClass('clickable');
       $anchor.attr('data-html', 'true');
@@ -198,16 +211,5 @@ export default Ember.Component.extend({
         }
       });
     }
-  },
-
-  refreshVisibleFilterItems() {
-    let component = this;
-    let appliedFilterList = component.getAppliedFilters();
-    component.set('appliedFilterList', appliedFilterList);
-    const filtersVisible = component.get('visibleFilterCount');
-    let visibleFilters = appliedFilterList.filter(function(filter, index) {
-      return index < filtersVisible;
-    });
-    component.set('visibleFilters', visibleFilters);
   }
 });

@@ -355,7 +355,8 @@ export default Ember.Component.extend(ModalMixin, {
         hash.licenseList.map(license => {
           let licenseInfo = {
             label: license.label,
-            code: license.id,
+            code: license.code,
+            id: license.id,
             value: license.sequence_id
           };
           if (selectedFilterItems.licenses !== undefined && selectedFilterItems.licenses.length > 0) {

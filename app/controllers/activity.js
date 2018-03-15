@@ -85,10 +85,14 @@ export default Ember.Controller.extend({
     onChangeFilterItems: function(filterItems, updatedFilter) {
       let controller = this;
       if (updatedFilter) {
-        let isChecked = Ember.$(`.${updatedFilter.type} .body .filter-name .${updatedFilter.id} input`).prop('checked');
-        Ember.$(`.${updatedFilter.type} .body .filter-name .${updatedFilter.id} input`).prop('checked', !isChecked);
+        let filterType = updatedFilter.type;
+        let filterId = updatedFilter.id;
+        filterId = typeof filterId === 'string' ? filterId.replace(/\./g, '-') : filterId;
+        let isChecked = Ember.$(`.${filterType} .body .filter-name .${filterId} input`).prop('checked');
+        Ember.$(`.${filterType} .body .filter-name .${filterId} input`).prop('checked', !isChecked);
       }
       controller.set('selectedFilterItemsBuffer', filterItems);
+      controller.set('selectedFilterItems', filterItems);
       let routeName = Utils.getRoutePathLastOccurrence();
       let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
       if (activeMenuIndex > -1) {
@@ -183,8 +187,8 @@ export default Ember.Controller.extend({
       formattedFilters['flt.21CenturySkills'] = controller.getConcatenatedFilterString(categorizedFilterData, delimiter);
       break;
     case 'licenses':
-      delimiter = ',';
-      formattedFilters['flt.licenseCode'] = controller.getConcatenatedFilterString(categorizedFilterData, delimiter, 'id');
+      delimiter = '~~';
+      formattedFilters['flt.licenseName'] = controller.getConcatenatedFilterString(categorizedFilterData, delimiter);
       break;
     case 'dok':
       formattedFilters['flt.depthOfKnowledge'] = controller.getConcatenatedFilterString(categorizedFilterData);
