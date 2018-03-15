@@ -21,7 +21,7 @@
                 <div class="competency-info-icon" {{action 'domainCompetencyPullOut' taxonomyDomainCompetency}}>
                   {{app-icon name="ic_info_outline" class="more-info"}}
                   <div class="competency-info-tile">
-                    {{#each taxonomyDomainCompetency.microCompetencies as |microCompeteny index|}}
+                    {{#each taxonomyDomainCompetency.microCompetencies as |microCompetency index|}}
                       <i class="competency-info-tile-icon" />
                     {{/each}}
                   </div>
@@ -31,13 +31,13 @@
                 </div>
               </div>
               <div class="micro-competency-container">
-                {{#each taxonomyDomainCompetency.microCompetencies as |microCompeteny index|}}
+                {{#each taxonomyDomainCompetency.microCompetencies as |microCompetency index|}}
                   <div class="micro-competency-info">
                     <div class="micro-competency-info-icon">
                       <i></i>
                     </div>
-                    <div class="micro-competency-name" {{action 'domainCompetencyPullOut' microCompeteny}}>
-                      <p>{{microCompeteny.title}}</p>
+                    <div class="micro-competency-name" {{action 'domainCompetencyPullOut' microCompetency}}>
+                      <p>{{microCompetency.title}}</p>
                     </div>
                   </div>
                 {{/each}}

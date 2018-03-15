@@ -1,5 +1,5 @@
 /**
- * Comptency matrix domain chart
+ * Competency matrix domain chart
  *
  * @module
  * @augments ember/Component
@@ -8,7 +8,6 @@ import Ember from 'ember';
 import d3 from 'd3';
 
 export default Ember.Component.extend({
-
   //------------------------------------------------------------------------
   //Dependencies
 
@@ -26,7 +25,6 @@ export default Ember.Component.extend({
    */
   taxonomyService: Ember.inject.service('taxonomy'),
 
-
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -34,7 +32,6 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
-
 
   // -------------------------------------------------------------------------
   // Properties
@@ -68,7 +65,6 @@ export default Ember.Component.extend({
     '5': '#006eb5'
   }),
 
-
   /**
    * Width of the cell
    * @type {Number}
@@ -99,19 +95,17 @@ export default Ember.Component.extend({
    */
   selectedSubjectCategory: 'k_12',
 
-
   isLoading: false,
 
   /**
    * It  will have chart value width scroll width handling
    * @type {String}
    */
-  istaxonomyDomains : Ember.computed('taxonomyDomains', function() {
+  istaxonomyDomains: Ember.computed('taxonomyDomains', function() {
     let component = this;
     let length = component.get('taxonomyDomains').length;
     return length > 0;
   }),
-
 
   /**
    * subjectId  change will call the function
@@ -185,19 +179,22 @@ export default Ember.Component.extend({
     const colorsBasedOnStatus = component.get('colorsBasedOnStatus');
     const cellWidth = component.get('cellWidth');
     const cellHeight = component.get('cellHeight');
-    const width = (Math.round(numberOfCellsInEachRow * cellWidth));
+    const width = Math.round(numberOfCellsInEachRow * cellWidth);
     component.set('width', width);
     const height = component.get('height');
     component.$('#competency-matrix-domain-chart').empty();
-    const svg = d3.select('#competency-matrix-domain-chart').append('svg')
+    const svg = d3
+      .select('#competency-matrix-domain-chart')
+      .append('svg')
       .attr('width', width)
       .attr('height', height)
       .append('g');
-    const cards = svg.selectAll('.competency')
-      .data(data);
-    cards.enter().append('rect')
-      .attr('x', (d) => (d.xAxisSeq - 1) * cellWidth)
-      .attr('y', (d) => (d.yAxisSeq - 1) * cellHeight)
+    const cards = svg.selectAll('.competency').data(data);
+    cards
+      .enter()
+      .append('rect')
+      .attr('x', d => (d.xAxisSeq - 1) * cellWidth)
+      .attr('y', d => (d.yAxisSeq - 1) * cellHeight)
       .attr('class', 'competency')
       .attr('width', cellWidth)
       .attr('height', cellHeight)
@@ -209,14 +206,19 @@ export default Ember.Component.extend({
       .style('fill', '#EAEAEA')
       .transition()
       .duration(1000)
-      .style('fill', (d) => {
+      .style('fill', d => {
         return colorsBasedOnStatus.get(d.status.toString());
       });
-    cards.enter().append('circle')
-      .attr('cx', (d) => (((d.xAxisSeq - 1) * cellWidth) + (cellWidth / 2)))
-      .attr('cy', (d) => (((d.yAxisSeq - 1) * cellHeight + (d.mastered ? (cellHeight / 2) : 2))))
-      .attr('class', (d) => d.skyline ? 'competency-skyline' : '')
-      .attr('r', (d) => d.skyline ? 2 : 0)
+    cards
+      .enter()
+      .append('circle')
+      .attr('cx', d => (d.xAxisSeq - 1) * cellWidth + cellWidth / 2)
+      .attr(
+        'cy',
+        d => (d.yAxisSeq - 1) * cellHeight + (d.mastered ? cellHeight / 2 : 2)
+      )
+      .attr('class', d => (d.skyline ? 'competency-skyline' : ''))
+      .attr('r', d => (d.skyline ? 2 : 0))
       .attr('fill', '#fff');
 
     let skylineElements = component.$('.competency-skyline');
@@ -225,36 +227,53 @@ export default Ember.Component.extend({
     skylineElements.each(function(index) {
       let x1 = parseInt(component.$(skylineElements[index]).attr('cx'));
       let y1 = component.$(skylineElements[index]).attr('cy');
-      if (index < (indexSize - 1)) {
-        let x2 = parseInt(component.$(skylineElements[(index + 1)]).attr('cx'));
-        let y2 = component.$(skylineElements[(index + 1)]).attr('cy');
-        svg.append('line').attr('x1', x1).attr('y1', y1).attr('x2', x2).attr('y2', y2).attr('class', 'skyline disable-skyline');
+      if (index < indexSize - 1) {
+        let x2 = parseInt(component.$(skylineElements[index + 1]).attr('cx'));
+        let y2 = component.$(skylineElements[index + 1]).attr('cy');
+        svg
+          .append('line')
+          .attr('x1', x1)
+          .attr('y1', y1)
+          .attr('x2', x2)
+          .attr('y2', y2)
+          .attr('class', 'skyline disable-skyline');
       }
-      svg.append('circle').attr('cx', x1).attr('cy', y1).attr('r', 3).attr('fill', '#fff').attr('class', 'skyline disable-skyline');
+      svg
+        .append('circle')
+        .attr('cx', x1)
+        .attr('cy', y1)
+        .attr('r', 3)
+        .attr('fill', '#fff')
+        .attr('class', 'skyline disable-skyline');
     });
     cards.exit().remove();
   },
-
 
   loadDataBySubject: function(subjectId) {
     let component = this;
     let userId = component.get('userId');
     component.set('isLoading', true);
     return Ember.RSVP.hash({
-      competencyMatrixs: component.get('competencyService').getCompetencyMatrixDomain(userId, subjectId),
-      competencyMatrixCoordinates: component.get('competencyService').getCompetencyMatrixCoordinates(subjectId)
-    }).then(({
-      competencyMatrixs,
-      competencyMatrixCoordinates
-    }) => {
+      competencyMatrixs: component
+        .get('competencyService')
+        .getCompetencyMatrixDomain(userId, subjectId),
+      competencyMatrixCoordinates: component
+        .get('competencyService')
+        .getCompetencyMatrixCoordinates(subjectId)
+    }).then(({ competencyMatrixs, competencyMatrixCoordinates }) => {
       component.set('isLoading', false);
-      let resultSet = component.parseCompetencyData(competencyMatrixs, competencyMatrixCoordinates);
+      let resultSet = component.parseCompetencyData(
+        competencyMatrixs,
+        competencyMatrixCoordinates
+      );
       component.drawChart(resultSet);
     });
-
   },
 
-  parseCompetencyData: function(competencyMatrixs, competencyMatrixCoordinates) {
+  parseCompetencyData: function(
+    competencyMatrixs,
+    competencyMatrixCoordinates
+  ) {
     let component = this;
     const cellHeight = component.get('cellHeight');
     let taxonomyDomain = Ember.A();
@@ -267,7 +286,9 @@ export default Ember.Component.extend({
       let domainName = domainData.get('domainName');
       let domainSeq = domainData.get('domainSeq');
       let competencyMatrix = competencyMatrixs.findBy('domainCode', domainCode);
-      let competencyMatrixByCompetency = competencyMatrix ? competencyMatrix.get('competencies') : [];
+      let competencyMatrixByCompetency = competencyMatrix
+        ? competencyMatrix.get('competencies')
+        : [];
       if (competencyMatrix && competencyMatrixByCompetency.length > 0) {
         taxonomyDomain.pushObject(domainData);
         let mergeDomainData = Ember.A();
@@ -277,13 +298,13 @@ export default Ember.Component.extend({
           let competencySeq = competency.get('competencySeq');
           let status = competency.get('status');
           let data = Ember.Object.create({
-            'domainName': domainName,
-            'domainCode': domainCode,
-            'domainSeq': domainSeq,
-            'competencyCode': competencyCode,
-            'competencyName': competencyName,
-            'competencySeq': competencySeq,
-            'status': status
+            domainName: domainName,
+            domainCode: domainCode,
+            domainSeq: domainSeq,
+            competencyCode: competencyCode,
+            competencyName: competencyName,
+            competencySeq: competencySeq,
+            status: status
           });
           if (status === 2 || status === 3 || status === 4 || status === 5) {
             mergeDomainData.forEach(data => {
@@ -297,9 +318,13 @@ export default Ember.Component.extend({
         if (masteredCompetencies && masteredCompetencies.length === 0) {
           mergeDomainData.objectAt(0).set('skyline', true);
         } else {
-          let numberOfMasteredCompetency = (masteredCompetencies.length);
-          mergeDomainData.objectAt(numberOfMasteredCompetency).set('skyline', true);
-          mergeDomainData.objectAt(numberOfMasteredCompetency).set('mastered', true);
+          let numberOfMasteredCompetency = masteredCompetencies.length;
+          mergeDomainData
+            .objectAt(numberOfMasteredCompetency)
+            .set('skyline', true);
+          mergeDomainData
+            .objectAt(numberOfMasteredCompetency)
+            .set('mastered', true);
         }
 
         let cellIndex = 1;
@@ -313,7 +338,7 @@ export default Ember.Component.extend({
         currentXaxis = currentXaxis + 1;
       }
     });
-    let height = cellHeight * (Math.max(...numberOfCellsInEachColumn));
+    let height = cellHeight * Math.max(...numberOfCellsInEachColumn);
     component.set('height', height);
     component.set('taxonomyDomains', taxonomyDomain);
     return resultSet;
@@ -329,10 +354,9 @@ export default Ember.Component.extend({
     const colorsBasedOnStatus = component.get('colorsBasedOnStatus');
     let color = colorsBasedOnStatus.get(selectedCompetency.status.toString());
     component.$('.block-container').remove();
-    let container = `<div class="block-container" style="width:${  width  }px">`;
-    container += `<div class="selected-competency"  style="width:${  cellWidth  }px; height:${  cellHeight  }px; background-color:${  color  };top:${  yAxisSeq  }px; left:${  xAxisSeq  }px"></div>`;
+    let container = `<div class="block-container" style="width:${width}px">`;
+    container += `<div class="selected-competency"  style="width:${cellWidth}px; height:${cellHeight}px; background-color:${color};top:${yAxisSeq}px; left:${xAxisSeq}px"></div>`;
     container += '</div>';
     component.$('#competency-matrix-domain-chart').prepend(container);
   }
-
 });
