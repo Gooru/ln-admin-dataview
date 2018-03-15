@@ -32,14 +32,10 @@ export default Ember.Component.extend({
    * @property {Array}
    * List of filters should be visible to user at searchbox
    */
-  visibleFilters: Ember.computed('selectedFilterItems', function() {
+  filtersObserver: Ember.observer('selectedFilterItems', function() {
     let component = this;
-    let appliedFilterList = component.getAppliedFilters();
-    component.set('appliedFilterList', appliedFilterList);
-    const filtersVisible = component.get('visibleFilterCount');
-    return appliedFilterList.filter(function(filter, index) {
-      return index < filtersVisible;
-    });
+    component.refreshVisibleFilterItems();
+    component.setupTooltip();
   }),
 
   /**
@@ -93,6 +89,7 @@ export default Ember.Component.extend({
   // Events
   didInsertElement: function() {
     let component = this;
+    component.refreshVisibleFilterItems();
     if (component.get('appliedFilterList.length')) {
       component.setupTooltip();
     }
@@ -124,7 +121,7 @@ export default Ember.Component.extend({
         localStorage.setItem(`research_${userId}_activities_filters`, JSON.stringify(storedFilters));
         component.set('selectedFilterItems', storedFilters);
         //Trigger action to update the search results
-        component.sendAction('onChangeFilterItems', storedFilters);
+        component.sendAction('onChangeFilterItems', storedFilters, selectedFilter);
       }
     },
 
@@ -158,20 +155,29 @@ export default Ember.Component.extend({
     if (storedFilters) {
       filterTypes.map(filterType => {
         let filterCode = filterType.code;
-        if (filterCode !== 'category' && filterCode !== 'subject') {
-          let categorizedFilterData = storedFilters[`${filterCode}`];
-          if (categorizedFilterData) {
-            categorizedFilterData.map(filterData => {
-              if (filterData) {
-                filterData.type = filterCode;
-                applicableFilterList.push(filterData);
-              }
-            });
-          }
+        let categorizedFilterData = storedFilters[`${filterCode}`];
+        if (categorizedFilterData) {
+          categorizedFilterData.map(filterData => {
+            if (filterData) {
+              filterData.type = filterCode;
+              applicableFilterList.push(filterData);
+            }
+          });
         }
       });
     }
     return applicableFilterList;
+  },
+
+  refreshVisibleFilterItems() {
+    let component = this;
+    let appliedFilterList = component.getAppliedFilters();
+    component.set('appliedFilterList', appliedFilterList);
+    const filtersVisible = component.get('visibleFilterCount');
+    let visibleFilters = appliedFilterList.filter(function(filter, index) {
+      return index < filtersVisible;
+    });
+    component.set('visibleFilters', visibleFilters);
   },
 
   /**
@@ -179,12 +185,11 @@ export default Ember.Component.extend({
    * Function to show popover content box while clicking on the more button
    */
   setupTooltip: function() {
-    var $anchor = this.$('button.non-visible-tags');
+    let component = this;
+    var $anchor = component.$('button.non-visible-tags');
 
     if ($anchor.length) {
-      let component = this;
       let placement = 'bottom';
-
       $anchor.addClass('clickable');
       $anchor.attr('data-html', 'true');
       $anchor.popover({

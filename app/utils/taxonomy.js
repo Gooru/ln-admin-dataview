@@ -146,7 +146,7 @@ export function getNodeInfo(node) {
       parent: `${node.parent.data.name  } > ${  node.data.name}`,
       searchValue: node.data.name,
       filters: {
-        'flt.subjectName': node.data.name
+        'flt.subject': node.data.id
       }
     };
   case 3:
@@ -156,7 +156,7 @@ export function getNodeInfo(node) {
       parent: `${node.parent.parent.data.name  } > ${  node.parent.data.name}`,
       searchValue: node.data.name,
       filters: {
-        'flt.subjectName': node.parent.data.name,
+        'flt.subject': node.parent.data.id,
         'flt.courseName': node.data.name
       }
     };
@@ -167,7 +167,7 @@ export function getNodeInfo(node) {
       parent: `${node.parent.parent.parent.data.name} > ${node.parent.parent.data.name} > ${node.parent.data.name}`,
       searchValue: node.data.name,
       filters: {
-        'flt.subjectName': node.parent.parent.data.name,
+        'flt.subject': node.parent.parent.data.id,
         'flt.courseName': node.parent.data.name,
         'flt.domainName': node.data.name
       }
@@ -180,7 +180,7 @@ export function getNodeInfo(node) {
       title: node.data.title,
       searchValue: node.data.code,
       filters: {
-        'flt.subjectName': node.parent.parent.parent.data.name,
+        'flt.subject': node.parent.parent.parent.data.id,
         'flt.courseName': node.parent.parent.data.name,
         'flt.domainName': node.parent.data.name,
         'flt.standardDisplay': node.data.code
@@ -194,7 +194,7 @@ export function getNodeInfo(node) {
       title: node.data.title,
       searchValue: node.data.code,
       filters: {
-        'flt.subjectName': node.parent.parent.parent.parent.data.name,
+        'flt.subject': node.parent.parent.parent.parent.data.id,
         'flt.courseName': node.parent.parent.parent.data.name,
         'flt.domainName': node.parent.parent.data.name,
         'flt.standardDisplay': node.data.code

@@ -53,6 +53,14 @@ export default Ember.Component.extend({
     component.getSearchContentCount();
   }),
 
+  /**
+  * Observer to watch user event on filter changes
+  */
+  refreshItemsObserver: Ember.observer('onRefreshItems', function() {
+    let component = this;
+    component.getSearchContentCount();
+  }),
+
   // -------------------------------------------------------------------------
   // Properties
 
@@ -253,8 +261,8 @@ export default Ember.Component.extend({
       formattedFilters['flt.21CenturySkills'] = controller.getConcatenatedFilterString(categorizedFilterData, delimiter);
       break;
     case 'licenses':
-      delimiter = ',';
-      formattedFilters['flt.licenseCode'] = controller.getConcatenatedFilterString(categorizedFilterData, delimiter, 'id');
+      delimiter = '~~';
+      formattedFilters['flt.licenseName'] = controller.getConcatenatedFilterString(categorizedFilterData, delimiter);
       break;
     case 'dok':
       formattedFilters['flt.depthOfKnowledge'] = controller.getConcatenatedFilterString(categorizedFilterData);

@@ -14,7 +14,7 @@
   <div class="body {{if isExpanded 'expanded' 'collapsed'}}">
     {{#each filterList as |filterInfo|}}
       <div class="filter-name">
-        <div class="{{filterInfo.code}}">{{input class="check-filter" checked=filterInfo.checked type="checkbox" change=(action 'onClickCheckbox' filterInfo filterType.code)}}<span class="checkmark"></span></div>{{filterInfo.label}}
+        <div class="{{string-replace (if filterInfo.id filterInfo.id filterInfo.code)  '\.' '-' 'g'}}">{{input class="check-filter" checked=filterInfo.checked type="checkbox" change=(action 'onClickCheckbox' filterInfo filterType.code)}}<span class="checkmark"></span></div>{{filterInfo.label}}
       </div>
     {{/each}}
   </div>

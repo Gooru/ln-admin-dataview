@@ -324,7 +324,7 @@ export default Ember.Component.extend(ModalMixin, {
                 });
                 storedFilters['21-century-skills'] = filterList;
                 localStorage.setItem(`research_${userId}_activities_filters`, JSON.stringify(storedFilters));
-                component.sendAction('onSelectCenturySkills', storedFilters);
+                component.sendAction('onSelectCenturySkills', storedFilters, selectedCenturySkills);
                 component.set('filterList', filterList);
 
               }
@@ -355,7 +355,8 @@ export default Ember.Component.extend(ModalMixin, {
         hash.licenseList.map(license => {
           let licenseInfo = {
             label: license.label,
-            code: license.id,
+            code: license.code,
+            id: license.id,
             value: license.sequence_id
           };
           if (selectedFilterItems.licenses !== undefined && selectedFilterItems.licenses.length > 0) {

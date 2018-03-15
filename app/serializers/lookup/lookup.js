@@ -31,7 +31,8 @@ export default Ember.Object.extend({
         let licenseData = {
           label: license.label,
           sequence_id: license.sequence_id,
-          id: license.id
+          id: license.id,
+          code: license.info ? license.info.license.code || '' : ''
         };
         normalizedLicenses.push(licenseData);
       });

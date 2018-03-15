@@ -23,6 +23,36 @@ export default Ember.Controller.extend({
 
   session: Ember.inject.service('session'),
 
+  /**
+   * Inject activity/collections controller
+   */
+  collectionsController: Ember.inject.controller('activity/collections'),
+
+  /**
+   * Inject activity/assessments controller
+   */
+  assessmentsController: Ember.inject.controller('activity/assessments'),
+
+  /**
+   * Inject activity/resources controller
+   */
+  resourcesController: Ember.inject.controller('activity/resources'),
+
+  /**
+   * Inject activity/questions controller
+   */
+  questionsController: Ember.inject.controller('activity/questions'),
+
+  /**
+   * Inject activity/summary controller
+   */
+  summaryController: Ember.inject.controller('activity/summary'),
+
+  /**
+   * Inject activity/courses controller
+   */
+  coursesController: Ember.inject.controller('activity/courses'),
+
 
   // -------------------------------------------------------------------------
   // Actions
@@ -52,11 +82,22 @@ export default Ember.Controller.extend({
       }
     },
 
-    onChangeFilterItems: function(filterItems) {
+    onChangeFilterItems: function(filterItems, updatedFilter) {
       let controller = this;
+      if (updatedFilter) {
+        let filterType = updatedFilter.type;
+        let filterId = updatedFilter.id;
+        filterId = typeof filterId === 'string' ? filterId.replace(/\./g, '-') : filterId;
+        let isChecked = Ember.$(`.${filterType} .body .filter-name .${filterId} input`).prop('checked');
+        Ember.$(`.${filterType} .body .filter-name .${filterId} input`).prop('checked', !isChecked);
+      }
       controller.set('selectedFilterItemsBuffer', filterItems);
-      //TODO temporary fix, need to refresh only selected route instead of reloading url
-      location.reload();
+      controller.set('selectedFilterItems', filterItems);
+      let routeName = Utils.getRoutePathLastOccurrence();
+      let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
+      if (activeMenuIndex > -1) {
+        controller.get(`${routeName}Controller`).refreshItems();
+      }
     }
   },
 
@@ -146,8 +187,8 @@ export default Ember.Controller.extend({
       formattedFilters['flt.21CenturySkills'] = controller.getConcatenatedFilterString(categorizedFilterData, delimiter);
       break;
     case 'licenses':
-      delimiter = ',';
-      formattedFilters['flt.licenseCode'] = controller.getConcatenatedFilterString(categorizedFilterData, delimiter, 'id');
+      delimiter = '~~';
+      formattedFilters['flt.licenseName'] = controller.getConcatenatedFilterString(categorizedFilterData, delimiter);
       break;
     case 'dok':
       formattedFilters['flt.depthOfKnowledge'] = controller.getConcatenatedFilterString(categorizedFilterData);
