@@ -4,9 +4,10 @@
   overflow-y: auto;
   clear: both;
   &.pull-out-active {
-    direction: ltr;
+    direction: rtl;
   }
   .app-pull-out {
+    direction: ltr;
     top: 63px;
     height: calc(100vh - 63px);
   }
