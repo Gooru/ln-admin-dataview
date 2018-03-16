@@ -92,6 +92,7 @@ export default Ember.Controller.extend({
      */
     onChooseDomain: function(selectedDomain) {
       let controller = this;
+      controller.set('selectedDomainCompetency', selectedDomain);
       let domainId = `${selectedDomain.courseCode}-${
         selectedDomain.domainCode
       }`;
@@ -117,16 +118,46 @@ export default Ember.Controller.extend({
         });
     },
 
-    domainCompetencyPullOut: function(competency) {
+    domainCompetencyPullOut: function(competency, status) {
       let controller = this;
-      let nodeData = {
+      let selectedDomain = controller.get('selectedDomainCompetency');
+      let domainId = `${selectedDomain.courseCode}-${
+        selectedDomain.domainCode
+      }`;
+
+      let subjectName = controller.get('selectedSubject.title');
+      let subjectCode = controller.get('selectedSubject.code');
+      let selectedCompetencyData = Ember.Object.create({
+        id: domainId,
+        name: selectedDomain.domainName,
+        code: domainId,
+        type: 'standard',
+        parent:
+          status === 'microCompetency'
+            ? `${subjectName}  > ${selectedDomain.courseName}  > ${
+              selectedDomain.domainName
+            } > ${competency.title}`
+            : `${subjectName}  > ${selectedDomain.courseName}  > ${
+              selectedDomain.domainName
+            }`,
+        title: competency.title,
+        filters: {
+          'flt.subject': subjectCode,
+          'flt.courseName': selectedDomain.courseName,
+          'flt.domainName': selectedDomain.domainName,
+          'flt.standardDisplay': competency.code
+        }
+      });
+      controller.set('selectedDomainData', selectedCompetencyData);
+
+      let nodeInfo = {
         code: competency.code,
         id: competency.id
       };
       controller.set('showPullOut', true);
       controller.set('isLoading', true);
       controller
-        .getSearchLearningMapsContent(nodeData)
+        .getSearchLearningMapsContent(nodeInfo)
         .then(function(learningData) {
           let culcaqrCount = Ember.A();
           let contentCountData = Ember.A();
