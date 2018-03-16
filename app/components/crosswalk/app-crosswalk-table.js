@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -15,15 +14,15 @@ export default Ember.Component.extend({
     let numberOfColumns = component.get('tableData.header').length;
     component.$('.thead .td').css('width', `calc(100% / ${numberOfColumns})`);
     component.$('tbody tr td').css('width', `calc(100% / ${numberOfColumns})`);
-    $('.table-structure').animate({scrollTop: 0});
+    $('.table-structure').animate({ scrollTop: 0 });
   },
 
   // -------------------------------------------------------------------------
   // Actions
   actions: {
     /**
-    * Move the scroll to top when user click up arrow
-    */
+     * Move the scroll to top when user click up arrow
+     */
     scrollTop: function() {
       let component = this;
       $('.crosswalk-body').animate({
@@ -39,7 +38,7 @@ export default Ember.Component.extend({
       let component = this;
       let tableData = component.get('tableData');
       let crosswakCodeByFrameworkId = [];
-      tableData.body.map( crosswalkItem => {
+      tableData.body.map(crosswalkItem => {
         let crosswalkCodeItem = crosswalkItem[headerPosition];
         if (crosswalkCodeItem !== '') {
           crosswakCodeByFrameworkId.push(crosswalkCodeItem);
@@ -57,6 +56,18 @@ export default Ember.Component.extend({
       let component = this;
       component.set('crosswakCodeByFrameworkId', null);
       component.set('isShowTableSearch', false);
+    },
+
+    /**
+     * Action triggered when the user toggle micro-competency visibility
+     */
+    onToggleMicroCompetency() {
+      let component = this;
+      component.$('.micro-competency').toggleClass('hide-row');
+      component.set(
+        'isShowMicroCompetency',
+        !this.get('isShowMicroCompetency')
+      );
     }
   },
 
@@ -76,6 +87,10 @@ export default Ember.Component.extend({
   /**
    * List of crosswalk codes by framework id
    */
-  crosswakCodeByFrameworkId: null
+  crosswakCodeByFrameworkId: null,
 
+  /**
+   * Show/Hide micro-competency level
+   */
+  isShowMicroCompetency: false
 });
