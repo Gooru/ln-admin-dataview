@@ -202,8 +202,8 @@ export default Ember.Component.extend({
       }
     },
 
-    domainCompetencyPullOut: function(competency) {
-      this.sendAction('domainCompetencyPullOut', competency);
+    domainCompetencyPullOut: function(competency, status) {
+      this.sendAction('domainCompetencyPullOut', competency, status);
     }
   },
 

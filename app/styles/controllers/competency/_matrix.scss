@@ -4,7 +4,7 @@
   overflow-y: auto;
   clear: both;
   &.pull-out-active {
-    direction: rtl;
+    direction: ltr;
   }
   .app-pull-out {
     top: 63px;

@@ -9,21 +9,22 @@
     <ul>
       {{#each subjects as |subject index|}}
         <li {{action 'onChooseSubject' index}}>
-          <div  class="subject-{{index}} subject-name {{if (eq index 0) 'active'}}">{{subject.title}}</div>
+          <div class="subject-{{index}} subject-name {{if (eq index 0) 'active'}}">{{subject.title}}</div>
           <div class="subject-{{index}} subject-round-icon {{if (eq index 0) 'active'}}"></div>
         </li>
       {{/each}}
     </ul>
   </div>
 
-  {{#app-pull-out showPullOut=showPullOut title=selectedDomainData.code description=selectedDomainData.name  showMore=showMore as |section| }}
+  {{#app-pull-out showPullOut=showPullOut title=selectedDomainData.code description=selectedDomainData.name showMore=showMore as |section| }}
     {{#if section.isLessContent}}
       {{gcm-pull-out-body
        contentCountData=contentCount
        isLoading=isLoading
+       signatureContents=signatureContents
        nodeData=selectedDomainData
        breadcrumb=selectedDomainData.parent
-      }}
+      }} {{else if section.isMoreContent}} {{gcm-pull-out-more-content nodeData=selectedDomainData prerequisites=prerequisites}}
     {{/if}}
   {{/app-pull-out}}
 
