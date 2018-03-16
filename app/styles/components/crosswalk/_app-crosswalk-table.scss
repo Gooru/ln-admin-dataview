@@ -13,8 +13,75 @@
     color: $white;
     text-transform: uppercase;
     line-height: 59px;
+    display: flex;
     span {
       cursor: pointer;
+    }
+    .subject-info {
+      width: 70%;
+    }
+    .toggle-competency {
+      font-size: 13px;
+      font-weight: bold;
+      display: flex;
+      margin-left: 25px;
+      .switch {
+        position: relative;
+        width: 40px;
+        height: 15px;
+        margin-top: 22px;
+        margin-right: 10px;
+        input {
+          display: none;
+        }
+      }
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: $light-600;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 22px;
+        width: 22px;
+        left: -5px;
+        bottom: -3px;
+        background-color: $navy-blue;
+        -webkit-transition: 0.4s;
+        transition: 0.4s;
+      }
+
+      input:checked + .slider {
+        background-color: $cyan-blue;
+      }
+
+      input:focus + .slider {
+        box-shadow: 0 0 1px #2196f3;
+      }
+
+      input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+        background-color: $navy-blue;
+      }
+
+      /* Rounded sliders */
+      .slider.round {
+        border-radius: 34px;
+      }
+
+      .slider.round:before {
+        border-radius: 50%;
+      }
     }
   }
   height: 100vh;
@@ -30,12 +97,6 @@
     border-bottom: 2px solid #979797;
     .td {
       padding-left: 15px;
-
-      &:first-child {
-        i {
-          display: none;
-        }
-      }
       i {
         float: right;
         line-height: 2.2;
@@ -56,6 +117,11 @@
       }
       tbody {
         tr {
+          &.micro-competency {
+            td {
+              padding-left: 30px;
+            }
+          }
           td {
             height: 52px;
             border-left: solid 1px $light-200;
@@ -77,6 +143,9 @@
           }
           td:last-child {
             border-right: none;
+          }
+          &.hide-row {
+            display: none;
           }
         }
       }

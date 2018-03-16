@@ -1,7 +1,8 @@
 export default {
   common: {
     support: 'Support',
-    unexpectedError: 'An unexpected error has occurred and has been reported. We\'re sorry for the inconvenience!',
+    unexpectedError:
+      'An unexpected error has occurred and has been reported. We\'re sorry for the inconvenience!',
     'question-type': {
       SA: 'Single Answer',
       MC: 'Multiple Choice',
@@ -16,45 +17,45 @@ export default {
       HT_RO: 'Drag and Drop Order',
       HT_HL: 'Highlight Text'
     },
-    'questions': 'Questions',
+    questions: 'Questions',
     currentlyStudying: 'currently Studying',
     'signature-assessment': 'Signature Assessments',
     'signature-collection': 'Signature Collections',
     mostPopularProviders: 'most popular providers',
     globalStatistics: 'global Statistics',
     usageStatistics: 'usage Statistics',
-    'learners': 'learners',
+    learners: 'learners',
     'active-users': 'Active Users',
-    'explore': 'Explore',
-    'active': 'Active',
-    'users': 'Users',
-    'username': 'Username',
+    explore: 'Explore',
+    active: 'Active',
+    users: 'Users',
+    username: 'Username',
     categoryOptions: {
-      'k12': 'K-12',
-      'k_12': 'K-12',
+      k12: 'K-12',
+      k_12: 'K-12',
       'higher-ed': 'Higher Education',
       'professional-dev': 'Professional Development'
     },
     'in-progress': 'in progress',
-    'mastered': 'mastered',
+    mastered: 'mastered',
     'add-century-skills': 'Add 21st Century Skills',
     cancel: 'Cancel',
-    'select': 'Select',
+    select: 'Select',
     'created-by': 'Created by',
     'remixed-by': 'Remixed by',
-    'subject': 'subject',
-    'course': 'course',
-    'domain': 'domain',
-    'relevance': 'Relevance',
-    'engagement': 'Engagement',
-    'efficacy': 'Efficacy',
+    subject: 'subject',
+    course: 'course',
+    domain: 'domain',
+    relevance: 'Relevance',
+    engagement: 'Engagement',
+    efficacy: 'Efficacy',
     'visibility-tooltip': 'Not visible to others',
     'visibility-available': 'Visible to others',
     'no-results': 'No results found',
     'no-results-message':
       'Check your spelling. We all make mistakes!<br/>Go broader and remove some filters.<br/> Or try searching for a similar word instead.',
     'show-more-results': 'Show More Results',
-    'prerequisites': 'Prerequisites'
+    prerequisites: 'Prerequisites'
   },
   logout: {
     name: 'Logout'
@@ -73,18 +74,17 @@ export default {
     'pull-out': {
       section: {
         'most-relevant': 'Most Relevant',
-        'prerequisites': 'Prerequisites',
-        'assessments': 'Assessments',
-        'collections': 'Collections',
-        'questions': 'Questions',
-        'resources': 'Resources',
-        'learnerSummary': 'Learner Summary',
-        'studentsMastery': 'Student Mastery',
-        'performanceDistribution': 'Performance Distibution'
-
+        prerequisites: 'Prerequisites',
+        assessments: 'Assessments',
+        collections: 'Collections',
+        questions: 'Questions',
+        resources: 'Resources',
+        learnerSummary: 'Learner Summary',
+        studentsMastery: 'Student Mastery',
+        performanceDistribution: 'Performance Distibution'
       }
     },
-    'content': {
+    content: {
       'created-by': 'Created by'
     },
     switch_to_crosswalk: 'Switch to Crosswalk'
@@ -97,6 +97,7 @@ export default {
       subject: 'Subject',
       framework: 'Framework'
     },
+    'micro-competency': 'MICRO-COMPETENCIES',
     'generate-table': 'Generate Table',
     framework: {
       'warning-text': 'Select up to 5 Frameworks'
@@ -108,16 +109,16 @@ export default {
     },
     'pull-out': {
       section: {
-        'assessments': 'Assessments',
-        'collections': 'Collections',
-        'questions': 'Questions',
-        'resources': 'Resources',
-        'courses': 'Courses'
+        assessments: 'Assessments',
+        collections: 'Collections',
+        questions: 'Questions',
+        resources: 'Resources',
+        courses: 'Courses'
       }
     }
   },
   learner: {
-    'yesterday': 'Yesterday',
+    yesterday: 'Yesterday',
     'last-week': 'Last Week',
     'last-month': 'Last Month',
     'last-3-months': 'Last 3 Months',
@@ -125,27 +126,27 @@ export default {
     'last-year': 'Last Year',
     'from-the-beginning-of-time': 'From the Beginning of Time',
     'courses-independent-journeys': 'courses & independent journeys',
-    'competencies': 'competencies',
+    competencies: 'competencies',
     'time-spent-activities': 'time spent :   activities',
     'time-spent-courses': 'time spent : courses',
     'competencies-studied': 'competencies studied',
     'competeny-report': 'Competeny Report',
-    'independentJourneys': 'Independent Journeys',
-    'classJourneys': 'Courses',
-    'grade': 'Grade',
-    'authority': 'Authority',
-    'reputation': 'Reputation',
-    'citizenship': 'Citizenship',
-    'hide': 'hide',
-    'details': 'details',
+    independentJourneys: 'Independent Journeys',
+    classJourneys: 'Courses',
+    grade: 'Grade',
+    authority: 'Authority',
+    reputation: 'Reputation',
+    citizenship: 'Citizenship',
+    hide: 'hide',
+    details: 'details',
     'grade-level': 'Grade Level',
-    'completed': 'Mastered',
-    'in_progress': 'In Progress',
+    completed: 'Mastered',
+    in_progress: 'In Progress',
     'user-preferences': {
-      'preferences': 'Preferences',
+      preferences: 'Preferences',
       'content-types': 'Content Types',
-      'providers': 'Providers',
-      'curators': 'Curators'
+      providers: 'Providers',
+      curators: 'Curators'
     },
     'course-report': 'Course Report',
     'resume-current-activity': 'Resume Current Activity',
@@ -157,35 +158,35 @@ export default {
       'course-map': 'Course Map',
       'my-report': 'My Report',
       'class-code': 'Class Code',
-      'report': 'Report'
+      report: 'Report'
     },
     activities: {
       'time-spent-activities': 'Time Spent on All Activities'
     },
     journeys: {
-      'assessments': 'Assessments'
+      assessments: 'Assessments'
     }
   },
   activities: {
     'learning-activities-available': 'Learning Activities',
     'resources-available': 'Resources',
-    'filters': 'Filters',
+    filters: 'Filters',
     'filter-types': {
-      'category': 'Category',
-      'subject': 'Subject',
-      'course': 'Course',
+      category: 'Category',
+      subject: 'Subject',
+      course: 'Course',
       '21-century-skills': '21st Century Skills',
-      'license': 'License',
-      'dok': 'Depth of Knowledge',
-      'publisher': 'Publisher',
-      'audience': 'Audience'
+      license: 'License',
+      dok: 'Depth of Knowledge',
+      publisher: 'Publisher',
+      audience: 'Audience'
     },
     'catalog-distribution': 'Catalog Distribution',
     'distribution-by-subject': 'distribution by subject',
     'no-filters': 'No Filters Applied',
     'pull-out': {
       'taxonomy-title': 'Subject, Course and Domain',
-      'content': 'Content'
+      content: 'Content'
     }
   },
   'century-skills': {
@@ -203,5 +204,4 @@ export default {
       }
     }
   }
-
 };

@@ -1,7 +1,17 @@
 <div class="table-responsive">
   <div class="crosswalk-subject">
-    {{t (concat 'common.categoryOptions.' categoryId)}} > {{subjectTitle}}
-    <span {{action "scrollTop"}}><i class="material-icons">arrow_upward</i></span>
+    <div class="toggle-competency">
+      <label class="switch">
+        {{input type="checkbox" checked=isShowMicroCompetency click=(action 'onToggleMicroCompetency')}}
+        <span class="slider round"></span>
+      </label>
+      <span>{{t 'crosswalk.micro-competency'}}</span>
+    </div>
+    <div class="subject-info">
+      {{t (concat 'common.categoryOptions.' categoryId)}} > {{subjectTitle}}
+      <span {{action "scrollTop"}}><i class="material-icons">arrow_upward</i></span>
+    </div>
+
   </div>
 
   {{#if isShowTableSearch}}
@@ -20,7 +30,7 @@
     <table class="table crosswalk-data" id="crosswalk-data">
       <tbody>
         {{#each tableData.body as |tableRow|}}
-          <tr>
+          <tr class="{{tableRow.competencyType}}">
             {{#each tableRow as |tableBody|}}
               <td>
                 <div class="id">{{tableBody.id}}</div>
