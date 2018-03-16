@@ -23,11 +23,6 @@
     }
   }
 
-  .taxonomy-category {
-    clear: both;
-    padding-top: 10px;
-  }
-
   .clear {
     clear: both;
   }
@@ -110,13 +105,13 @@
       transform-style: preserve-3d;
 
       .competency {
-        stroke: #FBFBFB;
+        stroke: #fbfbfb;
         stroke-width: 1;
         shape-rendering: crispedges;
       }
 
       line {
-        stroke: #FFFFFF;
+        stroke: #ffffff;
         stroke-width: 3;
         opacity: 0.8;
       }
