@@ -1,12 +1,8 @@
 import Ember from 'ember';
 import Utils from 'admin-dataview/utils/taxonomy';
-import {
-  CONTENT_TYPES,
-  TAXONOMY_LEVELS
-} from 'admin-dataview/config/config';
+import { CONTENT_TYPES, TAXONOMY_LEVELS } from 'admin-dataview/config/config';
 
 export default Ember.Controller.extend({
-
   //------------------------------------------------------------------------
   //Dependencies
 
@@ -29,7 +25,6 @@ export default Ember.Controller.extend({
 
   //-------------------------------------------------------------------------
   //Properties
-
 
   showPullOut: false,
 
@@ -63,21 +58,43 @@ export default Ember.Controller.extend({
    */
   reloadCount: 0,
 
+  /**
+   * List of resource contents
+   */
+  resourceContent: null,
+
+  /**
+   * List of collection contents
+   */
+  collectionContent: null,
+
+  /*
+   * List of assessment contents
+   */
+  assessmentContent: null,
+
+  /*
+   * List of question contents
+   */
+  questionContent: null,
 
   defaultTaxonomyTreeViewData: Ember.computed(function() {
     let data = Ember.Object.create({
-      'name': 'Gooru',
-      'type': 'root',
-      'id': 'GDT',
-      'children': Ember.A()
+      name: 'Gooru',
+      type: 'root',
+      id: 'GDT',
+      children: Ember.A()
     });
     return data;
   }),
 
-
   onChange: Ember.observer('categories', function() {
     let categories = this.get('categories');
-    this.parseTaxonomyData(categories, this.get('defaultTaxonomyTreeViewData'), true);
+    this.parseTaxonomyData(
+      categories,
+      this.get('defaultTaxonomyTreeViewData'),
+      true
+    );
     let categoryNodes = this.get('taxonomyTreeViewData').get('children');
     categories.forEach(category => {
       let targetCategoryNode = categoryNodes.findBy('id', category.get('id'));
@@ -189,42 +206,110 @@ export default Ember.Controller.extend({
         filters: nodeInfo.filters,
         id: nodeInfo.id
       };
-      controller.set('isCompetencyNode', nodeInfo.type === TAXONOMY_LEVELS.STANDARD);
+      controller.set(
+        'isCompetencyNode',
+        nodeInfo.type === TAXONOMY_LEVELS.STANDARD
+      );
       controller.set('nodeData', selectedNodeData);
       controller.set('isLoading', true);
       controller.set('showPullOut', true);
       if (nodeDepth < 5) {
-        controller.getSearchContentCount(selectedNodeData).then(function(contentCount) {
-          controller.set('contentCount', contentCount);
-          controller.set('isLoading', false);
-        });
+        controller
+          .getSearchContentCount(selectedNodeData)
+          .then(function(contentCount) {
+            controller.set('contentCount', contentCount);
+            controller.set('isLoading', false);
+          });
       } else {
-        controller.getSearchLearningMapsContent(selectedNodeData).then(function(learning) {
-          let culcaqrCount = Ember.A();
-          let contentCountData = Ember.A();
-          culcaqrCount = learning.contents;
-          let courseCount = culcaqrCount.course ? culcaqrCount.course.totalHitCount : 0;
-          let unitCount = culcaqrCount.unit ? culcaqrCount.unit.totalHitCount : 0;
-          let lessonCount = culcaqrCount.lesson ? culcaqrCount.lesson.totalHitCount : 0;
-          let collectionCount = culcaqrCount.collection ? culcaqrCount.collection.totalHitCount : 0;
-          let assessmentCount = culcaqrCount.assessment ? culcaqrCount.assessment.totalHitCount : 0;
-          let resourceCount = culcaqrCount.resource ? culcaqrCount.resource.totalHitCount : 0;
-          let questionCount = culcaqrCount.question ? culcaqrCount.question.totalHitCount : 0;
-          let rubricCount = culcaqrCount.rubric ? culcaqrCount.rubric.totalHitCount : 0;
+        controller
+          .getSearchLearningMapsContent(selectedNodeData)
+          .then(function(learning) {
+            let culcaqrCount = Ember.A();
+            let contentCountData = Ember.A();
+            culcaqrCount = learning.contents;
+            let courseCount = culcaqrCount.course
+              ? culcaqrCount.course.totalHitCount
+              : 0;
+            let unitCount = culcaqrCount.unit
+              ? culcaqrCount.unit.totalHitCount
+              : 0;
+            let lessonCount = culcaqrCount.lesson
+              ? culcaqrCount.lesson.totalHitCount
+              : 0;
+            let collectionCount = culcaqrCount.collection
+              ? culcaqrCount.collection.totalHitCount
+              : 0;
+            let assessmentCount = culcaqrCount.assessment
+              ? culcaqrCount.assessment.totalHitCount
+              : 0;
+            let resourceCount = culcaqrCount.resource
+              ? culcaqrCount.resource.totalHitCount
+              : 0;
+            let questionCount = culcaqrCount.question
+              ? culcaqrCount.question.totalHitCount
+              : 0;
+            let rubricCount = culcaqrCount.rubric
+              ? culcaqrCount.rubric.totalHitCount
+              : 0;
 
-          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COURSE, courseCount));
-          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.UNIT, unitCount));
-          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.LESSON, lessonCount));
-          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.ASSESSMENT, assessmentCount));
-          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COLLECTION, collectionCount));
-          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RESOURCE, resourceCount));
-          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.QUESTION, questionCount));
-          contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RUBRIC, rubricCount));
-          controller.set('contentCount', contentCountData);
-          controller.set('isLoading', false);
-          controller.set('signatureContents', learning.signatureContents);
-          controller.set('prerequisites', learning.prerequisites);
-        });
+            contentCountData.push(
+              Utils.getStructuredContentData(CONTENT_TYPES.COURSE, courseCount)
+            );
+            contentCountData.push(
+              Utils.getStructuredContentData(CONTENT_TYPES.UNIT, unitCount)
+            );
+            contentCountData.push(
+              Utils.getStructuredContentData(CONTENT_TYPES.LESSON, lessonCount)
+            );
+            contentCountData.push(
+              Utils.getStructuredContentData(
+                CONTENT_TYPES.ASSESSMENT,
+                assessmentCount
+              )
+            );
+            contentCountData.push(
+              Utils.getStructuredContentData(
+                CONTENT_TYPES.COLLECTION,
+                collectionCount
+              )
+            );
+            contentCountData.push(
+              Utils.getStructuredContentData(
+                CONTENT_TYPES.RESOURCE,
+                resourceCount
+              )
+            );
+            contentCountData.push(
+              Utils.getStructuredContentData(
+                CONTENT_TYPES.QUESTION,
+                questionCount
+              )
+            );
+            contentCountData.push(
+              Utils.getStructuredContentData(CONTENT_TYPES.RUBRIC, rubricCount)
+            );
+            controller.set('contentCount', contentCountData);
+            controller.set('isLoading', false);
+            controller.set('signatureContents', learning.signatureContents);
+            controller.set('prerequisites', learning.prerequisites);
+
+            controller.set(
+              'resourceContent',
+              culcaqrCount.resource.searchResults.splice(0, 3)
+            );
+            controller.set(
+              'collectionContent',
+              culcaqrCount.collection.searchResults.splice(0, 3)
+            );
+            controller.set(
+              'assessmentContent',
+              culcaqrCount.assessment.searchResults.splice(0, 3)
+            );
+            controller.set(
+              'questionContent',
+              culcaqrCount.question.searchResults.splice(0, 3)
+            );
+          });
       }
     },
     /**
@@ -272,11 +357,15 @@ export default Ember.Controller.extend({
     let subjects = category.get('subjects');
     let promises = Ember.A();
     subjects.forEach(subject => {
-      promises.pushObject(controller.get('taxonomyService').getCourses(subject));
+      promises.pushObject(
+        controller.get('taxonomyService').getCourses(subject)
+      );
     });
 
     return Ember.RSVP.all(promises).then(function() {
-      let categoryNodes = controller.get('taxonomyTreeViewData').get('children');
+      let categoryNodes = controller
+        .get('taxonomyTreeViewData')
+        .get('children');
       let categoryNode = categoryNodes.findBy('id', id);
       let childNodes = categoryNode.get('children');
       subjects.forEach(subject => {
@@ -297,11 +386,17 @@ export default Ember.Controller.extend({
     let courses = subject.get('courses');
     let promises = Ember.A();
     courses.forEach(course => {
-      promises.pushObject(controller.get('taxonomyService').getCourseDomains(subject, course.get('id')));
+      promises.pushObject(
+        controller
+          .get('taxonomyService')
+          .getCourseDomains(subject, course.get('id'))
+      );
     });
 
     return Ember.RSVP.all(promises).then(function() {
-      let categoryNodes = controller.get('taxonomyTreeViewData').get('children');
+      let categoryNodes = controller
+        .get('taxonomyTreeViewData')
+        .get('children');
       let categoryNode = categoryNodes.findBy('id', categoryId);
       let subjectNodes = categoryNode.get('children');
       let subjectNode = subjectNodes.findBy('id', id);
@@ -327,10 +422,16 @@ export default Ember.Controller.extend({
     let domains = course.get('children');
     let promises = Ember.A();
     domains.forEach(domain => {
-      promises.pushObject(controller.get('taxonomyService').getDomainCodes(subject, courseId, domain.get('id')));
+      promises.pushObject(
+        controller
+          .get('taxonomyService')
+          .getDomainCodes(subject, courseId, domain.get('id'))
+      );
     });
     return Ember.RSVP.all(promises).then(function() {
-      let categoryNodes = controller.get('taxonomyTreeViewData').get('children');
+      let categoryNodes = controller
+        .get('taxonomyTreeViewData')
+        .get('children');
       let categoryNode = categoryNodes.findBy('id', categoryId);
       let subjectNodes = categoryNode.get('children');
       let subjectNode = subjectNodes.findBy('id', subjectId);
@@ -360,7 +461,9 @@ export default Ember.Controller.extend({
           if (microStandardNodes && microStandardNodes.length > 0) {
             let standardChildNode = Ember.A();
             microStandardNodes.forEach(microStandard => {
-              standardChildNode.pushObject(controller.createNode(microStandard, false));
+              standardChildNode.pushObject(
+                controller.createNode(microStandard, false)
+              );
             });
             standardNode.set('childData', standardChildNode);
             if (standardChildNode.length > 0) {
@@ -383,11 +486,11 @@ export default Ember.Controller.extend({
 
   createNode: function(data, isShowDisplayCode = false) {
     let node = Ember.Object.create({
-      'id': data.id,
-      'code': data.code,
-      'name': isShowDisplayCode ? data.code : data.title,
-      'title': data.title,
-      'children': null
+      id: data.id,
+      code: data.code,
+      name: isShowDisplayCode ? data.code : data.title,
+      title: data.title,
+      children: null
     });
     return node;
   },
@@ -407,14 +510,30 @@ export default Ember.Controller.extend({
     let length = 3;
     const contentCountData = [];
     filters['flt.subjectClassification'] = selectedCategory;
-    const resourceCountPromise = Ember.RSVP.resolve(this.get('searchService').searchResources(query, filters, start, length));
-    const questionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchQuestions(query, filters, start, length));
-    const courseCountPromise = Ember.RSVP.resolve(this.get('searchService').searchCourses(query, filters, start, length));
-    const collectionCountPromise = Ember.RSVP.resolve(this.get('searchService').searchCollections(query, filters, start, length));
-    const assessmentCountPromise = Ember.RSVP.resolve(this.get('searchService').searchAssessments(query, filters, start, length));
-    const rubricCountPromise = Ember.RSVP.resolve(this.get('searchService').searchRubrics(query, filters, start, length));
-    const unitCountPromise = Ember.RSVP.resolve(this.get('searchService').searchUnits(query, filters, start, length));
-    const lessonsCountPromise = Ember.RSVP.resolve(this.get('searchService').searchLessons(query, filters, start, length));
+    const resourceCountPromise = Ember.RSVP.resolve(
+      this.get('searchService').searchResources(query, filters, start, length)
+    );
+    const questionCountPromise = Ember.RSVP.resolve(
+      this.get('searchService').searchQuestions(query, filters, start, length)
+    );
+    const courseCountPromise = Ember.RSVP.resolve(
+      this.get('searchService').searchCourses(query, filters, start, length)
+    );
+    const collectionCountPromise = Ember.RSVP.resolve(
+      this.get('searchService').searchCollections(query, filters, start, length)
+    );
+    const assessmentCountPromise = Ember.RSVP.resolve(
+      this.get('searchService').searchAssessments(query, filters, start, length)
+    );
+    const rubricCountPromise = Ember.RSVP.resolve(
+      this.get('searchService').searchRubrics(query, filters, start, length)
+    );
+    const unitCountPromise = Ember.RSVP.resolve(
+      this.get('searchService').searchUnits(query, filters, start, length)
+    );
+    const lessonsCountPromise = Ember.RSVP.resolve(
+      this.get('searchService').searchLessons(query, filters, start, length)
+    );
     return Ember.RSVP.hash({
       resource: resourceCountPromise,
       question: questionCountPromise,
@@ -425,39 +544,71 @@ export default Ember.Controller.extend({
       unit: unitCountPromise,
       lesson: lessonsCountPromise
     }).then(function(culcaqrCount) {
-      let courseCount = culcaqrCount.course ? culcaqrCount.course.get('hitCount') : 0;
+      let courseCount = culcaqrCount.course
+        ? culcaqrCount.course.get('hitCount')
+        : 0;
       let unitCount = culcaqrCount.unit ? culcaqrCount.unit : 0;
       let lessonCount = culcaqrCount.lesson ? culcaqrCount.lesson : 0;
-      let collectionCount = culcaqrCount.collection ? culcaqrCount.collection.get('hitCount') : 0;
-      let assessmentCount = culcaqrCount.assessment ? culcaqrCount.assessment.get('hitCount') : 0;
-      let resourceCount = culcaqrCount.resource ? culcaqrCount.resource.get('hitCount') : 0;
-      let questionCount = culcaqrCount.question ? culcaqrCount.question.get('hitCount') : 0;
+      let collectionCount = culcaqrCount.collection
+        ? culcaqrCount.collection.get('hitCount')
+        : 0;
+      let assessmentCount = culcaqrCount.assessment
+        ? culcaqrCount.assessment.get('hitCount')
+        : 0;
+      let resourceCount = culcaqrCount.resource
+        ? culcaqrCount.resource.get('hitCount')
+        : 0;
+      let questionCount = culcaqrCount.question
+        ? culcaqrCount.question.get('hitCount')
+        : 0;
       let rubricCount = culcaqrCount.rubric ? culcaqrCount.rubric : 0;
 
-      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COURSE, courseCount));
-      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.UNIT, unitCount));
-      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.LESSON, lessonCount));
-      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.ASSESSMENT, assessmentCount));
-      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.COLLECTION, collectionCount));
-      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RESOURCE, resourceCount));
-      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.QUESTION, questionCount));
-      contentCountData.push(Utils.getStructuredContentData(CONTENT_TYPES.RUBRIC, rubricCount));
+      contentCountData.push(
+        Utils.getStructuredContentData(CONTENT_TYPES.COURSE, courseCount)
+      );
+      contentCountData.push(
+        Utils.getStructuredContentData(CONTENT_TYPES.UNIT, unitCount)
+      );
+      contentCountData.push(
+        Utils.getStructuredContentData(CONTENT_TYPES.LESSON, lessonCount)
+      );
+      contentCountData.push(
+        Utils.getStructuredContentData(
+          CONTENT_TYPES.ASSESSMENT,
+          assessmentCount
+        )
+      );
+      contentCountData.push(
+        Utils.getStructuredContentData(
+          CONTENT_TYPES.COLLECTION,
+          collectionCount
+        )
+      );
+      contentCountData.push(
+        Utils.getStructuredContentData(CONTENT_TYPES.RESOURCE, resourceCount)
+      );
+      contentCountData.push(
+        Utils.getStructuredContentData(CONTENT_TYPES.QUESTION, questionCount)
+      );
+      contentCountData.push(
+        Utils.getStructuredContentData(CONTENT_TYPES.RUBRIC, rubricCount)
+      );
       return contentCountData;
     });
   },
-
 
   /**
    * Get Content count of search results
    * return hashed json of each content type conunt
    */
   getSearchLearningMapsContent: function(selectedNode) {
-    const learningMapsContent = Ember.RSVP.resolve(this.get('searchService').learningMapsContent(selectedNode));
+    const learningMapsContent = Ember.RSVP.resolve(
+      this.get('searchService').learningMapsContent(selectedNode)
+    );
     return Ember.RSVP.hash({
       learningMapsContent: learningMapsContent
     }).then(function(hash) {
       return hash.learningMapsContent;
     });
   }
-
 });

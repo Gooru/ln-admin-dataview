@@ -12,7 +12,7 @@
        breadcrumb=nodeData.parent
        nodeDescription=nodeData.description
       }} {{else if section.isMoreContent}}
-      {{gcm-pull-out-more-content nodeData=nodeData prerequisites=prerequisites}}
+      {{gcm-pull-out-more-content nodeData=nodeData prerequisites=prerequisites resourceContent=resourceContent collectionContent=collectionContent assessmentContent=assessmentContent questionContent=questionContent}}
     {{/if}}
   {{/app-pull-out}}
 </div>

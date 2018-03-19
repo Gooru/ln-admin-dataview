@@ -50,7 +50,7 @@
         width: 100%;
         font-size: 15px;
         text-align: right;
-        height: 45px;
+        height: 35px;
         padding-right: 14px;
         display: table;
 
@@ -104,9 +104,11 @@
         overflow: hidden;
         padding-top: 7px;
         border-bottom: 1px solid #e3e5ea;
+
         &.micro-competency-enabled {
           border-bottom: 10px solid #e3e5ea;
           height: auto;
+
           .competency-info {
             .competency-info-icon {
               .more-info {
