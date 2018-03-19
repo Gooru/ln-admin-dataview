@@ -56,13 +56,13 @@ export default Ember.Component.extend({
    * Width of the cell
    * @type {Number}
    */
-  cellWidth: 45,
+  cellWidth: 35,
 
   /**
    * height of the cell
    * @type {Number}
    */
-  cellHeight: 45,
+  cellHeight: 35,
 
   /**
    * It will have  taxonomy courses by selected subject
@@ -181,24 +181,27 @@ export default Ember.Component.extend({
         .$(domainCompetencyContainer)
         .hasClass('micro-competency-enabled');
       if (!isEnabled) {
-        component
-          .$(domainCompetencyContainer)
-          .animate({ height: `${height}px` }, function() {
+        component.$(domainCompetencyContainer).animate(
+          {
+            height: `${height}px`
+          },
+          function() {
             component
               .$(domainCompetencyContainer)
               .addClass('micro-competency-enabled');
-          });
+          }
+        );
       } else {
-        component
-          .$(domainCompetencyContainer)
-          .animate(
-            { height: `${defaultHeightOfCompetencyContainer}px` },
-            function() {
-              component
-                .$(domainCompetencyContainer)
-                .removeClass('micro-competency-enabled');
-            }
-          );
+        component.$(domainCompetencyContainer).animate(
+          {
+            height: `${defaultHeightOfCompetencyContainer}px`
+          },
+          function() {
+            component
+              .$(domainCompetencyContainer)
+              .removeClass('micro-competency-enabled');
+          }
+        );
       }
     },
 
@@ -274,9 +277,9 @@ export default Ember.Component.extend({
       .get('courses')
       .toArray()
       .reverse();
-    component.set('taxonomyCourses', courses);
     let resultSet = Ember.A();
     let domains = matrixCoordinates.get('domains');
+
     component.set('taxonomyDomains', domains);
     domains.forEach(domainData => {
       let domainCode = domainData.get('domainCode');
@@ -306,6 +309,14 @@ export default Ember.Component.extend({
         }
       });
     });
+    let filterCourses = Ember.A();
+    courses.forEach(course => {
+      let coursedomain = resultSet.findBy('courseCode', course.courseCode);
+      if (coursedomain) {
+        filterCourses.push(course);
+      }
+    });
+    component.set('taxonomyCourses', filterCourses);
     return resultSet;
   },
 

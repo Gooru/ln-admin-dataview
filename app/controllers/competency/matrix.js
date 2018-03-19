@@ -68,6 +68,26 @@ export default Ember.Controller.extend({
    */
   showMore: false,
 
+  /**
+   * List of resource contents
+   */
+  resourceContent: null,
+
+  /**
+   * List of collection contents
+   */
+  collectionContent: null,
+
+  /*
+   * List of assessment contents
+   */
+  assessmentContent: null,
+
+  /*
+   * List of question contents
+   */
+  questionContent: null,
+
   //---------------------------------------------------------------------------
   //Actions
 
@@ -223,11 +243,27 @@ export default Ember.Controller.extend({
           contentCountData.push(
             Utils.getStructuredContentData(CONTENT_TYPES.RUBRIC, rubricCount)
           );
-          controller.set('contentCount', contentCountData);
 
+          controller.set('contentCount', contentCountData);
           controller.set('isLoading', false);
           controller.set('signatureContents', learningData.signatureContents);
           controller.set('prerequisites', learningData.prerequisites);
+          controller.set(
+            'resourceContent',
+            culcaqrCount.resource.searchResults.splice(0, 3)
+          );
+          controller.set(
+            'collectionContent',
+            culcaqrCount.collection.searchResults.splice(0, 3)
+          );
+          controller.set(
+            'assessmentContent',
+            culcaqrCount.assessment.searchResults.splice(0, 3)
+          );
+          controller.set(
+            'questionContent',
+            culcaqrCount.question.searchResults.splice(0, 3)
+          );
         });
     }
   },
