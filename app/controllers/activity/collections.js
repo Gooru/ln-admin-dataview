@@ -2,12 +2,10 @@ import Ember from 'ember';
 import { truncateString } from 'admin-dataview/utils/utils';
 
 export default Ember.Controller.extend({
-
   // -------------------------------------------------------------------------
   // Query
 
   queryParams: ['term'],
-
 
   //------------------------------------------------------------------------
   //Dependencies
@@ -79,7 +77,7 @@ export default Ember.Controller.extend({
     let controller = this;
     let CUR_ITERATION_COUNT = controller.get('CUR_ITERATION_COUNT');
     let PAGE_SIZE = controller.get('PAGE_SIZE');
-    return (PAGE_SIZE <= CUR_ITERATION_COUNT);
+    return PAGE_SIZE <= CUR_ITERATION_COUNT;
   }),
 
   /**
@@ -97,30 +95,30 @@ export default Ember.Controller.extend({
 
         creation: {
           'Creator ID': collection.creator.id,
-          'Publisher': 'Gooru Org',
-          'Collaborator': collection.collaboratorIDs,
+          Publisher: 'Gooru Org',
+          Collaborator: collection.collaboratorIDs,
           'Instance Creator': collection.owner.username,
           'Original Creator': collection.creator.username,
           Aggregator: collection.aggregator ? collection.aggregator : null,
-          'Date Modified': moment(collection.lastModified).format('LLLL') || null,
+          'Date Modified':
+            moment(collection.lastModified).format('LLLL') || null,
           'Modified by': collection.lastModifiedBy,
           License: collection.license ? collection.license.code : null,
-          'Created': collection.owner.username,
+          Created: collection.owner.username,
           'Owner ID': collection.owner.id
         },
 
         educational: {
-          'Audience': collection.audience,
+          Audience: collection.audience,
           'Time Required': null,
           'Grade Level': collection.grade,
           'Learning Objective': collection.learningObjectives
         },
 
         media: {
-          'Keywords': collection.keyPoints,
-          'Visibility': null
+          Keywords: collection.keyPoints,
+          Visibility: null
         },
-
 
         instructional: {
           'Instructional Model': collection.instructionalModel,
@@ -135,9 +133,9 @@ export default Ember.Controller.extend({
         },
 
         Internal: {
-          'ID': collection.id,
-          'Deleted': null,
-          'Flagged': null
+          ID: collection.id,
+          Deleted: null,
+          Flagged: null
         },
 
         vector: {
@@ -150,28 +148,28 @@ export default Ember.Controller.extend({
     return resultSet;
   }),
 
-
   /**
    * Grouping header data to show more info  in pull out
    */
   groupHeader: Ember.computed('groupData', function() {
     let resultHeader = Ember.A();
-    resultHeader = [Ember.Object.create({
-      header: 'extracted',
-      isEnabled: true
-    }),
-    Ember.Object.create({
-      header: 'curated',
-      isEnabled: true
-    }),
-    Ember.Object.create({
-      header: 'tagged',
-      isEnabled: true
-    }),
-    Ember.Object.create({
-      header: 'computed',
-      isEnabled: true
-    })
+    resultHeader = [
+      Ember.Object.create({
+        header: 'extracted',
+        isEnabled: true
+      }),
+      Ember.Object.create({
+        header: 'curated',
+        isEnabled: true
+      }),
+      Ember.Object.create({
+        header: 'tagged',
+        isEnabled: true
+      }),
+      Ember.Object.create({
+        header: 'computed',
+        isEnabled: true
+      })
     ];
     return resultHeader;
   }),
@@ -188,18 +186,22 @@ export default Ember.Controller.extend({
 
   fetchCollectionPullOutData(collectionId) {
     let controller = this;
-    let collectionPromise = Ember.RSVP.resolve(controller.get('contentService').getCollectionById(collectionId));
+    let collectionPromise = Ember.RSVP.resolve(
+      controller.get('contentService').getCollectionById(collectionId)
+    );
     return Ember.RSVP.hash({
       collection: collectionPromise
-    })
-      .then(function(hash) {
-        controller.set('collectionPullOutData', hash.collection);
-      });
+    }).then(function(hash) {
+      controller.set('collectionPullOutData', hash.collection);
+    });
   },
 
   onChangeSearchTerm: Ember.observer('term', function() {
     let controller = this;
-    controller.refreshItems();
+    let term = controller.get('term');
+    if (term) {
+      controller.refreshItems();
+    }
   }),
 
   /**
@@ -219,15 +221,20 @@ export default Ember.Controller.extend({
     let term = controller.get('term') ? controller.get('term') : '*';
     let PAGE_SIZE = controller.get('PAGE_SIZE');
     let OFFSET = controller.get('OFFSET');
-    let collectionFilters = controller.get('activityController').getAppliedFilters();
+    let collectionFilters = controller
+      .get('activityController')
+      .getAppliedFilters();
     Ember.RSVP.hash({
-      collections: controller.get('searchService').searchCollections(term, collectionFilters, OFFSET, PAGE_SIZE)
-    }).then(({
-      collections
-    }) => {
+      collections: controller
+        .get('searchService')
+        .searchCollections(term, collectionFilters, OFFSET, PAGE_SIZE)
+    }).then(({ collections }) => {
       let fetchedCollections = controller.get('collections');
       let CUR_ITERATION_COUNT = collections.get('searchResults').length;
-      controller.set('collections', fetchedCollections.concat(collections.get('searchResults')));
+      controller.set(
+        'collections',
+        fetchedCollections.concat(collections.get('searchResults'))
+      );
       controller.set('CUR_ITERATION_COUNT', CUR_ITERATION_COUNT);
       controller.set('OFFSET', OFFSET + CUR_ITERATION_COUNT);
       controller.set('isLoading', false);
@@ -237,7 +244,6 @@ export default Ember.Controller.extend({
 
   // -------------------------------------------------------------------------
   // Actions
-
 
   actions: {
     onPlayCollection(collection) {
@@ -252,6 +258,4 @@ export default Ember.Controller.extend({
       controller.fetchSearchCollections();
     }
   }
-
-
 });
