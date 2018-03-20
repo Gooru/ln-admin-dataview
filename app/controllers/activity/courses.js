@@ -2,12 +2,10 @@ import Ember from 'ember';
 import { truncateString } from 'admin-dataview/utils/utils';
 
 export default Ember.Controller.extend({
-
   // -------------------------------------------------------------------------
   // Query
 
   queryParams: ['term'],
-
 
   //------------------------------------------------------------------------
   //Dependencies
@@ -99,7 +97,7 @@ export default Ember.Controller.extend({
     let controller = this;
     let CUR_ITERATION_COUNT = controller.get('CUR_ITERATION_COUNT');
     let PAGE_SIZE = controller.get('PAGE_SIZE');
-    return (PAGE_SIZE <= CUR_ITERATION_COUNT);
+    return PAGE_SIZE <= CUR_ITERATION_COUNT;
   }),
 
   /**
@@ -128,25 +126,26 @@ export default Ember.Controller.extend({
         creation: {
           'Creator ID': coursePullOutData.creator_id,
           'Created On': moment(course.createdDate).format('LLLL') || null,
-          'Publisher': 'Gooru Org',
+          Publisher: 'Gooru Org',
           'Publish Status': course.isPublished ? 'Published' : 'Unpublished',
           Aggregator: course.aggregator ? course.aggregator : null,
           'Modified On': moment(course.lastModified).format('LLLL') || null,
           'Modified By': course.lastModifiedBy,
-          License: coursePullOutData.license ? coursePullOutData.license.code : null,
-          'Host': null
+          License: coursePullOutData.license
+            ? coursePullOutData.license.code
+            : null,
+          Host: null
         },
 
         educational: {
-          'Audience': coursePullOutData.metadata.audience,
+          Audience: coursePullOutData.metadata.audience,
           'Grade Level': null
         },
 
         media: {
-          'Keywords': null,
-          'Visibility': coursePullOutData.visible_on_profile
+          Keywords: null,
+          Visibility: coursePullOutData.visible_on_profile
         },
-
 
         instructional: {
           '21st Century Skills': null
@@ -160,9 +159,9 @@ export default Ember.Controller.extend({
         },
 
         Internal: {
-          'ID': course.id,
-          'Deleted': null,
-          'Flagged': null
+          ID: course.id,
+          Deleted: null,
+          Flagged: null
         },
 
         vector: {
@@ -175,28 +174,28 @@ export default Ember.Controller.extend({
     return resultSet;
   }),
 
-
   /**
    * Grouping header data to show more info  in pull out
    */
   groupHeader: Ember.computed('groupData', function() {
     let resultHeader = Ember.A();
-    resultHeader = [Ember.Object.create({
-      header: 'extracted',
-      isEnabled: true
-    }),
-    Ember.Object.create({
-      header: 'curated',
-      isEnabled: true
-    }),
-    Ember.Object.create({
-      header: 'tagged',
-      isEnabled: true
-    }),
-    Ember.Object.create({
-      header: 'computed',
-      isEnabled: true
-    })
+    resultHeader = [
+      Ember.Object.create({
+        header: 'extracted',
+        isEnabled: true
+      }),
+      Ember.Object.create({
+        header: 'curated',
+        isEnabled: true
+      }),
+      Ember.Object.create({
+        header: 'tagged',
+        isEnabled: true
+      }),
+      Ember.Object.create({
+        header: 'computed',
+        isEnabled: true
+      })
     ];
     return resultHeader;
   }),
@@ -206,7 +205,10 @@ export default Ember.Controller.extend({
 
   onChangeSearchTerm: Ember.observer('term', function() {
     let controller = this;
-    controller.refreshItems();
+    let term = controller.get('term');
+    if (term) {
+      controller.refreshItems();
+    }
   }),
 
   /**
@@ -230,13 +232,20 @@ export default Ember.Controller.extend({
     let term = controller.get('term') ? controller.get('term') : '*';
     let PAGE_SIZE = controller.get('PAGE_SIZE');
     let OFFSET = controller.get('OFFSET');
-    let courseFilters = controller.get('activityController').getAppliedFilters();
+    let courseFilters = controller
+      .get('activityController')
+      .getAppliedFilters();
     Ember.RSVP.hash({
-      courses: controller.get('searchService').searchCourses(term, courseFilters, OFFSET, PAGE_SIZE)
-    }).then(({courses}) => {
+      courses: controller
+        .get('searchService')
+        .searchCourses(term, courseFilters, OFFSET, PAGE_SIZE)
+    }).then(({ courses }) => {
       let fetchedCourses = controller.get('courses');
       let CUR_ITERATION_COUNT = courses.get('searchResults').length;
-      controller.set('courses', fetchedCourses.concat(courses.get('searchResults')));
+      controller.set(
+        'courses',
+        fetchedCourses.concat(courses.get('searchResults'))
+      );
       controller.set('CUR_ITERATION_COUNT', CUR_ITERATION_COUNT);
       controller.set('OFFSET', OFFSET + CUR_ITERATION_COUNT);
       controller.set('hitCount', courses.get('hitCount'));
@@ -247,10 +256,11 @@ export default Ember.Controller.extend({
   getCourseContentById(courseId) {
     let controller = this;
     return Ember.RSVP.hash({
-      course: Ember.RSVP.resolve(controller.get('contentService').getCourseById(courseId))
-    })
-      .then(function(courseData) {
-        controller.set('coursePullOutData', courseData.course);
-      });
+      course: Ember.RSVP.resolve(
+        controller.get('contentService').getCourseById(courseId)
+      )
+    }).then(function(courseData) {
+      controller.set('coursePullOutData', courseData.course);
+    });
   }
 });

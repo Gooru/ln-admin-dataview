@@ -1,8 +1,8 @@
 <div class="activities">
-  {{activities.search-box selectedFilterItems=null onSearch='onSearch'}}
+  {{activities.search-box selectedFilterItems=selectedFilterItems onSearch='onSearch'}}
   <div class="filters pull-left">
     <div class="filter-list">
-      {{activities.activities-filter filterTypes=filterTypes}}
+      {{activities.activities-filter filterTypes=filterTypes onChangeFilterItems="onChangeFilterItems"}}
     </div>
   </div>
   <div class="activities-summary pull-left">
@@ -11,7 +11,7 @@
         {{t 'activities.catalog-distribution'}}
       </div>
       <div class="body">
-        {{activities.distribution-by-content term=term}}
+        {{activities.distribution-by-content term=term appliedFilterList=appliedFilterList}}
       </div>
     </div>
     <div class="content-distribution-by-subject section">
@@ -19,7 +19,7 @@
         {{t 'activities.distribution-by-subject'}}
       </div>
       <div class="body">
-        {{activities.distribution-by-subjects term=term}}
+        {{activities.distribution-by-subjects term=term appliedFilterList=appliedFilterList}}
       </div>
     </div>
   </div>

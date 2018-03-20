@@ -2,12 +2,10 @@ import Ember from 'ember';
 import { truncateString } from 'admin-dataview/utils/utils';
 
 export default Ember.Controller.extend({
-
   // -------------------------------------------------------------------------
   // Query
 
   queryParams: ['term'],
-
 
   //------------------------------------------------------------------------
   //Dependencies
@@ -100,7 +98,7 @@ export default Ember.Controller.extend({
     let controller = this;
     let CUR_ITERATION_COUNT = controller.get('CUR_ITERATION_COUNT');
     let PAGE_SIZE = controller.get('PAGE_SIZE');
-    return (PAGE_SIZE <= CUR_ITERATION_COUNT);
+    return PAGE_SIZE <= CUR_ITERATION_COUNT;
   }),
 
   /**
@@ -134,30 +132,30 @@ export default Ember.Controller.extend({
 
         creation: {
           'Creator ID': assessment.creator.id,
-          'Publisher': 'Gooru Org',
-          'Collaborator': assessment.collaboratorIDs,
+          Publisher: 'Gooru Org',
+          Collaborator: assessment.collaboratorIDs,
           'Instance Creator': assessment.owner.username,
           'Original Creator': assessment.creator.username,
           Aggregator: assessment.aggregator ? assessment.aggregator : null,
-          'Date Modified': moment(assessment.lastModified).format('LLLL') || null,
+          'Date Modified':
+            moment(assessment.lastModified).format('LLLL') || null,
           'Modified by': assessment.lastModifiedBy,
           License: assessment.license ? assessment.license.code : null,
-          'Created': assessment.owner.username,
+          Created: assessment.owner.username,
           'Owner ID': assessment.owner.id
         },
 
         educational: {
-          'Audience': assessment.audience,
+          Audience: assessment.audience,
           'Time Required': null,
           'Grade Level': assessment.grade,
           'Learning Objective': assessment.learningObjectives
         },
 
         media: {
-          'Keywords': assessment.keyPoints,
-          'Visibility': null
+          Keywords: assessment.keyPoints,
+          Visibility: null
         },
-
 
         instructional: {
           'Instructional Model': assessment.instructionalModel,
@@ -172,9 +170,9 @@ export default Ember.Controller.extend({
         },
 
         Internal: {
-          'ID': assessment.id,
-          'Deleted': null,
-          'Flagged': null
+          ID: assessment.id,
+          Deleted: null,
+          Flagged: null
         },
 
         vector: {
@@ -187,41 +185,43 @@ export default Ember.Controller.extend({
     return resultSet;
   }),
 
-
   /**
    * Grouping header data to show more info  in pull out
    */
   groupHeader: Ember.computed('groupData', function() {
     let resultHeader = Ember.A();
-    resultHeader = [Ember.Object.create({
-      header: 'extracted',
-      isEnabled: true
-    }),
-    Ember.Object.create({
-      header: 'curated',
-      isEnabled: true
-    }),
-    Ember.Object.create({
-      header: 'tagged',
-      isEnabled: true
-    }),
-    Ember.Object.create({
-      header: 'computed',
-      isEnabled: true
-    })
+    resultHeader = [
+      Ember.Object.create({
+        header: 'extracted',
+        isEnabled: true
+      }),
+      Ember.Object.create({
+        header: 'curated',
+        isEnabled: true
+      }),
+      Ember.Object.create({
+        header: 'tagged',
+        isEnabled: true
+      }),
+      Ember.Object.create({
+        header: 'computed',
+        isEnabled: true
+      })
     ];
     return resultHeader;
   }),
   // -------------------------------------------------------------------------
   // Actions
 
-
   // -------------------------------------------------------------------------
   // Methods
 
   onChangeSearchTerm: Ember.observer('term', function() {
     let controller = this;
-    controller.refreshItems();
+    let term = controller.get('term');
+    if (term) {
+      controller.refreshItems();
+    }
   }),
 
   /**
@@ -245,13 +245,20 @@ export default Ember.Controller.extend({
     let term = controller.get('term') ? controller.get('term') : '*';
     let PAGE_SIZE = controller.get('PAGE_SIZE');
     let OFFSET = controller.get('OFFSET');
-    let assessmentFilters = controller.get('activityController').getAppliedFilters();
+    let assessmentFilters = controller
+      .get('activityController')
+      .getAppliedFilters();
     Ember.RSVP.hash({
-      assessments: controller.get('searchService').searchAssessments(term, assessmentFilters, OFFSET, PAGE_SIZE)
-    }).then(({assessments}) => {
+      assessments: controller
+        .get('searchService')
+        .searchAssessments(term, assessmentFilters, OFFSET, PAGE_SIZE)
+    }).then(({ assessments }) => {
       let fetchedAssessments = controller.get('assessments');
       let CUR_ITERATION_COUNT = assessments.get('searchResults').length;
-      controller.set('assessments', fetchedAssessments.concat(assessments.get('searchResults')));
+      controller.set(
+        'assessments',
+        fetchedAssessments.concat(assessments.get('searchResults'))
+      );
       controller.set('CUR_ITERATION_COUNT', CUR_ITERATION_COUNT);
       controller.set('OFFSET', OFFSET + CUR_ITERATION_COUNT);
       controller.set('hitCount', assessments.get('hitCount'));
@@ -261,14 +268,13 @@ export default Ember.Controller.extend({
 
   fetchAssessmentPullOutData(assessmentId) {
     let controller = this;
-    let assessmentPromise = Ember.RSVP.resolve(controller.get('contentService').getAssessmentById(assessmentId));
+    let assessmentPromise = Ember.RSVP.resolve(
+      controller.get('contentService').getAssessmentById(assessmentId)
+    );
     return Ember.RSVP.hash({
       assessment: assessmentPromise
-    })
-      .then(function(hash) {
-        controller.set('assessmentPullOutData', hash.assessment);
-      });
+    }).then(function(hash) {
+      controller.set('assessmentPullOutData', hash.assessment);
+    });
   }
-
-
 });

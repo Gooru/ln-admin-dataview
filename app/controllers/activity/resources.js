@@ -10,18 +10,15 @@ export default Ember.Controller.extend({
   //------------------------------------------------------------------------
   //Dependencies
 
-
   /**
    * Search service to fetch content details
    */
   contentService: Ember.inject.service('api-sdk/content'),
 
-
   /**
    * @requires service:profile
    */
   profileService: Ember.inject.service('api-sdk/profile'),
-
 
   //------------------------------------------------------------------------
   //Dependencies
@@ -82,7 +79,6 @@ export default Ember.Controller.extend({
    */
   isLoading: false,
 
-
   /**
    * @property {Boolean}
    * Toggle show/hide view of three bounce spinner
@@ -103,9 +99,8 @@ export default Ember.Controller.extend({
     let controller = this;
     let CUR_ITERATION_COUNT = controller.get('CUR_ITERATION_COUNT');
     let PAGE_SIZE = controller.get('PAGE_SIZE');
-    return (PAGE_SIZE <= CUR_ITERATION_COUNT);
+    return PAGE_SIZE <= CUR_ITERATION_COUNT;
   }),
-
 
   /**
    * Grouping the data to show more info  in pull out
@@ -122,15 +117,18 @@ export default Ember.Controller.extend({
           description: truncateString(collection.description)
         },
 
-
         creation: {
           'Published By': 'Gooru org',
           'Published Status': 'Published',
           Aggregator: collection.aggregator ? collection.aggregator : null,
           License: collection.license ? collection.license : null,
           'creator Name': collection.owner.username,
-          'created On': collection.publish_date ? moment(collection.publish_date).format('YYYY-MM-DD') : null,
-          'modeified On': collection.modeified_date ? collection.modeified_date : null,
+          'created On': collection.publish_date
+            ? moment(collection.publish_date).format('YYYY-MM-DD')
+            : null,
+          'modeified On': collection.modeified_date
+            ? collection.modeified_date
+            : null,
           modified_by: collection.modified_by
         },
 
@@ -138,25 +136,29 @@ export default Ember.Controller.extend({
           language: collection.info.language,
           'edicational use': collection.metadata.educational_use,
           accessbility: collection.accessibility,
-          grade: collection.metadata.grade ? collection.metadata.grade[0] : null,
+          grade: collection.metadata.grade
+            ? collection.metadata.grade[0]
+            : null,
           'age-range': null,
           'Editorial Range': null,
           signature: collection.signature ? collection.signature : null,
-          keywords: collection.info.keywords ? collection.info.keywords[0] : null,
+          keywords: collection.info.keywords
+            ? collection.info.keywords[0]
+            : null,
           audience: collection.metadata.audience
         },
-
 
         media: {
           format: collection.content_subformat,
           'media Fearures': collection.media ? collection.media : null,
-          'access hazard': collection.accesshazard ? collection.accesshazard : null,
+          'access hazard': collection.accesshazard
+            ? collection.accesshazard
+            : null,
           advertisement_level: collection.metadata.advertisement_level,
           framebreaker: collection.display_guide.is_frame_breaker,
           isBroken: collection.publish_date.is_broken,
           address: collection.address ? collection.address : null
         },
-
 
         instructional: {
           depthofknowledge: collection.depthofknowledge,
@@ -180,28 +182,28 @@ export default Ember.Controller.extend({
     return resultSet;
   }),
 
-
   /**
    * Grouping header data to show more info  in pull out
    */
   groupHeader: Ember.computed('groupData', function() {
     let resultHeader = Ember.A();
-    resultHeader = [Ember.Object.create({
-      header: 'extracted',
-      isEnabled: true
-    }),
-    Ember.Object.create({
-      header: 'curated',
-      isEnabled: true
-    }),
-    Ember.Object.create({
-      header: 'tagged',
-      isEnabled: true
-    }),
-    Ember.Object.create({
-      header: 'computed',
-      isEnabled: true
-    })
+    resultHeader = [
+      Ember.Object.create({
+        header: 'extracted',
+        isEnabled: true
+      }),
+      Ember.Object.create({
+        header: 'curated',
+        isEnabled: true
+      }),
+      Ember.Object.create({
+        header: 'tagged',
+        isEnabled: true
+      }),
+      Ember.Object.create({
+        header: 'computed',
+        isEnabled: true
+      })
     ];
     return resultHeader;
   }),
@@ -210,7 +212,6 @@ export default Ember.Controller.extend({
   // Actions
 
   actions: {
-
     /**
      * Action triggered when the user invoke the collection in pull out.
      */
@@ -221,9 +222,13 @@ export default Ember.Controller.extend({
       controller.set('showMore', true);
       controller.set('selectedResource', resource);
       let collectionType = 'resource';
-      return controller.get('contentService').getResourceById(resource.id)
+      return controller
+        .get('contentService')
+        .getResourceById(resource.id)
         .then(function(collection) {
-          return controller.get('profileService').readUserProfile(collection.creator_id)
+          return controller
+            .get('profileService')
+            .readUserProfile(collection.creator_id)
             .then(function(owner) {
               collection.set('owner', owner);
               controller.set('collection', collection);
@@ -256,7 +261,10 @@ export default Ember.Controller.extend({
 
   onChangeSearchTerm: Ember.observer('term', function() {
     let controller = this;
-    controller.refreshItems();
+    let term = controller.get('term');
+    if (term) {
+      controller.refreshItems();
+    }
   }),
 
   /**
@@ -280,20 +288,24 @@ export default Ember.Controller.extend({
     let term = controller.get('term') ? controller.get('term') : '*';
     let PAGE_SIZE = controller.get('PAGE_SIZE');
     let OFFSET = controller.get('OFFSET');
-    let resourceFilters = controller.get('activityController').getAppliedFilters();
+    let resourceFilters = controller
+      .get('activityController')
+      .getAppliedFilters();
     Ember.RSVP.hash({
-      resources: controller.get('searchService').searchResources(term, resourceFilters, OFFSET, PAGE_SIZE)
-    }).then(({
-      resources
-    }) => {
+      resources: controller
+        .get('searchService')
+        .searchResources(term, resourceFilters, OFFSET, PAGE_SIZE)
+    }).then(({ resources }) => {
       let fetchedResources = controller.get('resources');
       let CUR_ITERATION_COUNT = resources.get('searchResults').length;
-      controller.set('resources', fetchedResources.concat(resources.get('searchResults')));
+      controller.set(
+        'resources',
+        fetchedResources.concat(resources.get('searchResults'))
+      );
       controller.set('CUR_ITERATION_COUNT', CUR_ITERATION_COUNT);
       controller.set('OFFSET', OFFSET + CUR_ITERATION_COUNT);
       controller.set('hitCount', resources.get('hitCount'));
       controller.set('isLoading', false);
     });
   }
-
 });

@@ -6,14 +6,12 @@ import {
 import Utils from 'admin-dataview/utils/utils';
 
 export default Ember.Controller.extend({
-
   // -------------------------------------------------------------------------
   // Query
 
   queryParams: ['term'],
 
   term: '',
-
 
   // -------------------------------------------------------------------------
   // Events
@@ -53,7 +51,6 @@ export default Ember.Controller.extend({
    */
   coursesController: Ember.inject.controller('activity/courses'),
 
-
   // -------------------------------------------------------------------------
   // Actions
 
@@ -61,9 +58,9 @@ export default Ember.Controller.extend({
     onMenuItemSelection(item) {
       let term = this.get('searchTerm');
       if (term) {
-        this.transitionToRoute(`/activities/${  item  }?term=${  term}`);
+        this.transitionToRoute(`/activities/${item}?term=${term}`);
       } else {
-        this.transitionToRoute(`/activities/${  item}`);
+        this.transitionToRoute(`/activities/${item}`);
       }
     },
 
@@ -76,9 +73,9 @@ export default Ember.Controller.extend({
       let routeName = Utils.getRoutePathLastOccurrence();
       let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
       if (activeMenuIndex > -1) {
-        this.transitionToRoute(`/activities/${  routeName  }?term=${  term}`);
+        this.transitionToRoute(`/activities/${routeName}?term=${term}`);
       } else {
-        this.transitionToRoute(`/activities/courses?term=${  term}`);
+        this.transitionToRoute(`/activities/courses?term=${term}`);
       }
     },
 
@@ -87,9 +84,17 @@ export default Ember.Controller.extend({
       if (updatedFilter) {
         let filterType = updatedFilter.type;
         let filterId = updatedFilter.id;
-        filterId = typeof filterId === 'string' ? filterId.replace(/\./g, '-') : filterId;
-        let isChecked = Ember.$(`.${filterType} .body .filter-name .${filterId} input`).prop('checked');
-        Ember.$(`.${filterType} .body .filter-name .${filterId} input`).prop('checked', !isChecked);
+        filterId =
+          typeof filterId === 'string'
+            ? filterId.replace(/\./g, '-')
+            : filterId;
+        let isChecked = Ember.$(
+          `.${filterType} .body .filter-name .${filterId} input`
+        ).prop('checked');
+        Ember.$(`.${filterType} .body .filter-name .${filterId} input`).prop(
+          'checked',
+          !isChecked
+        );
       }
       controller.set('selectedFilterItemsBuffer', filterItems);
       controller.set('selectedFilterItems', filterItems);
@@ -122,9 +127,7 @@ export default Ember.Controller.extend({
    */
   selectedFilterItems: Ember.computed('selectedFilterItemsBuffer', function() {
     let controller = this;
-    let userId = controller.get('session.id');
-    let storedFilters = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`)) || [];
-    return storedFilters;
+    return controller.getStoredFilterItems();
   }),
 
   /**
@@ -137,21 +140,37 @@ export default Ember.Controller.extend({
   // Methods
 
   /**
+   * @function getStoredFilterItems
+   * Function to get locally stored filter items
+   */
+  getStoredFilterItems() {
+    let controller = this;
+    let userId = controller.get('session.id');
+    let storedFilters =
+      JSON.parse(
+        localStorage.getItem(`research_${userId}_activities_filters`)
+      ) || [];
+    return storedFilters;
+  },
+
+  /**
    * @function getAppliedFilters
    * Return list of search filters
    */
   getAppliedFilters() {
     let controller = this;
-    let userId = controller.get('session.id');
-    let appliedFilters = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`));
+    let appliedFilters = controller.getStoredFilterItems();
     let filterTypes = controller.get('filterTypes');
     let formattedFilters = {};
     if (appliedFilters) {
-      filterTypes.map( filterTypeInfo => {
+      filterTypes.map(filterTypeInfo => {
         let filterType = filterTypeInfo.code;
         let categorizedFilter = appliedFilters[`${filterType}`] || null;
         if (categorizedFilter) {
-          formattedFilters = Object.assign(formattedFilters, controller.getFormattedSearchFilters(filterType, categorizedFilter));
+          formattedFilters = Object.assign(
+            formattedFilters,
+            controller.getFormattedSearchFilters(filterType, categorizedFilter)
+          );
         }
       });
     }
@@ -168,34 +187,62 @@ export default Ember.Controller.extend({
     let delimiter = ',';
     switch (filterType) {
     case 'category':
-      formattedFilters['flt.subjectClassification'] = categorizedFilterData[0] ? categorizedFilterData[0].id : '';
+      formattedFilters['flt.subjectClassification'] = categorizedFilterData[0]
+        ? categorizedFilterData[0].id
+        : '';
       break;
     case 'subject':
-      categorizedFilterData.map( filterData => {
-        formattedFilters['flt.subjectName'] = Utils.getSearchFilterTextBySubjectName(filterData.label);
+      categorizedFilterData.map(filterData => {
+        formattedFilters[
+          'flt.subjectName'
+        ] = Utils.getSearchFilterTextBySubjectName(filterData.label);
       });
       break;
     case 'course':
       delimiter = '~~';
-      formattedFilters['flt.courseName'] = controller.getConcatenatedFilterString(categorizedFilterData, delimiter);
+      formattedFilters[
+        'flt.courseName'
+      ] = controller.getConcatenatedFilterString(
+        categorizedFilterData,
+        delimiter
+      );
       break;
     case 'audience':
-      formattedFilters['flt.audience'] = controller.getConcatenatedFilterString(categorizedFilterData);
+      formattedFilters[
+        'flt.audience'
+      ] = controller.getConcatenatedFilterString(categorizedFilterData);
       break;
     case '21-century-skills':
       delimiter = '~~';
-      formattedFilters['flt.21CenturySkills'] = controller.getConcatenatedFilterString(categorizedFilterData, delimiter);
+      formattedFilters[
+        'flt.21CenturySkills'
+      ] = controller.getConcatenatedFilterString(
+        categorizedFilterData,
+        delimiter
+      );
       break;
     case 'licenses':
       delimiter = '~~';
-      formattedFilters['flt.licenseName'] = controller.getConcatenatedFilterString(categorizedFilterData, delimiter);
+      formattedFilters[
+        'flt.licenseName'
+      ] = controller.getConcatenatedFilterString(
+        categorizedFilterData,
+        delimiter
+      );
       break;
     case 'dok':
-      formattedFilters['flt.depthOfKnowledge'] = controller.getConcatenatedFilterString(categorizedFilterData);
+      formattedFilters[
+        'flt.depthOfKnowledge'
+      ] = controller.getConcatenatedFilterString(categorizedFilterData);
       break;
     case 'publisher':
       delimiter = '~~';
-      formattedFilters['flt.publisher'] = controller.getConcatenatedFilterString(categorizedFilterData, delimiter);
+      formattedFilters[
+        'flt.publisher'
+      ] = controller.getConcatenatedFilterString(
+        categorizedFilterData,
+        delimiter
+      );
       break;
     }
     return formattedFilters;
@@ -205,16 +252,15 @@ export default Ember.Controller.extend({
    * @function getConcatenatedFilterString
    * Return search filter values
    */
-  getConcatenatedFilterString( filterInfo, delimiter = ',', keyName = 'label' ) {
+  getConcatenatedFilterString(filterInfo, delimiter = ',', keyName = 'label') {
     let label = '';
     if (Ember.isArray(filterInfo)) {
-      filterInfo.map( filterData => {
-        label += delimiter + filterData[`${keyName}`] ;
+      filterInfo.map(filterData => {
+        label += delimiter + filterData[`${keyName}`];
       });
       let numOfCharsRemove = delimiter === ',' ? 1 : 2;
       return label.substring(numOfCharsRemove);
     }
     return label;
   }
-
 });

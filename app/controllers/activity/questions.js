@@ -2,12 +2,10 @@ import Ember from 'ember';
 import { truncateString } from 'admin-dataview/utils/utils';
 
 export default Ember.Controller.extend({
-
   // -------------------------------------------------------------------------
   // Query
 
   queryParams: ['term'],
-
 
   //------------------------------------------------------------------------
   //Dependencies
@@ -18,7 +16,6 @@ export default Ember.Controller.extend({
    * @requires service:search
    */
   searchService: Ember.inject.service('api-sdk/search'),
-
 
   /**
    * Search service to fetch content details
@@ -99,9 +96,8 @@ export default Ember.Controller.extend({
     let controller = this;
     let CUR_ITERATION_COUNT = controller.get('CUR_ITERATION_COUNT');
     let PAGE_SIZE = controller.get('PAGE_SIZE');
-    return (PAGE_SIZE <= CUR_ITERATION_COUNT);
+    return PAGE_SIZE <= CUR_ITERATION_COUNT;
   }),
-
 
   /**
    * Grouping the data to show more info  in pull out
@@ -123,14 +119,20 @@ export default Ember.Controller.extend({
           Aggregator: collection.aggregator ? collection.aggregator : null,
           License: collection.license ? collection.license : null,
           'creator Name': collection.owner.username,
-          'created On': collection.publish_date ? moment(collection.publish_date).format('YYYY-MM-DD') : null,
-          'modeified On': collection.modeified_date ? collection.modeified_date : null,
+          'created On': collection.publish_date
+            ? moment(collection.publish_date).format('YYYY-MM-DD')
+            : null,
+          'modeified On': collection.modeified_date
+            ? collection.modeified_date
+            : null,
           modified_by: collection.modified_by
         },
 
         educational: {
           language: collection.info ? collection.info.language : null,
-          'edicational use': collection.metadata ? collection.metadata.educational_use : null,
+          'edicational use': collection.metadata
+            ? collection.metadata.educational_use
+            : null,
           accessbility: collection.accessibility,
           grade: collection.metadata ? collection.metadata.grade : null,
           'age-range': collection.age ? collection.age : null,
@@ -140,17 +142,23 @@ export default Ember.Controller.extend({
           audience: collection.metadata ? collection.metadata.audience : null
         },
 
-
         media: {
           format: collection.content_subformat,
           'media Fearures': collection.media ? collection.media : null,
-          'access hazard': collection.accesshazard ? collection.accesshazard : null,
-          advertisement_level: collection.metadata ? collection.metadata.advertisement_level : null,
-          framebreaker: collection.display_guide ? collection.display_guide.is_frame_breaker : null,
-          isBroken: collection.publish_date ? collection.publish_date.is_broken : null,
+          'access hazard': collection.accesshazard
+            ? collection.accesshazard
+            : null,
+          advertisement_level: collection.metadata
+            ? collection.metadata.advertisement_level
+            : null,
+          framebreaker: collection.display_guide
+            ? collection.display_guide.is_frame_breaker
+            : null,
+          isBroken: collection.publish_date
+            ? collection.publish_date.is_broken
+            : null,
           address: collection.address ? collection.address : null
         },
-
 
         instructional: {
           depthofknowledge: collection.depthofknowledge,
@@ -174,38 +182,36 @@ export default Ember.Controller.extend({
     return resultSet;
   }),
 
-
   /**
    * Grouping header data to show more info  in pull out
    */
   questionHeader: Ember.computed('groupData', function() {
     let resultHeader = Ember.A();
-    resultHeader = [Ember.Object.create({
-      header: 'extracted',
-      isEnabled: true
-    }),
-    Ember.Object.create({
-      header: 'curated',
-      isEnabled: true
-    }),
-    Ember.Object.create({
-      header: 'tagged',
-      isEnabled: true
-    }),
-    Ember.Object.create({
-      header: 'computed',
-      isEnabled: true
-    })
+    resultHeader = [
+      Ember.Object.create({
+        header: 'extracted',
+        isEnabled: true
+      }),
+      Ember.Object.create({
+        header: 'curated',
+        isEnabled: true
+      }),
+      Ember.Object.create({
+        header: 'tagged',
+        isEnabled: true
+      }),
+      Ember.Object.create({
+        header: 'computed',
+        isEnabled: true
+      })
     ];
     return resultHeader;
   }),
-
 
   // -------------------------------------------------------------------------
   // Actions
 
   actions: {
-
     /**
      * Action triggered when the user invoke the collection in pull out.
      */
@@ -216,9 +222,13 @@ export default Ember.Controller.extend({
       controller.set('showMore', true);
       let collectionType = 'question';
       controller.set('selectedQuestion', question);
-      return controller.get('contentService').getQuestionById(question.id)
+      return controller
+        .get('contentService')
+        .getQuestionById(question.id)
         .then(function(collection) {
-          return controller.get('profileService').readUserProfile(collection.creator_id)
+          return controller
+            .get('profileService')
+            .readUserProfile(collection.creator_id)
             .then(function(owner) {
               collection.set('owner', owner);
               controller.set('question', collection);
@@ -246,13 +256,15 @@ export default Ember.Controller.extend({
     this.set('isLoading', true);
   },
 
-
   // -------------------------------------------------------------------------
   // Methods
 
   onChangeSearchTerm: Ember.observer('term', function() {
     let controller = this;
-    controller.refreshItems();
+    let term = controller.get('term');
+    if (term) {
+      controller.refreshItems();
+    }
   }),
 
   /**
@@ -276,20 +288,24 @@ export default Ember.Controller.extend({
     let term = controller.get('term') ? controller.get('term') : '*';
     let PAGE_SIZE = controller.get('PAGE_SIZE');
     let OFFSET = controller.get('OFFSET');
-    let questionFilters = controller.get('activityController').getAppliedFilters();
+    let questionFilters = controller
+      .get('activityController')
+      .getAppliedFilters();
     Ember.RSVP.hash({
-      questions: controller.get('searchService').searchQuestions(term, questionFilters, OFFSET, PAGE_SIZE)
-    }).then(({
-      questions
-    }) => {
+      questions: controller
+        .get('searchService')
+        .searchQuestions(term, questionFilters, OFFSET, PAGE_SIZE)
+    }).then(({ questions }) => {
       let fetchedQuestions = controller.get('questions');
       let CUR_ITERATION_COUNT = questions.get('searchResults').length;
-      controller.set('questions', fetchedQuestions.concat(questions.get('searchResults')));
+      controller.set(
+        'questions',
+        fetchedQuestions.concat(questions.get('searchResults'))
+      );
       controller.set('CUR_ITERATION_COUNT', CUR_ITERATION_COUNT);
       controller.set('OFFSET', OFFSET + CUR_ITERATION_COUNT);
       controller.set('hitCount', questions.get('hitCount'));
       controller.set('isLoading', false);
     });
   }
-
 });
