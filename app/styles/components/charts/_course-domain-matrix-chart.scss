@@ -33,7 +33,7 @@
     width: 100%;
 
     .courses {
-      width: 32%;
+      width: 25%;
       padding-left: 25px;
       padding-bottom: 10px;
 
@@ -41,6 +41,7 @@
         padding: 0;
         list-style: none;
         font-size: 15px;
+        margin-top: 5px;
         width: 100%;
         margin: 0;
         border-right: 1px solid #d7d7d7;
@@ -50,7 +51,7 @@
         width: 100%;
         font-size: 15px;
         text-align: right;
-        height: 35px;
+        height: 36px;
         padding-right: 14px;
         display: table;
 
@@ -234,9 +235,9 @@
     }
 
     .scroll-view {
-      width: 63%;
+      width: 70%;
       @media (min-width: $screen-sm-min) {
-        width: 61%;
+        width: 68%;
       }
       overflow-x: auto;
       background-image: url("../assets/images/grid-view.png");

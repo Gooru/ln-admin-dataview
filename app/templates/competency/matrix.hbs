@@ -8,10 +8,12 @@
   <div class="matrix-right-panel">
     <ul>
       {{#each subjects as |subject index|}}
-        <li {{action 'onChooseSubject' index}}>
-          <div class="subject-{{index}} subject-name {{if (eq index 0) 'active'}}">{{subject.title}}</div>
-          <div class="subject-{{index}} subject-round-icon {{if (eq index 0) 'active'}}"></div>
-        </li>
+        {{#if (lt index 4)}}
+          <li {{action 'onChooseSubject' index}}>
+            <div class="subject-{{index}} subject-name {{if (eq index 0) 'active'}}">{{subject.title}}</div>
+            <div class="subject-{{index}} subject-round-icon {{if (eq index 0) 'active'}}"></div>
+          </li>
+        {{/if}}
       {{/each}}
     </ul>
   </div>

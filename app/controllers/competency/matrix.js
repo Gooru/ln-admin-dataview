@@ -88,6 +88,11 @@ export default Ember.Controller.extend({
    */
   questionContent: null,
 
+  /*
+   * List of subjects
+   */
+  subjects: null,
+
   //---------------------------------------------------------------------------
   //Actions
 
