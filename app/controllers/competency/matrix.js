@@ -180,8 +180,10 @@ export default Ember.Controller.extend({
         .getSearchLearningMapsContent(nodeInfo)
         .then(function(learningData) {
           let culcaqrCount = Ember.A();
+          let culcaqrContents = Ember.A();
           let contentCountData = Ember.A();
           culcaqrCount = learningData.contents;
+          culcaqrContents = learningData.learningMapsContent;
           let courseCount = culcaqrCount.course
             ? culcaqrCount.course.totalHitCount
             : 0;
@@ -250,19 +252,19 @@ export default Ember.Controller.extend({
           controller.set('prerequisites', learningData.prerequisites);
           controller.set(
             'resourceContent',
-            culcaqrCount.resource.searchResults.splice(0, 3)
+            culcaqrContents.resource.splice(0, 3)
           );
           controller.set(
             'collectionContent',
-            culcaqrCount.collection.searchResults.splice(0, 3)
+            culcaqrContents.collection.splice(0, 3)
           );
           controller.set(
             'assessmentContent',
-            culcaqrCount.assessment.searchResults.splice(0, 3)
+            culcaqrContents.assessment.splice(0, 3)
           );
           controller.set(
             'questionContent',
-            culcaqrCount.question.searchResults.splice(0, 3)
+            culcaqrContents.question.splice(0, 3)
           );
         });
     }

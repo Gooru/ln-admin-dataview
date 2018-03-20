@@ -6,14 +6,9 @@ import CollectionModel from 'admin-dataview/models/collection/collection';
 import AssessmentModel from 'admin-dataview/models/assessment/assessment';
 import CourseModel from 'admin-dataview/models/course/course';
 import TaxonomySerializer from 'admin-dataview/serializers/taxonomy/taxonomy';
-import {
-  DEFAULT_IMAGES,
-  TAXONOMY_LEVELS
-} from 'admin-dataview/config/config';
+import { DEFAULT_IMAGES, TAXONOMY_LEVELS } from 'admin-dataview/config/config';
 import ProfileModel from 'admin-dataview/models/profile/profile';
-import {
-  getResourceFormat
-} from 'admin-dataview/utils/utils';
+import { getResourceFormat } from 'admin-dataview/utils/utils';
 
 /**
  * Serializer to support Search functionality
@@ -35,7 +30,6 @@ export default Ember.Object.extend(ConfigurationMixin, {
       TaxonomySerializer.create(Ember.getOwner(this).ownerInjection())
     );
   },
-
 
   /**
    * Normalize the Search course response
@@ -67,13 +61,14 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const serializer = this;
     const basePath = serializer.get('session.cdnUrls.content');
     const appRootPath = this.get('appRootPath'); //configuration appRootPath
-    const thumbnailUrl = result.thumbnail ?
-      basePath + result.thumbnail :
-      appRootPath + DEFAULT_IMAGES.COURSE;
+    const thumbnailUrl = result.thumbnail
+      ? basePath + result.thumbnail
+      : appRootPath + DEFAULT_IMAGES.COURSE;
     const taxonomyInfo =
       (result.taxonomy &&
         result.taxonomy.curriculum &&
-        result.taxonomy.curriculum.curriculumInfo) || [];
+        result.taxonomy.curriculum.curriculumInfo) ||
+      [];
     return CourseModel.create(Ember.getOwner(this).ownerInjection(), {
       id: result.id,
       title: result.title,
@@ -126,22 +121,28 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const taxonomyInfo =
       (resource.taxonomySet &&
         resource.taxonomySet.curriculum &&
-        resource.taxonomySet.curriculum.curriculumInfo) || [];
+        resource.taxonomySet.curriculum.curriculumInfo) ||
+      [];
     return ResourceModel.create(Ember.getOwner(this).ownerInjection(), {
       id: resource.gooruOid,
       title: resource.title,
       description: resource.description,
       format: format,
       url: resource.url,
-      thumbnailUrl: resource.thumbnail ?
-        basePath + resource.thumbnail : DEFAULT_IMAGES.RESOURCE,
-      creator: resource.creator ? serializer.normalizeOwner(resource.creator) : null,
+      thumbnailUrl: resource.thumbnail
+        ? basePath + resource.thumbnail
+        : DEFAULT_IMAGES.RESOURCE,
+      creator: resource.creator
+        ? serializer.normalizeOwner(resource.creator)
+        : null,
       owner: resource.user ? serializer.normalizeOwner(resource.user) : null,
       type: 'resource',
       standards: serializer
         .get('taxonomySerializer')
         .normalizeTaxonomyArray(taxonomyInfo),
-      taxonomySubject: resource.taxonomySet ? resource.taxonomySet.subject : null,
+      taxonomySubject: resource.taxonomySet
+        ? resource.taxonomySet.subject
+        : null,
       taxonomyCourse: resource.taxonomySet ? resource.taxonomySet.course : null,
       taxonomyDomain: resource.taxonomySet ? resource.taxonomySet.domain : null,
       publishStatus: resource.publishStatus,
@@ -223,19 +224,20 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const basePath = serializer.get('session.cdnUrls.content');
     const userBasePath = serializer.get('session.cdnUrls.user');
 
-    const thumbnailUrl = collectionData.thumbnail ?
-      basePath + collectionData.thumbnail :
-      DEFAULT_IMAGES.COLLECTION;
-    const userThumbnailUrl = collectionData.userProfileImage ?
-      userBasePath + collectionData.userProfileImage :
-      DEFAULT_IMAGES.USER_PROFILE;
-    const creatorThumbnailUrl = collectionData.creatorProfileImage ?
-      userBasePath + collectionData.creatorProfileImage :
-      DEFAULT_IMAGES.USER_PROFILE;
+    const thumbnailUrl = collectionData.thumbnail
+      ? basePath + collectionData.thumbnail
+      : DEFAULT_IMAGES.COLLECTION;
+    const userThumbnailUrl = collectionData.userProfileImage
+      ? userBasePath + collectionData.userProfileImage
+      : DEFAULT_IMAGES.USER_PROFILE;
+    const creatorThumbnailUrl = collectionData.creatorProfileImage
+      ? userBasePath + collectionData.creatorProfileImage
+      : DEFAULT_IMAGES.USER_PROFILE;
     const taxonomyInfo =
       (collectionData.taxonomySet &&
         collectionData.taxonomySet.curriculum &&
-        collectionData.taxonomySet.curriculum.curriculumInfo) || [];
+        collectionData.taxonomySet.curriculum.curriculumInfo) ||
+      [];
 
     const course = collectionData.course || {};
     return CollectionModel.create(Ember.getOwner(this).ownerInjection(), {
@@ -315,19 +317,20 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const serializer = this;
     const basePath = serializer.get('session.cdnUrls.content');
     const userBasePath = serializer.get('session.cdnUrls.user');
-    const thumbnailUrl = assessmentData.thumbnail ?
-      basePath + assessmentData.thumbnail :
-      DEFAULT_IMAGES.ASSESSMENT;
-    const ownerThumbnailUrl = assessmentData.userProfileImage ?
-      userBasePath + assessmentData.userProfileImage :
-      DEFAULT_IMAGES.USER_PROFILE;
-    const creatorThumbnailUrl = assessmentData.creatorProfileImage ?
-      userBasePath + assessmentData.creatorProfileImage :
-      DEFAULT_IMAGES.USER_PROFILE;
+    const thumbnailUrl = assessmentData.thumbnail
+      ? basePath + assessmentData.thumbnail
+      : DEFAULT_IMAGES.ASSESSMENT;
+    const ownerThumbnailUrl = assessmentData.userProfileImage
+      ? userBasePath + assessmentData.userProfileImage
+      : DEFAULT_IMAGES.USER_PROFILE;
+    const creatorThumbnailUrl = assessmentData.creatorProfileImage
+      ? userBasePath + assessmentData.creatorProfileImage
+      : DEFAULT_IMAGES.USER_PROFILE;
     const taxonomyInfo =
       (assessmentData.taxonomySet &&
         assessmentData.taxonomySet.curriculum &&
-        assessmentData.taxonomySet.curriculum.curriculumInfo) || [];
+        assessmentData.taxonomySet.curriculum.curriculumInfo) ||
+      [];
     const course = assessmentData.course || {};
     return AssessmentModel.create(Ember.getOwner(this).ownerInjection(), {
       id: assessmentData.id,
@@ -340,10 +343,12 @@ export default Ember.Object.extend(ConfigurationMixin, {
         .normalizeTaxonomyArray(taxonomyInfo),
       publishStatus: assessmentData.publishStatus,
       learningObjectives: assessmentData.languageObjective,
-      resourceCount: assessmentData.resourceCount ?
-        Number(assessmentData.resourceCount) : 0,
-      questionCount: assessmentData.questionCount ?
-        Number(assessmentData.questionCount) : 0,
+      resourceCount: assessmentData.resourceCount
+        ? Number(assessmentData.resourceCount)
+        : 0,
+      questionCount: assessmentData.questionCount
+        ? Number(assessmentData.questionCount)
+        : 0,
       remixCount: assessmentData.scollectionRemixCount || 0,
       course: course.title,
       courseId: course.id,
@@ -403,29 +408,45 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const taxonomyInfo =
       (questionData.taxonomySet &&
         questionData.taxonomySet.curriculum &&
-        questionData.taxonomySet.curriculum.curriculumInfo) || [];
-    const format = QuestionModel.normalizeQuestionType(questionData.contentSubFormat);
+        questionData.taxonomySet.curriculum.curriculumInfo) ||
+      [];
+    const format = QuestionModel.normalizeQuestionType(
+      questionData.contentSubFormat
+    );
     return QuestionModel.create(Ember.getOwner(this).ownerInjection(), {
       id: questionData.gooruOid,
       title: questionData.title,
       description: questionData.description,
-      type: questionData.resourceFormat ? questionData.resourceFormat.value : null,
+      type: questionData.resourceFormat
+        ? questionData.resourceFormat.value
+        : null,
       format: format,
       publisher: null, //TODO missing publisher at API response,
       thumbnailUrl: questionData.thumbnail,
-      creator: questionData.creator ? serializer.normalizeOwner(questionData.creator) : null,
-      owner: questionData.user ? serializer.normalizeOwner(questionData.user) : null,
-      standards: serializer.get('taxonomySerializer').normalizeTaxonomyArray(taxonomyInfo),
-      taxonomySubject: questionData.taxonomySet ? questionData.taxonomySet.subject : null,
-      taxonomyCourse: questionData.taxonomySet ? questionData.taxonomySet.course : null,
-      taxonomyDomain: questionData.taxonomySet ? questionData.taxonomySet.domain : null,
+      creator: questionData.creator
+        ? serializer.normalizeOwner(questionData.creator)
+        : null,
+      owner: questionData.user
+        ? serializer.normalizeOwner(questionData.user)
+        : null,
+      standards: serializer
+        .get('taxonomySerializer')
+        .normalizeTaxonomyArray(taxonomyInfo),
+      taxonomySubject: questionData.taxonomySet
+        ? questionData.taxonomySet.subject
+        : null,
+      taxonomyCourse: questionData.taxonomySet
+        ? questionData.taxonomySet.course
+        : null,
+      taxonomyDomain: questionData.taxonomySet
+        ? questionData.taxonomySet.domain
+        : null,
       efficacy: questionData.efficacy ? questionData.efficacy : null,
       relevance: questionData.relevance ? questionData.relevance : null,
       engagement: questionData.engagement ? questionData.engagement : null,
       contentSubFormat: questionData.contentSubFormat
     });
   },
-
 
   /**
    * Normalizes a question
@@ -440,16 +461,16 @@ export default Ember.Object.extend(ConfigurationMixin, {
     const signatureData = learningMapsContent.signatureContents;
     if (signatureData && signatureData.assessments) {
       signatureData.assessments.forEach(function(item) {
-        item.thumbnail = item.thumbnail ?
-          basePath + item.thumbnail :
-          appRootPath + DEFAULT_IMAGES.ASSESSMENT;
+        item.thumbnail = item.thumbnail
+          ? basePath + item.thumbnail
+          : appRootPath + DEFAULT_IMAGES.ASSESSMENT;
       });
     }
     if (signatureData && signatureData.collections) {
       signatureData.collections.forEach(function(item) {
-        item.thumbnail = item.thumbnail ?
-          basePath + item.thumbnail :
-          appRootPath + DEFAULT_IMAGES.COLLECTION;
+        item.thumbnail = item.thumbnail
+          ? basePath + item.thumbnail
+          : appRootPath + DEFAULT_IMAGES.COLLECTION;
       });
     }
 
@@ -461,7 +482,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
       contents: learningMapsContent.contents,
       prerequisites: learningMapsContent.prerequisites,
       signatureContents: signatureData,
-      learningMapsContent: serializer.normalizeSearchLearningMapsContentInfo(learningMapsContent.contents)
+      learningMapsContent: serializer.normalizeSearchLearningMapsContentInfo(
+        learningMapsContent.contents
+      )
     };
     return returnObjects;
   },
@@ -480,47 +503,72 @@ export default Ember.Object.extend(ConfigurationMixin, {
     let questionData = [];
 
     if (contents.assessment) {
-      contents.assessment.searchResults.map( assessment => {
+      contents.assessment.searchResults.map(assessment => {
         let assessmentInfo = serializer.normalizeAssessment(assessment);
         assessmentInfo.description = assessment.learningObjective;
         assessmentInfo.creator = serializer.normalizeOwner(assessment.creator);
         assessmentInfo.owner = serializer.normalizeOwner(assessment.user);
-        assessmentInfo.standards = serializer.get('taxonomySerializer').normalizeLearningMapsTaxonomyArray(assessment.taxonomy, TAXONOMY_LEVELS.ASSESSMENT);
+        assessmentInfo.standards = serializer
+          .get('taxonomySerializer')
+          .normalizeLearningMapsTaxonomyArray(
+            assessment.taxonomy,
+            TAXONOMY_LEVELS.ASSESSMENT
+          );
         assessmentData.push(assessmentInfo);
       });
     }
 
     if (contents.collection) {
-      contents.collection.searchResults.map( collection => {
+      contents.collection.searchResults.map(collection => {
         let collectionInfo = serializer.normalizeCollection(collection);
         collectionInfo.description = collection.learningObjective;
         collectionInfo.creator = serializer.normalizeOwner(collection.creator);
         collectionInfo.owner = serializer.normalizeOwner(collection.user);
-        collectionInfo.standards = serializer.get('taxonomySerializer').normalizeLearningMapsTaxonomyArray(collection.taxonomy, TAXONOMY_LEVELS.COLLECTION);
+        collectionInfo.standards = serializer
+          .get('taxonomySerializer')
+          .normalizeLearningMapsTaxonomyArray(
+            collection.taxonomy,
+            TAXONOMY_LEVELS.COLLECTION
+          );
         collectionData.push(collectionInfo);
       });
     }
 
     if (contents.course) {
-      contents.course.searchResults.map( course => {
+      contents.course.searchResults.map(course => {
         let courseInfo = serializer.normalizeCourse(course);
-        courseInfo.taxonomy = serializer.get('taxonomySerializer').normalizeLearningMapsTaxonomyArray(course.taxonomy, TAXONOMY_LEVELS.COURSE);
+        courseInfo.taxonomy = serializer
+          .get('taxonomySerializer')
+          .normalizeLearningMapsTaxonomyArray(
+            course.taxonomy,
+            TAXONOMY_LEVELS.COURSE
+          );
         courseData.push(courseInfo);
       });
     }
 
     if (contents.resource) {
-      contents.resource.searchResults.map( resource => {
+      contents.resource.searchResults.map(resource => {
         let resourceInfo = serializer.normalizeResource(resource);
-        resourceInfo.standards = serializer.get('taxonomySerializer').normalizeLearningMapsTaxonomyArray(resource.taxonomy, TAXONOMY_LEVELS.RESOURCE);
+        resourceInfo.standards = serializer
+          .get('taxonomySerializer')
+          .normalizeLearningMapsTaxonomyArray(
+            resource.taxonomy,
+            TAXONOMY_LEVELS.RESOURCE
+          );
         resourceData.push(resourceInfo);
       });
     }
 
     if (contents.question) {
-      contents.question.searchResults.map( question => {
+      contents.question.searchResults.map(question => {
         let questionInfo = serializer.normalizeQuestion(question);
-        questionInfo.standards = serializer.get('taxonomySerializer').normalizeLearningMapsTaxonomyArray(question.taxonomy, TAXONOMY_LEVELS.QUESTION);
+        questionInfo.standards = serializer
+          .get('taxonomySerializer')
+          .normalizeLearningMapsTaxonomyArray(
+            question.taxonomy,
+            TAXONOMY_LEVELS.QUESTION
+          );
         questionData.push(questionInfo);
       });
     }
@@ -532,7 +580,6 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return serializedContentData;
   },
 
-
   /**
    * Normalizes owner
    * @param ownerData
@@ -541,8 +588,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
   normalizeOwner: function(ownerData) {
     const serializer = this;
     const basePath = serializer.get('session.cdnUrls.user');
-    const thumbnailUrl = ownerData.profileImage ?
-      basePath + ownerData.profileImage : DEFAULT_IMAGES.USER_PROFILE;
+    const thumbnailUrl = ownerData.profileImage
+      ? basePath + ownerData.profileImage
+      : DEFAULT_IMAGES.USER_PROFILE;
 
     return ProfileModel.create(Ember.getOwner(this).ownerInjection(), {
       id: ownerData.gooruUId || ownerData.id,
@@ -560,9 +608,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
    * @returns {contentCount}
    */
   normalizeSearchContentCount: function(payload) {
-
     let totalHitCount = payload ? payload.totalHitCount : null;
     return totalHitCount;
   }
-
 });
