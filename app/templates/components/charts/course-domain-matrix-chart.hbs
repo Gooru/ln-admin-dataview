@@ -5,7 +5,7 @@
   <div class="course-domain-matrix">
     <div class="courses pull-left">
       {{#if isDomainViewEnabled}}
-        <div class="domain-info-container">
+        <div class="domain-info-container" style=" max-height : {{competencypanelHeight}}px">
           <div class="domain-detail-box">
             <div class="back-to-matrix-view" {{action 'backToCourseView'}}>
               {{app-icon name="ic_arrow_back"}}
