@@ -98,12 +98,12 @@
         }
       }
 
-      .domain-info-container ::-webkit-scrollbar {
+      .domain-info-container::-webkit-scrollbar {
         height: 6px;
-        width: 8px;
+        width: 5px;
       }
 
-      .domain-info-container ::-webkit-scrollbar-thumb {
+      .domain-info-container::-webkit-scrollbar-thumb {
         background: $gray-light;
         border: 1px solid $gray-light;
         border-radius: 5px;
