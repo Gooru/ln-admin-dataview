@@ -56,13 +56,13 @@ export default Ember.Component.extend({
    * Width of the cell
    * @type {Number}
    */
-  cellWidth: 35,
+  cellWidth: 32,
 
   /**
    * height of the cell
    * @type {Number}
    */
-  cellHeight: 35,
+  cellHeight: 32,
 
   /**
    * It will have  taxonomy courses by selected subject
