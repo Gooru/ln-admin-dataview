@@ -8,13 +8,9 @@
  */
 import Ember from 'ember';
 import d3 from 'd3';
-import {
-  DEFAULT_IMAGES
-} from 'admin-dataview/config/config';
-
+import { DEFAULT_IMAGES } from 'admin-dataview/config/config';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -80,7 +76,6 @@ export default Ember.Component.extend({
    */
   duration: 0,
 
-
   // -------------------------------------------------------------------------
   // Methods
 
@@ -112,7 +107,6 @@ export default Ember.Component.extend({
     if (!node.children) {
       component.appendLoader(children.data.id);
     }
-
   },
 
   update: function(source, depth) {
@@ -121,7 +115,6 @@ export default Ember.Component.extend({
     let width = component.get('width');
     let margin = component.get('margin');
     let root = component.get('root');
-
 
     // compute the new height
     let levelWidth = [1];
@@ -138,7 +131,8 @@ export default Ember.Component.extend({
     };
     childCount(0, root);
 
-    let newHeight = d3.max(levelWidth) * component.normalizeHeightBasedOnDepth(depth);
+    let newHeight =
+      d3.max(levelWidth) * component.normalizeHeightBasedOnDepth(depth);
 
     let treemap = d3.tree().size([newHeight, width]);
 
@@ -146,26 +140,24 @@ export default Ember.Component.extend({
     let nodes = treeData.descendants(),
       links = treeData.descendants().slice(1);
 
-
     d3.select('svg').remove();
-
-    let svg = d3.select(component.element).append('svg')
-      .attr('width', width + margin.right + margin.left + 600)
+    let svg = d3.select(component.element).append('svg');
+    let rootNode = svg
+      .attr('width', width + margin.right + margin.left)
       .attr('height', newHeight + margin.top + margin.bottom)
+      .attr('transform', 'scale(0.9, 0.9)')
       .append('g')
-      .attr('transform', `translate(${  margin.left  },${  margin.top  })`);
-
+      .attr('transform', `translate(${margin.left},${margin.top})`);
 
     nodes.forEach(function(d) {
-      d.y = d.depth * component.normalizeYPostionBasedOnDepth(d.depth);
+      d.y = d.depth * component.normalizeYPositionBasedOnDepth(d.depth);
     });
 
-    let node = svg.selectAll('g.node')
-      .data(nodes, function(d) {
-        let index = component.get('index');
-        component.set('index', ++index);
-        return d.id || (d.id = component.get('index'));
-      });
+    let node = rootNode.selectAll('g.node').data(nodes, function(d) {
+      let index = component.get('index');
+      component.set('index', ++index);
+      return d.id || (d.id = component.get('index'));
+    });
 
     /**
      * Click handling on when each node get choosed
@@ -212,65 +204,81 @@ export default Ember.Component.extend({
       d3.event.stopPropagation();
     }
 
-    let nodeEnter = node.enter().append('g')
+    let nodeEnter = node
+      .enter()
+      .append('g')
       .attr('class', 'node')
       .on('click', click);
 
-    let nodeText = nodeEnter.append('svg:foreignObject')
+    let nodeText = nodeEnter
+      .append('svg:foreignObject')
       .attr('text-anchor', function(d) {
         return d.children || d._children ? 'end' : 'start';
       })
       .style('fill-opacity', 1e-6)
-      .attr('width', 250).attr('height', 38)
+      .attr('width', 250)
+      .attr('height', 38)
       .append('xhtml:div')
       .attr('class', function(d) {
         let hasChildClass = d.data.hasChild ? '' : ' node-no-child';
-        let id = ` node-label-${  d.data.id.replace(/\./g, 's')}`;
+        let id = ` node-label-${d.data.id.replace(/\./g, 's')}`;
         return `${'node-label node-'}${d.depth}${hasChildClass}${id}`;
       });
 
     //Node label
-    nodeText.append('xhtml:div')
+    nodeText
+      .append('xhtml:div')
       .attr('class', 'node-text')
       .text(function(d) {
         return component.truncateString(d.data.name);
       });
 
-    nodeText.append('xhtml:div').attr('class', 'node-more-info').append('i')
-      .attr('class', 'ic_info_outline material-icons').text('ic_info_outline').on('click', onMoreInfoClick);
+    nodeText
+      .append('xhtml:div')
+      .attr('class', 'node-more-info')
+      .append('i')
+      .attr('class', 'ic_info_outline material-icons')
+      .text('ic_info_outline')
+      .on('click', onMoreInfoClick);
 
     let nodeUpdate = nodeEnter.merge(node);
 
-    nodeUpdate.transition()
+    nodeUpdate
+      .transition()
       .duration(duration)
       .attr('transform', function(d) {
-        let sourceY = d.y + component.normalizeYPostionBasedOnDepth((d.depth - 1));
+        let sourceY =
+          d.y + component.normalizeYPositionBasedOnDepth(d.depth - 1);
         let sourceX = d.x - 20;
-        return `translate(${  sourceY  },${  sourceX  })`;
+        return `translate(${sourceY},${sourceX})`;
       });
 
-
-    node.exit().transition()
+    node
+      .exit()
+      .transition()
       .duration(duration)
       .attr('transform', function(d) {
-        let sourceY = source.y + component.normalizeYPostionBasedOnDepth(d.depth);
+        let sourceY =
+          source.y + component.normalizeYPositionBasedOnDepth(d.depth);
         let sourceX = d.x - 20;
-        return `translate(${  sourceY  },${  sourceX  })`;
+        return `translate(${sourceY},${sourceX})`;
       })
       .remove();
 
-    let link = svg.selectAll('path.link')
-      .data(links, function(d) {
-        return d.id;
-      });
+    let link = rootNode.selectAll('path.link').data(links, function(d) {
+      return d.id;
+    });
     /**
      * Generates the diagonal path
      */
     function diagonal(s, d) {
       let sourceX = s.x;
-      let sourceY = s.y + component.normalizeYPostionBasedOnDepth(d.depth);
+      let sourceY = s.y + component.normalizeYPositionBasedOnDepth(d.depth);
       let selectedNodeX = d.x;
-      let selectedNodeY = d.y + component.normalizeYPostionBasedOnDepth(d.depth) + component.normalizePathPostionBasedOnDepth(d.depth);
+      let selectedNodeY =
+        d.y +
+        component.normalizeYPositionBasedOnDepth(d.depth) +
+        component.normalizePathPositionBasedOnDepth(d.depth);
       let path = `M ${sourceY} ${sourceX}
               C ${(sourceY + selectedNodeY) / 2} ${sourceX},
                 ${(sourceY + selectedNodeY) / 2} ${selectedNodeX},
@@ -279,11 +287,14 @@ export default Ember.Component.extend({
       return path;
     }
 
-    let linkEnter = link.enter().insert('path', 'g')
+    let linkEnter = link
+      .enter()
+      .insert('path', 'g')
       .attr('class', function(d) {
         let id = d.data.id.replace(/\./g, 's');
         return `${'link link-'}${id}${' link-'}${d.depth}`;
-      }).attr('copyclass', function(d) {
+      })
+      .attr('copyclass', function(d) {
         let id = d.data.id.replace(/\./g, 's');
         return `${'link link-'}${id}${' link-'}${d.depth}`;
       })
@@ -297,13 +308,16 @@ export default Ember.Component.extend({
 
     let linkUpdate = linkEnter.merge(link);
 
-    linkUpdate.transition()
+    linkUpdate
+      .transition()
       .duration(duration)
       .attr('d', function(d) {
         return diagonal(d, d.parent);
       });
 
-    link.exit().transition()
+    link
+      .exit()
+      .transition()
       .duration(duration)
       .attr('d', function() {
         var o = {
@@ -320,8 +334,11 @@ export default Ember.Component.extend({
     });
     if (depth === 1) {
       component.$('.node-1').removeClass('disable-events');
-      component.$(`.node-label-${  source.data.id}`).addClass('disable-events');
+      component.$(`.node-label-${source.data.id}`).addClass('disable-events');
     }
+    let newLevelWidth =
+      component.getWidthByTreeDepth() + margin.right + margin.left;
+    svg.attr('width', newLevelWidth);
   },
 
   data: null,
@@ -345,52 +362,55 @@ export default Ember.Component.extend({
     });
     selectedNode.children = childArray;
 
-
     component.update(selectedNode, selectedNode.depth);
   },
 
   normalizeHeightBasedOnDepth: function(depth) {
-    if (depth === 0) {
-      return 50;
-    } else if (depth === 1) {
-      return 60;
+    if (depth === 0 || depth === 1) {
+      return 45;
     } else if (depth === 2) {
+      return 60;
+    } else if (depth === 3 || depth === 4) {
+      return 65;
+    } else if (depth === 5) {
+      return 72;
+    } else if (depth === 6) {
       return 75;
-    } else {
-      return 80;
     }
   },
 
-  normalizeYPostionBasedOnDepth: function(depth) {
+  normalizeYPositionBasedOnDepth: function(depth) {
     if (depth >= 0) {
-      if (depth === 0) {
-        return 0;
-      } else if (depth === 1) {
-        return 160;
+      if (depth === 1) {
+        return 110;
       } else if (depth === 2) {
-        return 220;
+        return 130;
       } else if (depth === 3) {
-        return 240;
+        return 160;
       } else if (depth === 4) {
-        return 260;
-      } else if (depth === 5 || depth === 6) {
-        return 280;
+        return 175;
+      } else if (depth === 5) {
+        return 200;
+      } else if (depth === 6) {
+        return 210;
       }
     }
     return 0;
   },
 
-  normalizePathPostionBasedOnDepth: function(depth) {
+  normalizePathPositionBasedOnDepth: function(depth) {
     if (depth >= 0) {
-      if (depth === 0 || depth === 1) {
+      if (depth === 0) {
         return 0;
+      } else if (depth === 1) {
+        return 65;
       } else if (depth === 2) {
-        return 105;
+        return 155;
       } else if (depth === 3) {
-        return 140;
+        return 145;
       } else if (depth === 4) {
-        return 210;
-      } else if (depth === 5 || depth === 6) {
+        return 230;
+      } else if (depth === 5) {
         return 220;
       }
     }
@@ -405,24 +425,26 @@ export default Ember.Component.extend({
       component.$(element).attr('class', replaceClass);
     });
     component.$('.node-label').removeClass('selected');
-    component.$(`.node-label-${  id}`).addClass('selected');
+    component.$(`.node-label-${id}`).addClass('selected');
     let ids = id.split('-');
     for (let index = 0; index < ids.length; index++) {
       let newId = '';
       for (let nextIndex = 0; nextIndex <= index; nextIndex++) {
         if (nextIndex > 0) {
-          newId = `${newId  }-${  ids[nextIndex]}`;
+          newId = `${newId}-${ids[nextIndex]}`;
         } else {
           newId = newId + ids[nextIndex];
         }
       }
-      component.$(`svg g path.link-${  newId}`).attr('class', `selected link link-${  newId}`);
+      component
+        .$(`svg g path.link-${newId}`)
+        .attr('class', `selected link link-${newId}`);
     }
   },
 
   truncateString: function(text) {
     if (text.length > 74) {
-      return `${text.substring(0, 70)  }...`;
+      return `${text.substring(0, 70)}...`;
     }
     return text;
   },
@@ -430,9 +452,22 @@ export default Ember.Component.extend({
   appendLoader: function(id) {
     let component = this;
     id = id.replace(/\./g, 's');
-    component.$(`.node-label-${  id  } .node-more-info`).hide();
-    component.$(`.node-label-${  id}`).append(`<div class="loader"><img src="${  DEFAULT_IMAGES.LOADER }"></div>`);
+    component.$(`.node-label-${id} .node-more-info`).hide();
+    component
+      .$(`.node-label-${id}`)
+      .append(`<div class="loader"><img src="${DEFAULT_IMAGES.LOADER}"></div>`);
+  },
+
+  getWidthByTreeDepth: function() {
+    let component = this;
+    let width = 800;
+    if (component.$('.node-label').hasClass('node-6')) {
+      width = 1600;
+    } else if (component.$('.node-label').hasClass('node-5')) {
+      width = 1350;
+    } else if (component.$('.node-label').hasClass('node-4')) {
+      width = 1200;
+    }
+    return width;
   }
-
-
 });
