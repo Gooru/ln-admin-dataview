@@ -1,0 +1,13 @@
+{{#each categories as |category|}}
+{{category}}
+{{else}}
+no category
+check{{selectedCategory}}
+{{/each}}
+
+<div class="browser-container">
+  <div class="browser-level">
+
+    {{cards.app-domain-browser-card categories=categories}}
+  </div>
+</div>

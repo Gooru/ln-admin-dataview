@@ -1,0 +1,21 @@
+.cards.app-domain-browser-card {
+  width: 264px;
+  height: 343px;
+  overflow: auto;
+  border: solid 1px $dark-600;
+  .current-level-value {
+    a {
+      font-size: 13px;
+      color: $gray;
+      height: 36px;
+      line-height: 36px;
+      padding-left: 18px;
+      display: block;
+      text-transform: capitalize;
+      &:hover,
+      &.active {
+        background-color: #d0eefb;
+      }
+    }
+  }
+}

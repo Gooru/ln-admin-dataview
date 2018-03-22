@@ -7,11 +7,12 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.route('index', { path: '/'});
+  this.route('index', { path: '/' });
   this.route('competency', function() {
     this.route('tree');
     this.route('matrix');
     this.route('crosswalk');
+    this.route('learning-map');
   });
   this.route('learners');
   this.route('suggest');
@@ -23,7 +24,7 @@ Router.map(function() {
   });
   this.route('leaners');
 
-  this.route('activity', { path: '/activities/'}, function() {
+  this.route('activity', { path: '/activities/' }, function() {
     this.route('summary');
     this.route('courses');
     this.route('collections');
