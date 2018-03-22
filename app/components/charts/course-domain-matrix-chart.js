@@ -47,6 +47,11 @@ export default Ember.Component.extend({
   height: 900,
 
   /**
+   * @property {Number} competency left panel height
+   */
+  competencypanelHeight: 400,
+
+  /**
    * User id of competency matrix to plot
    * @type {String}
    */
@@ -219,6 +224,7 @@ export default Ember.Component.extend({
     let cellHeight = component.get('cellHeight');
     let height = component.get('taxonomyCourses').length * cellHeight;
     component.set('height', height);
+    component.set('competencypanelHeight', height + 25);
     let width = component.get('taxonomyDomains').length * cellWidth;
     component.set('width', width);
     component.$('#course-domain-matrix-chart').empty();

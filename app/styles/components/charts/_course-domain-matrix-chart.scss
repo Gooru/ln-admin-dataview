@@ -15,7 +15,7 @@
     cursor: default;
 
     .selected-domain {
-      box-shadow: 0 2px 7px 9px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 2px 7px 9px rgba(81, 79, 79, 0.5);
       position: absolute;
       background-color: $sky-400;
     }
@@ -65,6 +65,8 @@
       }
 
       .domain-info-container {
+        overflow-y: auto;
+
         .domain-detail-box {
           .back-to-matrix-view {
             width: 30px;
@@ -94,6 +96,17 @@
             }
           }
         }
+      }
+
+      .domain-info-container::-webkit-scrollbar {
+        height: 6px;
+        width: 5px;
+      }
+
+      .domain-info-container::-webkit-scrollbar-thumb {
+        background: $gray-light;
+        border: 1px solid $gray-light;
+        border-radius: 5px;
       }
 
       .domain-competency-info-container {
