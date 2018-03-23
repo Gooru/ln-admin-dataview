@@ -1,10 +1,7 @@
 import Ember from 'ember';
-import {
-  ACTIVITY_FILTER
-} from 'admin-dataview/config/config';
+import { ACTIVITY_FILTER } from 'admin-dataview/config/config';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['search-box'],
@@ -50,7 +47,10 @@ export default Ember.Component.extend({
    */
   invisibleFilterCount: Ember.computed('appliedFilterList', function() {
     let component = this;
-    return component.get('appliedFilterList.length') - component.get('visibleFilterCount');
+    return (
+      component.get('appliedFilterList.length') -
+      component.get('visibleFilterCount')
+    );
   }),
 
   /**
@@ -66,7 +66,6 @@ export default Ember.Component.extend({
    * @property {?string} action to send up when searching for a term
    */
   onSearch: null,
-
 
   /**
    * Search term
@@ -84,7 +83,6 @@ export default Ember.Component.extend({
 
   tempTerm: Ember.computed.oneWay('term'),
 
-
   // -------------------------------------------------------------------------
   // Events
   didInsertElement: function() {
@@ -98,7 +96,6 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Actions
   actions: {
-
     /**
      * @function onRemoveFilter
      * Action triggered when the user click on the clear button in applied filter tag
@@ -106,11 +103,15 @@ export default Ember.Component.extend({
     onRemoveFilter: function(selectedFilter) {
       let component = this;
       let userId = component.get('session.id');
-      let storedFilters = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`));
+      let storedFilters = JSON.parse(
+        localStorage.getItem(`research_${userId}_activities_filters`)
+      );
       if (storedFilters) {
         let filterType = selectedFilter.type;
         let categorizedFilterData = storedFilters[`${filterType}`];
-        let userRemovedFilterIndex = categorizedFilterData.findIndex(function(item) {
+        let userRemovedFilterIndex = categorizedFilterData.findIndex(function(
+          item
+        ) {
           return item.id === selectedFilter.id;
         });
         //if filter already selected, then remove it from the list
@@ -118,10 +119,17 @@ export default Ember.Component.extend({
           categorizedFilterData.splice(userRemovedFilterIndex, 1);
         }
         storedFilters[`${filterType}`] = categorizedFilterData;
-        localStorage.setItem(`research_${userId}_activities_filters`, JSON.stringify(storedFilters));
+        localStorage.setItem(
+          `research_${userId}_activities_filters`,
+          JSON.stringify(storedFilters)
+        );
         component.set('selectedFilterItems', storedFilters);
         //Trigger action to update the search results
-        component.sendAction('onChangeFilterItems', storedFilters, selectedFilter);
+        component.sendAction(
+          'onChangeFilterItems',
+          storedFilters,
+          selectedFilter
+        );
       }
     },
 
@@ -132,6 +140,8 @@ export default Ember.Component.extend({
         this.set('term', term);
         this.set('isInvalidSearchTerm', false);
         this.sendAction('onSearch', this.get('term'));
+      } else {
+        this.set('term', term);
       }
     },
 

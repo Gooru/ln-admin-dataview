@@ -3,7 +3,7 @@
     {{activities.search-box selectedFilterItems=selectedFilterItems onChangeFilterItems="onChangeFilterItems" onSearch='onSearch' term=searchTerm}}
     <div class="filters pull-left">
       <div class="filter-list">
-        {{activities.activities-filter filterTypes=filterTypes onChangeFilterItems="onChangeFilterItems"}}
+        {{activities.activities-filter clearSearch=clearSearch filterTypes=filterTypes onChangeFilterItems="onChangeFilterItems" clearFilter="clearFilter"}}
       </div>
     </div>
     <div class="activity-container pull-left">
