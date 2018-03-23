@@ -142,6 +142,7 @@ export default Ember.Component.extend({
         this.sendAction('onSearch', this.get('term'));
       } else {
         this.set('term', term);
+        this.sendAction('searchStatus');
       }
     },
 
