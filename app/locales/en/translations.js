@@ -34,7 +34,8 @@ export default {
       k12: 'K-12',
       k_12: 'K-12',
       'higher-ed': 'Higher Education',
-      'professional-dev': 'Professional Development'
+      'professional-dev': 'Professional Development',
+      'skills-training': 'Skills Training'
     },
     'in-progress': 'in progress',
     mastered: 'mastered',

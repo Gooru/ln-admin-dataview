@@ -3,21 +3,22 @@ import config from 'admin-dataview/config/environment';
 export const RESOURCE_COMPONENT_MAP = {
   'video/youtube': 'player.resources.gru-youtube-resource',
   'resource/url': 'player.resources.gru-url-resource',
-  'handouts': 'player.resources.gru-pdf-resource',
-  'image': 'player.resources.gru-image-resource',
+  handouts: 'player.resources.gru-pdf-resource',
+  image: 'player.resources.gru-image-resource',
   'vimeo/video': 'player.resources.gru-vimeo-resource'
 };
 
-export const UPLOADABLE_TYPES = [{
-  value: 'image',
-  validExtensions: '.jpg, .jpeg, .gif, .png',
-  validType: 'image/*'
-},
-{
-  value: 'text',
-  validExtensions: '.pdf',
-  validType: 'application/pdf'
-}
+export const UPLOADABLE_TYPES = [
+  {
+    value: 'image',
+    validExtensions: '.jpg, .jpeg, .gif, .png',
+    validType: 'image/*'
+  },
+  {
+    value: 'text',
+    validExtensions: '.pdf',
+    validType: 'application/pdf'
+  }
 ];
 
 export const VIDEO_RESOURCE_TYPE = 'video';
@@ -32,15 +33,16 @@ export const RESOURCE_TYPES = [
 ];
 
 export const DEFAULT_IMAGES = {
-  USER_PROFILE: `${config.rootURL  }assets/images/profile.png`,
-  COURSE: `${config.rootURL  }assets/images/course-default.png`,
-  RUBRIC: `${config.rootURL  }assets/images/rubric-default.png`,
-  COLLECTION: `${config.rootURL  }assets/images/collection-default.png`,
-  ASSESSMENT: `${config.rootURL  }assets/images/assessment-default.png`,
-  QUESTION_PLACEHOLDER_IMAGE: `${config.rootURL  }assets/images/question-placeholder-image.png`,
-  LOADER: `${config.rootURL  }/assets/images/loader.svg`
+  USER_PROFILE: `${config.rootURL}assets/images/profile.png`,
+  COURSE: `${config.rootURL}assets/images/course-default.png`,
+  RUBRIC: `${config.rootURL}assets/images/rubric-default.png`,
+  COLLECTION: `${config.rootURL}assets/images/collection-default.png`,
+  ASSESSMENT: `${config.rootURL}assets/images/assessment-default.png`,
+  QUESTION_PLACEHOLDER_IMAGE: `${
+    config.rootURL
+  }assets/images/question-placeholder-image.png`,
+  LOADER: `${config.rootURL}/assets/images/loader.svg`
 };
-
 
 export const K12_CATEGORY = {
   value: 'k_12',
@@ -58,10 +60,17 @@ export const LEARNING_CATEGORY = {
   label: 'common.categoryOptions.professional-dev'
 };
 
+export const SKILLS_TRAINING = {
+  value: 'skills_training',
+  apiCode: 'SK',
+  label: 'common.categoryOptions.skills-training'
+};
+
 export const TAXONOMY_CATEGORIES = [
   K12_CATEGORY,
   EDUCATION_CATEGORY,
-  LEARNING_CATEGORY
+  LEARNING_CATEGORY,
+  SKILLS_TRAINING
 ];
 
 export const CONTENT_TYPES = {
@@ -99,26 +108,27 @@ export const VIEW_LAYOUT_PICKER_OPTIONS = {
   THUMBNAILS: 'thumbnails'
 };
 
-export const EMOTION_VALUES = [{
-  value: 5,
-  unicode: '1f601'
-},
-{
-  value: 4,
-  unicode: '1f642'
-},
-{
-  value: 3,
-  unicode: '1f610'
-},
-{
-  value: 2,
-  unicode: '1f641'
-},
-{
-  value: 1,
-  unicode: '1f625'
-}
+export const EMOTION_VALUES = [
+  {
+    value: 5,
+    unicode: '1f601'
+  },
+  {
+    value: 4,
+    unicode: '1f642'
+  },
+  {
+    value: 3,
+    unicode: '1f610'
+  },
+  {
+    value: 2,
+    unicode: '1f641'
+  },
+  {
+    value: 1,
+    unicode: '1f625'
+  }
 ];
 
 export const SCORES = {
@@ -126,7 +136,6 @@ export const SCORES = {
   GOOD: 70,
   VERY_GOOD: 80,
   EXCELLENT: 90
-
 };
 
 export const GRADING_SCALE = [
@@ -149,36 +158,46 @@ export const TAXONOMY_LEVELS = {
   MICRO: 'micro-standard'
 };
 
-export const NAVIGATION_MENUS = ['competency', 'activities', 'learners', 'suggest'];
+export const NAVIGATION_MENUS = [
+  'competency',
+  'activities',
+  'learners',
+  'suggest'
+];
 
 export const NAVIGATION_MENUS_INDEX = {
-  'competency': 0,
-  'activities': 1,
-  'learners': 2,
-  'suggest': 3,
-  'learner': 2
+  competency: 0,
+  activities: 1,
+  learners: 2,
+  suggest: 3,
+  learner: 2
 };
 
-
-export const ACTIVITIES_NAVIGATION_MENUS = ['summary', 'courses', 'collections', 'assessments', 'resources', 'questions'];
+export const ACTIVITIES_NAVIGATION_MENUS = [
+  'summary',
+  'courses',
+  'collections',
+  'assessments',
+  'resources',
+  'questions'
+];
 
 export const ACTIVITIES_NAVIGATION_MENUS_INDEX = {
-  'summary': 0,
-  'courses': 1,
-  'collections': 2,
-  'assessments': 3,
-  'resources': 4,
-  'questions': 5
+  summary: 0,
+  courses: 1,
+  collections: 2,
+  assessments: 3,
+  resources: 4,
+  questions: 5
 };
 
 export const COMPETENCY_NAVIGATION_MENUS = ['matrix', 'crosswalk', 'tree'];
 
 export const COMPETENCY_NAVIGATION_MENUS_INDEX = {
-  'matrix': 0,
-  'crosswalk': 1,
-  'tree': 2
+  matrix: 0,
+  crosswalk: 1,
+  tree: 2
 };
-
 
 export const CODE_TYPES = {
   STANDARD_CATEGORY: 'standard_level_0',
@@ -202,59 +221,72 @@ export const QUESTION_TYPES = {
   hotTextHighlight: 'HT_HL'
 };
 
-export const LEARNER_TIME_PERIOD_FILTER = [{
-  'value': 'yesterday',
-  'label': 'learner.yesterday',
-  'isActive': false
-}, {
-  'value': '1w',
-  'label': 'learner.last-week',
-  'isActive': false
+export const LEARNER_TIME_PERIOD_FILTER = [
+  {
+    value: 'yesterday',
+    label: 'learner.yesterday',
+    isActive: false
+  },
+  {
+    value: '1w',
+    label: 'learner.last-week',
+    isActive: false
+  },
+  {
+    value: '1m',
+    label: 'learner.last-month',
+    isActive: false
+  },
+  {
+    value: '3m',
+    label: 'learner.last-3-months',
+    isActive: true
+  },
+  {
+    value: '6m',
+    label: 'learner.last-6-months',
+    isActive: false
+  },
+  {
+    value: '1y',
+    label: 'learner.last-year',
+    isActive: false
+  },
+  {
+    value: 'from-the-beginning-of-time',
+    label: 'learner.from-the-beginning-of-time',
+    isActive: false
+  }
+];
 
-}, {
-  'value': '1m',
-  'label': 'learner.last-month',
-  'isActive': false
-}, {
-  'value': '3m',
-  'label': 'learner.last-3-months',
-  'isActive': true
-}, {
-  'value': '6m',
-  'label': 'learner.last-6-months',
-  'isActive': false
-}, {
-  'value': '1y',
-  'label': 'learner.last-year',
-  'isActive': false
-}, {
-  'value': 'from-the-beginning-of-time',
-  'label': 'learner.from-the-beginning-of-time',
-  'isActive': false
-}];
+export const LEARNER_CHILD_ROUTES = [
+  'journeys',
+  'competencies',
+  'courses',
+  'activites'
+];
 
-export const LEARNER_CHILD_ROUTES = ['journeys', 'competencies', 'courses', 'activites'];
-
-export const BARS_GRADING_SCALE = [{
-  LOWER_LIMIT: 0,
-  COLOR: '#D82100'
-},
-{
-  LOWER_LIMIT: 60,
-  COLOR: '#CF7400'
-},
-{
-  LOWER_LIMIT: 70,
-  COLOR: '#CC9700'
-},
-{
-  LOWER_LIMIT: 80,
-  COLOR: '#4B9740'
-},
-{
-  LOWER_LIMIT: 90,
-  COLOR: '#A8C99C'
-}
+export const BARS_GRADING_SCALE = [
+  {
+    LOWER_LIMIT: 0,
+    COLOR: '#D82100'
+  },
+  {
+    LOWER_LIMIT: 60,
+    COLOR: '#CF7400'
+  },
+  {
+    LOWER_LIMIT: 70,
+    COLOR: '#CC9700'
+  },
+  {
+    LOWER_LIMIT: 80,
+    COLOR: '#4B9740'
+  },
+  {
+    LOWER_LIMIT: 90,
+    COLOR: '#A8C99C'
+  }
 ];
 
 export const CENTURY_SKILLS_GROUPS = {
@@ -265,50 +297,50 @@ export const CENTURY_SKILLS_GROUPS = {
 
 export const ACTIVITY_FILTER = [
   {
-    'title': 'activities.filter-types.category',
-    'code': 'category'
+    title: 'activities.filter-types.category',
+    code: 'category'
   },
   {
-    'title': 'activities.filter-types.subject',
-    'code': 'subject'
+    title: 'activities.filter-types.subject',
+    code: 'subject'
   },
   {
-    'title': 'activities.filter-types.course',
-    'code': 'course'
+    title: 'activities.filter-types.course',
+    code: 'course'
   },
   {
-    'title': 'activities.filter-types.21-century-skills',
-    'code': '21-century-skills'
+    title: 'activities.filter-types.21-century-skills',
+    code: '21-century-skills'
   },
   {
-    'title': 'activities.filter-types.dok',
-    'code': 'dok'
+    title: 'activities.filter-types.dok',
+    code: 'dok'
   },
   {
-    'title': 'activities.filter-types.license',
-    'code': 'licenses'
+    title: 'activities.filter-types.license',
+    code: 'licenses'
   },
   {
-    'title': 'activities.filter-types.publisher',
-    'code': 'publisher'
+    title: 'activities.filter-types.publisher',
+    code: 'publisher'
   },
   {
-    'title': 'activities.filter-types.audience',
-    'code': 'audience'
+    title: 'activities.filter-types.audience',
+    code: 'audience'
   }
 ];
 
 export const ACTIVITIES_FILTER = [
   {
-    'title': 'activities.filter-types.category',
-    'code': 'category'
+    title: 'activities.filter-types.category',
+    code: 'category'
   },
   {
-    'title': 'activities.filter-types.subject',
-    'code': 'subject'
+    title: 'activities.filter-types.subject',
+    code: 'subject'
   },
   {
-    'title': 'activities.filter-types.course',
-    'code': 'course'
+    title: 'activities.filter-types.course',
+    code: 'course'
   }
 ];
