@@ -133,8 +133,7 @@ export default Ember.Controller.extend({
       let filters = JSON.parse(
         localStorage.getItem(`research_${userId}_activities_filters`)
       );
-
-      if ((filters && filters.category) || filters.subject || filters.course) {
+      if (filters && (filters.category || filters.subject || filters.course)) {
         controller.set('service', true);
       } else {
         controller.transitionToRoute('/activities');
