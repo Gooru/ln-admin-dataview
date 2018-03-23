@@ -125,6 +125,20 @@ export default Ember.Controller.extend({
       } else {
         controller.transitionToRoute('/activities');
       }
+    },
+
+    searchStatus: function() {
+      let controller = this;
+      let userId = controller.get('session.id');
+      let filters = JSON.parse(
+        localStorage.getItem(`research_${userId}_activities_filters`)
+      );
+
+      if ((filters && filters.category) || filters.subject || filters.course) {
+        controller.set('service', true);
+      } else {
+        controller.transitionToRoute('/activities');
+      }
     }
   },
 
