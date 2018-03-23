@@ -103,6 +103,28 @@ export default Ember.Controller.extend({
       if (activeMenuIndex > -1) {
         controller.get(`${routeName}Controller`).refreshItems();
       }
+    },
+
+    clearFilter: function() {
+      let controller = this;
+      let userId = controller.get('session.id');
+      localStorage.setItem(
+        `research_${userId}_activities_filters`,
+        JSON.stringify({})
+      );
+      controller.set('selectedFilterItemsBuffer', {});
+      let term = controller.get('searchTerm');
+      if (term) {
+        let routeName = Utils.getRoutePathLastOccurrence();
+        let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
+        controller.set('selectedFilterItems', {});
+        controller.set('clearSearch', true);
+        if (activeMenuIndex > -1) {
+          controller.get(`${routeName}Controller`).refreshItems();
+        }
+      } else {
+        controller.transitionToRoute('/activities');
+      }
     }
   },
 
@@ -129,6 +151,12 @@ export default Ember.Controller.extend({
     let controller = this;
     return controller.getStoredFilterItems();
   }),
+
+  /**
+   * Search term clear refresh
+   * @type {String}
+   */
+  clearSearch: false,
 
   /**
    * Search term

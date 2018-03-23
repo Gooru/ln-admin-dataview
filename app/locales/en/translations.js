@@ -187,7 +187,8 @@ export default {
     'pull-out': {
       'taxonomy-title': 'Subject, Course and Domain',
       content: 'Content'
-    }
+    },
+    'clear-all': 'Clear All'
   },
   'century-skills': {
     legends: {

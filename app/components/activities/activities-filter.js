@@ -13,6 +13,12 @@ export default Ember.Component.extend({
   //Properties
   selectedFilterItems: {},
 
+  clearSearchRefresh: Ember.observer('clearSearch', function() {
+    let component = this;
+    component.set('selectedFilterItems', JSON.stringify({}));
+    component.$('.filter-name  input').prop('checked', false);
+  }),
+
   //------------------------------------------------------------------------
   //Actions
   actions: {
@@ -47,6 +53,11 @@ export default Ember.Component.extend({
     onSelectCenturySkills(storedFilters) {
       let component = this;
       component.sendAction('onChangeFilterItems', storedFilters);
+    },
+
+    clearFilters: function() {
+      let component = this;
+      component.sendAction('clearFilter');
     }
   },
 
