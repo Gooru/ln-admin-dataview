@@ -55,7 +55,10 @@ export default {
     'no-results-message':
       'Check your spelling. We all make mistakes!<br/>Go broader and remove some filters.<br/> Or try searching for a similar word instead.',
     'show-more-results': 'Show More Results',
-    prerequisites: 'Prerequisites'
+    prerequisites: 'Prerequisites',
+    skyline: 'Skyline',
+    'collapse-chart': 'Collapse chart',
+    'expand-chart': 'Expand chart'
   },
   logout: {
     name: 'Logout'

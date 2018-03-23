@@ -1,11 +1,7 @@
 import Ember from 'ember';
-import {
-  RESOURCE_TYPES
-} from 'admin-dataview/config/config';
-
+import { RESOURCE_TYPES } from 'admin-dataview/config/config';
 
 export default Ember.Controller.extend({
-
   // -------------------------------------------------------------------------
   // Dependencies
   i18n: Ember.inject.service(),
@@ -20,7 +16,6 @@ export default Ember.Controller.extend({
    */
   competencyService: Ember.inject.service('api-sdk/competency'),
 
-
   /**
    * @requires service:performance
    */
@@ -32,14 +27,11 @@ export default Ember.Controller.extend({
    */
   taxonomyService: Ember.inject.service('taxonomy'),
 
-
   // -------------------------------------------------------------------------
   // Attributes
 
-
   // -------------------------------------------------------------------------
   // Properties
-
 
   /**
    * data of the learner
@@ -83,7 +75,6 @@ export default Ember.Controller.extend({
    */
   isShowCourseMatrix: false,
 
-
   /**
    * Show loading spinner
    */
@@ -92,7 +83,14 @@ export default Ember.Controller.extend({
   /**
    * Show loading spinner
    */
-  competencyStatus: ['Not Started', 'In progress', 'Inferred', 'Asserted', 'Inferred', 'Earned'],
+  competencyStatus: [
+    'Not Started',
+    'In progress',
+    'Inferred',
+    'Asserted',
+    'Inferred',
+    'Earned'
+  ],
 
   /**
    * It  will have default subject category
@@ -118,12 +116,23 @@ export default Ember.Controller.extend({
    */
   isJourneyTabs: false,
 
-
   /**
    * It will indicates the state of skyline.
    * @type {Boolean}
    */
   isSkylineEnabled: false,
+
+  /**
+   * It will indicates the state of chart view mode.
+   * @type {Boolean}
+   */
+  isExpandChartEnabled: false,
+
+  /**
+   * Disabled expand button
+   * @type {Boolean}
+   */
+  disabledExpandButton: false,
 
   /**
    * It will have  couse item selected default .
@@ -140,7 +149,6 @@ export default Ember.Controller.extend({
   isSelectedCourseId: Ember.computed(function() {
     return 1;
   }),
-
 
   /**
    * It will have  subject item selected default .
@@ -159,16 +167,33 @@ export default Ember.Controller.extend({
   // actions
 
   actions: {
-
     onClickBackButton: function() {
       this.transitionToRoute('learner');
     },
 
     /**
-     * Trigger when skyline toggle button got changed
+     * Trigger when skyline toggle button got changed.
      */
     onChangeSkyline: function(value) {
+      if (value) {
+        this.set('isExpandChartEnabled', true);
+        this.set('disabledExpandButton', true);
+      } else {
+        this.set('disabledExpandButton', false);
+      }
       this.set('isSkylineEnabled', value);
+    },
+
+    /**
+     * Trigger when reset toggle button got changed.
+     */
+    onChangeResetChart: function(value) {
+      let isSkylineEnabled = this.get('isSkylineEnabled');
+      if (isSkylineEnabled) {
+        this.set('isExpandChartEnabled', true);
+      } else {
+        this.set('isExpandChartEnabled', value);
+      }
     },
 
     /**
@@ -183,20 +208,29 @@ export default Ember.Controller.extend({
       controller.set('showMore', false);
       let userId = controller.get('userId');
       return Ember.RSVP.hash({
-        collections: controller.get('competencyService').getUserPerformanceCompetencyCollections(userId, data.competencyCode)
-      }).then(({
-        collections
-      }) => {
+        collections: controller
+          .get('competencyService')
+          .getUserPerformanceCompetencyCollections(userId, data.competencyCode)
+      }).then(({ collections }) => {
         controller.set('isLoading', false);
         let collectionData = Ember.A();
         let status;
         let statusMastered;
-        if (data.status === 2 || data.status === 3 || data.status === 4 || data.status === 5) {
+        if (
+          data.status === 2 ||
+          data.status === 3 ||
+          data.status === 4 ||
+          data.status === 5
+        ) {
           status = 'Mastered';
-          statusMastered = controller.get('competencyStatus') ? controller.get('competencyStatus')[data.status] : null;
+          statusMastered = controller.get('competencyStatus')
+            ? controller.get('competencyStatus')[data.status]
+            : null;
           collectionData = collections;
           if (!collectionData.length >= 1) {
-            statusMastered = controller.get('competencyStatus') ? controller.get('competencyStatus')[2] : null;
+            statusMastered = controller.get('competencyStatus')
+              ? controller.get('competencyStatus')[2]
+              : null;
           }
         } else if (data.status === 1) {
           status = 'in progress';
@@ -205,7 +239,10 @@ export default Ember.Controller.extend({
           status = 'Not Started';
         }
         controller.set('collection', collectionData);
-        controller.set('title', data.courseName ? data.courseName : data.domainName);
+        controller.set(
+          'title',
+          data.courseName ? data.courseName : data.domainName
+        );
         controller.set('description', data.competencyCode);
         let competency = {
           status: status ? status : 'NA',
@@ -219,16 +256,19 @@ export default Ember.Controller.extend({
 
     onChangeHeaderView(selectedView) {
       let controller = this;
+      controller.set('isSkylineEnabled', false);
+      controller.set('isExpandChartEnabled', false);
       controller.set('isCourseModeEnabled', selectedView === 'course');
       controller.set('isListModeEnabled', selectedView === 'list');
     },
 
     subjectChange: function(subject) {
       let controller = this;
+      controller.set('isSkylineEnabled', false);
+      controller.set('isExpandChartEnabled', false);
       controller.set('subjectId', subject.id);
       controller.set('subjectTitle', subject.subjectTitle);
     },
-
 
     courseChange: function(course) {
       let controller = this;
@@ -269,19 +309,25 @@ export default Ember.Controller.extend({
       let controller = this;
       if (routeTo === 'activities') {
         let queryParams = {
-          'resource': RESOURCE_TYPES[0]
+          resource: RESOURCE_TYPES[0]
         };
         controller.transitionToRoute('learner.activities', {
           queryParams
         });
       } else if (routeTo === 'courses') {
-        controller.transitionToRoute('learner.journeys', controller.get('userId'));
+        controller.transitionToRoute(
+          'learner.journeys',
+          controller.get('userId')
+        );
       }
     },
 
     onExploreJourneyTaken: function() {
       let controller = this;
-      controller.transitionToRoute('learner.journeys', controller.get('userId'));
+      controller.transitionToRoute(
+        'learner.journeys',
+        controller.get('userId')
+      );
     },
 
     onClickCourseBackButton: function() {
@@ -290,7 +336,6 @@ export default Ember.Controller.extend({
       controller.set('isJourney', true);
       controller.set('isSelectedCourse', 'Journeys Summary');
     }
-
   },
 
   // -------------------------------------------------------------------------
@@ -308,33 +353,39 @@ export default Ember.Controller.extend({
     controller.fetchSubjectsByCategory(subjectCategory);
   },
 
-
   fetchSubjectsByCategory: function(subjectCategory) {
     let controller = this;
-    controller.get('taxonomyService').getSubjects(subjectCategory).then(subjects => {
-      let subject = subjects.objectAt(0);
-      controller.set('taxonomySubjects', subjects);
-      controller.set('subjectId', subject.id);
-      controller.set('subjectTitle', subject.subjectTitle);
-    });
+    controller
+      .get('taxonomyService')
+      .getSubjects(subjectCategory)
+      .then(subjects => {
+        let subject = subjects.objectAt(0);
+        controller.set('taxonomySubjects', subjects);
+        controller.set('subjectId', subject.id);
+        controller.set('subjectTitle', subject.subjectTitle);
+      });
   },
-
 
   fetchJourneyByUser: function() {
     let controller = this;
     let userId = controller.get('userId');
-    controller.get('learnersService').getUserStatsByCourse(userId, '3m').then(journeys => {
-      let journeyCourse = Ember.A();
-      let arrayList = [{
-        courseTitle: 'Journeys Summary',
-        courseId: 1
-      }];
-      journeys.forEach(course => {
-        arrayList.push(course);
+    controller
+      .get('learnersService')
+      .getUserStatsByCourse(userId, '3m')
+      .then(journeys => {
+        let journeyCourse = Ember.A();
+        let arrayList = [
+          {
+            courseTitle: 'Journeys Summary',
+            courseId: 1
+          }
+        ];
+        journeys.forEach(course => {
+          arrayList.push(course);
+        });
+        journeyCourse.push(arrayList);
+        controller.set('journeyCourses', journeyCourse[0]);
       });
-      journeyCourse.push(arrayList);
-      controller.set('journeyCourses', journeyCourse[0]);
-    });
   },
 
   courseInClass: function(course) {
@@ -343,14 +394,16 @@ export default Ember.Controller.extend({
     let courseId = course.courseId;
     let classId = course.classId;
     let userId = controller.get('userId');
-    controller.get('performanceService').getUserPerformanceUnits(userId, courseId, classId).then(performance => {
-      controller.set('userPerformanceUnits', performance);
-      controller.set('courseId', course.courseId);
-      controller.set('classId', course.classId);
-      controller.set('courseTitle', course.courseTitle);
-      controller.set('isLoading', false);
-
-    });
+    controller
+      .get('performanceService')
+      .getUserPerformanceUnits(userId, courseId, classId)
+      .then(performance => {
+        controller.set('userPerformanceUnits', performance);
+        controller.set('courseId', course.courseId);
+        controller.set('classId', course.classId);
+        controller.set('courseTitle', course.courseTitle);
+        controller.set('isLoading', false);
+      });
   },
 
   courseOutClass: function(course) {
@@ -359,15 +412,15 @@ export default Ember.Controller.extend({
     let courseId = course.courseId;
     let classId = course.classId;
     let userId = controller.get('userId');
-    controller.get('performanceService').getUserPerformanceUnits(userId, courseId, classId).then(performance => {
-      controller.set('userPerformanceUnits', performance);
-      controller.set('courseId', course.courseId);
-      controller.set('classId', course.classId);
-      controller.set('courseTitle', course.courseTitle);
-      controller.set('isLoading', false);
-
-    });
+    controller
+      .get('performanceService')
+      .getUserPerformanceUnits(userId, courseId, classId)
+      .then(performance => {
+        controller.set('userPerformanceUnits', performance);
+        controller.set('courseId', course.courseId);
+        controller.set('classId', course.classId);
+        controller.set('courseTitle', course.courseTitle);
+        controller.set('isLoading', false);
+      });
   }
-
-
 });

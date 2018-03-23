@@ -46,7 +46,7 @@
       margin-left: 20px;
 
       .panel-title {
-        margin: 0px;
+        margin: 0;
 
         span {
           width: 186px;
@@ -72,11 +72,22 @@
     }
 
     .skyline {
-      width: 50%;
+      width: 38%;
       display: flex;
 
       .text {
-        width: 25%;
+        width: 45%;
+        font-size: 16px;
+        color: #b3b3be;
+      }
+    }
+
+    .chart-reset-button {
+      width: 60%;
+      display: flex;
+
+      .text {
+        width: 53%;
         font-size: 16px;
         color: #b3b3be;
       }

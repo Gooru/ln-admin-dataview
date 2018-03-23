@@ -10,8 +10,16 @@
         {{#if (or isCourseModeEnabled isListModeEnabled)}}
         {{else}}
           <div class="skyline">
-            <span class="text">Skyline </span> {{app-switch  onOptionSwitch='onChangeSkyline'}}
-
+            <span class="text">{{t 'common.skyline'}}</span>
+            {{app-switch  onOptionSwitch='onChangeSkyline' isChecked=isSkylineEnabled}}
+          </div>
+          <div class="chart-reset-button">
+            {{# if isExpandChartEnabled}}
+            <span class="text">{{t 'common.collapse-chart'}}</span>
+            {{else}}
+            <span class="text">{{t 'common.expand-chart'}}</span>
+            {{/if}}
+            {{app-switch  onOptionSwitch='onChangeResetChart' isChecked=isExpandChartEnabled disabled=disabledExpandButton}}
           </div>
         {{/if}}
         <div class="nav-header">
@@ -33,7 +41,7 @@
 
           {{else if isCourseModeEnabled }} {{charts.competency-matrix-chart userId=userId subjectId=subjectId onCompetencyPullOut='onCompetencyPullOut' showPullOut=showPullOut}}
         {{else}}
-          {{charts.competency-matrix-domain-chart userId=userId  subjectId=subjectId onCompetencyPullOut='onCompetencyPullOut' showPullOut=showPullOut isSkylineEnabled=isSkylineEnabled}}
+          {{charts.competency-matrix-domain-chart userId=userId  subjectId=subjectId onCompetencyPullOut='onCompetencyPullOut' onChangeSkyline='onChangeSkyline' onChangeResetChart='onChangeResetChart' showPullOut=showPullOut isSkylineEnabled=isSkylineEnabled isExpandChartEnabled=isExpandChartEnabled}}
         {{/if}}
       </div>
       {{else if isJourney}}
