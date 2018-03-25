@@ -3,8 +3,8 @@
   height: 343px;
   overflow: auto;
   border: solid 1px $dark-600;
-  .current-level-value {
-    a {
+  .browser-card {
+    .item {
       font-size: 13px;
       color: $gray;
       height: 36px;
@@ -15,6 +15,18 @@
       &:hover,
       &.active {
         background-color: #d0eefb;
+      }
+    }
+    &.domain {
+      .item {
+        background: none;
+        line-height: normal;
+        display: flex;
+        margin-top: 13px;
+        height: auto;
+      }
+      input[type="checkbox"]:checked {
+        background: blue;
       }
     }
   }

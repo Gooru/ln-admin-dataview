@@ -4,9 +4,14 @@
       Category, Subject, Course, Domain
     </div>
     <div class="body">
-      {{learning-map.app-domain-browser}}
+      {{learning-map.app-domain-browser onSelectDomain="onSelectDomain" onSelectDataItem="onSelectDataItem"}}
+
+      <div class="generate-table-btn" align="center">
+        <button class="btn generate-btn {{unless enableGenerateTableBtn 'disabled'}}" {{action "onExportCompetency"}}>{{t 'crosswalk.generate-table'}}</button>
+      </div>
     </div>
   </div>
   <div class="table-container">
+    {{learning-map.competency-table dataLevels=dataLevels competencies=competencies domainStack=domainStack}}
   </div>
 </div>

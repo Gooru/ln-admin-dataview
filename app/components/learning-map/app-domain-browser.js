@@ -1,8 +1,5 @@
 import Ember from 'ember';
-import {
-  COMPETENCY_LEARNING_MAP_DATA_LEVELS,
-  TAXONOMY_CATEGORIES
-} from 'admin-dataview/config/config';
+import { TAXONOMY_CATEGORIES } from 'admin-dataview/config/config';
 
 export default Ember.Component.extend({
   classNames: ['learning-map', 'app-domain-browser'],
@@ -14,8 +11,6 @@ export default Ember.Component.extend({
    */
   taxonomyService: Ember.inject.service('taxonomy'),
 
-  dataLevels: COMPETENCY_LEARNING_MAP_DATA_LEVELS,
-
   categories: TAXONOMY_CATEGORIES,
 
   subjects: [],
@@ -23,8 +18,6 @@ export default Ember.Component.extend({
   courses: [],
 
   domains: [],
-
-  dataLevelItesms: [],
 
   defaultFramework: 'GDT',
 
@@ -36,26 +29,42 @@ export default Ember.Component.extend({
 
   domainStack: [],
 
-  init() {
+  didInsertElement() {
     let component = this;
     let selectedCategory = component.get('selectedCategory');
     let initialSubject = component.fetchSubjectsByCategory(selectedCategory);
     initialSubject.then(function(subject) {
-      if (!subject.frameworkId) {
-        subject.frameworkId = component.get('defaultFramework');
-      }
-      component.set('selectedSubject', subject);
       let initialCourse = component.fetchCoursesBySubject(subject);
       initialCourse.then(function(course) {
-        component.set('selectedCourse', course);
-        subject.courses = component.get('courses');
         component.fetchDomainsByCourse(subject, course);
       });
     });
   },
 
+  actions: {
+    onSelectDataItem(type, dataItem) {
+      let component = this;
+      component.fetchContentByType(type, dataItem);
+      component.sendAction('onSelectDataItem', type, dataItem);
+    },
+
+    onSelectDomain(domainId) {
+      let component = this;
+      let domainStack = component.get('domainStack');
+      if (domainStack.includes(domainId)) {
+        let domainIndex = domainStack.indexOf(domainId);
+        domainStack.splice(domainIndex, 1);
+      } else {
+        domainStack.push(domainId);
+      }
+      component.set('domainStack', domainStack);
+      component.sendAction('onSelectDomain', domainStack);
+    }
+  },
+
   fetchSubjectsByCategory(category) {
     let component = this;
+    component.set('selectedCategory', category);
     const subjectsPromise = Ember.RSVP.resolve(
       component.get('taxonomyService').getSubjects(category)
     );
@@ -69,8 +78,12 @@ export default Ember.Component.extend({
 
   fetchCoursesBySubject(subject) {
     let component = this;
+    if (!subject.frameworkId) {
+      subject.frameworkId = component.get('defaultFramework');
+    }
+    component.set('selectedSubject', subject);
     const coursePromise = Ember.RSVP.resolve(
-      component.get('taxonomyService').getCoursesBySubject(subject)
+      component.get('taxonomyService').getCourses(subject)
     );
     return Ember.RSVP.hash({
       courseList: coursePromise
@@ -82,6 +95,7 @@ export default Ember.Component.extend({
 
   fetchDomainsByCourse(subject, course) {
     let component = this;
+    component.set('selectedCourse', course);
     const domainPromise = Ember.RSVP.resolve(
       component.get('taxonomyService').getCourseDomains(subject, course.id)
     );
@@ -89,6 +103,40 @@ export default Ember.Component.extend({
       domainList: domainPromise
     }).then(function(hash) {
       component.set('domains', hash.domainList);
+    });
+  },
+
+  fetchContentByType(type, dataItem) {
+    let component = this;
+    let itemsToReset = [];
+    let selectedSubject = component.get('selectedSubject');
+    switch (type) {
+    case 'category':
+      itemsToReset = ['subjects', 'courses', 'domains'];
+      component.resetItems(itemsToReset);
+      component.fetchSubjectsByCategory(dataItem.value);
+      break;
+    case 'subject':
+      itemsToReset = ['courses', 'domains'];
+      component.resetItems(itemsToReset);
+      component.fetchCoursesBySubject(dataItem);
+      break;
+    case 'course':
+      itemsToReset = ['domains'];
+      component.resetItems(itemsToReset);
+      component.fetchDomainsByCourse(selectedSubject, dataItem);
+      break;
+    case 'domian':
+      break;
+    default:
+      return;
+    }
+  },
+
+  resetItems(itemsToReset) {
+    let component = this;
+    itemsToReset.map(item => {
+      component.set(`${item}`, []);
     });
   }
 });

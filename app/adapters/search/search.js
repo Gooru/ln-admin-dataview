@@ -270,10 +270,10 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
-  fetchCompetencies(filters, start = 0, length = 0) {
+  fetchLearningMapCompetency(filters, start = 0, length = 0) {
     const adapter = this;
     const namespace1 = adapter.get('namespace1');
-    const requestURL = `${namespace1}/stats/`;
+    const requestURL = `${namespace1}/stats`;
     let defaultFilters = {
       startAt: start,
       length: length

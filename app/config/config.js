@@ -344,9 +344,22 @@ export const ACTIVITIES_FILTER = [
   }
 ];
 
-export const COMPETENCY_LEARNING_MAP_DATA_LEVELS = [
-  'category',
-  'subject',
+export const LEARNING_MAP_DEFAULT_LEVELS = {
+  subjectClassification: 'k_12',
+  subjectCode: 'K12.SC',
+  courseCode: 'K12.SC-SCK'
+};
+
+export const LEARNING_MAP_CONTENT_SEQUENCE = [
   'course',
-  'domain'
+  'unit',
+  'lesson',
+  'collection',
+  'assessment',
+  'resource',
+  'question',
+  'rubric',
+  'signatureCollection',
+  'signatureAssessment',
+  'signatureResource'
 ];

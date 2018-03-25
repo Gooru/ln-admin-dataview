@@ -3,4 +3,26 @@
   clear: both;
   background-color: $white;
   overflow: auto;
+
+  .browser-container {
+    .body {
+      .generate-table-btn {
+        padding: 30px;
+
+        .generate-btn {
+          width: 160px;
+          height: 50px;
+          background-color: #1b72ba;
+          font-size: 15px;
+          font-weight: bold;
+          color: #ffffff;
+          text-transform: uppercase;
+
+          &.disabled {
+            pointer-events: none;
+          }
+        }
+      }
+    }
+  }
 }

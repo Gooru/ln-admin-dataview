@@ -1,7 +1,17 @@
-<div class="browser-card">
-  {{#each categories as |data|}}
+<div class="browser-card {{type}}">
+  {{#each dataContent as |data|}}
+    <div class="item {{string-replace (if data.id data.id data.value)  '\.' '-' 'g'}}" {{action "onSelectDataItem" type data}}>
+      {{#if (eq type 'domain')}}
+      <input type="checkbox" class="checkbox"
+        name="frameworkCheckbox"
+        onclick={{action 'onSelectDomain' data.id}}
+        />
+      {{/if}}
+      {{if (eq type 'category') (t data.label) data.title}}
+    </div>
+    {{else}}
     <div class="item">
-      {{data}}
+      No {{type}} found
     </div>
   {{/each}}
 </div>
