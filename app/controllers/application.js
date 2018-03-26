@@ -2,7 +2,6 @@ import Ember from 'ember';
 import ConfigurationMixin from 'admin-dataview/mixins/configuration';
 
 export default Ember.Controller.extend(ConfigurationMixin, {
-
   // --------------------------------------------------------------------------
   // Query params
 
@@ -22,18 +21,16 @@ export default Ember.Controller.extend(ConfigurationMixin, {
    */
   authenticationService: Ember.inject.service('api-sdk/authentication'),
 
-
   // -------------------------------------------------------------------------
   // Actions
 
   actions: {
     onMenuItemSelection(item) {
       if (item === 'competency') {
-        this.transitionToRoute(`${item  }.matrix`);
+        this.transitionToRoute(`${item}.tree`);
       } else {
         this.transitionToRoute(item);
       }
     }
   }
-
 });

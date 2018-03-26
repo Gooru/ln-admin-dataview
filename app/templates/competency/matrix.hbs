@@ -1,4 +1,4 @@
-<div class="competency-container-matrix {{if showPullOut 'pull-out-active'}}">
+<div class="competency-container-matrix">
   <div class="matrix-left-panel">
     {{charts.course-domain-matrix-chart userId=userId  subjectId=selectedSubject.id selectedSubject=selectedSubject onChooseDomain='onChooseDomain' domainCompetencyPullOut='domainCompetencyPullOut' showPullOut=showPullOut isSkylineEnabled=isSkylineEnabled}}
     <div class="matrix-left-panel-nav-1"></div>
@@ -8,10 +8,12 @@
   <div class="matrix-right-panel">
     <ul>
       {{#each subjects as |subject index|}}
-        <li {{action 'onChooseSubject' index}}>
-          <div class="subject-{{index}} subject-name {{if (eq index 0) 'active'}}">{{subject.title}}</div>
-          <div class="subject-{{index}} subject-round-icon {{if (eq index 0) 'active'}}"></div>
-        </li>
+        {{#if (lt index 4)}}
+          <li {{action 'onChooseSubject' index}}>
+            <div class="subject-{{index}} subject-name {{if (eq index 0) 'active'}}">{{subject.title}}</div>
+            <div class="subject-{{index}} subject-round-icon {{if (eq index 0) 'active'}}"></div>
+          </li>
+        {{/if}}
       {{/each}}
     </ul>
   </div>
@@ -24,7 +26,7 @@
        signatureContents=signatureContents
        nodeData=selectedDomainData
        breadcrumb=selectedDomainData.parent
-      }} {{else if section.isMoreContent}} {{gcm-pull-out-more-content nodeData=selectedDomainData prerequisites=prerequisites}}
+     }} {{else if section.isMoreContent}} {{gcm-pull-out-more-content nodeData=selectedDomainData prerequisites=prerequisites courseContent=courseContent unitContent=unitContent lessonContent=lessonContent resourceContent=resourceContent collectionContent=collectionContent assessmentContent=assessmentContent questionContent=questionContent}}
     {{/if}}
   {{/app-pull-out}}
 

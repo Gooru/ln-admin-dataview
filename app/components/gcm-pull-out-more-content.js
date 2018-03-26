@@ -49,34 +49,18 @@ export default Ember.Component.extend({
    * List of question contents
    */
   questionContent: null,
-
-  // -------------------------------------------------------------------------
-  // Events
-  /**
-   * Trigger observer when user select a node
+  /*
+   * List of course contents
    */
-  nodeDataObserver: Ember.observer('nodeData', function() {
-    let component = this;
-    component._super(...arguments);
-    const searchLength = component.get('searchLength');
-    let nodeData = component.get('nodeData');
-    let filters = nodeData.filters;
-    let q = '*';
-    let start = 1;
-    let resourcePromise = Ember.RSVP.resolve(component.get('searchService').searchResources(q, filters, start, searchLength));
-    let collectionPromise = Ember.RSVP.resolve(component.get('searchService').searchCollections(q, filters, start, searchLength));
-    let assessmentPromise = Ember.RSVP.resolve(component.get('searchService').searchAssessments(q, filters, start, searchLength));
-    let questionPromise = Ember.RSVP.resolve(component.get('searchService').searchQuestions(q, filters, start, searchLength));
-    return Ember.RSVP.hash({
-      resourceContent: resourcePromise,
-      collectionContent: collectionPromise,
-      assessmentContent: assessmentPromise,
-      questionContent: questionPromise
-    }).then(function(hash) {
-      component.set('resourceContent', hash.resourceContent.searchResults);
-      component.set('collectionContent', hash.collectionContent.searchResults);
-      component.set('assessmentContent', hash.assessmentContent.searchResults);
-      component.set('questionContent', hash.questionContent.searchResults);
-    });
-  })
+  courseContent: null,
+
+  /*
+   * List of unit contents
+   */
+  unitContent: null,
+
+  /*
+   * List of lesson contents
+   */
+  lessonContent: null
 });

@@ -1,12 +1,15 @@
 .app-switch {
   display: inline-block;
   padding: 5px;
+  .disabled-checkbox {
+    pointer-events: none;
+  }
 
   div {
     display: inline-block;
   }
-  @include btn(default,$light-600,$blue-800);
-  @include btn(primary,$blue-800);
+  @include btn(default, $light-600, $blue-800);
+  @include btn(primary, $blue-800);
 
   .btn {
     border: 1px solid transparent;

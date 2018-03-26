@@ -142,11 +142,19 @@ export default Ember.Component.extend({
         this.set('term', tempTerm);
         this.set('isInvalidSearchTerm', false);
         this.sendAction('onSearch', this.get('term'));
+      } else {
+        this.set('term', term);
+        this.sendAction('searchStatus');
       }
     },
 
     inputValueChange: function() {
       this.set('isTyping', false);
+    },
+
+    clearSearchText: function() {
+      this.set('tempTerm', '');
+      this.sendAction('clearSearchText');
     }
   },
 

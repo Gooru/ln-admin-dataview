@@ -47,6 +47,11 @@ export default Ember.Component.extend({
   height: 900,
 
   /**
+   * @property {Number} competency left panel height
+   */
+  competencypanelHeight: 400,
+
+  /**
    * User id of competency matrix to plot
    * @type {String}
    */
@@ -56,13 +61,13 @@ export default Ember.Component.extend({
    * Width of the cell
    * @type {Number}
    */
-  cellWidth: 45,
+  cellWidth: 32,
 
   /**
    * height of the cell
    * @type {Number}
    */
-  cellHeight: 45,
+  cellHeight: 32,
 
   /**
    * It will have  taxonomy courses by selected subject
@@ -181,24 +186,27 @@ export default Ember.Component.extend({
         .$(domainCompetencyContainer)
         .hasClass('micro-competency-enabled');
       if (!isEnabled) {
-        component
-          .$(domainCompetencyContainer)
-          .animate({ height: `${height}px` }, function() {
+        component.$(domainCompetencyContainer).animate(
+          {
+            height: `${height}px`
+          },
+          function() {
             component
               .$(domainCompetencyContainer)
               .addClass('micro-competency-enabled');
-          });
+          }
+        );
       } else {
-        component
-          .$(domainCompetencyContainer)
-          .animate(
-            { height: `${defaultHeightOfCompetencyContainer}px` },
-            function() {
-              component
-                .$(domainCompetencyContainer)
-                .removeClass('micro-competency-enabled');
-            }
-          );
+        component.$(domainCompetencyContainer).animate(
+          {
+            height: `${defaultHeightOfCompetencyContainer}px`
+          },
+          function() {
+            component
+              .$(domainCompetencyContainer)
+              .removeClass('micro-competency-enabled');
+          }
+        );
       }
     },
 
@@ -216,6 +224,7 @@ export default Ember.Component.extend({
     let cellHeight = component.get('cellHeight');
     let height = component.get('taxonomyCourses').length * cellHeight;
     component.set('height', height);
+    component.set('competencypanelHeight', height + 25);
     let width = component.get('taxonomyDomains').length * cellWidth;
     component.set('width', width);
     component.$('#course-domain-matrix-chart').empty();
@@ -274,9 +283,9 @@ export default Ember.Component.extend({
       .get('courses')
       .toArray()
       .reverse();
-    component.set('taxonomyCourses', courses);
     let resultSet = Ember.A();
     let domains = matrixCoordinates.get('domains');
+
     component.set('taxonomyDomains', domains);
     domains.forEach(domainData => {
       let domainCode = domainData.get('domainCode');
@@ -306,6 +315,14 @@ export default Ember.Component.extend({
         }
       });
     });
+    let filterCourses = Ember.A();
+    courses.forEach(course => {
+      let coursedomain = resultSet.findBy('courseCode', course.courseCode);
+      if (coursedomain) {
+        filterCourses.push(course);
+      }
+    });
+    component.set('taxonomyCourses', filterCourses);
     return resultSet;
   },
 

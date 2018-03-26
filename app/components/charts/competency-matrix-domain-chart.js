@@ -136,12 +136,6 @@ export default Ember.Component.extend({
   }),
 
   /**
-   * It will indicates the state of skyline.
-   * @type {Boolean}
-   */
-  isSkylineEnabled: false,
-
-  /**
    * Trigger whenever skyline toggle state got changed.
    */
   onChangeSkylineToggle: Ember.observer('isSkylineEnabled', function() {
@@ -159,10 +153,48 @@ export default Ember.Component.extend({
     }
   }),
 
+  /**
+   * Trigger whenever reset chart view mode toggle state got changed.
+   */
+  onChangeResetToggle: Ember.observer('isExpandChartEnabled', function() {
+    let component = this;
+    let isExpandChartEnabled = component.get('isExpandChartEnabled');
+    if (isExpandChartEnabled) {
+      component.expandChartColumnHeight();
+    } else {
+      component.reduceChartColumnHeight();
+    }
+  }),
+
+  /**
+   * It maintains the number of cells in each column
+   * @type {Number}
+   */
+  numberOfCellsInEachColumn: 0,
+
+  /**
+   * It decide  the max number of cells in each column
+   * @type {Number}
+   */
+  maxNumberOfCellsInEachColumn: 25,
+
+  /**
+   * This should be the height of cells when maximum number of cell size
+   * got exceeds for each column.
+   * @type {Number}
+   */
+  reducedHeightOfCells: 5,
+
+  /**
+   * Default height of the chart
+   * @type {Number}
+   */
+  defaultHeightOfChart: 500,
+
   // -------------------------------------------------------------------------
   // Events
 
-  didInsertElement: function() {
+  didInsertElement() {
     let component = this;
     if (component.get('subjectId')) {
       component.loadDataBySubject(component.get('subjectId'));
@@ -172,17 +204,19 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Methods
 
-  drawChart: function(data) {
+  drawChart(data) {
     let component = this;
     let cellSizeInRow = component.get('taxonomyDomains');
-    let numberOfCellsInEachRow = cellSizeInRow.length;
+    let numberOfCellsInEachColumn = cellSizeInRow.length;
+    component.set('numberOfCellsInEachColumn', numberOfCellsInEachColumn);
     const colorsBasedOnStatus = component.get('colorsBasedOnStatus');
     const cellWidth = component.get('cellWidth');
     const cellHeight = component.get('cellHeight');
-    const width = Math.round(numberOfCellsInEachRow * cellWidth);
+    const width = Math.round(numberOfCellsInEachColumn * cellWidth);
     component.set('width', width);
-    const height = component.get('height');
+    const height = component.get('defaultHeightOfChart');
     component.$('#competency-matrix-domain-chart').empty();
+    component.$('#competency-matrix-domain-chart').height(height);
     const svg = d3
       .select('#competency-matrix-domain-chart')
       .append('svg')
@@ -195,12 +229,22 @@ export default Ember.Component.extend({
       .append('rect')
       .attr('x', d => (d.xAxisSeq - 1) * cellWidth)
       .attr('y', d => (d.yAxisSeq - 1) * cellHeight)
-      .attr('class', 'competency')
+      .attr('class', d => {
+        return `competency competency-${d.xAxisSeq} competency-${d.xAxisSeq}-${
+          d.yAxisSeq
+        }`;
+      })
       .attr('width', cellWidth)
       .attr('height', cellHeight)
       .on('click', function(d) {
-        component.blockChartContainer(d);
-        component.sendAction('onCompetencyPullOut', d);
+        let competencyNode = component.$(
+          `.competency-${d.xAxisSeq}-${d.yAxisSeq}`
+        );
+        let className = competencyNode.attr('class');
+        if (className.indexOf('competency-more-cells') < 0) {
+          component.blockChartContainer(d);
+          component.sendAction('onCompetencyPullOut', d);
+        }
       })
       .merge(cards)
       .style('fill', '#EAEAEA')
@@ -247,9 +291,10 @@ export default Ember.Component.extend({
         .attr('class', 'skyline disable-skyline');
     });
     cards.exit().remove();
+    component.reduceChartColumnHeight();
   },
 
-  loadDataBySubject: function(subjectId) {
+  loadDataBySubject(subjectId) {
     let component = this;
     let userId = component.get('userId');
     component.set('isLoading', true);
@@ -270,10 +315,7 @@ export default Ember.Component.extend({
     });
   },
 
-  parseCompetencyData: function(
-    competencyMatrixs,
-    competencyMatrixCoordinates
-  ) {
+  parseCompetencyData(competencyMatrixs, competencyMatrixCoordinates) {
     let component = this;
     const cellHeight = component.get('cellHeight');
     let taxonomyDomain = Ember.A();
@@ -311,6 +353,7 @@ export default Ember.Component.extend({
               data.set('status', status);
               data.set('isMastery', true);
             });
+            data.set('isMastery', true);
           }
           mergeDomainData.pushObject(data);
         });
@@ -318,7 +361,7 @@ export default Ember.Component.extend({
         if (masteredCompetencies && masteredCompetencies.length === 0) {
           mergeDomainData.objectAt(0).set('skyline', true);
         } else {
-          let numberOfMasteredCompetency = masteredCompetencies.length;
+          let numberOfMasteredCompetency = masteredCompetencies.length - 1;
           mergeDomainData
             .objectAt(numberOfMasteredCompetency)
             .set('skyline', true);
@@ -344,7 +387,7 @@ export default Ember.Component.extend({
     return resultSet;
   },
 
-  blockChartContainer: function(selectedCompetency) {
+  blockChartContainer(selectedCompetency) {
     let component = this;
     const cellWidth = component.get('cellWidth');
     const cellHeight = component.get('cellHeight');
@@ -358,5 +401,61 @@ export default Ember.Component.extend({
     container += `<div class="selected-competency"  style="width:${cellWidth}px; height:${cellHeight}px; background-color:${color};top:${yAxisSeq}px; left:${xAxisSeq}px"></div>`;
     container += '</div>';
     component.$('#competency-matrix-domain-chart').prepend(container);
+  },
+
+  reduceChartColumnHeight() {
+    let component = this;
+    let numberOfCellsInEachColumn = component.get('numberOfCellsInEachColumn');
+    let maxNumberOfCellsInEachColumn = component.get(
+      'maxNumberOfCellsInEachColumn'
+    );
+    for (let index = 1; index <= numberOfCellsInEachColumn; index++) {
+      let numberOfCellsInColumn = component.$(`.competency-${index}`).length;
+      if (numberOfCellsInColumn > maxNumberOfCellsInEachColumn) {
+        let startIndex = maxNumberOfCellsInEachColumn + 1;
+        let startElement = component.$(
+          `.competency-${index}:eq(${startIndex})`
+        );
+        let newYAxis = +startElement.attr('y');
+        for (
+          let cellIndex = startIndex;
+          cellIndex < numberOfCellsInColumn;
+          cellIndex++
+        ) {
+          let element = component.$(`.competency-${index}:eq(${cellIndex})`);
+          let reducedHeightOfCells = component.get('reducedHeightOfCells');
+          let yAxis = element.attr('y');
+          let nodeClassName = element.attr('class');
+          element.attr('height', reducedHeightOfCells);
+          element.attr('copy-yaxis', yAxis);
+          element.attr('copy-class-name', nodeClassName);
+          element.attr('class', `${nodeClassName} competency-more-cells`);
+          if (cellIndex !== startIndex) {
+            newYAxis = newYAxis + reducedHeightOfCells;
+            element.attr('y', newYAxis);
+          }
+        }
+      }
+    }
+    let height = component.get('defaultHeightOfChart');
+    component.$('#competency-matrix-domain-chart').height(height);
+    component.$('#competency-matrix-domain-chart svg').attr('height', height);
+  },
+
+  expandChartColumnHeight() {
+    let component = this;
+    let elements = component.$('.competency-more-cells');
+    for (let index = 0; index < elements.length; index++) {
+      let element = $(elements[index]);
+      let cellHeight = component.get('cellHeight');
+      let yAxis = element.attr('copy-yaxis');
+      let className = element.attr('copy-class-name');
+      element.attr('height', cellHeight);
+      element.attr('class', className);
+      element.attr('y', yAxis);
+    }
+    let height = component.get('height');
+    component.$('#competency-matrix-domain-chart').height(height);
+    component.$('#competency-matrix-domain-chart svg').attr('height', height);
   }
 });

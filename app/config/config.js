@@ -60,10 +60,17 @@ export const LEARNING_CATEGORY = {
   label: 'common.categoryOptions.professional-dev'
 };
 
+export const SKILLS_TRAINING = {
+  value: 'skills_training',
+  apiCode: 'SK',
+  label: 'common.categoryOptions.skills-training'
+};
+
 export const TAXONOMY_CATEGORIES = [
   K12_CATEGORY,
   EDUCATION_CATEGORY,
-  LEARNING_CATEGORY
+  LEARNING_CATEGORY,
+  SKILLS_TRAINING
 ];
 
 export const CONTENT_TYPES = {
@@ -194,8 +201,7 @@ export const COMPETENCY_NAVIGATION_MENUS = [
 export const COMPETENCY_NAVIGATION_MENUS_INDEX = {
   matrix: 0,
   crosswalk: 1,
-  tree: 2,
-  'learning-map': 3
+  tree: 2
 };
 
 export const CODE_TYPES = {

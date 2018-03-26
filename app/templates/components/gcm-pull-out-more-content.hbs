@@ -7,6 +7,33 @@
         {{gcm-pull-out-more-prerequisites prerequisites=prerequisites}}
       </div>
 
+      <div class="section-content courses col-sm-12">
+        <div class="section-title">{{t 'gcm.pull-out.section.courses'}}</div>
+        {{#each courseContent as |content|}}
+          <div class="col-md-4 col-sm-12">
+            {{cards.content-card content=content isAddEnabled=false}}
+          </div>
+        {{/each}}
+      </div>
+
+      <div class="section-content units col-sm-12">
+        <div class="section-title">{{t 'gcm.pull-out.section.units'}}</div>
+        {{#each unitContent as |content|}}
+          <div class="col-md-4 col-sm-12">
+            {{cards.content-card content=content isAddEnabled=false}}
+          </div>
+        {{/each}}
+      </div>
+
+      <div class="section-content lessons col-sm-12">
+        <div class="section-title">{{t 'gcm.pull-out.section.lessons'}}</div>
+        {{#each lessonContent as |content|}}
+          <div class="col-md-4 col-sm-12">
+            {{cards.content-card content=content isAddEnabled=false}}
+          </div>
+        {{/each}}
+      </div>
+
       <div class="section-content assessment col-sm-12">
         <div class="section-title">{{t 'gcm.pull-out.section.assessments'}}</div>
         {{#each assessmentContent as |content|}}

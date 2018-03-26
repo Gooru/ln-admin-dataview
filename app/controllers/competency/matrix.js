@@ -68,6 +68,46 @@ export default Ember.Controller.extend({
    */
   showMore: false,
 
+  /**
+   * List of resource contents
+   */
+  resourceContent: null,
+
+  /**
+   * List of collection contents
+   */
+  collectionContent: null,
+
+  /*
+   * List of assessment contents
+   */
+  assessmentContent: null,
+
+  /*
+   * List of question contents
+   */
+  questionContent: null,
+
+  /*
+   * List of course contents
+   */
+  courseContent: null,
+
+  /*
+   * List of unit contents
+   */
+  unitContent: null,
+
+  /*
+   * List of lesson contents
+   */
+  lessonContent: null,
+
+  /*
+   * List of subjects
+   */
+  subjects: null,
+
   //---------------------------------------------------------------------------
   //Actions
 
@@ -160,8 +200,10 @@ export default Ember.Controller.extend({
         .getSearchLearningMapsContent(nodeInfo)
         .then(function(learningData) {
           let culcaqrCount = Ember.A();
+          let culcaqrContents = Ember.A();
           let contentCountData = Ember.A();
           culcaqrCount = learningData.contents;
+          culcaqrContents = learningData.learningMapsContent;
           let courseCount = culcaqrCount.course
             ? culcaqrCount.course.totalHitCount
             : 0;
@@ -223,11 +265,46 @@ export default Ember.Controller.extend({
           contentCountData.push(
             Utils.getStructuredContentData(CONTENT_TYPES.RUBRIC, rubricCount)
           );
-          controller.set('contentCount', contentCountData);
 
+          controller.set('contentCount', contentCountData);
           controller.set('isLoading', false);
           controller.set('signatureContents', learningData.signatureContents);
           controller.set('prerequisites', learningData.prerequisites);
+
+          controller.set(
+            'courseContent',
+            culcaqrContents.course
+              ? culcaqrContents.course.splice(0, 3)
+              : culcaqrContents.course
+          );
+          controller.set(
+            'unitContent',
+            culcaqrContents.unit
+              ? culcaqrContents.unit.splice(0, 3)
+              : culcaqrContents.unit
+          );
+          controller.set(
+            'lessonContent',
+            culcaqrContents.lesson
+              ? culcaqrContents.lesson.splice(0, 3)
+              : culcaqrContents.lesson
+          );
+          controller.set(
+            'resourceContent',
+            culcaqrContents.resource.splice(0, 3)
+          );
+          controller.set(
+            'collectionContent',
+            culcaqrContents.collection.splice(0, 3)
+          );
+          controller.set(
+            'assessmentContent',
+            culcaqrContents.assessment.splice(0, 3)
+          );
+          controller.set(
+            'questionContent',
+            culcaqrContents.question.splice(0, 3)
+          );
         });
     }
   },

@@ -34,7 +34,8 @@ export default {
       k12: 'K-12',
       k_12: 'K-12',
       'higher-ed': 'Higher Education',
-      'professional-dev': 'Professional Development'
+      'professional-dev': 'Professional Development',
+      'skills-training': 'Skills Training'
     },
     'in-progress': 'in progress',
     mastered: 'mastered',
@@ -58,7 +59,10 @@ export default {
     'show-more-results': 'Show More Results',
     prerequisites: 'Prerequisites',
     competency: 'competency',
-    'pre-requisites': 'pre-requisites'
+    'pre-requisites': 'pre-requisites',
+    skyline: 'Skyline',
+    'collapse-chart': 'Collapse chart',
+    'expand-chart': 'Expand chart'
   },
   logout: {
     name: 'Logout'
@@ -78,6 +82,9 @@ export default {
       section: {
         'most-relevant': 'Most Relevant',
         prerequisites: 'Prerequisites',
+        courses: 'Courses',
+        units: 'Units',
+        lessons: 'Lessons',
         assessments: 'Assessments',
         collections: 'Collections',
         questions: 'Questions',
@@ -190,7 +197,8 @@ export default {
     'pull-out': {
       'taxonomy-title': 'Subject, Course and Domain',
       content: 'Content'
-    }
+    },
+    'clear-all': 'Clear All'
   },
   'century-skills': {
     legends: {

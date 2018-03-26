@@ -104,6 +104,63 @@ export default Ember.Controller.extend({
       if (activeMenuIndex > -1) {
         controller.get(`${routeName}Controller`).refreshItems();
       }
+    },
+
+    clearFilter: function() {
+      let controller = this;
+      let userId = controller.get('session.id');
+      localStorage.setItem(
+        `research_${userId}_activities_filters`,
+        JSON.stringify({})
+      );
+      controller.set('selectedFilterItemsBuffer', {});
+      let term = controller.get('searchTerm');
+      if (term) {
+        let routeName = Utils.getRoutePathLastOccurrence();
+        let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
+        controller.set('selectedFilterItems', {});
+        controller.set('clearSearch', true);
+        if (activeMenuIndex > -1) {
+          controller.get(`${routeName}Controller`).refreshItems();
+        }
+      } else {
+        controller.transitionToRoute('/activities');
+      }
+    },
+
+    searchStatus: function() {
+      let controller = this;
+      let userId = controller.get('session.id');
+      let filters = JSON.parse(
+        localStorage.getItem(`research_${userId}_activities_filters`)
+      );
+      if (filters && (filters.category || filters.subject || filters.course)) {
+        controller.set('service', true);
+      } else {
+        controller.transitionToRoute('/activities');
+      }
+    },
+
+    clearSearchText: function() {
+      let controller = this;
+      let userId = controller.get('session.id');
+      let filters = JSON.parse(
+        localStorage.getItem(`research_${userId}_activities_filters`)
+      );
+      if (filters && (filters.category || filters.subject || filters.course)) {
+        let url = window.location.href;
+        let urlsplitted = url.split('?')[0];
+        if (urlsplitted) {
+          let lastURLdata = urlsplitted.split('/');
+          let colelctionURL = lastURLdata[lastURLdata.length - 1];
+          controller.set('searchTerm', '');
+          controller.transitionToRoute(`/activities/${colelctionURL}`);
+        } else {
+          controller.transitionToRoute('/activities');
+        }
+      } else {
+        controller.transitionToRoute('/activities');
+      }
     }
   },
 
@@ -130,6 +187,12 @@ export default Ember.Controller.extend({
     let controller = this;
     return controller.getStoredFilterItems();
   }),
+
+  /**
+   * Search term clear refresh
+   * @type {String}
+   */
+  clearSearch: false,
 
   /**
    * Search term
