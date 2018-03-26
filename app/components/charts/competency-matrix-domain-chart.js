@@ -162,7 +162,7 @@ export default Ember.Component.extend({
     if (isExpandChartEnabled) {
       component.expandChartColumnHeight();
     } else {
-      component.reduceChartColumnHeight();
+      component.reduceChartHeight();
     }
   }),
 
@@ -176,7 +176,7 @@ export default Ember.Component.extend({
    * It decide  the max number of cells in each column
    * @type {Number}
    */
-  maxNumberOfCellsInEachColumn: 25,
+  maxNumberOfCellsInEachColumn: 20,
 
   /**
    * This should be the height of cells when maximum number of cell size
@@ -189,7 +189,19 @@ export default Ember.Component.extend({
    * Default height of the chart
    * @type {Number}
    */
-  defaultHeightOfChart: 500,
+  defaultHeightOfChart: 450,
+
+  /**
+   * Maximum number of reduce cell below
+   * @type {Number}
+   */
+  maxNumberOfReduceCellBelow: 5,
+
+  /**
+   * skyline container
+   * @type {Object}
+   */
+  skylineContainer: null,
 
   // -------------------------------------------------------------------------
   // Events
@@ -221,21 +233,32 @@ export default Ember.Component.extend({
       .select('#competency-matrix-domain-chart')
       .append('svg')
       .attr('width', width)
-      .attr('height', height)
-      .append('g');
-    const cards = svg.selectAll('.competency').data(data);
+      .attr('height', height);
+    let cellContainer = svg.append('g').attr('id', 'cell-container');
+    let skylineContainer = svg.append('g').attr('id', 'skyline-container');
+    component.set('skylineContainer', skylineContainer);
+    const cards = cellContainer.selectAll('.competency').data(data);
     cards
       .enter()
       .append('rect')
       .attr('x', d => (d.xAxisSeq - 1) * cellWidth)
       .attr('y', d => (d.yAxisSeq - 1) * cellHeight)
+      .attr('copy-yaxis', d => (d.yAxisSeq - 1) * cellHeight)
       .attr('class', d => {
-        return `competency competency-${d.xAxisSeq} competency-${d.xAxisSeq}-${
-          d.yAxisSeq
-        }`;
+        let skylineClassName = d.skyline ? 'skyline-competency' : '';
+        return `competency ${skylineClassName} competency-${
+          d.xAxisSeq
+        } competency-${d.xAxisSeq}-${d.yAxisSeq}`;
+      })
+      .attr('copy-class-name', d => {
+        let skylineClassName = d.skyline ? 'skyline-competency' : '';
+        return `competency ${skylineClassName} competency-${
+          d.xAxisSeq
+        } competency-${d.xAxisSeq}-${d.yAxisSeq}`;
       })
       .attr('width', cellWidth)
       .attr('height', cellHeight)
+      .attr('yaxis-seq', d => d.yAxisSeq)
       .on('click', function(d) {
         let competencyNode = component.$(
           `.competency-${d.xAxisSeq}-${d.yAxisSeq}`
@@ -253,45 +276,8 @@ export default Ember.Component.extend({
       .style('fill', d => {
         return colorsBasedOnStatus.get(d.status.toString());
       });
-    cards
-      .enter()
-      .append('circle')
-      .attr('cx', d => (d.xAxisSeq - 1) * cellWidth + cellWidth / 2)
-      .attr(
-        'cy',
-        d => (d.yAxisSeq - 1) * cellHeight + (d.mastered ? cellHeight / 2 : 2)
-      )
-      .attr('class', d => (d.skyline ? 'competency-skyline' : ''))
-      .attr('r', d => (d.skyline ? 2 : 0))
-      .attr('fill', '#fff');
-
-    let skylineElements = component.$('.competency-skyline');
-    let indexSize = component.$(skylineElements).length;
-    component.$('circle').remove();
-    skylineElements.each(function(index) {
-      let x1 = parseInt(component.$(skylineElements[index]).attr('cx'));
-      let y1 = component.$(skylineElements[index]).attr('cy');
-      if (index < indexSize - 1) {
-        let x2 = parseInt(component.$(skylineElements[index + 1]).attr('cx'));
-        let y2 = component.$(skylineElements[index + 1]).attr('cy');
-        svg
-          .append('line')
-          .attr('x1', x1)
-          .attr('y1', y1)
-          .attr('x2', x2)
-          .attr('y2', y2)
-          .attr('class', 'skyline disable-skyline');
-      }
-      svg
-        .append('circle')
-        .attr('cx', x1)
-        .attr('cy', y1)
-        .attr('r', 3)
-        .attr('fill', '#fff')
-        .attr('class', 'skyline disable-skyline');
-    });
     cards.exit().remove();
-    component.reduceChartColumnHeight();
+    component.reduceChartHeight();
   },
 
   loadDataBySubject(subjectId) {
@@ -392,8 +378,13 @@ export default Ember.Component.extend({
     const cellWidth = component.get('cellWidth');
     const cellHeight = component.get('cellHeight');
     const width = component.get('width');
-    let xAxisSeq = (selectedCompetency.xAxisSeq - 1) * cellWidth;
-    let yAxisSeq = (selectedCompetency.yAxisSeq - 1) * cellHeight;
+    let selectedElement = component.$(
+      `.competency-${selectedCompetency.xAxisSeq}-${
+        selectedCompetency.yAxisSeq
+      }`
+    );
+    let xAxisSeq = selectedElement.attr('x');
+    let yAxisSeq = selectedElement.attr('y');
     const colorsBasedOnStatus = component.get('colorsBasedOnStatus');
     let color = colorsBasedOnStatus.get(selectedCompetency.status.toString());
     component.$('.block-container').remove();
@@ -403,40 +394,110 @@ export default Ember.Component.extend({
     component.$('#competency-matrix-domain-chart').prepend(container);
   },
 
-  reduceChartColumnHeight() {
+  reduceChartBelowCells() {
     let component = this;
-    let numberOfCellsInEachColumn = component.get('numberOfCellsInEachColumn');
+    let skylines = component.$('.skyline-competency');
     let maxNumberOfCellsInEachColumn = component.get(
       'maxNumberOfCellsInEachColumn'
     );
-    for (let index = 1; index <= numberOfCellsInEachColumn; index++) {
-      let numberOfCellsInColumn = component.$(`.competency-${index}`).length;
-      if (numberOfCellsInColumn > maxNumberOfCellsInEachColumn) {
-        let startIndex = maxNumberOfCellsInEachColumn + 1;
-        let startElement = component.$(
-          `.competency-${index}:eq(${startIndex})`
-        );
-        let newYAxis = +startElement.attr('y');
+    let reducedHeightOfCells = component.get('reducedHeightOfCells');
+    let cellHeight = component.get('cellHeight');
+    let maxNumberOfReduceCellBelow = component.get(
+      'maxNumberOfReduceCellBelow'
+    );
+    for (let index = 0; index < skylines.length; index++) {
+      let skyline = component.$(skylines[index]);
+      let skylineYAxisSeq = +skyline.attr('yaxis-seq');
+      if (skylineYAxisSeq > maxNumberOfCellsInEachColumn) {
+        let aboveMaxCells = skylineYAxisSeq - maxNumberOfCellsInEachColumn;
+        let domainColumnIndex = index + 1;
+        let competencyCells = component.$(`.competency-${domainColumnIndex}`);
+        let belowReduceCount = 1;
+        let yAxis = 0;
         for (
-          let cellIndex = startIndex;
-          cellIndex < numberOfCellsInColumn;
+          let cellIndex = 0;
+          cellIndex < competencyCells.length;
           cellIndex++
         ) {
-          let element = component.$(`.competency-${index}:eq(${cellIndex})`);
-          let reducedHeightOfCells = component.get('reducedHeightOfCells');
-          let yAxis = element.attr('y');
-          let nodeClassName = element.attr('class');
-          element.attr('height', reducedHeightOfCells);
-          element.attr('copy-yaxis', yAxis);
-          element.attr('copy-class-name', nodeClassName);
-          element.attr('class', `${nodeClassName} competency-more-cells`);
-          if (cellIndex !== startIndex) {
-            newYAxis = newYAxis + reducedHeightOfCells;
-            element.attr('y', newYAxis);
+          let element = component.$(competencyCells[cellIndex]);
+          let height = cellHeight;
+          if (belowReduceCount < aboveMaxCells) {
+            height = reducedHeightOfCells;
           }
+          if (cellIndex > 0) {
+            if (belowReduceCount <= aboveMaxCells) {
+              if (belowReduceCount > maxNumberOfReduceCellBelow) {
+                yAxis = yAxis + 0;
+              } else {
+                yAxis = yAxis + reducedHeightOfCells;
+              }
+              let className = element.attr('class');
+              element.attr(
+                'class',
+                `${className} competency-more-cells-${domainColumnIndex} competency-more-cells`
+              );
+              belowReduceCount++;
+            } else {
+              yAxis = yAxis + cellHeight;
+            }
+          }
+          element.attr('y', yAxis);
+          element.attr('height', height);
         }
       }
     }
+  },
+
+  reduceChartAboveCells() {
+    let component = this;
+    let numberOfDomainColumn = component.get('taxonomyDomains').length;
+    let maxNumberOfCellsInEachColumn = component.get(
+      'maxNumberOfCellsInEachColumn'
+    );
+    let reducedHeightOfCells = component.get('reducedHeightOfCells');
+    for (let index = 1; index <= numberOfDomainColumn; index++) {
+      let elements = component.$(`.competency-${index}`);
+      let totalCompetencyInDomain = elements.length;
+      let belowReducedCellElements = component.$(
+        `.competency-more-cells-${index}`
+      );
+      let numberOfBelowReducedCells = belowReducedCellElements.length;
+      let totalCellsWithoutReduce =
+        totalCompetencyInDomain - numberOfBelowReducedCells;
+      if (totalCellsWithoutReduce > maxNumberOfCellsInEachColumn) {
+        let aboveReduceCellIndex =
+          numberOfBelowReducedCells > 0
+            ? numberOfBelowReducedCells + maxNumberOfCellsInEachColumn
+            : maxNumberOfCellsInEachColumn;
+        let startIndex = aboveReduceCellIndex + 1;
+        let startElement = component.$(`.competency-${index}-${startIndex}`);
+        let newYAxis = +startElement.attr('y');
+        for (
+          let cellIndex = aboveReduceCellIndex;
+          cellIndex < elements.length;
+          cellIndex++
+        ) {
+          let element = component.$(elements[cellIndex]);
+          element.attr('height', reducedHeightOfCells);
+          if (cellIndex > aboveReduceCellIndex) {
+            newYAxis = newYAxis + reducedHeightOfCells;
+            element.attr('y', newYAxis);
+          }
+          let className = element.attr('class');
+          element.attr(
+            'class',
+            `${className} competency-more-cells-${index} competency-more-cells`
+          );
+        }
+      }
+    }
+  },
+
+  reduceChartHeight() {
+    let component = this;
+    component.reduceChartBelowCells();
+    component.reduceChartAboveCells();
+    component.drawSkyline();
     let height = component.get('defaultHeightOfChart');
     component.$('#competency-matrix-domain-chart').height(height);
     component.$('#competency-matrix-domain-chart svg').attr('height', height);
@@ -444,9 +505,9 @@ export default Ember.Component.extend({
 
   expandChartColumnHeight() {
     let component = this;
-    let elements = component.$('.competency-more-cells');
+    let elements = component.$('.competency');
     for (let index = 0; index < elements.length; index++) {
-      let element = $(elements[index]);
+      let element = component.$(elements[index]);
       let cellHeight = component.get('cellHeight');
       let yAxis = element.attr('copy-yaxis');
       let className = element.attr('copy-class-name');
@@ -454,8 +515,49 @@ export default Ember.Component.extend({
       element.attr('class', className);
       element.attr('y', yAxis);
     }
+    component.drawSkyline();
     let height = component.get('height');
     component.$('#competency-matrix-domain-chart').height(height);
     component.$('#competency-matrix-domain-chart svg').attr('height', height);
+  },
+
+  drawSkyline() {
+    let component = this;
+    let isSkylineEnabled = component.get('isSkylineEnabled');
+    let skylineElements = component.$('.skyline-competency');
+    let indexSize = component.$(skylineElements).length;
+    let cellWidth = component.get('cellWidth');
+    let cellHeight = component.get('cellHeight');
+    component.$('circle').remove();
+    component.$('line').remove();
+    let svg = component.get('skylineContainer');
+    let className = isSkylineEnabled ? '' : 'disable-skyline';
+    skylineElements.each(function(index) {
+      let x1 =
+        parseInt(component.$(skylineElements[index]).attr('x')) + cellWidth / 2;
+      let y1 = parseInt(component.$(skylineElements[index]).attr('y'));
+      y1 = y1 === 0 ? y1 + 3 : y1 + cellHeight / 2;
+      if (index < indexSize - 1) {
+        let x2 =
+          parseInt(component.$(skylineElements[index + 1]).attr('x')) +
+          cellWidth / 2;
+        let y2 = parseInt(component.$(skylineElements[index + 1]).attr('y'));
+        y2 = y2 === 0 ? y2 + 3 : y2 + cellHeight / 2;
+        svg
+          .append('line')
+          .attr('x1', x1)
+          .attr('y1', y1)
+          .attr('x2', x2)
+          .attr('y2', y2)
+          .attr('class', `skyline ${className}`);
+      }
+      svg
+        .append('circle')
+        .attr('cx', x1)
+        .attr('cy', y1)
+        .attr('r', 3)
+        .attr('fill', '#fff')
+        .attr('class', `skyline ${className}`);
+    });
   }
 });

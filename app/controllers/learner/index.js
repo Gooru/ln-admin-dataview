@@ -175,12 +175,6 @@ export default Ember.Controller.extend({
      * Trigger when skyline toggle button got changed.
      */
     onChangeSkyline: function(value) {
-      if (value) {
-        this.set('isExpandChartEnabled', true);
-        this.set('disabledExpandButton', true);
-      } else {
-        this.set('disabledExpandButton', false);
-      }
       this.set('isSkylineEnabled', value);
     },
 
@@ -188,12 +182,7 @@ export default Ember.Controller.extend({
      * Trigger when reset toggle button got changed.
      */
     onChangeResetChart: function(value) {
-      let isSkylineEnabled = this.get('isSkylineEnabled');
-      if (isSkylineEnabled) {
-        this.set('isExpandChartEnabled', true);
-      } else {
-        this.set('isExpandChartEnabled', value);
-      }
+      this.set('isExpandChartEnabled', value);
     },
 
     /**
