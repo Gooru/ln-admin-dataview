@@ -89,6 +89,21 @@ export default Ember.Controller.extend({
   questionContent: null,
 
   /*
+   * List of course contents
+   */
+  courseContent: null,
+
+  /*
+   * List of unit contents
+   */
+  unitContent: null,
+
+  /*
+   * List of lesson contents
+   */
+  lessonContent: null,
+
+  /*
    * List of subjects
    */
   subjects: null,
@@ -255,6 +270,25 @@ export default Ember.Controller.extend({
           controller.set('isLoading', false);
           controller.set('signatureContents', learningData.signatureContents);
           controller.set('prerequisites', learningData.prerequisites);
+
+          controller.set(
+            'courseContent',
+            culcaqrContents.course
+              ? culcaqrContents.course.splice(0, 3)
+              : culcaqrContents.course
+          );
+          controller.set(
+            'unitContent',
+            culcaqrContents.unit
+              ? culcaqrContents.unit.splice(0, 3)
+              : culcaqrContents.unit
+          );
+          controller.set(
+            'lessonContent',
+            culcaqrContents.lesson
+              ? culcaqrContents.lesson.splice(0, 3)
+              : culcaqrContents.lesson
+          );
           controller.set(
             'resourceContent',
             culcaqrContents.resource.splice(0, 3)
