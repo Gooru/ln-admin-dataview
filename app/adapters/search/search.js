@@ -1,13 +1,11 @@
 import Ember from 'ember';
 
-
 /**
  * Adapter to support the Search for Collections, Assessments, Resources and Questions
  *
  * @typedef {Object} SearchAdapter
  */
 export default Ember.Object.extend({
-
   session: Ember.inject.service('session'),
 
   namespace: '/gooru-search/rest/v2/search',
@@ -22,7 +20,12 @@ export default Ember.Object.extend({
    * @param  {Number} length
    * @return {Promise.<Collection[]>}
    */
-  searchCollections: function(query = '*', filters = {}, start = 1, length = 20) {
+  searchCollections: function(
+    query = '*',
+    filters = {},
+    start = 1,
+    length = 20
+  ) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/scollection`;
@@ -51,14 +54,19 @@ export default Ember.Object.extend({
    * @param  {Number} length
    * @return {Promise.<Assessment[]>}
    */
-  searchAssessments: function(query = '*', filters = {}, start = 1, length = 20) {
+  searchAssessments: function(
+    query = '*',
+    filters = {},
+    start = 1,
+    length = 20
+  ) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/scollection`;
     let defaultData = {
       q: query,
       length: length,
-      start:start,
+      start: start,
       'flt.collectionType': 'assessment'
     };
     const options = {
@@ -108,7 +116,7 @@ export default Ember.Object.extend({
    * @param  {Number} length
    * @return {Promise.<Question[]>}
    */
-  searchQuestions: function( query = '*',  filters = {}, start = 1, length = 20) {
+  searchQuestions: function(query = '*', filters = {}, start = 1, length = 20) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/resource`;
@@ -182,7 +190,6 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
-
   /**
    * Search units
    * @param  {String} query
@@ -209,7 +216,6 @@ export default Ember.Object.extend({
     options.data = Object.assign(defaultData, filters);
     return Ember.$.ajax(url, options);
   },
-
 
   /**
    * Search lessons
@@ -238,7 +244,6 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
-
   /**
    * Fetches learningMapsContent
    *
@@ -257,12 +262,30 @@ export default Ember.Object.extend({
     };
     if (nodeData.fwCode) {
       options.data = {
-        'fwCode': nodeData.fwCode,
-        'isDisplayCode': false,
+        fwCode: nodeData.fwCode,
+        isDisplayCode: false,
         length: length
       };
     }
     return Ember.$.ajax(url, options);
+  },
+
+  fetchLearningMapCompetency(filters, start = 0, length = 0) {
+    const adapter = this;
+    const namespace1 = adapter.get('namespace1');
+    const requestURL = `${namespace1}/stats`;
+    let defaultFilters = {
+      startAt: start,
+      length: length
+    };
+    let options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      headers: adapter.defineHeaders()
+    };
+    options.data = Object.assign(defaultFilters, filters);
+    return Ember.$.ajax(requestURL, options);
   },
 
   defineHeaders: function() {

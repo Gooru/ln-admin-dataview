@@ -191,7 +191,12 @@ export const ACTIVITIES_NAVIGATION_MENUS_INDEX = {
   questions: 5
 };
 
-export const COMPETENCY_NAVIGATION_MENUS = ['matrix', 'crosswalk', 'tree'];
+export const COMPETENCY_NAVIGATION_MENUS = [
+  'matrix',
+  'crosswalk',
+  'tree',
+  'learning-map'
+];
 
 export const COMPETENCY_NAVIGATION_MENUS_INDEX = {
   matrix: 0,
@@ -343,4 +348,24 @@ export const ACTIVITIES_FILTER = [
     title: 'activities.filter-types.course',
     code: 'course'
   }
+];
+
+export const LEARNING_MAP_DEFAULT_LEVELS = {
+  subjectClassification: 'k_12',
+  subjectCode: 'K12.SC',
+  courseCode: 'K12.SC-SCK'
+};
+
+export const LEARNING_MAP_CONTENT_SEQUENCE = [
+  'course',
+  'unit',
+  'lesson',
+  'collection',
+  'assessment',
+  'resource',
+  'question',
+  'rubric',
+  'signatureCollection',
+  'signatureAssessment',
+  'signatureResource'
 ];

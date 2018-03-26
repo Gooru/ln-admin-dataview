@@ -72,10 +72,11 @@ export default Ember.Controller.extend({
       this.set('searchTerm', term);
       let routeName = Utils.getRoutePathLastOccurrence();
       let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
+      let searchTerm = term ? `?term=${term}` : `?term=${term}`;
       if (activeMenuIndex > -1) {
-        this.transitionToRoute(`/activities/${routeName}?term=${term}`);
+        this.transitionToRoute(`/activities/${routeName}${searchTerm}`);
       } else {
-        this.transitionToRoute(`/activities/courses?term=${term}`);
+        this.transitionToRoute(`/activities/courses${searchTerm}`);
       }
     },
 
