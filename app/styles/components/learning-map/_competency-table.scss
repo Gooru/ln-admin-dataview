@@ -1,132 +1,185 @@
 .learning-map.competency-table {
-  height: 100vh;
+  height: 70vh;
   .table-responsive {
     width: 95%;
     margin: auto;
     .competency-data-level {
       display: block;
-      background: url("images/crosswalk-subject.png");
-      height: 59px;
+      background-image: url("images/crosswalk-subject.png");
+      height: 50px;
       background-size: contain;
-      object-fit: cover;
       font-size: 25px;
       font-weight: bold;
       text-align: center;
       color: $white;
-      text-transform: uppercase;
-      line-height: 59px;
+      line-height: 50px;
       display: flex;
+      span.title {
+        margin: auto;
+      }
+      span {
+        .material-icons {
+          cursor: pointer;
+        }
+      }
     }
 
     .thead {
       display: flex;
-      width: 94%;
       height: 44px;
       line-height: 44px;
       color: $dark-400;
       font-weight: bold;
       margin: auto;
-      border-bottom: 2px solid #979797;
+      border-bottom: 1px solid $dark-300;
       .th {
-        padding-left: 15px;
+        padding-left: 8px;
         i {
           float: right;
           line-height: 2.2;
           margin-right: 15px;
           cursor: pointer;
         }
+        &.competency-info {
+          text-transform: uppercase;
+          font-size: 15px;
+          font-weight: bold;
+          color: $dark-400;
+          border-right: 2px solid $light-300;
+        }
+
+        &.prerequisites-info {
+          border-left: 2px solid $light-300;
+          text-transform: uppercase;
+          font-size: 15px;
+          font-weight: bold;
+          color: $dark-400;
+        }
       }
 
       %content-icon-size {
-        width: 32.5px;
-        height: 25px;
-        object-fit: contain;
-        display: block;
+        width: 20px;
+        height: 20px;
+        background-size: 20px 20px;
+        margin-top: 12px;
       }
       .course {
         i {
-          background: url("images/course-icon.svg");
+          background-image: url("images/course-icon.svg");
           @extend %content-icon-size;
         }
       }
 
       .assessment {
         i {
-          background: url("images/assessment-icon.svg");
+          background-image: url("images/assessment-icon.svg");
           @extend %content-icon-size;
         }
       }
 
       .lesson {
         i {
-          background: url("images/lesson-icon.svg");
+          background-image: url("images/lesson-icon.svg");
           @extend %content-icon-size;
         }
       }
 
       .unit {
         i {
-          background: url("images/unit-icon.svg");
+          background-image: url("images/unit-icon.svg");
           @extend %content-icon-size;
         }
       }
 
       .collection {
         i {
-          background: url("images/collection-icon.svg");
+          background-image: url("images/collection-icon.svg");
           @extend %content-icon-size;
         }
       }
 
       .resource {
         i {
-          background: url("images/resource-icon.svg");
+          background-image: url("images/resource-icon.svg");
           @extend %content-icon-size;
         }
       }
 
       .question {
         i {
-          background: url("images/question-icon.svg");
+          background-image: url("images/question-icon.svg");
           @extend %content-icon-size;
         }
       }
 
       .rubric {
         i {
-          background: url("images/rubric-icon.svg");
+          background-image: url("images/rubric-icon.svg");
+          @extend %content-icon-size;
+        }
+      }
+
+      .signatureCollection {
+        i {
+          background-image: url("images/collection-orange.svg");
+          @extend %content-icon-size;
+        }
+      }
+
+      .signatureAssessment {
+        i {
+          background-image: url("images/assessment-orange.svg");
           @extend %content-icon-size;
         }
       }
     }
 
     .table-structure {
-      height: 80vh;
+      height: 75vh;
       overflow: auto;
+      margin-bottom: 20px;
       .table {
         .tbody {
           .competency-info {
             display: flex;
             font-size: 12px;
             color: $dark-400;
+            border-right: 2px solid $light-300;
             .competency-id {
               min-width: 160px;
               font-weight: bold;
             }
           }
           .content-info {
-            width: 50px;
             text-align: center;
             color: $dark-400;
             font-size: 15px;
             vertical-align: middle;
           }
           .prerequisites-info {
-            width: 195px;
-            border-left: 2px solid gray;
+            border-left: 2px solid $light-300;
           }
         }
       }
+    }
+    //Signature resource not available in the mock
+    .signatureResource {
+      display: none;
+    }
+    .competency-info {
+      width: 515px;
+    }
+    .content-info {
+      width: 50px;
+    }
+    .prerequisites-info {
+      width: 190px;
+    }
+    .not-available {
+      text-align: center;
+      font-size: 15px;
+      font-weight: bold;
+      margin-top: 30px;
     }
   }
 }

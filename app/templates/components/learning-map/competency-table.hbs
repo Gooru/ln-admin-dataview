@@ -1,19 +1,23 @@
 <div class="table-responsive">
   <div class="competency-data-level">
-
+    <span class="title">
+      {{concat selectedDataLevelItems.category ' / ' (truncate text=selectedDataLevelItems.subject maxLength=20) ' / ' (truncate text=selectedDataLevelItems.course maxLength=20)}}
+      {{if selectedDataLevelItems.domain (concat ' / ' selectedDataLevelItems.domain ' Domains')}}
+      <span {{action "onScrollTop"}}><i class="material-icons">arrow_upward</i></span>
+    </span>
   </div>
 
   <div class="thead">
-    <div class="th">
-      Competency
+    <div class="th competency-info">
+      {{t 'common.competency'}}
     </div>
     {{#each contentSequence as |content|}}
-      <div class="th {{content}}">
+      <div class="th content-info {{content}}">
         <i class="icon"></i>
       </div>
     {{/each}}
-    <div class="th">
-      prerequisites
+    <div class="th prerequisites-info">
+      {{t 'common.pre-requisites'}}
     </div>
   </div>
   <div class="table-structure">
@@ -37,11 +41,17 @@
             <td class="prerequisites-info">
               {{#each tableRow.prerequisites as |prerequisites|}}
                 <div class="prerequisites-id">
-                  {{prerequisites}}
+                  {{#each prerequisites as |prerequisite|}}
+                    {{prerequisite}}
+                  {{/each}}
                 </div>
               {{/each}}
             </td>
           </tr>
+        {{else}}
+          <div class="not-available">
+            Competency Not available
+          </div>
         {{/each}}
       </tbody>
     </table>

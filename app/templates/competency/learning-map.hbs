@@ -1,17 +1,33 @@
 <div class="learning-map-container">
   <div class="browser-container">
     <div class="title">
-      Category, Subject, Course, Domain
+      <span>
+        {{
+          concat
+          (t 'common.category') ', '
+          (t 'common.subject') ', '
+          (t 'common.course') ', '
+          (t 'common.domain')
+        }}
+      </span>
     </div>
-    <div class="body">
-      {{learning-map.app-domain-browser onSelectDomain="onSelectDomain" onSelectDataItem="onSelectDataItem"}}
-
-      <div class="generate-table-btn" align="center">
-        <button class="btn generate-btn {{unless enableGenerateTableBtn 'disabled'}}" {{action "onExportCompetency"}}>{{t 'crosswalk.generate-table'}}</button>
+      <div class="body">
+        {{learning-map.app-domain-browser onSelectDomain="onSelectDomain" onSelectDataItem="onSelectDataItem"}}
+        <div class="generate-table-btn" align="center">
+          <button class="btn generate-btn {{unless isShowExportBtn 'disabled'}}" {{action "onExportCompetency"}}>{{t 'crosswalk.generate-table'}}</button>
+        </div>
       </div>
+  </div>
+    <div class="table-container">
+      {{learning-map.competency-table
+        tableBody=tableBody
+        selectedDataLevelItems=selectedDataLevelItems
+        onScrollBottom="onScrollBottom"
+      }}
     </div>
-  </div>
-  <div class="table-container">
-    {{learning-map.competency-table dataLevels=dataLevels competencies=competencies domainStack=domainStack}}
-  </div>
+    {{#if isLoading}}
+      <div class="spinner">
+        {{three-bounce-spinner}}
+      </div>
+    {{/if}}
 </div>

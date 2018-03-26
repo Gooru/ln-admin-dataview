@@ -5,6 +5,17 @@
   overflow: auto;
 
   .browser-container {
+    .title {
+      font-size: 20px;
+      color: $gray;
+      font-weight: 300;
+      margin: auto;
+      width: 300px;
+      margin-bottom: 15px;
+      span {
+        text-transform: capitalize;
+      }
+    }
     .body {
       .generate-table-btn {
         padding: 30px;
@@ -24,5 +35,10 @@
         }
       }
     }
+  }
+  .spinner {
+    position: absolute;
+    left: 50%;
+    top: 50%;
   }
 }

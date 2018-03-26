@@ -29,8 +29,9 @@ export default Ember.Component.extend({
 
   domainStack: [],
 
-  didInsertElement() {
+  init: function() {
     let component = this;
+    component._super(...arguments);
     let selectedCategory = component.get('selectedCategory');
     let initialSubject = component.fetchSubjectsByCategory(selectedCategory);
     initialSubject.then(function(subject) {
@@ -113,24 +114,20 @@ export default Ember.Component.extend({
     switch (type) {
     case 'category':
       itemsToReset = ['subjects', 'courses', 'domains'];
-      component.resetItems(itemsToReset);
       component.fetchSubjectsByCategory(dataItem.value);
       break;
     case 'subject':
       itemsToReset = ['courses', 'domains'];
-      component.resetItems(itemsToReset);
       component.fetchCoursesBySubject(dataItem);
       break;
     case 'course':
-      itemsToReset = ['domains'];
-      component.resetItems(itemsToReset);
+      itemsToReset = ['domains', 'domainStack'];
       component.fetchDomainsByCourse(selectedSubject, dataItem);
       break;
     case 'domian':
       break;
-    default:
-      return;
     }
+    component.resetItems(itemsToReset);
   },
 
   resetItems(itemsToReset) {
