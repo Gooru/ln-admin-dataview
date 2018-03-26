@@ -230,24 +230,52 @@ export default Ember.Controller.extend({
    */
   fetchedCompetencies: [],
 
+  /**
+   * @property {Array}
+   * Property to store generated table body
+   */
   tableBody: [],
 
+  /**
+   * @property {Array}
+   * Property to store sequence of content items to show
+   */
   contentSequence: LEARNING_MAP_CONTENT_SEQUENCE,
 
+  /**
+   * @property {Array}
+   * Property to store selected domain stack
+   */
   domainStack: [],
 
-  isShowTable: true,
-
-  isShowBrowser: true,
-
+  /**
+   * @property {Array}
+   * Property to store list of competencies
+   */
   competencies: [],
 
+  /**
+   * @property {Number}
+   * Property to current start value
+   */
   start: 0,
 
+  /**
+   * @property {Number}
+   * Property to store length value
+   */
   length: 50,
 
+  /**
+   * @property {Boolean}
+   * Property to show/hide spinner
+   */
   isLoading: false,
 
+  /**
+   * @property {JSON}
+   * Property to store selected data leve items
+   */
   selectedDataLevelItems: {
     category: 'K-12',
     subject: 'Science',

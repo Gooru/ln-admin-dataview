@@ -1,17 +1,35 @@
 <div class="browser-card {{type}}">
-  {{#each dataContent as |data|}}
-    <div class="item {{string-replace (if data.id data.id data.value)  '\.' '-' 'g'}}" {{action "onSelectDataItem" type data}}>
-      {{#if (eq type 'domain')}}
-      <input type="checkbox" class="checkbox"
-        name="frameworkCheckbox"
-        onclick={{action 'onSelectDomain' data.id}}
-        />
-      {{/if}}
-      {{if (eq type 'category') (t data.label) data.title}}
-    </div>
-    {{else}}
-    <div class="item">
-      No {{type}} found
-    </div>
-  {{/each}}
+  {{#if (eq type 'domain')}}
+    {{#each dataContent as |data|}}
+      <div class="item {{string-replace (if data.id data.id data.value)  '\.' '-' 'g'}}">
+        {{#if (eq type 'domain')}}
+        <input type="checkbox" class="checkbox"
+          name="frameworkCheckbox"
+          onclick={{action 'onSelectDomain' data.id}}
+          />
+        {{/if}}
+        {{data.title}}
+      </div>
+      {{else}}
+      <div class="item">
+        No {{type}} found
+      </div>
+    {{/each}}
+  {{else}}
+    {{#each dataContent as |data|}}
+      <div class="item {{string-replace (if data.id data.id data.value)  '\.' '-' 'g'}}" {{action "onSelectDataItem" type data}}>
+        {{#if (eq type 'domain')}}
+        <input type="checkbox" class="checkbox"
+          name="frameworkCheckbox"
+          onclick={{action 'onSelectDomain' data.id}}
+          />
+        {{/if}}
+        {{if (eq type 'category') (t data.label) data.title}}
+      </div>
+      {{else}}
+      <div class="item">
+        No {{type}} found
+      </div>
+    {{/each}}
+  {{/if}}
 </div>
