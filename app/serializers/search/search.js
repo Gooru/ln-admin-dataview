@@ -501,6 +501,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
     let courseData = [];
     let resourceData = [];
     let questionData = [];
+    let unitData = [];
+    let lessonData = [];
 
     if (contents.assessment) {
       contents.assessment.searchResults.map(assessment => {
@@ -537,7 +539,14 @@ export default Ember.Object.extend(ConfigurationMixin, {
     if (contents.course) {
       contents.course.searchResults.map(course => {
         let courseInfo = serializer.normalizeCourse(course);
-        courseInfo.taxonomy = serializer
+        courseInfo.description = course.learningObjective;
+        courseInfo.creator = course.creator
+          ? serializer.normalizeOwner(course.creator)
+          : {};
+        courseInfo.owner = course.owner
+          ? serializer.normalizeOwner(course.owner)
+          : {};
+        courseInfo.standards = serializer
           .get('taxonomySerializer')
           .normalizeLearningMapsTaxonomyArray(
             course.taxonomy,
@@ -550,6 +559,13 @@ export default Ember.Object.extend(ConfigurationMixin, {
     if (contents.resource) {
       contents.resource.searchResults.map(resource => {
         let resourceInfo = serializer.normalizeResource(resource);
+        resourceInfo.description = resource.learningObjective;
+        resourceInfo.creator = resource.creator
+          ? serializer.normalizeOwner(resource.creator)
+          : {};
+        resourceInfo.owner = resource.user
+          ? serializer.normalizeOwner(resource.user)
+          : {};
         resourceInfo.standards = serializer
           .get('taxonomySerializer')
           .normalizeLearningMapsTaxonomyArray(
@@ -563,6 +579,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
     if (contents.question) {
       contents.question.searchResults.map(question => {
         let questionInfo = serializer.normalizeQuestion(question);
+        questionInfo.description = question.learningObjective;
+        questionInfo.creator = serializer.normalizeOwner(question.creator);
+        questionInfo.owner = serializer.normalizeOwner(question.user);
         questionInfo.standards = serializer
           .get('taxonomySerializer')
           .normalizeLearningMapsTaxonomyArray(
@@ -572,11 +591,54 @@ export default Ember.Object.extend(ConfigurationMixin, {
         questionData.push(questionInfo);
       });
     }
+
+    if (contents.unit) {
+      contents.unit.searchResults.map(unit => {
+        let unitInfo = serializer.normalizeQuestion(unit);
+        unitInfo.description = unit.learningObjective;
+        unitInfo.creator = unit.creator
+          ? serializer.normalizeOwner(unit.creator)
+          : {};
+        unitInfo.owner = unit.owner
+          ? serializer.normalizeOwner(unit.owner)
+          : {};
+        unitInfo.standards = serializer
+          .get('taxonomySerializer')
+          .normalizeLearningMapsTaxonomyArray(
+            unitInfo.taxonomy,
+            TAXONOMY_LEVELS.QUESTION
+          );
+        unitData.push(unitInfo);
+      });
+    }
+
+    if (contents.lesson) {
+      contents.lesson.searchResults.map(lesson => {
+        let lessonInfo = serializer.normalizeQuestion(lesson);
+        lessonInfo.description = lesson.learningObjective;
+        lessonInfo.creator = lesson.creator
+          ? serializer.normalizeOwner(lesson.creator)
+          : {};
+        lessonInfo.owner = lesson.owner
+          ? serializer.normalizeOwner(lesson.owner)
+          : {};
+        lessonInfo.standards = serializer
+          .get('taxonomySerializer')
+          .normalizeLearningMapsTaxonomyArray(
+            lessonInfo.taxonomy,
+            TAXONOMY_LEVELS.QUESTION
+          );
+        lessonData.push(lessonInfo);
+      });
+    }
+
     serializedContentData.assessment = assessmentData;
     serializedContentData.collection = collectionData;
     serializedContentData.course = courseData;
     serializedContentData.resource = resourceData;
     serializedContentData.question = questionData;
+    serializedContentData.unit = unitData;
+    serializedContentData.lesson = lessonData;
     return serializedContentData;
   },
 
