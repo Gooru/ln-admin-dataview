@@ -48,5 +48,19 @@ export default Ember.Component.extend({
   /*
    * List of question contents
    */
-  questionContent: null
+  questionContent: null,
+  /*
+   * List of course contents
+   */
+  courseContent: null,
+
+  /*
+   * List of unit contents
+   */
+  unitContent: null,
+
+  /*
+   * List of lesson contents
+   */
+  lessonContent: null
 });

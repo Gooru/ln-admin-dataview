@@ -78,6 +78,21 @@ export default Ember.Controller.extend({
    */
   questionContent: null,
 
+  /*
+   * List of course contents
+   */
+  courseContent: null,
+
+  /*
+   * List of unit contents
+   */
+  unitContent: null,
+
+  /*
+   * List of lesson contents
+   */
+  lessonContent: null,
+
   defaultTaxonomyTreeViewData: Ember.computed(function() {
     let data = Ember.Object.create({
       name: 'Gooru',
@@ -296,16 +311,40 @@ export default Ember.Controller.extend({
             controller.set('prerequisites', learning.prerequisites);
 
             controller.set(
+              'courseContent',
+              culcaqrContents.course
+                ? culcaqrContents.course.splice(0, 3)
+                : culcaqrContents.course
+            );
+            controller.set(
+              'unitContent',
+              culcaqrContents.unit
+                ? culcaqrContents.unit.splice(0, 3)
+                : culcaqrContents.unit
+            );
+            controller.set(
+              'lessonContent',
+              culcaqrContents.lesson
+                ? culcaqrContents.lesson.splice(0, 3)
+                : culcaqrContents.lesson
+            );
+            controller.set(
               'resourceContent',
-              culcaqrContents.resource.splice(0, 3)
+              culcaqrContents.resource
+                ? culcaqrContents.resource.splice(0, 3)
+                : culcaqrContents.resource
             );
             controller.set(
               'collectionContent',
-              culcaqrContents.collection.splice(0, 3)
+              culcaqrContents.collection
+                ? culcaqrContents.collection.splice(0, 3)
+                : culcaqrContents.collection
             );
             controller.set(
               'assessmentContent',
-              culcaqrContents.assessment.splice(0, 3)
+              culcaqrContents.assessment
+                ? culcaqrContents.assessment.splice(0, 3)
+                : culcaqrContents.assessment
             );
             controller.set(
               'questionContent',

@@ -79,6 +79,9 @@ export default {
       section: {
         'most-relevant': 'Most Relevant',
         prerequisites: 'Prerequisites',
+        courses: 'Courses',
+        units: 'Units',
+        lessons: 'Lessons',
         assessments: 'Assessments',
         collections: 'Collections',
         questions: 'Questions',

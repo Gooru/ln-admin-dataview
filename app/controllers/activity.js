@@ -138,6 +138,28 @@ export default Ember.Controller.extend({
       } else {
         controller.transitionToRoute('/activities');
       }
+    },
+
+    clearSearchText: function() {
+      let controller = this;
+      let userId = controller.get('session.id');
+      let filters = JSON.parse(
+        localStorage.getItem(`research_${userId}_activities_filters`)
+      );
+      if (filters && (filters.category || filters.subject || filters.course)) {
+        let url = window.location.href;
+        let urlsplitted = url.split('?')[0];
+        if (urlsplitted) {
+          let lastURLdata = urlsplitted.split('/');
+          let colelctionURL = lastURLdata[lastURLdata.length - 1];
+          controller.set('searchTerm', '');
+          controller.transitionToRoute(`/activities/${colelctionURL}`);
+        } else {
+          controller.transitionToRoute('/activities');
+        }
+      } else {
+        controller.transitionToRoute('/activities');
+      }
     }
   },
 
