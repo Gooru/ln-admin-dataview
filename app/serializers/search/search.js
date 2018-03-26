@@ -672,5 +672,32 @@ export default Ember.Object.extend(ConfigurationMixin, {
   normalizeSearchContentCount: function(payload) {
     let totalHitCount = payload ? payload.totalHitCount : null;
     return totalHitCount;
+  },
+
+  normalizeSearchlearningMapCompetency: function(payload) {
+    let serializer = this;
+    let serializedCompetencyData = {
+      totalHitCount: 0,
+      competencyInfo: []
+    };
+    if (payload) {
+      serializedCompetencyData.totalHitCount = payload.totalHitCount || 0;
+      let competencyDetails = [];
+      payload.stats.map(competency => {
+        competencyDetails.push(
+          serializer.normalizeLearningMapCompetencyData(competency)
+        );
+      });
+      serializedCompetencyData.competencyInfo = competencyDetails;
+    }
+    return serializedCompetencyData;
+  },
+
+  normalizeLearningMapCompetencyData(competency) {
+    //Add missing data with empty content
+    competency.prerequisites = competency.prerequisites || [];
+    competency.title = competency.title || '';
+    competency.code = competency.code || '';
+    return competency;
   }
 });

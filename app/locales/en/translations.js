@@ -44,6 +44,7 @@ export default {
     select: 'Select',
     'created-by': 'Created by',
     'remixed-by': 'Remixed by',
+    category: 'category',
     subject: 'subject',
     course: 'course',
     domain: 'domain',
@@ -57,6 +58,8 @@ export default {
       'Check your spelling. We all make mistakes!<br/>Go broader and remove some filters.<br/> Or try searching for a similar word instead.',
     'show-more-results': 'Show More Results',
     prerequisites: 'Prerequisites',
+    competency: 'competency',
+    'pre-requisites': 'pre-requisites',
     skyline: 'Skyline',
     'collapse-chart': 'Collapse chart',
     'expand-chart': 'Expand chart'

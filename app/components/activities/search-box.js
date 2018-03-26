@@ -134,10 +134,12 @@ export default Ember.Component.extend({
     },
 
     searchTerm: function() {
-      var term = $.trim(this.get('tempTerm'));
+      var tempTerm = $.trim(this.get('tempTerm'));
+      var term = $.trim(this.get('term'));
+      var isEmptyTerm = tempTerm === '' && term !== '';
       var isIncorrectTermSize = this.get('isIncorrectTermSize');
-      if (!isIncorrectTermSize) {
-        this.set('term', term);
+      if (!isIncorrectTermSize || isEmptyTerm) {
+        this.set('term', tempTerm);
         this.set('isInvalidSearchTerm', false);
         this.sendAction('onSearch', this.get('term'));
       } else {
