@@ -34,7 +34,11 @@
           font-weight: bold;
           $line-height: 1.5;
           $lines-to-show: 2;
-          @include ellipsis($font-size: 13px, $line-height: $line-height, $lines-to-show: $lines-to-show);
+          @include ellipsis(
+            $font-size: 13px,
+            $line-height: $line-height,
+            $lines-to-show: $lines-to-show
+          );
         }
       }
 
@@ -42,7 +46,11 @@
         display: block;
         position: absolute;
         z-index: 9;
-        background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, #000 100%);
+        background-image: linear-gradient(
+          to bottom,
+          rgba(255, 255, 255, 0) 0,
+          #000 100%
+        );
         margin-top: 52px;
         height: 60%;
         width: 100%;
@@ -112,13 +120,19 @@
       .assessment-description {
         $line-height: 1.5;
         $lines-to-show: 3;
-        @include ellipsis($font-size: 13px, $line-height: $line-height, $lines-to-show: $lines-to-show);
+        @include ellipsis(
+          $font-size: 13px,
+          $line-height: $line-height,
+          $lines-to-show: $lines-to-show
+        );
       }
 
       .assessment-standards {
         margin-top: 10px;
 
         .taxonomy-tag {
+          width: 70%;
+
           .content {
             font-size: 12px;
             width: 130px;
@@ -157,7 +171,7 @@
           height: 15px;
           width: 9px;
           position: relative;
-          background: #F1F2F7;
+          background: #f1f2f7;
           border-top-right-radius: 12.5px;
           border-bottom-right-radius: 12.5px;
           z-index: 1;
@@ -169,7 +183,7 @@
           height: 15px;
           width: 9px;
           position: relative;
-          background: #F1F2F7;
+          background: #f1f2f7;
           border-top-left-radius: 12.5px;
           border-bottom-left-radius: 12.5px;
           margin-left: 211px;

@@ -3,7 +3,6 @@ import TaxonomyTag from 'admin-dataview/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'admin-dataview/models/taxonomy/taxonomy-tag-data';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -26,24 +25,29 @@ export default Ember.Component.extend({
   }),
 
   /**
-  * isCollection card
-  */
+   * isCollection card
+   */
   isCollection: Ember.computed.equal('content.type', 'collection'),
 
   /**
-  * isAssessment card
-  */
+   * isAssessment card
+   */
   isAssessment: Ember.computed.equal('content.type', 'assessment'),
 
   /**
-  * isResource card
-  */
+   * isResource card
+   */
   isResource: Ember.computed.equal('content.type', 'resource'),
 
   /**
-  * isQuestion card
-  */
+   * isQuestion card
+   */
   isQuestion: Ember.computed.equal('content.type', 'question'),
+
+  /**
+   * isCourse card
+   */
+  isCourse: Ember.computed.equal('content.type', 'course'),
 
   // -------------------------------------------------------------------------
   // Events

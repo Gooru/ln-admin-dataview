@@ -55,12 +55,17 @@
         .title {
           padding-left: 10px;
           padding-right: 10px;
-          width: 100%;
+          width: 85%;
           height: 42px;
+          display: block !important;
           margin-top: 88px;
           $line-height: 1.5;
           $lines-to-show: 2;
-          @include ellipsis($font-size: 13px, $line-height: $line-height, $lines-to-show: $lines-to-show);
+          @include ellipsis(
+            $font-size: 13px,
+            $line-height: $line-height,
+            $lines-to-show: $lines-to-show
+          );
         }
       }
     }
@@ -136,7 +141,30 @@
       .resource-description {
         $line-height: 1.5;
         $lines-to-show: 3;
-        @include ellipsis($font-size: 13px, $line-height: $line-height, $lines-to-show: $lines-to-show);
+        @include ellipsis(
+          $font-size: 13px,
+          $line-height: $line-height,
+          $lines-to-show: $lines-to-show
+        );
+      }
+
+      .resource-standards {
+        margin-top: 10px;
+
+        .taxonomy-tag {
+          width: 70%;
+
+          .content {
+            font-size: 12px;
+            width: 130px;
+            height: 32px;
+          }
+        }
+
+        .non-visible-tags {
+          padding: 2px;
+          font-size: 12px;
+        }
       }
     }
 
@@ -163,7 +191,7 @@
           height: 15px;
           width: 9px;
           position: relative;
-          background: #F1F2F7;
+          background: #f1f2f7;
           border-top-right-radius: 12.5px;
           border-bottom-right-radius: 12.5px;
           z-index: 1;
@@ -175,7 +203,7 @@
           height: 15px;
           width: 9px;
           position: relative;
-          background: #F1F2F7;
+          background: #f1f2f7;
           border-top-left-radius: 12.5px;
           border-bottom-left-radius: 12.5px;
           margin-left: 211px;

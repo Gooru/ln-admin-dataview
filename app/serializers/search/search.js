@@ -95,7 +95,86 @@ export default Ember.Object.extend(ConfigurationMixin, {
       sequence: result.sequence,
       relevance: result.relevance,
       efficacy: result.efficacy,
-      engagement: result.engagement
+      engagement: result.engagement,
+      type: result.format
+    });
+  },
+
+  /**
+   * Normalizes a unit
+   * @param {*} result
+   * @returns {unit}
+   */
+  normalizeUnit: function(result) {
+    const serializer = this;
+    const basePath = serializer.get('session.cdnUrls.content');
+    const appRootPath = this.get('appRootPath'); //configuration appRootPath
+    const thumbnailUrl = result.thumbnail
+      ? basePath + result.thumbnail
+      : appRootPath + DEFAULT_IMAGES.COLLECTION;
+    const taxonomyInfo =
+      (result.taxonomy &&
+        result.taxonomy.curriculum &&
+        result.taxonomy.curriculum.curriculumInfo) ||
+      [];
+    return CourseModel.create(Ember.getOwner(this).ownerInjection(), {
+      id: result.id,
+      title: result.title,
+      description: result.description,
+      createdDate: result.addDate,
+      thumbnailUrl: thumbnailUrl,
+      lastModified: result.lastModified,
+      lastModifiedBy: result.lastModifiedBy,
+      isVisibleOnProfile: result.visibleOnProfile,
+      isPublished: result.publishStatus === 'published',
+      assessmentCount: result.assessmentCount,
+      collectionCount: result.collectionCount,
+      lessonCount: result.lessonCount,
+      standards: taxonomyInfo
+        ? serializer
+          .get('taxonomySerializer')
+          .normalizeTaxonomyArray(taxonomyInfo, TAXONOMY_LEVELS.COURSE)
+        : {},
+      owner: result.owner ? serializer.normalizeOwner(result.owner) : null,
+      sequence: result.sequence,
+      relevance: result.relevance,
+      efficacy: result.efficacy,
+      engagement: result.engagement,
+      type: result.format
+    });
+  },
+
+  /**
+   * Normalizes a lesson
+   * @param {*} result
+   * @returns {Course}
+   */
+  normalizeLesson: function(result) {
+    const serializer = this;
+    const basePath = serializer.get('session.cdnUrls.content');
+    const appRootPath = this.get('appRootPath'); //configuration appRootPath
+    const thumbnailUrl = result.thumbnail
+      ? basePath + result.thumbnail
+      : appRootPath + DEFAULT_IMAGES.COLLECTION;
+    return CourseModel.create(Ember.getOwner(this).ownerInjection(), {
+      id: result.id,
+      title: result.title,
+      description: result.description,
+      createdDate: result.addDate,
+      thumbnailUrl: thumbnailUrl,
+      lastModified: result.lastModified,
+      lastModifiedBy: result.lastModifiedBy,
+      isVisibleOnProfile: result.visibleOnProfile,
+      isPublished: result.publishStatus === 'published',
+      assessmentCount: result.assessmentCount,
+      collectionCount: result.collectionCount,
+      standards: null,
+      owner: result.owner ? serializer.normalizeOwner(result.owner) : null,
+      sequence: result.sequence,
+      relevance: result.relevance,
+      efficacy: result.efficacy,
+      engagement: result.engagement,
+      type: result.format
     });
   },
 
@@ -244,7 +323,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
       id: collectionData.id,
       title: collectionData.title,
       description: collectionData.description,
-      type: collectionData.type,
+      type: collectionData.type ? collectionData.type : collectionData.format,
       thumbnailUrl: thumbnailUrl,
       standards: serializer
         .get('taxonomySerializer')
@@ -336,7 +415,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
       id: assessmentData.id,
       title: assessmentData.title,
       description: assessmentData.description,
-      type: assessmentData.type,
+      type: assessmentData.type ? assessmentData.type : assessmentData.format,
       thumbnailUrl: thumbnailUrl,
       standards: serializer
         .get('taxonomySerializer')
@@ -416,7 +495,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return QuestionModel.create(Ember.getOwner(this).ownerInjection(), {
       id: questionData.gooruOid,
       title: questionData.title,
-      description: questionData.description,
+      description: questionData.description
+        ? questionData.description
+        : questionData.text,
       type: questionData.resourceFormat
         ? questionData.resourceFormat.value
         : null,
@@ -539,7 +620,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     if (contents.course) {
       contents.course.searchResults.map(course => {
         let courseInfo = serializer.normalizeCourse(course);
-        courseInfo.description = course.learningObjective;
+        courseInfo.description = course.description;
         courseInfo.creator = course.creator
           ? serializer.normalizeOwner(course.creator)
           : {};
@@ -559,7 +640,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     if (contents.resource) {
       contents.resource.searchResults.map(resource => {
         let resourceInfo = serializer.normalizeResource(resource);
-        resourceInfo.description = resource.learningObjective;
+        resourceInfo.description = resource.description;
         resourceInfo.creator = resource.creator
           ? serializer.normalizeOwner(resource.creator)
           : {};
@@ -579,7 +660,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     if (contents.question) {
       contents.question.searchResults.map(question => {
         let questionInfo = serializer.normalizeQuestion(question);
-        questionInfo.description = question.learningObjective;
+        questionInfo.description = question.description;
         questionInfo.creator = serializer.normalizeOwner(question.creator);
         questionInfo.owner = serializer.normalizeOwner(question.user);
         questionInfo.standards = serializer
@@ -594,7 +675,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
 
     if (contents.unit) {
       contents.unit.searchResults.map(unit => {
-        let unitInfo = serializer.normalizeQuestion(unit);
+        let unitInfo = serializer.normalizeUnit(unit);
         unitInfo.description = unit.learningObjective;
         unitInfo.creator = unit.creator
           ? serializer.normalizeOwner(unit.creator)
@@ -614,7 +695,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
 
     if (contents.lesson) {
       contents.lesson.searchResults.map(lesson => {
-        let lessonInfo = serializer.normalizeQuestion(lesson);
+        let lessonInfo = serializer.normalizeLesson(lesson);
         lessonInfo.description = lesson.learningObjective;
         lessonInfo.creator = lesson.creator
           ? serializer.normalizeOwner(lesson.creator)
