@@ -103,11 +103,14 @@
       -webkit-transform-style: preserve-3d;
       transform-style: preserve-3d;
       height: 450px;
+
       .competency {
         stroke: #fbfbfb;
         stroke-width: 1;
         shape-rendering: crispedges;
+        stroke-opacity: 0.4;
         cursor: pointer;
+
         &.competency-more-cells {
           cursor: default;
         }
@@ -116,7 +119,6 @@
       line {
         stroke: #ffffff;
         stroke-width: 3;
-        opacity: 0.8;
       }
 
       .skyline {

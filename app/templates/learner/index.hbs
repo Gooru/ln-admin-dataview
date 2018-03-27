@@ -4,7 +4,7 @@
       <div class="header {{if (or isCourseModeEnabled isListModeEnabled) ''  'domain-header'}}">
         <div class="panel-header {{if (or isCourseModeEnabled isListModeEnabled) 'course-list-view'  'domain-view'}}">
           <div class="pull-left panel-title">
-            <span>{{subjectTitle}}</span>
+            <div class="subject-title">{{subjectTitle}}</div>
           </div>
         </div>
         {{#if (or isCourseModeEnabled isListModeEnabled)}}
