@@ -6,7 +6,6 @@ import Ember from 'ember';
  * @typedef {Object} activitiesAdapter
  */
 export default Ember.Object.extend({
-
   session: Ember.inject.service('session'),
 
   namespace: '/gooru-search/rest',
@@ -15,11 +14,11 @@ export default Ember.Object.extend({
    * Get search learning maps
    * @returns {Promise.<[]>}
    */
-  getLearningMaps: function(filters = {}, q = '*', length = 0) {
+  getLearningMaps(filters = {}, q = '*', length = 0) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v1/pedagogy-search/learning-maps`;
-    let requestParams = { 'q' : q, length: length};
+    let requestParams = { q: q, length: length };
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -34,11 +33,9 @@ export default Ember.Object.extend({
     });
   },
 
-
-  defineHeaders: function() {
+  defineHeaders() {
     return {
       Authorization: `Token ${this.get('session.accessToken')}`
     };
   }
-
 });

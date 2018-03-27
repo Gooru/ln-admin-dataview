@@ -21,7 +21,7 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Events
 
-  init: function() {
+  init() {
     this._super(...arguments);
     this.renderDistributionBySubjectsCharts();
   },
@@ -79,7 +79,7 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Methods
 
-  renderDistributionBySubjectsCharts: function() {
+  renderDistributionBySubjectsCharts() {
     let component = this;
     let term = component.get('term');
     let appliedFilterList = component.get('appliedFilterList') || {};
@@ -140,7 +140,7 @@ export default Ember.Component.extend({
     });
   },
 
-  mapContentCountsBySubject: function(name, subject) {
+  mapContentCountsBySubject(name, subject) {
     let questionCounts = subject.get('question').get('totalHitCount');
     let resourceCounts = subject.get('resource').get('totalHitCount');
     let assessmentCounts = subject.get('assessment').get('totalHitCount');

@@ -2,9 +2,7 @@ import Ember from 'ember';
 import { truncateString } from 'admin-dataview/utils/utils';
 
 export default Ember.Component.extend({
-
   classNames: ['pull-out', 'course-pull-out-more-content'],
-
 
   // -------------------------------------------------------------------------
   // Properties
@@ -12,8 +10,8 @@ export default Ember.Component.extend({
   groupData: null,
 
   /**
-     * Grouping header indivituals  data to show more info
-     */
+   * Grouping header indivituals  data to show more info
+   */
   onChange: Ember.observer('groupData', function() {
     this.selectedHeadersData();
     return this.get('groupData');
@@ -24,15 +22,12 @@ export default Ember.Component.extend({
   // /**
   //  * Grouping header  by key value to show
   //  */
-  selectedHeadersData: function() {
+  selectedHeadersData() {
     let component = this;
     let iterateKeyValue = this.get('groupData');
     let setResponse = [];
     let color = '';
-    const extracted = [
-      'title',
-      'description'
-    ];
+    const extracted = ['title', 'description'];
     const curated = [
       'Publisher',
       'Publish Status',
@@ -125,13 +120,11 @@ export default Ember.Component.extend({
     return setResponse;
   },
 
-
   // -------------------------------------------------------------------------
   // actions
 
   actions: {
-
-    onheaderClick: function(header) {
+    onheaderClick(header) {
       let datas = Ember.A();
       datas = this.get('groupHeader');
       datas.forEach(data => {
@@ -145,7 +138,9 @@ export default Ember.Component.extend({
     onShowMore(description) {
       let component = this;
       let isShowMore = component.get('isShowMore');
-      let descriptionToShow = isShowMore ? description : truncateString(description);
+      let descriptionToShow = isShowMore
+        ? description
+        : truncateString(description);
       component.$('.description .text').html(descriptionToShow);
       component.toggleProperty('isShowMore');
     }

@@ -6,14 +6,13 @@ import Ember from 'ember';
  * @typedef {Object} LookupAdapter
  */
 export default Ember.Object.extend({
-
   namespace: 'stubs',
 
   /**
    * Get countries data
    * @returns {Promise.<[]>}
    */
-  getCountries: function() {
+  getCountries() {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/countries.json`;
@@ -31,7 +30,7 @@ export default Ember.Object.extend({
    * Get countries region data
    * @returns {Promise.<[]>}
    */
-  getCountriesRegion: function() {
+  getCountriesRegion() {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/countries-region.json`;
@@ -44,5 +43,4 @@ export default Ember.Object.extend({
       return hash.countriesRegion.value;
     });
   }
-
 });

@@ -6,7 +6,6 @@ import Ember from 'ember';
  * @typedef {Object} ProfileAdapter
  */
 export default Ember.Object.extend({
-
   session: Ember.inject.service('session'),
 
   namespace: '/api/ds/users',
@@ -17,7 +16,7 @@ export default Ember.Object.extend({
    * Get User profile
    * @returns {Promise.<[]>}
    */
-  getUserProfile: function(userId) {
+  getUserProfile(userId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v1/user/profile`;
@@ -26,7 +25,7 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       contentType: 'application/json; charset=utf-8',
       data: {
-        'user': userId
+        user: userId
       }
     };
     return Ember.RSVP.hashSettled({
@@ -40,7 +39,7 @@ export default Ember.Object.extend({
    * Get User grades
    * @returns {Promise.<[]>}
    */
-  getUserGrades: function(userId) {
+  getUserGrades(userId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v1/user/grades`;
@@ -49,7 +48,7 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       contentType: 'application/json; charset=utf-8',
       data: {
-        'user': userId
+        user: userId
       }
     };
     return Ember.RSVP.hashSettled({
@@ -63,7 +62,7 @@ export default Ember.Object.extend({
    * Get user prefs content
    * @returns {Promise.<[]>}
    */
-  getUserPrefsContent: function(userId) {
+  getUserPrefsContent(userId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v1/user/prefs/content`;
@@ -72,7 +71,7 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       contentType: 'application/json; charset=utf-8',
       data: {
-        'user': userId
+        user: userId
       }
     };
     return Ember.RSVP.hashSettled({
@@ -86,7 +85,7 @@ export default Ember.Object.extend({
    * Get user prefs providers
    * @returns {Promise.<[]>}
    */
-  getUserPrefsProviders: function(userId) {
+  getUserPrefsProviders(userId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v1/user/prefs/providers`;
@@ -95,7 +94,7 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       contentType: 'application/json; charset=utf-8',
       data: {
-        'user': userId
+        user: userId
       }
     };
     return Ember.RSVP.hashSettled({
@@ -109,7 +108,7 @@ export default Ember.Object.extend({
    * Get user prefs curators
    * @returns {Promise.<[]>}
    */
-  getUserPrefsCurators: function(userId) {
+  getUserPrefsCurators(userId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v1/user/prefs/curators`;
@@ -118,7 +117,7 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       contentType: 'application/json; charset=utf-8',
       data: {
-        'user': userId
+        user: userId
       }
     };
     return Ember.RSVP.hashSettled({
@@ -128,12 +127,11 @@ export default Ember.Object.extend({
     });
   },
 
-
   /**
    * Get User profile
    * @returns {Promise.<[]>}
    */
-  readUserProfile: function(userId) {
+  readUserProfile(userId) {
     const adapter = this;
     const namespace = adapter.get('namespaceProfile');
     const url = `${namespace}/search`;
@@ -142,7 +140,7 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       contentType: 'application/json; charset=utf-8',
       data: {
-        'userids': userId
+        userids: userId
       }
     };
     return Ember.RSVP.hashSettled({
@@ -152,10 +150,9 @@ export default Ember.Object.extend({
     });
   },
 
-  defineHeaders: function() {
+  defineHeaders() {
     return {
       Authorization: `Token ${this.get('session.accessToken')}`
     };
   }
-
 });

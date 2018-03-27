@@ -20,12 +20,7 @@ export default Ember.Object.extend({
    * @param  {Number} length
    * @return {Promise.<Collection[]>}
    */
-  searchCollections: function(
-    query = '*',
-    filters = {},
-    start = 1,
-    length = 20
-  ) {
+  searchCollections(query = '*', filters = {}, start = 1, length = 20) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/scollection`;
@@ -54,12 +49,7 @@ export default Ember.Object.extend({
    * @param  {Number} length
    * @return {Promise.<Assessment[]>}
    */
-  searchAssessments: function(
-    query = '*',
-    filters = {},
-    start = 1,
-    length = 20
-  ) {
+  searchAssessments(query = '*', filters = {}, start = 1, length = 20) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/scollection`;
@@ -87,7 +77,7 @@ export default Ember.Object.extend({
    * @param  {Number} length
    * @return {Promise.<Resource[]>}
    */
-  searchResources: function(query = '*', filters = {}, start = 1, length = 20) {
+  searchResources(query = '*', filters = {}, start = 1, length = 20) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/resource`;
@@ -116,7 +106,7 @@ export default Ember.Object.extend({
    * @param  {Number} length
    * @return {Promise.<Question[]>}
    */
-  searchQuestions: function(query = '*', filters = {}, start = 1, length = 20) {
+  searchQuestions(query = '*', filters = {}, start = 1, length = 20) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/resource`;
@@ -144,7 +134,7 @@ export default Ember.Object.extend({
    * @param  {Number} length
    * @return {Promise.<Course[]>}
    */
-  searchCourses: function(query = '*', filters = {}, start = 1, length = 20) {
+  searchCourses(query = '*', filters = {}, start = 1, length = 20) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/course`;
@@ -171,7 +161,7 @@ export default Ember.Object.extend({
    * @param  {Number} length
    * @return {Promise.<Rubric[]>}
    */
-  searchRubrics: function(query = '*', filters = {}, start = 1, length = 20) {
+  searchRubrics(query = '*', filters = {}, start = 1, length = 20) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/rubric`;
@@ -225,7 +215,7 @@ export default Ember.Object.extend({
    * @param  {Number} length
    * @return {Promise.<Lesson[]>}
    */
-  searchLessons: function(query = '*', filters = {}, start = 1, length = 20) {
+  searchLessons(query = '*', filters = {}, start = 1, length = 20) {
     const adapter = this;
     const namespace = this.get('namespace');
     const url = `${namespace}/lesson`;
@@ -250,7 +240,7 @@ export default Ember.Object.extend({
    * @param nodeData the term to search
    * @returns {Promise.<Content[]>}
    */
-  learningMapsContent: function(nodeData, length) {
+  learningMapsContent(nodeData, length) {
     const adapter = this;
     const namespace1 = this.get('namespace1');
     const url = `${namespace1}/standard/${nodeData.id}`;
@@ -288,7 +278,7 @@ export default Ember.Object.extend({
     return Ember.$.ajax(requestURL, options);
   },
 
-  defineHeaders: function() {
+  defineHeaders() {
     return {
       Authorization: `Token ${this.get('session.accessToken')}`
     };

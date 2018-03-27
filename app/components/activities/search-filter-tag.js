@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['search-filter-tag'],
@@ -9,11 +8,10 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Actions
   actions: {
-
     /**
      * Action triggered when the user click on the clear button in the applied filter item
      */
-    onRemoveFilter: function(selectedTag) {
+    onRemoveFilter(selectedTag) {
       let component = this;
       component.sendAction('onRemoveFilter', selectedTag);
     }

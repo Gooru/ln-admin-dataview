@@ -5,9 +5,7 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
-
   classNames: ['collection-pull-out-more-content'],
-
 
   // -------------------------------------------------------------------------
   // Properties
@@ -27,15 +25,12 @@ export default Ember.Component.extend({
   // /**
   //  * Grouping header  by key value to show
   //  */
-  selectedHeadersData: function() {
+  selectedHeadersData() {
     let component = this;
     let iterateKeyValue = this.get('groupData');
     let setResponse = [];
     let color = '';
-    const extracted = [
-      'title',
-      'description'
-    ];
+    const extracted = ['title', 'description'];
     const curated = [
       'Modified by',
       'Creator ID',
@@ -132,13 +127,11 @@ export default Ember.Component.extend({
     return setResponse;
   },
 
-
   // -------------------------------------------------------------------------
   // actions
 
   actions: {
-
-    onheaderClick: function(header) {
+    onheaderClick(header) {
       let datas = Ember.A();
       datas = this.get('groupHeader');
       datas.forEach(data => {
@@ -152,7 +145,9 @@ export default Ember.Component.extend({
     onShowMore(description) {
       let component = this;
       let isShowMore = component.get('isShowMore');
-      let descriptionToShow = isShowMore ? description : truncateString(description);
+      let descriptionToShow = isShowMore
+        ? description
+        : truncateString(description);
       component.$('.description .text').html(descriptionToShow);
       component.toggleProperty('isShowMore');
     }
@@ -160,6 +155,4 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
-
-
 });

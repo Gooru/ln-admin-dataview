@@ -26,7 +26,7 @@ export default Ember.Component.extend({
      * @function onClickCheckbox
      * Action triggered when the user click on the checkbox
      */
-    onClickCheckbox: function(filterInfo, filterType) {
+    onClickCheckbox(filterInfo, filterType) {
       let component = this;
       let selectedFilterItems = component.getUpdtedFilterItems(
         filterInfo,
@@ -55,7 +55,7 @@ export default Ember.Component.extend({
       component.sendAction('onChangeFilterItems', storedFilters);
     },
 
-    clearFilters: function() {
+    clearFilters() {
       this.sendAction('clearFilter');
     }
   },
@@ -67,7 +67,7 @@ export default Ember.Component.extend({
    * @function getUpdtedFilterItems
    * Method to update localStorage with latest filter selection
    */
-  getUpdtedFilterItems: function(filterInfo, filterType) {
+  getUpdtedFilterItems(filterInfo, filterType) {
     let component = this;
     let userId = component.get('session.id');
     let storedFilters =
@@ -108,7 +108,7 @@ export default Ember.Component.extend({
    * @function getStructuredDataItemsByFilterType
    * Method to get structured filter data based on the filter type
    */
-  getStructuredDataItemsByFilterType: function(filterType, filterInfo) {
+  getStructuredDataItemsByFilterType(filterType, filterInfo) {
     let userSelectedFilterItem = {};
     if (filterType === 'subject') {
       userSelectedFilterItem = {

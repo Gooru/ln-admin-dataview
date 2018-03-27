@@ -6,7 +6,6 @@ import Ember from 'ember';
  * @typedef {Object} LookupAdapter
  */
 export default Ember.Object.extend({
-
   session: Ember.inject.service('session'),
 
   namespace: 'config',
@@ -15,7 +14,7 @@ export default Ember.Object.extend({
    * Gets custom configuration
    * @returns {Promise.<[]>}
    */
-  loadConfiguration: function (key) {
+  loadConfiguration(key) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/${key}.json`;

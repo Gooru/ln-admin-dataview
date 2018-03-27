@@ -14,7 +14,7 @@ export default Ember.Object.extend({
    * Gets the audience list information
    * @returns {Promise.<[]>}
    */
-  readAudiences: function() {
+  readAudiences() {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/audience`;
@@ -29,7 +29,7 @@ export default Ember.Object.extend({
    * Gets the depth of knowledge list information
    * @returns {Promise.<[]>}
    */
-  readDepthOfKnowledgeItems: function() {
+  readDepthOfKnowledgeItems() {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/dok`;
@@ -44,7 +44,7 @@ export default Ember.Object.extend({
    * Gets the depth of knowledge list information
    * @returns {Promise.<[]>}
    */
-  readLicenses: function() {
+  readLicenses() {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/licenses`;
@@ -59,7 +59,7 @@ export default Ember.Object.extend({
    * Gets the 21st Century Skills list information
    * @returns {Promise.<[]>}
    */
-  readCenturySkills: function() {
+  readCenturySkills() {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/21-century-skills`;
@@ -74,7 +74,7 @@ export default Ember.Object.extend({
    *
    * @returns {{Authorization: string}}
    */
-  defineHeaders: function() {
+  defineHeaders() {
     return {
       Authorization: `Token ${this.get('session.accessToken')}`
     };

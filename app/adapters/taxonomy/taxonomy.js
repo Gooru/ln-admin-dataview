@@ -6,7 +6,6 @@ import Ember from 'ember';
  * @typedef {Object} TaxonomyAdapter
  */
 export default Ember.Object.extend({
-
   session: Ember.inject.service('session'),
 
   namespace: '/api/nucleus/v1/taxonomy',
@@ -17,7 +16,7 @@ export default Ember.Object.extend({
    * @param category - The classification type
    * @returns {Promise}
    */
-  fetchSubjects: function(category) {
+  fetchSubjects(category) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/subjects`;
@@ -39,7 +38,7 @@ export default Ember.Object.extend({
    * @param subjectId - the taxonomy subject ID
    * @returns {Promise}
    */
-  fetchCourses: function(frameworkId, subjectId) {
+  fetchCourses(frameworkId, subjectId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/frameworks/${frameworkId}/subjects/${subjectId}/courses`;
@@ -60,7 +59,7 @@ export default Ember.Object.extend({
    * @param courseId - the taxonomy course ID
    * @returns {Promise}
    */
-  fetchDomains: function(frameworkId, subjectId, courseId) {
+  fetchDomains(frameworkId, subjectId, courseId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/frameworks/${frameworkId}/subjects/${subjectId}/courses/${courseId}/domains`;
@@ -82,7 +81,7 @@ export default Ember.Object.extend({
    * @param domainId - the taxonomy domain ID
    * @returns {Promise}
    */
-  fetchCodes: function(frameworkId, subjectId, courseId, domainId) {
+  fetchCodes(frameworkId, subjectId, courseId, domainId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/frameworks/${frameworkId}/subjects/${subjectId}/courses/${courseId}/domains/${domainId}/codes`;
@@ -101,7 +100,7 @@ export default Ember.Object.extend({
    * @param codesIds - the list of codes IDs
    * @returns {Promise}
    */
-  fetchCodesByIds: function(codesIds) {
+  fetchCodesByIds(codesIds) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/codes`;
@@ -116,7 +115,7 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
-  defineHeaders: function() {
+  defineHeaders() {
     return {
       Authorization: `Token ${this.get('session.accessToken')}`
     };

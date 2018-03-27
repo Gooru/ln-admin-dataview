@@ -19,7 +19,7 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Events
 
-  init: function() {
+  init() {
     this._super(...arguments);
     this.getSearchContentCount();
   },
@@ -60,7 +60,7 @@ export default Ember.Component.extend({
    * Get Content subformat count of search results
    * return hashed json of each content subformats
    */
-  getSearchContentCount: function() {
+  getSearchContentCount() {
     let component = this;
     let term = component.get('term');
     term = term !== '' ? term : '*';

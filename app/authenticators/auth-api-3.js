@@ -7,17 +7,18 @@ import BaseAuthenticator from 'ember-simple-auth/authenticators/base';
  * @typedef {Object} Admin Auth API
  */
 export default BaseAuthenticator.extend({
-
   authenticationService: Ember.inject.service('api-sdk/authentication'),
 
-  restore: function (data) {
+  restore(data) {
     return Ember.RSVP.resolve(data);
   },
 
-  authenticate: function(accessToken) {
-    return this.get('authenticationService').authenticateWithToken(accessToken).then(response => {
-      response.accessToken = accessToken;
-      return response;
-    });
+  authenticate(accessToken) {
+    return this.get('authenticationService')
+      .authenticateWithToken(accessToken)
+      .then(response => {
+        response.accessToken = accessToken;
+        return response;
+      });
   }
 });

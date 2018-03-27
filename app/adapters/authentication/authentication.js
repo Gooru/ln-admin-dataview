@@ -6,7 +6,6 @@ import Ember from 'ember';
  * @typedef {Object} AuthenticationAdapter
  */
 export default Ember.Object.extend({
-
   session: Ember.inject.service('session'),
 
   namespace: '/api/nucleus-auth/v2',
@@ -16,7 +15,7 @@ export default Ember.Object.extend({
    * @param access token required to build the get headers
    * @returns {Promise}
    */
-  authenticationWithToken: function(data) {
+  authenticationWithToken(data) {
     const url = `${this.get('namespace')}/token`;
     const options = {
       type: 'GET',
@@ -28,14 +27,13 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
-  defineHeaders: function(data) {
+  defineHeaders(data) {
     if (data.isAnonymous) {
       return {};
     } else {
       return {
-        'Authorization': `Basic ${  btoa(`${data.username  }:${  data.password}`)}`
+        Authorization: `Basic ${btoa(`${data.username}:${data.password}`)}`
       };
     }
   }
-
 });

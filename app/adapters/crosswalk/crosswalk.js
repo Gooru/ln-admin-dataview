@@ -7,14 +7,13 @@ import Ember from 'ember';
  */
 
 export default Ember.Object.extend({
-
   namespace: 'stubs/crosswalk',
 
   /**
-  * @param subjectId
-  * Method to fetch crosswalk data using JSON file
-  */
-  getCrosswalkData: function(subjectId) {
+   * @param subjectId
+   * Method to fetch crosswalk data using JSON file
+   */
+  getCrosswalkData(subjectId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/${subjectId}.json`;

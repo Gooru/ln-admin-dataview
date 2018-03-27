@@ -85,7 +85,7 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
-  didInsertElement: function() {
+  didInsertElement() {
     let component = this;
     component.refreshVisibleFilterItems();
     if (component.get('appliedFilterList.length')) {
@@ -100,7 +100,7 @@ export default Ember.Component.extend({
      * @function onRemoveFilter
      * Action triggered when the user click on the clear button in applied filter tag
      */
-    onRemoveFilter: function(selectedFilter) {
+    onRemoveFilter(selectedFilter) {
       let component = this;
       let userId = component.get('session.id');
       let storedFilters = JSON.parse(
@@ -133,7 +133,7 @@ export default Ember.Component.extend({
       }
     },
 
-    searchTerm: function() {
+    searchTerm() {
       var tempTerm = $.trim(this.get('tempTerm'));
       var term = $.trim(this.get('term'));
       var isEmptyTerm = tempTerm === '' && term !== '';
@@ -148,11 +148,11 @@ export default Ember.Component.extend({
       }
     },
 
-    inputValueChange: function() {
+    inputValueChange() {
       this.set('isTyping', false);
     },
 
-    clearSearchText: function() {
+    clearSearchText() {
       this.set('tempTerm', '');
       this.sendAction('clearSearchText');
     }
@@ -165,7 +165,7 @@ export default Ember.Component.extend({
    * @function getAppliedFilters
    * Return list of applied filters
    */
-  getAppliedFilters: function() {
+  getAppliedFilters() {
     let component = this;
     let storedFilters = component.get('selectedFilterItems') || null;
     let filterTypes = component.get('filterTypes');
@@ -202,7 +202,7 @@ export default Ember.Component.extend({
    * @function setupTooltip
    * Function to show popover content box while clicking on the more button
    */
-  setupTooltip: function() {
+  setupTooltip() {
     let component = this;
     var $anchor = component.$('button.non-visible-tags');
 

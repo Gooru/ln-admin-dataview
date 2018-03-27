@@ -6,7 +6,6 @@ import Ember from 'ember';
  * @typedef {Object} CompetencyAdapter
  */
 export default Ember.Object.extend({
-
   session: Ember.inject.service('session'),
 
   namespace: '/api/ds/users',
@@ -15,7 +14,7 @@ export default Ember.Object.extend({
    * Get user  competencies
    * @returns {Promise.<[]>}
    */
-  getUserCompetencies: function(user, activeDuration = '3m') {
+  getUserCompetencies(user, activeDuration = '3m') {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v1/user/competency`;
@@ -35,12 +34,11 @@ export default Ember.Object.extend({
     });
   },
 
-
   /**
    * Get user performance competency collections
    * @returns {Promise.<[]>}
    */
-  getUserPerformanceCompetencyCollections: function(user, competencyCode) {
+  getUserPerformanceCompetencyCollections(user, competencyCode) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v1/user/performance/competency/collections`;
@@ -60,12 +58,11 @@ export default Ember.Object.extend({
     });
   },
 
-
   /**
    * Get Competency Matrix Coordinates for Subject
    * @returns {Promise.<[]>}
    */
-  getCompetencyMatrixCoordinates: function(subject) {
+  getCompetencyMatrixCoordinates(subject) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v1/tx/competency/matrix/coordinates`;
@@ -88,7 +85,7 @@ export default Ember.Object.extend({
    * Get user competency Matrix for courses by subject
    * @returns {Promise.<[]>}
    */
-  getCompetencyMatrixCourse: function(user, subject) {
+  getCompetencyMatrixCourse(user, subject) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v1/tx/competency/matrix/course`;
@@ -108,12 +105,11 @@ export default Ember.Object.extend({
     });
   },
 
-
   /**
    * Get user competency Matrix for domains by subjects
    * @returns {Promise.<[]>}
    */
-  getCompetencyMatrixDomain: function(user, subject) {
+  getCompetencyMatrixDomain(user, subject) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v1/tx/competency/matrix/domain`;
@@ -137,7 +133,7 @@ export default Ember.Object.extend({
    * Get user competency Matrix  by subjects
    * @returns {Promise.<[]>}
    */
-  getCompetencyMatrix: function(user, subject) {
+  getCompetencyMatrix(user, subject) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v1/tx/competency/matrix`;
@@ -157,11 +153,9 @@ export default Ember.Object.extend({
     });
   },
 
-
-  defineHeaders: function() {
+  defineHeaders() {
     return {
       Authorization: `Token ${this.get('session.accessToken')}`
     };
   }
-
 });

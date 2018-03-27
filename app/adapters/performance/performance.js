@@ -6,7 +6,6 @@ import Ember from 'ember';
  * @typedef {Object} PerformanceAdapter
  */
 export default Ember.Object.extend({
-
   session: Ember.inject.service('session'),
 
   namespace: '/api/ds/users',
@@ -15,7 +14,7 @@ export default Ember.Object.extend({
    * Get performance of user performance units
    * @returns {Promise.<[]>}
    */
-  getUserPerformanceUnits: function(user, courseId, classId) {
+  getUserPerformanceUnits(user, courseId, classId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v1/user/performance/course`;
@@ -42,7 +41,7 @@ export default Ember.Object.extend({
    * Get performance of user performance lessons
    * @returns {Promise.<[]>}
    */
-  getUserPerformanceLessons: function(user, courseId, unitId, classId) {
+  getUserPerformanceLessons(user, courseId, unitId, classId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v1/user/performance/lessons`;
@@ -70,7 +69,7 @@ export default Ember.Object.extend({
    * Get performance of user performance collections
    * @returns {Promise.<[]>}
    */
-  getUserPerformanceCollections: function(user, courseId, unitId, lessonId, classId) {
+  getUserPerformanceCollections(user, courseId, unitId, lessonId, classId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v1/user/performance/collections`;
@@ -99,7 +98,15 @@ export default Ember.Object.extend({
    * Get performance of user  resource in assessments
    * @returns {Promise.<[]>}
    */
-  getUserPerformanceResourceInAssessment: function(user, courseId, unitId, lessonId, assessmentId, sessionId, classId) {
+  getUserPerformanceResourceInAssessment(
+    user,
+    courseId,
+    unitId,
+    lessonId,
+    assessmentId,
+    sessionId,
+    classId
+  ) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v1/user/summary/assessment`;
@@ -116,7 +123,7 @@ export default Ember.Object.extend({
     if (classId) {
       options.data.classId = classId;
     }
-    if(courseId) {
+    if (courseId) {
       options.data.courseId = courseId;
     }
     if (unitId) {
@@ -136,7 +143,15 @@ export default Ember.Object.extend({
    * Get performance of user  resource in collection
    * @returns {Promise.<[]>}
    */
-  getUserPerformanceResourceInCollection: function(user, courseId, unitId, lessonId, collectionId, sessionId, classId) {
+  getUserPerformanceResourceInCollection(
+    user,
+    courseId,
+    unitId,
+    lessonId,
+    collectionId,
+    sessionId,
+    classId
+  ) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v1/user/summary/collection`;
@@ -153,7 +168,7 @@ export default Ember.Object.extend({
     if (classId) {
       options.data.classId = classId;
     }
-    if(courseId) {
+    if (courseId) {
       options.data.courseId = courseId;
     }
     if (unitId) {
@@ -169,11 +184,9 @@ export default Ember.Object.extend({
     });
   },
 
-
-  defineHeaders: function() {
+  defineHeaders() {
     return {
       Authorization: `Token ${this.get('session.accessToken')}`
     };
   }
-
 });

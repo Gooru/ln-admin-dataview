@@ -6,11 +6,9 @@ import Ember from 'ember';
  * @typedef {Object} LookupAdapter
  */
 export default Ember.Object.extend({
-
   session: Ember.inject.service('session'),
 
   namespace: '/api/nucleus/v1',
-
 
   /**
    * Reads a resource by id
@@ -18,7 +16,7 @@ export default Ember.Object.extend({
    * @param {string} resourceId
    * @returns {Promise}
    */
-  getResourceById: function(resourceId) {
+  getResourceById(resourceId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const resource = 'resources';
@@ -41,7 +39,7 @@ export default Ember.Object.extend({
    * @param {string} resourceId
    * @returns {Promise}
    */
-  getCollectionById: function(collectionId) {
+  getCollectionById(collectionId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const resource = 'collections';
@@ -60,7 +58,7 @@ export default Ember.Object.extend({
    * @param {string} resourceId
    * @returns {Promise}
    */
-  getAssessmentById: function(assessmentId) {
+  getAssessmentById(assessmentId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/assessments/${assessmentId}`;
@@ -72,14 +70,13 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
-
   /**
    * Reads a resource by id
    *
    * @param {string} resourceId
    * @returns {Promise}
    */
-  getQuestionById: function(questionId) {
+  getQuestionById(questionId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const question = 'questions';
@@ -98,7 +95,7 @@ export default Ember.Object.extend({
    * @param {string} resourceId
    * @returns {Promise}
    */
-  getCourseById: function(courseId) {
+  getCourseById(courseId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const course = 'courses';
@@ -115,8 +112,7 @@ export default Ember.Object.extend({
     });
   },
 
-
-  getLessonByUnitId: function(courseId, unitId) {
+  getLessonByUnitId(courseId, unitId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/courses/${courseId}/units/${unitId}`;
@@ -132,7 +128,7 @@ export default Ember.Object.extend({
     });
   },
 
-  getCollectionByLessonId: function(courseId, unitId, lessonId) {
+  getCollectionByLessonId(courseId, unitId, lessonId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/courses/${courseId}/units/${unitId}/lessons/${lessonId}`;
@@ -148,10 +144,9 @@ export default Ember.Object.extend({
     });
   },
 
-  defineHeaders: function() {
+  defineHeaders() {
     return {
       Authorization: `Token ${this.get('session.accessToken')}`
     };
   }
-
 });

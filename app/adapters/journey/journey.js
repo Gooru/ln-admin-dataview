@@ -6,7 +6,6 @@ import Ember from 'ember';
  * @typedef {Object} JourneyAdapter
  */
 export default Ember.Object.extend({
-
   session: Ember.inject.service('session'),
 
   namespace: '/api/ds/users',
@@ -15,7 +14,7 @@ export default Ember.Object.extend({
    * Get journey of user taken (courses and IL's courses)
    * @returns {Promise.<[]>}
    */
-  getUserJourneyByCourses: function(userId, requestPayLoad) {
+  getUserJourneyByCourses(userId, requestPayLoad) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v1/user/journey?user=${userId}`;
@@ -32,11 +31,9 @@ export default Ember.Object.extend({
     });
   },
 
-
-  defineHeaders: function() {
+  defineHeaders() {
     return {
       Authorization: `Token ${this.get('session.accessToken')}`
     };
   }
-
 });
