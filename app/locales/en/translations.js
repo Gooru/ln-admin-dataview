@@ -214,5 +214,9 @@ export default {
         learning: 'Key Learning Skills and Techniques'
       }
     }
+  },
+  'learning-map': {
+    'fetching-competency': 'Fetching Competencies',
+    'not-available': 'Competency Not Available'
   }
 };

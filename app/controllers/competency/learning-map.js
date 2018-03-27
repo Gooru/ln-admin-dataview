@@ -28,14 +28,21 @@ export default Ember.Controller.extend({
     let competencies = controller.get('fetchedCompetencies');
     let renderedTable = controller.get('tableBody');
     let tableBody = [];
+    let microComptencyLevelPattern = controller.get(
+      'microComptencyLevelPattern'
+    );
     competencies.map(competency => {
+      let competencyLevel = competency.type.includes(microComptencyLevelPattern)
+        ? 'micro-competency'
+        : 'competency';
       let tableRow = {
         id: competency.id,
         title: competency.title,
         contentCounts: controller.getStructuredContentCount(
           competency.contentCounts
         ),
-        prerequisites: competency.prerequisites
+        prerequisites: competency.prerequisites,
+        competencyLevel: competencyLevel
       };
       tableBody.push(tableRow);
     });
@@ -66,7 +73,7 @@ export default Ember.Controller.extend({
     },
 
     /**
-     * Action triggered when the user select a new item from the browser
+     * Action triggered when the user clic on a new item from the browser
      */
     onSelectDataItem(type, dataItem) {
       let controller = this;
@@ -81,11 +88,11 @@ export default Ember.Controller.extend({
      */
     onSelectDomain(domainStack) {
       let controller = this;
-      controller.set('isShowTable', false);
       controller.set('isShowExportBtn', true);
       controller.set('dataLevels.domainCode', domainStack.toString());
       controller.set('selectedDataLevelItems.domain', domainStack.length);
       controller.set('domainStack', domainStack);
+      Ember.$('.table-container').hide();
     },
 
     /**
@@ -114,30 +121,33 @@ export default Ember.Controller.extend({
    */
   fetchLearningMapCompetency() {
     let controller = this;
-    controller.set('isLoading', true);
-    let dataLevels = controller.get('dataLevels');
-    let start = controller.get('start');
-    let length = controller.get('length');
-    let filters = Object.assign(dataLevels);
-    let competencyPromise = Ember.RSVP.resolve(
-      controller
-        .get('searchService')
-        .fetchLearningMapCompetency(filters, start, length)
-    );
-    return Ember.RSVP.hash({
-      competencyList: competencyPromise
-    }).then(function(hash) {
-      let competencies = controller.get('competencies');
-      let fetchedCompetencies = hash.competencyList.competencyInfo;
-      let totalHitCount = hash.competencyList.totalHitCount;
-      competencies = competencies.concat(fetchedCompetencies);
-      controller.set('fetchedCompetencies', fetchedCompetencies);
-      controller.set('competencies', competencies);
-      controller.set('start', competencies.length);
-      if (competencies.length >= totalHitCount) {
-        controller.set('isShowExportBtn', false);
-      }
-    });
+    if (!controller.get('isProcessedAllCompetency')) {
+      controller.set('isLoading', true);
+      let dataLevels = controller.get('dataLevels');
+      let start = controller.get('start');
+      let length = controller.get('length');
+      let filters = Object.assign(dataLevels);
+      let competencyPromise = Ember.RSVP.resolve(
+        controller
+          .get('searchService')
+          .fetchLearningMapCompetency(filters, start, length)
+      );
+      return Ember.RSVP.hash({
+        competencyList: competencyPromise
+      }).then(function(hash) {
+        let competencies = controller.get('competencies');
+        let fetchedCompetencies = hash.competencyList.competencyInfo;
+        let totalHitCount = hash.competencyList.totalHitCount;
+        competencies = competencies.concat(fetchedCompetencies);
+        controller.set('fetchedCompetencies', fetchedCompetencies);
+        controller.set('competencies', competencies);
+        controller.set('start', competencies.length);
+        if (competencies.length >= totalHitCount) {
+          controller.set('isShowExportBtn', false);
+          controller.set('isProcessedAllCompetency', true);
+        }
+      });
+    }
   },
 
   /**
@@ -169,6 +179,7 @@ export default Ember.Controller.extend({
     controller.set('competencies', emptyItem);
     controller.set('fetchedCompetencies', emptyItem);
     controller.set('tableBody', emptyItem);
+    controller.set('isProcessedAllCompetency', false);
   },
 
   /**
@@ -204,7 +215,6 @@ export default Ember.Controller.extend({
       controller.set('selectedDataLevelItems.domain', null);
       break;
     }
-    controller.set('isShowTable', false);
     controller.set('isShowExportBtn', isShowExportBtn);
     controller.set('dataLevels', dataLevels);
   },
@@ -280,5 +290,9 @@ export default Ember.Controller.extend({
     category: 'K-12',
     subject: 'Science',
     course: 'Grade K'
-  }
+  },
+
+  microComptencyLevelPattern: 'learning_target_level_',
+
+  isProcessedAllCompetency: false
 });

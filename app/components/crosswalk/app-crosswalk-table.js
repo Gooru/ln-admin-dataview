@@ -64,10 +64,6 @@ export default Ember.Component.extend({
     onToggleMicroCompetency() {
       let component = this;
       component.$('.micro-competency').toggleClass('hide-row');
-      component.set(
-        'isShowMicroCompetency',
-        !this.get('isShowMicroCompetency')
-      );
     }
   },
 
@@ -87,10 +83,5 @@ export default Ember.Component.extend({
   /**
    * List of crosswalk codes by framework id
    */
-  crosswakCodeByFrameworkId: null,
-
-  /**
-   * Show/Hide micro-competency level
-   */
-  isShowMicroCompetency: false
+  crosswakCodeByFrameworkId: null
 });

@@ -1,0 +1,19 @@
+<div class="prerequisites-competency-info">
+  <div class="competency-info">
+    <div class="id">
+      {{competencyInfo.id}}
+    </div>
+    <div class="title">
+      {{competencyInfo.title}}
+    </div>
+  </div>
+  <div class="content-info">
+    {{#each competencyInfo.contentCounts as |content|}}
+      <div class="{{content.type}}">
+        {{content.value}}
+      </div>
+    {{/each}}
+  </div>
+  <div class="prerequisites-info">
+  </div>
+</div>
