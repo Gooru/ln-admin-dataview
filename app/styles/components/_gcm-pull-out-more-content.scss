@@ -1,23 +1,30 @@
 .gcm-pull-out-more-content {
   .body {
     overflow-y: auto;
+
     .section {
       .section-title {
         padding: 8px 0;
-        margin: 0px 35px 15px 35px;
+        margin: 0 35px 15px;
         font-size: 15px;
         font-weight: bold;
         color: $gray-29;
         text-transform: uppercase;
         border-bottom: dashed 2px $dark-600;
       }
-      .section-content  {
+
+      .section-content {
         margin-top: 12px;
+
         .prerequisites {
-          margin: 10px 0 0 0px;
+          margin: 10px 0 0;
+        }
+        .content-body {
+          padding-left: 27px;
         }
       }
     }
+
     .pre-requisites {
       margin-top: 42px;
     }

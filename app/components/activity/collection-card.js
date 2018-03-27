@@ -11,7 +11,6 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Events
 
-
   // -------------------------------------------------------------------------
   // Properties
 
@@ -24,23 +23,21 @@ export default Ember.Component.extend({
   /**
    * @property {TaxonomyTag[]} List of taxonomy tags
    */
-  tags: Ember.computed(
-    'collection.standards.[]',
-    function() {
-      let standards = this.get('collection.standards');
+  tags: Ember.computed('collection.standards.[]', function() {
+    let standards = this.get('collection.standards');
+    if (standards) {
       standards = standards.filter(function(standard) {
         // Filter out learning targets (they're too long for the card)
         return !TaxonomyTagData.isMicroStandardId(standard.get('id'));
       });
       return TaxonomyTag.getTaxonomyTags(standards);
     }
-  ),
+  }),
 
   // -------------------------------------------------------------------------
   // Actions
 
   actions: {
-
     /**
      * @function onPlayCollection
      * Action triggered when the user click on the play icon
@@ -50,5 +47,4 @@ export default Ember.Component.extend({
       component.sendAction('onPlayCollection', collection);
     }
   }
-
 });

@@ -6,7 +6,7 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
 
-  classNames: ['activity-resource-card'],
+  classNames: ['activity-unit-card'],
 
   // -------------------------------------------------------------------------
   // Events
@@ -15,16 +15,16 @@ export default Ember.Component.extend({
   // Properties
 
   /**
-   * resource object
+   * collection object
    * @type {Object}
    */
-  resource: null,
+  collection: null,
 
   /**
    * @property {TaxonomyTag[]} List of taxonomy tags
    */
-  tags: Ember.computed('resource.standards.[]', function() {
-    let standards = this.get('resource.standards');
+  tags: Ember.computed('unit.standards.[]', function() {
+    let standards = this.get('unit.standards');
     if (standards) {
       standards = standards.filter(function(standard) {
         // Filter out learning targets (they're too long for the card)
@@ -36,9 +36,15 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Actions
+
   actions: {
-    getResourceInfo: function(resource) {
-      this.sendAction('getResourceInfo', resource);
+    /**
+     * @function onPlayCollection
+     * Action triggered when the user click on the play icon
+     */
+    onPlayCollection(collection) {
+      let component = this;
+      component.sendAction('onPlayCollection', collection);
     }
   }
 });

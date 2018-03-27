@@ -1,4 +1,4 @@
-.activity-collection-card {
+.activity-lesson-card {
   .card-panel-container {
     width: 220px;
     height: 384px;
@@ -78,32 +78,32 @@
         font-size: 14px;
       }
 
-      .question {
+      .assessment {
         .icon {
-          background-image: url("../assets/images/question-icon.svg");
+          background-image: url("../assets/images/assessment-icon.svg");
         }
       }
 
-      .resource {
+      .collection {
         .icon {
-          background-image: url("../assets/images/resource-icon.svg");
+          background-image: url("../assets/images/collection-icon.svg");
         }
       }
     }
 
-    .collection-info-container {
+    .lesson-info-container {
       height: 150px;
       border-bottom: 1px solid #f2f2f2;
       padding: 15px;
 
-      .collection-user-info {
+      .lesson-user-info {
         height: 30px;
         cursor: default;
         @include flexbox;
 
         .created-by {
           font-style: italic;
-          width: 60px;
+          width: 65px;
         }
 
         .img-container {
@@ -128,7 +128,7 @@
         }
       }
 
-      .collection-description {
+      .lesson-description {
         $line-height: 1.5;
         $lines-to-show: 3;
         @include ellipsis(
@@ -138,7 +138,7 @@
         );
       }
 
-      .collection-standards {
+      .lesson-standards {
         margin-top: 10px;
 
         .taxonomy-tag {
@@ -176,7 +176,7 @@
         }
       }
 
-      .collection-prefs-container {
+      .lesson-prefs-container {
         .left-arc {
           display: block;
           height: 15px;
@@ -202,7 +202,7 @@
           top: -22px;
         }
 
-        .collection-prefs {
+        .lesson-prefs {
           width: 73.3px;
           height: 43px;
           float: left;
