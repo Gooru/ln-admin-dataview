@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { TAXONOMY_CATEGORIES } from 'admin-dataview/config/config';
+import { capitalizeString } from 'admin-dataview/utils/utils';
 
 export default Ember.Component.extend({
   classNames: ['learning-map', 'app-domain-browser'],
@@ -45,8 +46,15 @@ export default Ember.Component.extend({
   actions: {
     onSelectDataItem(type, dataItem) {
       let component = this;
-      component.fetchContentByType(type, dataItem);
-      component.sendAction('onSelectDataItem', type, dataItem);
+      let selectedType = capitalizeString(type);
+      let selectedId = dataItem.id || dataItem.value;
+      let selectedItemValue = component.get(`selected${selectedType}`);
+      let isAlreadySelectedItem =
+        (selectedItemValue.id || selectedItemValue) === selectedId;
+      if (!isAlreadySelectedItem) {
+        component.fetchContentByType(type, dataItem);
+        component.sendAction('onSelectDataItem', type, dataItem);
+      }
     },
 
     onSelectDomain(domainId) {
