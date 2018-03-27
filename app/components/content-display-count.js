@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-
   /**
    * Indicates the default group size of   component.
    * @type {Number}
@@ -33,7 +32,7 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Events
 
-  init: function() {
+  init() {
     const component = this;
     component._super(...arguments);
   },
@@ -44,5 +43,4 @@ export default Ember.Component.extend({
       trigger: 'hover'
     });
   }
-
 });

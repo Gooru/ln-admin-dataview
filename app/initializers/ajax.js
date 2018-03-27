@@ -4,11 +4,11 @@ import config from 'admin-dataview/config/environment';
 
 export default {
   name: 'ajax',
-  initialize: function(/* app */) {
+  initialize(/* app */) {
     Ember.$.ajaxSetup({
       cache: false,
       crossDomain: true,
-      beforeSend: function(jqXHR, settings) {
+      beforeSend(jqXHR, settings) {
         const url = settings.url;
         if (url.startsWith('/api') || url.startsWith('/gooru-search')) {
           let endpointUrl = EndPointsConfig.getEndpointUrl();
@@ -17,7 +17,9 @@ export default {
           }
           settings.url = `${endpointUrl}${url}`;
         } else if (url.startsWith('config/') || url.startsWith('stubs/')) {
-          const basePath = (`${window.location.protocol  }//${  window.location.host}`);
+          const basePath = `${window.location.protocol}//${
+            window.location.host
+          }`;
           settings.url = basePath + config.rootURL + url;
         }
       }

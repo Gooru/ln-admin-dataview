@@ -116,7 +116,7 @@ export default Ember.Controller.extend({
      * Action get triggred when subject get choosen
      * @param  {Number} subjectIndex
      */
-    onChooseSubject: function(subjectIndex) {
+    onChooseSubject(subjectIndex) {
       let controller = this;
       let subjects = controller.get('subjects');
       let subject = subjects.objectAt(subjectIndex);
@@ -130,7 +130,7 @@ export default Ember.Controller.extend({
      * Action get triggered when domain cell clicked
      * @param  {Object} category
      */
-    onChooseDomain: function(selectedDomain) {
+    onChooseDomain(selectedDomain) {
       let controller = this;
       controller.set('selectedDomainCompetency', selectedDomain);
       let domainId = `${selectedDomain.courseCode}-${
@@ -158,7 +158,7 @@ export default Ember.Controller.extend({
         });
     },
 
-    domainCompetencyPullOut: function(competency, status) {
+    domainCompetencyPullOut(competency, status) {
       let controller = this;
       let selectedDomain = controller.get('selectedDomainCompetency');
       let domainId = `${selectedDomain.courseCode}-${
@@ -316,7 +316,7 @@ export default Ember.Controller.extend({
    * Get Content count of search results
    * return hashed json of each content type count
    */
-  getSearchContentCount: function(selectedDomainData) {
+  getSearchContentCount(selectedDomainData) {
     let filters = selectedDomainData.filters;
     let selectedCategory = this.get('selectedCategory');
     let query = '*';
@@ -417,7 +417,7 @@ export default Ember.Controller.extend({
    * Get Content count of search results
    * return hashed json of each content type conunt
    */
-  getSearchLearningMapsContent: function(selectedNode) {
+  getSearchLearningMapsContent(selectedNode) {
     let controller = this;
     controller.set('showMore', true);
     const learningMapsContent = Ember.RSVP.resolve(

@@ -73,7 +73,7 @@ export default Ember.Controller.extend({
     /**
      * Action triggered when user select framework
      */
-    frameworkStack: function(subjectId, frameworkId) {
+    frameworkStack(subjectId, frameworkId) {
       let controller = this;
       let frameworkStack = controller.get('selectedFrameworks');
       let frameworkPosition = frameworkStack.indexOf(frameworkId);
@@ -91,7 +91,7 @@ export default Ember.Controller.extend({
       }
     },
 
-    disableGenerateBtn: function(category, subject) {
+    disableGenerateBtn(category, subject) {
       let controller = this;
       controller.set('categoryId', category);
       if (subject) {
@@ -108,7 +108,7 @@ export default Ember.Controller.extend({
     /**
      * Action triggered when user click generate table button
      */
-    generateCrosswalkTable: function() {
+    generateCrosswalkTable() {
       let controller = this;
       let selectedFrameworks = controller.get('selectedFrameworks');
       let subjectId = controller.get('subjectId');
@@ -125,7 +125,7 @@ export default Ember.Controller.extend({
       });
     },
 
-    onToggleSubjectBrowser: function() {
+    onToggleSubjectBrowser() {
       let controller = this;
       controller.toggleProperty('showSubjectBrowser');
     }
@@ -135,7 +135,7 @@ export default Ember.Controller.extend({
    * @param rawData of the crosswalk Data
    * Method to update the crosswalk table
    */
-  updateCrosswalkTable: function(rawData) {
+  updateCrosswalkTable(rawData) {
     let controller = this;
     let crosswalkData = rawData.crosswalkData;
     let frameworkList = rawData.frameworkList;

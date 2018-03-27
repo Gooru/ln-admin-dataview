@@ -167,21 +167,21 @@ export default Ember.Controller.extend({
   // actions
 
   actions: {
-    onClickBackButton: function() {
+    onClickBackButton() {
       this.transitionToRoute('learner');
     },
 
     /**
      * Trigger when skyline toggle button got changed.
      */
-    onChangeSkyline: function(value) {
+    onChangeSkyline(value) {
       this.set('isSkylineEnabled', value);
     },
 
     /**
      * Trigger when reset toggle button got changed.
      */
-    onChangeResetChart: function(value) {
+    onChangeResetChart(value) {
       this.set('isExpandChartEnabled', value);
     },
 
@@ -190,7 +190,7 @@ export default Ember.Controller.extend({
      * Triggered when an menu item is selected
      * @param item
      */
-    onCompetencyPullOut: function(data) {
+    onCompetencyPullOut(data) {
       let controller = this;
       controller.set('isLoading', true);
       controller.set('showPullOut', true);
@@ -251,7 +251,7 @@ export default Ember.Controller.extend({
       controller.set('isListModeEnabled', selectedView === 'list');
     },
 
-    subjectChange: function(subject) {
+    subjectChange(subject) {
       let controller = this;
       controller.set('isSkylineEnabled', false);
       controller.set('isExpandChartEnabled', false);
@@ -259,7 +259,7 @@ export default Ember.Controller.extend({
       controller.set('subjectTitle', subject.subjectTitle);
     },
 
-    courseChange: function(course) {
+    courseChange(course) {
       let controller = this;
       controller.set('isSelectedCourse', course.courseTitle);
       controller.set('isSelectedCourseId', course.courseId);
@@ -277,7 +277,7 @@ export default Ember.Controller.extend({
       }
     },
 
-    competencyTabs: function(tabs) {
+    competencyTabs(tabs) {
       let controller = this;
       controller.set('isCompetency', tabs === 'competency');
       controller.set('isJourney', tabs === 'journey');
@@ -294,7 +294,7 @@ export default Ember.Controller.extend({
      * @function onClickExploreButton
      * Action triggered when user click on explore button
      */
-    onClickExploreButton: function(routeTo) {
+    onClickExploreButton(routeTo) {
       let controller = this;
       if (routeTo === 'activities') {
         let queryParams = {
@@ -311,7 +311,7 @@ export default Ember.Controller.extend({
       }
     },
 
-    onExploreJourneyTaken: function() {
+    onExploreJourneyTaken() {
       let controller = this;
       controller.transitionToRoute(
         'learner.journeys',
@@ -319,7 +319,7 @@ export default Ember.Controller.extend({
       );
     },
 
-    onClickCourseBackButton: function() {
+    onClickCourseBackButton() {
       let controller = this;
       controller.set('isCompetency', false);
       controller.set('isJourney', true);
@@ -330,7 +330,7 @@ export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
   // Events
 
-  init: function() {
+  init() {
     this._super(...arguments);
     let controller = this;
     controller.set('isCompetency', true);
@@ -342,7 +342,7 @@ export default Ember.Controller.extend({
     controller.fetchSubjectsByCategory(subjectCategory);
   },
 
-  fetchSubjectsByCategory: function(subjectCategory) {
+  fetchSubjectsByCategory(subjectCategory) {
     let controller = this;
     controller
       .get('taxonomyService')
@@ -355,7 +355,7 @@ export default Ember.Controller.extend({
       });
   },
 
-  fetchJourneyByUser: function() {
+  fetchJourneyByUser() {
     let controller = this;
     let userId = controller.get('userId');
     controller
@@ -377,7 +377,7 @@ export default Ember.Controller.extend({
       });
   },
 
-  courseInClass: function(course) {
+  courseInClass(course) {
     let controller = this;
     controller.set('isLoading', true);
     let courseId = course.courseId;
@@ -395,7 +395,7 @@ export default Ember.Controller.extend({
       });
   },
 
-  courseOutClass: function(course) {
+  courseOutClass(course) {
     let controller = this;
     controller.set('isLoading', true);
     let courseId = course.courseId;

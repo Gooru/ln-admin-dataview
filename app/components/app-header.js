@@ -2,7 +2,6 @@ import Ember from 'ember';
 import ModalMixin from '../mixins/modal';
 import Env from 'admin-dataview/config/environment';
 
-
 /**
  * Application header component
  * @see application.hbs
@@ -12,7 +11,6 @@ import Env from 'admin-dataview/config/environment';
  * @typedef {object} AppHeader
  */
 export default Ember.Component.extend(ModalMixin, {
-
   // -------------------------------------------------------------------------
   // Dependencies
   i18n: Ember.inject.service(),
@@ -34,15 +32,14 @@ export default Ember.Component.extend(ModalMixin, {
   // Actions
 
   actions: {
-
-    logout: function() {
+    logout() {
       let userId = this.get('session.id');
       localStorage.removeItem(`research_${userId}_activities_filters`);
       this.get('session').invalidate();
-      window.location.href =  '/logout';
+      window.location.href = '/logout';
     },
 
-    onMenuItemSelection: function(item) {
+    onMenuItemSelection(item) {
       this.sendAction('onMenuItemSelection', item);
     }
   },
@@ -57,6 +54,4 @@ export default Ember.Component.extend(ModalMixin, {
   supportSiteUrl: Ember.computed(function() {
     return Env.supportSiteUrl;
   })
-
-
 });

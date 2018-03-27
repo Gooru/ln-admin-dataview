@@ -1,10 +1,7 @@
 import Ember from 'ember';
-import {
-  dataCountFormat as countformat
-} from 'admin-dataview/utils/utils';
+import { dataCountFormat as countformat } from 'admin-dataview/utils/utils';
 
 export default Ember.Controller.extend({
-
   //------------------------------------------------------------------------
   //Dependencies
 
@@ -14,7 +11,6 @@ export default Ember.Controller.extend({
    * @requires service:learners
    */
   learnersService: Ember.inject.service('api-sdk/learners'),
-
 
   // -------------------------------------------------------------------------
   // Properties
@@ -35,13 +31,17 @@ export default Ember.Controller.extend({
    * geo location based learner profile distribution
    * @return {Object}
    */
-  geoLocations: Ember.computed.alias('learnersProfileDistribution.geoLocations'),
+  geoLocations: Ember.computed.alias(
+    'learnersProfileDistribution.geoLocations'
+  ),
 
   /**
    * geo location based learner profile distribution by subject
    * @return {Object}
    */
-  geoLocationsBySubject: Ember.computed.alias('learnerProfileDistributionBySubject.geoLocations'),
+  geoLocationsBySubject: Ember.computed.alias(
+    'learnerProfileDistributionBySubject.geoLocations'
+  ),
 
   /**
    *  learners profile distribution by subject
@@ -62,7 +62,9 @@ export default Ember.Controller.extend({
   selectedTitleSubjectHeader: Ember.computed('selectedSubject', function() {
     let controller = this;
     let selectedSubject = controller.get('selectedSubject');
-    return `${countformat(selectedSubject.get('active'))  }  ${  controller.get('i18n').t('common.active').string  } ${  selectedSubject.get('name')  }  ${  controller.get('i18n').t('common.users').string}`;
+    return `${countformat(
+      selectedSubject.get('active')
+    )}  ${controller.get('i18n').t('common.active').string} ${selectedSubject.get('name')}  ${controller.get('i18n').t('common.users').string}`;
   }),
 
   /**
@@ -75,28 +77,39 @@ export default Ember.Controller.extend({
   // actions
 
   actions: {
-    onSelectActiveUsers: function(subject) {
+    onSelectActiveUsers(subject) {
       let controller = this;
       Ember.RSVP.hash({
-        activeUserDistrbutionBySubject: controller.get('learnersService').getActiveUserDistrbutionBySubject(subject.get('code')),
-        learnerProfileDistributionBySubject: controller.get('learnersService').getLearnerProfileDistribution(subject.get('code'))
-      }).then(({
-        activeUserDistrbutionBySubject,
-        learnerProfileDistributionBySubject
-      }) => {
-        controller.set('activeUserDistrbutionBySubject', activeUserDistrbutionBySubject);
-        controller.set('learnerProfileDistributionBySubject', learnerProfileDistributionBySubject);
-        controller.set('selectedSubject', subject);
-      });
+        activeUserDistrbutionBySubject: controller
+          .get('learnersService')
+          .getActiveUserDistrbutionBySubject(subject.get('code')),
+        learnerProfileDistributionBySubject: controller
+          .get('learnersService')
+          .getLearnerProfileDistribution(subject.get('code'))
+      }).then(
+        ({
+          activeUserDistrbutionBySubject,
+          learnerProfileDistributionBySubject
+        }) => {
+          controller.set(
+            'activeUserDistrbutionBySubject',
+            activeUserDistrbutionBySubject
+          );
+          controller.set(
+            'learnerProfileDistributionBySubject',
+            learnerProfileDistributionBySubject
+          );
+          controller.set('selectedSubject', subject);
+        }
+      );
     },
 
-    onClickBackButton: function() {
+    onClickBackButton() {
       this.set('selectedSubject', null);
     },
 
-    onSelectUser: function(user) {
+    onSelectUser(user) {
       this.transitionToRoute('learner', user.get('userId'));
     }
   }
-
 });

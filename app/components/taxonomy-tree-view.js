@@ -19,7 +19,7 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Events
 
-  didInsertElement: function() {
+  didInsertElement() {
     const $component = this.$();
 
     // Get the component dimensions from the css
@@ -79,7 +79,7 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Methods
 
-  renderTreeView: function() {
+  renderTreeView() {
     let component = this;
     let height = component.get('height');
     let treeData = this.get('data');
@@ -109,7 +109,7 @@ export default Ember.Component.extend({
     }
   },
 
-  update: function(source, depth) {
+  update(source, depth) {
     let component = this;
     let duration = component.get('duration');
     let width = component.get('width');
@@ -343,7 +343,7 @@ export default Ember.Component.extend({
 
   data: null,
 
-  updateData: function(selectedNode, newNodes) {
+  updateData(selectedNode, newNodes) {
     let component = this;
 
     if (!selectedNode.children) {
@@ -365,7 +365,7 @@ export default Ember.Component.extend({
     component.update(selectedNode, selectedNode.depth);
   },
 
-  normalizeHeightBasedOnDepth: function(depth) {
+  normalizeHeightBasedOnDepth(depth) {
     if (depth === 0 || depth === 1) {
       return 45;
     } else if (depth === 2) {
@@ -379,7 +379,7 @@ export default Ember.Component.extend({
     }
   },
 
-  normalizeYPositionBasedOnDepth: function(depth) {
+  normalizeYPositionBasedOnDepth(depth) {
     if (depth >= 0) {
       if (depth === 1) {
         return 110;
@@ -398,7 +398,7 @@ export default Ember.Component.extend({
     return 0;
   },
 
-  normalizePathPositionBasedOnDepth: function(depth) {
+  normalizePathPositionBasedOnDepth(depth) {
     if (depth >= 0) {
       if (depth === 0) {
         return 0;
@@ -417,7 +417,7 @@ export default Ember.Component.extend({
     return 0;
   },
 
-  updateMoreInfoActiveNodes: function(id) {
+  updateMoreInfoActiveNodes(id) {
     let component = this;
     id = id.replace(/\./g, 's');
     component.$('svg g path.link').each(function(index, element) {
@@ -442,14 +442,14 @@ export default Ember.Component.extend({
     }
   },
 
-  truncateString: function(text) {
+  truncateString(text) {
     if (text.length > 74) {
       return `${text.substring(0, 70)}...`;
     }
     return text;
   },
 
-  appendLoader: function(id) {
+  appendLoader(id) {
     let component = this;
     id = id.replace(/\./g, 's');
     component.$(`.node-label-${id} .node-more-info`).hide();
@@ -458,7 +458,7 @@ export default Ember.Component.extend({
       .append(`<div class="loader"><img src="${DEFAULT_IMAGES.LOADER}"></div>`);
   },
 
-  getWidthByTreeDepth: function() {
+  getWidthByTreeDepth() {
     let component = this;
     let width = 800;
     if (component.$('.node-label').hasClass('node-6')) {

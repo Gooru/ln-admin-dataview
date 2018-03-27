@@ -31,7 +31,7 @@ export default Ember.Component.extend({
   // Actions
 
   actions: {
-    focusOut: function() {
+    focusOut() {
       this.set('rawInputValue', this.get('value'));
       this.set('isTyping', false);
       if (this.get('onFocusOut')) {
@@ -39,14 +39,14 @@ export default Ember.Component.extend({
       }
     },
 
-    inputTyping: function() {
+    inputTyping() {
       this.set('isTyping', true);
       if (this.get('onTyping')) {
         this.sendAction('onTyping');
       }
     },
 
-    enterPressed: function() {
+    enterPressed() {
       this.set('rawInputValue', this.get('value'));
       this.set('isTyping', false);
       this.get('onEnter') &&
@@ -54,7 +54,7 @@ export default Ember.Component.extend({
         this.get('onEnter')(this.get('value'));
     },
 
-    clearContent: function() {
+    clearContent() {
       this.set('rawInputValue', '');
       this.sendAction('onClearContent');
     }
@@ -68,7 +68,7 @@ export default Ember.Component.extend({
     this.initValues();
   },
 
-  didInsertElement: function() {
+  didInsertElement() {
     const component = this;
     const $input = component.$('div input');
 
@@ -233,14 +233,14 @@ export default Ember.Component.extend({
   /*
   * Remove white spaces from input
   */
-  removeWhiteSpaces: function(value) {
+  removeWhiteSpaces(value) {
     return $.trim(value);
   },
 
   /*
    * Remove html tags from value
    */
-  removeTags: function(value) {
+  removeTags(value) {
     return $('<p>')
       .html(value)
       .text();
@@ -249,7 +249,7 @@ export default Ember.Component.extend({
   /*
    * Init input values
    */
-  initValues: function() {
+  initValues() {
     var valuePath = this.get('valuePath');
     defineProperty(
       this,

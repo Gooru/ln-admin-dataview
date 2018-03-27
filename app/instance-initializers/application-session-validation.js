@@ -1,11 +1,10 @@
 import Ember from 'ember';
 
-
 /**
  * Initialize session validation function
  */
 export function initialize(instance) {
-  Ember.$(document).ajaxError(function(event, jqXHR) {
+  Ember.$(document).ajaxError((event, jqXHR) => {
     if (jqXHR.status === 401) {
       const sessionService = instance.container.lookup('service:session');
       if (sessionService.get('isAuthenticated')) {

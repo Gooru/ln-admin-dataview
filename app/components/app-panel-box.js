@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Dependencies
   i18n: Ember.inject.service(),
@@ -34,9 +33,8 @@ export default Ember.Component.extend({
   // Events
 
   actions: {
-    onClickBackButton: function() {
+    onClickBackButton() {
       this.sendAction('onClickBackButton');
     }
   }
-
 });

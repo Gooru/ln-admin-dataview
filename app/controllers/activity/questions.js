@@ -215,7 +215,7 @@ export default Ember.Controller.extend({
     /**
      * Action triggered when the user invoke the collection in pull out.
      */
-    getQuestionInfo: function(question) {
+    getQuestionInfo(question) {
       let controller = this;
       controller.set('isLoadingPullOut', true);
       controller.set('showPullOut', true);

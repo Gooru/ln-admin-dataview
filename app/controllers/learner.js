@@ -1,9 +1,7 @@
 import Ember from 'ember';
 import ModalMixin from 'admin-dataview/mixins/modal';
 
-
 export default Ember.Controller.extend(ModalMixin, {
-
   // --------------------------------------------------------------------------
   // Query params
 
@@ -11,8 +9,7 @@ export default Ember.Controller.extend(ModalMixin, {
   // Events
 
   actions: {
-
-    onClickBackButton: function() {
+    onClickBackButton() {
       let pathname = window.location.pathname;
       let pathLists = pathname.split('/');
       if (pathLists.length === 4) {
@@ -22,7 +19,7 @@ export default Ember.Controller.extend(ModalMixin, {
       }
     },
 
-    onClickProfileInfo: function() {
+    onClickProfileInfo() {
       let controller = this;
       let user = controller.get('user');
 
@@ -30,17 +27,18 @@ export default Ember.Controller.extend(ModalMixin, {
         user: user
       };
       // Open user profile info modal once user click thumbnail
-      controller.send('showModal', 'modals.learner.user-profile-modal', modalData);
+      controller.send(
+        'showModal',
+        'modals.learner.user-profile-modal',
+        modalData
+      );
     },
 
-    onFilterSelection: function(activeDuration) {
+    onFilterSelection(activeDuration) {
       this.send('onSelectActiveDuration', activeDuration);
     }
-
   }
 
   // --------------------------------------------------------------------------
   // Properties
-
-
 });

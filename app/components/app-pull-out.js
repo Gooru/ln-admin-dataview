@@ -27,53 +27,58 @@ export default Ember.Component.extend({
 
   classNameBindings: ['showLess:app-pull-out-more'],
 
-
   // -------------------------------------------------------------------------
   // Actions
   actions: {
     /**
      * Action triggered when the user invoke the pull out.
      */
-    onPullOutOpen: function() {
+    onPullOutOpen() {
       this.set('showPullOut', true);
     },
 
     /**
      * Action triggered when the user click's the more info button.
      */
-    showMoreInfo: function() {
+    showMoreInfo() {
       let component = this;
-      component.$().animate({
-        right: '0'
-      }, {
-        complete: function() {
-          component.toggleProperty('showMore');
-          component.toggleProperty('showLess');
+      component.$().animate(
+        {
+          right: '0'
+        },
+        {
+          complete: function() {
+            component.toggleProperty('showMore');
+            component.toggleProperty('showLess');
+          }
         }
-      });
+      );
     },
 
     /**
      * Action triggered when the user click's the less info button.
      */
-    showLessInfo: function() {
+    showLessInfo() {
       let component = this;
       const right = 460 - component.$().width();
-      component.$().animate({
-        right: `${right  }px`
-      }, {
-        complete: function() {
-          component.toggleProperty('showMore');
-          component.toggleProperty('showLess');
-          component.$().css('right', 'calc(460px - 100%)');
+      component.$().animate(
+        {
+          right: `${right}px`
+        },
+        {
+          complete: function() {
+            component.toggleProperty('showMore');
+            component.toggleProperty('showLess');
+            component.$().css('right', 'calc(460px - 100%)');
+          }
         }
-      });
+      );
     },
 
     /**
      * Action triggered when the user close the pull out
      */
-    onPullOutClose: function() {
+    onPullOutClose() {
       this.set('showMore', false);
       this.set('showLess', false);
       this.set('showPullOut', false);
@@ -113,23 +118,28 @@ export default Ember.Component.extend({
       let component = this;
       const right = 460 - component.$().width();
       component.$().removeClass('app-pull-out-hidden');
-      component.$().animate({
-        right: `${right  }px`
-      }, {
-        complete: function() {
-          component.$().css('right', 'calc(460px - 100%)');
+      component.$().animate(
+        {
+          right: `${right}px`
+        },
+        {
+          complete: function() {
+            component.$().css('right', 'calc(460px - 100%)');
+          }
         }
-      });
+      );
     } else {
       let component = this;
-      component.$().animate({
-        right: '-101%'
-      }, {
-        complete: function() {
-          component.$().addClass('app-pull-out-hidden');
+      component.$().animate(
+        {
+          right: '-101%'
+        },
+        {
+          complete: function() {
+            component.$().addClass('app-pull-out-hidden');
+          }
         }
-      });
+      );
     }
   })
-
 });

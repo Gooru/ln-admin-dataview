@@ -22,7 +22,7 @@ export default Ember.Component.extend(ModalMixin, {
   // -------------------------------------------------------------------------
   // Events
 
-  didInsertElement: function() {
+  didInsertElement() {
     var self = this;
 
     // Add event listener
@@ -40,7 +40,7 @@ export default Ember.Component.extend(ModalMixin, {
     this.controlVisibility();
   },
 
-  willDestroyElement: function() {
+  willDestroyElement() {
     this.$().off('hidden.bs.modal');
   },
 

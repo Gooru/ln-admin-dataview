@@ -68,7 +68,7 @@ export default Ember.Controller.extend({
      * @function onSearch
      * Action triggered when the user hit enter on the search box
      */
-    onSearch: function(term) {
+    onSearch(term) {
       this.set('searchTerm', term);
       let routeName = Utils.getRoutePathLastOccurrence();
       let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
@@ -80,7 +80,7 @@ export default Ember.Controller.extend({
       }
     },
 
-    onChangeFilterItems: function(filterItems, updatedFilter) {
+    onChangeFilterItems(filterItems, updatedFilter) {
       let controller = this;
       if (updatedFilter) {
         let filterType = updatedFilter.type;
@@ -106,7 +106,7 @@ export default Ember.Controller.extend({
       }
     },
 
-    clearFilter: function() {
+    clearFilter() {
       let controller = this;
       let userId = controller.get('session.id');
       localStorage.setItem(
@@ -128,7 +128,7 @@ export default Ember.Controller.extend({
       }
     },
 
-    searchStatus: function() {
+    searchStatus() {
       let controller = this;
       let userId = controller.get('session.id');
       let filters = JSON.parse(
@@ -141,7 +141,7 @@ export default Ember.Controller.extend({
       }
     },
 
-    clearSearchText: function() {
+    clearSearchText() {
       let controller = this;
       let userId = controller.get('session.id');
       let filters = JSON.parse(

@@ -31,7 +31,7 @@ export default Ember.Controller.extend({
   //Actions
 
   actions: {
-    showMoreResults: function() {
+    showMoreResults() {
       let controller = this;
       controller.fetchSearchAssessments();
     },

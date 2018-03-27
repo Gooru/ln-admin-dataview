@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-
   // -------------------------------------------------------------------------
   // Properties
 
@@ -15,15 +14,12 @@ export default Ember.Controller.extend({
    */
   userId: null,
 
-
   //------------------------------------------------------------------------
   // Events
 
   actions: {
-
-    onClickBackButton: function() {
+    onClickBackButton() {
       this.transitionToRoute('learner');
     }
   }
-
 });

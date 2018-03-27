@@ -8,7 +8,7 @@ export default {
 
   after: 'ember-i18n',
 
-  initialize: function(registry, application) {
+  initialize(registry, application) {
     application.inject('controller', 'i18n', 'service:i18n');
     application.inject('model', 'i18n', 'service:i18n');
   }

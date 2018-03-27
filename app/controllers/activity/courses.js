@@ -30,12 +30,12 @@ export default Ember.Controller.extend({
   //Actions
 
   actions: {
-    showMoreResults: function() {
+    showMoreResults() {
       let controller = this;
       controller.fetchSearchCourses();
     },
 
-    onPlayCourse: function(course) {
+    onPlayCourse(course) {
       let controller = this;
       controller.getCourseContentById(course.id);
       controller.set('selectedCourse', course);

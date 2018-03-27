@@ -253,7 +253,7 @@ export default Ember.Controller.extend({
       controller.set('showPullOut', true);
     },
 
-    showMoreResults: function() {
+    showMoreResults() {
       let controller = this;
       controller.fetchSearchCollections();
     }

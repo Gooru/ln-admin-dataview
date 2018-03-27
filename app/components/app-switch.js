@@ -26,7 +26,7 @@ export default Ember.Component.extend({
   /**
    * Overwrites didInsertElement hook.
    */
-  didInsertElement: function() {
+  didInsertElement() {
     const component = this;
     const $toggle = this.$('input[type=checkbox][data-toggle^=toggle]');
     $toggle.bootstrapToggle();
@@ -43,7 +43,7 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Methods
-  changeStatus: function(isChecked) {
+  changeStatus(isChecked) {
     const $toggle = this.$('input[type=checkbox][data-toggle^=toggle]');
     $toggle.prop('checked', isChecked).change();
   },

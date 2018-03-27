@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-
   // -------------------------------------------------------------------------
   // Query
 
@@ -14,10 +13,9 @@ export default Ember.Controller.extend({
   courseTitle: null,
 
   actions: {
-    onClickBackButton: function() {
+    onClickBackButton() {
       let controller = this;
       controller.transitionToRoute('learner');
     }
   }
-
 });

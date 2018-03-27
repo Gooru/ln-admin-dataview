@@ -24,7 +24,7 @@ export default Ember.Controller.extend({
      * @function onSearch
      * Action triggered when the user hit enter on the search box
      */
-    onSearch: function(term) {
+    onSearch(term) {
       let controller = this;
       controller.transitionToRoute(`/activities/summary?term=${term}`);
     },
@@ -35,7 +35,7 @@ export default Ember.Controller.extend({
       controller.set('appliedFilterList', controller.getUserAppliedFilters());
     },
 
-    clearFilter: function() {
+    clearFilter() {
       let controller = this;
       let userId = controller.get('session.id');
       localStorage.setItem(
@@ -52,7 +52,7 @@ export default Ember.Controller.extend({
       }
     },
 
-    clearSearchText: function() {
+    clearSearchText() {
       let controller = this;
       let userId = controller.get('session.id');
       let filters = JSON.parse(

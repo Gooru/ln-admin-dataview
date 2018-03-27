@@ -127,7 +127,7 @@ export default Ember.Controller.extend({
      * @param  {Object} d selected node
      * @param  {Object} component
      */
-    onClickTaxonomyNode: function(node, component) {
+    onClickTaxonomyNode(node, component) {
       let controller = this;
       controller.set('showPullOut', false);
       let taxonomyTreeViewData = controller.get('taxonomyTreeViewData');
@@ -206,7 +206,7 @@ export default Ember.Controller.extend({
     /**
      * Action triggered when clicking more info in each node
      */
-    onClickNodeMoreInfo: function(node) {
+    onClickNodeMoreInfo(node) {
       let controller = this;
       let nodeDepth = node.depth;
       let nodeInfo = Utils.getNodeInfo(node);
@@ -357,7 +357,7 @@ export default Ember.Controller.extend({
      * Action get triggered when subject category is choosen
      * @param  {Object} category
      */
-    onChooseCategory: function(category) {
+    onChooseCategory(category) {
       this.set('showPullOut', false);
       this.send('chooseCategory', category);
     }
@@ -366,12 +366,12 @@ export default Ember.Controller.extend({
   //-------------------------------------------------------------------------
   //Methods
 
-  init: function() {
+  init() {
     this._super(...arguments);
     this.set('taxonomyTreeViewData', this.get('defaultTaxonomyTreeViewData'));
   },
 
-  parseTaxonomyData: function(data, targetData, pushDataToChild) {
+  parseTaxonomyData(data, targetData, pushDataToChild) {
     let controller = this;
     let childData = Ember.A();
     data.forEach(item => {
@@ -390,7 +390,7 @@ export default Ember.Controller.extend({
     }
   },
 
-  renderCoursesData: function(node) {
+  renderCoursesData(node) {
     let id = node.data.id;
     let controller = this;
     let categories = controller.get('categories');
@@ -416,7 +416,7 @@ export default Ember.Controller.extend({
     });
   },
 
-  renderCourseDomainsData: function(node) {
+  renderCourseDomainsData(node) {
     let id = node.data.id;
     let controller = this;
     let categories = controller.get('categories');
@@ -449,7 +449,7 @@ export default Ember.Controller.extend({
     });
   },
 
-  renderDomainCodesData: function(node) {
+  renderDomainCodesData(node) {
     let controller = this;
     let id = node.data.id;
     let categories = controller.get('categories');
@@ -487,7 +487,7 @@ export default Ember.Controller.extend({
     });
   },
 
-  renderStandardCodes: function(data, targetNode) {
+  renderStandardCodes(data, targetNode) {
     let controller = this;
     data = data.objectAt(0);
     let standards = data.get('children');
@@ -525,7 +525,7 @@ export default Ember.Controller.extend({
     }
   },
 
-  createNode: function(data, isShowDisplayCode = false) {
+  createNode(data, isShowDisplayCode = false) {
     let node = Ember.Object.create({
       id: data.id,
       code: data.code,
@@ -540,7 +540,7 @@ export default Ember.Controller.extend({
    * Get Content count of search results
    * return hashed json of each content type count
    */
-  getSearchContentCount: function(selectedNode) {
+  getSearchContentCount(selectedNode) {
     let code = selectedNode.code;
     let categoryId = Utils.getCategoryId(code);
     let category = this.get('categories').findBy('id', categoryId);
@@ -642,7 +642,7 @@ export default Ember.Controller.extend({
    * Get Content count of search results
    * return hashed json of each content type conunt
    */
-  getSearchLearningMapsContent: function(selectedNode) {
+  getSearchLearningMapsContent(selectedNode) {
     const learningMapsContent = Ember.RSVP.resolve(
       this.get('searchService').learningMapsContent(selectedNode)
     );

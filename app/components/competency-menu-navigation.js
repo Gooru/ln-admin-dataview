@@ -1,6 +1,9 @@
 import Ember from 'ember';
 import ConfigurationMixin from 'admin-dataview/mixins/configuration';
-import {COMPETENCY_NAVIGATION_MENUS,COMPETENCY_NAVIGATION_MENUS_INDEX} from 'admin-dataview/config/config';
+import {
+  COMPETENCY_NAVIGATION_MENUS,
+  COMPETENCY_NAVIGATION_MENUS_INDEX
+} from 'admin-dataview/config/config';
 import Utils from 'admin-dataview/utils/utils';
 
 /**
@@ -30,7 +33,7 @@ export default Ember.Component.extend(ConfigurationMixin, {
      * Triggered when an menu item is selected
      * @param item
      */
-    onMenuItemSelection: function(item) {
+    onMenuItemSelection(item) {
       this.sendAction('onMenuItemSelection', item);
     }
   },
@@ -45,12 +48,12 @@ export default Ember.Component.extend(ConfigurationMixin, {
   menuItems: COMPETENCY_NAVIGATION_MENUS,
 
   /**
-  * Find the active menu index from the navigation list.
-  * @property {Boolean}
-  */
+   * Find the active menu index from the navigation list.
+   * @property {Boolean}
+   */
   activeMenuIndex: Ember.computed(function() {
-    let activeMenuIndex = COMPETENCY_NAVIGATION_MENUS_INDEX[Utils.getRoutePathLastOccurrence()];
+    let activeMenuIndex =
+      COMPETENCY_NAVIGATION_MENUS_INDEX[Utils.getRoutePathLastOccurrence()];
     return activeMenuIndex > -1 ? activeMenuIndex : 0;
   })
-
 });

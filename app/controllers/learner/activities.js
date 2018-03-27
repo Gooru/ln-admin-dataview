@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import { RESOURCE_TYPES } from 'admin-dataview/config/config';
 export default Ember.Controller.extend({
-
   //------------------------------------------------------------------------
   //Events
   classNames: ['learner-activities'],
@@ -45,15 +44,13 @@ export default Ember.Controller.extend({
   //------------------------------------------------------------------------
   //Actions
   actions: {
-
     /**
      * @function onClickBackButton
      * Action triggerred when an user click back arrow in the page
      */
-    onClickBackButton: function() {
+    onClickBackButton() {
       let controller = this;
       controller.transitionToRoute('learner');
     }
   }
-
 });
