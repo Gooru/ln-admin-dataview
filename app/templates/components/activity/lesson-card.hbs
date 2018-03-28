@@ -1,10 +1,10 @@
-<div class="card-panel-container" {{action "onPlaylesson" lesson}}>
-  <div class="card-panel-header" style="background-image: url({{lesson.thumbnailUrl}})">
+<div class="card-panel-container" {{action 'getlessonInfo' lesson}}>
+  <div class="card-panel-header {{lesson.contentSubFormat}}">
     <div class="info">
       <div class="title">{{lesson.title}}</div>
     </div>
   </div>
-  <div class="content-count-container">
+  <div class="lesson-format-container">
     <div class="assessment pull-left">
       <i class="icon"></i>
       <span>{{lesson.assessmentCount}}</span>
