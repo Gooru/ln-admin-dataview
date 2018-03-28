@@ -27,7 +27,7 @@
     </div>
   </div>
   {{#if isShowCompetencyInfo}}
-    {{learning-map.competency-info competencyInfo=prerequisitesCompetencyInfo}}
+    {{learning-map.competency-info competencyInfo=prerequisitesCompetencyInfo onCloseInfoPopup="onCloseInfoPopup" onSelectPrerequisites="onSelectPrerequisites"}}
   {{/if}}
   <div class="table-structure">
     <table class="table competency-data">
