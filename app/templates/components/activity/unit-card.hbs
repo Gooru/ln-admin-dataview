@@ -1,10 +1,10 @@
-<div class="card-panel-container" {{action "onPlayunit" unit}}>
-  <div class="card-panel-header" style="background-image: url({{unit.thumbnailUrl}})">
+<div class="card-panel-container" {{action 'getunitInfo' unit}}>
+  <div class="card-panel-header {{unit.contentSubFormat}}">
     <div class="info">
       <div class="title">{{unit.title}}</div>
     </div>
   </div>
-  <div class="content-count-container">
+  <div class="unit-format-container">
     <div class="assessment pull-left">
       <i class="icon"></i>
       <span>{{unit.assessmentCount}}</span>
@@ -16,7 +16,7 @@
   </div>
   <div class="unit-info-container">
     <div class="unit-user-info">
-      <div class="created-by">{{t "common.created-by"}}</div>
+      <div class="created-by">{{t (if unit.sameOwnerAndCreator "common.created-by" "common.remixed-by")}}</div>
       <div class="img-container pull-left">
         <img class="img-responsive" src="{{unit.owner.avatarUrl}}">
       </div>
