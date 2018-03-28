@@ -12,7 +12,7 @@
         {{/each}}
       </ul>
     </div>
-    <div class="pull-left matrix-chart-container {{if istaxonomyDomains 'scroll-view' ''}}">
+    <div class="pull-left matrix-chart-container {{if isTaxonomyDomains 'scroll-view' ''}}">
       <div id="competency-matrix-domain-chart"></div>
       <div class="domain-list" style="width:{{width}}px">
         {{#each taxonomyDomains as |taxonomyDomain index |}}
@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    {{#if (and (not isLoading) (not istaxonomyDomains) ) }}
+    {{#if (and (not isLoading) (not isTaxonomyDomains) ) }}
       <span class="no-data">No Data Found</span>
     {{/if}}
   </div>

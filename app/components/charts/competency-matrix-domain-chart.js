@@ -101,7 +101,7 @@ export default Ember.Component.extend({
    * It  will have chart value width scroll width handling
    * @type {String}
    */
-  istaxonomyDomains: Ember.computed('taxonomyDomains', function() {
+  isTaxonomyDomains: Ember.computed('taxonomyDomains', function() {
     let component = this;
     let length = component.get('taxonomyDomains').length;
     return length > 0;
@@ -228,7 +228,6 @@ export default Ember.Component.extend({
     component.set('width', width);
     const height = component.get('defaultHeightOfChart');
     component.$('#competency-matrix-domain-chart').empty();
-    component.$('#competency-matrix-domain-chart').height(height);
     const svg = d3
       .select('#competency-matrix-domain-chart')
       .append('svg')
@@ -498,7 +497,9 @@ export default Ember.Component.extend({
     component.reduceChartBelowCells();
     component.reduceChartAboveCells();
     component.drawSkyline();
-    let height = component.get('defaultHeightOfChart');
+    let height = component.get('isTaxonomyDomains')
+      ? component.get('defaultHeightOfChart')
+      : 50;
     component.$('#competency-matrix-domain-chart').height(height);
     component.$('#competency-matrix-domain-chart svg').attr('height', height);
   },
