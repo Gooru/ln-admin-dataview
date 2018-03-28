@@ -42,3 +42,7 @@
     top: 50%;
   }
 }
+.non-scrollable-margin {
+  overflow: hidden !important;
+  margin-right: 15px;
+}

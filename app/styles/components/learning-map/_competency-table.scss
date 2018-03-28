@@ -147,14 +147,6 @@
       }
     }
 
-    .prerequisites-competency-info {
-      position: absolute;
-      display: inline-block;
-      height: 70vh;
-      width: 100%;
-      background-color: $white;
-    }
-
     .table-structure {
       height: 75vh;
       overflow: auto;
@@ -226,6 +218,10 @@
     .prerequisites-info {
       width: 190px;
       border-left: 2px solid $light-300;
+      .prerequisites-id {
+        height: 30px;
+        line-height: 30px;
+      }
     }
     .not-available {
       text-align: center;

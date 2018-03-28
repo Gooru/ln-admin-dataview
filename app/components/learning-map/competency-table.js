@@ -1,18 +1,21 @@
 import Ember from 'ember';
-import { LEARNING_MAP_CONTENT_SEQUENCE } from 'admin-dataview/config/config';
+import {
+  LEARNING_MAP_CONTENT_SEQUENCE,
+  LEARNING_MAP_DEFAULT_LEVELS
+} from 'admin-dataview/config/config';
 
 export default Ember.Component.extend({
+  // -------------------------------------------------------------------------
+  // Attributes
   classNames: ['learning-map', 'competency-table'],
 
-  contentSequence: LEARNING_MAP_CONTENT_SEQUENCE,
-
-  isShowMicroCompetency: false,
-
-  isShowCompetencyInfo: false,
-
-  prerequisitesCompetencyInfo: null,
-
+  /**
+   * @requires searchService
+   */
   searchService: Ember.inject.service('api-sdk/search'),
+
+  // -------------------------------------------------------------------------
+  // Events
 
   didInsertElement() {
     let component = this;
@@ -30,11 +33,15 @@ export default Ember.Component.extend({
     component.$('td.prerequisites-info').css('width', width);
   },
 
+  // -------------------------------------------------------------------------
+  // Actions
   actions: {
     /**
      * Action triggered when the user click up arrow
      */
     onScrollTop() {
+      let component = this;
+      component.activateFirstItemByDefault();
       Ember.$('.browser-container').show();
       Ember.$('.learning-map-container').animate(
         {
@@ -42,20 +49,42 @@ export default Ember.Component.extend({
         },
         'slow'
       );
+      component.resetPrerequisitesInfo();
     },
 
+    /**
+     * Action triggered when the user toggle micro-competency visibility
+     */
     onToggleButton() {
       let component = this;
       component.toggleProperty('isShowMicroCompetency');
       component.$('.micro-competency').toggleClass('hide-row');
     },
 
+    /**
+     * Action triggered when the user select prerequisites
+     */
     onSelectPrerequisites(prerequisitesId) {
       let component = this;
       component.fetchLearningMapContent(prerequisitesId);
+    },
+
+    /**
+     * Action triggered when the user close prerequisites popup
+     */
+    onCloseInfoPopup() {
+      let component = this;
+      component.resetPrerequisitesInfo();
     }
   },
 
+  // -------------------------------------------------------------------------
+  // Methods
+
+  /**
+   * @function setupScrollable
+   * Method to setup scroll event
+   */
   setupScrollable() {
     let component = this;
     const $competencyTable = component.$('.table-structure');
@@ -69,8 +98,13 @@ export default Ember.Component.extend({
     });
   },
 
+  /**
+   * @function fetchLearningMapContent
+   * Method to fetch learning map content
+   */
   fetchLearningMapContent(competencyId) {
     let component = this;
+    component.set('isLoading', true);
     let length = 1;
     let filters = {
       id: competencyId,
@@ -86,10 +120,17 @@ export default Ember.Component.extend({
         'prerequisitesCompetencyInfo',
         component.normalizeLearningMapContent(hash.competencyContent)
       );
-      // component.set('isShowCompetencyInfo', true);
+      component.set('isShowCompetencyInfo', true);
+      component.set('isLoading', false);
+      Ember.$('.learning-map-container').addClass('non-scrollable-margin');
+      Ember.$('.table-structure').addClass('non-scrollable-margin');
     });
   },
 
+  /**
+   * @function normalizeLearningMapContent
+   * Method to normalize learning map content response
+   */
   normalizeLearningMapContent(competencyContent) {
     let component = this;
     let competencyContents = competencyContent.contents;
@@ -144,10 +185,79 @@ export default Ember.Component.extend({
     return normalizedContent;
   },
 
+  /**
+   * @function getStruncturedCompetencyInfo
+   * Method to get structured competency info
+   */
   getStruncturedCompetencyInfo(type, value) {
     return {
       type: type,
       value: value
     };
-  }
+  },
+
+  /**
+   * @function activateFirstItemByDefault
+   * Method to set first item in each component selected by default
+   */
+  activateFirstItemByDefault() {
+    let defaultLevels = LEARNING_MAP_DEFAULT_LEVELS;
+    const $categoryComponent = Ember.$('.category .item');
+    const $subjectComponent = Ember.$('.subject .item');
+    const $courseComponent = Ember.$('.course .item');
+    if (!$categoryComponent.hasClass('active')) {
+      Ember.$(`.category .item.${defaultLevels.categoryCode}`).addClass(
+        'active'
+      );
+    }
+    if (!$subjectComponent.hasClass('active')) {
+      Ember.$(
+        `.subject .item.${defaultLevels.subjectCode.replace(/\./, '-')}`
+      ).addClass('active');
+    }
+    if (!$courseComponent.hasClass('active')) {
+      Ember.$(
+        `.course .item.${defaultLevels.courseCode.replace(/\./, '-')}`
+      ).addClass('active');
+    }
+  },
+
+  /**
+   * @function resetPrerequisitesInfo
+   * Method to reset prerequisites info items
+   */
+  resetPrerequisitesInfo() {
+    let component = this;
+    component.set('isShowCompetencyInfo', false);
+    component.set('prerequisitesCompetencyInfo', null);
+    Ember.$('.learning-map-container').toggleClass('non-scrollable-margin');
+    Ember.$('.table-structure').toggleClass('non-scrollable-margin');
+  },
+
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * @property {Array}
+   * Propety to store sequence of content items
+   */
+  contentSequence: LEARNING_MAP_CONTENT_SEQUENCE,
+
+  /**
+   * @property {Boolean}
+   * Propety to show/hide micro-competency
+   */
+  isShowMicroCompetency: false,
+
+  /**
+   * @property {Boolean}
+   * Property to show/hide prerequisites competency info
+   */
+  isShowCompetencyInfo: false,
+
+  /**
+   * @property {Objet}
+   * Property to store fetched prerequisites info
+   */
+  prerequisitesCompetencyInfo: null
 });

@@ -3,6 +3,8 @@ import { TAXONOMY_CATEGORIES } from 'admin-dataview/config/config';
 import { capitalizeString } from 'admin-dataview/utils/utils';
 
 export default Ember.Component.extend({
+  // -------------------------------------------------------------------------
+  // Attributes
   classNames: ['learning-map', 'app-domain-browser'],
 
   // -------------------------------------------------------------------------
@@ -12,24 +14,8 @@ export default Ember.Component.extend({
    */
   taxonomyService: Ember.inject.service('taxonomy'),
 
-  categories: TAXONOMY_CATEGORIES,
-
-  subjects: [],
-
-  courses: [],
-
-  domains: [],
-
-  defaultFramework: 'GDT',
-
-  selectedCategory: 'k_12',
-
-  selectedSubject: null,
-
-  selectedCourse: null,
-
-  domainStack: [],
-
+  // -------------------------------------------------------------------------
+  // Events
   init: function() {
     let component = this;
     component._super(...arguments);
@@ -43,7 +29,12 @@ export default Ember.Component.extend({
     });
   },
 
+  // -------------------------------------------------------------------------
+  // Actions
   actions: {
+    /**
+     * Action triggered when the user select a data item
+     */
     onSelectDataItem(type, dataItem) {
       let component = this;
       let selectedType = capitalizeString(type);
@@ -57,6 +48,9 @@ export default Ember.Component.extend({
       }
     },
 
+    /**
+     * Action triggered when the user select a domain item
+     */
     onSelectDomain(domainId) {
       let component = this;
       let domainStack = component.get('domainStack');
@@ -71,6 +65,13 @@ export default Ember.Component.extend({
     }
   },
 
+  // -------------------------------------------------------------------------
+  // Methods
+
+  /**
+   * @function fetchSubjectsByCategory
+   * Method to fetch subjects by category
+   */
   fetchSubjectsByCategory(category) {
     let component = this;
     component.set('selectedCategory', category);
@@ -85,6 +86,10 @@ export default Ember.Component.extend({
     });
   },
 
+  /**
+   * @function fetchCoursesBySubject
+   * Method to fetch courses by subject
+   */
   fetchCoursesBySubject(subject) {
     let component = this;
     if (!subject.frameworkId) {
@@ -102,6 +107,10 @@ export default Ember.Component.extend({
     });
   },
 
+  /**
+   * @function fetchDomainsByCourse
+   * Method to fetch domains by course
+   */
   fetchDomainsByCourse(subject, course) {
     let component = this;
     component.set('selectedCourse', course);
@@ -115,6 +124,10 @@ export default Ember.Component.extend({
     });
   },
 
+  /**
+   * @function fetchContentByType
+   * Method to fetch content by type
+   */
   fetchContentByType(type, dataItem) {
     let component = this;
     let itemsToReset = [];
@@ -138,10 +151,71 @@ export default Ember.Component.extend({
     component.resetItems(itemsToReset);
   },
 
+  /**
+   * @function resetItems
+   * Method to reset property items
+   */
   resetItems(itemsToReset) {
     let component = this;
     itemsToReset.map(item => {
       component.set(`${item}`, []);
     });
-  }
+  },
+
+  // -------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * @property {Array}
+   * Property to store taxonomy categories
+   */
+  categories: TAXONOMY_CATEGORIES,
+
+  /**
+   * @property {Array}
+   * Propety to store fetched subjects
+   */
+  subjects: [],
+
+  /**
+   * @property {Array}
+   * Propety to store fetched courses
+   */
+  courses: [],
+
+  /**
+   * @property {Array}
+   * Propety to store fetched domains
+   */
+  domains: [],
+
+  /**
+   * @property {String}
+   * Propety to store default framework id
+   */
+  defaultFramework: 'GDT',
+
+  /**
+   * @property {String}
+   * Propety to store selected category id
+   */
+  selectedCategory: 'k_12',
+
+  /**
+   * @property {Object}
+   * Propety to store selected subject info
+   */
+  selectedSubject: null,
+
+  /**
+   * @property {Object}
+   * Propety to store selected course info
+   */
+  selectedCourse: null,
+
+  /**
+   * @property {Array}
+   * Propety to store selected domain stack
+   */
+  domainStack: []
 });
