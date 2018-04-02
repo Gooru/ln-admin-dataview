@@ -195,6 +195,7 @@ export default Ember.Component.extend({
     let visibleFilters = appliedFilterList.filter(function(filter, index) {
       return index < filtersVisible;
     });
+    component.sendAction('onEmptyFilters', visibleFilters.length === 0);
     component.set('visibleFilters', visibleFilters);
   },
 

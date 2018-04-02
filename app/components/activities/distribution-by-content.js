@@ -25,7 +25,7 @@ export default Ember.Component.extend({
   },
 
   /**
-   * Observe the filte changes
+   * Observe the filter changes
    */
   filtersObserver: Ember.observer('appliedFilterList', function() {
     let component = this;

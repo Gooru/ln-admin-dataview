@@ -19,7 +19,9 @@
     </div>
   </div>
   <div class="search-form">
-    <span class="clear-icon" {{action 'clearSearchText'}}>{{app-icon name="clear"}}</span>
+    {{#if term}}
+      <span class="clear-icon" {{action 'clearSearchText'}}>{{app-icon name="clear"}}</span>
+    {{/if}}
     <span class="search-icon">
       {{app-icon name='search' }}
     </span>

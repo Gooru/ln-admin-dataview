@@ -109,6 +109,7 @@ export default Ember.Controller.extend({
     clearFilter() {
       let controller = this;
       let userId = controller.get('session.id');
+      let toggleClearSearch = controller.get('toggleClearSearch');
       localStorage.setItem(
         `research_${userId}_activities_filters`,
         JSON.stringify({})
@@ -119,7 +120,7 @@ export default Ember.Controller.extend({
         let routeName = Utils.getRoutePathLastOccurrence();
         let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
         controller.set('selectedFilterItems', {});
-        controller.set('clearSearch', true);
+        controller.set('toggleClearSearch', !toggleClearSearch);
         if (activeMenuIndex > -1) {
           controller.get(`${routeName}Controller`).refreshItems();
         }
@@ -161,6 +162,14 @@ export default Ember.Controller.extend({
       } else {
         controller.transitionToRoute('/activities');
       }
+    },
+
+    /**
+     * Action triggered when am user change filter item
+     */
+    onEmptyFilters(isEmpty) {
+      let controller = this;
+      controller.set('isEmptyFilters', isEmpty);
     }
   },
 
@@ -192,13 +201,19 @@ export default Ember.Controller.extend({
    * Search term clear refresh
    * @type {String}
    */
-  clearSearch: false,
+  toggleClearSearch: false,
 
   /**
    * Search term
    * @type {String}
    */
   searchTerm: null,
+
+  /**
+   * @type {Boolean}
+   * Show/Hide clear filter text
+   */
+  isEmptyFilters: false,
 
   // -------------------------------------------------------------------------
   // Methods

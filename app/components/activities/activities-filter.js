@@ -13,7 +13,7 @@ export default Ember.Component.extend({
   //Properties
   selectedFilterItems: {},
 
-  clearSearchRefresh: Ember.observer('clearSearch', function() {
+  clearSearchRefresh: Ember.observer('toggleClearSearch', function() {
     let component = this;
     component.set('selectedFilterItems', JSON.stringify({}));
     component.$('.filter-name  input').prop('checked', false);

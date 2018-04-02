@@ -1,8 +1,8 @@
 <div class="activities">
-  {{activities.search-box selectedFilterItems=selectedFilterItems onSearch='onSearch' clearSearchText='clearSearchText'}}
+  {{activities.search-box selectedFilterItems=selectedFilterItems onSearch='onSearch' clearSearchText='clearSearchText' onEmptyFilters="onEmptyFilters"}}
   <div class="filters pull-left">
     <div class="filter-list">
-      {{activities.activities-filter filterTypes=filterTypes onChangeFilterItems="onChangeFilterItems" clearSearch=clearSearch clearFilter='clearFilter'}}
+      {{activities.activities-filter filterTypes=filterTypes onChangeFilterItems="onChangeFilterItems" toggleClearSearch=toggleClearSearch clearFilter='clearFilter' isEmptyFilters=isEmptyFilters}}
     </div>
   </div>
   <div class="activities-summary pull-left">
