@@ -5,9 +5,8 @@
     font-weight: bold;
     color: $dark-800;
     height: 28px;
-    border-bottom: dashed 2px  $dark-600;
+    border-bottom: dashed 2px $dark-600;
   }
-
 
   .signature {
     width: 100%;
@@ -38,10 +37,14 @@
     }
 
     .collection-name {
-      text-align: center;
       color: $gray-29;
-      margin-left: 20px;
-      line-height: 4;
+      margin-left: 23px;
+      position: relative;
+      top: 10px;
+      left: 16px;
+      display: block;
+      text-align: left;
+      @include ellipsis($font-size: 13px, $line-height: 1, $lines-to-show: 2);
     }
   }
 }

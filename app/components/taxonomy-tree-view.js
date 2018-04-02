@@ -76,6 +76,28 @@ export default Ember.Component.extend({
    */
   duration: 0,
 
+  /**
+   * switch button enabled
+   * @type {boolean}
+   */
+  isZoomEnabled: false,
+
+  /**
+   * Trigger whenever skyline toggle state got changed.
+   */
+  onChangeZoomToggle: Ember.observer('isZoomEnabled', function() {
+    let component = this;
+    let isZoomEnabled = component.get('isZoomEnabled');
+    let svgElement = $('.taxonomy-tree-view  svg').position();
+    let postionTop = Math.round(svgElement.top);
+    let svg = d3.select(component.element).select('svg');
+    if (isZoomEnabled) {
+      svg.attr('transform', `translate(0, -${postionTop}), scale(0.6, 0.6)`);
+    } else {
+      svg.attr('transform', 'scale(0.9, 0.9)');
+    }
+  }),
+
   // -------------------------------------------------------------------------
   // Methods
 
