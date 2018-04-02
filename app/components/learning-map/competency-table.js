@@ -50,6 +50,7 @@ export default Ember.Component.extend({
         'slow'
       );
       component.resetPrerequisitesInfo();
+      component.sendAction('onToggleExportButton', false);
     },
 
     /**
@@ -228,10 +229,12 @@ export default Ember.Component.extend({
    */
   resetPrerequisitesInfo() {
     let component = this;
-    component.set('isShowCompetencyInfo', false);
-    component.set('prerequisitesCompetencyInfo', null);
-    Ember.$('.learning-map-container').toggleClass('non-scrollable-margin');
-    Ember.$('.table-structure').toggleClass('non-scrollable-margin');
+    if (component.get('isShowCompetencyInfo')) {
+      component.set('isShowCompetencyInfo', false);
+      component.set('prerequisitesCompetencyInfo', {});
+      Ember.$('.learning-map-container').toggleClass('non-scrollable-margin');
+      Ember.$('.table-structure').toggleClass('non-scrollable-margin');
+    }
   },
 
   // -------------------------------------------------------------------------
