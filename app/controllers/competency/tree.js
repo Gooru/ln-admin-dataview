@@ -89,6 +89,11 @@ export default Ember.Controller.extend({
   unitContent: null,
 
   /*
+   * zoom in and out  Enabled
+   */
+  isZoomEnabled: null,
+
+  /*
    * List of lesson contents
    */
   lessonContent: null,
@@ -360,6 +365,13 @@ export default Ember.Controller.extend({
     onChooseCategory(category) {
       this.set('showPullOut', false);
       this.send('chooseCategory', category);
+    },
+
+    /**
+     * Trigger when skyline toggle button got changed.
+     */
+    onChangeSkyline(value) {
+      this.set('isZoomEnabled', value);
     }
   },
 
