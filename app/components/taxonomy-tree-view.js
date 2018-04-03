@@ -90,6 +90,8 @@ export default Ember.Component.extend({
     let isZoomEnabled = component.get('isZoomEnabled');
     let svgElement = $('.taxonomy-tree-view  svg').position();
     let postionTop = Math.round(svgElement.top);
+    postionTop =
+      Math.sign(postionTop) === -1 ? Math.abs(postionTop) : postionTop;
     let svg = d3.select(component.element).select('svg');
     if (isZoomEnabled) {
       svg.attr('transform', `translate(0, -${postionTop}), scale(0.6, 0.6)`);
