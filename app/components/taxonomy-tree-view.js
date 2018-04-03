@@ -83,6 +83,12 @@ export default Ember.Component.extend({
   isZoomEnabled: false,
 
   /**
+   * default Zooming view scale size
+   * @type {float}
+   */
+  zoomScale: 0.9,
+
+  /**
    * Trigger whenever skyline toggle state got changed.
    */
   onChangeZoomToggle: Ember.observer('isZoomEnabled', function() {
@@ -94,9 +100,16 @@ export default Ember.Component.extend({
       Math.sign(postionTop) === -1 ? Math.abs(postionTop) : postionTop;
     let svg = d3.select(component.element).select('svg');
     if (isZoomEnabled) {
-      svg.attr('transform', `translate(0, -${postionTop}), scale(0.6, 0.6)`);
+      component.set('zoomScale', 0.6);
+      let scale = component.get('zoomScale');
+      svg.attr(
+        'transform',
+        `translate(0, -${postionTop}), scale(${scale},${scale})`
+      );
     } else {
-      svg.attr('transform', 'scale(0.9, 0.9)');
+      component.set('zoomScale', 0.9);
+      let scale = component.get('zoomScale');
+      svg.attr('transform', `scale(${scale},${scale})`);
     }
   }),
 
@@ -166,10 +179,11 @@ export default Ember.Component.extend({
 
     d3.select('svg').remove();
     let svg = d3.select(component.element).append('svg');
+    let scale = component.get('zoomScale');
     let rootNode = svg
       .attr('width', width + margin.right + margin.left)
       .attr('height', newHeight + margin.top + margin.bottom)
-      .attr('transform', 'scale(0.9, 0.9)')
+      .attr('transform', `scale(${scale},${scale})`)
       .append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
 
