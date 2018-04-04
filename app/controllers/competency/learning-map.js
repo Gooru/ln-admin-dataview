@@ -101,14 +101,6 @@ export default Ember.Controller.extend({
     onToggleExportButton(state) {
       let controller = this;
       controller.set('isShowExportBtn', state);
-    },
-
-    /**
-     * Action triggered when the user scrolled to bottom of the component
-     */
-    onScrollBottom() {
-      let controller = this;
-      controller.fetchLearningMapCompetency();
     }
   },
 
@@ -274,7 +266,7 @@ export default Ember.Controller.extend({
    * @property {Number}
    * Property to store length value
    */
-  length: 50,
+  length: 500,
 
   /**
    * @property {Boolean}

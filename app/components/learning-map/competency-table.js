@@ -17,11 +17,6 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Events
 
-  didInsertElement() {
-    let component = this;
-    component.setupScrollable();
-  },
-
   didRender() {
     let component = this;
     component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
@@ -81,23 +76,6 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Methods
-
-  /**
-   * @function setupScrollable
-   * Method to setup scroll event
-   */
-  setupScrollable() {
-    let component = this;
-    const $competencyTable = component.$('.table-structure');
-    $competencyTable.scroll(function() {
-      let isEnd =
-        $competencyTable.scrollTop() + $competencyTable.innerHeight() >=
-        $competencyTable[0].scrollHeight;
-      if (isEnd) {
-        component.sendAction('onScrollBottom');
-      }
-    });
-  },
 
   /**
    * @function fetchLearningMapContent
