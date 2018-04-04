@@ -100,19 +100,20 @@ export default Ember.Component.extend({
   onChangeZoomToggle: Ember.observer('isZoomEnabled', function() {
     let component = this;
     let isZoomEnabled = component.get('isZoomEnabled');
+    let treeElement = $('.taxonomy-tree-view').position();
     let svgElement = $('.taxonomy-tree-view  svg').position();
-    let postionTop = Math.round(svgElement.top);
-    postionTop =
-      Math.sign(postionTop) === -1 ? Math.abs(postionTop) : postionTop;
+    let svgHeight = $('.taxonomy-tree-view  svg').height() / 2;
+    let positionSvg = Math.abs(svgElement.top - treeElement.top);
     let svg = d3.select(component.element).select('svg');
     if (isZoomEnabled) {
-      component.set('zoomScale', 0.6);
-      component.set('svgPostion', postionTop);
+      component.set('zoomScale', 0.5);
+      if (svgHeight >= 500) {
+        component.set('zoomScale', 0.3);
+      }
       let scale = component.get('zoomScale');
-      svg.attr(
-        'transform',
-        `translate(0, -${postionTop}), scale(${scale},${scale})`
-      );
+      svg
+        .attr('transform', `scale(${scale},${scale})`)
+        .attr('transform-origin', `300 ${Math.round(positionSvg)}`);
     } else {
       component.set('zoomScale', 0.9);
       let scale = component.get('zoomScale');
@@ -186,15 +187,23 @@ export default Ember.Component.extend({
 
     d3.select('svg').remove();
     let svg = d3.select(component.element).append('svg');
+    let positionSvg = 0;
+    if (component.get('isZoomEnabled')) {
+      let svgElement = $('.taxonomy-tree-view  svg').position();
+      let treeElement = $('.taxonomy-tree-view').position();
+      positionSvg = Math.abs(treeElement.top - svgElement.top);
+      positionSvg = positionSvg >= 10 ? positionSvg : 300;
+      let svgHeight = $('.taxonomy-tree-view  svg').height() / 2;
+      if (svgHeight >= 500) {
+        component.set('zoomScale', 0.3);
+      }
+      svg.attr('transform-origin', `300 ${positionSvg}`);
+    }
     let scale = component.get('zoomScale');
-    let svgPostion = component.get('svgPostion');
     let rootNode = svg
       .attr('width', width + margin.right + margin.left)
       .attr('height', newHeight + margin.top + margin.bottom)
-      .attr(
-        'transform',
-        `translate(0, -${svgPostion}) scale(${scale},${scale})`
-      )
+      .attr('transform', `scale(${scale},${scale})`)
       .append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
 
