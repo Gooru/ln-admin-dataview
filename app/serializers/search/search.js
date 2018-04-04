@@ -755,25 +755,73 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return totalHitCount;
   },
 
+  /**
+   * Normalize the Learning Map Competency
+   *
+   * @param payload is the endpoint response in JSON format
+   * @returns {LearningMapCompetencyData}
+   */
   normalizeSearchlearningMapCompetency: function(payload) {
     let serializer = this;
+    let microCompetencyData = [];
+    let competencyData = [];
     let serializedCompetencyData = {
       totalHitCount: 0,
       competencyInfo: []
     };
+    let microComptencyLevelPattern = 'learning_target_level_';
     if (payload) {
       serializedCompetencyData.totalHitCount = payload.totalHitCount || 0;
-      let competencyDetails = [];
       payload.stats.map(competency => {
-        competencyDetails.push(
-          serializer.normalizeLearningMapCompetencyData(competency)
-        );
+        if (competency.type.includes(microComptencyLevelPattern)) {
+          ///micro-competency
+          let storedMicroCompetencies =
+            microCompetencyData[`${competency.parentId}`] || [];
+          storedMicroCompetencies[
+            competency.sequenceId - 1
+          ] = serializer.normalizeLearningMapCompetencyData(competency);
+          microCompetencyData[
+            `${competency.parentId}`
+          ] = storedMicroCompetencies;
+        } else {
+          competencyData.push(
+            serializer.normalizeLearningMapCompetencyData(competency)
+          );
+        }
       });
-      serializedCompetencyData.competencyInfo = competencyDetails;
+      serializedCompetencyData.competencyInfo = serializer.sequenceLearningMapCompetencyItems(
+        competencyData,
+        microCompetencyData
+      );
     }
     return serializedCompetencyData;
   },
 
+  /**
+   * @function sequenceLearningMapCompetencyItems
+   * To sequence the separated competency and micro-competency data
+   * @param competencyData
+   * @param microCompetencyData
+   * @return sequencedCompetencyData
+   */
+  sequenceLearningMapCompetencyItems(competencyData, microCompetencyData) {
+    let sequencedCompetencyData = [];
+    competencyData.map(competency => {
+      let microCompetencyInfo = null;
+      sequencedCompetencyData.push(competency);
+      microCompetencyInfo = microCompetencyData[`${competency.id}`] || null;
+      if (microCompetencyInfo) {
+        sequencedCompetencyData = sequencedCompetencyData.concat(
+          microCompetencyInfo
+        );
+      }
+    });
+    return sequencedCompetencyData;
+  },
+
+  /**
+   * Restore missing competency properties with default values
+   */
   normalizeLearningMapCompetencyData(competency) {
     //Add missing data with empty content
     competency.prerequisites = competency.prerequisites || [];
