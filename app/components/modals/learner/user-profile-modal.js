@@ -1,7 +1,6 @@
 import Ember from 'ember';
-import {capitalizeString} from 'admin-dataview/utils/utils';
+import { capitalizeString } from 'admin-dataview/utils/utils';
 export default Ember.Component.extend({
-
   //------------------------------------------------------------------------
   //Dependency
   /**
@@ -27,17 +26,27 @@ export default Ember.Component.extend({
     let userId = user.userId;
     return Ember.RSVP.hash({
       userGrades: this.get('profileService').getUserGrades(userId),
-      userPrefsCurators: this.get('profileService').getUserPrefsCurators(userId),
-      userPrefsProviders: this.get('profileService').getUserPrefsProviders(userId),
+      userPrefsCurators: this.get('profileService').getUserPrefsCurators(
+        userId
+      ),
+      userPrefsProviders: this.get('profileService').getUserPrefsProviders(
+        userId
+      ),
       userPrefsContent: this.get('profileService').getUserPrefsContent(userId)
-    }).then(({userGrades, userPrefsCurators, userPrefsProviders, userPrefsContent}) => {
-      component.set('userProfile', user);
-      component.set('userGrades', userGrades);
-      component.set('userPrefsContent', userPrefsContent);
-      component.set('userPrefsProviders', userPrefsProviders);
-      component.set('userPrefsCurators',  userPrefsCurators);
-    });
-
+    }).then(
+      ({
+        userGrades,
+        userPrefsCurators,
+        userPrefsProviders,
+        userPrefsContent
+      }) => {
+        component.set('userProfile', user);
+        component.set('userGrades', userGrades);
+        component.set('userPrefsContent', userPrefsContent);
+        component.set('userPrefsProviders', userPrefsProviders);
+        component.set('userPrefsCurators', userPrefsCurators);
+      }
+    );
   },
 
   // --------------------------------------------------------------------------
@@ -45,8 +54,8 @@ export default Ember.Component.extend({
 
   actions: {
     /**
-      * Action triggered when user click on the down arrow icon
-      */
+     * Action triggered when user click on the down arrow icon
+     */
     onShowPanel: function(preferenceType) {
       let component = this;
       component.$(`.${preferenceType} .body`).slideDown();
@@ -55,8 +64,8 @@ export default Ember.Component.extend({
     },
 
     /**
-    * Action triggered when user click on the up arrow icon
-    */
+     * Action triggered when user click on the up arrow icon
+     */
     onHidePanel: function(preferenceType) {
       let component = this;
       component.$(`.${preferenceType} .body`).slideUp();
@@ -124,12 +133,11 @@ export default Ember.Component.extend({
    * show/hide provider panel
    * @property {Boolean}
    */
-  isProviderExpanded: false,
+  isProviderExpanded: true,
 
   /**
    * show/hide curators panel
    * @property {Boolean}
    */
-  isCuratorExpanded: false
-
+  isCuratorExpanded: true
 });
