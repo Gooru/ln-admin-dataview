@@ -18,6 +18,11 @@ export default Ember.Controller.extend({
   searchService: Ember.inject.service('api-sdk/search'),
 
   /**
+   * @requires service:profile
+   */
+  profileService: Ember.inject.service('api-sdk/profile'),
+
+  /**
    * @requires service:content
    */
   contentService: Ember.inject.service('api-sdk/content'),
@@ -40,6 +45,7 @@ export default Ember.Controller.extend({
       let controller = this;
       controller.fetchAssessmentPullOutData(assessment.id);
       controller.set('selectedAssessment', assessment);
+      controller.fetchUserProfileById(assessment.lastModifiedBy);
       controller.set('showPullOut', true);
     }
   },
@@ -123,6 +129,7 @@ export default Ember.Controller.extend({
   groupData: Ember.computed('selectedAssessment', function() {
     let assessment = this.get('selectedAssessment');
     let resultSet = Ember.A();
+    let defaultVectorValue = 0.5;
     if (assessment) {
       resultSet = {
         descriptive: {
@@ -176,9 +183,9 @@ export default Ember.Controller.extend({
         },
 
         vector: {
-          relevance: assessment.relevance,
-          engagment: assessment.engagment,
-          efficacy: assessment.efficacy
+          relevance: assessment.relevance || defaultVectorValue,
+          engagment: assessment.engagment || defaultVectorValue,
+          efficacy: assessment.efficacy || defaultVectorValue
         }
       };
     }
@@ -275,6 +282,24 @@ export default Ember.Controller.extend({
       assessment: assessmentPromise
     }).then(function(hash) {
       controller.set('assessmentPullOutData', hash.assessment);
+    });
+  },
+
+  /**
+   * @function fetchUserProfileById
+   * Fuction to fetch user info using userId
+   */
+  fetchUserProfileById(userId) {
+    let controller = this;
+    return Ember.RSVP.hash({
+      profile: Ember.RSVP.resolve(
+        controller.get('profileService').readUserProfile(userId)
+      )
+    }).then(function(profileData) {
+      controller.set(
+        'selectedAssessment.lastModifiedUser',
+        profileData.profile
+      );
     });
   }
 });

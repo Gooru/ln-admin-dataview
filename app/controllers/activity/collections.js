@@ -17,6 +17,11 @@ export default Ember.Controller.extend({
    */
   searchService: Ember.inject.service('api-sdk/search'),
 
+  /**
+   * @requires service:profile
+   */
+  profileService: Ember.inject.service('api-sdk/profile'),
+
   contentService: Ember.inject.service('api-sdk/content'),
 
   /**
@@ -85,6 +90,7 @@ export default Ember.Controller.extend({
    */
   groupData: Ember.computed('selectedCollection', function() {
     let collection = this.get('selectedCollection');
+    let defaultVectorValue = 0.5;
     let resultSet = Ember.A();
     if (collection) {
       resultSet = {
@@ -139,9 +145,9 @@ export default Ember.Controller.extend({
         },
 
         vector: {
-          relevance: collection.relevance,
-          engagment: collection.engagment,
-          efficacy: collection.efficacy
+          relevance: collection.relevance || defaultVectorValue,
+          engagment: collection.engagment || defaultVectorValue,
+          efficacy: collection.efficacy || defaultVectorValue
         }
       };
     }
@@ -242,6 +248,24 @@ export default Ember.Controller.extend({
     });
   },
 
+  /**
+   * @function fetchUserProfileById
+   * Fuction to fetch user info using userId
+   */
+  fetchUserProfileById(userId) {
+    let controller = this;
+    return Ember.RSVP.hash({
+      profile: Ember.RSVP.resolve(
+        controller.get('profileService').readUserProfile(userId)
+      )
+    }).then(function(profileData) {
+      controller.set(
+        'selectedCollection.lastModifiedUser',
+        profileData.profile
+      );
+    });
+  },
+
   // -------------------------------------------------------------------------
   // Actions
 
@@ -251,6 +275,7 @@ export default Ember.Controller.extend({
       controller.fetchCollectionPullOutData(collection.id);
       controller.set('selectedCollection', collection);
       controller.set('showPullOut', true);
+      controller.fetchUserProfileById(collection.lastModifiedBy);
     },
 
     showMoreResults() {

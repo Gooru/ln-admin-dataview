@@ -8,7 +8,7 @@
     .modal-header {
       border-bottom: none;
       .header-info {
-        width: 195px;
+        width: 186px;
         margin: auto;
         display: flex;
         div {
@@ -57,7 +57,7 @@
     .modal-body {
       border: none;
       .user-profile-info {
-        width: 570px;
+        width: 605px;
         margin: 0 auto;
         height: 200px;
         display: flex;
@@ -76,7 +76,7 @@
         .user-profile-more-info {
           text-align: center;
           width: auto;
-          margin: 0 70px;
+          margin: 0 30px;
           color: $dark-400;
           text-transform: capitalize;
           .username {
@@ -110,7 +110,8 @@
           .user-profile-stats {
             display: flex;
             padding: 2px;
-            .range {}
+            .range {
+            }
 
             .name {
               font-size: 15px;
@@ -124,7 +125,7 @@
           }
         }
         > div {
-          width: calc(100% / 3)!important;
+          width: calc(100% / 3) !important;
         }
       }
       .user-grade-levels {
@@ -182,7 +183,7 @@
               margin-bottom: 18px;
               .accordion-dropdown {
                 float: right;
-                span i{
+                span i {
                   cursor: pointer;
                 }
               }
@@ -204,7 +205,7 @@
                   }
                   width: 60%;
                   display: flex;
-                  .video i{
+                  .video i {
                     background-image: url("../assets/images/video-resource-dark.svg");
                     @extend %content-icon-size;
                   }
@@ -244,7 +245,8 @@
               }
             }
           }
-          .provider, .curator {
+          .provider,
+          .curator {
             .body {
               .body-content {
                 .data {

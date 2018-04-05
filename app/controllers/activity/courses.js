@@ -26,6 +26,11 @@ export default Ember.Controller.extend({
    */
   activityController: Ember.inject.controller('activity'),
 
+  /**
+   * @requires service:profile
+   */
+  profileService: Ember.inject.service('api-sdk/profile'),
+
   //-------------------------------------------------------------------------
   //Actions
 
@@ -38,6 +43,7 @@ export default Ember.Controller.extend({
     onPlayCourse(course) {
       let controller = this;
       controller.getCourseContentById(course.id);
+      controller.fetchUserProfileById(course.lastModifiedBy);
       controller.set('selectedCourse', course);
       controller.set('showPullOut', true);
     }
@@ -114,6 +120,7 @@ export default Ember.Controller.extend({
   groupData: Ember.computed('coursePullOutData', function() {
     let controller = this;
     let course = controller.get('selectedCourse');
+    let defaultVectorValue = 0.5;
     let resultSet = Ember.A();
     if (course) {
       let coursePullOutData = controller.get('coursePullOutData');
@@ -165,9 +172,9 @@ export default Ember.Controller.extend({
         },
 
         vector: {
-          relevance: course.relevance,
-          engagment: course.engagment,
-          efficacy: course.efficacy
+          relevance: course.relevance || defaultVectorValue,
+          engagment: course.engagment || defaultVectorValue,
+          efficacy: course.efficacy || defaultVectorValue
         }
       };
     }
@@ -261,6 +268,21 @@ export default Ember.Controller.extend({
       )
     }).then(function(courseData) {
       controller.set('coursePullOutData', courseData.course);
+    });
+  },
+
+  /**
+   * @function fetchUserProfileById
+   * Fuction to fetch user info using userId
+   */
+  fetchUserProfileById(userId) {
+    let controller = this;
+    return Ember.RSVP.hash({
+      profile: Ember.RSVP.resolve(
+        controller.get('profileService').readUserProfile(userId)
+      )
+    }).then(function(profileData) {
+      controller.set('selectedCourse.lastModifiedUser', profileData.profile);
     });
   }
 });
