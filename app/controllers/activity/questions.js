@@ -98,6 +98,32 @@ export default Ember.Controller.extend({
     let PAGE_SIZE = controller.get('PAGE_SIZE');
     return PAGE_SIZE <= CUR_ITERATION_COUNT;
   }),
+  /**
+   * @property {Object}
+   *  usage statistics
+   */
+  usageStatistics: Ember.computed(function() {
+    let usageStatistics = [
+      {
+        total: 40000,
+        name: 'average time spent'
+      },
+      {
+        total: 110000,
+        name: 'view count'
+      },
+      {
+        total: 700000,
+        name: 'remixed count'
+      },
+      {
+        total: 9000,
+        name: 'times studied'
+      }
+    ];
+
+    return usageStatistics;
+  }),
 
   /**
    * Grouping the data to show more info  in pull out
@@ -129,7 +155,11 @@ export default Ember.Controller.extend({
         },
 
         educational: {
-          language: collection.info ? collection.info.language : null,
+          language: collection.info
+            ? collection.info.language === 'eng'
+              ? 'English'
+              : collection.info.language
+            : 'English',
           'edicational use': collection.metadata
             ? collection.metadata.educational_use
             : null,
@@ -143,7 +173,9 @@ export default Ember.Controller.extend({
         },
 
         media: {
-          format: collection.content_subformat,
+          format: collection.content_subformat
+            ? collection.content_subformat.replace(/_/g, ' ')
+            : null,
           'media Fearures': collection.media ? collection.media : null,
           'access hazard': collection.accesshazard
             ? collection.accesshazard
@@ -153,7 +185,7 @@ export default Ember.Controller.extend({
             : null,
           framebreaker: collection.display_guide
             ? collection.display_guide.is_frame_breaker
-            : null,
+            : 'No',
           isBroken: collection.publish_date
             ? collection.publish_date.is_broken
             : null,
@@ -161,7 +193,7 @@ export default Ember.Controller.extend({
         },
 
         instructional: {
-          depthofknowledge: collection.depthofknowledge,
+          'Depth of Knowledge': collection.depthofknowledge,
           '21st Century Skills': collection.skills
         },
 
@@ -173,9 +205,9 @@ export default Ember.Controller.extend({
         },
 
         vector: {
-          relevance: null,
-          engagment: null,
-          efficacy: null
+          relevance: 0.5,
+          engagment: 0.5,
+          efficacy: 0.5
         }
       };
     }

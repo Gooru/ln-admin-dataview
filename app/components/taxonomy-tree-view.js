@@ -95,6 +95,12 @@ export default Ember.Component.extend({
   svgPostion: 0,
 
   /**
+   * default  taxonomy call height as equal to svg
+   * @type {Number}
+   */
+  taxonomyHeight: 450,
+
+  /**
    * Trigger whenever skyline toggle state got changed.
    */
   onChangeZoomToggle: Ember.observer('isZoomEnabled', function() {
@@ -105,11 +111,8 @@ export default Ember.Component.extend({
     let svgHeight = $('.taxonomy-tree-view  svg').height() / 2;
     let positionSvg = Math.abs(svgElement.top - treeElement.top);
     let svg = d3.select(component.element).select('svg');
+    component.set('zoomScale', component.getScaleLevel(svgHeight));
     if (isZoomEnabled) {
-      component.set('zoomScale', 0.5);
-      if (svgHeight >= 500) {
-        component.set('zoomScale', 0.3);
-      }
       let scale = component.get('zoomScale');
       svg
         .attr('transform', `scale(${scale},${scale})`)
@@ -188,17 +191,6 @@ export default Ember.Component.extend({
     d3.select('svg').remove();
     let svg = d3.select(component.element).append('svg');
     let positionSvg = 0;
-    if (component.get('isZoomEnabled')) {
-      let svgElement = $('.taxonomy-tree-view  svg').position();
-      let treeElement = $('.taxonomy-tree-view').position();
-      positionSvg = Math.abs(treeElement.top - svgElement.top);
-      positionSvg = positionSvg >= 10 ? positionSvg : 300;
-      let svgHeight = $('.taxonomy-tree-view  svg').height() / 2;
-      if (svgHeight >= 500) {
-        component.set('zoomScale', 0.3);
-      }
-      svg.attr('transform-origin', `300 ${positionSvg}`);
-    }
     let scale = component.get('zoomScale');
     let rootNode = svg
       .attr('width', width + margin.right + margin.left)
@@ -206,6 +198,19 @@ export default Ember.Component.extend({
       .attr('transform', `scale(${scale},${scale})`)
       .append('g')
       .attr('transform', `translate(${margin.left},${margin.top})`);
+
+    if (component.get('isZoomEnabled')) {
+      let svgElement = $('.taxonomy-tree-view  svg').position();
+      let treeElement = $('.taxonomy-tree-view').position();
+      positionSvg = Math.abs(treeElement.top - svgElement.top);
+      let svgHeight = $('.taxonomy-tree-view svg').height() / 2;
+      svgHeight = Math.round(svgHeight);
+      positionSvg = positionSvg >= 300 ? positionSvg : 300;
+      component.set('zoomScale', component.getScaleLevel(svgHeight));
+      let scale = component.get('zoomScale');
+      svg.attr('transform-origin', `300 ${positionSvg}`);
+      svg.attr('transform', `scale(${scale},${scale})`);
+    }
 
     nodes.forEach(function(d) {
       d.y = d.depth * component.normalizeYPositionBasedOnDepth(d.depth);
@@ -527,5 +532,15 @@ export default Ember.Component.extend({
       width = 1200;
     }
     return width;
+  },
+
+  getScaleLevel(svgHeight) {
+    if (svgHeight < 500) {
+      return 0.5;
+    } else if (svgHeight < 1000) {
+      return 0.2;
+    } else if (svgHeight < 1750) {
+      return 0.1;
+    }
   }
 });

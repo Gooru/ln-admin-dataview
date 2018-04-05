@@ -22,6 +22,8 @@ export default Ember.Component.extend({
 
   isShowMore: true,
 
+  usageStatistics: null,
+
   // /**
   //  * Grouping header  by key value to show
   //  */
@@ -51,7 +53,7 @@ export default Ember.Component.extend({
     ];
     const tagged = [
       'audience',
-      'depthofknowledge',
+      'Depth of Knowledge',
       '21st Century Skills',
       'subject',
       'course',
