@@ -132,6 +132,12 @@
           }
         }
 
+        .format {
+          span {
+            text-transform: capitalize;
+          }
+        }
+
         .header-no-value {
           line-height: normal;
           padding: 0;
