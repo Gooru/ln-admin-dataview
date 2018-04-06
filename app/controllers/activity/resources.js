@@ -130,11 +130,28 @@ export default Ember.Controller.extend({
   }),
 
   /**
+   * @property {Object}
+   *  audience level of  text
+   */
+  audienceLevelText: [
+    '',
+    '',
+    '',
+    'All Students',
+    'English Language Learners',
+    'Students Above Grade Level',
+    'Students Below Grade Level',
+    'Students With Special Needs',
+    'Teachers'
+  ],
+
+  /**
    * Grouping the data to show more info  in pull out
    */
   groupData: Ember.computed('collection', function() {
     let controller = this;
     let collection = this.get('collection');
+    let audienceLevel = controller.get('audienceLevelText');
     let resultSet = Ember.A();
     let selectedResource = controller.get('selectedResource');
     if (collection) {
@@ -177,6 +194,8 @@ export default Ember.Controller.extend({
             ? collection.info.keywords[0]
             : null,
           audience: collection.metadata.audience
+            ? audienceLevel[collection.metadata.audience]
+            : null
         },
 
         media: {
