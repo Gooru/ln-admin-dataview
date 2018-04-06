@@ -112,7 +112,10 @@ export default Ember.Component.extend({
     let frameworkId = component.get('selectedFramework');
     let length = 3;
     component.set('isLoading', true);
-    crosswalkCode.fwCode = frameworkId;
+    if (frameworkId !== 'COMPETENCY') {
+      ///not GUT code
+      crosswalkCode.fwCode = frameworkId;
+    }
     let learningMapContentPromise = Ember.RSVP.resolve(
       component.get('searchService').learningMapsContent(crosswalkCode, length)
     );

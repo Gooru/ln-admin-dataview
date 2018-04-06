@@ -43,9 +43,13 @@ export default Ember.Controller.extend({
     onPlayCourse(course) {
       let controller = this;
       controller.getCourseContentById(course.id);
-      controller.fetchUserProfileById(course.lastModifiedBy);
-      controller.set('selectedCourse', course);
-      controller.set('showPullOut', true);
+      controller
+        .fetchUserProfileById(course.lastModifiedBy)
+        .then(function(userProfileData) {
+          course.lastModifiedUser = userProfileData;
+          controller.set('selectedCourse', course);
+          controller.set('showPullOut', true);
+        });
     }
   },
 
@@ -117,7 +121,7 @@ export default Ember.Controller.extend({
   /**
    * Grouping the data to show more info  in pull out
    */
-  groupData: Ember.computed('coursePullOutData', function() {
+  groupData: Ember.computed('selectedCourse', function() {
     let controller = this;
     let course = controller.get('selectedCourse');
     let defaultVectorValue = 0.5;
@@ -137,7 +141,8 @@ export default Ember.Controller.extend({
           'Publish Status': course.isPublished ? 'Published' : 'Unpublished',
           Aggregator: course.aggregator ? course.aggregator : null,
           'Modified On': moment(course.lastModified).format('LLLL') || null,
-          'Modified By': course.lastModifiedBy,
+          'Modified By':
+            course.lastModifiedUser.username || course.lastModifiedBy,
           License: coursePullOutData.license
             ? coursePullOutData.license.code
             : null,
@@ -282,7 +287,7 @@ export default Ember.Controller.extend({
         controller.get('profileService').readUserProfile(userId)
       )
     }).then(function(profileData) {
-      controller.set('selectedCourse.lastModifiedUser', profileData.profile);
+      return profileData.profile;
     });
   }
 });

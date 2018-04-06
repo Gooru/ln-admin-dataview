@@ -24,6 +24,7 @@
         selectedDataLevelItems=selectedDataLevelItems
         isLoading=isLoading
         onToggleExportButton="onToggleExportButton"
+        onSelectContentType="onSelectContentType"
       }}
     </div>
     {{#if isLoading}}
@@ -31,4 +32,12 @@
         {{three-bounce-spinner}}
       </div>
     {{/if}}
+
+    {{#app-pull-out showPullOut=showPullOut title="title" showMore=true as |section| }}
+      {{#if section.isLessContent}}
+        {{learning-map.pull-out-body
+        }} {{else if section.isMoreContent}}
+        {{learning-map.pull-out-more-content}}
+      {{/if}}
+    {{/app-pull-out}}
 </div>

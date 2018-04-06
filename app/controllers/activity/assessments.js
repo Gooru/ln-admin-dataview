@@ -44,9 +44,13 @@ export default Ember.Controller.extend({
     onPlayCollection(assessment) {
       let controller = this;
       controller.fetchAssessmentPullOutData(assessment.id);
-      controller.set('selectedAssessment', assessment);
-      controller.fetchUserProfileById(assessment.lastModifiedBy);
-      controller.set('showPullOut', true);
+      controller
+        .fetchUserProfileById(assessment.lastModifiedBy)
+        .then(function(userProfileData) {
+          assessment.lastModifiedUser = userProfileData;
+          controller.set('selectedAssessment', assessment);
+          controller.set('showPullOut', true);
+        });
     }
   },
 
@@ -146,7 +150,8 @@ export default Ember.Controller.extend({
           Aggregator: assessment.aggregator ? assessment.aggregator : null,
           'Date Modified':
             moment(assessment.lastModified).format('LLLL') || null,
-          'Modified by': assessment.lastModifiedBy,
+          'Modified by':
+            assessment.lastModifiedUser.username || assessment.lastModifiedBy,
           License: assessment.license ? assessment.license.code : null,
           Created: assessment.owner.username,
           'Owner ID': assessment.owner.id
@@ -296,10 +301,7 @@ export default Ember.Controller.extend({
         controller.get('profileService').readUserProfile(userId)
       )
     }).then(function(profileData) {
-      controller.set(
-        'selectedAssessment.lastModifiedUser',
-        profileData.profile
-      );
+      return profileData.profile;
     });
   }
 });

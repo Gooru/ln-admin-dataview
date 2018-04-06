@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import {
   LEARNING_MAP_DEFAULT_LEVELS,
-  LEARNING_MAP_CONTENT_SEQUENCE
+  LEARNING_MAP_CONTENT_SEQUENCE,
+  CONTENT_TYPES
 } from 'admin-dataview/config/config';
 
 export default Ember.Controller.extend({
@@ -101,6 +102,23 @@ export default Ember.Controller.extend({
     onToggleExportButton(state) {
       let controller = this;
       controller.set('isShowExportBtn', state);
+    },
+
+    onSelectContentType(competencyId, contentType) {
+      let controller = this;
+      controller.set('selectedCompetency', competencyId);
+      controller
+        .fetchCompetencyContentById(competencyId)
+        .then(function(learningMapData) {
+          controller.set(
+            'pullOutData',
+            controller.getLearningMapDataByContentType(
+              learningMapData,
+              contentType
+            )
+          );
+        });
+      controller.set('showPullOut', true);
     }
   },
 
@@ -140,6 +158,25 @@ export default Ember.Controller.extend({
         }
       });
     }
+  },
+
+  /**
+   * @function fetchLearningMapContent
+   * Function to fetch a competency content
+   */
+  fetchCompetencyContentById(competencyId) {
+    let controller = this;
+    let filters = {
+      id: competencyId
+    };
+    let competencyPromise = Ember.RSVP.resolve(
+      controller.get('searchService').learningMapsContent(filters)
+    );
+    return Ember.RSVP.hash({
+      competencyInfo: competencyPromise
+    }).then(function(hash) {
+      return hash.competencyInfo;
+    });
   },
 
   /**
@@ -209,6 +246,30 @@ export default Ember.Controller.extend({
     }
     controller.set('isShowExportBtn', isShowExportBtn);
     controller.set('dataLevels', dataLevels);
+  },
+
+  getLearningMapDataByContentType(learningMapData, contentType) {
+    let controller = this;
+    let contentTypes = controller.get('contentTypes');
+    let selectedLearningMapData = {
+      id: learningMapData.gutCode,
+      displayCode: learningMapData.code,
+      title: learningMapData.title,
+      type: contentType
+    };
+    let contentData = [];
+    if (contentTypes[`${contentType.toUpperCase()}`]) {
+      let contentInfo = learningMapData.contents[`${contentType}`];
+      contentData = {
+        contents: contentInfo.searchResults,
+        totalHitCount: contentInfo.totalHitCount
+      };
+    }
+    selectedLearningMapData = Object.assign(
+      selectedLearningMapData,
+      contentData
+    );
+    return selectedLearningMapData;
   },
 
   // -------------------------------------------------------------------------
@@ -286,5 +347,11 @@ export default Ember.Controller.extend({
 
   microComptencyLevelPattern: 'learning_target_level_',
 
-  isProcessedAllCompetency: false
+  isProcessedAllCompetency: false,
+
+  showPullOut: false,
+
+  selectedCompetency: null,
+
+  contentTypes: CONTENT_TYPES
 });
