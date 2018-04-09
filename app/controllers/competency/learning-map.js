@@ -248,6 +248,10 @@ export default Ember.Controller.extend({
     controller.set('dataLevels', dataLevels);
   },
 
+  /**
+   * @function getLearningMapDataByContentType
+   * Method to fetch user selected content type info
+   */
   getLearningMapDataByContentType(learningMapData, contentType) {
     let controller = this;
     let contentTypes = controller.get('contentTypes');
@@ -261,9 +265,21 @@ export default Ember.Controller.extend({
     if (contentTypes[`${contentType.toUpperCase()}`]) {
       let contentInfo = learningMapData.contents[`${contentType}`];
       contentData = {
-        contents: contentInfo.searchResults,
+        contents: learningMapData.learningMapsContent[`${contentType}`],
         totalHitCount: contentInfo.totalHitCount
       };
+    } else {
+      if (contentType === 'signatureCollection') {
+        contentData = {
+          contents: learningMapData.signatureContents.collections,
+          totalHitCount: learningMapData.signatureContents.collections.length
+        };
+      } else if (contentType === 'signatureAssessment') {
+        contentData = {
+          contents: learningMapData.signatureContents.assessments,
+          totalHitCount: learningMapData.signatureContents.assessments.length
+        };
+      }
     }
     selectedLearningMapData = Object.assign(
       selectedLearningMapData,
@@ -345,13 +361,33 @@ export default Ember.Controller.extend({
     course: 'Grade K'
   },
 
+  /**
+   * @property {String}
+   * Property to store the micro-competency pattern
+   */
   microComptencyLevelPattern: 'learning_target_level_',
 
+  /**
+   * @property {Boolean}
+   * To store flag, whether all the competencies are fetched or not
+   */
   isProcessedAllCompetency: false,
 
+  /**
+   * @property {Boolean}
+   * Show pullout
+   */
   showPullOut: false,
 
+  /**
+   * @property {Array}
+   * Property to store user selected competency
+   */
   selectedCompetency: null,
 
+  /**
+   * @property {JSON}
+   * Property to store default content types
+   */
   contentTypes: CONTENT_TYPES
 });
