@@ -285,7 +285,6 @@ export default Ember.Component.extend({
       .reverse();
     let resultSet = Ember.A();
     let domains = matrixCoordinates.get('domains');
-
     component.set('taxonomyDomains', domains);
     domains.forEach(domainData => {
       let domainCode = domainData.get('domainCode');
@@ -316,6 +315,7 @@ export default Ember.Component.extend({
       });
     });
     let filterCourses = Ember.A();
+
     courses.forEach(course => {
       let coursedomain = resultSet.findBy('courseCode', course.courseCode);
       if (coursedomain) {

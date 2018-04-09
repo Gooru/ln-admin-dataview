@@ -57,7 +57,19 @@
           display: table-cell;
           text-align: right;
           border-bottom: 1px solid #d7d7d7;
+          $line-height: 2.1;
+          $lines-to-show: 1;
+          @include ellipsis(
+            $font-size: 15px,
+            $line-height: $line-height,
+            $lines-to-show: $lines-to-show,
+            $excerpt-bg: $white
+          );
         }
+      }
+
+      li:first-child {
+        margin-top: 2px;
       }
 
       li:last-child {
