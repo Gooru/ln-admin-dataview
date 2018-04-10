@@ -33,12 +33,12 @@
       </div>
     {{/if}}
 
-    {{#app-pull-out showPullOut=showPullOut title=pullOutData.displayCode description=pullOutData.title showMore=true as |section| }}
+    {{#app-pull-out showPullOut=showPullOut title=pullOutInfo.displayCode description=pullOutInfo.title showMore=pullOutShowMore as |section| }}
       {{#if section.isLessContent}}
         {{learning-map.pull-out-body
-          pullOutData=pullOutData
+          pullOutInfo=pullOutInfo
         }} {{else if section.isMoreContent}}
-        {{learning-map.pull-out-more-content pullOutData=pullOutData type=pullOutData.type}}
+        {{learning-map.pull-out-more-content pullOutContents=pullOutContents pullOutInfo=pullOutInfo type=pullOutInfo.type onClickShowMoreResults="onClickShowMoreResults"}}
       {{/if}}
     {{/app-pull-out}}
 </div>

@@ -1,8 +1,6 @@
 .learning-map-container {
   .pull-out-more-content {
     .content-section {
-      height: 90vh;
-      overflow: hidden;
       .section-title {
         height: 30px;
         background-color: $white;
@@ -10,13 +8,10 @@
         font-size: 15px;
         font-weight: bold;
         text-transform: uppercase;
-        margin-left: 10px;
-        margin-bottom: 20px;
+        margin: 20px 0 20px 10px;
       }
 
       .section-content {
-        height: 100%;
-        overflow: auto;
       }
     }
   }

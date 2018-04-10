@@ -294,12 +294,12 @@ export default Ember.Service.extend({
     });
   },
 
-  learningMapsContent: function(filters, length) {
+  learningMapsContent: function(filters, length, start) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('searchAdapter')
-        .learningMapsContent(filters, length)
+        .learningMapsContent(filters, length, start)
         .then(
           function(response) {
             resolve(

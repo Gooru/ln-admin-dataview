@@ -104,21 +104,25 @@ export default Ember.Controller.extend({
       controller.set('isShowExportBtn', state);
     },
 
+    /**
+     * Action triggered when the user click on the content type
+     */
     onSelectContentType(competencyId, contentType) {
       let controller = this;
+      controller.resetPullOutData();
+      controller.set('pullOutShowMore', true);
       controller.set('selectedCompetency', competencyId);
-      controller
-        .fetchCompetencyContentById(competencyId)
-        .then(function(learningMapData) {
-          controller.set(
-            'pullOutData',
-            controller.getLearningMapDataByContentType(
-              learningMapData,
-              contentType
-            )
-          );
-        });
-      controller.set('showPullOut', true);
+      controller.set('selectedContentType', contentType);
+      controller.getLearningMapCompetencyData();
+    },
+
+    /**
+     * Action triggered when the user click show more results
+     */
+    onClickShowMoreResults() {
+      let controller = this;
+      controller.set('pullOutShowMore', false);
+      controller.getLearningMapCompetencyData();
     }
   },
 
@@ -166,17 +170,47 @@ export default Ember.Controller.extend({
    */
   fetchCompetencyContentById(competencyId) {
     let controller = this;
+    let length = controller.get('competencyPullOutLength');
+    let start = controller.get('competencyPullOutOffset');
     let filters = {
       id: competencyId
     };
     let competencyPromise = Ember.RSVP.resolve(
-      controller.get('searchService').learningMapsContent(filters)
+      controller
+        .get('searchService')
+        .learningMapsContent(filters, length, start)
     );
     return Ember.RSVP.hash({
       competencyInfo: competencyPromise
     }).then(function(hash) {
       return hash.competencyInfo;
     });
+  },
+
+  /**
+   * @function getLearningMapCompetencyData
+   * Method to request and process competency data
+   */
+  getLearningMapCompetencyData() {
+    let controller = this;
+    controller.set('isLoading', true);
+    let competencyId = controller.get('selectedCompetency');
+    let contentType = controller.get('selectedContentType');
+    controller
+      .fetchCompetencyContentById(competencyId)
+      .then(function(learningMapData) {
+        let pullOutContents = controller.get('pullOutContents');
+        let fetchedPullOutData = controller.getLearningMapDataByContentType(
+          learningMapData,
+          contentType
+        );
+        pullOutContents = pullOutContents.concat(fetchedPullOutData.contents);
+        controller.set('competencyPullOutOffset', pullOutContents.length);
+        controller.set('pullOutContents', pullOutContents);
+        controller.set('pullOutInfo', fetchedPullOutData);
+        controller.set('showPullOut', true);
+        controller.set('isLoading', false);
+      });
   },
 
   /**
@@ -209,6 +243,19 @@ export default Ember.Controller.extend({
     controller.set('fetchedCompetencies', emptyItem);
     controller.set('tableBody', emptyItem);
     controller.set('isProcessedAllCompetency', false);
+  },
+
+  /**
+   * @function resetPullOutData
+   * Method to reset competency pull out info
+   */
+  resetPullOutData() {
+    let controller = this;
+    controller.set('pullOutInfo', []);
+    controller.set('pullOutContents', []);
+    controller.set('competencyPullOutOffset', 0);
+    controller.set('pullOutShowMore', true);
+    controller.set('showPullOut', false);
   },
 
   /**
@@ -386,8 +433,38 @@ export default Ember.Controller.extend({
   selectedCompetency: null,
 
   /**
+   * @property {String}
+   * Property to store user selected content type
+   */
+  selectedContentType: null,
+
+  /**
    * @property {JSON}
    * Property to store default content types
    */
-  contentTypes: CONTENT_TYPES
+  contentTypes: CONTENT_TYPES,
+
+  /**
+   * @property {Number}
+   * Property to store the API length
+   */
+  competencyPullOutLength: 9,
+
+  /**
+   * @property {Number}
+   * Property to store current API offset
+   */
+  competencyPullOutOffset: 0,
+
+  /**
+   * @property {Array}
+   * Property to store fetched pull out contents
+   */
+  pullOutContents: [],
+
+  /**
+   * @property {Array}
+   * Property to store fetched pull out info
+   */
+  pullOutInfo: []
 });
