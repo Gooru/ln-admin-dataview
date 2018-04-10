@@ -1,0 +1,18 @@
+.learning-map-container {
+  .pull-out-more-content {
+    .content-section {
+      .section-title {
+        height: 30px;
+        background-color: $white;
+        border-bottom: dashed 2px #979797;
+        font-size: 15px;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin: 20px 0 20px 10px;
+      }
+
+      .section-content {
+      }
+    }
+  }
+}

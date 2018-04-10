@@ -4,6 +4,11 @@
   background-color: $white;
   overflow: auto;
 
+  .app-pull-out {
+    top: 104px;
+    height: calc(100vh - 104px);
+  }
+
   .browser-container {
     .title {
       font-size: 20px;

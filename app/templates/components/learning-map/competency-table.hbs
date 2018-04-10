@@ -43,7 +43,7 @@
               </div>
             </td>
             {{#each tableRow.contentCounts as |content|}}
-              <td class="content-info {{content.type}}">
+              <td class="content-info {{content.type}}" {{action "onSelectContentType" tableRow.id content.type}}>
                 {{content.count}}
               </td>
             {{/each}}

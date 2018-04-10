@@ -108,7 +108,8 @@ export default Ember.Controller.extend({
           Aggregator: collection.aggregator ? collection.aggregator : null,
           'Date Modified':
             moment(collection.lastModified).format('LLLL') || null,
-          'Modified by': collection.lastModifiedBy,
+          'Modified by':
+            collection.lastModifiedUser.username || collection.lastModifiedBy,
           License: collection.license ? collection.license.code : null,
           Created: collection.owner.username,
           'Owner ID': collection.owner.id
@@ -259,10 +260,7 @@ export default Ember.Controller.extend({
         controller.get('profileService').readUserProfile(userId)
       )
     }).then(function(profileData) {
-      controller.set(
-        'selectedCollection.lastModifiedUser',
-        profileData.profile
-      );
+      return profileData.profile;
     });
   },
 
@@ -273,9 +271,13 @@ export default Ember.Controller.extend({
     onPlayCollection(collection) {
       let controller = this;
       controller.fetchCollectionPullOutData(collection.id);
-      controller.set('selectedCollection', collection);
-      controller.set('showPullOut', true);
-      controller.fetchUserProfileById(collection.lastModifiedBy);
+      controller
+        .fetchUserProfileById(collection.lastModifiedBy)
+        .then(function(userProfileData) {
+          collection.lastModifiedUser = userProfileData;
+          controller.set('selectedCollection', collection);
+          controller.set('showPullOut', true);
+        });
     },
 
     showMoreResults() {

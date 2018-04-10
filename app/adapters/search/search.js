@@ -240,7 +240,7 @@ export default Ember.Object.extend({
    * @param nodeData the term to search
    * @returns {Promise.<Content[]>}
    */
-  learningMapsContent(nodeData, length) {
+  learningMapsContent(nodeData, length = 10, start = 0) {
     const adapter = this;
     const namespace1 = this.get('namespace1');
     const url = `${namespace1}/standard/${nodeData.id}`;
@@ -250,12 +250,13 @@ export default Ember.Object.extend({
       dataType: 'json',
       headers: adapter.defineHeaders()
     };
+    options.data = {
+      startAt: start,
+      length: length
+    };
     if (nodeData.fwCode) {
-      options.data = {
-        fwCode: nodeData.fwCode,
-        isDisplayCode: false,
-        length: length
-      };
+      options.data.fwCode = nodeData.fwCode;
+      options.data.isDisplayCode = false;
     }
     return Ember.$.ajax(url, options);
   },

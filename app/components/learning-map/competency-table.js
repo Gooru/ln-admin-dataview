@@ -71,6 +71,14 @@ export default Ember.Component.extend({
     onCloseInfoPopup() {
       let component = this;
       component.resetPrerequisitesInfo();
+    },
+
+    /**
+     * Action triggered when an user select a competency
+     */
+    onSelectContentType(competencyId, contentType) {
+      let component = this;
+      component.sendAction('onSelectContentType', competencyId, contentType);
     }
   },
 
