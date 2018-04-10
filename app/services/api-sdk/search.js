@@ -12,8 +12,14 @@ export default Ember.Service.extend({
 
   searchAdapter: null,
 
+  /**
+   * Competency content container to avoid recursive API calls
+   */
+  competencyContentContainer: null,
+
   init: function() {
     this._super(...arguments);
+    this.set('competencyContentContainer', {});
     this.set(
       'searchSerializer',
       SearchSerializer.create(Ember.getOwner(this).ownerInjection())
@@ -296,22 +302,35 @@ export default Ember.Service.extend({
 
   learningMapsContent: function(filters, length, start) {
     const service = this;
+    let competencyContentContainer = service.get('competencyContentContainer');
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service
-        .get('searchAdapter')
-        .learningMapsContent(filters, length, start)
-        .then(
-          function(response) {
-            resolve(
-              service
+      let isCompetencyContentAvailable =
+        competencyContentContainer[`${filters.id}`] || null;
+      if (isCompetencyContentAvailable) {
+        resolve(isCompetencyContentAvailable);
+      } else {
+        service
+          .get('searchAdapter')
+          .learningMapsContent(filters, length, start)
+          .then(
+            function(response) {
+              let normalizedCompetencyContent = service
                 .get('searchSerializer')
-                .normalizeSearchlearningMapsContent(response)
-            );
-          },
-          function(error) {
-            reject(error);
-          }
-        );
+                .normalizeSearchlearningMapsContent(response);
+              competencyContentContainer[
+                `${filters.id}`
+              ] = normalizedCompetencyContent;
+              service.set(
+                'competencyContentContainer',
+                competencyContentContainer
+              );
+              resolve(normalizedCompetencyContent);
+            },
+            function(error) {
+              reject(error);
+            }
+          );
+      }
     });
   },
 
