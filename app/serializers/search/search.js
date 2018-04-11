@@ -537,21 +537,19 @@ export default Ember.Object.extend(ConfigurationMixin, {
   normalizeSearchlearningMapsContent: function(learningMapsContent) {
     const serializer = this;
     const basePath = serializer.get('session.cdnUrls.content');
-    // const userBasePath = serializer.get('session.cdnUrls.user');
-    const appRootPath = this.get('appRootPath'); //configuration appRootPath
     const signatureData = learningMapsContent.signatureContents;
     if (signatureData && signatureData.assessments) {
       signatureData.assessments.forEach(function(item) {
         item.thumbnail = item.thumbnail
           ? basePath + item.thumbnail
-          : appRootPath + DEFAULT_IMAGES.ASSESSMENT;
+          : DEFAULT_IMAGES.ASSESSMENT;
       });
     }
     if (signatureData && signatureData.collections) {
       signatureData.collections.forEach(function(item) {
         item.thumbnail = item.thumbnail
           ? basePath + item.thumbnail
-          : appRootPath + DEFAULT_IMAGES.COLLECTION;
+          : DEFAULT_IMAGES.COLLECTION;
       });
     }
 
