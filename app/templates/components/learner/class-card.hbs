@@ -5,10 +5,6 @@
         <div class="title ellipsis">
           {{truncate text=course.classTitle maxLength=25}}
         </div>
-        <div class="code">
-          <div class="title">{{t 'learner.class.class-code'}}</div>
-          <div class="class-code">{{course.classCode}}</div>
-        </div>
       </div>
     {{else}}
       {{#if (eq course.averageScore 0)}}
@@ -16,19 +12,11 @@
           <div class="title ellipsis">
             {{truncate text=course.classTitle maxLength=25}}
           </div>
-          <div class="code">
-            <div class="title">{{t 'learner.class.class-code'}}</div>
-            <div class="class-code">{{course.classCode}}</div>
-          </div>
         </div>
       {{else}}
         <div class="no-percentage-header">
           <div class="title ellipsis">
             {{truncate text=course.title maxLength=25}}
-          </div>
-          <div class="code">
-            <div class="title">{{t 'learner.class.class-code'}}</div>
-            <div class="class-code">{{course.classCode}}</div>
           </div>
         </div>
 
