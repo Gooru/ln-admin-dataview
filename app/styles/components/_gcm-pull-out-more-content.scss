@@ -19,8 +19,23 @@
         .prerequisites {
           margin: 10px 0 0;
         }
+
         .content-body {
           padding-left: 27px;
+        }
+
+        .content-body {
+          .activity-assessment-card,
+          .activity-collection-card,
+          .activity-course-card,
+          .activity-lesson-card,
+          .activity-question-card,
+          .activity-resource-card,
+          .activity-unit-card {
+            .card-panel-container {
+              cursor: auto;
+            }
+          }
         }
       }
     }

@@ -182,11 +182,11 @@ export default Ember.Controller.extend({
               ? 'English'
               : collection.info.language
             : 'English',
-          'edicational use': collection.metadata.educational_use,
-          accessbility: collection.accessibility,
-          grade: collection.metadata.grade
-            ? collection.metadata.grade[0]
+          'edicational use': collection.metadata
+            ? collection.metadata.educational_use
             : null,
+          accessbility: collection.accessibility,
+          grade: collection.metadata ? collection.metadata.grade[0] : null,
           'age-range': null,
           'Editorial Range': null,
           signature: collection.signature ? collection.signature : null,
