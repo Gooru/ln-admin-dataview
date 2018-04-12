@@ -150,6 +150,31 @@ export default Ember.Controller.extend({
     let audienceLevel = controller.get('audienceLevelText');
 
     let selectedQuestion = controller.get('selectedQuestion');
+
+    let taxonomyCourses = '';
+    let taxonomyDomains = '';
+    if (selectedQuestion && selectedQuestion.taxonomyCourse) {
+      let i = 0;
+      selectedQuestion.taxonomyCourse.forEach(data => {
+        i = i + 1;
+        if (selectedQuestion.taxonomyCourse.length > i) {
+          taxonomyCourses += ` ${data},`;
+        } else {
+          taxonomyCourses += ` ${data}`;
+        }
+      });
+      if (selectedQuestion.taxonomyDomain) {
+        selectedQuestion.taxonomyDomain.forEach(data => {
+          i = i + 1;
+          if (selectedQuestion.taxonomyDomain.length > i) {
+            taxonomyDomains += ` ${data},`;
+          } else {
+            taxonomyDomains += ` ${data}`;
+          }
+        });
+      }
+    }
+
     let resultSet = Ember.A();
     if (collection) {
       resultSet = {
@@ -199,17 +224,19 @@ export default Ember.Controller.extend({
           'media Fearures': collection.media ? collection.media : null,
           'access hazard': collection.accesshazard
             ? collection.accesshazard
-            : null,
+            : 'None',
           advertisement_level: collection.metadata
             ? collection.metadata.advertisement_level
-            : null,
+              ? collection.metadata.advertisement_leve
+              : 'Low'
+            : 'Low',
           framebreaker: collection.display_guide
             ? collection.display_guide.is_frame_breaker
             : 'No',
           isBroken: collection.publish_date
             ? collection.publish_date.is_broken
-            : null,
-          address: collection.address ? collection.address : null
+            : 'No',
+          address: collection.address ? collection.address : 'None'
         },
 
         instructional: {
@@ -219,8 +246,8 @@ export default Ember.Controller.extend({
 
         framework: {
           subject: selectedQuestion.taxonomySubject,
-          course: selectedQuestion.taxonomyCourse,
-          domain: selectedQuestion.taxonomyDomain,
+          course: taxonomyCourses,
+          domain: taxonomyDomains,
           standard: collection.taxonomy ? collection.taxonomy.id : null
         },
 
