@@ -27,7 +27,10 @@
             <i></i>
           </div>
           <div class="items">
-            <span> {{safe-html resource.title}}</span>
+            <div class="title ellipsis">
+              <span> {{safe-html resource.title}}</span>
+            </div>
+
             <div class="panel-info">
               <span class="time"> {{format-time resource.timeSpent}}</span>
             </div>

@@ -63,7 +63,19 @@ export default {
     skyline: 'Skyline',
     zoom: 'Zoom',
     'collapse-chart': 'Collapse chart',
-    'expand-chart': 'Expand chart'
+    'expand-chart': 'Expand chart',
+    'content-types': {
+      course: 'Courses',
+      collection: 'Collections',
+      assessment: 'Assessments',
+      resource: 'Resources',
+      question: 'Questions',
+      rubric: 'Rubrics',
+      signatureAssessment: 'Signature Assessments',
+      signatureCollection: 'Signature Collections',
+      unit: 'Units',
+      lesson: 'Lessons'
+    }
   },
   logout: {
     name: 'Logout'

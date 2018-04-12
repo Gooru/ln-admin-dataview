@@ -3,7 +3,9 @@
     <span class="title">  {{t "common.created-by" }} </span>
     <img class="img-responsive" src="{{collection.owner.thumbnail}}">
     <span class="owner">{{collection.owner.username}}</span>
-    <span class="date">on {{format-date collection.publish_date 'DD MMMM, YYYY'}}</span>
+    {{#if collection.publish_date}}
+      <span class="date">on {{format-date collection.publish_date 'MMM DD, YYYY'}}</span>
+    {{/if}}
   </div>
 
   <div class="collection-info">

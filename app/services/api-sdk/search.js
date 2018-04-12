@@ -13,13 +13,13 @@ export default Ember.Service.extend({
   searchAdapter: null,
 
   /**
-   * Competency content container to avoid recursive API calls
+   * Make a cache of competency content and make use of offset as well to avoid recursive API
    */
   competencyContentContainer: null,
 
   init: function() {
     this._super(...arguments);
-    this.set('competencyContentContainer', {});
+    this.set('competencyContentContainer', []);
     this.set(
       'searchSerializer',
       SearchSerializer.create(Ember.getOwner(this).ownerInjection())
@@ -304,8 +304,11 @@ export default Ember.Service.extend({
     const service = this;
     let competencyContentContainer = service.get('competencyContentContainer');
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      let isCompetencyContentAvailable =
-        competencyContentContainer[`${filters.id}`] || null;
+      let isCompetencyContentAvailable = competencyContentContainer[
+        `${filters.id}`
+      ]
+        ? competencyContentContainer[`${filters.id}`][start] || null
+        : null;
       if (isCompetencyContentAvailable) {
         resolve(isCompetencyContentAvailable);
       } else {
@@ -317,9 +320,12 @@ export default Ember.Service.extend({
               let normalizedCompetencyContent = service
                 .get('searchSerializer')
                 .normalizeSearchlearningMapsContent(response);
+              let fetchedCompetencyContent =
+                competencyContentContainer[`${filters.id}`] || [];
+              fetchedCompetencyContent[start] = normalizedCompetencyContent;
               competencyContentContainer[
                 `${filters.id}`
-              ] = normalizedCompetencyContent;
+              ] = fetchedCompetencyContent;
               service.set(
                 'competencyContentContainer',
                 competencyContentContainer

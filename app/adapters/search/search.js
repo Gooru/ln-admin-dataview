@@ -27,7 +27,7 @@ export default Ember.Object.extend({
     let defaultData = {
       q: query,
       length: length,
-      start: start,
+      startAt: start,
       'flt.collectionType': 'collection'
     };
     const options = {
@@ -56,7 +56,7 @@ export default Ember.Object.extend({
     let defaultData = {
       q: query,
       length: length,
-      start: start,
+      startAt: start,
       'flt.collectionType': 'assessment'
     };
     const options = {
@@ -84,7 +84,7 @@ export default Ember.Object.extend({
     let defaultData = {
       q: query,
       length: length,
-      start: start,
+      startAt: start,
       'flt.contentFormat': 'resource'
     };
     let options = {
@@ -113,7 +113,7 @@ export default Ember.Object.extend({
     let defaultData = {
       q: query,
       length: length,
-      start: start,
+      startAt: start,
       'flt.resourceFormat': 'question'
     };
     let options = {
@@ -140,7 +140,7 @@ export default Ember.Object.extend({
     const url = `${namespace}/course`;
     let defaultData = {
       q: query,
-      start: start,
+      startAt: start,
       length: length
     };
     let options = {
@@ -168,7 +168,7 @@ export default Ember.Object.extend({
     let defaultData = {
       q: query,
       length: length,
-      start: start
+      startAt: start
     };
     let options = {
       type: 'GET',
@@ -195,7 +195,7 @@ export default Ember.Object.extend({
     let defaultData = {
       q: query,
       length: length,
-      start: start
+      startAt: start
     };
     let options = {
       type: 'GET',
@@ -222,7 +222,7 @@ export default Ember.Object.extend({
     let defaultData = {
       q: query,
       length: length,
-      start: start
+      startAt: start
     };
     let options = {
       type: 'GET',
