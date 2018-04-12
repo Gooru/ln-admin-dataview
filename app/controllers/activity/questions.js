@@ -148,7 +148,6 @@ export default Ember.Controller.extend({
     let controller = this;
     let collection = this.get('question');
     let audienceLevel = controller.get('audienceLevelText');
-
     let selectedQuestion = controller.get('selectedQuestion');
     let resultSet = Ember.A();
     if (collection) {
@@ -199,17 +198,19 @@ export default Ember.Controller.extend({
           'media Fearures': collection.media ? collection.media : null,
           'access hazard': collection.accesshazard
             ? collection.accesshazard
-            : null,
+            : 'None',
           advertisement_level: collection.metadata
             ? collection.metadata.advertisement_level
-            : null,
+              ? collection.metadata.advertisement_leve
+              : 'Low'
+            : 'Low',
           framebreaker: collection.display_guide
             ? collection.display_guide.is_frame_breaker
             : 'No',
           isBroken: collection.publish_date
             ? collection.publish_date.is_broken
-            : null,
-          address: collection.address ? collection.address : null
+            : 'No',
+          address: collection.address ? collection.address : 'None'
         },
 
         instructional: {
@@ -219,8 +220,12 @@ export default Ember.Controller.extend({
 
         framework: {
           subject: selectedQuestion.taxonomySubject,
-          course: selectedQuestion.taxonomyCourse,
-          domain: selectedQuestion.taxonomyDomain,
+          course: selectedQuestion.taxonomyCourse
+            ? selectedQuestion.taxonomyCourse.join(', ')
+            : null,
+          domain: selectedQuestion.taxonomyDomain
+            ? selectedQuestion.taxonomyDomain.join(', ')
+            : null,
           standard: collection.taxonomy ? collection.taxonomy.id : null
         },
 

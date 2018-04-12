@@ -154,6 +154,7 @@ export default Ember.Controller.extend({
     let audienceLevel = controller.get('audienceLevelText');
     let resultSet = Ember.A();
     let selectedResource = controller.get('selectedResource');
+
     if (collection) {
       resultSet = {
         descriptive: {
@@ -205,13 +206,19 @@ export default Ember.Controller.extend({
           'media Fearures': collection.media ? collection.media : null,
           'access hazard': collection.accesshazard
             ? collection.accesshazard
-            : null,
-          advertisement_level: collection.metadata.advertisement_level,
+            : 'None',
+          advertisement_level: collection.metadata
+            ? collection.metadata.advertisement_level
+              ? collection.metadata.advertisement_level
+              : 'Low'
+            : 'Low',
           framebreaker: collection.display_guide.is_frame_breaker
             ? collection.display_guide.is_frame_breaker
             : 'No',
-          isBroken: collection.publish_date.is_broken,
-          address: collection.address ? collection.address : null
+          isBroken: collection.publish_date.is_broken
+            ? collection.publish_date.is_broken
+            : 'No',
+          address: collection.address ? collection.address : 'None'
         },
 
         instructional: {
@@ -221,8 +228,12 @@ export default Ember.Controller.extend({
 
         framework: {
           subject: selectedResource.taxonomySubject,
-          course: selectedResource.taxonomyCourse,
-          domain: selectedResource.taxonomyDomain,
+          course: selectedResource.taxonomyCourse
+            ? selectedResource.taxonomyCourse.join(', ')
+            : null,
+          domain: selectedResource.taxonomyDomain
+            ? selectedResource.taxonomyDomain.join(', ')
+            : null,
           standard: collection.taxonomy ? collection.taxonomy.id : null
         },
 
