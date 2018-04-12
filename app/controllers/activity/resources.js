@@ -154,29 +154,6 @@ export default Ember.Controller.extend({
     let audienceLevel = controller.get('audienceLevelText');
     let resultSet = Ember.A();
     let selectedResource = controller.get('selectedResource');
-    let taxonomyCourses = '';
-    let taxonomyDomains = '';
-    if (selectedResource && selectedResource.taxonomyCourse) {
-      let i = 0;
-      selectedResource.taxonomyCourse.forEach(data => {
-        i = i + 1;
-        if (selectedResource.taxonomyCourse.length > i) {
-          taxonomyCourses += ` ${data},`;
-        } else {
-          taxonomyCourses += ` ${data}`;
-        }
-      });
-      if (selectedResource.taxonomyDomain) {
-        selectedResource.taxonomyDomain.forEach(data => {
-          i = i + 1;
-          if (selectedResource.taxonomyDomain.length > i) {
-            taxonomyDomains += ` ${data},`;
-          } else {
-            taxonomyDomains += ` ${data}`;
-          }
-        });
-      }
-    }
 
     if (collection) {
       resultSet = {
@@ -251,8 +228,12 @@ export default Ember.Controller.extend({
 
         framework: {
           subject: selectedResource.taxonomySubject,
-          course: taxonomyCourses,
-          domain: taxonomyDomains,
+          course: selectedResource.taxonomyCourse
+            ? selectedResource.taxonomyCourse.join(', ')
+            : null,
+          domain: selectedResource.taxonomyDomain
+            ? selectedResource.taxonomyDomain.join(', ')
+            : null,
           standard: collection.taxonomy ? collection.taxonomy.id : null
         },
 
