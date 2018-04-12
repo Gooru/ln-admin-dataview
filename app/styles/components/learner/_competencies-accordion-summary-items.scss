@@ -155,9 +155,16 @@
           height: 40px;
           padding: 8px;
           border-bottom: 1px solid $dark-50;
+          display: flex;
+
+          .title {
+            width: 80%;
+          }
 
           .panel-info {
             float: right;
+            text-align: right;
+            width: 20%;
 
             .correct {
               margin-right: 60px;
@@ -186,7 +193,7 @@
             }
 
             .time {
-              padding: 40px;
+              padding: 0 32px;
               font-size: 16px;
             }
           }

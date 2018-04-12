@@ -6,7 +6,7 @@
   background: $white;
   top: 51px;
   .body {
-    height: 76vh;
+    height: calc(100vh - 152px);
     overflow-y: auto;
     .body-container {
       margin: 20px 30px;
@@ -28,7 +28,6 @@
             font-weight: bold;
           }
           .description {
-
           }
           &.active {
             background-color: $white;
@@ -59,7 +58,8 @@
             border-bottom: dashed 2px $dark-600;
             padding: 8px 0;
           }
-          .gut-code, .description {
+          .gut-code,
+          .description {
             font-size: 15px;
             color: $dark-400;
             line-height: 1.5;
@@ -68,7 +68,10 @@
           .gut-code {
             font-weight: bold;
           }
-          .content-count, .signature-assessments, .signature-collections, .prerequisites {
+          .content-count,
+          .signature-assessments,
+          .signature-collections,
+          .prerequisites {
             padding: 15px 0;
           }
         }
