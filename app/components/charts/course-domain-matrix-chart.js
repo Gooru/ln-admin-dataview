@@ -322,7 +322,7 @@ export default Ember.Component.extend({
         filterCourses.push(course);
       }
     });
-    component.set('taxonomyCourses', courses);
+    component.set('taxonomyCourses', filterCourses);
     return resultSet;
   },
 
