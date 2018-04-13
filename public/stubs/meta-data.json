@@ -33,6 +33,23 @@
     "72": "No Advertisement",
     "73": "Aggressive Advertisements"
   },
+  "educational_use": {
+    "14": "Activity",
+    "15": "Article",
+    "16": "Book",
+    "17": "Curriculum Plan",
+    "18": "Game",
+    "19": "Handout",
+    "20": "Homework",
+    "21": "Lesson Plan",
+    "22": "Presentation",
+    "23": "Project Plan",
+    "24": "Quiz",
+    "25": "Reading",
+    "26": "Reference Material",
+    "27": "Textbook",
+    "28": "Unit Plan"
+  },
   "license": {
     "91": "non-exclusive and non-transferable license",
     "92": "24+26 Creative Common",
