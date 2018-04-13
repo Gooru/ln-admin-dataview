@@ -143,6 +143,7 @@ export default Ember.Controller.extend({
       let audience = metadataLevels.audience;
       let grade = metadataLevels.grade;
       let License = metadataLevels.license;
+      let educational_use = metadataLevels.educational_use;
 
       resultSet = {
         descriptive: {
@@ -172,7 +173,7 @@ export default Ember.Controller.extend({
               : collection.info.language
             : 'English',
           'edicational use': collection.metadata
-            ? collection.metadata.educational_use
+            ? educational_use[collection.metadata.educational_use]
             : null,
           accessbility: collection.accessibility,
           grade: collection.metadata

@@ -10,7 +10,7 @@ export default Ember.Object.extend({
 
   namespace: '/api/nucleus/v1',
 
-  stubs: 'stubs',
+  namespaceStubs: 'stubs',
 
   /**
    * Reads a resource by id
@@ -153,15 +153,15 @@ export default Ember.Object.extend({
    */
   getMetadataLevel() {
     const adapter = this;
-    const stubs = adapter.get('stubs');
-    const url = `${stubs}/meta-data.json`;
+    const namespaceStubs = adapter.get('namespaceStubs');
+    const url = `${namespaceStubs}/meta-data.json`;
     const options = {
       type: 'GET'
     };
     return Ember.RSVP.hashSettled({
-      countriesRegion: Ember.$.ajax(url, options)
+      metadataLevel: Ember.$.ajax(url, options)
     }).then(function(hash) {
-      return hash.countriesRegion.value;
+      return hash.metadataLevel.value;
     });
   },
 
