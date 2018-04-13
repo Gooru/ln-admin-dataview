@@ -62,9 +62,9 @@ export default Ember.Component.extend({
     ];
     const computed = [
       'created by',
-      'created On',
-      'modeified On',
-      'modified_by',
+      'created on',
+      'modified on',
+      'modified by',
       'isBroken',
       'address',
       'relevance',
