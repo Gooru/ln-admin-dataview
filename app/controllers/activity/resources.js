@@ -104,6 +104,12 @@ export default Ember.Controller.extend({
 
   /**
    * @property {Object}
+   *  collections data to pull out
+   */
+  collection: null,
+
+  /**
+   * @property {Object}
    *  usage statistics
    */
   usageStatistics: Ember.computed(function() {
@@ -182,8 +188,8 @@ export default Ember.Controller.extend({
           'age-range': null,
           'Editorial Range': null,
           signature: collection.signature ? collection.signature : null,
-          keywords: collection.info.keywords
-            ? collection.info.keywords[0]
+          keywords: collection.info
+            ? collection.info.keywords ? collection.info.keywords[0] : null
             : null,
           audience: collection.metadata.audience
             ? audience[collection.metadata.audience]

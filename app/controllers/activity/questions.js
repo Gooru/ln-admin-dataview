@@ -175,7 +175,9 @@ export default Ember.Controller.extend({
           'age-range': collection.age ? collection.age : null,
           'Editorial Range': null,
           signature: collection.signature ? collection.signature : null,
-          keywords: collection.info ? collection.info.keywords[0] : null,
+          keywords: collection.info
+            ? collection.info.keywords ? collection.info.keywords[0] : null
+            : null,
           audience: collection.metadata
             ? audience[collection.metadata.audience]
             : null
