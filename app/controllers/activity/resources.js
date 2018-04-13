@@ -163,13 +163,13 @@ export default Ember.Controller.extend({
           Aggregator: collection.aggregator ? collection.aggregator : null,
           License: collection.license ? License[collection.license] : null,
           'created by': collection.owner.username,
-          'created On': collection.publish_date
+          'created on': collection.publish_date
             ? moment(collection.publish_date).format('YYYY-MM-DD')
             : null,
-          'Modified On': collection.modeified_date
+          'modified on': collection.modeified_date
             ? collection.modeified_date
             : null,
-          'Modified by': collection.modified_by
+          'modified by': collection.modified_by
         },
 
         educational: {
