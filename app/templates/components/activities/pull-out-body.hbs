@@ -4,7 +4,7 @@
     <img class="img-responsive" src="{{collection.owner.thumbnail}}">
     <span class="owner">{{collection.owner.username}}</span>
     {{#if collection.publish_date}}
-      <span class="date">on {{format-date collection.publish_date 'MMM DD, YYYY'}}</span>
+      <span class="date">on {{format-date collection.publish_date 'MMMM DD, YYYY' true}}</span>
     {{/if}}
   </div>
 
