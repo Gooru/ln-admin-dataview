@@ -151,14 +151,14 @@ export default Ember.Controller.extend({
           'Published Status': 'Published',
           Aggregator: collection.aggregator ? collection.aggregator : null,
           License: collection.license ? license[collection.license] : null,
-          'creator Name': collection.owner.username,
+          'creator by': collection.owner.username,
           'created On': collection.publish_date
             ? moment(collection.publish_date).format('YYYY-MM-DD')
             : null,
-          'modeified On': collection.modeified_date
+          'Modified On': collection.modeified_date
             ? collection.modeified_date
             : null,
-          modified_by: collection.modified_by
+          'Modified By': collection.modified_by
         },
 
         educational: {
@@ -197,7 +197,7 @@ export default Ember.Controller.extend({
           framebreaker: collection.display_guide
             ? collection.display_guide.is_frame_breaker
             : 'No',
-          isBroken: collection.publish_date
+          'Is Broken': collection.publish_date
             ? collection.publish_date.is_broken
             : 'No',
           address: collection.address ? collection.address : 'None'
