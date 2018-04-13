@@ -86,7 +86,7 @@ export default Ember.Controller.extend({
    * @property {Number}
    * Maintain current offset of the search API
    */
-  OFFSET: 1,
+  OFFSET: 0,
 
   /**
    * @property {Boolean}
@@ -243,7 +243,7 @@ export default Ember.Controller.extend({
   refreshItems() {
     let controller = this;
     controller.set('isLoading', true);
-    controller.set('OFFSET', 1);
+    controller.set('OFFSET', 0);
     controller.set('assessments', Ember.A());
     controller.fetchSearchAssessments();
   },
