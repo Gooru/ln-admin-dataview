@@ -61,7 +61,7 @@ export default Ember.Component.extend({
       'standard'
     ];
     const computed = [
-      'creator Name',
+      'created by',
       'created On',
       'modeified On',
       'modified_by',
