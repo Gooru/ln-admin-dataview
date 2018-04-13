@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import TaxonomySerializer from 'admin-dataview/serializers/taxonomy/taxonomy';
-import {DEFAULT_IMAGES} from 'admin-dataview/config/config';
-
+import { DEFAULT_IMAGES } from 'admin-dataview/config/config';
 
 /**
  * Serializer for activities endpoints
@@ -9,7 +8,6 @@ import {DEFAULT_IMAGES} from 'admin-dataview/config/config';
  * @typedef {Object} contentSerializers
  */
 export default Ember.Object.extend({
-
   // -------------------------------------------------------------------------
   // Dependencies
 
@@ -17,7 +15,6 @@ export default Ember.Object.extend({
    * @type {SessionService} Service to retrieve session information
    */
   session: Ember.inject.service(),
-
 
   /**
    * @property {TaxonomySerializer} taxonomySerializer
@@ -31,7 +28,6 @@ export default Ember.Object.extend({
       TaxonomySerializer.create(Ember.getOwner(this).ownerInjection())
     );
   },
-
 
   /**
    * Normalized data of resource by id
@@ -84,7 +80,6 @@ export default Ember.Object.extend({
     return serializedCourseData;
   },
 
-
   /**
    * Normalized data of resource by id
    * @return {Object}
@@ -104,7 +99,8 @@ export default Ember.Object.extend({
     if (lessonData) {
       serializedLessonData = {
         lessonSummary: lessonData.lesson_summary,
-        title: lessonData.title      };
+        title: lessonData.title
+      };
     }
     return serializedLessonData;
   },
@@ -112,12 +108,18 @@ export default Ember.Object.extend({
   normalizeCollectionSummary: function(collectionData) {
     let serializedCollectionData = Ember.A();
     if (collectionData) {
-      return serializedCollectionData = {
+      return (serializedCollectionData = {
         collectionSummary: collectionData.collection_summary
-      };
+      });
     }
     return serializedCollectionData;
+  },
+
+  /**
+   * normalizeMetadataLevel
+   * @return {Object}
+   */
+  normalizeMetadataLevel: function(metadata) {
+    return metadata ? metadata : {};
   }
-
-
 });

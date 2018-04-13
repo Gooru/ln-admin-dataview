@@ -7,15 +7,19 @@ import contentSerializer from 'admin-dataview/serializers/content/content';
  * @typedef {Object} contentService
  */
 export default Ember.Service.extend({
-
   learnersAdapter: null,
 
   init: function() {
     this._super(...arguments);
-    this.set('contentAdapter', contentAdapter.create(Ember.getOwner(this).ownerInjection()));
-    this.set('contentSerializer', contentSerializer.create(Ember.getOwner(this).ownerInjection()));
+    this.set(
+      'contentAdapter',
+      contentAdapter.create(Ember.getOwner(this).ownerInjection())
+    );
+    this.set(
+      'contentSerializer',
+      contentSerializer.create(Ember.getOwner(this).ownerInjection())
+    );
   },
-
 
   /**
    * Fetch the content resource info by id
@@ -28,7 +32,9 @@ export default Ember.Service.extend({
         .get('contentAdapter')
         .getResourceById(resourceId)
         .then(function(response) {
-          resolve(service.get('contentSerializer').normalizeResourceContent(response));
+          resolve(
+            service.get('contentSerializer').normalizeResourceContent(response)
+          );
         }, reject);
     });
   },
@@ -44,7 +50,11 @@ export default Ember.Service.extend({
         .get('contentAdapter')
         .getCollectionById(collectionId)
         .then(function(response) {
-          resolve(service.get('contentSerializer').normalizeCollectionContent(response));
+          resolve(
+            service
+              .get('contentSerializer')
+              .normalizeCollectionContent(response)
+          );
         }, reject);
     });
   },
@@ -60,7 +70,9 @@ export default Ember.Service.extend({
         .get('contentAdapter')
         .getQuestionById(questionId)
         .then(function(response) {
-          resolve(service.get('contentSerializer').normalizeQuestionContent(response));
+          resolve(
+            service.get('contentSerializer').normalizeQuestionContent(response)
+          );
         }, reject);
     });
   },
@@ -76,7 +88,11 @@ export default Ember.Service.extend({
         .get('contentAdapter')
         .getAssessmentById(assessmentId)
         .then(function(response) {
-          resolve(service.get('contentSerializer').normalizeAssessmentContent(response));
+          resolve(
+            service
+              .get('contentSerializer')
+              .normalizeAssessmentContent(response)
+          );
         }, reject);
     });
   },
@@ -92,7 +108,9 @@ export default Ember.Service.extend({
         .get('contentAdapter')
         .getCourseById(courseId)
         .then(function(response) {
-          resolve(service.get('contentSerializer').normalizeCourseContent(response));
+          resolve(
+            service.get('contentSerializer').normalizeCourseContent(response)
+          );
         }, reject);
     });
   },
@@ -104,7 +122,9 @@ export default Ember.Service.extend({
         .get('contentAdapter')
         .getLessonByUnitId(courseId, unitId)
         .then(function(response) {
-          resolve(service.get('contentSerializer').normalizeLessonSummary(response));
+          resolve(
+            service.get('contentSerializer').normalizeLessonSummary(response)
+          );
         }, reject);
     });
   },
@@ -116,10 +136,30 @@ export default Ember.Service.extend({
         .get('contentAdapter')
         .getCollectionByLessonId(courseId, unitId, lessonId)
         .then(function(response) {
-          resolve(service.get('contentSerializer').normalizeCollectionSummary(response));
+          resolve(
+            service
+              .get('contentSerializer')
+              .normalizeCollectionSummary(response)
+          );
+        }, reject);
+    });
+  },
+
+  /**
+   * Fetch the meta-data
+   * @returns {Object}
+   */
+  getMetadataLevel: function() {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('contentAdapter')
+        .getMetadataLevel()
+        .then(function(response) {
+          resolve(
+            service.get('contentSerializer').normalizeMetadataLevel(response)
+          );
         }, reject);
     });
   }
-
-
 });

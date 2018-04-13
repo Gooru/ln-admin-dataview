@@ -130,32 +130,20 @@ export default Ember.Controller.extend({
   }),
 
   /**
-   * @property {Object}
-   *  audience level of  text
-   */
-  audienceLevelText: [
-    '',
-    '',
-    '',
-    'All Students',
-    'English Language Learners',
-    'Students Above Grade Level',
-    'Students Below Grade Level',
-    'Students With Special Needs',
-    'Teachers'
-  ],
-
-  /**
    * Grouping the data to show more info  in pull out
    */
   groupData: Ember.computed('collection', function() {
     let controller = this;
     let collection = this.get('collection');
-    let audienceLevel = controller.get('audienceLevelText');
     let resultSet = Ember.A();
     let selectedResource = controller.get('selectedResource');
-
     if (collection) {
+      let metadataLevels = controller.get('metadataLevels');
+      let advertisement_level = metadataLevels.advertisement_level;
+      let audience = metadataLevels.audience;
+      let grade = metadataLevels.grade;
+      let License = metadataLevels.license;
+
       resultSet = {
         descriptive: {
           title: collection.title,
@@ -166,15 +154,15 @@ export default Ember.Controller.extend({
           'Published By': 'Gooru org',
           'Published Status': 'Published',
           Aggregator: collection.aggregator ? collection.aggregator : null,
-          License: collection.license ? collection.license : null,
-          'creator Name': collection.owner.username,
+          License: collection.license ? License[collection.license] : null,
+          'created by': collection.owner.username,
           'created On': collection.publish_date
             ? moment(collection.publish_date).format('YYYY-MM-DD')
             : null,
-          'modeified On': collection.modeified_date
+          'Modified On': collection.modeified_date
             ? collection.modeified_date
             : null,
-          modified_by: collection.modified_by
+          'Modified by': collection.modified_by
         },
 
         educational: {
@@ -187,7 +175,9 @@ export default Ember.Controller.extend({
             ? collection.metadata.educational_use
             : null,
           accessbility: collection.accessibility,
-          grade: collection.metadata ? collection.metadata.grade[0] : null,
+          grade: collection.metadata
+            ? grade[collection.metadata.grade[0]]
+            : null,
           'age-range': null,
           'Editorial Range': null,
           signature: collection.signature ? collection.signature : null,
@@ -195,7 +185,7 @@ export default Ember.Controller.extend({
             ? collection.info.keywords[0]
             : null,
           audience: collection.metadata.audience
-            ? audienceLevel[collection.metadata.audience]
+            ? audience[collection.metadata.audience]
             : null
         },
 
@@ -209,13 +199,13 @@ export default Ember.Controller.extend({
             : 'None',
           advertisement_level: collection.metadata
             ? collection.metadata.advertisement_level
-              ? collection.metadata.advertisement_level
+              ? advertisement_level[collection.metadata.advertisement_level]
               : 'Low'
             : 'Low',
           framebreaker: collection.display_guide.is_frame_breaker
             ? collection.display_guide.is_frame_breaker
             : 'No',
-          isBroken: collection.publish_date.is_broken
+          'Is Broken': collection.publish_date.is_broken
             ? collection.publish_date.is_broken
             : 'No',
           address: collection.address ? collection.address : 'None'
@@ -318,7 +308,14 @@ export default Ember.Controller.extend({
   // Events
 
   init() {
-    this.set('isLoading', true);
+    let controller = this;
+    controller.set('isLoading', true);
+    controller
+      .get('contentService')
+      .getMetadataLevel()
+      .then(metadataLevel => {
+        controller.set('metadataLevels', metadataLevel);
+      });
   },
 
   // -------------------------------------------------------------------------
