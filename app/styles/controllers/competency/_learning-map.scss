@@ -46,6 +46,18 @@
     left: 50%;
     top: 50%;
   }
+  /* width */
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $dark-100;
+    border-radius: 4px;
+  }
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: $light-300;
+  }
 }
 .non-scrollable-margin {
   overflow: hidden !important;

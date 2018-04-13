@@ -27,7 +27,7 @@
         text-transform: capitalize;
         font-size: 13px;
         color: $dark-200;
-        .check-filter{
+        .check-filter {
           &::after {
             border-radius: 50%;
             border: 2px solid $light-500;
@@ -38,7 +38,8 @@
           }
           &:checked::after {
             background-color: yellow;
-            background: url(../assets/images/tick-inside-circle-blue.svg) no-repeat center;
+            background: url(../assets/images/tick-inside-circle-blue.svg)
+              no-repeat center;
             background-size: contain;
             border: none;
             display: block;
@@ -50,6 +51,16 @@
       }
       &.collapsed {
         display: none;
+      }
+    }
+
+    &.deactivated {
+      pointer-events: none;
+      .header {
+        .name,
+        .toggle-dropdown > i {
+          color: $light-500;
+        }
       }
     }
   }
