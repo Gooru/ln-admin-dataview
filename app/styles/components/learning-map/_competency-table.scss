@@ -188,7 +188,32 @@
           }
         }
       }
+
+      &.mask-view {
+        opacity: 0.5;
+        pointer-events: none;
+        background: $light-300;
+        tr {
+          td {
+            background: $light-300;
+          }
+        }
+      }
+
+      /* width */
+      &::-webkit-scrollbar {
+        width: 7px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: $dark-100;
+        border-radius: 4px;
+      }
+      /* Track */
+      &::-webkit-scrollbar-track {
+        background: $light-300;
+      }
     }
+
     //Signature resource not available in the mock
     .signatureResource {
       display: none;

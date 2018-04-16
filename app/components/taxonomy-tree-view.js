@@ -524,12 +524,15 @@ export default Ember.Component.extend({
   getWidthByTreeDepth() {
     let component = this;
     let width = 800;
-    if (component.$('.node-label').hasClass('node-6')) {
-      width = 1600;
-    } else if (component.$('.node-label').hasClass('node-5')) {
-      width = 1350;
-    } else if (component.$('.node-label').hasClass('node-4')) {
-      width = 1200;
+    let nodeLabel = component.$('.node-label');
+    if (nodeLabel) {
+      if (nodeLabel.hasClass('node-6')) {
+        width = 1600;
+      } else if (nodeLabel.hasClass('node-5')) {
+        width = 1350;
+      } else if (nodeLabel.hasClass('node-4')) {
+        width = 1200;
+      }
     }
     return width;
   },

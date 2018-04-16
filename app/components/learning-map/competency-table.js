@@ -21,11 +21,15 @@ export default Ember.Component.extend({
     let component = this;
     component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
     const $competencyTable = component.$('.table-structure');
-    let width =
-      $competencyTable.get(0).scrollHeight > $competencyTable.height()
-        ? '190px'
-        : '205px';
-    component.$('td.prerequisites-info').css('width', width);
+    let actualWidth = component.$('.table-structure').width();
+    var scrollbarWidth = $competencyTable.get(0).scrollWidth;
+    let prerequisitesWidth = '205';
+    if ($competencyTable.get(0).scrollHeight > $competencyTable.height()) {
+      prerequisitesWidth = 191 + actualWidth - scrollbarWidth;
+    }
+    component
+      .$('td.prerequisites-info')
+      .css('width', `${prerequisitesWidth}px`);
   },
 
   // -------------------------------------------------------------------------
@@ -63,6 +67,7 @@ export default Ember.Component.extend({
     onSelectPrerequisites(prerequisitesId) {
       let component = this;
       component.fetchLearningMapContent(prerequisitesId);
+      component.showTableMaskView();
     },
 
     /**
@@ -71,6 +76,7 @@ export default Ember.Component.extend({
     onCloseInfoPopup() {
       let component = this;
       component.resetPrerequisitesInfo();
+      component.removeTableMaskView();
     },
 
     /**
@@ -221,6 +227,14 @@ export default Ember.Component.extend({
       Ember.$('.learning-map-container').toggleClass('non-scrollable-margin');
       Ember.$('.table-structure').toggleClass('non-scrollable-margin');
     }
+  },
+
+  showTableMaskView() {
+    Ember.$('.table-structure').addClass('mask-view');
+  },
+
+  removeTableMaskView() {
+    Ember.$('.table-structure').removeClass('mask-view');
   },
 
   // -------------------------------------------------------------------------

@@ -14,7 +14,7 @@
 <div class="body">
   <div class="col-md-12 header-property">
     {{#each selectedDatas as | parentHeader |}}
-      <div class="col-md-6 headergroup">
+      <div class="col-md-6 headergroup {{if (eq parentHeader.length 0) 'hide'}}">
         <span class="header-title"> {{parentHeader.key}} </span>
         {{#each parentHeader.value as | keysValue |}}
           <div class="col-md-12 ">

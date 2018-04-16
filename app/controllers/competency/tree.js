@@ -98,28 +98,11 @@ export default Ember.Controller.extend({
    */
   lessonContent: null,
 
-  /*
-   * Node loading lock the process
-   */
-  isNodeLoading: false,
+  dataLoadCount: 0,
 
-  defaultTaxonomyTreeViewData: Ember.computed(function() {
-    let data = Ember.Object.create({
-      name: 'Gooru',
-      type: 'root',
-      id: 'GDT',
-      children: Ember.A()
-    });
-    return data;
-  }),
-
-  onChange: Ember.observer('categories', function() {
+  onChange: Ember.observer('dataLoadCount', function() {
     let categories = this.get('categories');
-    this.parseTaxonomyData(
-      categories,
-      this.get('defaultTaxonomyTreeViewData'),
-      true
-    );
+    this.parseTaxonomyData(categories, this.get('taxonomyTreeViewData'), true);
     let categoryNodes = this.get('taxonomyTreeViewData').get('children');
     categories.forEach(category => {
       let targetCategoryNode = categoryNodes.findBy('id', category.get('id'));
@@ -381,14 +364,6 @@ export default Ember.Controller.extend({
     onChangeSkyline(value) {
       this.set('isZoomEnabled', value);
     }
-  },
-
-  //-------------------------------------------------------------------------
-  //Methods
-
-  init() {
-    this._super(...arguments);
-    this.set('taxonomyTreeViewData', this.get('defaultTaxonomyTreeViewData'));
   },
 
   parseTaxonomyData(data, targetData, pushDataToChild) {

@@ -19,6 +19,21 @@ export default Ember.Component.extend({
     component.$('.filter-name  input').prop('checked', false);
   }),
 
+  /**
+   * Observe filter changes
+   */
+  filterObserver: Ember.observer('selectedFilterItems', function() {
+    let component = this;
+    component.toggleFilterVisibility();
+  }),
+
+  //------------------------------------------------------------------------
+  //Events
+  didInsertElement() {
+    let component = this;
+    component.toggleFilterVisibility();
+  },
+
   //------------------------------------------------------------------------
   //Actions
   actions: {
@@ -169,5 +184,38 @@ export default Ember.Component.extend({
         component.$(`.${filterComponent} .header .toggle-dropdown`).click();
       }
     });
+  },
+
+  /**
+   * @function toggleFilterVisibility
+   * Method to toggle filter visibility
+   */
+  toggleFilterVisibility() {
+    let component = this;
+    const $filterComponent = '.activities-filter .filters';
+    let userId = component.get('session.id');
+    let selectedFilterItems =
+      JSON.parse(
+        localStorage.getItem(`research_${userId}_activities_filters`)
+      ) || component.get('selectedFilterItems');
+    if (selectedFilterItems) {
+      let isCategoryFilterApplied = selectedFilterItems.category
+        ? selectedFilterItems.category.length || null
+        : null;
+      let isSubjectFilterApplied = selectedFilterItems.subject
+        ? selectedFilterItems.subject.length || null
+        : null;
+      if (isCategoryFilterApplied) {
+        Ember.$(`${$filterComponent} .subject`).removeClass('deactivated');
+        if (isSubjectFilterApplied) {
+          Ember.$(`${$filterComponent} .course`).removeClass('deactivated');
+        } else {
+          Ember.$(`${$filterComponent} .course`).addClass('deactivated');
+        }
+      } else {
+        Ember.$(`${$filterComponent} .subject`).addClass('deactivated');
+        Ember.$(`${$filterComponent} .course`).addClass('deactivated');
+      }
+    }
   }
 });

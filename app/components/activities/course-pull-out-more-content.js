@@ -35,23 +35,19 @@ export default Ember.Component.extend({
       'Host',
       'License',
       'Keywords',
-      'Visibility',
-      'ID',
-      'Deleted',
-      'Flagged'
+      'Visibility'
     ];
     const tagged = [
       'Audience',
       'Grade Level',
       'subject',
-      'Taxonomy Course',
+      'Course',
       'domain',
       'Standards',
       'Depth of Knowledge',
       '21st Century Skills'
     ];
     const computed = [
-      'Creator ID',
       'Created On',
       'Modified On',
       'Modified By',
@@ -110,7 +106,8 @@ export default Ember.Component.extend({
           }
           let response = {
             key: key,
-            value: valueObject
+            value: valueObject,
+            length: valueObject.length
           };
           setResponse.push(response);
         }
