@@ -125,74 +125,77 @@ export default Ember.Controller.extend({
       controller.set('showPullOut', false);
       let taxonomyTreeViewData = controller.get('taxonomyTreeViewData');
       let id = node.data.id;
-      if (node.depth === 1) {
-        let categoryNodes = taxonomyTreeViewData.get('children');
-        let category = categoryNodes.findBy('id', id);
-        let subjectNodes = category.get('children');
-        let subject = subjectNodes.get(0);
-        let courseNodes = subject.get('childData');
-        if (!courseNodes) {
-          controller.renderCoursesData(node).then(function() {
+      let isNodeLoading = component.get('isNodeLoading');
+      if (!isNodeLoading) {
+        if (node.depth === 1) {
+          let categoryNodes = taxonomyTreeViewData.get('children');
+          let category = categoryNodes.findBy('id', id);
+          let subjectNodes = category.get('children');
+          let subject = subjectNodes.get(0);
+          let courseNodes = subject.get('childData');
+          if (!courseNodes) {
+            controller.renderCoursesData(node).then(function() {
+              component.updateData(node, subjectNodes);
+            });
+          } else {
             component.updateData(node, subjectNodes);
-          });
-        } else {
-          component.updateData(node, subjectNodes);
-        }
-      } else if (node.depth === 2) {
-        let categoryNodes = taxonomyTreeViewData.get('children');
-        let category = categoryNodes.findBy('id', Utils.getCategoryId(id));
-        let subjectNodes = category.get('children');
-        let subject = subjectNodes.findBy('id', id);
-        let courseNodes = subject.get('childData');
-        let course = courseNodes.get(0);
-        let domainNodes = course.get('childData');
-        if (!domainNodes) {
-          controller.renderCourseDomainsData(node).then(function() {
+          }
+        } else if (node.depth === 2) {
+          let categoryNodes = taxonomyTreeViewData.get('children');
+          let category = categoryNodes.findBy('id', Utils.getCategoryId(id));
+          let subjectNodes = category.get('children');
+          let subject = subjectNodes.findBy('id', id);
+          let courseNodes = subject.get('childData');
+          let course = courseNodes.get(0);
+          let domainNodes = course.get('childData');
+          if (!domainNodes) {
+            controller.renderCourseDomainsData(node).then(function() {
+              component.updateData(node, courseNodes);
+            });
+          } else {
             component.updateData(node, courseNodes);
-          });
-        } else {
-          component.updateData(node, courseNodes);
-        }
-      } else if (node.depth === 3) {
-        let categoryNodes = taxonomyTreeViewData.get('children');
-        let category = categoryNodes.findBy('id', Utils.getCategoryId(id));
-        let subjectNodes = category.get('children');
-        let subject = subjectNodes.findBy('id', Utils.getSubjectId(id));
-        let courseNodes = subject.get('childData');
-        let course = courseNodes.findBy('id', Utils.getCourseId(id));
-        let domainNodes = course.get('childData');
-        let domainNode = domainNodes.get(0);
-        if (!domainNode.get('childData')) {
-          controller.renderDomainCodesData(node).then(function() {
+          }
+        } else if (node.depth === 3) {
+          let categoryNodes = taxonomyTreeViewData.get('children');
+          let category = categoryNodes.findBy('id', Utils.getCategoryId(id));
+          let subjectNodes = category.get('children');
+          let subject = subjectNodes.findBy('id', Utils.getSubjectId(id));
+          let courseNodes = subject.get('childData');
+          let course = courseNodes.findBy('id', Utils.getCourseId(id));
+          let domainNodes = course.get('childData');
+          let domainNode = domainNodes.get(0);
+          if (!domainNode.get('childData')) {
+            controller.renderDomainCodesData(node).then(function() {
+              component.updateData(node, domainNodes);
+            });
+          } else {
             component.updateData(node, domainNodes);
-          });
-        } else {
-          component.updateData(node, domainNodes);
+          }
+        } else if (node.depth === 4) {
+          let categoryNodes = taxonomyTreeViewData.get('children');
+          let category = categoryNodes.findBy('id', Utils.getCategoryId(id));
+          let subjectNodes = category.get('children');
+          let subject = subjectNodes.findBy('id', Utils.getSubjectId(id));
+          let courseNodes = subject.get('childData');
+          let course = courseNodes.findBy('id', Utils.getCourseId(id));
+          let domainNodes = course.get('childData');
+          let domainNode = domainNodes.findBy('id', id);
+          let standardNodes = domainNode.get('childData');
+          component.updateData(node, standardNodes);
+        } else if (node.depth === 5) {
+          let categoryNodes = taxonomyTreeViewData.get('children');
+          let category = categoryNodes.findBy('id', Utils.getCategoryId(id));
+          let subjectNodes = category.get('children');
+          let subject = subjectNodes.findBy('id', Utils.getSubjectId(id));
+          let courseNodes = subject.get('childData');
+          let course = courseNodes.findBy('id', Utils.getCourseId(id));
+          let domainNodes = course.get('childData');
+          let domainNode = domainNodes.findBy('id', Utils.getDomainId(id));
+          let standardNodes = domainNode.get('childData');
+          let standardNode = standardNodes.findBy('id', id);
+          let microStandardNodes = standardNode.get('childData');
+          component.updateData(node, microStandardNodes);
         }
-      } else if (node.depth === 4) {
-        let categoryNodes = taxonomyTreeViewData.get('children');
-        let category = categoryNodes.findBy('id', Utils.getCategoryId(id));
-        let subjectNodes = category.get('children');
-        let subject = subjectNodes.findBy('id', Utils.getSubjectId(id));
-        let courseNodes = subject.get('childData');
-        let course = courseNodes.findBy('id', Utils.getCourseId(id));
-        let domainNodes = course.get('childData');
-        let domainNode = domainNodes.findBy('id', id);
-        let standardNodes = domainNode.get('childData');
-        component.updateData(node, standardNodes);
-      } else if (node.depth === 5) {
-        let categoryNodes = taxonomyTreeViewData.get('children');
-        let category = categoryNodes.findBy('id', Utils.getCategoryId(id));
-        let subjectNodes = category.get('children');
-        let subject = subjectNodes.findBy('id', Utils.getSubjectId(id));
-        let courseNodes = subject.get('childData');
-        let course = courseNodes.findBy('id', Utils.getCourseId(id));
-        let domainNodes = course.get('childData');
-        let domainNode = domainNodes.findBy('id', Utils.getDomainId(id));
-        let standardNodes = domainNode.get('childData');
-        let standardNode = standardNodes.findBy('id', id);
-        let microStandardNodes = standardNode.get('childData');
-        component.updateData(node, microStandardNodes);
       }
     },
 
