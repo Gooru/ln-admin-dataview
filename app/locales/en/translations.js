@@ -209,7 +209,8 @@ export default {
     'no-filters': 'No Filters Applied',
     'pull-out': {
       'taxonomy-title': 'Subject, Course and Domain',
-      content: 'Content'
+      content: 'Content',
+      'no-content': 'No Content Available'
     },
     'clear-all': 'Clear All'
   },

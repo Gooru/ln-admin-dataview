@@ -42,14 +42,17 @@ export default Ember.Controller.extend({
 
     onPlayCourse(course) {
       let controller = this;
-      controller.getCourseContentById(course.id);
-      controller
-        .fetchUserProfileById(course.lastModifiedBy)
-        .then(function(userProfileData) {
-          course.lastModifiedUser = userProfileData;
-          controller.set('selectedCourse', course);
-          controller.set('showPullOut', true);
-        });
+      controller.getCourseContentById(course.id).then(function(courseContentData) {
+        controller.set('coursePullOutData', courseContentData);
+        controller
+          .fetchUserProfileById(course.lastModifiedBy)
+          .then(function(userProfileData) {
+            course.lastModifiedUser = userProfileData;
+            controller.set('selectedCourse', course);
+            controller.set('showPullOut', true);
+          });
+      });
+
     }
   },
 
@@ -135,28 +138,27 @@ export default Ember.Controller.extend({
         },
 
         creation: {
-          'Creator ID': coursePullOutData.creator_id,
-          'Created On': moment(course.createdDate).format('LLLL') || null,
+          'Created On': moment(course.createdDate).format('MMMM DD, YYYY') || null,
           Publisher: 'Gooru Org',
           'Publish Status': course.isPublished ? 'Published' : 'Unpublished',
           Aggregator: course.aggregator ? course.aggregator : null,
-          'Modified On': moment(course.lastModified).format('LLLL') || null,
+          'Modified On': moment(course.lastModified).format('MMMM DD, YYYY') || null,
           'Modified By':
             course.lastModifiedUser.username || course.lastModifiedBy,
           License: coursePullOutData.license
-            ? coursePullOutData.license.code
-            : null,
+            ? coursePullOutData.license
+            : 'Public Domain',
           Host: null
         },
 
         educational: {
-          Audience: coursePullOutData.metadata.audience,
+          Audience: coursePullOutData.metadata.audience || null,
           'Grade Level': null
         },
 
         media: {
           Keywords: null,
-          Visibility: coursePullOutData.visible_on_profile
+          Visibility: coursePullOutData.visible_on_profile ? 'True' : 'False'
         },
 
         instructional: {
@@ -165,15 +167,9 @@ export default Ember.Controller.extend({
 
         framework: {
           subject: course.taxonomySubject,
-          'Taxonomy Course': course.taxonomyCourse,
+          'Course': course.taxonomyCourse,
           domain: course.taxonomyDomain,
-          Standards: coursePullOutData.taxonomy.code
-        },
-
-        Internal: {
-          ID: course.id,
-          Deleted: null,
-          Flagged: null
+          Standards: coursePullOutData.taxonomy.code || null
         },
 
         vector: {
@@ -272,7 +268,7 @@ export default Ember.Controller.extend({
         controller.get('contentService').getCourseById(courseId)
       )
     }).then(function(courseData) {
-      controller.set('coursePullOutData', courseData.course);
+      return courseData.course;
     });
   },
 

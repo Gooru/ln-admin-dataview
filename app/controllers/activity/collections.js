@@ -100,31 +100,27 @@ export default Ember.Controller.extend({
         },
 
         creation: {
-          'Creator ID': collection.creator.id,
           Publisher: 'Gooru Org',
+          'Publish Status': collection.isPublished ? 'Published' : 'Unpublished',
           Collaborator: collection.collaboratorIDs,
-          'Instance Creator': collection.owner.username,
-          'Original Creator': collection.creator.username,
+          'Created by': collection.creator.username,
           Aggregator: collection.aggregator ? collection.aggregator : null,
-          'Date Modified':
-            moment(collection.lastModified).format('LLLL') || null,
           'Modified by':
             collection.lastModifiedUser.username || collection.lastModifiedBy,
-          License: collection.license ? collection.license.code : null,
-          Created: collection.owner.username,
-          'Owner ID': collection.owner.id
+          'Date Modified':
+            moment(collection.lastModified).format('MMMM DD, YYYY') || null,
+          License: collection.license ? collection.license.code : 'Public Domain'
         },
 
         educational: {
           Audience: collection.audience,
-          'Time Required': null,
           'Grade Level': collection.grade,
           'Learning Objective': collection.learningObjectives
         },
 
         media: {
           Keywords: collection.keyPoints,
-          Visibility: null
+          Visibility: collection.isVisibleOnProfile ? 'True' : 'False'
         },
 
         instructional: {
@@ -137,12 +133,6 @@ export default Ember.Controller.extend({
           course: collection.taxonomySet.course,
           domain: collection.taxonomySet.domain,
           standard: null
-        },
-
-        Internal: {
-          ID: collection.id,
-          Deleted: null,
-          Flagged: null
         },
 
         vector: {
