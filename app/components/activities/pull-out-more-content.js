@@ -36,7 +36,6 @@ export default Ember.Component.extend({
     const curated = [
       'Published By',
       'Published Status',
-      'Aggregator',
       'License',
       'language',
       'edicational use',
@@ -44,9 +43,8 @@ export default Ember.Component.extend({
       'grade',
       'age-range',
       'Editorial Range',
-      'signature',
       'keywords',
-      'media Fearures',
+      'media Features',
       'access hazard',
       'advertisement_level',
       'framebreaker'

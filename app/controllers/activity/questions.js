@@ -140,6 +140,15 @@ export default Ember.Controller.extend({
       let grade = metadataLevels.grade;
       let license = metadataLevels.license;
       let educational_use = metadataLevels.educational_use;
+      let gradeLevelText = [];
+      let collectionGrade = collection.metadata
+        ? collection.metadata.grade
+        : null;
+      if (collectionGrade) {
+        collectionGrade.forEach(gradeLevel => {
+          gradeLevelText.push(grade[gradeLevel]);
+        });
+      }
 
       resultSet = {
         descriptive: {
@@ -149,8 +158,9 @@ export default Ember.Controller.extend({
         creation: {
           'Published By': 'Gooru org',
           'Published Status': 'Published',
-          Aggregator: collection.aggregator ? collection.aggregator : null,
-          License: collection.license ? license[collection.license] : null,
+          License: collection.license
+            ? license[collection.license]
+            : 'Public Domain',
           'created by': collection.owner.username,
           'created on': collection.publish_date
             ? moment(collection.publish_date).format('YYYY-MM-DD')
@@ -171,15 +181,18 @@ export default Ember.Controller.extend({
             ? educational_use[collection.metadata.educational_use]
             : null,
           accessbility: collection.accessibility,
-          grade: collection.metadata ? grade[collection.metadata.grade] : null,
+          grade: collection.metadata
+            ? collection.metadata.grade ? gradeLevelText.join(', ') : null
+            : null,
           'age-range': collection.age ? collection.age : null,
           'Editorial Range': null,
-          signature: collection.signature ? collection.signature : null,
           keywords: collection.info
             ? collection.info.keywords ? collection.info.keywords[0] : null
             : null,
           audience: collection.metadata
-            ? audience[collection.metadata.audience]
+            ? collection.metadata.audience
+              ? audience[collection.metadata.audience]
+              : null
             : null
         },
 
@@ -187,7 +200,7 @@ export default Ember.Controller.extend({
           format: collection.content_subformat
             ? collection.content_subformat.replace(/_/g, ' ')
             : null,
-          'media Fearures': collection.media ? collection.media : null,
+          'media Features': collection.media ? collection.media : null,
           'access hazard': collection.accesshazard
             ? collection.accesshazard
             : 'None',
@@ -197,7 +210,7 @@ export default Ember.Controller.extend({
               : 'Low'
             : 'Low',
           framebreaker: collection.display_guide
-            ? collection.display_guide.is_frame_breaker
+            ? collection.display_guide.is_frame_breaker === 1 ? 'Yes' : 'No'
             : 'No',
           'Is Broken': collection.publish_date
             ? collection.publish_date.is_broken
