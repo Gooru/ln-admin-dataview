@@ -68,6 +68,10 @@
                 {{safe-html content.title}}
             </span>
           </div>
+        {{else}}
+          <div class="no-content">
+            {{t 'activities.pull-out.no-content'}}
+          </div>
         {{/each}}
       </div>
     </div>
