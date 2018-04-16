@@ -32,22 +32,18 @@ export default Ember.Component.extend({
     let color = '';
     const extracted = ['title', 'description'];
     const curated = [
+      'Publish Status',
       'Modified by',
-      'Creator ID',
+      'Created by',
       'Aggregator',
       'Date Modified',
       'License',
-      'Created',
-      'Owner ID',
       'Audience',
       'Time Required',
       'Grade Level',
       'Learning Objective',
       'Keywords',
-      'Visibility',
-      'ID',
-      'Deleted',
-      'Flagged'
+      'Visibility'
     ];
     const tagged = [
       'Instructional Model',
@@ -60,8 +56,6 @@ export default Ember.Component.extend({
     const computed = [
       'Publisher',
       'Collaborator',
-      'Instance Creator',
-      'Original Creator',
       'relevance',
       'engagment',
       'efficacy'
@@ -117,7 +111,8 @@ export default Ember.Component.extend({
           }
           let response = {
             key: key,
-            value: valueObject
+            value: valueObject,
+            length: valueObject.length
           };
           setResponse.push(response);
         }
