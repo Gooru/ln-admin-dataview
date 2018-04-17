@@ -205,7 +205,7 @@ export default Ember.Component.extend({
       positionSvg = Math.abs(treeElement.top - svgElement.top);
       let svgHeight = $('.taxonomy-tree-view svg').height() / 2;
       svgHeight = Math.round(svgHeight);
-      positionSvg = positionSvg >= 300 ? positionSvg : 300;
+      positionSvg = positionSvg <= 70 ? positionSvg : 70;
       component.set('zoomScale', component.getScaleLevel(svgHeight));
       let scale = component.get('zoomScale');
       svg.attr('transform-origin', `300 ${positionSvg}`);

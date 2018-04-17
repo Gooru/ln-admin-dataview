@@ -100,6 +100,8 @@ export default Ember.Controller.extend({
 
   dataLoadCount: 0,
 
+  chartOverFlow: false,
+
   onChange: Ember.observer('dataLoadCount', function() {
     let categories = this.get('categories');
     this.parseTaxonomyData(categories, this.get('taxonomyTreeViewData'), true);
@@ -109,6 +111,20 @@ export default Ember.Controller.extend({
       let subjects = category.get('subjects');
       this.parseTaxonomyData(subjects, targetCategoryNode, true);
     });
+  }),
+
+  /**
+   * Trigger whenever skyline toggle state got changed.
+   */
+  onChangeZoomToggle: Ember.observer('isZoomEnabled', function() {
+    let controller = this;
+    let zoomEnabled = controller.get('isZoomEnabled');
+    if (zoomEnabled) {
+      $('.taxonomy').scrollTop(2);
+      controller.set('chartOverFlow', true);
+    } else {
+      controller.set('chartOverFlow', false);
+    }
   }),
 
   // -------------------------------------------------------------------------

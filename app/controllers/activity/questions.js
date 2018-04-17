@@ -177,7 +177,7 @@ export default Ember.Controller.extend({
               ? 'English'
               : collection.info.language
             : 'English',
-          'edicational use': collection.metadata
+          'educational use': collection.metadata
             ? educational_use[collection.metadata.educational_use]
             : null,
           accessbility: collection.accessibility,
@@ -204,7 +204,7 @@ export default Ember.Controller.extend({
           'access hazard': collection.accesshazard
             ? collection.accesshazard
             : 'None',
-          advertisement_level: collection.metadata
+          'advertisement level': collection.metadata
             ? collection.metadata.advertisement_level
               ? advertisement_level[collection.metadata.advertisement_level]
               : 'Low'

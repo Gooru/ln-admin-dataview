@@ -38,7 +38,7 @@ export default Ember.Component.extend({
       'Published Status',
       'License',
       'language',
-      'edicational use',
+      'educational use',
       'accessbility',
       'grade',
       'age-range',
@@ -46,7 +46,7 @@ export default Ember.Component.extend({
       'keywords',
       'media Features',
       'access hazard',
-      'advertisement_level',
+      'advertisement level',
       'framebreaker'
     ];
     const tagged = [
