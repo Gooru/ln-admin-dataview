@@ -157,7 +157,7 @@ export function getNodeInfo(node) {
       searchValue: node.data.name,
       filters: {
         'flt.subject': node.parent.data.id,
-        'flt.courseName': node.data.name
+        'flt.course': node.data.id
       }
     };
   case 4:
@@ -168,8 +168,8 @@ export function getNodeInfo(node) {
       searchValue: node.data.name,
       filters: {
         'flt.subject': node.parent.parent.data.id,
-        'flt.courseName': node.parent.data.name,
-        'flt.domainName': node.data.name
+        'flt.course': node.parent.data.id,
+        'flt.domain': node.data.id
       }
     };
   case 5:
@@ -181,8 +181,8 @@ export function getNodeInfo(node) {
       searchValue: node.data.code,
       filters: {
         'flt.subject': node.parent.parent.parent.data.id,
-        'flt.courseName': node.parent.parent.data.name,
-        'flt.domainName': node.parent.data.name,
+        'flt.course': node.parent.parent.data.id,
+        'flt.domain': node.parent.data.id,
         'flt.standardDisplay': node.data.code
       }
     };
@@ -195,8 +195,8 @@ export function getNodeInfo(node) {
       searchValue: node.data.code,
       filters: {
         'flt.subject': node.parent.parent.parent.parent.data.id,
-        'flt.courseName': node.parent.parent.parent.data.name,
-        'flt.domainName': node.parent.parent.data.name,
+        'flt.course': node.parent.parent.parent.data.id,
+        'flt.domain': node.parent.parent.data.id,
         'flt.standardDisplay': node.data.code
       }
     };

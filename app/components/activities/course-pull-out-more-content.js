@@ -12,12 +12,49 @@ export default Ember.Component.extend({
   /**
    * Grouping header indivituals  data to show more info
    */
-  onChange: Ember.observer('groupData', function() {
+  onChange: Ember.observer('groupHeader', function() {
     this.selectedHeadersData();
     return this.get('groupData');
   }),
 
+  /**
+   * Observe standars property
+   */
+  observeStandardsChange: Ember.observer('standards', function() {
+    let component = this;
+    let standardVisibleCount = component.get('standardVisibleCount');
+    component.updateStandardsList(standardVisibleCount);
+  }),
+
+  /**
+   * @property {Boolean}
+   * Property to handle description show more/less
+   */
   isShowMore: true,
+
+  /**
+   * @property {Number}
+   * Property to store default standards visibility count
+   */
+  standardVisibleCount: 5,
+
+  /**
+   * @property {Array}
+   * Property to store list of visible standards
+   */
+  visibleStandards: [],
+
+  /**
+   * @property {Boolean}
+   * Property to handle list of standards visible
+   */
+  isShowAllStandards: false,
+
+  /**
+   * @property {Number}
+   * Property to store number of standards are not visbile
+   */
+  nonVisbibleStandards: 0,
 
   // /**
   //  * Grouping header  by key value to show
@@ -117,6 +154,22 @@ export default Ember.Component.extend({
     return setResponse;
   },
 
+  /**
+   * @function updateStandardsList
+   * Method to update visible standards list
+   */
+  updateStandardsList(visibilityCount) {
+    let component = this;
+    let standards = component.get('standards');
+    let visibleStandards = [];
+    standards.some(function(standard) {
+      visibleStandards.push(standard.id);
+      return visibleStandards.length === visibilityCount;
+    });
+    component.set('nonVisbibleStandards', standards.length - visibleStandards.length);
+    component.set('visibleStandards', visibleStandards);
+  },
+
   // -------------------------------------------------------------------------
   // actions
 
@@ -140,6 +193,18 @@ export default Ember.Component.extend({
         : truncateString(description);
       component.$('.description .text').html(descriptionToShow);
       component.toggleProperty('isShowMore');
+    },
+
+    /**
+     * Action triggered when the user click show more/less in the framework standards
+     */
+    onClickShowMoreStandards() {
+      let component = this;
+      let isShowAllStandards = component.get('isShowAllStandards');
+      let defaultVisibilityCount = component.get('standardVisibleCount');
+      let noOfStandardsToShow = isShowAllStandards ? defaultVisibilityCount : component.get('standards.length');
+      component.updateStandardsList(noOfStandardsToShow);
+      component.toggleProperty('isShowAllStandards');
     }
   }
 });

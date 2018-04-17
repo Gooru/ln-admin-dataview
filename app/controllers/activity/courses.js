@@ -169,7 +169,7 @@ export default Ember.Controller.extend({
           subject: course.taxonomySubject,
           'Course': course.taxonomyCourse,
           domain: course.taxonomyDomain,
-          Standards: coursePullOutData.taxonomy.code || null
+          Standards: coursePullOutData.taxonomy[0].code || null
         },
 
         vector: {

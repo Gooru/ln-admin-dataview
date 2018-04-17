@@ -77,6 +77,8 @@ export default Ember.Object.extend({
       .get('taxonomySerializer')
       .normalizeTaxonomyObject(courseData.taxonomy);
     serializedCourseData.taxonomy = taxonomy;
+    let aggregatedTaxonomy = serializer.get('taxonomySerializer').normalizeLearningMapsTaxonomyArray(courseData.aggregated_taxonomy);
+    serializedCourseData.aggregated_taxonomy = aggregatedTaxonomy;
     return serializedCourseData;
   },
 

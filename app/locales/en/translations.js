@@ -75,7 +75,9 @@ export default {
       signatureCollection: 'Signature Collections',
       unit: 'Units',
       lesson: 'Lessons'
-    }
+    },
+    'show-more': 'Show More',
+    'show-less': 'Show Less'
   },
   logout: {
     name: 'Logout'
