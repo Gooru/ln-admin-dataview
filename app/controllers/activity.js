@@ -273,17 +273,18 @@ export default Ember.Controller.extend({
     case 'subject':
       categorizedFilterData.map(filterData => {
         formattedFilters[
-          'flt.subjectName'
-        ] = Utils.getSearchFilterTextBySubjectName(filterData.label);
+          'flt.subject'
+        ] = filterData.id;
       });
       break;
     case 'course':
-      delimiter = '~~';
+      delimiter = ',';
       formattedFilters[
-        'flt.courseName'
+        'flt.course'
       ] = controller.getConcatenatedFilterString(
         categorizedFilterData,
-        delimiter
+        delimiter,
+        'id'
       );
       break;
     case 'audience':

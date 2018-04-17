@@ -15,7 +15,7 @@ export default Ember.Component.extend({
   /**
    * Grouping header indivituals  data to show more info
    */
-  onChange: Ember.observer('groupData', function() {
+  onChange: Ember.observer('groupHeader', function() {
     this.selectedHeadersData();
     return this.get('groupData');
   }),

@@ -145,5 +145,18 @@
       height: auto;
       padding: 10px;
     }
+
+    .popover-standards {
+      max-height: 300px;
+      overflow: auto;
+      span {
+        display: block;
+      }
+    }
+    .toggle-show {
+      font-size: 12px;
+      color: $blue-400;
+      cursor: pointer;
+    }
   }
 }

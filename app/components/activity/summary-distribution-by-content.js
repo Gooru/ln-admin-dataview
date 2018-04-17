@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import { ACTIVITY_FILTER } from 'admin-dataview/config/config';
-import { getSearchFilterTextBySubjectName } from 'admin-dataview/utils/utils';
 
 export default Ember.Component.extend({
 
@@ -246,12 +245,12 @@ export default Ember.Component.extend({
       break;
     case 'subject':
       categorizedFilterData.map( filterData => {
-        formattedFilters['flt.subjectName'] = getSearchFilterTextBySubjectName(filterData.label);
+        formattedFilters['flt.subject'] = filterData.id;
       });
       break;
     case 'course':
-      delimiter = '~~';
-      formattedFilters['flt.courseName'] = controller.getConcatenatedFilterString(categorizedFilterData, delimiter);
+      delimiter = ',';
+      formattedFilters['flt.course'] = controller.getConcatenatedFilterString(categorizedFilterData, delimiter, 'id');
       break;
     case 'audience':
       formattedFilters['flt.audience'] = controller.getConcatenatedFilterString(categorizedFilterData);

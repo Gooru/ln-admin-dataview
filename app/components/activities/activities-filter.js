@@ -13,6 +13,8 @@ export default Ember.Component.extend({
   //Properties
   selectedFilterItems: {},
 
+  isFilterUpdated: false,
+
   clearSearchRefresh: Ember.observer('toggleClearSearch', function() {
     let component = this;
     component.set('selectedFilterItems', JSON.stringify({}));
@@ -22,7 +24,7 @@ export default Ember.Component.extend({
   /**
    * Observe filter changes
    */
-  filterObserver: Ember.observer('selectedFilterItems', function() {
+  filterObserver: Ember.observer('isFilterUpdated', function() {
     let component = this;
     component.toggleFilterVisibility();
   }),
@@ -63,6 +65,7 @@ export default Ember.Component.extend({
         `research_${userId}_activities_filters`,
         JSON.stringify(selectedFilterItems)
       );
+      component.toggleProperty('isFilterUpdated');
     },
 
     onSelectCenturySkills(storedFilters) {

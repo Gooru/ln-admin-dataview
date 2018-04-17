@@ -23,6 +23,18 @@
                 {{#if (eq keysValue.key 'description')}}
                   <span class="show-more" {{action "onShowMore" description}}>{{if isShowMore 'More' 'Less'}}</span>
                 {{/if}}
+                {{#if (eq keysValue.key 'Standards')}}
+                  <div class="popover-standards">
+                    {{#each visibleStandards as |standard|}}
+                      <span class="standard-id">{{standard}}</span>
+                    {{/each}}
+                  </div>
+                  {{#if (gt standards.length 5)}}
+                    <div class="toggle-show" {{action "onClickShowMoreStandards"}}>
+                      {{if isShowAllStandards (t 'common.show-less') (concat '+' nonVisbibleStandards ' More')}}
+                    </div>
+                  {{/if}}
+                {{/if}}
               </span>
             {{else}}
               <span class="col-md-6  header-no-value"> __ </span>

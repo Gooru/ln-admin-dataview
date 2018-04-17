@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { getSearchFilterTextBySubjectName } from 'admin-dataview/utils/utils';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -86,27 +85,25 @@ export default Ember.Component.extend({
     term = term !== '' ? term : '*';
     component.set('isLoading', true);
     let mathsSubjectFilter = {
-      'flt.subjectName': getSearchFilterTextBySubjectName('Math')
+      'flt.subject': 'K12.MA'
     };
     mathsSubjectFilter = Object.assign(mathsSubjectFilter, appliedFilterList);
     let scienceSubjectFilter = {
-      'flt.subjectName': getSearchFilterTextBySubjectName('science')
+      'flt.subject': 'K12.SC'
     };
     scienceSubjectFilter = Object.assign(
       scienceSubjectFilter,
       appliedFilterList
     );
     let socialScienceSubjectFilter = {
-      'flt.subjectName': getSearchFilterTextBySubjectName('Social Sciences')
+      'flt.subject': 'K12.SS'
     };
     socialScienceSubjectFilter = Object.assign(
       socialScienceSubjectFilter,
       appliedFilterList
     );
     let ELAScienceSubjectFilter = {
-      'flt.subjectName': getSearchFilterTextBySubjectName(
-        'English Language Arts'
-      )
+      'flt.subject': 'K12.ELA'
     };
     ELAScienceSubjectFilter = Object.assign(
       ELAScienceSubjectFilter,
