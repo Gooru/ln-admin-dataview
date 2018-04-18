@@ -260,6 +260,7 @@ export default Ember.Controller.extend({
   actions: {
     onPlayCollection(collection) {
       let controller = this;
+      controller.set('isLoadingPullout', true);
       controller.fetchCollectionPullOutData(collection.id);
       controller
         .fetchUserProfileById(collection.lastModifiedBy)
@@ -267,6 +268,7 @@ export default Ember.Controller.extend({
           collection.lastModifiedUser = userProfileData;
           controller.set('selectedCollection', collection);
           controller.set('showPullOut', true);
+          controller.set('isLoadingPullout', false);
         });
     },
 
