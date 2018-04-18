@@ -3,6 +3,11 @@
     {{three-bounce-spinner}}
   {{else}}
     {{#if collections}}
+      <div class="loading-spinner">
+        {{#if isLoadingPullout}}
+          {{three-bounce-spinner}}
+        {{/if}}
+      </div>
       <div class="collection-cards">
         {{#each collections as |collection|}}
           {{activity.collection-card collection=collection onPlayCollection="onPlayCollection"}}

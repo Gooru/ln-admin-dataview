@@ -201,7 +201,8 @@ export const COMPETENCY_NAVIGATION_MENUS = [
 export const COMPETENCY_NAVIGATION_MENUS_INDEX = {
   matrix: 0,
   crosswalk: 1,
-  tree: 2
+  tree: 2,
+  'learning-map': 3
 };
 
 export const CODE_TYPES = {

@@ -43,6 +43,7 @@ export default Ember.Controller.extend({
 
     onPlayCollection(assessment) {
       let controller = this;
+      controller.set('isLoadingPullout', true);
       controller.fetchAssessmentPullOutData(assessment.id);
       controller
         .fetchUserProfileById(assessment.lastModifiedBy)
@@ -50,6 +51,7 @@ export default Ember.Controller.extend({
           assessment.lastModifiedUser = userProfileData;
           controller.set('selectedAssessment', assessment);
           controller.set('showPullOut', true);
+          controller.set('isLoadingPullout', false);
         });
     }
   },

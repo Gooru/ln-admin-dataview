@@ -152,6 +152,19 @@
       span {
         display: block;
       }
+
+      /* width */
+      &::-webkit-scrollbar {
+        width: 4px;
+      }
+      &::-webkit-scrollbar-thumb {
+        background: $dark-100;
+        border-radius: 4px;
+      }
+      /* Track */
+      &::-webkit-scrollbar-track {
+        background: $light-300;
+      }
     }
     .toggle-show {
       font-size: 12px;

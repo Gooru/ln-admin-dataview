@@ -42,6 +42,7 @@ export default Ember.Controller.extend({
 
     onPlayCourse(course) {
       let controller = this;
+      controller.set('isLoadingPullout', true);
       controller.getCourseContentById(course.id).then(function(courseContentData) {
         controller.set('coursePullOutData', courseContentData);
         controller
@@ -50,6 +51,7 @@ export default Ember.Controller.extend({
             course.lastModifiedUser = userProfileData;
             controller.set('selectedCourse', course);
             controller.set('showPullOut', true);
+            controller.set('isLoadingPullout', false);
           });
       });
 

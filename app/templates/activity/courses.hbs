@@ -3,6 +3,11 @@
     {{three-bounce-spinner}}
   {{else}}
     {{#if courses}}
+      <div class="loading-spinner">
+        {{#if isLoadingPullout}}
+          {{three-bounce-spinner}}
+        {{/if}}
+      </div>
       <div class="course-cards">
         {{#each courses as |course|}}
           {{activity.course-card course=course onPlayCourse="onPlayCourse"}}
