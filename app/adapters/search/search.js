@@ -289,6 +289,30 @@ export default Ember.Object.extend({
     return Ember.$.ajax(requestURL, options);
   },
 
+  /**
+   * @function searchLearningMapComptency
+   * Method to search learning map competency based on the search term
+   */
+  searchLearningMapCompetency(q = '*', start = 0, length = 500) {
+    let adapter = this;
+    const namespace1 = adapter.get('namespace1');
+    const requestURL = `${namespace1}/stats/search`;
+    let defaultFilters = {
+      q: q,
+      startAt: start,
+      length: length,
+      'isCrosswalk': false
+    };
+    let options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      headers: adapter.defineHeaders()
+    };
+    options.data = Object.assign(defaultFilters);
+    return Ember.$.ajax(requestURL, options);
+  },
+
   defineHeaders() {
     return {
       Authorization: `Token ${this.get('session.accessToken')}`

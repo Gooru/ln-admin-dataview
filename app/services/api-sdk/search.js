@@ -359,5 +359,30 @@ export default Ember.Service.extend({
           }
         );
     });
+  },
+
+  /**
+   * @function searchLearningMapComptency
+   * Method to search learning map competencies based on the search term
+   */
+  searchLearningMapCompetency(q, start, length) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('searchAdapter')
+        .searchLearningMapCompetency(q, start, length)
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('searchSerializer')
+                .normalizeSearchlearningMapCompetency(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
   }
 });

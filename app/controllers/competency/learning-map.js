@@ -123,6 +123,13 @@ export default Ember.Controller.extend({
       let controller = this;
       controller.set('pullOutShowMore', false);
       controller.getLearningMapCompetencyData();
+    },
+
+    onSearch(searchTerm) {
+      let controller = this;
+      controller.resetTable();
+      controller.set('searchTerm', searchTerm);
+      controller.fetchLeaningMapSearchComptency();
     }
   },
 
@@ -214,6 +221,32 @@ export default Ember.Controller.extend({
   },
 
   /**
+   * @function fetchLeaningMapSearchComptency
+   * Method to search competencies based on search term
+   */
+  fetchLeaningMapSearchComptency() {
+    let controller = this;
+    controller.set('isLoading', true);
+    let searchTerm = controller.get('searchTerm');
+    let competencyPromise = Ember.RSVP.resolve(controller.get('searchService').searchLearningMapCompetency(searchTerm));
+    return Ember.RSVP.hash({
+      competencyList: competencyPromise
+    }).then(function(hash) {
+      let fetchedCompetencies = hash.competencyList.competencyInfo;
+      let totalHitCount = hash.competencyList.totalHitCount;
+      controller.set('fetchedCompetencies', fetchedCompetencies);
+      controller.set('competencies', fetchedCompetencies);
+      controller.set('isLoading', false);
+      if (fetchedCompetencies.length >= totalHitCount) {
+        controller.set('isShowExportBtn', false);
+        controller.set('isProcessedAllCompetency', true);
+      }
+    }, function() {
+      controller.set('isLoading', false);
+    });
+  },
+
+  /**
    * @function getStructuredContentCount
    * Method to structurize content count of each competency
    */
@@ -243,6 +276,7 @@ export default Ember.Controller.extend({
     controller.set('fetchedCompetencies', emptyItem);
     controller.set('tableBody', emptyItem);
     controller.set('isProcessedAllCompetency', false);
+    controller.set('searchTerm', null);
   },
 
   /**
@@ -349,6 +383,12 @@ export default Ember.Controller.extend({
    * Property to store user selected data level item and it's used for applying filters
    */
   dataLevels: LEARNING_MAP_DEFAULT_LEVELS,
+
+  defaultLevels: {
+    subjectClassification: 'k_12',
+    subjectCode: 'K12.SC',
+    courseCode: 'K12.SC-SCK'
+  },
 
   /**
    * @property {Array}
