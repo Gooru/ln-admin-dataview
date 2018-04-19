@@ -208,6 +208,7 @@ export default Ember.Component.extend({
       positionSvg = positionSvg <= 70 ? positionSvg : 70;
       component.set('zoomScale', component.getScaleLevel(svgHeight));
       let scale = component.get('zoomScale');
+      scale = scale ? scale : '0.1';
       svg.attr('transform-origin', `300 ${positionSvg}`);
       svg.attr('transform', `scale(${scale},${scale})`);
     }
@@ -542,7 +543,7 @@ export default Ember.Component.extend({
       return 0.5;
     } else if (svgHeight < 1000) {
       return 0.2;
-    } else if (svgHeight < 1750) {
+    } else if (svgHeight > 1000) {
       return 0.1;
     }
   }

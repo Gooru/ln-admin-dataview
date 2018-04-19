@@ -298,6 +298,7 @@ export default Ember.Service.extend({
       let taxonomyItem = TaxonomyItem.create({
         id: code.id,
         code: code.code,
+        codeType: code.codeType,
         title: code.title,
         parent: code.parentTaxonomyCodeId
       });

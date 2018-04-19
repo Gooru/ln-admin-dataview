@@ -167,6 +167,7 @@ export default Ember.Object.extend({
         taxonomyResult[taxonomyKey] = {
           code: taxonomy.get('code'),
           title: taxonomy.get('title'),
+          codeType: taxonomy.get('codeType'),
           parent_title: taxonomy.hasOwnProperty('parentTitle')
             ? taxonomy.get('parentTitle')
             : '',
