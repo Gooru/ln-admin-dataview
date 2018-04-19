@@ -154,7 +154,7 @@ export default Ember.Controller.extend({
         },
 
         educational: {
-          Audience: coursePullOutData.metadata.audience || null,
+          Audience: course.audience,
           'Grade Level': null
         },
 
