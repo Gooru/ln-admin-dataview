@@ -543,7 +543,7 @@ export default Ember.Component.extend({
       return 0.5;
     } else if (svgHeight < 1000) {
       return 0.2;
-    } else if (svgHeight < 1750 || svgHeight > 1750) {
+    } else if (svgHeight > 1000) {
       return 0.1;
     }
   }
