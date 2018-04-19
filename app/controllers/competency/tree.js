@@ -498,31 +498,58 @@ export default Ember.Controller.extend({
     });
   },
 
-  renderStandardCodes(data, targetNode) {
+  renderStandardCodes(datas, targetNode) {
     let controller = this;
-    data = data.objectAt(0);
-    let standards = data.get('children');
+    let standards = Ember.A();
+    datas.forEach(data => {
+      let standardLevel1s = data.get('children');
+      standardLevel1s.forEach(standardLevel1 => {
+        if (standardLevel1.get('children').length > 1) {
+          let standardsCopy = Ember.Object.create({
+            children: Ember.A(),
+            code: standardLevel1.code,
+            codeType: standardLevel1.codeType,
+            id: standardLevel1.id,
+            level: standardLevel1.level,
+            parent: standardLevel1.parent,
+            title: standardLevel1.title
+          });
+          standards.pushObject(standardsCopy);
+          let standardLevel2s = standardLevel1.get('children');
+          standardLevel2s.forEach(standardLevel2 => {
+            standards.pushObject(standardLevel2);
+          });
+        } else {
+          standards.pushObject(standardLevel1);
+        }
+      });
+    });
     let children = Ember.A();
     if (standards && standards.length > 0) {
       standards.forEach(standard => {
         let standardNode = controller.createNode(standard, false);
         let standardChildNodes = standard.get('children');
         if (standardChildNodes && standardChildNodes.length > 0) {
-          let microStandardNodes = standardChildNodes[0];
-          microStandardNodes = microStandardNodes.get('children');
-          if (microStandardNodes && microStandardNodes.length > 0) {
-            let standardChildNode = Ember.A();
-            microStandardNodes.forEach(microStandard => {
-              standardChildNode.pushObject(
-                controller.createNode(microStandard, false)
-              );
-            });
-            standardNode.set('childData', standardChildNode);
-            if (standardChildNode.length > 0) {
-              standardNode.set('hasChild', true);
+          let standardChildNode = Ember.A();
+          standardChildNodes.forEach(standardChild => {
+            let microStandardNodes = standardChild.get('children');
+            if (microStandardNodes && microStandardNodes.length > 0) {
+              microStandardNodes.forEach(microStandard => {
+                standardChildNode.pushObject(
+                  controller.createNode(microStandard, false)
+                );
+              });
             } else {
-              standardNode.set('hasChild', false);
+              standardChildNode.pushObject(
+                controller.createNode(standardChild, false)
+              );
             }
+          });
+          standardNode.set('childData', standardChildNode);
+          if (standardChildNode.length > 0) {
+            standardNode.set('hasChild', true);
+          } else {
+            standardNode.set('hasChild', false);
           }
         }
         children.pushObject(standardNode);

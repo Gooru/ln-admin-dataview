@@ -174,7 +174,7 @@ export default Ember.Controller.extend({
             : 'Public Domain',
           'created by': collection.owner.username,
           'created on': collection.publish_date
-            ? moment(collection.publish_date).format('YYYY-MM-DD')
+            ? moment(collection.publish_date).format('MMMM DD, YYYY')
             : null,
           'modified on': collection.modeified_date
             ? collection.modeified_date
@@ -244,7 +244,6 @@ export default Ember.Controller.extend({
             : null,
           standard: collection.taxonomy ? collection.taxonomy.id : null
         },
-
         vector: {
           relevance: 0.5,
           engagment: 0.5,
