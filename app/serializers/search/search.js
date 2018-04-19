@@ -560,6 +560,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
       gutCode: learningMapsContent.gutCode,
       contents: learningMapsContent.contents,
       prerequisites: learningMapsContent.prerequisites,
+      subject: learningMapsContent.subject,
+      course: learningMapsContent.course,
+      domain: learningMapsContent.domain,
       signatureContents: signatureData,
       learningMapsContent: serializer.normalizeSearchLearningMapsContentInfo(
         learningMapsContent.contents

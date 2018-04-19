@@ -340,7 +340,10 @@ export default Ember.Controller.extend({
       id: learningMapData.gutCode,
       displayCode: learningMapData.code,
       title: learningMapData.title,
-      type: contentType
+      type: contentType,
+      subject: learningMapData.subject,
+      course: learningMapData.course,
+      domain: learningMapData.domain
     };
     let contentData = [];
     if (contentTypes[`${contentType.toUpperCase()}`]) {
