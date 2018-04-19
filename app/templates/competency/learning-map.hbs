@@ -1,5 +1,8 @@
 <div class="learning-map-container">
   <div class="browser-container">
+    <div class="search-box-container">
+      {{learning-map.search-box onSearch="onSearch"}}
+    </div>
     <div class="title">
       <span>
         {{
@@ -23,6 +26,7 @@
         tableBody=tableBody
         selectedDataLevelItems=selectedDataLevelItems
         isLoading=isLoading
+        searchTerm=searchTerm
         onToggleExportButton="onToggleExportButton"
         onSelectContentType="onSelectContentType"
       }}
