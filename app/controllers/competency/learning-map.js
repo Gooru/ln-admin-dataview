@@ -447,8 +447,8 @@ export default Ember.Controller.extend({
    */
   selectedDataLevelItems: {
     category: 'K-12',
-    subject: 'Science',
-    course: 'Grade K'
+    subject: 'Math',
+    course: 'Grade 6'
   },
 
   /**

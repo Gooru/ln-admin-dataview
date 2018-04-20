@@ -40,7 +40,7 @@ export default Ember.Component.extend({
      */
     onScrollTop() {
       let component = this;
-      component.activateFirstItemByDefault();
+      component.checkDefaultItem();
       Ember.$('.browser-container').show();
       Ember.$('.learning-map-container').animate(
         {
@@ -190,10 +190,10 @@ export default Ember.Component.extend({
   },
 
   /**
-   * @function activateFirstItemByDefault
+   * @function checkDefaultItem
    * Method to set first item in each component selected by default
    */
-  activateFirstItemByDefault() {
+  checkDefaultItem() {
     let defaultLevels = LEARNING_MAP_DEFAULT_LEVELS;
     const $categoryComponent = Ember.$('.category .item');
     const $subjectComponent = Ember.$('.subject .item');
@@ -212,6 +212,13 @@ export default Ember.Component.extend({
       Ember.$(
         `.course .item.${defaultLevels.courseCode.replace(/\./, '-')}`
       ).addClass('active');
+    }
+    let domainCodes = defaultLevels.domainCode || null;
+    if (domainCodes) {
+      domainCodes = domainCodes.split(',');
+      domainCodes.map(domainCode => {
+        Ember.$(`.domain .item.${domainCode.replace(/\./, '-')} input`).prop('checked', true);
+      });
     }
   },
 
