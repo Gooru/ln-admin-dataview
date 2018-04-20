@@ -353,8 +353,8 @@ export const ACTIVITIES_FILTER = [
 
 export const LEARNING_MAP_DEFAULT_LEVELS = {
   subjectClassification: 'k_12',
-  subjectCode: 'K12.SC',
-  courseCode: 'K12.SC-SCK'
+  subjectCode: 'K12.MA',
+  courseCode: 'K12.MA-MA6'
 };
 
 export const LEARNING_MAP_CONTENT_SEQUENCE = [

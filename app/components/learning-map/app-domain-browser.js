@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { TAXONOMY_CATEGORIES } from 'admin-dataview/config/config';
+import { TAXONOMY_CATEGORIES, LEARNING_MAP_DEFAULT_LEVELS } from 'admin-dataview/config/config';
 import { capitalizeString } from 'admin-dataview/utils/utils';
 
 export default Ember.Component.extend({
@@ -16,17 +16,56 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
-  init: function() {
+  didInsertElement: function() {
     let component = this;
     component._super(...arguments);
+    component.set('isInitialIteration', true);
     let selectedCategory = component.get('selectedCategory');
-    let initialSubject = component.fetchSubjectsByCategory(selectedCategory);
-    initialSubject.then(function(subject) {
-      let initialCourse = component.fetchCoursesBySubject(subject);
-      initialCourse.then(function(course) {
+    let defaultSubject = component.fetchSubjectsByCategory(selectedCategory);
+    defaultSubject.then(function(subject) {
+      let defaultCourse = component.fetchCoursesBySubject(subject);
+      defaultCourse.then(function(course) {
         component.fetchDomainsByCourse(subject, course);
       });
     });
+  },
+
+  itemObserver: Ember.observer('subjects', 'courses', 'domains', function() {
+    let component = this;
+    component.checkDefaultItem();
+  }),
+
+  /**
+   * @function checkDefaultItem
+   * Method to set first item in each component selected by default
+   */
+  checkDefaultItem() {
+    let defaultLevels = LEARNING_MAP_DEFAULT_LEVELS;
+    const $categoryComponent = Ember.$('.category .item');
+    const $subjectComponent = Ember.$('.subject .item');
+    const $courseComponent = Ember.$('.course .item');
+    if (!$categoryComponent.hasClass('active')) {
+      Ember.$(`.category .item.${defaultLevels.categoryCode}`).addClass(
+        'active'
+      );
+    }
+    if (!$subjectComponent.hasClass('active')) {
+      Ember.$(
+        `.subject .item.${defaultLevels.subjectCode.replace(/\./, '-')}`
+      ).addClass('active');
+    }
+    if (!$courseComponent.hasClass('active')) {
+      Ember.$(
+        `.course .item.${defaultLevels.courseCode.replace(/\./, '-')}`
+      ).addClass('active');
+    }
+    let domainCodes = defaultLevels.domainCode || null;
+    if (domainCodes) {
+      domainCodes = domainCodes.split(',');
+      domainCodes.map(domainCode => {
+        Ember.$(`.domain .item.${domainCode.replace(/\./, '-')} input`).prop('checked', true);
+      });
+    }
   },
 
   // -------------------------------------------------------------------------
@@ -42,6 +81,7 @@ export default Ember.Component.extend({
       let selectedItemValue = component.get(`selected${selectedType}`);
       let isAlreadySelectedItem =
         (selectedItemValue.id || selectedItemValue) === selectedId;
+      component.set('isInitialIteration', false);
       if (!isAlreadySelectedItem) {
         component.fetchContentByType(type, dataItem);
         component.sendAction('onSelectDataItem', type, dataItem);
@@ -82,7 +122,12 @@ export default Ember.Component.extend({
       subjectList: subjectsPromise
     }).then(function(hash) {
       component.set('subjects', hash.subjectList);
-      return hash.subjectList[0];
+      let defaultItem = [];
+      if (component.get('isInitialIteration')) {
+        let level = 'subject';
+        defaultItem = component.getDefaultItemByCode(hash.subjectList, level);
+      }
+      return defaultItem;
     });
   },
 
@@ -102,8 +147,13 @@ export default Ember.Component.extend({
     return Ember.RSVP.hash({
       courseList: coursePromise
     }).then(function(hash) {
+      let defaultItem = [];
       component.set('courses', hash.courseList);
-      return hash.courseList[0];
+      if (component.get('isInitialIteration')) {
+        let level = 'course';
+        defaultItem = component.getDefaultItemByCode(hash.courseList, level);
+      }
+      return defaultItem;
     });
   },
 
@@ -162,6 +212,25 @@ export default Ember.Component.extend({
     });
   },
 
+  /**
+   * @function getDefaultItemByCode
+   * Method to get default item only on the initial iteration
+   */
+  getDefaultItemByCode(fetchedList, type) {
+    let component = this;
+    let defaultLevels = component.get('defaultLevels');
+    let defaultCode = defaultLevels[`${type}Code`];
+    let defaultItem = [];
+    fetchedList.some(function(curItem) {
+      let isDefaultItemAvailable = curItem.code === defaultCode;
+      if (isDefaultItemAvailable) {
+        defaultItem = curItem;
+        return isDefaultItemAvailable;
+      }
+    });
+    return defaultItem;
+  },
+
   // -------------------------------------------------------------------------
   // Properties
 
@@ -173,49 +242,61 @@ export default Ember.Component.extend({
 
   /**
    * @property {Array}
-   * Propety to store fetched subjects
+   * Property to store fetched subjects
    */
   subjects: [],
 
   /**
    * @property {Array}
-   * Propety to store fetched courses
+   * Property to store fetched courses
    */
   courses: [],
 
   /**
    * @property {Array}
-   * Propety to store fetched domains
+   * Property to store fetched domains
    */
   domains: [],
 
   /**
    * @property {String}
-   * Propety to store default framework id
+   * Property to store default framework id
    */
   defaultFramework: 'GDT',
 
   /**
    * @property {String}
-   * Propety to store selected category id
+   * Property to store selected category id
    */
   selectedCategory: 'k_12',
 
   /**
    * @property {Object}
-   * Propety to store selected subject info
+   * Property to store selected subject info
    */
   selectedSubject: null,
 
   /**
    * @property {Object}
-   * Propety to store selected course info
+   * Property to store selected course info
    */
   selectedCourse: null,
 
   /**
    * @property {Array}
-   * Propety to store selected domain stack
+   * Property to store selected domain stack
    */
-  domainStack: []
+  domainStack: [],
+
+  /**
+   * @property {JSON}
+   * Property to store current/default data levels
+   */
+  defaultLevels: LEARNING_MAP_DEFAULT_LEVELS,
+
+  /**
+   * @property {Boolean}
+   * Property to decide whether it's a initial iteration or not
+   */
+  isInitialIteration: false
 });
