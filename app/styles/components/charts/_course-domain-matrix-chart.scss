@@ -30,7 +30,7 @@
     width: 100%;
 
     .courses {
-      width: 25%;
+      width: 15%;
       padding-left: 25px;
       padding-bottom: 10px;
 
@@ -75,119 +75,166 @@
       li:last-child {
         border: none;
       }
+    }
 
-      .domain-info-container {
-        overflow-y: auto;
+    .domain-info-container {
+      overflow-y: auto;
+      margin-right: 89px;
+      z-index: 99999;
+      display: inherit;
 
-        .domain-detail-box {
-          .back-to-matrix-view {
-            width: 30px;
-            float: left;
-            cursor: pointer;
+      .domain-detail-box {
+        .back-to-matrix-view {
+          width: 30px;
+          float: left;
+          cursor: pointer;
 
-            i {
-              margin-left: -72px;
-              margin-top: 10px;
-              pointer-events: none;
-            }
+          i {
+            margin-left: -72px;
+            margin-top: 10px;
+            pointer-events: none;
+          }
+        }
+
+        .course-domain-info {
+          float: left;
+          width: calc(100% - 30px);
+
+          .course-name {
+            font-size: 13px;
+            color: #4a4a4a;
           }
 
-          .course-domain-info {
-            float: left;
-            width: calc(100% - 30px);
-
-            .course-name {
-              font-size: 13px;
-              color: #4a4a4a;
-            }
-
-            .domain-name {
-              font-size: 13px;
-              font-weight: bold;
-              color: #fab12f;
-            }
+          .domain-name {
+            font-size: 13px;
+            font-weight: bold;
+            color: #fab12f;
           }
         }
       }
+    }
 
-      .domain-info-container::-webkit-scrollbar {
-        height: 6px;
-        width: 5px;
-      }
+    .domain-info-container::-webkit-scrollbar {
+      height: 6px;
+      width: 5px;
+    }
 
-      .domain-info-container::-webkit-scrollbar-thumb {
-        background: $gray-light;
-        border: 1px solid $gray-light;
-        border-radius: 5px;
-      }
+    .domain-info-container::-webkit-scrollbar-thumb {
+      background: $gray-light;
+      border: 1px solid $gray-light;
+      border-radius: 5px;
+    }
 
-      .domain-competency-info-container {
-        clear: both;
-        height: 56px;
-        overflow: hidden;
-        padding-top: 7px;
-        border-bottom: 1px solid #e3e5ea;
+    .domain-competency-info-container {
+      clear: both;
+      height: 56px;
+      overflow: hidden;
+      padding-top: 7px;
+      border-bottom: 1px solid #e3e5ea;
 
-        &.micro-competency-enabled {
-          border-bottom: 10px solid #e3e5ea;
-          height: auto;
-
-          .competency-info {
-            .competency-info-icon {
-              .more-info {
-                display: block;
-              }
-
-              .competency-info-tile {
-                display: none;
-              }
-            }
-          }
-        }
+      &.micro-competency-enabled {
+        border-bottom: 10px solid #e3e5ea;
+        height: auto;
 
         .competency-info {
+          .competency-info-icon {
+            .more-info {
+              display: block;
+            }
+
+            .competency-info-tile {
+              display: none;
+            }
+          }
+        }
+      }
+
+      .competency-info {
+        padding-top: 5px;
+        clear: both;
+        height: 49px;
+
+        .competency-info-icon {
+          width: 30px;
+          float: left;
+          cursor: pointer;
+
+          .more-info {
+            margin-left: -57px;
+            font-size: 20px;
+            margin-top: 2px;
+            color: $sky-400;
+            display: none;
+          }
+
+          .competency-info-tile {
+            display: block;
+            width: 30px;
+            height: 30px;
+            margin-left: 2px;
+
+            i.competency-info-tile-icon {
+              width: 7px;
+              height: 7px;
+              border-radius: 50%;
+              background: #0072bc;
+              display: block;
+              float: left;
+              margin-left: 4px;
+              margin-top: 4px;
+            }
+          }
+        }
+
+        .competency-name {
+          float: left;
+          width: calc(100% - 30px);
+          height: 45px;
+          color: #4a4a4a;
+          font-size: 13px;
+          border-bottom: 1px solid #e3e5ea;
+          cursor: pointer;
+
+          p {
+            $line-height: 1.3;
+            $lines-to-show: 2;
+            @include ellipsis(
+              $font-size: 13px,
+              $line-height: $line-height,
+              $lines-to-show: $lines-to-show,
+              $excerpt-bg: $white
+            );
+          }
+        }
+      }
+
+      .micro-competency-container {
+        .micro-competency-info {
           padding-top: 5px;
           clear: both;
           height: 49px;
 
-          .competency-info-icon {
+          .micro-competency-info-icon {
             width: 30px;
             float: left;
-            cursor: pointer;
 
-            .more-info {
-              margin-left: -57px;
-              font-size: 20px;
-              margin-top: 2px;
-              color: $sky-400;
-              display: none;
-            }
-
-            .competency-info-tile {
+            i {
               display: block;
-              width: 30px;
-              height: 30px;
-              margin-left: 2px;
-
-              i.competency-info-tile-icon {
-                width: 7px;
-                height: 7px;
-                border-radius: 50%;
-                background: #0072bc;
-                display: block;
-                float: left;
-                margin-left: 4px;
-                margin-top: 4px;
-              }
+              width: 7px;
+              height: 7px;
+              border-radius: 50%;
+              background: #0072bc;
+              margin-left: 10px;
+              margin-top: 9px;
             }
           }
 
-          .competency-name {
+          .micro-competency-name {
             float: left;
             width: calc(100% - 30px);
             height: 45px;
-            color: #4a4a4a;
             font-size: 13px;
+            color: #4a4a4a;
             border-bottom: 1px solid #e3e5ea;
             cursor: pointer;
 
@@ -202,54 +249,10 @@
               );
             }
           }
-        }
 
-        .micro-competency-container {
-          .micro-competency-info {
-            padding-top: 5px;
-            clear: both;
-            height: 49px;
-
-            .micro-competency-info-icon {
-              width: 30px;
-              float: left;
-
-              i {
-                display: block;
-                width: 7px;
-                height: 7px;
-                border-radius: 50%;
-                background: #0072bc;
-                margin-left: 10px;
-                margin-top: 9px;
-              }
-            }
-
+          &:last-child {
             .micro-competency-name {
-              float: left;
-              width: calc(100% - 30px);
-              height: 45px;
-              font-size: 13px;
-              color: #4a4a4a;
-              border-bottom: 1px solid #e3e5ea;
-              cursor: pointer;
-
-              p {
-                $line-height: 1.3;
-                $lines-to-show: 2;
-                @include ellipsis(
-                  $font-size: 13px,
-                  $line-height: $line-height,
-                  $lines-to-show: $lines-to-show,
-                  $excerpt-bg: $white
-                );
-              }
-            }
-
-            &:last-child {
-              .micro-competency-name {
-                border: none;
-              }
+              border: none;
             }
           }
         }
@@ -257,10 +260,6 @@
     }
 
     .scroll-view {
-      width: 70%;
-      @media (min-width: $screen-sm-min) {
-        width: 68%;
-      }
       overflow-x: auto;
       background-image: url("../assets/images/grid-view.png");
       margin-left: 20px;
@@ -292,6 +291,18 @@
         cursor: pointer;
         shape-rendering: crispedges;
       }
+    }
+  }
+
+  .domain-list {
+    display: inline-block;
+
+    .domain-counts {
+      float: left;
+      display: inline-block;
+      width: 32px;
+      text-align: center;
+      margin-top: 0;
     }
   }
 }

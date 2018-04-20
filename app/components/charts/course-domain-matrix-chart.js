@@ -147,6 +147,8 @@ export default Ember.Component.extend({
    */
   defaultHeightOfCompetencyContainer: 56,
 
+  isSocialScience: false,
+
   // -------------------------------------------------------------------------
   // Events
 
@@ -345,6 +347,10 @@ export default Ember.Component.extend({
   getCompetenciesByDomain: function(selectedDomain) {
     let component = this;
     let subject = component.get('selectedSubject');
+    let socialScienceSubject = subject.get('subjectTitle');
+    if (socialScienceSubject === 'Social Sciences') {
+      component.set('isSocialScience', true);
+    }
     let courseId = selectedDomain.courseCode;
     let domainId = `${selectedDomain.courseCode}-${selectedDomain.domainCode}`;
     component.set('isLoading', true);
