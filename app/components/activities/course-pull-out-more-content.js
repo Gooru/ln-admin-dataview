@@ -76,7 +76,6 @@ export default Ember.Component.extend({
     ];
     const tagged = [
       'Audience',
-      'Grade Level',
       'subject',
       'Course',
       'domain',

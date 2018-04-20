@@ -72,6 +72,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     return CourseModel.create(Ember.getOwner(this).ownerInjection(), {
       id: result.id,
       title: result.title,
+      audience: result.audience || null,
       description: result.description,
       createdDate: result.addDate,
       thumbnailUrl: thumbnailUrl,

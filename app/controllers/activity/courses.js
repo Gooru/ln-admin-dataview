@@ -154,8 +154,7 @@ export default Ember.Controller.extend({
         },
 
         educational: {
-          Audience: course.audience,
-          'Grade Level': null
+          Audience: course.audience
         },
 
         media: {
