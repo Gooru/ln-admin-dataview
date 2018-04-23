@@ -147,6 +147,8 @@ export default Ember.Component.extend({
    */
   defaultHeightOfCompetencyContainer: 56,
 
+  isScroll: false,
+
   // -------------------------------------------------------------------------
   // Events
 
@@ -224,7 +226,7 @@ export default Ember.Component.extend({
     let cellHeight = component.get('cellHeight');
     let height = component.get('taxonomyCourses').length * cellHeight;
     component.set('height', height);
-    component.set('competencypanelHeight', height + 25);
+    component.set('competencypanelHeight', height + 10);
     let width = component.get('taxonomyDomains').length * cellWidth;
     component.set('width', width);
     component.$('#course-domain-matrix-chart').empty();
@@ -345,6 +347,9 @@ export default Ember.Component.extend({
   getCompetenciesByDomain: function(selectedDomain) {
     let component = this;
     let subject = component.get('selectedSubject');
+    if (component.get('width') && component.get('width') >= 420) {
+      component.set('isScroll', true);
+    }
     let courseId = selectedDomain.courseCode;
     let domainId = `${selectedDomain.courseCode}-${selectedDomain.domainCode}`;
     component.set('isLoading', true);

@@ -1,7 +1,11 @@
 <div class="competency-container-tree">
   <div class="taxonomy" style="overflow-y: {{if chartOverFlow 'hidden' 'auto'}}">
     <div class="switch-view">
-      <span class="text">{{t 'common.zoom'}}</span> {{app-switch  onOptionSwitch='onChangeSkyline' isChecked=isSkylineEnabled}}
+      {{#if isZoomEnabled}} <span class="text">{{t 'common.zoom-in'}}</span>
+      {{else}}
+        <span class="text">{{t 'common.zoom-out'}}</span>
+      {{/if}}
+      {{app-switch  onOptionSwitch='onChangeSkyline' isChecked=isSkylineEnabled}}
     </div>
     {{taxonomy-tree-view data=taxonomyTreeViewData  isZoomEnabled=isZoomEnabled  onClickNodeMoreInfo="onClickNodeMoreInfo" onClickNode='onClickTaxonomyNode' reloadCount=reloadCount}}
   </div>

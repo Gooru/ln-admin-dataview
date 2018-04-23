@@ -36,7 +36,7 @@ export default {
       'higher-ed': 'Higher Education',
       'professional-dev': 'Professional Development',
       'skills-training': 'Skills Training',
-      'skills_training': 'Skills Training'
+      skills_training: 'Skills Training'
     },
     'in-progress': 'in progress',
     mastered: 'mastered',
@@ -62,7 +62,8 @@ export default {
     competency: 'competency',
     'pre-requisites': 'pre-requisites',
     skyline: 'Skyline',
-    zoom: 'Zoom',
+    'zoom-out': 'Zoom Out',
+    'zoom-in': 'Zoom In',
     'collapse-chart': 'Collapse chart',
     'expand-chart': 'Expand chart',
     'content-types': {
