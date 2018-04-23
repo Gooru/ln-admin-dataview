@@ -62,7 +62,8 @@ export default {
     competency: 'competency',
     'pre-requisites': 'pre-requisites',
     skyline: 'Skyline',
-    zoom: 'Zoom Out',
+    'zoom-out': 'Zoom Out',
+    'zoom-in': 'Zoom In',
     'collapse-chart': 'Collapse chart',
     'expand-chart': 'Expand chart',
     'content-types': {

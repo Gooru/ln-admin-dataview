@@ -15,8 +15,17 @@
       </ul>
     </div>
 
-    <div class="pull-left matrix-chart-container {{if isTaxonomyCourses 'scroll-view' ''}}" style="width: {{if isSocialScience '47%' 'auto' }}">
+    <div class="pull-left matrix-chart-container {{if isTaxonomyCourses 'scroll-view' ''}}" style="width: {{if isScroll '47%' 'auto' }}">
       <div id="course-domain-matrix-chart"></div>
+      <div class="domain-numbers" style="width:{{width}}px">
+        <div class="domain-list" >
+          {{#each taxonomyDomains as |taxonomyDomain index |}}
+            <li class="domain-counts">
+              {{taxonomyDomain.domainSeq}}
+            </li>
+          {{/each}}
+        </div>
+      </div>
     </div>
     {{#if isDomainViewEnabled}}
       <div class="domain-info-container" style=" max-height : {{competencypanelHeight}}px">
@@ -61,13 +70,7 @@
         {{/each}}
       </div>
     {{/if}}
-    <div class="domain-list" style="width:{{width}}px">
-      {{#each taxonomyDomains as |taxonomyDomain index |}}
-        <li class="domain-counts">
-          {{taxonomyDomain.domainSeq}}
-        </li>
-      {{/each}}
-    </div>
+
   </div>
   <div class="clear"></div>
 </div>

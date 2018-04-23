@@ -292,19 +292,22 @@
         shape-rendering: crispedges;
       }
     }
-  }
+    .domain-numbers {
+      background: white !important;
 
-  .domain-list {
-    width: auto;
-    margin-left: 23px;
-    display: inline-block;
+      .domain-list {
+        background: white;
+        width: auto;
+        display: inline-block;
 
-    .domain-counts {
-      float: left;
-      display: inline-block;
-      width: 32px;
-      text-align: center;
-      margin-top: 0;
+        .domain-counts {
+          float: left;
+          display: inline-block;
+          width: 32px;
+          text-align: center;
+          margin-top: 0;
+        }
+      }
     }
   }
 }
