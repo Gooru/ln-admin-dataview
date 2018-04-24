@@ -229,6 +229,9 @@ export default Ember.Component.extend({
     component.set('competencypanelHeight', height + 10);
     let width = component.get('taxonomyDomains').length * cellWidth;
     component.set('width', width);
+    if (width >= 420) {
+      component.set('isScroll', true);
+    }
     component.$('#course-domain-matrix-chart').empty();
     const svg = d3
       .select('#course-domain-matrix-chart')

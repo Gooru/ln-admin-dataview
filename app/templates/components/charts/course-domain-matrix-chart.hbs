@@ -18,7 +18,7 @@
     <div class="pull-left matrix-chart-container {{if isTaxonomyCourses 'scroll-view' ''}}" style="width: {{if isScroll '47%' 'auto' }}">
       <div id="course-domain-matrix-chart"></div>
       <div class="domain-numbers" style="width:{{width}}px">
-        <div class="domain-list" >
+        <div class="domain-list">
           {{#each taxonomyDomains as |taxonomyDomain index |}}
             <li class="domain-counts">
               {{taxonomyDomain.domainSeq}}
@@ -27,6 +27,8 @@
         </div>
       </div>
     </div>
+
+
     {{#if isDomainViewEnabled}}
       <div class="domain-info-container" style=" max-height : {{competencypanelHeight}}px">
         <div class="domain-detail-box">
@@ -68,6 +70,18 @@
             <div class="clear"></div>
           </div>
         {{/each}}
+      </div>
+    {{else}}
+      <div class="domains pull-left" style=" max-height : {{competencypanelHeight}}px">
+        <ul>
+          {{#each taxonomyDomains as |taxonomyDomain index |}}
+            <li>
+              <span class="domain-name">
+              {{taxonomyDomain.domainSeq}} : {{taxonomyDomain.domainName}}
+              </span>
+            </li>
+          {{/each}}
+        </ul>
       </div>
     {{/if}}
 
