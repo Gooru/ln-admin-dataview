@@ -77,6 +77,55 @@
       }
     }
 
+    .domains {
+      width: 32%;
+      padding-bottom: 10px;
+      overflow-y: auto;
+
+      ul {
+        padding: 0;
+        list-style: none;
+        font-size: 15px;
+        margin-top: 5px;
+        width: 100%;
+        margin: 0;
+        border-right: 1px solid #d7d7d7;
+      }
+
+      li {
+        width: 100%;
+        font-size: 15px;
+        text-align: right;
+        height: 33px;
+        padding-right: 14px;
+        display: table;
+
+        .domain-name {
+          vertical-align: middle;
+          display: table-cell;
+          text-align: left;
+          min-height: 31.5px;
+          border-bottom: 1px solid #d7d7d7;
+          $line-height: 2.1;
+          $lines-to-show: 1;
+          @include ellipsis(
+            $font-size: 15px,
+            $line-height: $line-height,
+            $lines-to-show: $lines-to-show,
+            $excerpt-bg: $white
+          );
+        }
+      }
+
+      li:first-child {
+        margin-top: 2px;
+      }
+
+      li:last-child {
+        border: none;
+      }
+    }
+
     .domain-info-container {
       overflow-y: auto;
       margin-right: 89px;
@@ -120,6 +169,17 @@
     }
 
     .domain-info-container::-webkit-scrollbar-thumb {
+      background: $gray-light;
+      border: 1px solid $gray-light;
+      border-radius: 5px;
+    }
+
+    .domains::-webkit-scrollbar {
+      height: 6px;
+      width: 5px;
+    }
+
+    .domains::-webkit-scrollbar-thumb {
       background: $gray-light;
       border: 1px solid $gray-light;
       border-radius: 5px;
@@ -292,6 +352,7 @@
         shape-rendering: crispedges;
       }
     }
+
     .domain-numbers {
       background: white !important;
 
