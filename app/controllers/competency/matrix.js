@@ -137,14 +137,16 @@ export default Ember.Controller.extend({
         selectedDomain.domainCode
       }`;
       let subjectName = controller.get('selectedSubject.title');
+      let subjectCode = controller.get('selectedSubject.code');
       let selectedDomainData = Ember.Object.create({
         id: domainId,
         name: selectedDomain.domainName,
         code: domainId,
         parent: `${subjectName}  > ${selectedDomain.courseName}`,
         filters: {
-          'flt.courseName': selectedDomain.courseName,
-          'flt.domainName': selectedDomain.domainName
+          'flt.subject': subjectCode,
+          'flt.course': selectedDomain.courseCode,
+          'flt.domain': domainId
         }
       });
       controller.set('selectedDomainData', selectedDomainData);
