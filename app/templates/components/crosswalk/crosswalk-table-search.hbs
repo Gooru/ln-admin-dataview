@@ -24,6 +24,9 @@
         {{three-bounce-spinner}}
       {{else}}
         <div class="crosswalk-info">
+          {{#if isContentNotAvailable}}
+            {{no-result-found}}
+          {{/if}}
           {{#if isShowStandardInfo}}
             <div class="standard-info">
               <div class="title">

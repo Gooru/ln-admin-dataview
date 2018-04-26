@@ -49,6 +49,11 @@ export default Ember.Component.extend({
    */
   isCrosswalkAvailable: true,
 
+  /**
+   * Is crosswalk content not available
+   */
+  isContentNotAvailable: false,
+
   //-------------------------------------------------------------------------
   //Actions
   actions: {
@@ -155,6 +160,10 @@ export default Ember.Component.extend({
         hash.learningMapsContent.learningMapsContent.question
       );
       component.set('isLoading', false);
+      component.set('isContentNotAvailable', false);
+    }, function() { //if API return any error
+      component.set('isLoading', false);
+      component.set('isContentNotAvailable', true);
     });
   },
 
