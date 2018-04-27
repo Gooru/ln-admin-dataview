@@ -365,43 +365,34 @@ export default Ember.Component.extend({
           .getDomainCodes(subject, courseId, domainId)
           .then(competencyData => {
             let taxonomyDomainCompetencies = Ember.A();
-            if (competencyData && competencyData.length > 0) {
-              let competencies = competencyData.objectAt(0);
-              let data = competencies.get('children');
-              data.forEach(competency => {
-                let competencyDataNode = Ember.Object.create({
-                  title: competency.get('title'),
-                  id: competency.get('id'),
-                  code: competency.get('code'),
-                  microCompetencies: Ember.A()
-                });
-                let competenciesChildren = competency.get('children');
-                if (competenciesChildren && competenciesChildren.length > 0) {
-                  let competenciesChildData = competenciesChildren[0];
-                  if (competenciesChildData) {
-                    let microCompetenciesDataNode = Ember.A();
-                    let microCompetencies = competenciesChildData.get(
-                      'children'
-                    );
-                    microCompetencies.forEach(microCompetency => {
-                      let microCompetencyDataNode = Ember.Object.create({
-                        title: microCompetency.get('title'),
-                        id: microCompetency.get('id'),
-                        code: microCompetency.get('code')
+            let standards = component.extractCompetencies(competencyData);
+            if (standards && standards.length > 0) {
+              standards.forEach(standard => {
+                let standardNode = component.createCompetencyNode(standard);
+                let standardChildNodes = standard.get('children');
+                if (standardChildNodes && standardChildNodes.length > 0) {
+                  let standardChildNode = Ember.A();
+                  standardChildNodes.forEach(standardChild => {
+                    let microStandardNodes = standardChild.get('children');
+                    if (microStandardNodes && microStandardNodes.length > 0) {
+                      microStandardNodes.forEach(microStandard => {
+                        standardChildNode.pushObject(
+                          component.createCompetencyNode(microStandard)
+                        );
                       });
-                      microCompetenciesDataNode.pushObject(
-                        microCompetencyDataNode
+                    } else {
+                      standardChildNode.pushObject(
+                        component.createCompetencyNode(standardChild)
                       );
-                    });
-                    competencyDataNode.set(
-                      'microCompetencies',
-                      microCompetenciesDataNode
-                    );
-                    taxonomyDomainCompetencies.pushObject(competencyDataNode);
-                  }
+                    }
+                  });
+                  standardNode.set('microCompetencies', standardChildNode);
                 }
+
+                taxonomyDomainCompetencies.pushObject(standardNode);
               });
             }
+
             component.set(
               'taxonomyDomainCompetencies',
               taxonomyDomainCompetencies
@@ -410,5 +401,44 @@ export default Ember.Component.extend({
             component.set('isDomainViewEnabled', true);
           });
       });
+  },
+
+  createCompetencyNode(competency) {
+    let competencyDataNode = Ember.Object.create({
+      title: competency.get('title'),
+      id: competency.get('id'),
+      code: competency.get('code')
+    });
+    return competencyDataNode;
+  },
+
+  extractCompetencies(competencyData) {
+    let standards = Ember.A();
+    if (competencyData && competencyData.length > 0) {
+      competencyData.forEach(competencies => {
+        let standardLevel1s = competencies.get('children');
+        standardLevel1s.forEach(standardLevel1 => {
+          if (standardLevel1.get('children').length > 1) {
+            let standardsCopy = Ember.Object.create({
+              children: Ember.A(),
+              code: standardLevel1.code,
+              codeType: standardLevel1.codeType,
+              id: standardLevel1.id,
+              level: standardLevel1.level,
+              parent: standardLevel1.parent,
+              title: standardLevel1.title
+            });
+            standards.pushObject(standardsCopy);
+            let standardLevel2s = standardLevel1.get('children');
+            standardLevel2s.forEach(standardLevel2 => {
+              standards.pushObject(standardLevel2);
+            });
+          } else {
+            standards.pushObject(standardLevel1);
+          }
+        });
+      });
+    }
+    return standards;
   }
 });
