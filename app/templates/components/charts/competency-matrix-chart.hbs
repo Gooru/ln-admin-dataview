@@ -3,22 +3,22 @@
 {{/if}}
 <div class="competency-chart-tab-container">
   <div class="competency-courses-chart">
-    <div class="courses pull-left">
-      <ul>
-        {{#each taxonomyCourses as |taxonomyCourse|}}
-          <li>
-            {{taxonomyCourse.courseName}}
-          </li>
-        {{/each}}
-      </ul>
-    </div>
-    <div class="pull-left matrix-chart-container {{if istaxonomyCourses 'scroll-view' 'no-scroll'}}">
-      <div id="competency-matrix-chart"></div>
-    </div>
-
-    {{#if (and (not isLoading) (not istaxonomyCourses) ) }}
+    {{#if (not isCompetenciesNull)}}
+      <div class="courses pull-left">
+        <ul>
+          {{#each taxonomyCourses as |taxonomyCourse|}}
+            <li class="course">
+              {{taxonomyCourse.courseName}}
+            </li>
+          {{/each}}
+        </ul>
+      </div>
+    {{else}}
       <span class="no-data">No Data Found</span>
     {{/if}}
+    <div class="pull-left matrix-chart-container {{if (not isCompetenciesNull) 'scroll-view'}}">
+      <div id="competency-matrix-chart"></div>
+    </div>
   </div>
   <div class="clear"></div>
 </div>
