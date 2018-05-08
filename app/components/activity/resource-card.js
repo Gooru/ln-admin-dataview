@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import TaxonomyTag from 'admin-dataview/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'admin-dataview/models/taxonomy/taxonomy-tag-data';
-import PLAYER_WINDOW_NAME from 'admin-dataview/config/config';
+import { PLAYER_EVENT_SOURCE, PLAYER_WINDOW_NAME } from 'admin-dataview/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -52,7 +52,7 @@ export default Ember.Component.extend({
      */
     onPlayResource(resourceId) {
       let locOrigin = window.location.origin;
-      let resourceUrl = `/content/resources/play/${resourceId}?source=rgo`;
+      let resourceUrl = `/content/resources/play/${resourceId}?source=${PLAYER_EVENT_SOURCE.RGO}`;
       let playerURL = locOrigin + resourceUrl;
       window.open(playerURL, PLAYER_WINDOW_NAME);
     }
