@@ -1,5 +1,5 @@
-<div class="card-panel-container" {{action "onPlayCollection" assessment}}>
-  <div class="card-panel-header" style="background-image: url({{assessment.thumbnailUrl}})">
+<div class="card-panel-container">
+  <div class="card-panel-header" {{action "onShowPullOut" assessment}} style="background-image: url({{assessment.thumbnailUrl}})">
     <div class="info">
       <div class="title">{{assessment.title}}</div>
     </div>
@@ -28,7 +28,7 @@
   </div>
   <div class="card-panel-footer">
     <div class="buttons-container">
-      <div class="play-btn">{{app-icon name="ic_play_arrow"}}</div>
+      <div class="play-btn" title="Play" data-toggle="tooltip" data-placement="right" {{action "onPlayAssessment" assessment.id}}>{{app-icon name="ic_play_arrow"}}</div>
     </div>
     <div class="assessment-prefs-container">
       <span class="left-arc"></span>

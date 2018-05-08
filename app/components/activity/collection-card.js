@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import TaxonomyTag from 'admin-dataview/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'admin-dataview/models/taxonomy/taxonomy-tag-data';
+import { PLAYER_WINDOW_NAME } from 'admin-dataview/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -10,6 +11,10 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
+  didRender() {
+    var component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+  },
 
   // -------------------------------------------------------------------------
   // Properties
@@ -39,12 +44,24 @@ export default Ember.Component.extend({
 
   actions: {
     /**
-     * @function onPlayCollection
+     * @function onShowPullOut
      * Action triggered when the user click on the play icon
      */
-    onPlayCollection(collection) {
+    onShowPullOut(collection) {
       let component = this;
-      component.sendAction('onPlayCollection', collection);
+      component.sendAction('onShowPullOut', collection);
+    },
+
+    /**
+     * Action triggered when the user play collection
+     * It'll open the player in new tab
+     */
+    onPlayCollection(collectionId) {
+      let locOrigin = window.location.origin;
+      locOrigin = 'http://localhost:4200';
+      let collectionUrl = `/player/${collectionId}`;
+      let playerURL = locOrigin + collectionUrl;
+      window.open(playerURL, PLAYER_WINDOW_NAME);
     }
   }
 });

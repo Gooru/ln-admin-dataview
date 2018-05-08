@@ -40,7 +40,7 @@ export default Ember.Controller.extend({
       controller.fetchSearchCourses();
     },
 
-    onPlayCourse(course) {
+    onShowPullOut(course) {
       let controller = this;
       controller.set('isLoadingPullout', true);
       controller.getCourseContentById(course.id).then(function(courseContentData) {

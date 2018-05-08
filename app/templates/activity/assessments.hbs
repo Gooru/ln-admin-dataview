@@ -10,7 +10,7 @@
       </div>
       <div class="assessment-cards">
         {{#each assessments as |assessment|}}
-          {{activity.assessment-card assessment=assessment onPlayCollection="onPlayCollection"}}
+          {{activity.assessment-card assessment=assessment onShowPullOut="onShowPullOut"}}
         {{/each}}
       </div>
       {{#if isShowMoreVisible}}

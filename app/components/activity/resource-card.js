@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import TaxonomyTag from 'admin-dataview/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'admin-dataview/models/taxonomy/taxonomy-tag-data';
+import PLAYER_WINDOW_NAME from 'admin-dataview/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -10,6 +11,11 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
+
+  didRender() {
+    var component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+  },
 
   // -------------------------------------------------------------------------
   // Properties
@@ -39,6 +45,17 @@ export default Ember.Component.extend({
   actions: {
     getResourceInfo: function(resource) {
       this.sendAction('getResourceInfo', resource);
+    },
+
+    /**
+     * Action triggered when the user play a resource
+     */
+    onPlayResource(resourceId) {
+      let locOrigin = window.location.origin;
+      locOrigin = 'http://localhost:4200';
+      let resourceUrl = `/content/resources/play/${resourceId}?source=rgo`;
+      let playerURL = locOrigin + resourceUrl;
+      window.open(playerURL, PLAYER_WINDOW_NAME);
     }
   }
 });

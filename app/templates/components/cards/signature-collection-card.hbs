@@ -1,5 +1,5 @@
-<div class="card-panel-container" {{action "onPlayCollection" collection}}>
-  <div class="card-panel-header" style="background-image: url({{collection.thumbnail}})">
+<div class="card-panel-container">
+  <div class="card-panel-header" {{action "onShowPullOut" collection}} style="background-image: url({{collection.thumbnail}})">
     <div class="info">
       <div class="title">{{collection.title}}</div>
     </div>
@@ -34,7 +34,7 @@
   </div>
   <div class="card-panel-footer">
     <div class="buttons-container">
-      <div class="play-btn">{{app-icon name="ic_play_arrow"}}</div>
+      <div class="play-btn" {{action "onPlayCollection" collection.id}}>{{app-icon name="ic_play_arrow"}}</div>
     </div>
     <div class="collection-prefs-container">
       <span class="left-arc"></span>

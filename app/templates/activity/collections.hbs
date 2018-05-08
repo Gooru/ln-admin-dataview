@@ -10,7 +10,7 @@
       </div>
       <div class="collection-cards">
         {{#each collections as |collection|}}
-          {{activity.collection-card collection=collection onPlayCollection="onPlayCollection"}}
+          {{activity.collection-card collection=collection onShowPullOut="onShowPullOut"}}
         {{/each}}
       </div>
       {{#if isShowMoreVisible}}

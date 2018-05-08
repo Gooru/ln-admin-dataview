@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import TaxonomyTag from 'admin-dataview/models/taxonomy/taxonomy-tag';
+import PLAYER_WINDOW_NAME from 'admin-dataview/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -9,6 +10,10 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
+  didRender() {
+    var component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+  },
 
 
   // -------------------------------------------------------------------------
@@ -31,8 +36,16 @@ export default Ember.Component.extend({
   ),
 
   actions: {
-    onPlayCourse: function(course) {
-      this.sendAction('onPlayCourse', course);
+    onShowPullOut: function(course) {
+      this.sendAction('onShowPullOut', course);
+    },
+
+    onPlayCourse(courseId) {
+      let locOrigin = window.location.origin;
+      locOrigin = 'http://localhost:4200';
+      let courseUrl = `/content/courses/play/${courseId}?source=rgo`;
+      let playerURL = locOrigin + courseUrl;
+      window.open(playerURL, PLAYER_WINDOW_NAME);
     }
   }
 

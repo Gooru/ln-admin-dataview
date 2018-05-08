@@ -370,3 +370,5 @@ export const LEARNING_MAP_CONTENT_SEQUENCE = [
   'signatureAssessment',
   'signatureResource'
 ];
+
+export const PLAYER_WINDOW_NAME = 'rgo_player';
