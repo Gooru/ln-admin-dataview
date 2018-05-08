@@ -590,6 +590,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     if (contents.assessment) {
       contents.assessment.searchResults.map(assessment => {
         let assessmentInfo = serializer.normalizeAssessment(assessment);
+        assessmentInfo.id = assessment.id;
         assessmentInfo.description = assessment.learningObjective;
         assessmentInfo.creator = serializer.normalizeOwner(assessment.creator);
         assessmentInfo.owner = serializer.normalizeOwner(assessment.user);
@@ -606,6 +607,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     if (contents.collection) {
       contents.collection.searchResults.map(collection => {
         let collectionInfo = serializer.normalizeCollection(collection);
+        collectionInfo.id = collection.id;
         collectionInfo.description = collection.learningObjective;
         collectionInfo.creator = serializer.normalizeOwner(collection.creator);
         collectionInfo.owner = serializer.normalizeOwner(collection.user);
@@ -622,6 +624,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     if (contents.course) {
       contents.course.searchResults.map(course => {
         let courseInfo = serializer.normalizeCourse(course);
+        courseInfo.id = course.id;
         courseInfo.description = course.description;
         courseInfo.creator = course.creator
           ? serializer.normalizeOwner(course.creator)
@@ -642,6 +645,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     if (contents.resource) {
       contents.resource.searchResults.map(resource => {
         let resourceInfo = serializer.normalizeResource(resource);
+        resourceInfo.id = resource.id;
         resourceInfo.description = resource.description;
         resourceInfo.creator = resource.creator
           ? serializer.normalizeOwner(resource.creator)
@@ -662,6 +666,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     if (contents.question) {
       contents.question.searchResults.map(question => {
         let questionInfo = serializer.normalizeQuestion(question);
+        questionInfo.id = question.id;
         questionInfo.description = question.description;
         questionInfo.creator = serializer.normalizeOwner(question.creator);
         questionInfo.owner = serializer.normalizeOwner(question.user);
@@ -678,6 +683,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     if (contents.unit) {
       contents.unit.searchResults.map(unit => {
         let unitInfo = serializer.normalizeUnit(unit);
+        unitInfo.id = unit.id;
         unitInfo.description = unit.learningObjective;
         unitInfo.creator = unit.creator
           ? serializer.normalizeOwner(unit.creator)
@@ -698,6 +704,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     if (contents.lesson) {
       contents.lesson.searchResults.map(lesson => {
         let lessonInfo = serializer.normalizeLesson(lesson);
+        lessonInfo.id = lesson.id;
         lessonInfo.description = lesson.learningObjective;
         lessonInfo.creator = lesson.creator
           ? serializer.normalizeOwner(lesson.creator)

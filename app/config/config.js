@@ -372,3 +372,7 @@ export const LEARNING_MAP_CONTENT_SEQUENCE = [
 ];
 
 export const PLAYER_WINDOW_NAME = 'rgo_player';
+
+export const PLAYER_EVENT_SOURCE = {
+  RGO: 'rgo'
+};
