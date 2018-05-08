@@ -52,7 +52,6 @@ export default Ember.Component.extend({
      */
     onPlayAssessment(assessmentId) {
       let locOrigin = window.location.origin;
-      locOrigin = 'http://localhost:4200';
       let assessmentUrl = `/player/${assessmentId}`;
       let playerURL = locOrigin + assessmentUrl;
       window.open(playerURL, PLAYER_WINDOW_NAME);

@@ -51,7 +51,6 @@ export default Ember.Component.extend({
 
     onPlayQuestion(questionId) {
       let locOrigin = window.location.origin;
-      locOrigin = 'http://localhost:4200';
       let questionUrl = `/content/questions/play/${questionId}?source=rgo`;
       let playerURL = locOrigin + questionUrl;
       window.open(playerURL, PLAYER_WINDOW_NAME);

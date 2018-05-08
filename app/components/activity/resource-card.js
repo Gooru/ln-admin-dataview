@@ -52,7 +52,6 @@ export default Ember.Component.extend({
      */
     onPlayResource(resourceId) {
       let locOrigin = window.location.origin;
-      locOrigin = 'http://localhost:4200';
       let resourceUrl = `/content/resources/play/${resourceId}?source=rgo`;
       let playerURL = locOrigin + resourceUrl;
       window.open(playerURL, PLAYER_WINDOW_NAME);

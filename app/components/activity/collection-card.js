@@ -58,7 +58,6 @@ export default Ember.Component.extend({
      */
     onPlayCollection(collectionId) {
       let locOrigin = window.location.origin;
-      locOrigin = 'http://localhost:4200';
       let collectionUrl = `/player/${collectionId}`;
       let playerURL = locOrigin + collectionUrl;
       window.open(playerURL, PLAYER_WINDOW_NAME);
