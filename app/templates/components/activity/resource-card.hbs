@@ -1,5 +1,5 @@
-<div class="card-panel-container" {{action 'getResourceInfo' resource}}>
-  <div class="card-panel-header {{resource.format}}">
+<div class="card-panel-container">
+  <div class="card-panel-header {{resource.format}}" {{action 'getResourceInfo' resource}}>
     <div class="info">
       <div class="title">{{resource.title}}</div>
     </div>
@@ -36,7 +36,7 @@
   </div>
   <div class="card-panel-footer">
     <div class="buttons-container">
-      <div class="play-btn">{{app-icon name="ic_play_arrow"}}</div>
+      <div class="play-btn" title="Play" data-toggle="tooltip" data-placement="right" {{action "onPlayResource" resource.id}}>{{app-icon name="ic_play_arrow"}}</div>
     </div>
     <div class="resource-prefs-container">
       <span class="left-arc"></span>

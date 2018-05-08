@@ -41,7 +41,7 @@ export default Ember.Controller.extend({
       controller.fetchSearchAssessments();
     },
 
-    onPlayCollection(assessment) {
+    onShowPullOut(assessment) {
       let controller = this;
       controller.set('isLoadingPullout', true);
       controller.fetchAssessmentPullOutData(assessment.id);

@@ -1,5 +1,5 @@
-<div class="card-panel-container" {{action "onPlayCourse" course}}>
-  <div class="card-panel-header" style="background-image: url({{course.thumbnailUrl}})">
+<div class="card-panel-container">
+  <div class="card-panel-header" {{action "onShowPullOut" course}} style="background-image: url({{course.thumbnailUrl}})">
     <div class="info">
       <div class="title">{{course.title}}</div>
     </div>
@@ -28,7 +28,7 @@
   </div>
   <div class="card-panel-footer">
     <div class="buttons-container">
-      <div class="play-btn">{{app-icon name="ic_play_arrow"}}</div>
+      <div class="play-btn" title="Play" data-toggle="tooltip" data-placement="right" {{action "onPlayCourse" course.id}}>{{app-icon name="ic_play_arrow"}}</div>
     </div>
     <div class="course-prefs-container">
       <span class="left-arc"></span>

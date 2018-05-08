@@ -258,7 +258,7 @@ export default Ember.Controller.extend({
   // Actions
 
   actions: {
-    onPlayCollection(collection) {
+    onShowPullOut(collection) {
       let controller = this;
       controller.set('isLoadingPullout', true);
       controller.fetchCollectionPullOutData(collection.id);

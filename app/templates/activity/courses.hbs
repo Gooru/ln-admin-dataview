@@ -10,7 +10,7 @@
       </div>
       <div class="course-cards">
         {{#each courses as |course|}}
-          {{activity.course-card course=course onPlayCourse="onPlayCourse"}}
+          {{activity.course-card course=course onShowPullOut="onShowPullOut"}}
         {{/each}}
       </div>
       {{#if isShowMoreVisible}}
