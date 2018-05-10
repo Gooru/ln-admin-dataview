@@ -38,7 +38,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       controller.set('term', model.term);
     } else {
       //Show search results without query term
-      controller.fetchSearchResources();
+      controller.refreshItems();
     }
   }
 

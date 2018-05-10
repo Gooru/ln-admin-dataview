@@ -32,6 +32,52 @@ export const RESOURCE_TYPES = [
   'text'
 ];
 
+export const VIDEO_RESOURCE = {
+  value: RESOURCE_TYPES.VIDEO_RESOURCE_TYPE,
+  apiCode: 'video_resource',
+  label: 'common.resource-type.video'
+};
+
+export const WEBPAGE_RESOURCE = {
+  value: RESOURCE_TYPES.webpage,
+  apiCode: 'webpage_resource',
+  label: 'common.resource-type.webpage'
+};
+
+export const INTERACTIVE_RESOURCE = {
+  value: RESOURCE_TYPES.interactive,
+  apiCode: 'interactive_resource',
+  label: 'common.resource-type.interactive'
+};
+
+export const AUDIO_RESOURCE = {
+  value: RESOURCE_TYPES.audo,
+  apiCode: 'audio_resource',
+  label: 'common.resource-type.audio'
+};
+
+export const IMAGE_RESOURCE = {
+  value: RESOURCE_TYPES.image,
+  apiCode: 'image_resource',
+  label: 'common.resource-type.image'
+};
+
+export const TEXT_RESOURCE = {
+  value: RESOURCE_TYPES.text,
+  apiCode: 'text_resource',
+  label: 'common.resource-type.text'
+};
+
+export const RESOURCE_TYPE_CONFIG = [
+  VIDEO_RESOURCE,
+  WEBPAGE_RESOURCE,
+  INTERACTIVE_RESOURCE,
+  AUDIO_RESOURCE,
+  IMAGE_RESOURCE,
+  TEXT_RESOURCE
+];
+
+
 export const DEFAULT_IMAGES = {
   USER_PROFILE: `${config.rootURL}assets/images/profile.png`,
   COURSE: `${config.rootURL}assets/images/course-default.png`,
@@ -227,6 +273,75 @@ export const QUESTION_TYPES = {
   hotTextHighlight: 'HT_HL'
 };
 
+export const MULTIPLE_CHOICE_QUESTION = {
+  value: QUESTION_TYPES.multipleChoice,
+  apiCode: 'multiple_choice_question',
+  label: 'common.question-type.MC'
+};
+
+export const MULTIPLE_ANSWER_QUESTION = {
+  value: QUESTION_TYPES.multipleAnswer,
+  apiCode: 'multiple_answer_question',
+  label: 'common.question-type.MA'
+};
+
+export const TRUE_FALSE_QUESTION = {
+  value: QUESTION_TYPES.trueFalse,
+  apiCode: 'true_false_question',
+  label: 'common.question-type.T/F'
+};
+
+export const DRAG_AND_DROP_QUESTION = {
+  value: QUESTION_TYPES.hotTextReorder,
+  apiCode: 'hot_text_reorder_question',
+  label: 'common.question-type.HT_RO'
+};
+
+export const HIGHLIGHT_TEXT_QUESTION = {
+  value: QUESTION_TYPES.hotTextHighlight,
+  apiCode: 'hot_text_highlight_question',
+  label: 'common.question-type.HT_HL'
+};
+
+export const MULTIPLE_SELECT_IMAGE_QUESTION = {
+  value: QUESTION_TYPES.hotSpotImage,
+  apiCode: 'hot_spot_image_question',
+  label: 'common.question-type.HS_IMG'
+};
+
+export const MULTIPLE_SELECT_TEXT_QUESTION = {
+  value: QUESTION_TYPES.hotSpotText,
+  apiCode: 'hot_spot_text_question',
+  label: 'common.question-type.HS_TXT'
+};
+
+export const OPEN_ENDED_QUESTION = {
+  value: QUESTION_TYPES.openEnded,
+  apiCode: 'open_ended_question',
+  label: 'common.question-type.OE'
+};
+
+export const FIB_QUESTION = {
+  value: QUESTION_TYPES.fib,
+  apiCode: 'fill_in_the_blank_question',
+  label: 'common.question-type.FIB'
+};
+
+/**
+ * Question type configuration
+ */
+export const QUESTION_TYPE_CONFIG = [
+  MULTIPLE_CHOICE_QUESTION,
+  MULTIPLE_ANSWER_QUESTION,
+  TRUE_FALSE_QUESTION,
+  OPEN_ENDED_QUESTION,
+  FIB_QUESTION,
+  DRAG_AND_DROP_QUESTION,
+  HIGHLIGHT_TEXT_QUESTION,
+  MULTIPLE_SELECT_IMAGE_QUESTION,
+  MULTIPLE_SELECT_TEXT_QUESTION
+];
+
 export const LEARNER_TIME_PERIOD_FILTER = [
   {
     value: 'yesterday',
@@ -303,18 +418,6 @@ export const CENTURY_SKILLS_GROUPS = {
 
 export const ACTIVITY_FILTER = [
   {
-    title: 'activities.filter-types.category',
-    code: 'category'
-  },
-  {
-    title: 'activities.filter-types.subject',
-    code: 'subject'
-  },
-  {
-    title: 'activities.filter-types.course',
-    code: 'course'
-  },
-  {
     title: 'activities.filter-types.21-century-skills',
     code: '21-century-skills'
   },
@@ -336,7 +439,7 @@ export const ACTIVITY_FILTER = [
   }
 ];
 
-export const ACTIVITIES_FILTER = [
+export const DEFAULT_ACTIVITY_FILTERS = [
   {
     title: 'activities.filter-types.category',
     code: 'category'
@@ -348,6 +451,20 @@ export const ACTIVITIES_FILTER = [
   {
     title: 'activities.filter-types.course',
     code: 'course'
+  }
+];
+
+export const QUESTION_TYPE_FILTERS = [
+  {
+    title: 'activities.filter-types.question-type',
+    code: 'qt'
+  }
+];
+
+export const RESOURCE_TYPE_FILTERS = [
+  {
+    title: 'activities.filter-types.resource-type',
+    code: 'rt'
   }
 ];
 

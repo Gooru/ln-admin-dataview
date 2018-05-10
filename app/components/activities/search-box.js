@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { ACTIVITY_FILTER } from 'admin-dataview/config/config';
+import { DEFAULT_ACTIVITY_FILTERS, ACTIVITY_FILTER, QUESTION_TYPE_FILTERS, RESOURCE_TYPE_FILTERS } from 'admin-dataview/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -17,13 +17,19 @@ export default Ember.Component.extend({
    * @property {Array}
    * List of filter types
    */
-  filterTypes: ACTIVITY_FILTER,
+  filterTypes: Ember.computed('curMenuItem', function() {
+    let defaultFilter = DEFAULT_ACTIVITY_FILTERS;
+    let activityFilter = ACTIVITY_FILTER;
+    let resourceTypeFilters = RESOURCE_TYPE_FILTERS;
+    let questionTypeFilters = QUESTION_TYPE_FILTERS;
+    return defaultFilter.concat(activityFilter, resourceTypeFilters, questionTypeFilters);
+  }),
 
   /**
    * @property {Array}
    * List of Applied filters
    */
-  appliedFilterList: [],
+  appliedFilterList: Ember.A([]),
 
   /**
    * @property {Array}
@@ -82,6 +88,12 @@ export default Ember.Component.extend({
   isInvalidSearchTerm: false,
 
   tempTerm: Ember.computed.oneWay('term'),
+
+  /**
+   * @type {String}
+   * Current menu item
+   */
+  curMenuItem: null,
 
   // -------------------------------------------------------------------------
   // Events
@@ -187,6 +199,10 @@ export default Ember.Component.extend({
     return applicableFilterList;
   },
 
+  /**
+   * @function refreshVisibleFilterItems
+   * Method to refresh visible search filter tag
+   */
   refreshVisibleFilterItems() {
     let component = this;
     let appliedFilterList = component.getAppliedFilters();
