@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import {
   TAXONOMY_CATEGORIES,
-  ACTIVITIES_NAVIGATION_MENUS_INDEX
+  ACTIVITIES_NAVIGATION_MENUS_INDEX,
+  QUESTION_TYPE_CONFIG,
+  RESOURCE_TYPE_CONFIG
 } from 'admin-dataview/config/config';
 import Utils from 'admin-dataview/utils/utils';
 import ModalMixin from 'admin-dataview/mixins/modal';
@@ -149,6 +151,12 @@ export default Ember.Component.extend(ModalMixin, {
       break;
     case 'publisher':
       component.fetchPublisherFilters();
+      break;
+    case 'qt':
+      component.fetchQuestionTypeFilters();
+      break;
+    case 'rt':
+      component.fetchResourceTypeFilters();
       break;
     default:
     }
@@ -501,5 +509,69 @@ export default Ember.Component.extend(ModalMixin, {
       });
       component.set('filterList', filterList);
     });
+  },
+
+  /**
+   * @function fetchQuestionTypeFilters
+   * Method to fetch question type items from config and show it into filter component
+   */
+  fetchQuestionTypeFilters() {
+    let component = this;
+    let questionTypeConfig = QUESTION_TYPE_CONFIG;
+    let userId = component.get('session.id');
+    let selectedFilterItems =
+      JSON.parse(
+        localStorage.getItem(`research_${userId}_activities_filters`)
+      ) || component.get('selectedFilterItems');
+    let filterList = [];
+    const i18n = component.get('i18n');
+    questionTypeConfig.map(questionType => {
+      let questionTypeInfo = {
+        label: String(i18n.t(questionType.label)),
+        code: questionType.apiCode,
+        value: questionType.value
+      };
+      if (
+        selectedFilterItems.qt !== undefined &&
+        selectedFilterItems.qt.length > 0
+      ) {
+        let selectedQuestionTypes = selectedFilterItems.qt;
+        questionTypeInfo.checked = component.isFilterSelected(questionType.apiCode, selectedQuestionTypes);
+      }
+      filterList.push(questionTypeInfo);
+    });
+    component.set('filterList', filterList);
+  },
+
+  /**
+   * @function fetchResourceTypeFilters
+   * Method to fetch resource type items from config and show it into filter component
+   */
+  fetchResourceTypeFilters() {
+    let component = this;
+    let resourceTypeConfig = RESOURCE_TYPE_CONFIG;
+    let userId = component.get('session.id');
+    let selectedFilterItems =
+      JSON.parse(
+        localStorage.getItem(`research_${userId}_activities_filters`)
+      ) || component.get('selectedFilterItems');
+    let filterList = [];
+    const i18n = component.get('i18n');
+    resourceTypeConfig.map(resourceType => {
+      let resourceTypeInfo = {
+        label: String(i18n.t(resourceType.label)),
+        code: resourceType.apiCode,
+        value: resourceType.value
+      };
+      if (
+        selectedFilterItems.rt !== undefined &&
+        selectedFilterItems.rt.length > 0
+      ) {
+        let selectedResourceTypes = selectedFilterItems.rt;
+        resourceTypeInfo.checked = component.isFilterSelected(resourceType.apiCode, selectedResourceTypes);
+      }
+      filterList.push(resourceTypeInfo);
+    });
+    component.set('filterList', filterList);
   }
 });

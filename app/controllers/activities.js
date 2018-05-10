@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import {
-  ACTIVITIES_FILTER,
+  DEFAULT_ACTIVITY_FILTERS,
   ACTIVITIES_NAVIGATION_MENUS_INDEX
 } from 'admin-dataview/config/config';
 import Utils from 'admin-dataview/utils/utils';
@@ -100,7 +100,7 @@ export default Ember.Controller.extend({
    * @property {Array}
    * List of filter items supported in the activities modules
    */
-  filterTypes: ACTIVITIES_FILTER,
+  filterTypes: DEFAULT_ACTIVITY_FILTERS,
 
   getUserAppliedFilters() {
     let controller = this;

@@ -1,7 +1,10 @@
 import Ember from 'ember';
 import {
   ACTIVITY_FILTER,
-  ACTIVITIES_NAVIGATION_MENUS_INDEX
+  DEFAULT_ACTIVITY_FILTERS,
+  ACTIVITIES_NAVIGATION_MENUS_INDEX,
+  RESOURCE_TYPE_FILTERS,
+  QUESTION_TYPE_FILTERS
 } from 'admin-dataview/config/config';
 import Utils from 'admin-dataview/utils/utils';
 
@@ -57,6 +60,7 @@ export default Ember.Controller.extend({
   actions: {
     onMenuItemSelection(item) {
       let term = this.get('searchTerm');
+      this.set('curMenuItem', item);
       if (term) {
         this.transitionToRoute(`/activities/${item}?term=${term}`);
       } else {
@@ -80,6 +84,9 @@ export default Ember.Controller.extend({
       }
     },
 
+    /**
+     * Action triggered when the user update/modify search filters
+     */
     onChangeFilterItems(filterItems, updatedFilter) {
       let controller = this;
       if (updatedFilter) {
@@ -97,15 +104,22 @@ export default Ember.Controller.extend({
           !isChecked
         );
       }
+
       controller.set('selectedFilterItemsBuffer', filterItems);
       controller.set('selectedFilterItems', filterItems);
       let routeName = Utils.getRoutePathLastOccurrence();
       let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
+      let curRouteName = controller.get('curMenuItem') || routeName;
+      let refreshedFilterItems = controller.getRefreshedFiltersByRoute(curRouteName);
+      controller.set('visibleFilterItems', refreshedFilterItems);
       if (activeMenuIndex > -1) {
         controller.get(`${routeName}Controller`).refreshItems();
       }
     },
 
+    /**
+     * Action triggered when the user clear applied filters
+     */
     clearFilter() {
       let controller = this;
       let userId = controller.get('session.id');
@@ -120,6 +134,7 @@ export default Ember.Controller.extend({
         let routeName = Utils.getRoutePathLastOccurrence();
         let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
         controller.set('selectedFilterItems', {});
+        controller.set('visibleFilterItems', []);
         controller.set('toggleClearSearch', !toggleClearSearch);
         if (activeMenuIndex > -1) {
           controller.get(`${routeName}Controller`).refreshItems();
@@ -142,6 +157,9 @@ export default Ember.Controller.extend({
       }
     },
 
+    /**
+     * Action triggered when the user clear search text
+     */
     clearSearchText() {
       let controller = this;
       let userId = controller.get('session.id');
@@ -180,7 +198,15 @@ export default Ember.Controller.extend({
    * @property {Array}
    * List of filter types
    */
-  filterTypes: ACTIVITY_FILTER,
+  filterTypes: Ember.computed('curMenuItem', function() {
+    let controller = this;
+    let defaultActivityFilters = DEFAULT_ACTIVITY_FILTERS;
+    let activityFilter = ACTIVITY_FILTER;
+    let routeName = controller.get('curMenuItem') || Utils.getRoutePathLastOccurrence();
+    let routeBasedFilters = controller.getRouteBasedFilters(routeName);
+    controller.set('visibleFilterItems', controller.getRefreshedFiltersByRoute(routeName));
+    return defaultActivityFilters.concat(routeBasedFilters, activityFilter);
+  }),
 
   /**
    * @property {JSON}
@@ -196,6 +222,12 @@ export default Ember.Controller.extend({
     let controller = this;
     return controller.getStoredFilterItems();
   }),
+
+  /**
+   * @type {Array}
+   * Filter items that need to be show in the search box tag list
+   */
+  visibleFilterItems: Ember.A([]),
 
   /**
    * Search term clear refresh
@@ -214,6 +246,12 @@ export default Ember.Controller.extend({
    * Show/Hide clear filter text
    */
   isEmptyFilters: false,
+
+  /**
+   * @type {String}
+   * Currently selected menu item
+   */
+  curMenuItem: null,
 
   // -------------------------------------------------------------------------
   // Methods
@@ -264,6 +302,7 @@ export default Ember.Controller.extend({
     let controller = this;
     let formattedFilters = {};
     let delimiter = ',';
+    let routeName = controller.get('curMenuItem') || Utils.getRoutePathLastOccurrence();
     switch (filterType) {
     case 'category':
       formattedFilters['flt.subjectClassification'] = categorizedFilterData[0]
@@ -324,6 +363,30 @@ export default Ember.Controller.extend({
         delimiter
       );
       break;
+    case 'qt':  //Question Type
+      if (routeName === 'questions') {
+        delimiter = ',';
+        formattedFilters[
+          'flt.questionType'
+        ] = controller.getConcatenatedFilterString(
+          categorizedFilterData,
+          delimiter,
+          'id'
+        );
+      }
+      break;
+    case 'rt':  //Resource Type
+      if (routeName === 'resources') {
+        delimiter = ',';
+        formattedFilters[
+          'flt.resourceFormat'
+        ] = controller.getConcatenatedFilterString(
+          categorizedFilterData,
+          delimiter,
+          'id'
+        );
+      }
+      break;
     }
     return formattedFilters;
   },
@@ -342,5 +405,44 @@ export default Ember.Controller.extend({
       return label.substring(numOfCharsRemove);
     }
     return label;
+  },
+
+  /**
+   * @function getRouteBasedFilters
+   * Method to get filter type items based on current route
+   */
+  getRouteBasedFilters(routeName) {
+    let filter = [];
+    switch (routeName) {
+    case 'resources':
+      filter = RESOURCE_TYPE_FILTERS;
+      break;
+    case 'questions':
+      filter = QUESTION_TYPE_FILTERS;
+      break;
+    }
+    return filter;
+  },
+
+  /**
+   * @function getRefreshedFiltersByRoute
+   * Method to get refresh the filter items based on current route
+   */
+  getRefreshedFiltersByRoute(routeName) {
+    let controller = this;
+    let storedFilters = controller.getStoredFilterItems();
+    switch (routeName) {
+    case 'resources':
+      storedFilters.qt = [];
+      break;
+    case 'questions':
+      storedFilters.rt = [];
+      break;
+    default:
+      storedFilters.rt = [];
+      storedFilters.qt = [];
+      break;
+    }
+    return storedFilters;
   }
 });

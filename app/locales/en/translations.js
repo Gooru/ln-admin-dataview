@@ -17,6 +17,16 @@ export default {
       HT_RO: 'Drag and Drop Order',
       HT_HL: 'Highlight Text'
     },
+    'resource-type': {
+      video: 'Video',
+      webpage: 'Webpage',
+      interactive: 'Interactive',
+      question: 'Question',
+      image: 'Image',
+      text: 'Text',
+      audio: 'Audio',
+      oer: 'OER'
+    },
     questions: 'Questions',
     currentlyStudying: 'currently Studying',
     'signature-assessment': 'Signature Assessments',
@@ -206,7 +216,9 @@ export default {
       license: 'License',
       dok: 'Depth of Knowledge',
       publisher: 'Publisher',
-      audience: 'Audience'
+      audience: 'Audience',
+      'question-type': 'Question Type',
+      'resource-type': 'Resource Type'
     },
     'catalog-distribution': 'Catalog Distribution',
     'distribution-by-subject': 'distribution by subject',
