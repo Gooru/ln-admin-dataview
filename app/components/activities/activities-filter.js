@@ -49,22 +49,11 @@ export default Ember.Component.extend({
         filterInfo,
         filterType
       );
-      let userId = component.get('session.id');
-      component.set('selectedFilterItems', selectedFilterItems);
-      if (filterType === 'category') {
-        selectedFilterItems.course = [];
-        selectedFilterItems.subject = [];
-        component.toggleCheckboxProperty(filterType, filterInfo.code);
-        component.toggleExpandedComponent(filterType);
-      } else if (filterType === 'subject') {
-        selectedFilterItems.course = [];
+      if (filterType === 'category' || filterType === 'subject') {
         component.toggleCheckboxProperty(filterType, filterInfo.code);
         component.toggleExpandedComponent(filterType);
       }
-      localStorage.setItem(
-        `research_${userId}_activities_filters`,
-        JSON.stringify(selectedFilterItems)
-      );
+      component.set('selectedFilterItems', selectedFilterItems);
       component.toggleProperty('isFilterUpdated');
     },
 
@@ -113,6 +102,7 @@ export default Ember.Component.extend({
         );
       }
     }
+    storedFilters = component.removedFilterItemsByType(filterType, storedFilters);
     storedFilters[`${filterType}`] = userSelectedFilter;
     localStorage.setItem(
       `research_${userId}_activities_filters`,
@@ -220,5 +210,19 @@ export default Ember.Component.extend({
         Ember.$(`${$filterComponent} .course`).addClass('deactivated');
       }
     }
+  },
+
+  /**
+   * @function removedFilterItemsByType
+   * Method to remove applied filter items when toggling parent filter type
+   */
+  removedFilterItemsByType(filterType, selectedFilterItems) {
+    if (filterType === 'category') {
+      selectedFilterItems.course = [];
+      selectedFilterItems.subject = [];
+    } else if (filterType === 'subject') {
+      selectedFilterItems.course = [];
+    }
+    return selectedFilterItems;
   }
 });
