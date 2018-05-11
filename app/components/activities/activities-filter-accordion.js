@@ -40,6 +40,22 @@ export default Ember.Component.extend(ModalMixin, {
   //Properties
 
   /**
+   * @type {Number}
+   * Number of filter items applied in this filter type
+   */
+  filterCount: Ember.computed('selectedFilterItems', function() {
+    let component = this;
+    let userId = component.get('session.id');
+    let selectedFilterItems =
+      JSON.parse(
+        localStorage.getItem(`research_${userId}_activities_filters`)
+      ) || component.get('selectedFilterItems');
+    let filterCode = component.get('filterType.code');
+    let curFilterItem = selectedFilterItems[`${filterCode}`];
+    return curFilterItem && curFilterItem.length > 0 ? curFilterItem.length : 0;
+  }),
+
+  /**
    * @property {Boolean}
    * Toggle current component view
    */
