@@ -1,5 +1,6 @@
 import Ember from 'ember';
-import { ACTIVITY_FILTER } from 'admin-dataview/config/config';
+import { ACTIVITY_FILTER,
+DEFAULT_ACTIVITY_FILTERS } from 'admin-dataview/config/config';
 
 export default Ember.Component.extend({
 
@@ -87,6 +88,13 @@ export default Ember.Component.extend({
    * @type {Array}
    */
   culcaCounts: Ember.A(),
+
+  filterTypes: Ember.computed(function() {
+    let controller = this;
+    let defaultActivityFilters = DEFAULT_ACTIVITY_FILTERS;
+    let activityFilter = ACTIVITY_FILTER;
+    return defaultActivityFilters.concat(activityFilter);
+  }),
 
   // -------------------------------------------------------------------------
   // Methods
@@ -214,17 +222,17 @@ export default Ember.Component.extend({
    * Get user applied filters from the local storage
    */
   getAppliedFilters() {
-    let controller = this;
-    let userId = controller.get('session.id');
+    let component = this;
+    let userId = component.get('session.id');
     let appliedFilters = JSON.parse(localStorage.getItem(`research_${userId}_activities_filters`));
-    let filterTypes = ACTIVITY_FILTER;
+    let filterTypes = component.get('filterTypes');
     let formattedFilters = {};
     if (appliedFilters) {
       filterTypes.map( filterTypeInfo => {
         let filterType = filterTypeInfo.code;
         let categorizedFilter = appliedFilters[`${filterType}`] || null;
         if (categorizedFilter) {
-          formattedFilters = Object.assign(formattedFilters, controller.getFormattedSearchFilters(filterType, categorizedFilter));
+          formattedFilters = Object.assign(formattedFilters, component.getFormattedSearchFilters(filterType, categorizedFilter));
         }
       });
     }
