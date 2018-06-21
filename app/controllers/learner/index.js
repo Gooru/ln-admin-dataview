@@ -86,10 +86,10 @@ export default Ember.Controller.extend({
   competencyStatus: [
     'Not Started',
     'In progress',
-    'Inferred',
     'Asserted',
     'Inferred',
-    'Earned'
+    'Earned',
+    'Demonstrated'
   ],
 
   /**
