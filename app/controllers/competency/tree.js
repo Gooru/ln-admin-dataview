@@ -321,46 +321,33 @@ export default Ember.Controller.extend({
             controller.set('isLoading', false);
             controller.set('signatureContents', learning.signatureContents);
             controller.set('prerequisites', learning.prerequisites);
-
             controller.set(
               'courseContent',
-              culcaqrContents.course
-                ? culcaqrContents.course.splice(0, 3)
-                : culcaqrContents.course
+              culcaqrContents.course.slice(0, 3)
             );
             controller.set(
               'unitContent',
-              culcaqrContents.unit
-                ? culcaqrContents.unit.splice(0, 3)
-                : culcaqrContents.unit
+              culcaqrContents.unit.slice(0, 3)
             );
             controller.set(
               'lessonContent',
-              culcaqrContents.lesson
-                ? culcaqrContents.lesson.splice(0, 3)
-                : culcaqrContents.lesson
+              culcaqrContents.lesson.slice(0, 3)
             );
             controller.set(
               'resourceContent',
-              culcaqrContents.resource
-                ? culcaqrContents.resource.splice(0, 3)
-                : culcaqrContents.resource
+              culcaqrContents.resource.slice(0, 3)
             );
             controller.set(
               'collectionContent',
-              culcaqrContents.collection
-                ? culcaqrContents.collection.splice(0, 3)
-                : culcaqrContents.collection
+              culcaqrContents.collection.slice(0, 3)
             );
             controller.set(
               'assessmentContent',
-              culcaqrContents.assessment
-                ? culcaqrContents.assessment.splice(0, 3)
-                : culcaqrContents.assessment
+              culcaqrContents.assessment.slice(0, 3)
             );
             controller.set(
               'questionContent',
-              culcaqrContents.question.splice(0, 3)
+              culcaqrContents.question.slice(0, 3)
             );
           });
       }
@@ -681,8 +668,10 @@ export default Ember.Controller.extend({
    * return hashed json of each content type conunt
    */
   getSearchLearningMapsContent(selectedNode) {
+    const length = 3;
+    const startAt = 0;
     const learningMapsContent = Ember.RSVP.resolve(
-      this.get('searchService').learningMapsContent(selectedNode)
+      this.get('searchService').learningMapsContent(selectedNode, length, startAt)
     );
     return Ember.RSVP.hash({
       learningMapsContent: learningMapsContent

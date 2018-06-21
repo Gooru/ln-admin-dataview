@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import { ACTIVITY_FILTER,
-DEFAULT_ACTIVITY_FILTERS } from 'admin-dataview/config/config';
+  DEFAULT_ACTIVITY_FILTERS } from 'admin-dataview/config/config';
 
 export default Ember.Component.extend({
 
@@ -90,7 +90,6 @@ export default Ember.Component.extend({
   culcaCounts: Ember.A(),
 
   filterTypes: Ember.computed(function() {
-    let controller = this;
     let defaultActivityFilters = DEFAULT_ACTIVITY_FILTERS;
     let activityFilter = ACTIVITY_FILTER;
     return defaultActivityFilters.concat(activityFilter);
