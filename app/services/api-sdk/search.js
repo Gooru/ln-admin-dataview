@@ -310,7 +310,7 @@ export default Ember.Service.extend({
         ? competencyContentContainer[`${filters.id}`][start] || null
         : null;
       if (isCompetencyContentAvailable) {
-        resolve(isCompetencyContentAvailable);
+        resolve(competencyContentContainer[`${filters.id}`][start]);
       } else {
         service
           .get('searchAdapter')
