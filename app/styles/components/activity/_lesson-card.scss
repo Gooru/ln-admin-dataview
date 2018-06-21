@@ -1,7 +1,7 @@
 .activity-lesson-card {
   .card-panel-container {
     width: 220px;
-    height: 384px;
+    height: 348px;
     object-fit: contain;
     border-radius: 4px;
     background-color: $white;
@@ -153,21 +153,6 @@
     }
 
     .card-panel-footer {
-      .buttons-container {
-        height: 36px;
-        border-bottom: 1px solid #f2f2f2;
-
-        .play-btn {
-          width: 45px;
-          border-right: 1px solid #f2f2f2;
-
-          i {
-            margin-left: -62px;
-            margin-top: 7px;
-            color: #0072bc;
-          }
-        }
-      }
 
       .lesson-prefs-container {
         .left-arc {
