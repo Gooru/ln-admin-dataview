@@ -7,10 +7,6 @@
 ##
 ## Required environmnet variables
 ##
-## - S3_BUCKET             the S3 bucket where the deployment artifacts are stored
-## - AWS_ACCESS_KEY_ID     the AWS key id
-## - AWS_SECRET_ACCESS_KEY the AWS secret
-## - AWS_DEFAULT_REGION    the AWS region
 ## - CODE_DEPLOY_APP_NAME  the CodeDeploy application name
 ## - DEPLOYMENT_GROUP      the CodeDeploy deployment group
 ##
@@ -65,15 +61,6 @@ function wait_for_deployment() {
   done
 }
 
-if [ -z "$AWS_ACCESS_KEY_ID" ] || [ -z "$AWS_SECRET_ACCESS_KEY" ] || [ -z "$AWS_DEFAULT_REGION" ]; then
-  error "No AWS credentials provided"
-  exit 1
-fi
-
-if [ -z "$S3_BUCKET" ]; then
-  error "No S3 bucket provided"
-  exit 1
-fi
 
 if [ -z "$DEPLOYMENT_GROUP" ] || [ -z "$CODE_DEPLOY_APP_NAME" ]; then
   error "No deployment group or application name provided"
