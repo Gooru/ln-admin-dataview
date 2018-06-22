@@ -21,7 +21,7 @@ info "Installing npm dependencies..."
 silent yarn install
 
 info "Installing bower dependencies..."
-silent bower install
+silent bower install --allow-root
 
 info "Running eslint..."
 silent grunt bamboo-eslint
@@ -33,5 +33,8 @@ info "Building..."
 silent grunt build:prod-bamboo
 echo $VERSION > admin-dataview/version.html
 
+info "Rename filename as research ..."
+mv admin-dataview research
+
 info "Creating artifact with version ${VERSION}..."
-tar czf admin-dataview-${VERSION}.tar.gz admin-dataview/ appspec.yml .deploy/
+tar czf research-${VERSION}.tar.gz research/ appspec.yml .deploy/
