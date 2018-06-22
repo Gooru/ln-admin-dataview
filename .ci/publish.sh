@@ -23,7 +23,7 @@ fi
 
 info "Publishing artifacts..."
 
-silent aws s3 cp admin-dataview-${VERSION}.tar.gz \
-  s3://${S3_BUCKET}/frontend-30/builds/${GIT_BRANCH}/admin-dataview-$VERSION.tar.gz
+silent aws s3 cp research-${VERSION}.tar.gz \
+  s3://${S3_BUCKET}/frontend-30/builds/${GIT_BRANCH}/research-$VERSION.tar.gz
 
 info "Done publishing artifacts"
