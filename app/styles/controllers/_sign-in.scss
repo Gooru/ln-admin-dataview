@@ -1,0 +1,103 @@
+.controller.sign-in {
+  .sign-in-wrapper {
+    box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    background-color: $white;
+    width: 100%;
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 0;
+    float: none;
+    height: 460px;
+
+    .sign-in-header {
+      text-align: center;
+      padding: 45px 0 0;
+
+      h1 {
+        font-size: $font-size-h3;
+        margin: 0 0 20px;
+      }
+    }
+
+    .divider {
+      border-bottom: 1px solid $light-200;
+      margin: 35px 0 18px;
+      width: 100%;
+    }
+
+    .sign-in-form {
+      padding: 15px 37px 0;
+
+      .form-group {
+        margin: 5px 0;
+
+        label {
+          width: 100%;
+        }
+
+        &.username {
+          margin-bottom: 48px;
+        }
+
+        a.btn-link {
+          padding: 0;
+          text-transform: none;
+          color: $blue-200;
+          font-size: $font-size-base;
+        }
+
+        input {
+          &:focus {
+            border-color: $blue-200;
+          }
+        }
+
+        &.log-in-button {
+          margin: 50px -37px 0;
+
+          button {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            width: 100%;
+            font-size: $font-size-h4;
+            font-weight: 300;
+            position: relative;
+
+            i {
+              position: absolute;
+              font-size: $font-size-h3;
+              line-height: 48px;
+              position: absolute;
+              right: 5px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+#toast-container.toast-top-full-width.sign-in {
+  top: 55px;
+  width: 100%;
+  position: fixed;
+  @media (min-width: $screen-md) {
+    top: 63px;
+  }
+
+  > div.toast-error {
+    width: inherit;
+    background-image: none !important;
+    background-color: $red-400;
+    opacity: 1;
+    @media (max-width: $screen-xs-min) {
+      padding: 10px;
+      margin: 0;
+    }
+
+    .toast-message {
+      text-align: center;
+    }
+  }
+}

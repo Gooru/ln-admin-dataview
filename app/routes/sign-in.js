@@ -1,20 +1,44 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  // -------------------------------------------------------------------------
+  // Dependencies
 
   /**
-   * The session service.
-   * @property session
-   * @readOnly
+   * @property {Service} Session
    */
-  session: Ember.inject.service('session'),
+  session: Ember.inject.service(),
 
-  beforeModel: function() {
-    let sessionService = this.get('session');
-    if (sessionService.get('isAuthenticated')) {
-      this.get('session').invalidate();
+  /**
+   * @requires service:notifications
+   */
+  notifications: Ember.inject.service(),
+
+  //--------------------------------------------------------------------------
+  // Properties
+
+  /**
+   * @property {boolean} isAuthenticated
+   */
+  isAuthenticated: Ember.computed.alias('session.isAuthenticated'),
+
+  // -------------------------------------------------------------------------
+  // Methods
+
+  beforeModel() {
+    if (this.get('isAuthenticated')) {
+      this.transitionTo('competency.tree');
     }
-    window.location.replace('/sign-in');
-  }
+  },
 
+  /**
+   * Set all controller properties used in the template
+   * @param controller
+   * @param model
+   */
+  setupController: function(controller) {
+    // remove old notifications
+    this.get('notifications').remove();
+    controller.resetProperties();
+  }
 });

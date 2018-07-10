@@ -1,6 +1,6 @@
 .app-header {
   background: $white;
-  $transparent-opacity: rgba(0, 0, 0, .1);
+  $transparent-opacity: rgba(0, 0, 0, 0.1);
   box-shadow: 0 2px 30px 0 $transparent-opacity;
   height: 55px;
   top: 0;
@@ -18,7 +18,7 @@
       @include flexbox;
       @include align-items(center);
       background-color: inherit;
-      border-bottom: 1px solid  $dark-600;
+      border-bottom: 1px solid $dark-600;
       box-shadow: none;
       -webkit-box-shadow: none;
       border-radius: 0px;
@@ -36,7 +36,6 @@
         @include flex-grow(1);
         height: 55px;
         min-width: 300px;
-        margin-top: 6px;
       }
       .navbar-header {
         @include inline-flex;
@@ -54,8 +53,8 @@
         }
 
         .navbar-brand {
-          @include scale(.8, .8);
-          background: url('images/gooru-logo.svg');
+          @include scale(0.8, 0.8);
+          background: url("images/gooru-logo.svg");
           height: 32px;
           padding: 0;
           width: 111px;
@@ -80,7 +79,7 @@
         @include flexbox;
         @include justify-content(flex-end);
         @include align-items(center);
-        margin:0;
+        margin: 0;
         @media (min-width: $screen-sm) {
           float: right;
         }
@@ -90,21 +89,21 @@
           cursor: pointer;
           padding: 0 10px;
           max-height: 45px;
-          button{
-            margin:0;
+          button {
+            margin: 0;
             &.dropdown-toggle {
               background-color: transparent;
               box-shadow: none;
               padding: 0;
             }
-            i{
-              color:$dark-500;
+            i {
+              color: $dark-500;
               font-size: $font-size-h3;
             }
           }
-          a{
+          a {
             padding: 0;
-            color: rgba(0,0,0,0.3);
+            color: rgba(0, 0, 0, 0.3);
             &.active {
               color: $gray-base;
             }
@@ -138,7 +137,8 @@
                 }
                 a {
                   color: $text-color;
-                  padding: ($link-vertical-padding / 2) ($link-horizontal-padding / 2);
+                  padding: ($link-vertical-padding / 2)
+                    ($link-horizontal-padding / 2);
                 }
               }
             }
@@ -170,8 +170,11 @@
               @include border-top-radius(0);
               @include border-bottom-radius(0);
               @include gradient-horizontal($blue-400, $blue-500, 0%, 100%);
-              @include transition(all .5s ease-out);
-              @include box-shadow(inset 0px 1px 3px 0px rgba(0,0,0,0.50), 0 0 40px 0 rgba(50,50,50,0.50));
+              @include transition(all 0.5s ease-out);
+              @include box-shadow(
+                inset 0px 1px 3px 0px rgba(0, 0, 0, 0.5),
+                0 0 40px 0 rgba(50, 50, 50, 0.5)
+              );
               @media (min-width: $screen-sm) {
                 min-width: 40%;
               }
@@ -183,7 +186,8 @@
                 max-height: none;
                 a {
                   color: $white;
-                  padding: ($link-vertical-padding / 2) ($link-horizontal-padding);
+                  padding: ($link-vertical-padding / 2)
+                    ($link-horizontal-padding);
                   &:hover,
                   &:focus {
                     background-color: transparent;
@@ -209,8 +213,8 @@
               }
             }
           }
-          &.introjs-showElement{
-            a{
+          &.introjs-showElement {
+            a {
               color: $dark-400;
             }
           }
@@ -231,13 +235,13 @@
           @include flexbox;
           @include justify-content(center);
           @include align-items(center);
-          padding:0;
+          padding: 0;
           &:hover {
             border-radius: 5px;
             background-color: $gray-lighter;
             color: $gray;
           }
-          &.introjs-showElement{
+          &.introjs-showElement {
             color: $dark-400;
           }
         }

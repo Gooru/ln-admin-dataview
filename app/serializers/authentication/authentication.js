@@ -8,7 +8,6 @@ import ConfigurationMixin from 'admin-dataview/mixins/configuration';
  * @typedef {Object} AuthenticationSerializer
  */
 export default Ember.Object.extend(ConfigurationMixin, {
-
   /**
    *
    * @param payload is the response coming from the endpoint
@@ -16,16 +15,16 @@ export default Ember.Object.extend(ConfigurationMixin, {
    * @returns {{accessToken, user: {username: (string|string|string)},
    *            cdnUrls:{content: *, user: *}, isAuthenticated: boolean}}
    */
-  normalizeResponse: function(payload, truth,  accessToken) {
+  normalizeResponse: function(payload, truth, accessToken) {
     const basePath = payload.cdn_urls.user_cdn_url;
-    const appRootPath = this.get('appRootPath'); //configuration appRootPath
     return {
-      accessToken: (accessToken ? accessToken : payload.access_token),
+      accessToken: accessToken ? accessToken : payload.access_token,
       user: {
         username: payload.username,
         id: payload.user_id,
-        avatarUrl: payload.thumbnail ?
-          basePath + payload.thumbnail : appRootPath + DEFAULT_IMAGES.USER_PROFILE,
+        avatarUrl: payload.thumbnail
+          ? basePath + payload.thumbnail
+          : DEFAULT_IMAGES.USER_PROFILE,
         providedAt: payload.provided_at
       },
       cdnUrls: {

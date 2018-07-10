@@ -31,6 +31,10 @@ export default Ember.Controller.extend(ConfigurationMixin, {
       } else {
         this.transitionToRoute(item);
       }
+    },
+
+    logout() {
+      this.transitionToRoute('logout');
     }
   }
 });
