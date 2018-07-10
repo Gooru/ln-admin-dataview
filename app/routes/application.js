@@ -55,31 +55,10 @@ export default Ember.Route.extend(ConfigurationMixin, {
     Ember.$(document).off('ajaxError');
   },
 
-  beforeModel(transition) {
-    const params = transition.queryParams;
+  beforeModel() {
     const route = this;
     let details = null;
-    details = route
-      .get('configurationService')
-      .loadConfiguration()
-      .then(function() {
-        let accessToken = params.access_token;
-        if (route.get('session.isAuthenticated') && params.access_token) {
-          route.get('session').invalidate();
-        }
-        if (accessToken) {
-          route
-            .get('authService')
-            .authenticateWithToken(accessToken)
-            .then(function() {
-              route.transitionToRoute('competency.tree', {
-                queryParams: {
-                  access_token: undefined
-                }
-              });
-            });
-        }
-      });
+    details = route.get('configurationService').loadConfiguration();
     return details;
   },
 
