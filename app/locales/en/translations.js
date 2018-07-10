@@ -1,4 +1,16 @@
 export default {
+  signIn: {
+    title: 'Welcome Back to RGO!!',
+    usernameOrEmail: 'Username or Email',
+    logIn: 'Log In',
+    password: 'Password',
+    errors: {
+      add_username: 'Please enter a username.',
+      password_required: 'Please enter a password.',
+      credentials_not_valid:
+        'Uh oh! Something\'s not right. Please double check your username and password and try again.'
+    }
+  },
   common: {
     support: 'Support',
     unexpectedError:

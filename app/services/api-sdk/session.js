@@ -1,8 +1,6 @@
-
 import Ember from 'ember';
 
 export default Ember.Service.extend({
-
   session: Ember.inject.service('session'),
 
   /**
@@ -11,7 +9,27 @@ export default Ember.Service.extend({
    * @returns {*|Ember.RSVP.Promise}
    */
   authenticateWithToken: function(token) {
-    return this.get('session').authenticate('authenticator:auth-api-3', token);
+    let data = {
+      mode: 'token',
+      accessToken: token
+    };
+    return this.get('session').authenticate('authenticator:auth-api-3', data);
+  },
+
+  /**
+   * Creates a session with the specified user credentials
+   * @param {Ember.Object} credentials - Object with username and password attributes
+   * @returns {*|Ember.RSVP.Promise}
+   */
+  authenticateUsingCredentials: function(credentials) {
+    let data = {
+      mode: 'credentials',
+      credentials: {
+        username: credentials.get('username'),
+        password: credentials.get('password')
+      }
+    };
+    return this.get('session').authenticate('authenticator:auth-api-3', data);
   },
 
   /**
@@ -22,5 +40,4 @@ export default Ember.Service.extend({
     const session = this.get('session');
     session.set('user', userData);
   }
-
 });

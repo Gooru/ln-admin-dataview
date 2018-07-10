@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-
   // --------------------------------------------------------------------------
   // Dependencies
 
@@ -13,13 +12,14 @@ export default Ember.Route.extend({
 
   sessionService: Ember.inject.service('api-sdk/session'),
 
-
   // --------------------------------------------------------------------------
   // Methods
 
   beforeModel: function() {
     if (this.get('session.isAuthenticated')) {
-      this.transitionTo('competency');
+      this.transitionTo('competency.tree');
+    } else {
+      this.transitionTo('sign-in');
     }
   },
 

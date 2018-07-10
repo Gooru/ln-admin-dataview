@@ -13,12 +13,21 @@ export default BaseAuthenticator.extend({
     return Ember.RSVP.resolve(data);
   },
 
-  authenticate(accessToken) {
+  authenticate(data) {
     return this.get('authenticationService')
-      .authenticateWithToken(accessToken)
+      .authenticateUsingCredentials(
+        data.credentials.username,
+        data.credentials.password
+      )
       .then(response => {
-        response.accessToken = accessToken;
-        return response;
+        let userId = response.user.id;
+        let accessToken = response.accessToken;
+        return this.get('authenticationService')
+          .authenticateAsImpersonateUser(userId, accessToken)
+          .then(res => {
+            response.accessToken = res.access_token;
+            return response;
+          });
       });
   }
 });

@@ -33,6 +33,7 @@ Router.map(function() {
     this.route('questions');
   });
   this.route('activities');
+  this.route('logout');
 });
 
 export default Router;

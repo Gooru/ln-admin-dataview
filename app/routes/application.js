@@ -72,7 +72,7 @@ export default Ember.Route.extend(ConfigurationMixin, {
             .get('authService')
             .authenticateWithToken(accessToken)
             .then(function() {
-              route.transitionTo('competency.tree', {
+              route.transitionToRoute('competency.tree', {
                 queryParams: {
                   access_token: undefined
                 }
