@@ -1,10 +1,6 @@
 export default {
   signIn: {
     title: 'Welcome Back to RGO!!',
-    title_session_ends: 'Your session expired.',
-    or: 'Or',
-    haveAccount: 'Do you have an account?',
-    signUpHere: 'Sign Up here!',
     usernameOrEmail: 'Username or Email',
     logIn: 'Log In',
     password: 'Password',

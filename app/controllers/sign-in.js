@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import User from 'admin-dataview/models/auth/sign-in';
-import Env from 'admin-dataview/config/environment';
 
 export default Ember.Controller.extend({
   // -------------------------------------------------------------------------
@@ -85,10 +84,6 @@ export default Ember.Controller.extend({
       password: null
     });
     controller.set('user', user);
-    const url = `${window.location.protocol}//${window.location.host}${
-      Env['google-sign-in'].url
-    }`;
-    controller.set('googleSignInUrl', url);
     controller.set('didValidate', false);
   },
 
