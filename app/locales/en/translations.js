@@ -1,6 +1,6 @@
 export default {
   signIn: {
-    title: 'Welcome Back to RGO!!',
+    title: 'Welcome!',
     usernameOrEmail: 'Username or Email',
     logIn: 'Log In',
     password: 'Password',
