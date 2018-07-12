@@ -38,15 +38,20 @@ export default Ember.Component.extend({
       ).addClass('active');
     }
     if (!$courseComponent.hasClass('active')) {
-      Ember.$(
-        `.course .item.${defaultLevels.courseCode.replace(/\./, '-')}`
-      ).addClass('active');
+      if (defaultLevels.courseCode) {
+        Ember.$(
+          `.course .item.${defaultLevels.courseCode.replace(/\./, '-')}`
+        ).addClass('active');
+      }
     }
     let domainCodes = defaultLevels.domainCode || null;
     if (domainCodes) {
       domainCodes = domainCodes.split(',');
       domainCodes.map(domainCode => {
-        Ember.$(`.domain .item.${domainCode.replace(/\./, '-')} input`).prop('checked', true);
+        Ember.$(`.domain .item.${domainCode.replace(/\./, '-')} input`).prop(
+          'checked',
+          true
+        );
       });
     }
   },
