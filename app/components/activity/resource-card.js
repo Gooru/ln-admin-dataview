@@ -1,7 +1,11 @@
 import Ember from 'ember';
 import TaxonomyTag from 'admin-dataview/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'admin-dataview/models/taxonomy/taxonomy-tag-data';
-import { PLAYER_EVENT_SOURCE, PLAYER_WINDOW_NAME } from 'admin-dataview/config/config';
+import {
+  PLAYER_EVENT_SOURCE,
+  PLAYER_WINDOW_NAME
+} from 'admin-dataview/config/config';
+import { getGooruAppEndpointUrl } from 'admin-dataview/utils/endpoint-config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -51,9 +55,9 @@ export default Ember.Component.extend({
      * Action triggered when the user play a resource
      */
     onPlayResource(resourceId) {
-      let locOrigin = window.location.origin;
-      let resourceUrl = `/content/resources/play/${resourceId}?source=${PLAYER_EVENT_SOURCE.RGO}`;
-      let playerURL = locOrigin + resourceUrl;
+      let playerURL = `${getGooruAppEndpointUrl()}/content/resources/play/${resourceId}?source=${
+        PLAYER_EVENT_SOURCE.RGO
+      }`;
       window.open(playerURL, PLAYER_WINDOW_NAME);
     }
   }
