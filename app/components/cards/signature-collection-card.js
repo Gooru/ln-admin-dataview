@@ -1,5 +1,10 @@
 import Ember from 'ember';
-import { DEFAULT_IMAGES, PLAYER_WINDOW_NAME, PLAYER_EVENT_SOURCE } from 'admin-dataview/config/config';
+import {
+  DEFAULT_IMAGES,
+  PLAYER_WINDOW_NAME,
+  PLAYER_EVENT_SOURCE
+} from 'admin-dataview/config/config';
+import { getGooruAppEndpointUrl } from 'admin-dataview/utils/endpoint-config';
 
 export default Ember.Component.extend({
   classNames: ['cards', 'signature-collection-card'],
@@ -22,9 +27,9 @@ export default Ember.Component.extend({
      * It'll open the player in new tab
      */
     onPlayCollection(collectionId) {
-      let locOrigin = window.location.origin;
-      let collectionUrl = `/player/${collectionId}?source=${PLAYER_EVENT_SOURCE.RGO}`;
-      let playerURL = locOrigin + collectionUrl;
+      let playerURL = `${getGooruAppEndpointUrl()}/player/${collectionId}?source=${
+        PLAYER_EVENT_SOURCE.RGO
+      }`;
       window.open(playerURL, PLAYER_WINDOW_NAME);
     }
   }
