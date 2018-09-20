@@ -15,5 +15,10 @@
       </div>
     </div>
   </div>
-  {{learner.time-period-filter onFilterSelection='onFilterSelection'}} {{outlet}}
+
+  <!-- TODO Need to look into it once BE ready, don't remove this section  -->
+  <!-- {{learner.time-period-filter onFilterSelection='onFilterSelection'}}
+  {{outlet}} -->
+
+  {{learner.profile-proficiency user=user}}
 </div>

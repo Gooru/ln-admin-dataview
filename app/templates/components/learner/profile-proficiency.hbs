@@ -1,0 +1,88 @@
+<div class="user-proficiency">
+  <div class="panel left-panel">
+    <div class="panel-header">
+      <div class="title {{selectedMatrixView}}">
+        {{selectedSubject.title}}
+      </div>
+      {{#if (eq selectedMatrixView 'domain')}}
+        <div class="toggle-chart-view">
+          <span class="text">{{t 'proficiency.expand-chart'}}</span>
+          {{app-toggle-button onToggleButton="onToggleChart"}}
+        </div>
+      {{/if}}
+      <div class="actions">
+        <div class="toggle-view">
+          <span class="domain {{if (eq selectedMatrixView 'domain') 'active'}}" {{action "onToggleView" 'domain'}}>{{t 'common.domain'}}</span>
+          <span class="course {{if (eq selectedMatrixView 'course') 'active'}}" {{action "onToggleView" 'course'}}>{{t 'common.course'}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="panel-body matrix">
+      {{#if (eq selectedMatrixView 'domain')}}
+        <div class="domain">
+          {{learner.proficiency.domain-proficiency-chart userId=userId subject=selectedSubject isExpandChartEnabled=isExpandChartEnabled onCompetencyPullOut='onCompetencyPullOut' showPullOut=showPullOut onGetLastUpdated="onGetLastUpdated" timeLine=timeLine}}
+        </div>
+      {{else}}
+        <div class="course">
+          {{learner.proficiency.course-proficiency-chart userId=userId subject=selectedSubject onCompetencyPullOut='onCompetencyPullOut' showPullOut=showPullOut onGetLastUpdated="onGetLastUpdated"}}
+        </div>
+      {{/if}}
+
+      <div class="proficiency-tags">
+        <div class="proficiency-legends">
+          <div class="mastered legend">
+            <span class="box"></span>
+            <span class="title">{{t 'proficiency.mastered'}}</span>
+          </div>
+          <div class="in-progress legend">
+            <span class="box"></span>
+            <span class="title">{{t 'proficiency.in-progress'}}</span>
+          </div>
+          <div class="not-started legend">
+            <span class="box"></span>
+            <span class="title">{{t 'proficiency.not-started'}}</span>
+          </div>
+          <div class="skyline legend">
+            <span class="box-skyline"></span>
+            <span class="title">{{t 'proficiency.skyline'}}</span>
+          </div>
+          <div class="baseline legend">
+            <span class="box-baseline"></span>
+            <span class="title">{{t 'proficiency.baseline'}}</span>
+          </div>
+        </div>
+
+        <div class="last-updated">
+          {{concat (t 'common.last-updated') ':'}} <span class="date-time">{{if lastUpdated (format-date lastUpdated 'MMMM DD, YYYY h:mm A') 'NA'}}</span>
+        </div>
+      </div>
+
+      {{#if (eq selectedMatrixView 'domain')}}
+        <div class="time-series">
+          {{charts.monthly-time-series-chart onSelectMonth="onSelectMonth"}}
+        </div>
+      {{/if}}
+
+    </div>
+  </div>
+  <div class="panel right-panel">
+    <div class="panel-header">
+      <div class="title">
+        {{t 'common.subject'}}
+      </div>
+    </div>
+    <div class="panel-body">
+      {{learner.proficiency.subject-item-list taxonomySubjects=taxonomySubjects selectedItem=selectedSubject onSelectItem="onSelectItem"}}
+    </div>
+  </div>
+  {{#app-pull-out showPullOut=showPullOut title=description description=title showMore=showMore isLoading=isLoading as |section|}}
+    {{#if section.isLessContent}}
+      {{learner.competencies-pull-out-body
+        collection=collection
+        userId=userId
+        competency=competency
+        isLoading=isLoading
+     }}
+    {{/if}}
+  {{/app-pull-out}}
+</div>

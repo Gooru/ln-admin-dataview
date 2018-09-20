@@ -33,16 +33,46 @@ export default Ember.Service.extend({
   fetchSubjects: function(category) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('taxonomyAdapter').fetchSubjects(category).then(
-        function(response) {
-          resolve(
-            service.get('taxonomySerializer').normalizeFetchSubjects(response)
-          );
-        },
-        function(error) {
-          reject(error);
-        }
-      );
+      service
+        .get('taxonomyAdapter')
+        .fetchSubjects(category)
+        .then(
+          function(response) {
+            resolve(
+              service.get('taxonomySerializer').normalizeFetchSubjects(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * Fetches the Taxonomy Subjects from DS
+   *
+   * @param category - The classification type
+   * @returns {Promise}
+   */
+  fetchTaxonomySubjects(taxonomyCategory) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('taxonomyAdapter')
+        .fetchTaxonomySubjects(taxonomyCategory)
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('taxonomySerializer')
+                .normalizeTaxonomySubjects(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
     });
   },
 
@@ -56,16 +86,19 @@ export default Ember.Service.extend({
   fetchCourses: function(frameworkId, subjectId) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('taxonomyAdapter').fetchCourses(frameworkId, subjectId).then(
-        function(response) {
-          resolve(
-            service.get('taxonomySerializer').normalizeFetchCourses(response)
-          );
-        },
-        function(error) {
-          reject(error);
-        }
-      );
+      service
+        .get('taxonomyAdapter')
+        .fetchCourses(frameworkId, subjectId)
+        .then(
+          function(response) {
+            resolve(
+              service.get('taxonomySerializer').normalizeFetchCourses(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
     });
   },
 
@@ -133,16 +166,19 @@ export default Ember.Service.extend({
   fetchCodesByIds: function(codesIds) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
-      service.get('taxonomyAdapter').fetchCodesByIds(codesIds).then(
-        function(response) {
-          resolve(
-            service.get('taxonomySerializer').normalizeFetchCodes(response)
-          );
-        },
-        function(error) {
-          reject(error);
-        }
-      );
+      service
+        .get('taxonomyAdapter')
+        .fetchCodesByIds(codesIds)
+        .then(
+          function(response) {
+            resolve(
+              service.get('taxonomySerializer').normalizeFetchCodes(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
     });
   }
 });

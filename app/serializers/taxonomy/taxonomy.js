@@ -30,6 +30,21 @@ export default Ember.Object.extend({
     return result;
   },
 
+  /**
+   * Method to normalize taxonomy subjects from DS
+   */
+  normalizeTaxonomySubjects(subjectPayload) {
+    var result = [];
+    const serializer = this;
+    const subjects = subjectPayload.subjects;
+    if (Ember.isArray(subjects)) {
+      result = subjects.map(function(subject) {
+        return serializer.normalizeSubject(subject);
+      });
+    }
+    return result;
+  },
+
   normalizeSubject: function(subjectPayload) {
     var serializer = this;
     return TaxonomyRoot.create(Ember.getOwner(serializer).ownerInjection(), {
