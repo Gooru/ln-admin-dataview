@@ -185,7 +185,7 @@ export default Ember.Controller.extend({
     let competencyPromise = Ember.RSVP.resolve(
       controller
         .get('searchService')
-        .learningMapsContent(filters, length, start)
+        .learningMapsCompetencyContent(filters, length, start)
     );
     return Ember.RSVP.hash({
       competencyInfo: competencyPromise
@@ -228,22 +228,27 @@ export default Ember.Controller.extend({
     let controller = this;
     controller.set('isLoading', true);
     let searchTerm = controller.get('searchTerm');
-    let competencyPromise = Ember.RSVP.resolve(controller.get('searchService').searchLearningMapCompetency(searchTerm));
+    let competencyPromise = Ember.RSVP.resolve(
+      controller.get('searchService').searchLearningMapCompetency(searchTerm)
+    );
     return Ember.RSVP.hash({
       competencyList: competencyPromise
-    }).then(function(hash) {
-      let fetchedCompetencies = hash.competencyList.competencyInfo;
-      let totalHitCount = hash.competencyList.totalHitCount;
-      controller.set('fetchedCompetencies', fetchedCompetencies);
-      controller.set('competencies', fetchedCompetencies);
-      controller.set('isLoading', false);
-      if (fetchedCompetencies.length >= totalHitCount) {
-        controller.set('isShowExportBtn', false);
-        controller.set('isProcessedAllCompetency', true);
+    }).then(
+      function(hash) {
+        let fetchedCompetencies = hash.competencyList.competencyInfo;
+        let totalHitCount = hash.competencyList.totalHitCount;
+        controller.set('fetchedCompetencies', fetchedCompetencies);
+        controller.set('competencies', fetchedCompetencies);
+        controller.set('isLoading', false);
+        if (fetchedCompetencies.length >= totalHitCount) {
+          controller.set('isShowExportBtn', false);
+          controller.set('isProcessedAllCompetency', true);
+        }
+      },
+      function() {
+        controller.set('isLoading', false);
       }
-    }, function() {
-      controller.set('isLoading', false);
-    });
+    );
   },
 
   /**
