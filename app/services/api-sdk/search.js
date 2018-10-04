@@ -340,6 +340,46 @@ export default Ember.Service.extend({
     });
   },
 
+  learningMapsCompetencyContent: function(filters, length, start) {
+    const service = this;
+    let competencyContentContainer = service.get('competencyContentContainer');
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      let isCompetencyContentAvailable = competencyContentContainer[
+        `${filters.id}`
+      ]
+        ? competencyContentContainer[`${filters.id}`][start] || null
+        : null;
+      if (isCompetencyContentAvailable) {
+        resolve(competencyContentContainer[`${filters.id}`][start]);
+      } else {
+        service
+          .get('searchAdapter')
+          .learningMapsCompetencyContent(filters, length, start)
+          .then(
+            function(response) {
+              let normalizedCompetencyContent = service
+                .get('searchSerializer')
+                .normalizeSearchlearningMapsContent(response);
+              let fetchedCompetencyContent =
+                competencyContentContainer[`${filters.id}`] || [];
+              fetchedCompetencyContent[start] = normalizedCompetencyContent;
+              competencyContentContainer[
+                `${filters.id}`
+              ] = fetchedCompetencyContent;
+              service.set(
+                'competencyContentContainer',
+                competencyContentContainer
+              );
+              resolve(normalizedCompetencyContent);
+            },
+            function(error) {
+              reject(error);
+            }
+          );
+      }
+    });
+  },
+
   fetchLearningMapCompetency: function(filters, start, length) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
