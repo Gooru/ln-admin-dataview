@@ -11,6 +11,12 @@ export default Ember.Object.extend({
   namespace: '/api/nucleus/v1/taxonomy',
 
   /**
+   * @namespace taxonomyDSNamespace
+   * API Endpoint of the DS users for taxonomy
+   */
+  taxonomyDSNamespace: '/api/ds/users/v2/tx',
+
+  /**
    * Fetches the Taxonomy Subjects for the specific type
    *
    * @param category - The classification type
@@ -26,6 +32,27 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders(),
       data: {
         classification_type: category
+      }
+    };
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Fetches the Taxonomy Subjects from the DS
+   *
+   * @param category - The classification type
+   * @returns {Promise}
+   */
+  fetchTaxonomySubjects(category) {
+    const adapter = this;
+    const namespace = adapter.get('taxonomyDSNamespace');
+    const url = `${namespace}/subjects`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders(),
+      data: {
+        classificationType: category
       }
     };
     return Ember.$.ajax(url, options);

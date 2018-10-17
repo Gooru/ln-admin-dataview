@@ -6,7 +6,6 @@ import Ember from 'ember';
  * @typedef {Object} CompetencySerializer
  */
 export default Ember.Object.extend({
-
   /**
    * Normalized data of user competencies
    * @return {Object}
@@ -82,24 +81,25 @@ export default Ember.Object.extend({
    */
   normalizeCompetencyMatrixDomain: function(response) {
     let resultSet = Ember.A();
+    let domains = Ember.A();
     if (response.userCompetencyMatrix) {
       let userCompetencyMatrix = Ember.A(response.userCompetencyMatrix);
       userCompetencyMatrix.forEach(domainData => {
         let domain = Ember.Object.create(domainData);
         let competencies = domain.get('competencies');
-        let domainSet = Ember.A();
         let competencySet = Ember.A();
         competencies.forEach(data => {
           competencySet.pushObject(Ember.Object.create(data));
         });
         domain.set('competencies', competencySet);
-        domainSet.pushObject(domain);
-        domain.set('domains', domainSet);
-        resultSet.pushObject(domain);
+        domains.pushObject(domain);
       });
     }
+    resultSet = {
+      domains: domains,
+      lastUpdated: response.lastUpdated || response.createdAt
+    };
     return resultSet;
-
   },
 
   /**
@@ -124,7 +124,6 @@ export default Ember.Object.extend({
           });
           domain.set('competencies', competencySet);
           domainSet.pushObject(domain);
-
         });
         course.set('domains', domainSet);
         resultSet.pushObject(course);
@@ -132,5 +131,4 @@ export default Ember.Object.extend({
     }
     return resultSet;
   }
-
 });

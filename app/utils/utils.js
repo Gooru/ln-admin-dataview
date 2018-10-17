@@ -1,9 +1,5 @@
-import {
-  GRADING_SCALE
-} from 'admin-dataview/config/config';
-import {
-  isNumeric
-} from './math';
+import { GRADING_SCALE } from 'admin-dataview/config/config';
+import { isNumeric } from './math';
 
 /**
  * Find the route path last occurrence
@@ -41,7 +37,7 @@ export function getResourceFormat(format) {
  */
 export function truncateString(text, length = 95) {
   if (text && text.length > 100) {
-    return `${text.substring(0, length)  }...`;
+    return `${text.substring(0, length)}...`;
   }
   return text;
 }
@@ -90,13 +86,13 @@ export function formatTime(timeInMillis) {
  * @return {String} formated string of count
  */
 export function dataCountFormat(count) {
-  return Math.abs(Number(count)) >= 1.0e+9 ?
-    `${Math.round(Math.abs(Number(count)) / 1.0e+9)  }B` :
-    Math.round(Math.abs(Number(count)) >= 1.0e+6) ?
-      `${Math.round(Math.abs(Number(count)) / 1.0e+6)  }M` :
-      Math.round(Math.abs(Number(count)) >= 1.0e+3) ?
-        `${Math.round(Math.abs(Number(count)) / 1.0e+3)  }K` :
-        Math.round(count);
+  return Math.abs(Number(count)) >= 1.0e9
+    ? `${Math.round(Math.abs(Number(count)) / 1.0e9)}B`
+    : Math.round(Math.abs(Number(count)) >= 1.0e6)
+      ? `${Math.round(Math.abs(Number(count)) / 1.0e6)}M`
+      : Math.round(Math.abs(Number(count)) >= 1.0e3)
+        ? `${Math.round(Math.abs(Number(count)) / 1.0e3)}K`
+        : Math.round(count);
 }
 
 /**
@@ -106,10 +102,9 @@ export function dataCountFormat(count) {
  */
 export function dataCountFormatByKilo(count) {
   const usLocale = 'en-US';
-  const countSuffix = Math.round(Math.abs(Number(count)) >= 1.0e+3) ? 'K' : '';
+  const countSuffix = Math.round(Math.abs(Number(count)) >= 1.0e3) ? 'K' : '';
   return count.toLocaleString(usLocale) + countSuffix;
 }
-
 
 /**
  * Transform the given text into capitalize form
@@ -142,7 +137,6 @@ export function getBarGradeColor(grade) {
   return color;
 }
 
-
 /**
  * Find the range corresponding to the grade bracket that a specific grade belongs to
  * @see gooru-web/config/config#BARS_GRADING_SCALE
@@ -163,7 +157,6 @@ export function getGradeRange(score) {
   }
   return range;
 }
-
 
 /**
  * Formats a date into a string
@@ -186,11 +179,24 @@ export function getSearchFilterTextBySubjectName(subjectName) {
     subjectfilter = 'Math~~Mathematics';
     break;
   case 'English Language Arts':
-    subjectfilter = 'English Language Arts & Literacy~~English Language Arts~~English Language Arts/Literacy~~English Language Arts and Reading~~ELA';
+    subjectfilter =
+        'English Language Arts & Literacy~~English Language Arts~~English Language Arts/Literacy~~English Language Arts and Reading~~ELA';
     break;
   case 'Social Sciences':
-    subjectfilter = 'Social Studies~~History~~History-Social Science~~Social Sciences';
+    subjectfilter =
+        'Social Studies~~History~~History-Social Science~~Social Sciences';
     break;
   }
   return subjectfilter;
+}
+
+/**
+ * Find number of months between two dates
+ * @return {Number}
+ */
+export function diffMonthBtwTwoDates(date1, date2) {
+  let diff = (date1.getTime() - date2.getTime()) / 1000;
+  diff /= 60 * 60 * 24 * 7 * 4;
+  let monthsDiff = Math.abs(Math.round(diff));
+  return monthsDiff > 0 ? monthsDiff - 1 : monthsDiff;
 }

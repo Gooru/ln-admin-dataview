@@ -27,6 +27,12 @@ export default Ember.Service.extend({
    */
   taxonomyContainer: null,
 
+  /**
+   * @property {Object} taxonomySubjectContainer
+   * An object to store taxonomy subjects which is fetched from the ds-user API
+   */
+  taxonomySubjectContainer: null,
+
   init() {
     this._super(...arguments);
     this.set('taxonomyContainer', {});
@@ -34,6 +40,7 @@ export default Ember.Service.extend({
       'apiTaxonomyService',
       APITaxonomyService.create(Ember.getOwner(this).ownerInjection())
     );
+    this.set('taxonomySubjectContainer', {});
   },
 
   /**
@@ -61,6 +68,31 @@ export default Ember.Service.extend({
         Ember.RSVP.all(promises).then(function() {
           resolve(taxonomyContainer[category]);
         });
+      }
+    });
+  },
+
+  /**
+   * Gets the Taxonomy Subjects for a Category from the cached taxonomy. If the subjects are not available then fetch
+   * them from the Taxonomy API.
+   *
+   * @param {String} category - The classification type
+   * @returns {Promise}
+   */
+  getTaxonomySubjects(taxonomyCategory) {
+    const service = this;
+    const apiTaxonomyService = service.get('apiTaxonomyService');
+    return new Ember.RSVP.Promise(function(resolve) {
+      var taxonomySubjectContainer = service.get('taxonomySubjectContainer');
+      if (taxonomySubjectContainer[taxonomyCategory]) {
+        resolve(taxonomySubjectContainer[taxonomyCategory]);
+      } else {
+        return apiTaxonomyService
+          .fetchTaxonomySubjects(taxonomyCategory)
+          .then(function(subjects) {
+            taxonomySubjectContainer[taxonomyCategory] = subjects;
+            resolve(taxonomySubjectContainer[taxonomyCategory]);
+          });
       }
     });
   },
