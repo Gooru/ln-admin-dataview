@@ -1,6 +1,7 @@
  {
   "endpoint" : {
     "url": "http://www.gooru.org",
-    "secureUrl": "http://www.gooru.org"
+    "secureUrl": "http://www.gooru.org",
+    "gooruAppUrl": "//www.gooru.org"
   }
 }
