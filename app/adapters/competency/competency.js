@@ -17,7 +17,7 @@ export default Ember.Object.extend({
   getUserCompetencies(user, activeDuration = '3m') {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v1/user/competency`;
+    const url = `${namespace}/v2/user/competency`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
