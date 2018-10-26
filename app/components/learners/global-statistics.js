@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -10,16 +9,8 @@ export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Properties
 
-  subjects: null,
+  subjects: null
 
   // -------------------------------------------------------------------------
   // Events
-
-  actions:  {
-    onSelectActiveUsers: function(subject) {
-      this.sendAction('onSelectActiveUsers', subject);
-    }
-  }
-
-
 });
