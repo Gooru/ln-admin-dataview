@@ -17,7 +17,7 @@ export default Ember.Object.extend({
   getUserJourneyByCourses(userId, requestPayLoad) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v1/user/journey?user=${userId}`;
+    const url = `${namespace}/v2/user/journey?user=${userId}`;
     const options = {
       type: 'POST',
       headers: adapter.defineHeaders(),
