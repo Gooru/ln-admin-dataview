@@ -142,6 +142,23 @@ export default Ember.Object.extend({
     return Ember.$.ajax(url, options);
   },
 
+  /**
+   * Fetches the Taxonomy classifications.
+   *
+   * @returns {Promise}
+   */
+  fetchTaxonomyClassifications() {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/classifications`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      headers: adapter.defineHeaders()
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   defineHeaders() {
     return {
       Authorization: `Token ${this.get('session.accessToken')}`
