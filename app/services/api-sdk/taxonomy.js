@@ -180,5 +180,31 @@ export default Ember.Service.extend({
           }
         );
     });
+  },
+
+  /**
+   * Fetches the Taxonomy classifications.
+   *
+   * @returns {Promise}
+   */
+  fetchTaxonomyClassifications() {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('taxonomyAdapter')
+        .fetchTaxonomyClassifications()
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('taxonomySerializer')
+                .normalizeFetchClassification(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
   }
 });

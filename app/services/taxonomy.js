@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import APITaxonomyService from 'admin-dataview/services/api-sdk/taxonomy';
 import TaxonomyItem from 'admin-dataview/models/taxonomy/taxonomy-item';
-import { TAXONOMY_CATEGORIES, CODE_TYPES } from 'admin-dataview/config/config';
+import { CODE_TYPES } from 'admin-dataview/config/config';
 import { getCategoryFromSubjectId } from 'admin-dataview/utils/taxonomy';
 
 /**
@@ -33,6 +33,12 @@ export default Ember.Service.extend({
    */
   taxonomySubjectContainer: null,
 
+  /**
+   * @property {Object} taxonomyClassificationsContainer
+   * An object to store taxonomy classification which is fetched
+   */
+  taxonomyClassificationsContainer: null,
+
   init() {
     this._super(...arguments);
     this.set('taxonomyContainer', {});
@@ -41,6 +47,7 @@ export default Ember.Service.extend({
       APITaxonomyService.create(Ember.getOwner(this).ownerInjection())
     );
     this.set('taxonomySubjectContainer', {});
+    this.set('taxonomyClassificationsContainer', null);
   },
 
   /**
@@ -58,15 +65,17 @@ export default Ember.Service.extend({
       if (taxonomyContainer[category]) {
         resolve(taxonomyContainer[category]);
       } else {
-        let promises = TAXONOMY_CATEGORIES.map(function(taxonomyCategory) {
-          return apiTaxonomyService
-            .fetchSubjects(taxonomyCategory.value)
-            .then(function(subjects) {
-              taxonomyContainer[taxonomyCategory.value] = subjects;
-            });
-        });
-        Ember.RSVP.all(promises).then(function() {
-          resolve(taxonomyContainer[category]);
+        service.getTaxonomyClassifications().then(classifications => {
+          let promises = classifications.map(classification => {
+            return apiTaxonomyService
+              .fetchSubjects(classification.get('id'))
+              .then(function(subjects) {
+                taxonomyContainer[classification.get('id')] = subjects;
+              });
+          });
+          Ember.RSVP.all(promises).then(function() {
+            resolve(taxonomyContainer[category]);
+          });
         });
       }
     });
@@ -92,6 +101,32 @@ export default Ember.Service.extend({
           .then(function(subjects) {
             taxonomySubjectContainer[taxonomyCategory] = subjects;
             resolve(taxonomySubjectContainer[taxonomyCategory]);
+          });
+      }
+    });
+  },
+
+  /**
+   * Gets the Taxonomy classifications  from the cached taxonomy. If the classifications are not available then fetch
+   * them from the Taxonomy API.
+   *
+   * @returns {Promise}
+   */
+  getTaxonomyClassifications() {
+    const service = this;
+    const apiTaxonomyService = service.get('apiTaxonomyService');
+    return new Ember.RSVP.Promise(function(resolve) {
+      let taxonomyClassificationsContainer = service.get(
+        'taxonomyClassificationsContainer'
+      );
+      if (taxonomyClassificationsContainer) {
+        resolve(taxonomyClassificationsContainer);
+      } else {
+        return apiTaxonomyService
+          .fetchTaxonomyClassifications()
+          .then(function(classifications) {
+            service.set('taxonomyClassificationsContainer', classifications);
+            resolve(classifications);
           });
       }
     });
