@@ -2,8 +2,8 @@
   {{#if (eq type 'category')}}
     {{#each values as |value|}}
       <div class="current-level-value">
-        <a {{action "getSubjects" value.value}} id="{{value.value}}">
-          {{t value.label}}
+        <a {{action "getSubjects" value.id}} id="{{value.id}}">
+          {{value.title}}
         </a>
       </div>
     {{/each}}
