@@ -12,7 +12,7 @@
           <span class="title">{{t 'crosswalk.browser-level.subject'}}, </span>
           <span class="title">{{t 'crosswalk.browser-level.framework'}}</span>
         </div>
-        {{crosswalk.app-subject-browser frameworkStack="frameworkStack" disableGenerateBtn="disableGenerateBtn" isShowWarning=enableGenerateTableBtn categoryId=categoryId}}
+        {{crosswalk.app-subject-browser categories=categories frameworkStack="frameworkStack" disableGenerateBtn="disableGenerateBtn" isShowWarning=enableGenerateTableBtn categoryId=categoryId}}
       </div>
       <div class="generate-table-btn" align="center">
         <button class="btn generate-btn {{unless enableGenerateTableBtn 'disabled'}}" {{action "generateCrosswalkTable"}}>{{t 'crosswalk.generate-table'}}</button>
@@ -21,7 +21,7 @@
     <div class="crosswalk-table-view">
       {{#if showCrosswalkTable}}
         <div class="crosswalk-table">
-          {{crosswalk.app-crosswalk-table categoryId=categoryId subjectTitle=subjectTitle tableData=tableData onToggleSubjectBrowser="onToggleSubjectBrowser" isShowTableSearch=false}}
+          {{crosswalk.app-crosswalk-table categories=categories categoryId=categoryId subjectTitle=subjectTitle tableData=tableData onToggleSubjectBrowser="onToggleSubjectBrowser" isShowTableSearch=false}}
         </div>
       {{/if}}
     </div>
