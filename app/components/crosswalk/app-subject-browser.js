@@ -8,6 +8,7 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Dependencies
+
   /**
    * Search service to fetch content details
    */
@@ -66,14 +67,12 @@ export default Ember.Component.extend({
   init: function() {
     let component = this;
     component._super(...arguments);
-    component.fetchTaxonomyClassifications().then(() => {
-      let currentSubject = component.fetchTaxonomySubjects(
-        component.get('defaultCategory')
-      );
-      currentSubject.then(function(subject) {
-        component.set('currentSubjectId', subject.id);
-        component.fetchTaxonomyFrameworks(subject);
-      });
+    let currentSubject = component.fetchTaxonomySubjects(
+      component.get('defaultCategory')
+    );
+    currentSubject.then(function(subject) {
+      component.set('currentSubjectId', subject.id);
+      component.fetchTaxonomyFrameworks(subject);
     });
   },
 
@@ -146,22 +145,5 @@ export default Ember.Component.extend({
     let component = this;
     component.set('frameworks', subject.frameworks);
     component.set('isShowFrameworkLevel', true);
-  },
-
-  /**
-   * Methods used to fetch the taxonomy classifications
-   * @return {Promise}
-   */
-  fetchTaxonomyClassifications() {
-    let component = this;
-    return new Ember.RSVP.Promise(function(resolve) {
-      return component
-        .get('taxonomyService')
-        .getTaxonomyClassifications()
-        .then(classifications => {
-          component.set('categories', classifications);
-          resolve();
-        });
-    });
   }
 });
