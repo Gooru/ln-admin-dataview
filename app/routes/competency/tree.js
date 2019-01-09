@@ -29,6 +29,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   // Methods
 
   model: function() {
+    this.set('categories', Ember.A([]));
     return this.loadTaxonomyData();
   },
 
