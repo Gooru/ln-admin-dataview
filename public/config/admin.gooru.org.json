@@ -1,7 +1,7 @@
  {
   "endpoint" : {
-    "url": "http://staging.gooru.org",
-    "secureUrl": "https://staging.gooru.org",
-    "gooruAppUrl": "//staging.gooru.org"
+    "url": "http://gooru.org",
+    "secureUrl": "https://gooru.org",
+    "gooruAppUrl": "//gooru.org"
   }
 }
