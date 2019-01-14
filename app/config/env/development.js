@@ -2,10 +2,10 @@
  Development Environment configuration properties
  */
 export default {
-  'appRootPath': '/', //default is root
-  'endpoint' : {
-    'url': 'http://staging.gooru.org',
-    'secureUrl': 'https://staging.gooru.org'
+  appRootPath: '/', //default is root
+  endpoint: {
+    url: 'http://staging.gooru.org',
+    secureUrl: 'http://staging.gooru.org',
+    gooruAppUrl: '//staging.gooru.org'
   }
-
 };

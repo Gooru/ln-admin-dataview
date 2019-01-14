@@ -1,6 +1,10 @@
 import Ember from 'ember';
 import TaxonomyTag from 'admin-dataview/models/taxonomy/taxonomy-tag';
-import {PLAYER_WINDOW_NAME, PLAYER_EVENT_SOURCE} from 'admin-dataview/config/config';
+import {
+  PLAYER_WINDOW_NAME,
+  PLAYER_EVENT_SOURCE
+} from 'admin-dataview/config/config';
+import { getGooruAppEndpointUrl } from 'admin-dataview/utils/endpoint-config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -15,7 +19,6 @@ export default Ember.Component.extend({
     component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
   },
 
-
   // -------------------------------------------------------------------------
   // Properties
 
@@ -28,12 +31,9 @@ export default Ember.Component.extend({
   /**
    * @property {TaxonomyTag[]} List of taxonomy tags
    */
-  tags: Ember.computed(
-    'course.taxonomy.[]',
-    function() {
-      return TaxonomyTag.getTaxonomyTags(this.get('course.taxonomy'));
-    }
-  ),
+  tags: Ember.computed('course.taxonomy.[]', function() {
+    return TaxonomyTag.getTaxonomyTags(this.get('course.taxonomy'));
+  }),
 
   actions: {
     onShowPullOut: function(course) {
@@ -41,11 +41,10 @@ export default Ember.Component.extend({
     },
 
     onPlayCourse(courseId) {
-      let locOrigin = window.location.origin;
-      let courseUrl = `/content/courses/play/${courseId}?source=${PLAYER_EVENT_SOURCE.RGO}`;
-      let playerURL = locOrigin + courseUrl;
+      let playerURL = `${getGooruAppEndpointUrl()}/content/courses/play/${courseId}?source=${
+        PLAYER_EVENT_SOURCE.RGO
+      }`;
       window.open(playerURL, PLAYER_WINDOW_NAME);
     }
   }
-
 });

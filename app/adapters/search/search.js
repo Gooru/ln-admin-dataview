@@ -29,7 +29,7 @@ export default Ember.Object.extend({
       length: length,
       startAt: start,
       'flt.collectionType': 'collection',
-      'isCrosswalk': false
+      isCrosswalk: false
     };
     const options = {
       type: 'GET',
@@ -59,7 +59,7 @@ export default Ember.Object.extend({
       length: length,
       startAt: start,
       'flt.collectionType': 'assessment',
-      'isCrosswalk': false
+      isCrosswalk: false
     };
     const options = {
       type: 'GET',
@@ -88,7 +88,7 @@ export default Ember.Object.extend({
       length: length,
       startAt: start,
       'flt.contentFormat': 'resource',
-      'isCrosswalk': false
+      isCrosswalk: false
     };
     let options = {
       type: 'GET',
@@ -118,7 +118,7 @@ export default Ember.Object.extend({
       length: length,
       startAt: start,
       'flt.resourceFormat': 'question',
-      'isCrosswalk': false
+      isCrosswalk: false
     };
     let options = {
       type: 'GET',
@@ -146,7 +146,7 @@ export default Ember.Object.extend({
       q: query,
       startAt: start,
       length: length,
-      'isCrosswalk': false
+      isCrosswalk: false
     };
     let options = {
       type: 'GET',
@@ -174,7 +174,7 @@ export default Ember.Object.extend({
       q: query,
       length: length,
       startAt: start,
-      'isCrosswalk': false
+      isCrosswalk: false
     };
     let options = {
       type: 'GET',
@@ -202,7 +202,7 @@ export default Ember.Object.extend({
       q: query,
       length: length,
       startAt: start,
-      'isCrosswalk': false
+      isCrosswalk: false
     };
     let options = {
       type: 'GET',
@@ -230,7 +230,7 @@ export default Ember.Object.extend({
       q: query,
       length: length,
       startAt: start,
-      'isCrosswalk': false
+      isCrosswalk: false
     };
     let options = {
       type: 'GET',
@@ -261,7 +261,35 @@ export default Ember.Object.extend({
     options.data = {
       startAt: start,
       length: length,
-      'isCrosswalk': false
+      isCrosswalk: false
+    };
+    if (nodeData.fwCode) {
+      options.data.fwCode = nodeData.fwCode;
+      options.data.isDisplayCode = false;
+    }
+    return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * Fetches learningMapsCompetencyContent
+   *
+   * @param nodeData the term to search
+   * @returns {Promise.<Content[]>}
+   */
+  learningMapsCompetencyContent(nodeData, length = 10, start = 0) {
+    const adapter = this;
+    const namespace1 = this.get('namespace1');
+    const url = `${namespace1}/competency/${nodeData.id}`;
+    let options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      headers: adapter.defineHeaders()
+    };
+    options.data = {
+      startAt: start,
+      length: length,
+      isCrosswalk: false
     };
     if (nodeData.fwCode) {
       options.data.fwCode = nodeData.fwCode;
@@ -277,7 +305,7 @@ export default Ember.Object.extend({
     let defaultFilters = {
       startAt: start,
       length: length,
-      'isCrosswalk': false
+      isCrosswalk: false
     };
     let options = {
       type: 'GET',
@@ -301,7 +329,7 @@ export default Ember.Object.extend({
       q: q,
       startAt: start,
       length: length,
-      'isCrosswalk': false
+      isCrosswalk: false
     };
     let options = {
       type: 'GET',

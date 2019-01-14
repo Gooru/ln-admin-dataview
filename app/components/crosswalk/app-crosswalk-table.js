@@ -14,7 +14,9 @@ export default Ember.Component.extend({
     let numberOfColumns = component.get('tableData.header').length;
     component.$('.thead .td').css('width', `calc(100% / ${numberOfColumns})`);
     component.$('tbody tr td').css('width', `calc(100% / ${numberOfColumns})`);
-    $('.table-structure').animate({ scrollTop: 0 });
+    $('.table-structure').animate({
+      scrollTop: 0
+    });
   },
 
   // -------------------------------------------------------------------------
@@ -83,5 +85,13 @@ export default Ember.Component.extend({
   /**
    * List of crosswalk codes by framework id
    */
-  crosswakCodeByFrameworkId: null
+  crosswakCodeByFrameworkId: null,
+
+  /**
+   * Identify category value from categories list based on category Id.
+   */
+  category: Ember.computed('categories', 'categoryId', function() {
+    let categoryId = this.get('categoryId');
+    return this.get('categories').findBy('id', categoryId);
+  })
 });

@@ -1,7 +1,11 @@
 import Ember from 'ember';
 import TaxonomyTag from 'admin-dataview/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'admin-dataview/models/taxonomy/taxonomy-tag-data';
-import { PLAYER_WINDOW_NAME, PLAYER_EVENT_SOURCE } from 'admin-dataview/config/config';
+import {
+  PLAYER_WINDOW_NAME,
+  PLAYER_EVENT_SOURCE
+} from 'admin-dataview/config/config';
+import { getGooruAppEndpointUrl } from 'admin-dataview/utils/endpoint-config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -57,9 +61,9 @@ export default Ember.Component.extend({
      * It'll open the player in new tab
      */
     onPlayCollection(collectionId) {
-      let locOrigin = window.location.origin;
-      let collectionUrl = `/player/${collectionId}?source=${PLAYER_EVENT_SOURCE.RGO}`;
-      let playerURL = locOrigin + collectionUrl;
+      let playerURL = `${getGooruAppEndpointUrl()}/player/${collectionId}?source=${
+        PLAYER_EVENT_SOURCE.RGO
+      }`;
       window.open(playerURL, PLAYER_WINDOW_NAME);
     }
   }

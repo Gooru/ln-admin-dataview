@@ -17,7 +17,7 @@ export default Ember.Object.extend({
   getUserCompetencies(user, activeDuration = '3m') {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v1/user/competency`;
+    const url = `${namespace}/v2/user/competency`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -109,19 +109,20 @@ export default Ember.Object.extend({
    * Get user competency Matrix for domains by subjects
    * @returns {Promise.<[]>}
    */
-  getCompetencyMatrixDomain(user, subject) {
+  getCompetencyMatrixDomain(user, subject, timeSeries = {}) {
     const adapter = this;
     const namespace = adapter.get('namespace');
     const url = `${namespace}/v2/tx/competency/matrix/domain`;
+    const defaultParams = {
+      user,
+      subject
+    };
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
-      contentType: 'application/json; charset=utf-8',
-      data: {
-        user,
-        subject
-      }
+      contentType: 'application/json; charset=utf-8'
     };
+    options.data = Object.assign(defaultParams, timeSeries);
     return Ember.RSVP.hashSettled({
       competencyMatrix: Ember.$.ajax(url, options)
     }).then(function(hash) {

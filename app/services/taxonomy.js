@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import APITaxonomyService from 'admin-dataview/services/api-sdk/taxonomy';
 import TaxonomyItem from 'admin-dataview/models/taxonomy/taxonomy-item';
-import { TAXONOMY_CATEGORIES, CODE_TYPES } from 'admin-dataview/config/config';
+import { CODE_TYPES } from 'admin-dataview/config/config';
 import { getCategoryFromSubjectId } from 'admin-dataview/utils/taxonomy';
 
 /**
@@ -27,6 +27,18 @@ export default Ember.Service.extend({
    */
   taxonomyContainer: null,
 
+  /**
+   * @property {Object} taxonomySubjectContainer
+   * An object to store taxonomy subjects which is fetched from the ds-user API
+   */
+  taxonomySubjectContainer: null,
+
+  /**
+   * @property {Object} taxonomyClassificationsContainer
+   * An object to store taxonomy classification which is fetched
+   */
+  taxonomyClassificationsContainer: null,
+
   init() {
     this._super(...arguments);
     this.set('taxonomyContainer', {});
@@ -34,6 +46,8 @@ export default Ember.Service.extend({
       'apiTaxonomyService',
       APITaxonomyService.create(Ember.getOwner(this).ownerInjection())
     );
+    this.set('taxonomySubjectContainer', {});
+    this.set('taxonomyClassificationsContainer', null);
   },
 
   /**
@@ -51,16 +65,69 @@ export default Ember.Service.extend({
       if (taxonomyContainer[category]) {
         resolve(taxonomyContainer[category]);
       } else {
-        let promises = TAXONOMY_CATEGORIES.map(function(taxonomyCategory) {
-          return apiTaxonomyService
-            .fetchSubjects(taxonomyCategory.value)
-            .then(function(subjects) {
-              taxonomyContainer[taxonomyCategory.value] = subjects;
-            });
+        service.getTaxonomyClassifications().then(classifications => {
+          let promises = classifications.map(classification => {
+            return apiTaxonomyService
+              .fetchSubjects(classification.get('id'))
+              .then(function(subjects) {
+                taxonomyContainer[classification.get('id')] = subjects;
+              });
+          });
+          Ember.RSVP.all(promises).then(function() {
+            resolve(taxonomyContainer[category]);
+          });
         });
-        Ember.RSVP.all(promises).then(function() {
-          resolve(taxonomyContainer[category]);
-        });
+      }
+    });
+  },
+
+  /**
+   * Gets the Taxonomy Subjects for a Category from the cached taxonomy. If the subjects are not available then fetch
+   * them from the Taxonomy API.
+   *
+   * @param {String} category - The classification type
+   * @returns {Promise}
+   */
+  getTaxonomySubjects(taxonomyCategory) {
+    const service = this;
+    const apiTaxonomyService = service.get('apiTaxonomyService');
+    return new Ember.RSVP.Promise(function(resolve) {
+      var taxonomySubjectContainer = service.get('taxonomySubjectContainer');
+      if (taxonomySubjectContainer[taxonomyCategory]) {
+        resolve(taxonomySubjectContainer[taxonomyCategory]);
+      } else {
+        return apiTaxonomyService
+          .fetchTaxonomySubjects(taxonomyCategory)
+          .then(function(subjects) {
+            taxonomySubjectContainer[taxonomyCategory] = subjects;
+            resolve(taxonomySubjectContainer[taxonomyCategory]);
+          });
+      }
+    });
+  },
+
+  /**
+   * Gets the Taxonomy classifications  from the cached taxonomy. If the classifications are not available then fetch
+   * them from the Taxonomy API.
+   *
+   * @returns {Promise}
+   */
+  getTaxonomyClassifications() {
+    const service = this;
+    const apiTaxonomyService = service.get('apiTaxonomyService');
+    return new Ember.RSVP.Promise(function(resolve) {
+      let taxonomyClassificationsContainer = service.get(
+        'taxonomyClassificationsContainer'
+      );
+      if (taxonomyClassificationsContainer) {
+        resolve(taxonomyClassificationsContainer);
+      } else {
+        return apiTaxonomyService
+          .fetchTaxonomyClassifications()
+          .then(function(classifications) {
+            service.set('taxonomyClassificationsContainer', classifications);
+            resolve(classifications);
+          });
       }
     });
   },

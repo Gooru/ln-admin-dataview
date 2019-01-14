@@ -158,7 +158,7 @@ export default Ember.Controller.extend({
           }
         } else if (node.depth === 2) {
           let categoryNodes = taxonomyTreeViewData.get('children');
-          let category = categoryNodes.findBy('id', Utils.getCategoryId(id));
+          let category = categoryNodes.findBy('code', Utils.getCategoryId(id));
           let subjectNodes = category.get('children');
           let subject = subjectNodes.findBy('id', id);
           let courseNodes = subject.get('childData');
@@ -173,7 +173,7 @@ export default Ember.Controller.extend({
           }
         } else if (node.depth === 3) {
           let categoryNodes = taxonomyTreeViewData.get('children');
-          let category = categoryNodes.findBy('id', Utils.getCategoryId(id));
+          let category = categoryNodes.findBy('code', Utils.getCategoryId(id));
           let subjectNodes = category.get('children');
           let subject = subjectNodes.findBy('id', Utils.getSubjectId(id));
           let courseNodes = subject.get('childData');
@@ -189,7 +189,7 @@ export default Ember.Controller.extend({
           }
         } else if (node.depth === 4) {
           let categoryNodes = taxonomyTreeViewData.get('children');
-          let category = categoryNodes.findBy('id', Utils.getCategoryId(id));
+          let category = categoryNodes.findBy('code', Utils.getCategoryId(id));
           let subjectNodes = category.get('children');
           let subject = subjectNodes.findBy('id', Utils.getSubjectId(id));
           let courseNodes = subject.get('childData');
@@ -200,7 +200,7 @@ export default Ember.Controller.extend({
           component.updateData(node, standardNodes);
         } else if (node.depth === 5) {
           let categoryNodes = taxonomyTreeViewData.get('children');
-          let category = categoryNodes.findBy('id', Utils.getCategoryId(id));
+          let category = categoryNodes.findBy('code', Utils.getCategoryId(id));
           let subjectNodes = category.get('children');
           let subject = subjectNodes.findBy('id', Utils.getSubjectId(id));
           let courseNodes = subject.get('childData');
@@ -321,18 +321,9 @@ export default Ember.Controller.extend({
             controller.set('isLoading', false);
             controller.set('signatureContents', learning.signatureContents);
             controller.set('prerequisites', learning.prerequisites);
-            controller.set(
-              'courseContent',
-              culcaqrContents.course.slice(0, 3)
-            );
-            controller.set(
-              'unitContent',
-              culcaqrContents.unit.slice(0, 3)
-            );
-            controller.set(
-              'lessonContent',
-              culcaqrContents.lesson.slice(0, 3)
-            );
+            controller.set('courseContent', culcaqrContents.course.slice(0, 3));
+            controller.set('unitContent', culcaqrContents.unit.slice(0, 3));
+            controller.set('lessonContent', culcaqrContents.lesson.slice(0, 3));
             controller.set(
               'resourceContent',
               culcaqrContents.resource.slice(0, 3)
@@ -419,7 +410,7 @@ export default Ember.Controller.extend({
     let controller = this;
     let categories = controller.get('categories');
     let categoryId = Utils.getCategoryId(id);
-    let category = categories.findBy('id', categoryId);
+    let category = categories.findBy('code', categoryId);
     let subjects = category.get('subjects');
     let subject = subjects.findBy('id', id);
     let courses = subject.get('courses');
@@ -436,7 +427,7 @@ export default Ember.Controller.extend({
       let categoryNodes = controller
         .get('taxonomyTreeViewData')
         .get('children');
-      let categoryNode = categoryNodes.findBy('id', categoryId);
+      let categoryNode = categoryNodes.findBy('code', categoryId);
       let subjectNodes = categoryNode.get('children');
       let subjectNode = subjectNodes.findBy('id', id);
       let childNodes = subjectNode.get('childData');
@@ -452,7 +443,7 @@ export default Ember.Controller.extend({
     let id = node.data.id;
     let categories = controller.get('categories');
     let categoryId = Utils.getCategoryId(id);
-    let category = categories.findBy('id', categoryId);
+    let category = categories.findBy('code', categoryId);
     let subjects = category.get('subjects');
     let subjectId = Utils.getSubjectId(id);
     let courseId = Utils.getCourseId(id);
@@ -471,7 +462,7 @@ export default Ember.Controller.extend({
       let categoryNodes = controller
         .get('taxonomyTreeViewData')
         .get('children');
-      let categoryNode = categoryNodes.findBy('id', categoryId);
+      let categoryNode = categoryNodes.findBy('code', categoryId);
       let subjectNodes = categoryNode.get('children');
       let subjectNode = subjectNodes.findBy('id', subjectId);
       let courseNodes = subjectNode.get('childData');
@@ -568,7 +559,7 @@ export default Ember.Controller.extend({
   getSearchContentCount(selectedNode) {
     let code = selectedNode.code;
     let categoryId = Utils.getCategoryId(code);
-    let category = this.get('categories').findBy('id', categoryId);
+    let category = this.get('categories').findBy('code', categoryId);
     let filters = selectedNode.filters;
     let selectedCategory = category.get('code');
     let query = '*';
@@ -671,7 +662,11 @@ export default Ember.Controller.extend({
     const length = 3;
     const startAt = 0;
     const learningMapsContent = Ember.RSVP.resolve(
-      this.get('searchService').learningMapsContent(selectedNode, length, startAt)
+      this.get('searchService').learningMapsContent(
+        selectedNode,
+        length,
+        startAt
+      )
     );
     return Ember.RSVP.hash({
       learningMapsContent: learningMapsContent

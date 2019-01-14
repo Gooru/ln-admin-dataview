@@ -7,15 +7,20 @@ import CompetencySerializer from 'admin-dataview/serializers/competency/competen
  * @typedef {Object} competencyService
  */
 export default Ember.Service.extend({
-
   competencyAdapter: null,
 
   competencySerializer: null,
 
   init: function() {
     this._super(...arguments);
-    this.set('competencyAdapter', CompetencyAdapter.create(Ember.getOwner(this).ownerInjection()));
-    this.set('competencySerializer', CompetencySerializer.create(Ember.getOwner(this).ownerInjection()));
+    this.set(
+      'competencyAdapter',
+      CompetencyAdapter.create(Ember.getOwner(this).ownerInjection())
+    );
+    this.set(
+      'competencySerializer',
+      CompetencySerializer.create(Ember.getOwner(this).ownerInjection())
+    );
   },
 
   /**
@@ -29,7 +34,11 @@ export default Ember.Service.extend({
         .get('competencyAdapter')
         .getUserCompetencies(userId, activeDuration)
         .then(function(response) {
-          resolve(service.get('competencySerializer').normalizeUserCompetencies(response));
+          resolve(
+            service
+              .get('competencySerializer')
+              .normalizeUserCompetencies(response)
+          );
         }, reject);
     });
   },
@@ -45,7 +54,11 @@ export default Ember.Service.extend({
         .get('competencyAdapter')
         .getUserPerformanceCompetencyCollections(userId, competencyCode)
         .then(function(response) {
-          resolve(service.get('competencySerializer').normalizeUserPerformanceCompetencyCollections(response));
+          resolve(
+            service
+              .get('competencySerializer')
+              .normalizeUserPerformanceCompetencyCollections(response)
+          );
         }, reject);
     });
   },
@@ -61,7 +74,11 @@ export default Ember.Service.extend({
         .get('competencyAdapter')
         .getCompetencyMatrixCoordinates(subject)
         .then(function(response) {
-          resolve(service.get('competencySerializer').normalizeCompetencyMatrixCoordinates(response));
+          resolve(
+            service
+              .get('competencySerializer')
+              .normalizeCompetencyMatrixCoordinates(response)
+          );
         }, reject);
     });
   },
@@ -77,7 +94,11 @@ export default Ember.Service.extend({
         .get('competencyAdapter')
         .getCompetencyMatrixCourse(user, subject)
         .then(function(response) {
-          resolve(service.get('competencySerializer').normalizeCompetencyMatrixCourse(response));
+          resolve(
+            service
+              .get('competencySerializer')
+              .normalizeCompetencyMatrixCourse(response)
+          );
         }, reject);
     });
   },
@@ -86,14 +107,18 @@ export default Ember.Service.extend({
    * Get user competency Matrix for domains by subject
    * @returns {Promise.<[]>}
    */
-  getCompetencyMatrixDomain: function(user, subject) {
+  getCompetencyMatrixDomain: function(user, subject, timeLine) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('competencyAdapter')
-        .getCompetencyMatrixDomain(user, subject)
+        .getCompetencyMatrixDomain(user, subject, timeLine)
         .then(function(response) {
-          resolve(service.get('competencySerializer').normalizeCompetencyMatrixDomain(response));
+          resolve(
+            service
+              .get('competencySerializer')
+              .normalizeCompetencyMatrixDomain(response)
+          );
         }, reject);
     });
   },
@@ -109,9 +134,12 @@ export default Ember.Service.extend({
         .get('competencyAdapter')
         .getCompetencyMatrix(user, subject)
         .then(function(response) {
-          resolve(service.get('competencySerializer').normalizeCompetencyMatrix(response));
+          resolve(
+            service
+              .get('competencySerializer')
+              .normalizeCompetencyMatrix(response)
+          );
         }, reject);
     });
   }
-
 });

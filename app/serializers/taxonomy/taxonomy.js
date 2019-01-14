@@ -30,6 +30,21 @@ export default Ember.Object.extend({
     return result;
   },
 
+  /**
+   * Method to normalize taxonomy subjects from DS
+   */
+  normalizeTaxonomySubjects(subjectPayload) {
+    var result = [];
+    const serializer = this;
+    const subjects = subjectPayload.subjects;
+    if (Ember.isArray(subjects)) {
+      result = subjects.map(function(subject) {
+        return serializer.normalizeSubject(subject);
+      });
+    }
+    return result;
+  },
+
   normalizeSubject: function(subjectPayload) {
     var serializer = this;
     return TaxonomyRoot.create(Ember.getOwner(serializer).ownerInjection(), {
@@ -306,5 +321,21 @@ export default Ember.Object.extend({
       });
     }
     return taxonomyResult;
+  },
+
+  /**
+   * Normalize the Fetch Taxonomy classification endpoint's response
+   *
+   * @param payload is the endpoint response in JSON format
+   * @returns {Subject[]} an array of subjects
+   */
+  normalizeFetchClassification: function(response) {
+    let resultSet = Ember.A();
+    response = Ember.A(response.subject_classifications);
+    response.forEach(data => {
+      let result = Ember.Object.create(data);
+      resultSet.pushObject(result);
+    });
+    return resultSet;
   }
 });

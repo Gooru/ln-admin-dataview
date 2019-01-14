@@ -17,7 +17,7 @@ export default Ember.Object.extend({
   getLearnerProfileDistribution(subjectId, activeDuration = '3m') {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v1/user/distribution`;
+    const url = `${namespace}/v2/user/distribution`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -38,7 +38,7 @@ export default Ember.Object.extend({
   getUserStatsContent(userId, activeDuration = '3m') {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v1/user/stats/contents`;
+    const url = `${namespace}/v2/user/stats/contents`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -59,7 +59,7 @@ export default Ember.Object.extend({
   getUserStatsContentByType(userId, contentType, activeDuration = '3m') {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v1/user/stats/resources`;
+    const url = `${namespace}/v2/user/stats/resources`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -84,7 +84,7 @@ export default Ember.Object.extend({
   getUserStatsByCourse(userId, activeDuration = '3m') {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v1/user/stats/courses`;
+    const url = `${namespace}/v2/user/stats/courses`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -105,7 +105,7 @@ export default Ember.Object.extend({
   getUserJourneyStats(userId, activeDuration = '3m') {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v1/user/stats/journeys`;
+    const url = `${namespace}/v2/user/stats/journeys`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -126,7 +126,7 @@ export default Ember.Object.extend({
   getUserCompetencyStats(userId, activeDuration = '3m') {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v1/user/stats/competency`;
+    const url = `${namespace}/v2/user/stats/competency`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -147,7 +147,7 @@ export default Ember.Object.extend({
   getActiveUserDistrbutionBySubject(subjectId, activeDuration = '3m') {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v1/user/distribution/active`;
+    const url = `${namespace}/v2/user/distribution/active`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -168,7 +168,7 @@ export default Ember.Object.extend({
   getUserTimeSpentStats(userId, activeDuration = '3m') {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v1/user/stats/timespent`;
+    const url = `${namespace}/v2/user/stats/timespent`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),

@@ -17,7 +17,7 @@ export default Ember.Object.extend({
   getUserPerformanceUnits(user, courseId, classId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v1/user/performance/course`;
+    const url = `${namespace}/v2/user/performance/course`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -44,7 +44,7 @@ export default Ember.Object.extend({
   getUserPerformanceLessons(user, courseId, unitId, classId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v1/user/performance/lessons`;
+    const url = `${namespace}/v2/user/performance/lessons`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -72,7 +72,7 @@ export default Ember.Object.extend({
   getUserPerformanceCollections(user, courseId, unitId, lessonId, classId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v1/user/performance/collections`;
+    const url = `${namespace}/v2/user/performance/collections`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -109,7 +109,7 @@ export default Ember.Object.extend({
   ) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v1/user/summary/assessment`;
+    const url = `${namespace}/v2/user/summary/assessment`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -154,7 +154,7 @@ export default Ember.Object.extend({
   ) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v1/user/summary/collection`;
+    const url = `${namespace}/v2/user/summary/collection`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),

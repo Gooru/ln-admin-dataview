@@ -101,7 +101,8 @@ export default {
       lesson: 'Lessons'
     },
     'show-more': 'Show More',
-    'show-less': 'Show Less'
+    'show-less': 'Show Less',
+    'last-updated': 'Last Updated'
   },
   logout: {
     name: 'Logout'
@@ -260,5 +261,17 @@ export default {
   'learning-map': {
     'fetching-competency': 'Fetching Competencies',
     'not-available': 'Competency Not Available'
+  },
+  proficiency: {
+    'is-empty':
+      'No data available yet. Once you begin studying, your data will become available.',
+    'expand-chart': 'Expand Chart',
+    mastered: 'Mastered',
+    'in-progress': 'In Progress',
+    'not-started': 'Not Started',
+    skyline: 'Skyline',
+    baseline: 'Baseline',
+    'not-tagged':
+      'The class has no course assigned or the course has not been tagged to a valid subject or standards.'
   }
 };

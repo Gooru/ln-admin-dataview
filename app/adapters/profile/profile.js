@@ -19,7 +19,7 @@ export default Ember.Object.extend({
   getUserProfile(userId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v1/user/profile`;
+    const url = `${namespace}/v2/user/profile`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -42,7 +42,7 @@ export default Ember.Object.extend({
   getUserGrades(userId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v1/user/grades`;
+    const url = `${namespace}/v2/user/grades`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -65,7 +65,7 @@ export default Ember.Object.extend({
   getUserPrefsContent(userId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v1/user/prefs/content`;
+    const url = `${namespace}/v2/user/prefs/content`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -88,7 +88,7 @@ export default Ember.Object.extend({
   getUserPrefsProviders(userId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v1/user/prefs/providers`;
+    const url = `${namespace}/v2/user/prefs/providers`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
@@ -111,7 +111,7 @@ export default Ember.Object.extend({
   getUserPrefsCurators(userId) {
     const adapter = this;
     const namespace = adapter.get('namespace');
-    const url = `${namespace}/v1/user/prefs/curators`;
+    const url = `${namespace}/v2/user/prefs/curators`;
     const options = {
       type: 'GET',
       headers: adapter.defineHeaders(),
