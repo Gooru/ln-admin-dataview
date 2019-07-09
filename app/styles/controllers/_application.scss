@@ -14,11 +14,11 @@
 
 .app-container {
   height: 100vh;
-  padding-top: 63px;
+  padding-top: 60px;
   padding-left: 0;
   padding-right: 0;
   @media (min-width: $screen-md) {
-    padding-top: 63px;
+    padding-top: 60px;
   }
 
   > .controller {

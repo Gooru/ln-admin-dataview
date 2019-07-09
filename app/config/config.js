@@ -77,7 +77,6 @@ export const RESOURCE_TYPE_CONFIG = [
   TEXT_RESOURCE
 ];
 
-
 export const DEFAULT_IMAGES = {
   USER_PROFILE: `${config.rootURL}assets/images/profile.png`,
   COURSE: `${config.rootURL}assets/images/course-default.png`,
@@ -205,18 +204,19 @@ export const TAXONOMY_LEVELS = {
 };
 
 export const NAVIGATION_MENUS = [
+  'network',
   'competency',
-  'activities',
-  'learners',
-  'suggest'
+  'catalog',
+  'learners'
 ];
 
 export const NAVIGATION_MENUS_INDEX = {
-  competency: 0,
-  activities: 1,
-  learners: 2,
-  suggest: 3,
-  learner: 2
+  network: 0,
+  competency: 1,
+  activities: 2,
+  catalog: 2,
+  learners: 3,
+  learner: 3
 };
 
 export const ACTIVITIES_NAVIGATION_MENUS = [
