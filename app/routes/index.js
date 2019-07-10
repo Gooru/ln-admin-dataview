@@ -19,7 +19,7 @@ export default Ember.Route.extend({
     if (this.get('session.isAuthenticated')) {
       this.transitionTo('competency.tree');
     } else {
-      this.transitionTo('sign-in');
+      window.location.href = '/login';
     }
   },
 
