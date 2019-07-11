@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import config from 'admin-dataview/config/environment';
 
 /**
  * Initialize session validation function
@@ -11,7 +10,7 @@ export function initialize(instance) {
       if (sessionService.get('isAuthenticated')) {
         sessionService.invalidate();
       }
-      window.location.replace(`${config.rootURL}sign-in`);
+      window.location.href = '/login';
     }
   });
 }

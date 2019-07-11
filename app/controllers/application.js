@@ -21,10 +21,16 @@ export default Ember.Controller.extend(ConfigurationMixin, {
 
   actions: {
     onMenuItemSelection(item) {
-      if (item === 'competency') {
-        this.transitionToRoute(`${item}.tree`);
+      if (item === 'network') {
+        window.location.href = '/network';
       } else {
-        this.transitionToRoute(item);
+        if (item === 'competency') {
+          this.transitionToRoute(`${item}.tree`);
+        } else if (item === 'catalog') {
+          this.transitionToRoute('activities');
+        } else {
+          this.transitionToRoute(item);
+        }
       }
     },
 
