@@ -67,20 +67,44 @@ export default Ember.Component.extend({
     let length = 0;
     let start = 0;
     component.set('isLoading', true);
-    let aggregatedFilters = {
-      aggBy: 'contentSubFormat'
+    let resourceAggregatedFilters = {
+      aggBy: 'contentSubFormat',
+      'flt.publisherQualityIndicatorGTE': 2,
+      'flt.audience': 'All Students,Teachers'
+    };
+    let questionAggregatedFilters = {
+      aggBy: 'contentSubFormat',
+      'flt.audience': 'All Students,Teachers'
     };
     let appliedFilterList = component.get('appliedFilterList');
-    aggregatedFilters = Object.assign(aggregatedFilters, appliedFilterList);
+    resourceAggregatedFilters = Object.assign(
+      resourceAggregatedFilters,
+      appliedFilterList
+    );
+    questionAggregatedFilters = Object.assign(
+      questionAggregatedFilters,
+      appliedFilterList
+    );
+
     let aggregatedResourcePromise = Ember.RSVP.resolve(
       component
         .get('searchService')
-        .searchAggregatedResources(term, aggregatedFilters, start, length)
+        .searchAggregatedResources(
+          term,
+          resourceAggregatedFilters,
+          start,
+          length
+        )
     );
     let aggregatedQuestionPromise = Ember.RSVP.resolve(
       component
         .get('searchService')
-        .searchAggregatedQuestions(term, aggregatedFilters, start, length)
+        .searchAggregatedQuestions(
+          term,
+          questionAggregatedFilters,
+          start,
+          length
+        )
     );
     return Ember.RSVP.hash({
       aggregatedResourceCount: aggregatedResourcePromise,

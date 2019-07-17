@@ -129,7 +129,7 @@ export default Ember.Component.extend(ModalMixin, {
       let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
       //Route to summary page once the user select a subject from filter
       if (filterType === 'subject' && activeMenuIndex === undefined) {
-        component.get('router').transitionTo('/activities/summary');
+        component.get('router').transitionTo('/catalog/summary');
       }
     }
   },
@@ -552,7 +552,10 @@ export default Ember.Component.extend(ModalMixin, {
         selectedFilterItems.qt.length > 0
       ) {
         let selectedQuestionTypes = selectedFilterItems.qt;
-        questionTypeInfo.checked = component.isFilterSelected(questionType.apiCode, selectedQuestionTypes);
+        questionTypeInfo.checked = component.isFilterSelected(
+          questionType.apiCode,
+          selectedQuestionTypes
+        );
       }
       filterList.push(questionTypeInfo);
     });
@@ -584,7 +587,10 @@ export default Ember.Component.extend(ModalMixin, {
         selectedFilterItems.rt.length > 0
       ) {
         let selectedResourceTypes = selectedFilterItems.rt;
-        resourceTypeInfo.checked = component.isFilterSelected(resourceType.apiCode, selectedResourceTypes);
+        resourceTypeInfo.checked = component.isFilterSelected(
+          resourceType.apiCode,
+          selectedResourceTypes
+        );
       }
       filterList.push(resourceTypeInfo);
     });

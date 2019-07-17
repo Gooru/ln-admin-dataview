@@ -34,7 +34,7 @@ export default Ember.Controller.extend({
      */
     onSearch(term) {
       let controller = this;
-      controller.transitionToRoute(`/activities/summary?term=${term}`);
+      controller.transitionToRoute(`/catalog/summary?term=${term}`);
     },
 
     onChangeFilterItems(selectedFilterItems) {
@@ -75,12 +75,12 @@ export default Ember.Controller.extend({
           let lastURLdata = urlsplitted.split('/');
           let colelctionURL = lastURLdata[lastURLdata.length - 1];
           controller.set('searchTerm', '');
-          controller.transitionToRoute(`/activities/${colelctionURL}`);
+          controller.transitionToRoute(`/catalog/${colelctionURL}`);
         } else {
-          controller.transitionToRoute('/activities');
+          controller.transitionToRoute('/catalog');
         }
       } else {
-        controller.transitionToRoute('/activities');
+        controller.transitionToRoute('/catalog');
       }
     },
 
