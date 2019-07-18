@@ -62,9 +62,9 @@ export default Ember.Controller.extend({
       let term = this.get('searchTerm');
       this.set('curMenuItem', item);
       if (term) {
-        this.transitionToRoute(`/activities/${item}?term=${term}`);
+        this.transitionToRoute(`/catalog/${item}?term=${term}`);
       } else {
-        this.transitionToRoute(`/activities/${item}`);
+        this.transitionToRoute(`/catalog/${item}`);
       }
     },
 
@@ -78,9 +78,9 @@ export default Ember.Controller.extend({
       let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
       let searchTerm = term ? `?term=${term}` : `?term=${term}`;
       if (activeMenuIndex > -1) {
-        this.transitionToRoute(`/activities/${routeName}${searchTerm}`);
+        this.transitionToRoute(`/catalog/${routeName}${searchTerm}`);
       } else {
-        this.transitionToRoute(`/activities/courses${searchTerm}`);
+        this.transitionToRoute(`/catalog/courses${searchTerm}`);
       }
     },
 
@@ -110,7 +110,9 @@ export default Ember.Controller.extend({
       let routeName = Utils.getRoutePathLastOccurrence();
       let activeMenuIndex = ACTIVITIES_NAVIGATION_MENUS_INDEX[routeName];
       let curRouteName = controller.get('curMenuItem') || routeName;
-      let refreshedFilterItems = controller.getRefreshedFiltersByRoute(curRouteName);
+      let refreshedFilterItems = controller.getRefreshedFiltersByRoute(
+        curRouteName
+      );
       controller.set('visibleFilterItems', refreshedFilterItems);
       if (activeMenuIndex > -1) {
         controller.get(`${routeName}Controller`).refreshItems();
@@ -140,7 +142,7 @@ export default Ember.Controller.extend({
           controller.get(`${routeName}Controller`).refreshItems();
         }
       } else {
-        controller.transitionToRoute('/activities');
+        controller.transitionToRoute('/catalog');
       }
     },
 
@@ -153,7 +155,7 @@ export default Ember.Controller.extend({
       if (filters && (filters.category || filters.subject || filters.course)) {
         controller.set('service', true);
       } else {
-        controller.transitionToRoute('/activities');
+        controller.transitionToRoute('/catalog');
       }
     },
 
@@ -173,12 +175,12 @@ export default Ember.Controller.extend({
           let lastURLdata = urlsplitted.split('/');
           let colelctionURL = lastURLdata[lastURLdata.length - 1];
           controller.set('searchTerm', '');
-          controller.transitionToRoute(`/activities/${colelctionURL}`);
+          controller.transitionToRoute(`/catalog/${colelctionURL}`);
         } else {
-          controller.transitionToRoute('/activities');
+          controller.transitionToRoute('/catalog');
         }
       } else {
-        controller.transitionToRoute('/activities');
+        controller.transitionToRoute('/catalog');
       }
     },
 
@@ -202,9 +204,13 @@ export default Ember.Controller.extend({
     let controller = this;
     let defaultActivityFilters = DEFAULT_ACTIVITY_FILTERS;
     let activityFilter = ACTIVITY_FILTER;
-    let routeName = controller.get('curMenuItem') || Utils.getRoutePathLastOccurrence();
+    let routeName =
+      controller.get('curMenuItem') || Utils.getRoutePathLastOccurrence();
     let routeBasedFilters = controller.getRouteBasedFilters(routeName);
-    controller.set('visibleFilterItems', controller.getRefreshedFiltersByRoute(routeName));
+    controller.set(
+      'visibleFilterItems',
+      controller.getRefreshedFiltersByRoute(routeName)
+    );
     return defaultActivityFilters.concat(routeBasedFilters, activityFilter);
   }),
 
@@ -302,7 +308,8 @@ export default Ember.Controller.extend({
     let controller = this;
     let formattedFilters = {};
     let delimiter = ',';
-    let routeName = controller.get('curMenuItem') || Utils.getRoutePathLastOccurrence();
+    let routeName =
+      controller.get('curMenuItem') || Utils.getRoutePathLastOccurrence();
     switch (filterType) {
     case 'category':
       formattedFilters['flt.subjectClassification'] = categorizedFilterData[0]
@@ -311,16 +318,12 @@ export default Ember.Controller.extend({
       break;
     case 'subject':
       categorizedFilterData.map(filterData => {
-        formattedFilters[
-          'flt.subject'
-        ] = filterData.id;
+        formattedFilters['flt.subject'] = filterData.id;
       });
       break;
     case 'course':
       delimiter = ',';
-      formattedFilters[
-        'flt.course'
-      ] = controller.getConcatenatedFilterString(
+      formattedFilters['flt.course'] = controller.getConcatenatedFilterString(
         categorizedFilterData,
         delimiter,
         'id'
@@ -363,7 +366,7 @@ export default Ember.Controller.extend({
         delimiter
       );
       break;
-    case 'qt':  //Question Type
+    case 'qt': //Question Type
       if (routeName === 'questions') {
         delimiter = ',';
         formattedFilters[
@@ -375,7 +378,7 @@ export default Ember.Controller.extend({
         );
       }
       break;
-    case 'rt':  //Resource Type
+    case 'rt': //Resource Type
       if (routeName === 'resources') {
         delimiter = ',';
         formattedFilters[

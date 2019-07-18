@@ -36,7 +36,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       userFilterItems.subject &&
       userFilterItems.subject.length > 0
     ) {
-      route.transitionTo('/activities/summary');
+      route.transitionTo('/catalog/summary');
     }
   }
 });

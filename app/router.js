@@ -24,7 +24,7 @@ Router.map(function() {
   });
   this.route('leaners');
 
-  this.route('activity', { path: '/activities/' }, function() {
+  this.route('activity', { path: '/catalog/' }, function() {
     this.route('summary');
     this.route('courses');
     this.route('collections');
