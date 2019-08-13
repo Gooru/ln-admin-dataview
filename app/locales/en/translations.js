@@ -95,6 +95,7 @@ export default {
       resource: 'Resources',
       question: 'Questions',
       rubric: 'Rubrics',
+      offlineActivity: 'Offline Activities',
       signatureAssessment: 'Signature Assessments',
       signatureCollection: 'Signature Collections',
       unit: 'Units',
