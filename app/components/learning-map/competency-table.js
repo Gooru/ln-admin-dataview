@@ -19,7 +19,9 @@ export default Ember.Component.extend({
 
   didRender() {
     let component = this;
-    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+    component.$('[data-toggle="tooltip"]').tooltip({
+      trigger: 'hover'
+    });
     const $competencyTable = component.$('.table-structure');
     let actualWidth = component.$('.table-structure').width();
     var scrollbarWidth = $competencyTable.get(0).scrollWidth;
@@ -153,6 +155,10 @@ export default Ember.Component.extend({
           competencyContents.assessment.totalHitCount
         ),
         component.getStruncturedCompetencyInfo(
+          'offlineActivity',
+          competencyContents.offlineActivity.totalHitCount
+        ),
+        component.getStruncturedCompetencyInfo(
           'resource',
           competencyContents.resource.totalHitCount
         ),
@@ -217,7 +223,10 @@ export default Ember.Component.extend({
     if (domainCodes) {
       domainCodes = domainCodes.split(',');
       domainCodes.map(domainCode => {
-        Ember.$(`.domain .item.${domainCode.replace(/\./, '-')} input`).prop('checked', true);
+        Ember.$(`.domain .item.${domainCode.replace(/\./, '-')} input`).prop(
+          'checked',
+          true
+        );
       });
     }
   },

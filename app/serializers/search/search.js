@@ -299,14 +299,16 @@ export default Ember.Object.extend(ConfigurationMixin, {
    * @param {*} collectionData
    * @returns {Collection}
    */
-  normalizeCollection: function(collectionData) {
+  normalizeCollection: function(collectionData, isOffineActivity = false) {
     const serializer = this;
     const basePath = serializer.get('session.cdnUrls.content');
     const userBasePath = serializer.get('session.cdnUrls.user');
 
     const thumbnailUrl = collectionData.thumbnail
       ? basePath + collectionData.thumbnail
-      : DEFAULT_IMAGES.COLLECTION;
+      : isOffineActivity
+        ? DEFAULT_IMAGES.OFFLINE_ACTIVITY
+        : DEFAULT_IMAGES.COLLECTION;
     const userThumbnailUrl = collectionData.userProfileImage
       ? userBasePath + collectionData.userProfileImage
       : DEFAULT_IMAGES.USER_PROFILE;
@@ -586,7 +588,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     let questionData = [];
     let unitData = [];
     let lessonData = [];
-
+    let offlineActivityData = [];
     if (contents.assessment) {
       contents.assessment.searchResults.map(assessment => {
         let assessmentInfo = serializer.normalizeAssessment(assessment);
@@ -618,6 +620,30 @@ export default Ember.Object.extend(ConfigurationMixin, {
             TAXONOMY_LEVELS.COLLECTION
           );
         collectionData.push(collectionInfo);
+      });
+    }
+
+    if (contents.offlineActivity) {
+      contents.offlineActivity.searchResults.map(offlineActivity => {
+        let offlineActivityInfo = serializer.normalizeCollection(
+          offlineActivity,
+          true
+        );
+        offlineActivityInfo.id = offlineActivity.id;
+        offlineActivityInfo.description = offlineActivity.learningObjective;
+        offlineActivityInfo.creator = serializer.normalizeOwner(
+          offlineActivity.creator
+        );
+        offlineActivityInfo.owner = serializer.normalizeOwner(
+          offlineActivity.user
+        );
+        offlineActivityInfo.standards = serializer
+          .get('taxonomySerializer')
+          .normalizeLearningMapsTaxonomyArray(
+            offlineActivity.taxonomy,
+            TAXONOMY_LEVELS.COLLECTION
+          );
+        offlineActivityData.push(offlineActivityInfo);
       });
     }
 
@@ -729,6 +755,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     serializedContentData.question = questionData;
     serializedContentData.unit = unitData;
     serializedContentData.lesson = lessonData;
+    serializedContentData.offlineActivity = offlineActivityData;
     return serializedContentData;
   },
 

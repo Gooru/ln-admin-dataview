@@ -83,9 +83,8 @@ export const DEFAULT_IMAGES = {
   RUBRIC: `${config.rootURL}assets/images/rubric-default.png`,
   COLLECTION: `${config.rootURL}assets/images/collection-default.png`,
   ASSESSMENT: `${config.rootURL}assets/images/assessment-default.png`,
-  QUESTION_PLACEHOLDER_IMAGE: `${
-    config.rootURL
-  }assets/images/question-placeholder-image.png`,
+  QUESTION_PLACEHOLDER_IMAGE: `${config.rootURL}assets/images/question-placeholder-image.png`,
+  OFFLINE_ACTIVITY: `${config.rootURL}assets/gooru/offline-activity-default.png`,
   LOADER: `${config.rootURL}/assets/images/loader.svg`
 };
 
@@ -124,6 +123,7 @@ export const CONTENT_TYPES = {
   EXTERNAL_ASSESSMENT: 'assessment-external',
   COURSE: 'course',
   UNIT: 'unit',
+  OFFLINEACTIVITY: 'offline-activity',
   LESSON: 'lesson',
   RESOURCE: 'resource',
   QUESTION: 'question',
@@ -184,11 +184,31 @@ export const SCORES = {
 };
 
 export const GRADING_SCALE = [
-  { LOWER_LIMIT: 0, COLOR: '#F46360', RANGE: '0-59' },
-  { LOWER_LIMIT: 60, COLOR: '#ED8E36', RANGE: '60-69' },
-  { LOWER_LIMIT: 70, COLOR: '#FABA36', RANGE: '70-79' },
-  { LOWER_LIMIT: 80, COLOR: '#A8C99C', RANGE: '80-89' },
-  { LOWER_LIMIT: 90, COLOR: '#4B9740', RANGE: '90-100' }
+  {
+    LOWER_LIMIT: 0,
+    COLOR: '#F46360',
+    RANGE: '0-59'
+  },
+  {
+    LOWER_LIMIT: 60,
+    COLOR: '#ED8E36',
+    RANGE: '60-69'
+  },
+  {
+    LOWER_LIMIT: 70,
+    COLOR: '#FABA36',
+    RANGE: '70-79'
+  },
+  {
+    LOWER_LIMIT: 80,
+    COLOR: '#A8C99C',
+    RANGE: '80-89'
+  },
+  {
+    LOWER_LIMIT: 90,
+    COLOR: '#4B9740',
+    RANGE: '90-100'
+  }
 ];
 
 export const ROLES = {
@@ -480,6 +500,7 @@ export const LEARNING_MAP_CONTENT_SEQUENCE = [
   'lesson',
   'collection',
   'assessment',
+  'offlineActivity',
   'resource',
   'question',
   'rubric',
