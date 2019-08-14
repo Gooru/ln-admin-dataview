@@ -495,18 +495,54 @@ export const LEARNING_MAP_DEFAULT_LEVELS = {
 };
 
 export const LEARNING_MAP_CONTENT_SEQUENCE = [
-  'course',
-  'unit',
-  'lesson',
-  'collection',
-  'assessment',
-  'offlineActivity',
-  'resource',
-  'question',
-  'rubric',
-  'signatureCollection',
-  'signatureAssessment',
-  'signatureResource'
+  {
+    type: 'course',
+    label: 'course'
+  },
+  {
+    type: 'unit',
+    label: 'unit'
+  },
+  {
+    type: 'lesson',
+    label: 'lesson'
+  },
+  {
+    type: 'collection',
+    label: 'collection'
+  },
+  {
+    type: 'assessment',
+    label: 'assessment'
+  },
+  {
+    type: 'offlineActivity',
+    label: 'offline activity'
+  },
+  {
+    type: 'resource',
+    label: 'resource'
+  },
+  {
+    type: 'question',
+    label: 'question'
+  },
+  {
+    type: 'rubric',
+    label: 'rubric'
+  },
+  {
+    type: 'signatureCollection',
+    label: 'signature collection'
+  },
+  {
+    type: 'signatureAssessment',
+    label: 'signature assessment'
+  },
+  {
+    type: 'signatureResource',
+    label: 'signature resource'
+  }
 ];
 
 export const PLAYER_WINDOW_NAME = 'rgo_player';
