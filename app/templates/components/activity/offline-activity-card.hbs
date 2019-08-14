@@ -4,6 +4,12 @@
       <div class="title">{{offlineActivity.title}}</div>
     </div>
   </div>
+  <div class="content-count-container">
+    <div class="task pull-left">
+      <i class="icon"></i>
+      <span>{{offlineActivity.taskCount}}</span>
+    </div>
+  </div>
   <div class="offline-activity-info-container">
     <div class="offline-activity-user-info">
       <div class="created-by">{{t (if offlineActivity.sameOwnerAndCreator "common.created-by" "common.remixed-by")}}</div>

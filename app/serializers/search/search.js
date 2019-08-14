@@ -299,16 +299,14 @@ export default Ember.Object.extend(ConfigurationMixin, {
    * @param {*} collectionData
    * @returns {Collection}
    */
-  normalizeCollection: function(collectionData, isOffineActivity = false) {
+  normalizeCollection: function(collectionData) {
     const serializer = this;
     const basePath = serializer.get('session.cdnUrls.content');
     const userBasePath = serializer.get('session.cdnUrls.user');
 
     const thumbnailUrl = collectionData.thumbnail
       ? basePath + collectionData.thumbnail
-      : isOffineActivity
-        ? DEFAULT_IMAGES.OFFLINE_ACTIVITY
-        : DEFAULT_IMAGES.COLLECTION;
+      : DEFAULT_IMAGES.COLLECTION;
     const userThumbnailUrl = collectionData.userProfileImage
       ? userBasePath + collectionData.userProfileImage
       : DEFAULT_IMAGES.USER_PROFILE;
@@ -336,6 +334,77 @@ export default Ember.Object.extend(ConfigurationMixin, {
       resourceCount: collectionData.resourceCount || 0,
       questionCount: collectionData.questionCount || 0,
       remixCount: collectionData.scollectionRemixCount || 0,
+      course: course.title,
+      courseId: course.id,
+      isVisibleOnProfile: collectionData.profileUserVisibility,
+      owner: ProfileModel.create({
+        id: collectionData.gooruUId,
+        firstName: collectionData.userFirstName,
+        lastName: collectionData.userLastName,
+        avatarUrl: userThumbnailUrl,
+        username: collectionData.usernameDisplay
+      }),
+      creator: ProfileModel.create({
+        id: collectionData.creatorId,
+        firstName: collectionData.creatorFirstname,
+        lastName: collectionData.creatorLastname,
+        avatarUrl: creatorThumbnailUrl,
+        username: collectionData.creatornameDisplay
+      }),
+      taxonomySet: collectionData.taxonomySet,
+      createdDate: collectionData.addDate,
+      collaboratorIDs: collectionData.collaboratorIds,
+      grade: collectionData.grade,
+      instructionalModel: collectionData.instructionalMethod,
+      lastModified: collectionData.lastModified,
+      lastModifiedBy: collectionData.lastModifiedBy,
+      license: collectionData.license,
+      audience: collectionData.audience,
+      keyPoints: collectionData.keyPoints,
+      efficacy: collectionData.efficacy ? collectionData.efficacy : null,
+      relevance: collectionData.relevance ? collectionData.relevance : null,
+      engagement: collectionData.engagement ? collectionData.engagement : null
+    });
+  },
+
+  /**
+   * Normalize a offline Activity
+   * @param {*} offlineActivityData
+   * @returns {offline activity}
+   */
+  normalizeOfflineActivity: function(collectionData) {
+    const serializer = this;
+    const basePath = serializer.get('session.cdnUrls.content');
+    const userBasePath = serializer.get('session.cdnUrls.user');
+
+    const thumbnailUrl = collectionData.thumbnail
+      ? basePath + collectionData.thumbnail
+      : DEFAULT_IMAGES.OFFLINE_ACTIVITY;
+    const userThumbnailUrl = collectionData.userProfileImage
+      ? userBasePath + collectionData.userProfileImage
+      : DEFAULT_IMAGES.USER_PROFILE;
+    const creatorThumbnailUrl = collectionData.creatorProfileImage
+      ? userBasePath + collectionData.creatorProfileImage
+      : DEFAULT_IMAGES.USER_PROFILE;
+    const taxonomyInfo =
+      (collectionData.taxonomySet &&
+        collectionData.taxonomySet.curriculum &&
+        collectionData.taxonomySet.curriculum.curriculumInfo) ||
+      [];
+
+    const course = collectionData.course || {};
+    return CollectionModel.create(Ember.getOwner(this).ownerInjection(), {
+      id: collectionData.id,
+      title: collectionData.title,
+      description: collectionData.description,
+      type: collectionData.type ? collectionData.type : collectionData.format,
+      thumbnailUrl: thumbnailUrl,
+      standards: serializer
+        .get('taxonomySerializer')
+        .normalizeTaxonomyArray(taxonomyInfo),
+      publishStatus: collectionData.publishStatus,
+      learningObjectives: collectionData.languageObjective,
+      taskCount: collectionData.taskCount || 0,
       course: course.title,
       courseId: course.id,
       isVisibleOnProfile: collectionData.profileUserVisibility,
@@ -625,9 +694,8 @@ export default Ember.Object.extend(ConfigurationMixin, {
 
     if (contents.offlineActivity) {
       contents.offlineActivity.searchResults.map(offlineActivity => {
-        let offlineActivityInfo = serializer.normalizeCollection(
-          offlineActivity,
-          true
+        let offlineActivityInfo = serializer.normalizeOfflineActivity(
+          offlineActivity
         );
         offlineActivityInfo.id = offlineActivity.id;
         offlineActivityInfo.description = offlineActivity.learningObjective;

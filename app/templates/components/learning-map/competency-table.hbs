@@ -22,7 +22,7 @@
       {{t 'common.competency'}}
     </div>
     {{#each contentSequence as |content|}}
-      <div class="th content-info {{content}}" data-toggle="tooltip" title="{{content}}">
+      <div class="th content-info {{content.type}}" data-toggle="tooltip" title="{{content.label}}">
         <i class="icon"></i>
       </div>
     {{/each}}
