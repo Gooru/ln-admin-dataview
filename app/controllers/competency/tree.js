@@ -281,6 +281,10 @@ export default Ember.Controller.extend({
               ? culcaqrCount.rubric.totalHitCount
               : 0;
 
+            let offlineActivityCount = culcaqrCount.offlineActivity
+              ? culcaqrCount.offlineActivity.totalHitCount
+              : 0;
+
             contentCountData.push(
               Utils.getStructuredContentData(CONTENT_TYPES.COURSE, courseCount)
             );
@@ -300,6 +304,12 @@ export default Ember.Controller.extend({
               Utils.getStructuredContentData(
                 CONTENT_TYPES.COLLECTION,
                 collectionCount
+              )
+            );
+            contentCountData.push(
+              Utils.getStructuredContentData(
+                CONTENT_TYPES.OFFLINEACTIVITY,
+                offlineActivityCount
               )
             );
             contentCountData.push(
@@ -331,6 +341,10 @@ export default Ember.Controller.extend({
             controller.set(
               'collectionContent',
               culcaqrContents.collection.slice(0, 3)
+            );
+            controller.set(
+              'offlineActivityContent',
+              culcaqrContents.offlineActivity.slice(0, 3)
             );
             controller.set(
               'assessmentContent',

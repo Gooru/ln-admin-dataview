@@ -50,7 +50,6 @@
           {{/each}}
         </div>
       </div>
-
       <div class="section-content collections col-sm-12">
         <div class="section-title">{{t 'gcm.pull-out.section.collections'}}</div>
         <div class="content-body">
@@ -60,7 +59,16 @@
           {{/each}}
         </div>
       </div>
-
+      <div class="section-content offlineActivity col-sm-12">
+        <div class="section-title">{{t 'common.content-types.offlineActivity'}}</div>
+        <div class="content-body">
+          {{#each offlineActivityContent as |offlineActivity|}}
+            <div class="col-md-4 col-sm-12">
+              {{activity.offline-activity-card offlineActivity=offlineActivity }}
+            </div>
+          {{/each}}
+        </div>
+      </div>
       <div class="section-content resources col-sm-12">
         <div class="section-title">{{t 'gcm.pull-out.section.resources'}}</div>
         <div class="content-body">
