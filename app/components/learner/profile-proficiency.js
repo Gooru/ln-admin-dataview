@@ -42,7 +42,7 @@ export default Ember.Component.extend({
     let subjectCategory = controller.get('selectedSubjectCategory');
     if (userId === '4420b570-cfae-44b4-a130-d5daecf52b69') {
       // hard coded need to remove later.
-      subjectCategory = 'TLA';
+      subjectCategory = 'professional_learning';
     }
     controller.fetchSubjectsByCategory(subjectCategory);
   },

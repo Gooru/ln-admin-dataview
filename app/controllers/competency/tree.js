@@ -575,7 +575,7 @@ export default Ember.Controller.extend({
     let categoryId = Utils.getCategoryId(code);
     let category = this.get('categories').findBy('code', categoryId);
     let filters = selectedNode.filters;
-    let selectedCategory = category.get('code');
+    let selectedCategory = category.get('id');
     let query = '*';
     let start = 1;
     let length = 3;
