@@ -113,15 +113,27 @@ export default Ember.Controller.extend({
       let selectedFrameworks = controller.get('selectedFrameworks');
       let subjectId = controller.get('subjectId');
       controller.set('isLoading', true);
-      let crosswalkDataPromise = Ember.RSVP.resolve(
-        controller.get('crosswalkService').getCrosswalkData(subjectId)
+      let crosswalkDataPromise = Ember.A();
+      selectedFrameworks.forEach(id => {
+        crosswalkDataPromise.pushObject(
+          controller
+            .get('crosswalkService')
+            .getCrosswalkData(id, subjectId, true)
+        );
+      });
+      crosswalkDataPromise.pushObject(
+        controller
+          .get('crosswalkService')
+          .getCrosswalkData('GUT', subjectId, true)
       );
-      return Ember.RSVP.hash({
-        frameworkList: selectedFrameworks,
-        crosswalkData: crosswalkDataPromise
-      }).then(function(hash) {
-        controller.updateCrosswalkTable(hash);
-        return controller.set('showSubjectBrowser', false);
+      return Ember.RSVP.all(crosswalkDataPromise).then(function(data) {
+        return Ember.RSVP.hash({
+          frameworkList: selectedFrameworks,
+          crosswalkData: Ember.A(data)
+        }).then(function(hash) {
+          controller.updateCrosswalkTable(hash);
+          controller.set('showSubjectBrowser', false);
+        });
       });
     },
 
@@ -143,12 +155,10 @@ export default Ember.Controller.extend({
     let tableHeader = defaultHeaderItems.concat(frameworkList);
     let numberOfColumns = tableHeader.length;
     let tableBody = [];
-    let microComptencyLevelPattern = controller.get(
-      'microComptencyLevelPattern'
-    );
-    crosswalkData.map(data => {
+    const crosswalkGUTData = crosswalkData.findBy('id', 'GUT').data;
+    crosswalkGUTData.map(data => {
       let tableRowData = [];
-      let competencyLevel = data.code_type.includes(microComptencyLevelPattern)
+      let competencyLevel = data.isMicro
         ? 'micro-competency hide-row'
         : 'competency';
       tableRowData.length = numberOfColumns;
@@ -158,19 +168,21 @@ export default Ember.Controller.extend({
         id: data.id,
         title: truncateString(data.title, 180)
       };
-      data.crosswalkCodes.forEach(crosswalkCode => {
-        let frameworkId = crosswalkCode.framework_id;
+      frameworkList.forEach(frameworkId => {
         let frameworkPosition = tableHeader.indexOf(frameworkId);
-        if (frameworkList.includes(frameworkId)) {
-          let tableCellData = {
-            id: crosswalkCode.id,
-            title: truncateString(crosswalkCode.title, 180)
-          };
-          tableRowData[frameworkPosition] = tableCellData;
+        const competenciesData = crosswalkData.findBy('id', frameworkId).data;
+        if (competenciesData) {
+          const competencyData = competenciesData.findBy('key', data.id);
+          if (competencyData) {
+            let tableCellData = {
+              id: competencyData.id,
+              title: truncateString(competencyData.title, 180)
+            };
+            tableRowData[frameworkPosition] = tableCellData;
+          }
         }
+        tableBody.push(tableRowData);
       });
-      tableBody.push(tableRowData);
-      return true;
     });
     let tableData = {
       header: tableHeader,
