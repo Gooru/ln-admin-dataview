@@ -1,5 +1,5 @@
 <div class="activities">
-  {{activities.search-box selectedFilterItems=selectedFilterItems onSearch='onSearch' clearSearchText='clearSearchText' onEmptyFilters="onEmptyFilters"}}
+  {{activities.search-box onShowDropDown="onShowDropDown" selectedFilterItems=selectedFilterItems onSearch='onSearch' clearSearchText='clearSearchText' onEmptyFilters="onEmptyFilters"}}
   <div class="filters pull-left">
     <div class="filter-list">
       {{activities.activities-filter filterTypes=filterTypes onChangeFilterItems="onChangeFilterItems" toggleClearSearch=toggleClearSearch clearFilter='clearFilter' isEmptyFilters=isEmptyFilters}}

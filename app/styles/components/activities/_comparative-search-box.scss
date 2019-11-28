@@ -1,0 +1,26 @@
+.comparative-search-box {
+  .comparative-search-box-container {
+    display: grid;
+    grid-template-columns: 50px 1fr 100px;
+    align-items: center;
+    background-color: $white;
+    margin-top: 20px;
+    .search-back {
+      display: grid;
+      padding: 10px;
+      align-items: center;
+      background-color: $light-200;
+    }
+    .search-input {
+      padding-left: 10px;
+      input {
+        width: 90%;
+      }
+    }
+    .search-personalize {
+      display: grid;
+      grid-template-columns: 1fr 30px;
+      align-items: center;
+    }
+  }
+}

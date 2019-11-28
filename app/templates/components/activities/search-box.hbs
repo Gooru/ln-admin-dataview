@@ -1,32 +1,9 @@
 <div class="box-container">
-  <div class="applied-filters">
-    <div class="visible-filters">
-      {{#each visibleFilters as |filterData|}}
-        {{activities.search-filter-tag isTagAvailable=true tag=filterData onRemoveFilter="onRemoveFilter"}}
-        {{else}}
-          {{activities.search-filter-tag isTagAvailable=false}}
-      {{/each}}
-      {{#if (gt appliedFilterList.length 3)}}
-        <button class="non-visible-tags">
-          <span>+ {{invisibleFilterCount}} More</span>
-        </button>
-      {{/if}}
-    </div>
-    <div class="non-visible-filters">
-      {{#each appliedFilterList as |filterData|}}
-        {{activities.search-filter-tag isTagAvailable=true tag=filterData onRemoveFilter="onRemoveFilter"}}
-      {{/each}}
-    </div>
+  <div class="filter-logo">
+      <div class="gooru-logo"></div>
+     <span>Gooru Catalog</span>
   </div>
   <div class="search-form">
-    {{#if term}}
-      <span class="clear-icon" {{action 'clearSearchText'}}>{{app-icon name="clear"}}</span>
-    {{/if}}
-    <span class="search-icon">
-      {{app-icon name='search' }}
-    </span>
-
-
     <form {{action "searchTerm" on="submit"}} class="form-inline">
       <div class="form-group">
         <div class="input-group validation {{if searchErrorMessage 'has-error'}}">
@@ -50,5 +27,43 @@
         </div>
       </div>
     </form>
+
+    <div class="applied-filters">
+      <div class="visible-filters">
+        {{#each visibleFilters as |filterData|}}
+          {{activities.search-filter-tag isTagAvailable=true tag=filterData onRemoveFilter="onRemoveFilter"}}
+          {{else}}
+            {{activities.search-filter-tag isTagAvailable=false}}
+        {{/each}}
+        {{#if (gt appliedFilterList.length 3)}}
+          <button class="non-visible-tags" >
+            <span>+ {{invisibleFilterCount}} More</span>
+          </button>
+        {{/if}}
+      </div>
+      <div class="non-visible-filters">
+        {{#each appliedFilterList as |filterData|}}
+          {{activities.search-filter-tag isTagAvailable=true tag=filterData onRemoveFilter="onRemoveFilter"}}
+        {{/each}}
+      </div>
+    </div>
+    <div class="filter-actions-icons">
+      {{#if term}}
+        <span class="clear-icon" {{action 'clearSearchText'}}>{{app-icon name="clear"}}</span>
+      {{/if}}
+      <span class="search-icon">
+        {{app-icon name='search' }}
+      </span>
+      <span class="search-dropdown" {{action 'onShowDropDown'}}>
+        {{app-icon name='filter_list' }}
+      </span>
+    </div>
   </div>
+  <div class="comparative-search-filters">
+      <span>Compare</span>
+      {{app-icon name='person'}}
+  </div>
+</div>
+<div class="filter-dropdown-list">
+
 </div>

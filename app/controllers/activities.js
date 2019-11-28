@@ -90,6 +90,13 @@ export default Ember.Controller.extend({
     onEmptyFilters(isEmpty) {
       let controller = this;
       controller.set('isEmptyFilters', isEmpty);
+    },
+
+    /**
+     * Action triggered when am user click dropdown icon
+     */
+    onShowDropDown() {
+      Ember.$('.filter-list').slideToggle(500);
     }
   },
 

@@ -1,5 +1,10 @@
 import Ember from 'ember';
-import { DEFAULT_ACTIVITY_FILTERS, ACTIVITY_FILTER, QUESTION_TYPE_FILTERS, RESOURCE_TYPE_FILTERS } from 'admin-dataview/config/config';
+import {
+  DEFAULT_ACTIVITY_FILTERS,
+  ACTIVITY_FILTER,
+  QUESTION_TYPE_FILTERS,
+  RESOURCE_TYPE_FILTERS
+} from 'admin-dataview/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -22,7 +27,11 @@ export default Ember.Component.extend({
     let activityFilter = ACTIVITY_FILTER;
     let resourceTypeFilters = RESOURCE_TYPE_FILTERS;
     let questionTypeFilters = QUESTION_TYPE_FILTERS;
-    return defaultFilter.concat(activityFilter, resourceTypeFilters, questionTypeFilters);
+    return defaultFilter.concat(
+      activityFilter,
+      resourceTypeFilters,
+      questionTypeFilters
+    );
   }),
 
   /**
@@ -167,6 +176,14 @@ export default Ember.Component.extend({
     clearSearchText() {
       this.set('tempTerm', '');
       this.sendAction('clearSearchText');
+    },
+
+    /**
+     * Action triggered when am user click dropdown icon
+     */
+    onShowDropDown() {
+      let component = this;
+      component.sendAction('onShowDropDown');
     }
   },
 

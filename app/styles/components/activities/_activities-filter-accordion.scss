@@ -3,8 +3,10 @@
   .filter {
     padding-left: 12px;
     margin-bottom: 10px;
+    position: relative;
     .header {
       display: flex;
+      cursor: pointer;
       .name {
         width: 200px;
         text-transform: capitalize;
@@ -13,13 +15,15 @@
         color: $dark-400;
       }
       .toggle-dropdown {
-        z-index: 999;
         cursor: pointer;
       }
     }
     .body {
+      position: absolute;
       max-height: 180px;
-      width: 220px;
+      z-index: 10;
+      width: 100%;
+      background-color: $white;
       overflow: auto;
       .filter-name {
         padding: 3px;
