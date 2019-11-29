@@ -341,6 +341,47 @@ export default Ember.Object.extend({
     return Ember.$.ajax(requestURL, options);
   },
 
+  /**
+   * @function googleSearch
+   * Method to search google content
+   */
+  googleSearch(query, start = 1) {
+    let url = `https://www.googleapis.com/customsearch/v1?key=AIzaSyD9z1JhHhwZ2b-i6WRxhG5i2JgIgIDxglA&cx=014236057503552390158:jjjumkgqhli&q=${query}&start=${start}`;
+    return Ember.$.ajax(url);
+  },
+
+  /**
+   * @function bingSearch
+   * Method to search bing content
+   */
+  bingSearch(query, start = 1) {
+    let url = `https://www.googleapis.com/customsearch/v1?key=AIzaSyD9z1JhHhwZ2b-i6WRxhG5i2JgIgIDxglA&cx=014236057503552390158:nhidtvjygpo&q=${query}&start=${start}`;
+    return Ember.$.ajax(url);
+  },
+
+  /**
+   * @function comparativeSearch
+   * Method
+   */
+  comparativeSearch(query = '*', start = 0, length = 10) {
+    const adapter = this;
+    const namespace = this.get('namespace1');
+    const url = `${namespace}/search`;
+    let defaultData = {
+      q: query,
+      startAt: start,
+      length: length
+    };
+    let options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      headers: adapter.defineHeaders(),
+      data: defaultData
+    };
+    return Ember.$.ajax(url, options);
+  },
+
   defineHeaders() {
     return {
       Authorization: `Token ${this.get('session.accessToken')}`

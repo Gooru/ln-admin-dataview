@@ -932,5 +932,33 @@ export default Ember.Object.extend(ConfigurationMixin, {
     competency.title = competency.title || '';
     competency.code = competency.code || '';
     return competency;
+  },
+
+  /**
+   * Normalize search data to ember data
+   */
+  normalizeSearchData(payload) {
+    let searchResults = Ember.A([]);
+    let searchItems = payload.items ? payload.items : [];
+    if (searchItems.length) {
+      searchItems.map(item => {
+        searchResults.pushObject(item);
+      });
+    }
+    return searchResults;
+  },
+
+  /**
+   * Normalize gooru search data to ember data
+   */
+  normalizeComparativeSearch(payload) {
+    let searchResults = Ember.A([]);
+    let searchItems = payload.contents ? payload.contents : [];
+    if (searchItems.length) {
+      searchItems.map(item => {
+        searchResults.pushObject(item);
+      });
+    }
+    return searchResults;
   }
 });

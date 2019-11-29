@@ -1,12 +1,13 @@
 <div class="comparative-search-box-container">
-    <div class="search-back">
-        {{app-icon name="arrow_back"}}
-    </div>
-    <div class="search-input">
-        <input type="text" name="" value="">
-    </div>
-    <div class="search-personalize">
-      <span>Personalize</span>
-      {{app-icon name='person'}}
-    </div>
+      <div class="search-back">
+          {{app-icon name="arrow_back"}}
+      </div>
+      <div class="search-input">
+          {{input enter="onSearchTerms" type="text" value=searchTerms}}
+          <span {{action 'onSearchTerms'}}>{{app-icon name="search"}}</span>
+      </div>
+      <div class="search-personalize">
+        <span>Personalize</span>
+        {{app-icon name='person'}}
+      </div>
 </div>

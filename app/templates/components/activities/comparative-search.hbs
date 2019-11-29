@@ -1,0 +1,29 @@
+<div class="comparative-search-container">
+  <div class="comaparative-search-header">
+      {{activities.comparative-search-box onSearchTerms = "onSearchTerms"}}
+  </div>
+  <div class="comparative-search-section">
+      <div class="comparative-search-engine-list {{unless googleSearchContent.length 'no-search-content' ''}}">
+          <div class="engine-logo google-search-engine">
+
+          </div>
+          <div class="engine-logo bing-search-engine">
+
+          </div>
+          <div class="engine-logo gooru-search-engine">
+
+          </div>
+      </div>
+      <div class="comparative-search-content {{unless googleSearchContent.length 'no-search-content' ''}}">
+        {{#if (and googleSearchContent.length bingSearchContent.length)}}
+          {{activities.comparative-search-card searchContent = googleSearchContent}}
+          {{activities.comparative-search-card searchContent = bingSearchContent}}
+          {{activities.comparative-search-card searchContent = googleSearchContent}}
+        {{else}}
+          <div class="no-content">
+              Type in some keywords to see the results from different platforms.
+          </div>
+        {{/if}}
+      </div>
+  </div>
+</div>

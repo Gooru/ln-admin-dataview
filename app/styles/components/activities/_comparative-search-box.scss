@@ -1,7 +1,7 @@
 .comparative-search-box {
   .comparative-search-box-container {
     display: grid;
-    grid-template-columns: 50px 1fr 100px;
+    grid-template-columns: 50px 1fr 140px;
     align-items: center;
     background-color: $white;
     margin-top: 20px;
@@ -10,17 +10,37 @@
       padding: 10px;
       align-items: center;
       background-color: $light-200;
+      cursor: pointer;
     }
     .search-input {
+      display: grid;
+      grid-template-columns: 1fr 50px;
+      align-items: center;
       padding-left: 10px;
+      span {
+        display: grid;
+        align-items: center;
+        cursor: pointer;
+      }
       input {
         width: 90%;
+        height: 40px;
+        outline: none;
       }
     }
     .search-personalize {
       display: grid;
       grid-template-columns: 1fr 30px;
       align-items: center;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 10px;
+      border-left: 1px solid $light-200;
+      text-transform: uppercase;
+      cursor: pointer;
+      span {
+        color: $blue-500;
+      }
     }
   }
 }
