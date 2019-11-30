@@ -68,6 +68,24 @@
       .comparative-gooru-collection-description-content {
         padding: 0 10px;
       }
+      .comparative-gooru-collection-core {
+        display: grid;
+        grid-template-columns: 50px 1fr 50px;
+        align-items: center;
+        border-top: 1px solid $light-100;
+        border-bottom: 1px solid $light-100;
+        i {
+          text-align: center;
+        }
+        .comparative-gooru-collection-head {
+          line-height: 1.4;
+          display: grid;
+          grid-template-columns: auto;
+          span:last-child {
+            color: $light-500;
+          }
+        }
+      }
     }
   }
 }

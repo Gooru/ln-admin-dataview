@@ -19,7 +19,12 @@ export default Ember.Component.extend({
   // Hooks
 
   didInsertElement() {
+    this.set('sortedContents', []);
     this.sortGooruSearch();
+  },
+
+  didDestoryElement() {
+    this.set('activityContents', []);
   },
 
   // -----------------------------------------------------------
@@ -34,29 +39,67 @@ export default Ember.Component.extend({
     let sortedContents = component.get('sortedContents');
     let activityList = [];
     if (sortedContents.length === 0) {
-      let firstResourse =
-        activityContents.resource.length > 4
-          ? activityContents.resource.slice(0, 4)
-          : activityContents.resource;
-      let secondAssessment =
-        activityContents.assessment.length > 4
-          ? activityContents.assessment.slice(0, 4)
-          : activityContents.assessment;
-      let thirdCollection =
-        activityContents.collection.length > 4
-          ? activityContents.collection.slice(0, 4)
-          : activityContents.collection;
-      let fourthOfflineActivity =
-        activityContents.offlineActivity.length > 4
-          ? activityContents.offlineActivity.slice(0, 4)
-          : activityContents.offlineActivity;
+      let selectedResourse = component.mixSelectedActivities(
+        activityContents.resource
+      );
+      let selectedAssessment = component.mixSelectedActivities(
+        activityContents.assessment
+      );
+      let selectedCollection = component.mixSelectedActivities(
+        activityContents.collection
+      );
+      let selectedOfflineActivity = component.mixSelectedActivities(
+        activityContents.offlineActivity
+      );
+      let otherResourse = component.mixOtherActivities(
+        activityContents.resource
+      );
+      let otherAssessment = component.mixOtherActivities(
+        activityContents.assessment
+      );
+      let otherCollection = component.mixOtherActivities(
+        activityContents.collection
+      );
+      let otherOfflineActivity = component.mixOtherActivities(
+        activityContents.offlineActivity
+      );
+
       activityList = [
-        ...firstResourse,
-        ...secondAssessment,
-        ...thirdCollection,
-        ...fourthOfflineActivity
+        ...selectedResourse,
+        ...selectedAssessment,
+        ...selectedCollection,
+        ...selectedOfflineActivity
       ];
+
+      let mixActivity = [
+        ...otherResourse,
+        ...otherAssessment,
+        ...otherCollection,
+        ...otherOfflineActivity
+      ];
+      activityList = activityList.concat(component.shuffle(mixActivity));
+      component.set('sortedContents', sortedContents.concat(activityList));
+    } else {
+      let mixActivity = [
+        ...activityContents.resource,
+        ...activityContents.assessment,
+        ...activityContents.collection,
+        ...activityContents.offlineActivity
+      ];
+      activityList = activityList.concat(component.shuffle(mixActivity));
       component.set('sortedContents', sortedContents.concat(activityList));
     }
+  },
+
+  mixSelectedActivities(content) {
+    return content.length > 4 ? content.slice(0, 4) : content;
+  },
+
+  mixOtherActivities(content) {
+    return content.length > 4 ? content.slice(4, content.length) : [];
+  },
+
+  shuffle(content) {
+    return content.sort(() => Math.random() - 0.5);
   }
 });

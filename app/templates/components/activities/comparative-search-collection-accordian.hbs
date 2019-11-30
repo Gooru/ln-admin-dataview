@@ -4,7 +4,7 @@
          <span class="icon {{activity.type}}"></span>
       </div>
       <div class="search-activity-title">
-         <span>{{activity.type}}</span>
+         <span>{{activity.title}}</span>
          {{#if (eq  activity.type "collection")}}
             <span>{{activity.resourceCount}} Resources</span>
          {{else}}
@@ -26,8 +26,13 @@
         <div class="comparative-gooru-collection-description-content">
            {{activity.description}}
         </div>
-        <div class="comparative-gooru-collection-code">
+        <div class="comparative-gooru-collection-core">
           <span></span>
+          <div class="comparative-gooru-collection-head">
+              <span>Objective Learning</span>
+              <span>Once the description start</span>
+          </div>
+          {{app-icon name="arrow_drop_down"}}
         </div>
         <div class="comparative-gooru-collection-footer">
 
