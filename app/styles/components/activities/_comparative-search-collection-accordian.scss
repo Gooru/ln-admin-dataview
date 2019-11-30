@@ -63,10 +63,10 @@
       .comparative-gooru-collection-description-head {
         font-weight: bold;
         font-size: 13px;
-        padding: 0 10px;
+        padding: 0 20px;
       }
       .comparative-gooru-collection-description-content {
-        padding: 0 10px;
+        padding: 0 20px;
       }
       .comparative-gooru-collection-core {
         display: grid;
@@ -74,6 +74,18 @@
         align-items: center;
         border-top: 1px solid $light-100;
         border-bottom: 1px solid $light-100;
+        .icon {
+          width: 20px;
+          height: 20px;
+          background-size: 20px 20px;
+          margin: 0 auto;
+          &.collection {
+            background-image: url(images/resource-icon.svg);
+          }
+          &.assessment {
+            background-image: url(images/question-icon.svg);
+          }
+        }
         i {
           text-align: center;
         }
@@ -81,8 +93,16 @@
           line-height: 1.4;
           display: grid;
           grid-template-columns: auto;
+          padding: 3px 0;
+          span {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            font-weight: bold;
+          }
           span:last-child {
-            color: $light-500;
+            font-size: 11px;
+            font-weight: 300;
           }
         }
       }

@@ -7,8 +7,14 @@
          <span>{{activity.title}}</span>
          <span>{{activity.format}}</span>
       </div>
-      <div class="search-activity-expand-icon" {{action "onToggleActivity"}}>
-        {{app-icon name="remove_red_eye"}}
+      <div class="search-activity-expand-icon" {{action "onToggleActivity" activity}}>
+        <span >
+          {{#if isExpanded}}
+            {{app-icon name="arrow_drop_up"}}
+          {{else}}
+            {{app-icon name="remove_red_eye"}}
+          {{/if}}
+          </span>
       </div>
     </div>
     <div class="comparative-gooru-resource-accordian-panel">

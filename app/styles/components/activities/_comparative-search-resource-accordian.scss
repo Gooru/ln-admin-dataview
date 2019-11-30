@@ -63,14 +63,14 @@
     .comparative-gooru-resource-accordian-panel {
       display: none;
       background-color: $white;
-      margin-bottom: 10px;
+      margin-bottom: 20px;
       .comparative-gooru-resource-description-head {
         font-weight: bold;
         font-size: 13px;
-        padding: 0 10px;
+        padding: 0 20px;
       }
       .comparative-gooru-resource-description-content {
-        padding: 0 10px;
+        padding: 0 20px;
       }
       .comparative-gooru-resource-footer {
         border-top: 1px solid $light-100;
@@ -78,7 +78,7 @@
         grid-template-columns: auto;
         line-height: 1.4;
         font-size: 11px;
-        padding: 3px 10px;
+        padding: 3px 20px;
 
         span:first-child {
           color: $light-400;

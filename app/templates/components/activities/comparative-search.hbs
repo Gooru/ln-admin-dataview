@@ -16,9 +16,9 @@
       </div>
       <div class="comparative-search-content {{unless gooruSearchContent.maxTotalHitCount 'no-search-content' ''}}">
         {{#if gooruSearchContent.maxTotalHitCount}}
-          {{activities.comparative-search-card searchContent = googleSearchContent}}
-          {{activities.comparative-search-card searchContent = bingSearchContent}}
-          {{activities.comparative-gooru-search-card activityContents = gooruSearchContent}}
+          {{activities.comparative-search-card paginateNext="paginateNext" searchContent = googleSearchContent}}
+          {{activities.comparative-search-card paginateNext="paginateNext" searchContent = bingSearchContent}}
+          {{activities.comparative-gooru-search-card paginateNext="paginateNext" activityContents = gooruSearchContent}}
         {{else}}
           <div class="no-content">
               Type in some keywords to see the results from different platforms.

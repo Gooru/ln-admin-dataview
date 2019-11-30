@@ -3,7 +3,7 @@
     {{#if (eq "resource" content.type)}}
       {{activities.comparative-search-resource-accordian activity = content}}
     {{else}}
-      {{activities.comparative-search-collection-accordian activity = content}}
+      {{activities.comparative-search-collection-accordian paginateNext = "paginateNext" activity = content}}
     {{/if}}
   {{/each}}
 </div>

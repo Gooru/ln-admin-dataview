@@ -1,5 +1,5 @@
 <div class="comparative-search-collection-accordian-container">
-    <div class="comparative-gooru-collection-accordian" {{action "onToggleActivity"}}>
+    <div class="comparative-gooru-collection-accordian">
       <div class="search-activity-icon">
          <span class="icon {{activity.type}}"></span>
       </div>
@@ -12,8 +12,14 @@
          {{/if}}
 
       </div>
-      <div class="search-activity-expand-icon">
-        {{app-icon name="remove_red_eye"}}
+      <div class="search-activity-expand-icon" {{action "onToggleActivity" activity}}>
+        <span >
+          {{#if isExpanded}}
+            {{app-icon name="arrow_drop_up"}}
+          {{else}}
+            {{app-icon name="remove_red_eye"}}
+          {{/if}}
+          </span>
       </div>
     </div>
     <div class="comparative-gooru-collection-accordian-panel">
@@ -26,16 +32,15 @@
         <div class="comparative-gooru-collection-description-content">
            {{activity.description}}
         </div>
+        {{#each activityContent as |content|}}
         <div class="comparative-gooru-collection-core">
-          <span></span>
+          <span class="icon {{activity.type}}"></span>
           <div class="comparative-gooru-collection-head">
-              <span>Objective Learning</span>
-              <span>Once the description start</span>
+              <span>{{content.title}}</span>
+              <span>{{content.content_subformat}}</span>
           </div>
           {{app-icon name="arrow_drop_down"}}
         </div>
-        <div class="comparative-gooru-collection-footer">
-
-        </div>
+        {{/each}}
     </div>
 </div>

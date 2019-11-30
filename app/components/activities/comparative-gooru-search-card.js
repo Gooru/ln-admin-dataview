@@ -15,6 +15,13 @@ export default Ember.Component.extend({
    */
   sortedContents: [],
 
+  /**
+   * Watching activity data changes
+   */
+  watchingActivityContent: Ember.observer('activityContents', function() {
+    this.sortGooruSearch();
+  }),
+
   // --------------------------------------------------------------
   // Hooks
 
@@ -23,8 +30,17 @@ export default Ember.Component.extend({
     this.sortGooruSearch();
   },
 
-  didDestoryElement() {
-    this.set('activityContents', []);
+  // -----------------------------------------------------------------------
+  // Actions
+
+  actions: {
+    /**
+     * Action trigger when scroll on acitivity
+     */
+    paginateNext(activity) {
+      let component = this;
+      component.sendAction('paginateNext', activity);
+    }
   },
 
   // -----------------------------------------------------------
