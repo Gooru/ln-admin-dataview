@@ -824,6 +824,15 @@ export default Ember.Object.extend(ConfigurationMixin, {
     serializedContentData.unit = unitData;
     serializedContentData.lesson = lessonData;
     serializedContentData.offlineActivity = offlineActivityData;
+    serializedContentData.maxTotalHitCount = Math.max(
+      contents.assessment.totalHitCount,
+      contents.assessmentExternal.totalHitCount,
+      contents.collectionExternal.totalHitCount,
+      contents.collection.totalHitCount,
+      contents.offlineActivity.totalHitCount,
+      contents.question.totalHitCount,
+      contents.resource.totalHitCount
+    );
     return serializedContentData;
   },
 

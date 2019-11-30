@@ -487,7 +487,7 @@ export default Ember.Service.extend({
             resolve(
               service
                 .get('searchSerializer')
-                .normalizeSearchLearningMapsContentInfo(response)
+                .normalizeSearchLearningMapsContentInfo(response.contents)
             );
           },
           function(error) {

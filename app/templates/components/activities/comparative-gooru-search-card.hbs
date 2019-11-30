@@ -1,0 +1,9 @@
+<div class="comparative-gooru-search-card-container">
+  {{#each sortedContents as |content|}}
+    {{#if (eq "resource" content.type)}}
+      {{activities.comparative-search-resource-accordian activity = content}}
+    {{else}}
+      {{activities.comparative-search-collection-accordian activity = content}}
+    {{/if}}
+  {{/each}}
+</div>

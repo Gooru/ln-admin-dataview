@@ -1,0 +1,73 @@
+.comparative-search-collection-accordian {
+  .comparative-search-collection-accordian-container {
+    .comparative-gooru-collection-accordian {
+      background-color: $white;
+      display: grid;
+      grid-template-columns: 50px 1fr 50px;
+      align-items: center;
+      border-top: 1px solid $light-100;
+      .search-activity-icon {
+        display: grid;
+        text-align: center;
+        align-items: center;
+        .icon {
+          width: 20px;
+          height: 20px;
+          background-size: 20px 20px;
+          margin: 0 auto;
+          &.assessment {
+            background-image: url(images/assessment-icon.svg);
+          }
+          &.collection {
+            background-image: url(images/collection-icon.svg);
+          }
+        }
+      }
+      .search-activity-title {
+        padding: 5px 0;
+        display: grid;
+        grid-template-columns: auto;
+        font-size: 13px;
+        line-height: 1.4;
+        text-transform: capitalize;
+        span {
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          font-weight: bold;
+        }
+        span:last-child {
+          font-size: 11px;
+          font-weight: 300;
+        }
+      }
+      .search-activity-expand-icon {
+        text-align: center;
+        display: grid;
+        align-items: center;
+        cursor: pointer;
+        i {
+          font-size: 18px;
+        }
+      }
+    }
+    .comparative-gooru-collection-accordian-panel {
+      background-color: $white;
+      display: none;
+      margin-bottom: 10px;
+      .comparative-gooru-collection-img {
+        img {
+          width: 100%;
+        }
+      }
+      .comparative-gooru-collection-description-head {
+        font-weight: bold;
+        font-size: 13px;
+        padding: 0 10px;
+      }
+      .comparative-gooru-collection-description-content {
+        padding: 0 10px;
+      }
+    }
+  }
+}

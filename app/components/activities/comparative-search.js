@@ -21,6 +21,11 @@ export default Ember.Component.extend({
    */
   bingSearchContent: [],
 
+  /**
+   * @property {Array} gooruSearchContent hold gooru search contents
+   */
+  gooruSearchContent: [],
+
   // --------------------------------------------------------------
   // Action
   actions: {
@@ -29,6 +34,7 @@ export default Ember.Component.extend({
      */
     onSearchTerms(searchTerms) {
       let component = this;
+      component.set('gooruSearchContent', []);
       component.searchTermsContent(searchTerms);
     }
   },
@@ -48,7 +54,7 @@ export default Ember.Component.extend({
     }).then(({ googleSearch, bingSearch, gooruSearch }) => {
       component.set('googleSearchContent', googleSearch);
       component.set('bingSearchContent', bingSearch);
-      component.set('bingSearchContent', gooruSearch);
+      component.set('gooruSearchContent', gooruSearch);
     });
   }
 });

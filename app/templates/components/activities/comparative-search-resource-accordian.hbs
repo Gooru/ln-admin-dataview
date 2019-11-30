@@ -1,0 +1,29 @@
+<div class="comparative-search-resource-accordian-container">
+    <div class="comparative-gooru-resource-accordian">
+      <div class="search-activity-icon">
+         <span class="icon {{activity.format}}"></span>
+      </div>
+      <div class="search-activity-title">
+         <span>{{activity.title}}</span>
+         <span>{{activity.format}}</span>
+      </div>
+      <div class="search-activity-expand-icon" {{action "onToggleActivity"}}>
+        {{app-icon name="remove_red_eye"}}
+      </div>
+    </div>
+    <div class="comparative-gooru-resource-accordian-panel">
+        <div class="comparative-gooru-resource-description-head">
+            Description
+        </div>
+        <div class="comparative-gooru-resource-description-content">
+           {{activity.description}}
+        </div>
+        <div class="comparative-gooru-resource-code">
+
+        </div>
+        <div class="comparative-gooru-resource-footer">
+          <span>{{activity.owner.username}}</span>
+          <span>{{activity.publisher}}</span>
+        </div>
+    </div>
+</div>

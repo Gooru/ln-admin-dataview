@@ -1,0 +1,36 @@
+<div class="comparative-search-collection-accordian-container">
+    <div class="comparative-gooru-collection-accordian" {{action "onToggleActivity"}}>
+      <div class="search-activity-icon">
+         <span class="icon {{activity.type}}"></span>
+      </div>
+      <div class="search-activity-title">
+         <span>{{activity.type}}</span>
+         {{#if (eq  activity.type "collection")}}
+            <span>{{activity.resourceCount}} Resources</span>
+         {{else}}
+           <span>{{activity.questionCount}} Questions</span>
+         {{/if}}
+
+      </div>
+      <div class="search-activity-expand-icon">
+        {{app-icon name="remove_red_eye"}}
+      </div>
+    </div>
+    <div class="comparative-gooru-collection-accordian-panel">
+        <div class="comparative-gooru-collection-img">
+            <img src="{{activity.thumbnailUrl}}">
+        </div>
+        <div class="comparative-gooru-collection-description-head">
+            Description
+        </div>
+        <div class="comparative-gooru-collection-description-content">
+           {{activity.description}}
+        </div>
+        <div class="comparative-gooru-collection-code">
+          <span></span>
+        </div>
+        <div class="comparative-gooru-collection-footer">
+
+        </div>
+    </div>
+</div>

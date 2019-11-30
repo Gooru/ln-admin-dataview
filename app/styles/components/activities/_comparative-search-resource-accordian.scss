@@ -1,0 +1,89 @@
+.comparative-search-resource-accordian {
+  .comparative-search-resource-accordian-container {
+    .comparative-gooru-resource-accordian {
+      background-color: $white;
+      display: grid;
+      grid-template-columns: 50px 1fr 50px;
+      align-items: center;
+      border-top: 1px solid $light-100;
+      .search-activity-icon {
+        display: grid;
+        text-align: center;
+        align-items: center;
+        .icon {
+          width: 20px;
+          height: 20px;
+          background-size: 20px 20px;
+          margin: 0 auto;
+          &.interactive {
+            background-image: url(images/interactive-resource-dark.svg);
+          }
+          &.webpage {
+            background-image: url(images/website-resource-dark.svg);
+          }
+          &.text {
+            background-image: url(images/text-resource-dark.svg);
+          }
+          &.video {
+            background-image: url(images/video-resource-dark.svg);
+          }
+          &.image {
+            background-image: url(images/image-resource-dark.svg);
+          }
+        }
+      }
+      .search-activity-title {
+        padding: 5px 0;
+        display: grid;
+        grid-template-columns: auto;
+        font-size: 13px;
+        line-height: 1.4;
+        text-transform: capitalize;
+        span {
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          overflow: hidden;
+          font-weight: bold;
+        }
+        span:last-child {
+          font-size: 11px;
+          font-weight: 300;
+        }
+      }
+      .search-activity-expand-icon {
+        text-align: center;
+        display: grid;
+        align-items: center;
+        cursor: pointer;
+        i {
+          font-size: 18px;
+        }
+      }
+    }
+    .comparative-gooru-resource-accordian-panel {
+      display: none;
+      background-color: $white;
+      margin-bottom: 10px;
+      .comparative-gooru-resource-description-head {
+        font-weight: bold;
+        font-size: 13px;
+        padding: 0 10px;
+      }
+      .comparative-gooru-resource-description-content {
+        padding: 0 10px;
+      }
+      .comparative-gooru-resource-footer {
+        border-top: 1px solid $light-100;
+        display: grid;
+        grid-template-columns: auto;
+        line-height: 1.4;
+        font-size: 11px;
+        padding: 3px 10px;
+
+        span:first-child {
+          color: $light-400;
+        }
+      }
+    }
+  }
+}
