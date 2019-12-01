@@ -16,6 +16,16 @@ export default Ember.Component.extend({
   sortedContents: [],
 
   /**
+   * @property {Number} startAt
+   */
+  startAt: 0,
+
+  /**
+   * @property {Number} length
+   */
+  length: 10,
+
+  /**
    * Watching activity data changes
    */
   watchingActivityContent: Ember.observer('activityContents', function() {
@@ -30,18 +40,12 @@ export default Ember.Component.extend({
     this.sortGooruSearch();
   },
 
+  didRender() {
+    let component = this;
+    component.handleShowMoreData();
+  },
   // -----------------------------------------------------------------------
   // Actions
-
-  actions: {
-    /**
-     * Action trigger when scroll on acitivity
-     */
-    paginateNext(activity) {
-      let component = this;
-      component.sendAction('paginateNext', activity);
-    }
-  },
 
   // -----------------------------------------------------------
   // Methods
@@ -51,6 +55,8 @@ export default Ember.Component.extend({
    */
   sortGooruSearch() {
     let component = this;
+    let startAt = component.get('startAt');
+    let length = component.get('length');
     let activityContents = component.get('activityContents');
     let sortedContents = component.get('sortedContents');
     let activityList = [];
@@ -105,6 +111,34 @@ export default Ember.Component.extend({
       activityList = activityList.concat(component.shuffle(mixActivity));
       component.set('sortedContents', sortedContents.concat(activityList));
     }
+    component.set('startAt', startAt + length);
+  },
+
+  /**
+   * @function handleShowMoreData used to load more data while scroll
+   */
+  handleShowMoreData() {
+    let component = this;
+    let loading = false;
+    let container = Ember.$('.comparative-gooru-search-card');
+    component.$(container).scroll(function() {
+      if (!loading) {
+        let scrollTop = Ember.$(container).scrollTop();
+        let listContainerHeight = Ember.$(container).height() + 1;
+        let isScrollReachedBottom =
+          scrollTop >=
+          component.$(container).prop('scrollHeight') - listContainerHeight;
+        if (isScrollReachedBottom) {
+          loading = true;
+          let startAt = component.get('startAt');
+          component.sendAction('paginateNext', {
+            activity: 'activity',
+            startAt: startAt
+          });
+          loading = false;
+        }
+      }
+    });
   },
 
   mixSelectedActivities(content) {

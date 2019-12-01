@@ -36,19 +36,16 @@ export default Ember.Component.extend({
    */
   isLoading: false,
 
-  /**
-   * @property {Number} startAt
-   */
-  startAt: 0,
-
-  /**
-   * @property {Number} length
-   */
-  length: 10,
-
   // --------------------------------------------------------------
   // Action
   actions: {
+    /**
+     * Action trigger when click on back arrow
+     */
+    backToCatalog() {
+      this.sendAction('backToCatalog');
+    },
+
     /**
      * Action trigger when click search button
      */
@@ -68,9 +65,28 @@ export default Ember.Component.extend({
      */
     paginateNext(content) {
       let component = this;
-      if (content.activity === 'activity' && !component.get('isLoading')) {
+      let maxTotalHitCount = component.get('gooruSearchContent')
+        .maxTotalHitCount;
+      let startAt = content.startAt;
+      if (
+        content.activity === 'activity' &&
+        !component.get('isLoading') &&
+        startAt < maxTotalHitCount
+      ) {
         component.set('isLoading', true);
-        component.gooruSearchTermsContent(component.get('searchTerms'));
+        component.gooruSearchTermsContent(
+          component.get('searchTerms'),
+          content
+        );
+      } else if (content.activity === 'google' && !component.get('isLoading')) {
+        component.set('isLoading', true);
+        component.googleSearchTermsContent(
+          component.get('searchTerms'),
+          content
+        );
+      } else if (content.activity === 'bing' && !component.get('isLoading')) {
+        component.set('isLoading', true);
+        component.bingSearchTermsContent(component.get('searchTerms'), content);
       }
     }
   },
@@ -81,17 +97,15 @@ export default Ember.Component.extend({
   /**
    * @function gooruSearchTermsContent
    */
-  gooruSearchTermsContent(searchTerms) {
+  gooruSearchTermsContent(searchTerms, content = null) {
     let component = this;
-    let startAt = component.get('startAt');
-    let length = component.get('length');
+    let startAt = content ? content.startAt : 0;
     Ember.RSVP.hash({
       gooruSearch: component
         .get('searchService')
-        .comparativeSearch(searchTerms, startAt, length)
+        .comparativeSearch(searchTerms, startAt)
     }).then(({ gooruSearch }) => {
       component.set('gooruSearchContent', gooruSearch);
-      component.set('startAt', startAt + length);
       Ember.run.later(function() {
         component.set('isLoading', false);
       }, 5000);
@@ -101,26 +115,38 @@ export default Ember.Component.extend({
   /**
    * @function bingSearchTermsContent
    */
-  bingSearchTermsContent(searchTerms) {
+  bingSearchTermsContent(searchTerms, content = null) {
     let component = this;
+    let startAt = content ? content.startAt : 1;
     component
       .get('searchService')
-      .googleSearch(searchTerms)
+      .googleSearch(searchTerms, startAt)
       .then(googleSearch => {
-        component.set('googleSearchContent', googleSearch);
+        let googleSearchContent = component.get('googleSearchContent');
+        googleSearchContent = googleSearchContent.concat(googleSearch);
+        component.set('googleSearchContent', googleSearchContent);
+        Ember.run.later(function() {
+          component.set('isLoading', false);
+        }, 5000);
       });
   },
 
   /**
    * @function googleSearchTermsContent
    */
-  googleSearchTermsContent(searchTerms) {
+  googleSearchTermsContent(searchTerms, content = null) {
     let component = this;
+    let startAt = content ? content.startAt : 1;
     component
       .get('searchService')
-      .bingSearch(searchTerms)
+      .bingSearch(searchTerms, startAt)
       .then(bingSearch => {
-        component.set('bingSearchContent', bingSearch);
+        let bingSearchContent = component.get('bingSearchContent');
+        bingSearchContent = bingSearchContent.concat(bingSearch);
+        component.set('bingSearchContent', bingSearchContent);
+        Ember.run.later(function() {
+          component.set('isLoading', false);
+        }, 5000);
       });
   }
 });

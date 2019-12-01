@@ -49,12 +49,6 @@ export default Ember.Component.extend({
   },
 
   // -------------------------------------------------------------------------
-  // Events
-  didRender() {
-    let component = this;
-    component.handleShowMoreData();
-  },
-  // -------------------------------------------------------------------------
   // Methods
 
   /**
@@ -78,28 +72,5 @@ export default Ember.Component.extend({
           component.set('activityContent', activityData.question);
         });
     }
-  },
-
-  /**
-   * @function handleShowMoreData used to load more data while scroll
-   */
-  handleShowMoreData() {
-    let component = this;
-    let loading = false;
-    let container = Ember.$('.comparative-gooru-search-card');
-    component.$(container).scroll(function() {
-      if (!loading) {
-        let scrollTop = Ember.$(container).scrollTop();
-        let listContainerHeight = Ember.$(container).height() + 1;
-        let isScrollReachedBottom =
-          scrollTop >=
-          component.$(container).prop('scrollHeight') - listContainerHeight;
-        if (isScrollReachedBottom) {
-          loading = true;
-          component.sendAction('paginateNext', { activity: 'activity' });
-          loading = false;
-        }
-      }
-    });
   }
 });

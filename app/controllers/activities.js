@@ -25,6 +25,12 @@ export default Ember.Controller.extend({
    */
   isEmptyFilters: false,
 
+  /**
+   * @property {Boolean}
+   * used to switch search box in activity
+   */
+  isComparativeSearch: false,
+
   // -------------------------------------------------------------------------
   // Actions
   actions: {
@@ -97,6 +103,21 @@ export default Ember.Controller.extend({
      */
     onShowDropDown() {
       Ember.$('.filter-list').slideToggle(500);
+    },
+
+    /**
+     * Action triggered when click on comparative buttton
+     */
+
+    onComparativeSearch() {
+      this.set('isComparativeSearch', true);
+    },
+
+    /**
+     * Action trigger when click on back arrow
+     */
+    backToCatalog() {
+      this.set('isComparativeSearch', false);
     }
   },
 

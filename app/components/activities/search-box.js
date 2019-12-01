@@ -184,6 +184,14 @@ export default Ember.Component.extend({
     onShowDropDown() {
       let component = this;
       component.sendAction('onShowDropDown');
+    },
+
+    /**
+     * Action triggered when click on comparative buttton
+     */
+
+    onComparativeSearch() {
+      this.sendAction('onComparativeSearch');
     }
   },
 

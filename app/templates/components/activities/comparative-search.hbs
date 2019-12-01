@@ -1,6 +1,6 @@
 <div class="comparative-search-container">
   <div class="comaparative-search-header">
-      {{activities.comparative-search-box onSearchTerms = "onSearchTerms"}}
+      {{activities.comparative-search-box backToCatalog="backToCatalog" onSearchTerms = "onSearchTerms"}}
   </div>
   <div class="comparative-search-section">
       <div class="comparative-search-engine-list {{unless googleSearchContent.length 'no-search-content' ''}}">
@@ -16,8 +16,8 @@
       </div>
       <div class="comparative-search-content {{unless gooruSearchContent.maxTotalHitCount 'no-search-content' ''}}">
         {{#if gooruSearchContent.maxTotalHitCount}}
-          {{activities.comparative-search-card paginateNext="paginateNext" searchContent = googleSearchContent}}
-          {{activities.comparative-search-card paginateNext="paginateNext" searchContent = bingSearchContent}}
+          {{activities.comparative-search-card paginateNext="paginateNext" searchCardName='google' searchContent = googleSearchContent}}
+          {{activities.comparative-search-card paginateNext="paginateNext" searchCardName='bing' searchContent = bingSearchContent}}
           {{activities.comparative-gooru-search-card paginateNext="paginateNext" activityContents = gooruSearchContent}}
         {{else}}
           <div class="no-content">

@@ -26,6 +26,13 @@ export default Ember.Component.extend({
       if (searchTerms) {
         component.sendAction('onSearchTerms', searchTerms);
       }
+    },
+
+    /**
+     * Action trigger when click on back arrow
+     */
+    backToCatalog() {
+      this.sendAction('backToCatalog');
     }
   }
 });
