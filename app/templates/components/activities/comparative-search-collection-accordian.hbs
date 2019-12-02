@@ -6,11 +6,19 @@
       <div class="search-activity-title">
          <span>{{activity.title}}</span>
          {{#if (eq  activity.type "collection")}}
-            <span>{{activity.resourceCount}} Resources</span>
+            <span>{{activity.resourceCount}} {{t 'common.content-types.resource'}}</span>
          {{else}}
-           <span>{{activity.questionCount}} Questions</span>
+           <span>{{activity.questionCount}} {{t 'common.content-types.question'}}</span>
          {{/if}}
-
+      </div>
+      <div class="search-play-icon">
+        {{#if isPlay}}
+          {{#if (eq  activity.type "collection")}}
+            <span {{action 'onPlayCollection' activity.id}}>{{app-icon name="play_arrow"}}</span>
+          {{else}}
+            <span {{action 'onPlayAssessment' activity.id}}>{{app-icon name="play_arrow"}}</span>
+          {{/if}}
+        {{/if}}
       </div>
       <div class="search-activity-expand-icon" {{action "onToggleActivity" activity}}>
         <span >
@@ -27,7 +35,7 @@
             <img src="{{activity.thumbnailUrl}}">
         </div>
         <div class="comparative-gooru-collection-description-head">
-            Description
+            {{t 'activities.description'}}
         </div>
         <div class="comparative-gooru-collection-description-content">
            {{activity.description}}

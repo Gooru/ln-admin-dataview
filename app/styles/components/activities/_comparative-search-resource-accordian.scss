@@ -3,7 +3,7 @@
     .comparative-gooru-resource-accordian {
       background-color: $white;
       display: grid;
-      grid-template-columns: 50px 1fr 50px;
+      grid-template-columns: 50px 1fr 40px 40px;
       align-items: center;
       border-top: 1px solid $light-100;
       .search-activity-icon {
@@ -50,6 +50,10 @@
           font-weight: 300;
         }
       }
+      .search-play-icon {
+        text-align: center;
+        cursor: pointer;
+      }
       .search-activity-expand-icon {
         text-align: center;
         display: grid;
@@ -71,6 +75,9 @@
       }
       .comparative-gooru-resource-description-content {
         padding: 0 20px;
+      }
+      .comparative-search-taxonomy-code-container {
+        margin: 10px;
       }
       .comparative-gooru-resource-footer {
         border-top: 1px solid $light-100;

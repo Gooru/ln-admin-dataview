@@ -366,7 +366,7 @@ export default Ember.Object.extend({
   comparativeSearch(query = '*', start = 0, length = 10) {
     const adapter = this;
     const namespace = this.get('namespace1');
-    const url = `${namespace}/search`;
+    const url = `${namespace}`;
     let defaultData = {
       q: query,
       startAt: start,

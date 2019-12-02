@@ -7,6 +7,11 @@
          <span>{{activity.title}}</span>
          <span>{{activity.format}}</span>
       </div>
+      <div class="search-play-icon">
+        {{#if isPlay}}
+        <span {{action "onPlayResource" activity.id}}>{{app-icon name="play_arrow"}}</span>
+        {{/if}}
+      </div>
       <div class="search-activity-expand-icon" {{action "onToggleActivity" activity}}>
         <span >
           {{#if isExpanded}}
@@ -19,14 +24,17 @@
     </div>
     <div class="comparative-gooru-resource-accordian-panel">
         <div class="comparative-gooru-resource-description-head">
-            Description
+            {{t 'activities.description'}}
         </div>
         <div class="comparative-gooru-resource-description-content">
            {{activity.description}}
         </div>
-        <div class="comparative-gooru-resource-code">
-
+        <div class="comparative-search-taxonomy-code-container">
+          {{#if tags.length}}
+            {{taxonomy.taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
+          {{/if}}
         </div>
+
         <div class="comparative-gooru-resource-footer">
           <span>{{activity.owner.username}}</span>
           <span>{{activity.publisher}}</span>

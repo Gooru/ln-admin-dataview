@@ -38,5 +38,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     ) {
       route.transitionTo('/catalog/summary');
     }
+  },
+
+  resetController: function(controller) {
+    controller.set('isComparativeSearch', false);
   }
 });

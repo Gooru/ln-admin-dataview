@@ -113,9 +113,9 @@ export default Ember.Component.extend({
   },
 
   /**
-   * @function bingSearchTermsContent
+   * @function googleSearchTermsContent
    */
-  bingSearchTermsContent(searchTerms, content = null) {
+  googleSearchTermsContent(searchTerms, content = null) {
     let component = this;
     let startAt = content ? content.startAt : 1;
     component
@@ -132,9 +132,9 @@ export default Ember.Component.extend({
   },
 
   /**
-   * @function googleSearchTermsContent
+   * @function bingSearchTermsContent
    */
-  googleSearchTermsContent(searchTerms, content = null) {
+  bingSearchTermsContent(searchTerms, content = null) {
     let component = this;
     let startAt = content ? content.startAt : 1;
     component

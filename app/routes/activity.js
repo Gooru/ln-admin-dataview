@@ -12,5 +12,9 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   setupController: function(controller, model) {
     controller.set('searchTerm', model.term);
     controller.set('selectedFilterItems', controller.getStoredFilterItems());
+  },
+
+  resetController: function(controller) {
+    controller.set('isComparativeSearch', false);
   }
 });

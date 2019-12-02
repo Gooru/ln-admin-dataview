@@ -11,9 +11,6 @@
         justify-items: center;
         font-size: 15px;
         font-weight: bold;
-        &.no-search-content {
-          opacity: 0.4;
-        }
         .engine-logo {
           width: 100px;
           height: 50px;
@@ -21,6 +18,9 @@
           background-repeat: no-repeat;
           background-position: center;
           background-position-y: 15px;
+          &.no-search-content {
+            opacity: 0.4;
+          }
           &.google-search-engine {
             background-image: url(images/Google_logo.svg);
           }

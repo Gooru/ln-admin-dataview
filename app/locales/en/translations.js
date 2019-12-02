@@ -242,7 +242,13 @@ export default {
       content: 'Content',
       'no-content': 'No Content Available'
     },
-    'clear-all': 'Clear All'
+    'clear-all': 'Clear All',
+    personalize: 'PERSONALIZE',
+    compare: 'COMPARE',
+    'gooru-catalog': 'Gooru Catalog',
+    'no-search-result':
+      'Type in some keywords to see the results from different platforms.',
+    description: 'Description'
   },
   'century-skills': {
     legends: {

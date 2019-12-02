@@ -29,17 +29,64 @@
       }
     }
     .search-personalize {
-      display: grid;
-      grid-template-columns: 1fr 30px;
-      align-items: center;
-      font-size: 13px;
-      font-weight: bold;
-      padding: 10px;
-      border-left: 1px solid $light-200;
-      text-transform: uppercase;
-      cursor: pointer;
-      span {
-        color: $blue-500;
+      position: relative;
+      .search-personalize-heading {
+        display: grid;
+        grid-template-columns: 1fr 40px;
+        align-items: center;
+        font-size: 11px;
+        font-weight: bold;
+        padding: 10px;
+        border-left: 1px solid $light-200;
+        text-transform: uppercase;
+        cursor: pointer;
+        span {
+          color: $blue-500;
+        }
+        i {
+          font-size: 20px;
+        }
+      }
+
+      .personalize-grade-dropdown {
+        width: 100%;
+        position: absolute;
+        top: 50px;
+        background-color: $white;
+        font-size: 12px;
+        z-index: 1;
+        box-shadow: 0 0 10px $light-200;
+        display: none;
+
+        .grade-list {
+          display: grid;
+          grid-template-columns: auto 50px;
+          align-items: center;
+          border-bottom: 1px solid $light-100;
+          padding: 3px 2px;
+          .grade-name {
+            line-height: 1.4;
+            text-align: right;
+            span {
+              text-transform: capitalize;
+              font-size: 11px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+            span:last-child {
+              font-weight: 100;
+            }
+          }
+          .grade-profile {
+            margin: 0 auto;
+            width: 30px;
+            height: 30px;
+            background-image: url(images/profile.png);
+            background-size: 30px 30px;
+            border-radius: 50%;
+          }
+        }
       }
     }
   }

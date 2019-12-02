@@ -33,6 +33,14 @@ export default Ember.Component.extend({
      */
     backToCatalog() {
       this.sendAction('backToCatalog');
+    },
+
+    /**
+     * Action trigger when click personalize dropdown
+     */
+    togglePeronalizeList() {
+      let component = this;
+      component.$('.personalize-grade-dropdown').slideToggle(500);
     }
   }
 });

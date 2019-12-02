@@ -3,25 +3,32 @@
       {{activities.comparative-search-box backToCatalog="backToCatalog" onSearchTerms = "onSearchTerms"}}
   </div>
   <div class="comparative-search-section">
-      <div class="comparative-search-engine-list {{unless googleSearchContent.length 'no-search-content' ''}}">
-          <div class="engine-logo google-search-engine">
+      <div class="comparative-search-engine-list">
+          <div class="engine-logo google-search-engine {{unless bingSearchContent.length 'no-search-content' ''}}">
 
           </div>
-          <div class="engine-logo bing-search-engine">
+          <div class="engine-logo bing-search-engine {{unless googleSearchContent.length 'no-search-content' ''}}">
 
           </div>
-          <div class="engine-logo gooru-search-engine">
+          <div class="engine-logo gooru-search-engine {{unless gooruSearchContent.maxTotalHitCount 'no-search-content' ''}}">
 
           </div>
       </div>
-      <div class="comparative-search-content {{unless gooruSearchContent.maxTotalHitCount 'no-search-content' ''}}">
-        {{#if gooruSearchContent.maxTotalHitCount}}
-          {{activities.comparative-search-card paginateNext="paginateNext" searchCardName='google' searchContent = googleSearchContent}}
-          {{activities.comparative-search-card paginateNext="paginateNext" searchCardName='bing' searchContent = bingSearchContent}}
-          {{activities.comparative-gooru-search-card paginateNext="paginateNext" activityContents = gooruSearchContent}}
+      <div class="comparative-search-content {{unless (or bingSearchContent.length googleSearchContent.length gooruSearchContent.maxTotalHitCount) 'no-search-content' ''}}">
+        {{#if (or bingSearchContent.length googleSearchContent.length gooruSearchContent.maxTotalHitCount)}}
+          {{#if googleSearchContent.length}}
+              {{activities.comparative-search-card paginateNext="paginateNext" searchCardName='google' searchContent = googleSearchContent}}
+          {{/if}}
+          {{#if bingSearchContent.length}}
+              {{activities.comparative-search-card paginateNext="paginateNext" searchCardName='bing' searchContent = bingSearchContent}}
+          {{/if}}
+          {{#if gooruSearchContent.maxTotalHitCount}}
+             {{activities.comparative-gooru-search-card paginateNext="paginateNext" activityContents = gooruSearchContent}}
+          {{/if}}
+
         {{else}}
           <div class="no-content">
-              Type in some keywords to see the results from different platforms.
+              {{t 'activities.no-search-result'}}
           </div>
         {{/if}}
       </div>

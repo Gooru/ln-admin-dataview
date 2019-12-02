@@ -147,11 +147,14 @@
       grid-template-columns: auto 50px;
       align-items: center;
       font-weight: bold;
-      font-size: 12px;
+      font-size: 11px;
       text-transform: uppercase;
       padding-left: 10px;
       text-align: center;
       cursor: pointer;
+      i {
+        font-size: 20px;
+      }
       span {
         color: $blue-500;
       }
