@@ -67,9 +67,7 @@
     "grunt-svgstore": "^1.0.0",
     "husky": "^0.14.3",
     "lint-staged": "^4.0.2",
-    "prettier": "^1.5.3",
-    "detect-indent": "5.0.0",
-    "sort-package-json": "1.22.1"
+    "prettier": "^1.5.3"
   },
   "dependencies": {
     "broccoli-sass": "^0.7.0",
