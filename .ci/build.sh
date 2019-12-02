@@ -23,7 +23,7 @@ if [ $UID -eq 0 ]; then
 fi
 
 info "Installing npm dependencies..."
-silent yarn install
+silent yarn install --ignore-engines
 
 info "Installing bower dependencies..."
 silent bower install
