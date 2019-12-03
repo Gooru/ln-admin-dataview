@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { GOOGLE_API_KEY } from 'admin-dataview/config/config';
+import { GOOGLE_API_KEY, SEARCH_API } from 'admin-dataview/config/config';
 
 /**
  * Adapter to support the Search for Collections, Assessments, Resources and Questions
@@ -348,7 +348,7 @@ export default Ember.Object.extend({
    */
   googleSearch(query, start = 1) {
     let key = GOOGLE_API_KEY[Math.floor(Math.random() * GOOGLE_API_KEY.length)];
-    let url = `https://www.googleapis.com/customsearch/v1?key=${key}&cx=014236057503552390158:jjjumkgqhli&q=${query}&start=${start}`;
+    let url = `${SEARCH_API.baseUrl}?key=${key}&cx=${SEARCH_API.googleCx}&q=${query}&start=${start}`;
     return Ember.$.ajax(url);
   },
 
@@ -358,7 +358,7 @@ export default Ember.Object.extend({
    */
   bingSearch(query, start = 1) {
     let key = GOOGLE_API_KEY[Math.floor(Math.random() * GOOGLE_API_KEY.length)];
-    let url = `https://www.googleapis.com/customsearch/v1?key=${key}&cx=014236057503552390158:nhidtvjygpo&q=${query}&start=${start}`;
+    let url = `${SEARCH_API.baseUrl}?key=${key}&cx=${SEARCH_API.bingCx}&q=${query}&start=${start}`;
     return Ember.$.ajax(url);
   },
 

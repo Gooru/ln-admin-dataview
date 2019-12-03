@@ -563,3 +563,9 @@ export const GOOGLE_API_KEY = [
   'AIzaSyARoulEDz8GHplwF-t9NGb7jTbfCqYfj_s',
   'AIzaSyC-KPkkPxf7ghUJ2fq58cbRdpfjVpHemhE'
 ];
+
+export const SEARCH_API = {
+  baseUrl: 'https://www.googleapis.com/customsearch/v1',
+  googleCx: '014236057503552390158:jjjumkgqhli',
+  bingCx: '014236057503552390158:nhidtvjygpo'
+};
