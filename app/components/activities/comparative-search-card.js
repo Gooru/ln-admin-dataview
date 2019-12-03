@@ -1,6 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  // -----------------------------------------------------------
+  // Attributes
+
   classNames: ['comparative-search-card'],
 
   classNameBindings: ['searchCardName'],
@@ -27,9 +30,14 @@ export default Ember.Component.extend({
    */
   length: 10,
 
+  /**
+   * @property {Boolean} isLoading checking api response
+   */
+  isLoading: false,
+
   // --------------------------------------------------------------
   // Hooks
-  didRender() {
+  didInsertElement() {
     let component = this;
     component.handleShowMoreData();
   },
@@ -42,24 +50,23 @@ export default Ember.Component.extend({
    */
   handleShowMoreData() {
     let component = this;
-    let loading = false;
+    let loading = component.get('isLoading');
     let searchCardName = component.get('searchCardName');
-    let container = Ember.$(`.comparative-search-card.${  searchCardName}`);
+    let container = Ember.$(`.comparative-search-card.${searchCardName}`);
     component.$(container).scroll(function() {
       if (!loading) {
         let scrollTop = Ember.$(container).scrollTop();
-        let listContainerHeight = Ember.$(container).height() + 100;
+        let listContainerHeight = Ember.$(container).height() + 50;
         let isScrollReachedBottom =
           scrollTop >=
           component.$(container).prop('scrollHeight') - listContainerHeight;
         if (isScrollReachedBottom) {
-          loading = true;
+          component.set('isLoading', true);
           let startAt = component.get('startAt') + 10;
           component.sendAction('paginateNext', {
             activity: component.get('searchCardName'),
             startAt: startAt
           });
-          loading = false;
         }
       }
     });

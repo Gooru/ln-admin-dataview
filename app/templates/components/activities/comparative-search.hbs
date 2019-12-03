@@ -17,13 +17,13 @@
       <div class="comparative-search-content {{unless (or bingSearchContent.length googleSearchContent.length gooruSearchContent.maxTotalHitCount) 'no-search-content' ''}}">
         {{#if (or bingSearchContent.length googleSearchContent.length gooruSearchContent.maxTotalHitCount)}}
           {{#if googleSearchContent.length}}
-              {{activities.comparative-search-card paginateNext="paginateNext" searchCardName='google' searchContent = googleSearchContent}}
+              {{activities.comparative-search-card isLoading= isLoading paginateNext="paginateNext" searchCardName='google' searchContent = googleSearchContent}}
           {{/if}}
           {{#if bingSearchContent.length}}
-              {{activities.comparative-search-card paginateNext="paginateNext" searchCardName='bing' searchContent = bingSearchContent}}
+              {{activities.comparative-search-card isLoading= isLoading paginateNext="paginateNext" searchCardName='bing' searchContent = bingSearchContent}}
           {{/if}}
           {{#if gooruSearchContent.maxTotalHitCount}}
-             {{activities.comparative-gooru-search-card paginateNext="paginateNext" activityContents = gooruSearchContent}}
+             {{activities.comparative-gooru-search-card isLoading= isLoading paginateNext="paginateNext" activityContents = gooruSearchContent}}
           {{/if}}
 
         {{else}}

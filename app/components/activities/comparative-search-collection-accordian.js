@@ -6,6 +6,9 @@ import {
 import { getGooruAppEndpointUrl } from 'admin-dataview/utils/endpoint-config';
 
 export default Ember.Component.extend({
+  // --------------------------------------------------------
+  // Attributes
+
   classNames: ['comparative-search-collection-accordian'],
 
   // ---------------------------------------------------------------------

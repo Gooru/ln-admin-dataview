@@ -1,6 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  // ----------------------------------------------------------------
+  // Attributes
+
   classNames: ['comparative-search'],
 
   // --------------------------------------------------------------
@@ -32,7 +35,7 @@ export default Ember.Component.extend({
   gooruSearchContent: [],
 
   /**
-   * @property {Boolean} isLoading checking is content loading or not
+   * @property {Boolean} isLoading checking api response
    */
   isLoading: false,
 
@@ -68,24 +71,17 @@ export default Ember.Component.extend({
       let maxTotalHitCount = component.get('gooruSearchContent')
         .maxTotalHitCount;
       let startAt = content.startAt;
-      if (
-        content.activity === 'activity' &&
-        !component.get('isLoading') &&
-        startAt < maxTotalHitCount
-      ) {
-        component.set('isLoading', true);
+      if (content.activity === 'activity' && startAt < maxTotalHitCount) {
         component.gooruSearchTermsContent(
           component.get('searchTerms'),
           content
         );
-      } else if (content.activity === 'google' && !component.get('isLoading')) {
-        component.set('isLoading', true);
+      } else if (content.activity === 'google') {
         component.googleSearchTermsContent(
           component.get('searchTerms'),
           content
         );
-      } else if (content.activity === 'bing' && !component.get('isLoading')) {
-        component.set('isLoading', true);
+      } else if (content.activity === 'bing') {
         component.bingSearchTermsContent(component.get('searchTerms'), content);
       }
     }
@@ -106,9 +102,7 @@ export default Ember.Component.extend({
         .comparativeSearch(searchTerms, startAt)
     }).then(({ gooruSearch }) => {
       component.set('gooruSearchContent', gooruSearch);
-      Ember.run.later(function() {
-        component.set('isLoading', false);
-      }, 5000);
+      component.set('isLoading', false);
     });
   },
 
@@ -125,9 +119,7 @@ export default Ember.Component.extend({
         let googleSearchContent = component.get('googleSearchContent');
         googleSearchContent = googleSearchContent.concat(googleSearch);
         component.set('googleSearchContent', googleSearchContent);
-        Ember.run.later(function() {
-          component.set('isLoading', false);
-        }, 5000);
+        component.set('isLoading', false);
       });
   },
 
@@ -144,9 +136,7 @@ export default Ember.Component.extend({
         let bingSearchContent = component.get('bingSearchContent');
         bingSearchContent = bingSearchContent.concat(bingSearch);
         component.set('bingSearchContent', bingSearchContent);
-        Ember.run.later(function() {
-          component.set('isLoading', false);
-        }, 5000);
+        component.set('isLoading', false);
       });
   }
 });

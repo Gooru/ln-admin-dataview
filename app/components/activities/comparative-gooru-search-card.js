@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  // ----------------------------------------------------------------
+  // Attributes
   classNames: ['comparative-gooru-search-card'],
 
   // ----------------------------------------------------
@@ -26,6 +28,11 @@ export default Ember.Component.extend({
   length: 10,
 
   /**
+   * @property {Boolean} isLoading checking api response
+   */
+  isLoading: false,
+
+  /**
    * Watching activity data changes
    */
   watchingActivityContent: Ember.observer('activityContents', function() {
@@ -38,12 +45,9 @@ export default Ember.Component.extend({
   didInsertElement() {
     this.set('sortedContents', []);
     this.sortGooruSearch();
+    this.handleShowMoreData();
   },
 
-  didRender() {
-    let component = this;
-    component.handleShowMoreData();
-  },
   // -----------------------------------------------------------------------
   // Actions
 
@@ -119,7 +123,7 @@ export default Ember.Component.extend({
    */
   handleShowMoreData() {
     let component = this;
-    let loading = false;
+    let loading = component.get('isLoading');
     let container = Ember.$('.comparative-gooru-search-card');
     component.$(container).scroll(function() {
       if (!loading) {
@@ -129,26 +133,34 @@ export default Ember.Component.extend({
           scrollTop >=
           component.$(container).prop('scrollHeight') - listContainerHeight;
         if (isScrollReachedBottom) {
-          loading = true;
+          component.set('isLoading', true);
           let startAt = component.get('startAt');
           component.sendAction('paginateNext', {
             activity: 'activity',
             startAt: startAt
           });
-          loading = false;
         }
       }
     });
   },
 
+  /**
+   * @function mixSelectedActivities used to mix selected activity data
+   */
   mixSelectedActivities(content) {
     return content.length > 4 ? content.slice(0, 4) : content;
   },
 
+  /**
+   * @function mixOtherActivities used to mix other activity data
+   */
   mixOtherActivities(content) {
     return content.length > 4 ? content.slice(4, content.length) : [];
   },
 
+  /**
+   * @function shuffle used to suffle acitivity datas
+   */
   shuffle(content) {
     return content.sort(() => Math.random() - 0.5);
   }
