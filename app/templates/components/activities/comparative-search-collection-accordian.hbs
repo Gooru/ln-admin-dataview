@@ -1,0 +1,54 @@
+<div class="comparative-search-collection-accordian-container">
+    <div class="comparative-gooru-collection-accordian">
+      <div class="search-activity-icon">
+         <span class="icon {{activity.type}}"></span>
+      </div>
+      <div class="search-activity-title">
+         <span>{{activity.title}}</span>
+         {{#if (eq  activity.type "collection")}}
+            <span>{{activity.resourceCount}} {{t 'common.content-types.resource'}}</span>
+         {{else}}
+           <span>{{activity.questionCount}} {{t 'common.content-types.question'}}</span>
+         {{/if}}
+      </div>
+      <div class="search-play-icon">
+        {{#if isPlay}}
+          {{#if (eq  activity.type "collection")}}
+            <span {{action 'onPlayCollection' activity.id}}>{{app-icon name="play_arrow"}}</span>
+          {{else}}
+            <span {{action 'onPlayAssessment' activity.id}}>{{app-icon name="play_arrow"}}</span>
+          {{/if}}
+        {{/if}}
+      </div>
+      <div class="search-activity-expand-icon" {{action "onToggleActivity" activity}}>
+        <span >
+          {{#if isExpanded}}
+            {{app-icon name="arrow_drop_up"}}
+          {{else}}
+            {{app-icon name="remove_red_eye"}}
+          {{/if}}
+          </span>
+      </div>
+    </div>
+    <div class="comparative-gooru-collection-accordian-panel">
+        <div class="comparative-gooru-collection-img">
+            <img src="{{activity.thumbnailUrl}}">
+        </div>
+        <div class="comparative-gooru-collection-description-head">
+            {{t 'activities.description'}}
+        </div>
+        <div class="comparative-gooru-collection-description-content">
+           {{activity.description}}
+        </div>
+        {{#each activityContent as |content|}}
+        <div class="comparative-gooru-collection-core">
+          <span class="icon {{activity.type}}"></span>
+          <div class="comparative-gooru-collection-head">
+              <span>{{content.title}}</span>
+              <span>{{content.content_subformat}}</span>
+          </div>
+          {{app-icon name="arrow_drop_down"}}
+        </div>
+        {{/each}}
+    </div>
+</div>

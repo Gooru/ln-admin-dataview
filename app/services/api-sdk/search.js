@@ -424,5 +424,76 @@ export default Ember.Service.extend({
           }
         );
     });
+  },
+
+  /**
+   * @function googleSearch
+   * Method to search google content
+   */
+  googleSearch(query, start) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('searchAdapter')
+        .googleSearch(query, start)
+        .then(
+          function(response) {
+            resolve(
+              service.get('searchSerializer').normalizeSearchData(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * @function bingSearch
+   * Method to search bing content
+   */
+  bingSearch(query, start) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('searchAdapter')
+        .bingSearch(query, start)
+        .then(
+          function(response) {
+            resolve(
+              service.get('searchSerializer').normalizeSearchData(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
+  },
+
+  /**
+   * @function comparativeSearch
+   * Method to search content from gooru
+   */
+  comparativeSearch(query, start, length) {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('searchAdapter')
+        .comparativeSearch(query, start, length)
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('searchSerializer')
+                .normalizeSearchLearningMapsContentInfo(response.contents)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
   }
 });

@@ -824,6 +824,15 @@ export default Ember.Object.extend(ConfigurationMixin, {
     serializedContentData.unit = unitData;
     serializedContentData.lesson = lessonData;
     serializedContentData.offlineActivity = offlineActivityData;
+    serializedContentData.maxTotalHitCount = Math.max(
+      contents.assessment.totalHitCount,
+      contents.assessmentExternal.totalHitCount,
+      contents.collectionExternal.totalHitCount,
+      contents.collection.totalHitCount,
+      contents.offlineActivity.totalHitCount,
+      contents.question.totalHitCount,
+      contents.resource.totalHitCount
+    );
     return serializedContentData;
   },
 
@@ -932,5 +941,33 @@ export default Ember.Object.extend(ConfigurationMixin, {
     competency.title = competency.title || '';
     competency.code = competency.code || '';
     return competency;
+  },
+
+  /**
+   * Normalize search data to ember data
+   */
+  normalizeSearchData(payload) {
+    let searchResults = Ember.A([]);
+    let searchItems = payload.items ? payload.items : [];
+    if (searchItems.length) {
+      searchItems.map(item => {
+        searchResults.pushObject(item);
+      });
+    }
+    return searchResults;
+  },
+
+  /**
+   * Normalize gooru search data to ember data
+   */
+  normalizeComparativeSearch(payload) {
+    let searchResults = Ember.A([]);
+    let searchItems = payload.contents ? payload.contents : [];
+    if (searchItems.length) {
+      searchItems.map(item => {
+        searchResults.pushObject(item);
+      });
+    }
+    return searchResults;
   }
 });

@@ -17,15 +17,32 @@
     border-image-slice: 1;
     display: flex;
 
+    .filter-logo {
+      width: 230px;
+      display: grid;
+      grid-template-columns: auto auto;
+      align-items: center;
+      font-size: 15px;
+      font-weight: bold;
+
+      .gooru-logo {
+        width: 100px;
+        height: 50px;
+        background-size: 80px 20px;
+        background-repeat: no-repeat;
+        background-image: url(gooru-logo.svg);
+        background-position: center;
+        background-position-y: 15px;
+      }
+    }
+
     .applied-filters {
-      width: 246px;
+      width: 280px;
       display: flex;
-      border-right: 1px solid $dark-200;
-      margin: -1px 0;
 
       .visible-filters {
         display: flex;
-        flex-wrap: wrap;
+        align-items: center;
 
         .search-filter-tag {
           .tag-label {
@@ -70,43 +87,76 @@
     }
 
     .search-form {
-      width: calc(100% - 220px);
+      align-items: center;
+      width: calc(100% - 350px);
+      border-right: 1px solid #b8bfc4;
+      display: grid;
+      grid-template-columns: 1fr 1fr 120px;
 
       .input-group {
         input {
           margin-left: 17px;
           height: 47px;
-          width: 670px;
+          width: 100%;
 
           &:focus {
             outline: none;
           }
         }
       }
+      .filter-actions-icons {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
 
-      .search-icon {
-        float: right;
-        line-height: 60px;
-        margin-right: 15px;
-        font-size: 10px;
-        cursor: pointer;
+        .search-icon {
+          margin-right: 15px;
+          display: grid;
+          cursor: pointer;
+          align-items: center;
 
-        i {
-          font-size: 20px;
-          color: $light-500;
+          i {
+            font-size: 25px;
+            color: $light-500;
+          }
+        }
+        .search-dropdown {
+          margin-right: 15px;
+          display: grid;
+          cursor: pointer;
+          align-items: center;
+
+          i {
+            font-size: 25px;
+          }
+        }
+        .clear-icon {
+          margin-right: 15px;
+          display: grid;
+          cursor: pointer;
+          align-items: center;
+
+          i {
+            font-size: 25px;
+            color: $light-500;
+          }
         }
       }
-      .clear-icon {
-        float: right;
-        line-height: 60px;
-        margin-right: 15px;
-        font-size: 10px;
-        cursor: pointer;
-
-        i {
-          font-size: 20px;
-          color: $light-500;
-        }
+    }
+    .comparative-search-filters {
+      display: grid;
+      grid-template-columns: auto 50px;
+      align-items: center;
+      font-weight: bold;
+      font-size: 11px;
+      text-transform: uppercase;
+      padding-left: 10px;
+      text-align: center;
+      cursor: pointer;
+      i {
+        font-size: 20px;
+      }
+      span {
+        color: $blue-500;
       }
     }
   }

@@ -6,16 +6,24 @@
   border-radius: 4px;
 
   .title {
-    width: 235px;
+    width: 100%;
     color: $dark-200;
     font-size: 13px;
     text-transform: uppercase;
     border-bottom: 2px dashed $dark-100;
-    padding: 17px 0 8px 12px;
+    padding: 10px;
 
     span {
       float: right;
       cursor: pointer;
+    }
+  }
+  .filter-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    .split-row {
+      flex-basis: 100%;
     }
   }
 }

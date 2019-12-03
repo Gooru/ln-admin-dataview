@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { GOOGLE_API_KEY, SEARCH_API } from 'admin-dataview/config/config';
 
 /**
  * Adapter to support the Search for Collections, Assessments, Resources and Questions
@@ -339,6 +340,49 @@ export default Ember.Object.extend({
     };
     options.data = Object.assign(defaultFilters);
     return Ember.$.ajax(requestURL, options);
+  },
+
+  /**
+   * @function googleSearch
+   * Method to search google content
+   */
+  googleSearch(query, start = 1) {
+    let key = GOOGLE_API_KEY[Math.floor(Math.random() * GOOGLE_API_KEY.length)];
+    let url = `${SEARCH_API.baseUrl}?key=${key}&cx=${SEARCH_API.googleCx}&q=${query}&start=${start}`;
+    return Ember.$.ajax(url);
+  },
+
+  /**
+   * @function bingSearch
+   * Method to search bing content
+   */
+  bingSearch(query, start = 1) {
+    let key = GOOGLE_API_KEY[Math.floor(Math.random() * GOOGLE_API_KEY.length)];
+    let url = `${SEARCH_API.baseUrl}?key=${key}&cx=${SEARCH_API.bingCx}&q=${query}&start=${start}`;
+    return Ember.$.ajax(url);
+  },
+
+  /**
+   * @function comparativeSearch
+   * Method
+   */
+  comparativeSearch(query = '*', start = 0, length = 10) {
+    const adapter = this;
+    const namespace = this.get('namespace1');
+    const url = `${namespace}`;
+    let defaultData = {
+      q: query,
+      startAt: start,
+      length: length
+    };
+    let options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8',
+      dataType: 'json',
+      headers: adapter.defineHeaders(),
+      data: defaultData
+    };
+    return Ember.$.ajax(url, options);
   },
 
   defineHeaders() {

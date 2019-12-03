@@ -1,0 +1,35 @@
+<div class="comparative-search-box-container">
+      <div class="search-back" {{action "backToCatalog"}}>
+          {{app-icon name="arrow_back"}}
+      </div>
+      <div class="search-input">
+          {{input enter="onSearchTerms" type="text" value=searchTerms}}
+          <span {{action 'onSearchTerms'}}>{{app-icon name="search"}}</span>
+      </div>
+      <div class="search-personalize">
+        <div class="search-personalize-heading" {{action 'togglePeronalizeList'}}>
+          <span>{{t 'activities.personalize'}}</span>
+          {{app-icon name='person'}}
+        </div>
+        <div class="personalize-grade-dropdown">
+          <div class="grade-list">
+            <div class="grade-name">
+              <span>Grade Name</span>
+              <span>Grade Name</span>
+            </div>
+            <div class="grade-profile">
+
+            </div>
+          </div>
+          <div class="grade-list">
+            <div class="grade-name">
+              <span>Grade Name</span>
+              <span>Grade Name</span>
+            </div>
+            <div class="grade-profile">
+
+            </div>
+          </div>
+        </div>
+      </div>
+</div>

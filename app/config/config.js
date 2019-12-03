@@ -550,3 +550,22 @@ export const PLAYER_WINDOW_NAME = 'rgo_player';
 export const PLAYER_EVENT_SOURCE = {
   RGO: 'rgo'
 };
+
+export const GOOGLE_API_KEY = [
+  'AIzaSyD9z1JhHhwZ2b-i6WRxhG5i2JgIgIDxglA',
+  'AIzaSyABfhoEot0VkJFnSvwEsw9ivMFR_PfdYDY',
+  'AIzaSyA8wyzY0XMOVBTD2RBBRZL4Qk-pUIK_Sfk',
+  'AIzaSyAP847Hfs03TSR49RcfuItBTOfUsH6nY-g',
+  'AIzaSyAqfU3qDEBuX2_sqiEj5sr3MC8pQPIE7nU',
+  'AIzaSyC7-EsuJBK_kRwha7JZlopwUrEm9GDMSdM',
+  'AIzaSyCacylTMwgg1e6D7TXbtpw02terqlPbNiQ',
+  'AIzaSyAj3rw2xqm7KUBxxyFlT5g2eDM_2lPGl4k',
+  'AIzaSyARoulEDz8GHplwF-t9NGb7jTbfCqYfj_s',
+  'AIzaSyC-KPkkPxf7ghUJ2fq58cbRdpfjVpHemhE'
+];
+
+export const SEARCH_API = {
+  baseUrl: 'https://www.googleapis.com/customsearch/v1',
+  googleCx: '014236057503552390158:jjjumkgqhli',
+  bingCx: '014236057503552390158:nhidtvjygpo'
+};

@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import { GRADING_SCALE } from 'admin-dataview/config/config';
 import { isNumeric } from './math';
 
@@ -199,4 +200,36 @@ export function diffMonthBtwTwoDates(date1, date2) {
   diff /= 60 * 60 * 24 * 7 * 4;
   let monthsDiff = Math.abs(Math.round(diff));
   return monthsDiff > 0 ? monthsDiff - 1 : monthsDiff;
+}
+
+//TODO Need to improve this method to perform multiple levels of cloning
+/**
+ * @function getObjectCopy
+ * @param {Object} originalObject
+ * @return {Ember.Object} clonedObject
+ * Method to perform object copy
+ */
+export function getObjectCopy(originalObject) {
+  let clonedObject = Ember.Object.create();
+  let objectKeys = Object.keys(originalObject);
+  objectKeys.map(key => {
+    clonedObject.set(`${key}`, originalObject[key]);
+  });
+  return clonedObject;
+}
+
+/**
+ * @function getObjectsDeepCopy
+ * @param {Array} objectElements
+ * @return {Ember.Array} clonedObjectElements
+ * Method to perform deep copy of list of objects
+ */
+export function getObjectsDeepCopy(objectElements) {
+  let clonedObjectElements = Ember.A([]);
+  if (Ember.isArray(objectElements)) {
+    objectElements.map(originalObject => {
+      clonedObjectElements.pushObject(getObjectCopy(originalObject));
+    });
+  }
+  return clonedObjectElements;
 }
