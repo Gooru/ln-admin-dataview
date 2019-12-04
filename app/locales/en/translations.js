@@ -248,7 +248,8 @@ export default {
     'gooru-catalog': 'Gooru Catalog',
     'no-search-result':
       'Type in some keywords to see the results from different platforms.',
-    description: 'Description'
+    description: 'Description',
+    generalize: 'Generalize'
   },
   'century-skills': {
     legends: {

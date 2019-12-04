@@ -2,13 +2,12 @@
   margin-bottom: 50px;
 
   .subject-wise-distribution {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-items: center;
 
     .subject-chart {
-      float: left;
-      width: 50%;
-      list-style: none;
-      text-align: center;
-
       .double-layer-donut-chart {
         display: grid;
         height: 280px;
@@ -30,17 +29,20 @@
     .subject-name {
       font-size: 20px;
       margin-top: 15px;
+      text-align: center;
     }
   }
 
   ul.subject-wise-distribution-legend {
     height: 25px;
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
     li {
-      float: left;
       width: 144px;
       list-style: none;
-      text-align: center;
-      height: 25px;
 
       .legend-container {
         width: 115px;

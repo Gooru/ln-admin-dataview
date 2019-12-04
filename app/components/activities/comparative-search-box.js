@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { GRADE_PREFERENCE } from 'admin-dataview/config/config';
 
 /**
  * Component for comparative search box
@@ -13,6 +14,16 @@ export default Ember.Component.extend({
    * @property {string} searchTerms hold search string
    */
   searchTerms: '',
+
+  /**
+   * @property {Array} gradeList hold list of grades
+   */
+  gradeList: GRADE_PREFERENCE,
+
+  /**
+   * @property {Object} selectedGrade hold active grade user
+   */
+  selectedGrade: null,
 
   // --------------------------------------------------------------
   // Actions
@@ -41,6 +52,16 @@ export default Ember.Component.extend({
     togglePeronalizeList() {
       let component = this;
       component.$('.personalize-grade-dropdown').slideToggle(500);
+    },
+
+    /**
+     * Action trigger when click user in personalize grade list
+     */
+    onSelectGrade(grade = null) {
+      let component = this;
+      component.send('togglePeronalizeList');
+      component.set('selectedGrade', grade);
+      component.sendAction('onSelectGrade', grade);
     }
   }
 });

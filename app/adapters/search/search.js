@@ -366,21 +366,16 @@ export default Ember.Object.extend({
    * @function comparativeSearch
    * Method
    */
-  comparativeSearch(query = '*', start = 0, length = 10) {
+  comparativeSearch(params) {
     const adapter = this;
     const namespace = this.get('namespace1');
     const url = `${namespace}`;
-    let defaultData = {
-      q: query,
-      startAt: start,
-      length: length
-    };
     let options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8',
       dataType: 'json',
       headers: adapter.defineHeaders(),
-      data: defaultData
+      data: params
     };
     return Ember.$.ajax(url, options);
   },

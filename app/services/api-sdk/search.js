@@ -476,12 +476,12 @@ export default Ember.Service.extend({
    * @function comparativeSearch
    * Method to search content from gooru
    */
-  comparativeSearch(query, start, length) {
+  comparativeSearch(params) {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('searchAdapter')
-        .comparativeSearch(query, start, length)
+        .comparativeSearch(params)
         .then(
           function(response) {
             resolve(
