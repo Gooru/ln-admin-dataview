@@ -337,5 +337,21 @@ export default Ember.Object.extend({
       resultSet.pushObject(result);
     });
     return resultSet;
+  },
+
+  /**
+   * Normalize the Fetch Taxonomy grade list data
+   *
+   * @param payload is the endpoint response in JSON format
+   * @returns {grade[]} an array of grades
+   */
+  normalizeTaxonomyGradeList(payload) {
+    let taxonomyGradList = Ember.A([]);
+    if (payload.length) {
+      payload.forEach(grade => {
+        taxonomyGradList.pushObject(Ember.Object.create(grade));
+      });
+    }
+    return taxonomyGradList;
   }
 });

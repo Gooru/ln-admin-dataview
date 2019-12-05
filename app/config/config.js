@@ -569,26 +569,3 @@ export const SEARCH_API = {
   googleCx: '014236057503552390158:jjjumkgqhli',
   bingCx: '014236057503552390158:nhidtvjygpo'
 };
-
-export const GRADE_PREFERENCE = [
-  {
-    gradeCode: ['K12.SC-SC5', 'K12.MA-MA5', 'K12.SS-SS5', 'K12.ELA-ELA5'],
-    userName: 'Kate Middleton',
-    gradeName: 'Grade 5'
-  },
-  {
-    gradeCode: ['K12.MA-MA6', 'K12.SC-SC6', 'K12.SS-SS6', 'K12.ELA-ELA6'],
-    userName: 'James',
-    gradeName: 'Grade 6'
-  },
-  {
-    gradeCode: ['K12.SC-SC7', 'K12.MA-MA7', 'K12.SS-SS7', 'K12.ELA-ELA7'],
-    userName: 'Matthew',
-    gradeName: 'Grade 7'
-  },
-  {
-    gradeCode: ['K12.SC-SC8', 'K12.MA-MA8', 'K12.SS-SS8', 'K12.ELA-ELA8'],
-    userName: 'Tom',
-    gradeName: 'Grade 8'
-  }
-];

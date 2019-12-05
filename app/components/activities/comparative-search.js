@@ -105,7 +105,7 @@ export default Ember.Component.extend({
       component.set('gradeList', []);
       if (grade) {
         component.set('isPersonalize', true);
-        component.set('gradeList', grade.gradeCode);
+        component.set('gradeList', grade.get('gradeCode'));
       }
     }
   },

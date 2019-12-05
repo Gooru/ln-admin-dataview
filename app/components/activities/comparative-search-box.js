@@ -1,11 +1,20 @@
 import Ember from 'ember';
-import { GRADE_PREFERENCE } from 'admin-dataview/config/config';
 
 /**
  * Component for comparative search box
  */
 export default Ember.Component.extend({
+  // -------------------------------------------------------------
+  // Attributes
   classNames: ['comparative-search-box'],
+
+  // -----------------------------------------------------------
+  // Dependencies
+
+  /**
+   * taxonomy service
+   */
+  taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
 
   // --------------------------------------------------------------
   // Properties
@@ -18,12 +27,18 @@ export default Ember.Component.extend({
   /**
    * @property {Array} gradeList hold list of grades
    */
-  gradeList: GRADE_PREFERENCE,
+  gradeList: [],
 
   /**
    * @property {Object} selectedGrade hold active grade user
    */
   selectedGrade: null,
+
+  // ------------------------------------------------------------
+  // Hooks
+  didInsertElement() {
+    this.fetchTaxonomyGradeList();
+  },
 
   // --------------------------------------------------------------
   // Actions
@@ -63,5 +78,22 @@ export default Ember.Component.extend({
       component.set('selectedGrade', grade);
       component.sendAction('onSelectGrade', grade);
     }
+  },
+
+  // --------------------------------------------------------------------
+  // Methods
+  /**
+   * @function fetchTaxonomyGradeList
+   */
+  fetchTaxonomyGradeList() {
+    let component = this;
+    component
+      .get('taxonomyService')
+      .fetchTaxonomyGradeList()
+      .then(gradeList => {
+        if (!component.get('isDestroyed')) {
+          component.set('gradeList', gradeList);
+        }
+      });
   }
 });

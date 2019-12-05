@@ -206,5 +206,30 @@ export default Ember.Service.extend({
           }
         );
     });
+  },
+
+  /**
+   * @return {Promise}
+   * fetchTaxonomyGradeList used to fetch taxonomy grade list
+   */
+  fetchTaxonomyGradeList() {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('taxonomyAdapter')
+        .fetchTaxonomyGradeList()
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('taxonomySerializer')
+                .normalizeTaxonomyGradeList(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
   }
 });
