@@ -2,13 +2,19 @@
   .clear {
     clear: both;
   }
+  .summary-content-distribution-chart-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
 
-  .summary-content-distribution-by-resource {
-    width: 360px;
-  }
+    .summary-content-distribution-by-resource {
+      width: 360px;
+    }
 
-  .summary-content-distribution-by-question {
-    width: 360px;
+    .summary-content-distribution-by-question {
+      width: 360px;
+    }
   }
 
   .culca-count {
@@ -23,9 +29,11 @@
     padding-bottom: 0px;
     padding-right: 0px;
     height: 50px;
+    width: 100%;
+    display: inline-flex;
+    justify-content: center;
     border-bottom: 1px solid $dark-400;
     li {
-      float: left;
       width: 148px;
       font-size: 15px;
       .icon {

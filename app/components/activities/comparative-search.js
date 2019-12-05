@@ -39,6 +39,16 @@ export default Ember.Component.extend({
    */
   isLoading: false,
 
+  /**
+   * @property {Boolean} isPersonalize is checking personalize or not
+   */
+  isPersonalize: false,
+
+  /**
+   * @property {Array} gradeList is hold grade list
+   */
+  gradeList: [],
+
   // --------------------------------------------------------------
   // Action
   actions: {
@@ -84,6 +94,19 @@ export default Ember.Component.extend({
       } else if (content.activity === 'bing') {
         component.bingSearchTermsContent(component.get('searchTerms'), content);
       }
+    },
+
+    /**
+     * Action trigger when click user in personalize grade list
+     */
+    onSelectGrade(grade) {
+      let component = this;
+      component.set('isPersonalize', false);
+      component.set('gradeList', []);
+      if (grade) {
+        component.set('isPersonalize', true);
+        component.set('gradeList', grade.get('gradeCode'));
+      }
     }
   },
 
@@ -96,10 +119,17 @@ export default Ember.Component.extend({
   gooruSearchTermsContent(searchTerms, content = null) {
     let component = this;
     let startAt = content ? content.startAt : 0;
+    let gradeList = component.get('gradeList');
+    let params = {
+      q: searchTerms,
+      startAt: startAt,
+      length: 10
+    };
+    if (component.get('isPersonalize')) {
+      params['flt.course'] = gradeList ? gradeList.toString() : '';
+    }
     Ember.RSVP.hash({
-      gooruSearch: component
-        .get('searchService')
-        .comparativeSearch(searchTerms, startAt)
+      gooruSearch: component.get('searchService').comparativeSearch(params)
     }).then(({ gooruSearch }) => {
       component.set('gooruSearchContent', gooruSearch);
       component.set('isLoading', false);

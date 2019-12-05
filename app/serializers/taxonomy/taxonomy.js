@@ -337,5 +337,21 @@ export default Ember.Object.extend({
       resultSet.pushObject(result);
     });
     return resultSet;
+  },
+
+  /**
+   * Normalize the Fetch user profile grade list data
+   *
+   * @param payload is the endpoint response in JSON format
+   * @returns {grade[]} an array of grades
+   */
+  normalizeUserProfileGrades(payload) {
+    let userProfileGrades = Ember.A([]);
+    if (payload.length) {
+      payload.forEach(grade => {
+        userProfileGrades.pushObject(Ember.Object.create(grade));
+      });
+    }
+    return userProfileGrades;
   }
 });

@@ -41,10 +41,22 @@
         text-transform: uppercase;
         cursor: pointer;
         span {
-          color: $blue-500;
+          color: $blue-300;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          text-align: right;
         }
         i {
           font-size: 20px;
+        }
+        .grade-profile {
+          margin: 0 auto;
+          width: 20px;
+          height: 20px;
+          background-image: url(images/profile.png);
+          background-size: 20px 20px;
+          border-radius: 50%;
         }
       }
 
@@ -64,9 +76,14 @@
           align-items: center;
           border-bottom: 1px solid $light-100;
           padding: 3px 2px;
+          cursor: pointer;
+          &.active {
+            background-color: $light-100;
+          }
           .grade-name {
             line-height: 1.4;
             text-align: right;
+            display: grid;
             span {
               text-transform: capitalize;
               font-size: 11px;
@@ -74,8 +91,19 @@
               text-overflow: ellipsis;
               white-space: nowrap;
             }
-            span:last-child {
+            .grade-code {
               font-weight: 100;
+            }
+          }
+          .person-icon {
+            margin: 0 auto;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid $light-200;
+            text-align: center;
+            i {
+              color: $light-200;
             }
           }
           .grade-profile {

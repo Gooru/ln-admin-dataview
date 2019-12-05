@@ -5,11 +5,11 @@
   box-shadow: 0 0 1px $light-500;
 
   &.google {
-    height: 400px;
+    height: calc(100vh - 220px);
     overflow-y: auto;
   }
   &.bing {
-    height: 400px;
+    height: calc(100vh - 220px);
     overflow-y: auto;
   }
 

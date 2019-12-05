@@ -4,7 +4,17 @@ import Ember from 'ember';
  * Component for comparative search box
  */
 export default Ember.Component.extend({
+  // -------------------------------------------------------------
+  // Attributes
   classNames: ['comparative-search-box'],
+
+  // -----------------------------------------------------------
+  // Dependencies
+
+  /**
+   * taxonomy service
+   */
+  taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
 
   // --------------------------------------------------------------
   // Properties
@@ -13,6 +23,22 @@ export default Ember.Component.extend({
    * @property {string} searchTerms hold search string
    */
   searchTerms: '',
+
+  /**
+   * @property {Array} gradeList hold list of grades
+   */
+  gradeList: [],
+
+  /**
+   * @property {Object} selectedGrade hold active grade user
+   */
+  selectedGrade: null,
+
+  // ------------------------------------------------------------
+  // Hooks
+  didInsertElement() {
+    this.fetchUserProfileGrades();
+  },
 
   // --------------------------------------------------------------
   // Actions
@@ -41,6 +67,33 @@ export default Ember.Component.extend({
     togglePeronalizeList() {
       let component = this;
       component.$('.personalize-grade-dropdown').slideToggle(500);
+    },
+
+    /**
+     * Action trigger when click user in personalize grade list
+     */
+    onSelectGrade(grade = null) {
+      let component = this;
+      component.send('togglePeronalizeList');
+      component.set('selectedGrade', grade);
+      component.sendAction('onSelectGrade', grade);
     }
+  },
+
+  // --------------------------------------------------------------------
+  // Methods
+  /**
+   * @function fetchUserProfileGrades
+   */
+  fetchUserProfileGrades() {
+    let component = this;
+    component
+      .get('taxonomyService')
+      .fetchUserProfileGrades()
+      .then(gradeList => {
+        if (!component.get('isDestroyed')) {
+          component.set('gradeList', gradeList);
+        }
+      });
   }
 });
