@@ -167,12 +167,12 @@ export default Ember.Object.extend({
 
   /**
    * @return {Promise}
-   * used to fetch taxonomy grade list
+   * used to fetch user profile grade list
    */
-  fetchTaxonomyGradeList() {
+  fetchUserProfileGrades() {
     const adapter = this;
     const namespace = adapter.get('namespaceStub');
-    const url = `${namespace}/class-preference.json`;
+    const url = `${namespace}/user-profile-grades.json`;
     const options = {
       type: 'GET',
       contentType: 'application/json; charset=utf-8'

@@ -340,18 +340,18 @@ export default Ember.Object.extend({
   },
 
   /**
-   * Normalize the Fetch Taxonomy grade list data
+   * Normalize the Fetch user profile grade list data
    *
    * @param payload is the endpoint response in JSON format
    * @returns {grade[]} an array of grades
    */
-  normalizeTaxonomyGradeList(payload) {
-    let taxonomyGradList = Ember.A([]);
+  normalizeUserProfileGrades(payload) {
+    let userProfileGrades = Ember.A([]);
     if (payload.length) {
       payload.forEach(grade => {
-        taxonomyGradList.pushObject(Ember.Object.create(grade));
+        userProfileGrades.pushObject(Ember.Object.create(grade));
       });
     }
-    return taxonomyGradList;
+    return userProfileGrades;
   }
 });

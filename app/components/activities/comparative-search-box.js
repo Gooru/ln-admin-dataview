@@ -37,7 +37,7 @@ export default Ember.Component.extend({
   // ------------------------------------------------------------
   // Hooks
   didInsertElement() {
-    this.fetchTaxonomyGradeList();
+    this.fetchUserProfileGrades();
   },
 
   // --------------------------------------------------------------
@@ -83,13 +83,13 @@ export default Ember.Component.extend({
   // --------------------------------------------------------------------
   // Methods
   /**
-   * @function fetchTaxonomyGradeList
+   * @function fetchUserProfileGrades
    */
-  fetchTaxonomyGradeList() {
+  fetchUserProfileGrades() {
     let component = this;
     component
       .get('taxonomyService')
-      .fetchTaxonomyGradeList()
+      .fetchUserProfileGrades()
       .then(gradeList => {
         if (!component.get('isDestroyed')) {
           component.set('gradeList', gradeList);

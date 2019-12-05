@@ -210,20 +210,20 @@ export default Ember.Service.extend({
 
   /**
    * @return {Promise}
-   * fetchTaxonomyGradeList used to fetch taxonomy grade list
+   * fetchUserProfileGrades used to fetch user grade list
    */
-  fetchTaxonomyGradeList() {
+  fetchUserProfileGrades() {
     const service = this;
     return new Ember.RSVP.Promise(function(resolve, reject) {
       service
         .get('taxonomyAdapter')
-        .fetchTaxonomyGradeList()
+        .fetchUserProfileGrades()
         .then(
           function(response) {
             resolve(
               service
                 .get('taxonomySerializer')
-                .normalizeTaxonomyGradeList(response)
+                .normalizeUserProfileGrades(response)
             );
           },
           function(error) {
