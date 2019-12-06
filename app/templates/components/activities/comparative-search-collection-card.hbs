@@ -2,7 +2,13 @@
   <span class="icon {{activity.content_format}}"></span>
   <div class="comparative-gooru-collection-head">
       <span>{{safe-html activity.title}}</span>
-      <span>{{activityFormat}}</span>
+      <span>
+        {{#if (eq activity.content_format 'resource')}}
+          {{activityFormat}}
+        {{else}}
+          {{t activityFormat}}
+        {{/if}}
+      </span>
   </div>
   {{app-icon name="arrow_drop_down"}}
 </div>

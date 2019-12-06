@@ -6,8 +6,11 @@ import {
   PLAYER_WINDOW_NAME
 } from 'admin-dataview/config/config';
 import { getGooruAppEndpointUrl } from 'admin-dataview/utils/endpoint-config';
+import { getQuestionFormat } from 'admin-dataview/utils/utils';
 
 export default Ember.Component.extend({
+  // --------------------------------------------------------------
+  // Attributes
   classNames: ['comparative-search-resource-accordian'],
 
   // ----------------------------------------------------------------------
@@ -27,6 +30,18 @@ export default Ember.Component.extend({
    * @property {Boolean} isExpanded controll play arrow
    */
   isPlay: false,
+
+  /**
+   * @property {string} activityFormat hold the  activity format
+   */
+  activityFormat: Ember.computed('activity', function() {
+    let activity = this.get('activity');
+    if (activity.type === 'question') {
+      return getQuestionFormat('value', activity.format);
+    } else {
+      return activity.format;
+    }
+  }),
 
   /**
    * @property {TaxonomyTag[]} List of taxonomy tags

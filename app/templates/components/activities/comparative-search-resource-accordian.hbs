@@ -5,7 +5,13 @@
       </div>
       <div class="search-activity-title">
          <span class="title">{{safe-html activity.title}}</span>
-         <span>{{activity.format}}</span>
+         <span>
+           {{#if (eq activity.type 'question')}}
+           {{t activityFormat}}
+           {{else}}
+           {{activityFormat}}
+           {{/if}}
+         </span>
       </div>
       <div class="search-play-icon">
         {{#if isPlay}}

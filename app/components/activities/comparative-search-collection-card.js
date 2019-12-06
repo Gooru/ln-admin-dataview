@@ -1,7 +1,10 @@
 import Ember from 'ember';
 import TaxonomyTag from 'admin-dataview/models/taxonomy/taxonomy-tag';
 import TaxonomyTagData from 'admin-dataview/models/taxonomy/taxonomy-tag-data';
-import { getResourceFormat } from 'admin-dataview/utils/utils';
+import {
+  getResourceFormat,
+  getQuestionFormat
+} from 'admin-dataview/utils/utils';
 
 export default Ember.Component.extend({
   // Attributes
@@ -25,7 +28,11 @@ export default Ember.Component.extend({
    */
   activityFormat: Ember.computed('activity', function() {
     let activity = this.get('activity');
-    return getResourceFormat(activity.content_subformat);
+    if (activity.content_format === 'resource') {
+      return getResourceFormat(activity.content_subformat);
+    } else {
+      return getQuestionFormat('apiCode', activity.content_subformat);
+    }
   }),
 
   /**
