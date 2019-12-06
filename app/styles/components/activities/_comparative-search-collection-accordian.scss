@@ -38,15 +38,17 @@
         }
         .search-activity-title-subhead {
           display: flex;
+          font-size: 12px;
+          opacity: 0.7;
           span {
             display: grid;
             grid-template-columns: auto 20px;
             align-items: center;
             padding-right: 10px;
             .icon {
-              width: 15px;
-              height: 15px;
-              background-size: 15px 15px;
+              width: 12px;
+              height: 12px;
+              background-size: 12px 12px;
               margin: 0 auto;
               &.resource {
                 background-image: url(images/resource-icon.svg);
@@ -69,6 +71,9 @@
         cursor: pointer;
         i {
           font-size: 18px;
+          &.arrow_drop_up {
+            font-size: 40px;
+          }
         }
       }
     }
@@ -90,6 +95,7 @@
       }
       .comparative-gooru-collection-description-content {
         padding: 0 20px;
+        line-height: 1.4;
       }
       .comparative-gooru-collection-accordian-content {
         display: none;

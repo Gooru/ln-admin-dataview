@@ -48,21 +48,10 @@
     }
     .comparative-gooru-resource-description-content {
       padding: 0 20px;
+      line-height: 1.4;
     }
     .comparative-search-taxonomy-code-container {
       margin: 10px;
-    }
-    .comparative-gooru-resource-footer {
-      border-top: 1px solid $light-100;
-      display: grid;
-      grid-template-columns: auto;
-      line-height: 1.4;
-      font-size: 11px;
-      padding: 3px 20px;
-
-      span:first-child {
-        color: $light-400;
-      }
     }
   }
 }

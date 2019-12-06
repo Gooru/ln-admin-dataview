@@ -6,6 +6,7 @@
       grid-template-columns: 50px 1fr 40px 40px;
       align-items: center;
       border-top: 1px solid $light-100;
+      border-bottom: 1px solid $light-100;
       .search-activity-icon {
         display: grid;
         text-align: center;
@@ -69,6 +70,9 @@
         cursor: pointer;
         i {
           font-size: 18px;
+          &.arrow_drop_up {
+            font-size: 40px;
+          }
         }
       }
     }
@@ -83,6 +87,7 @@
       }
       .comparative-gooru-resource-description-content {
         padding: 0 20px;
+        line-height: 1.4;
       }
       .comparative-search-taxonomy-code-container {
         margin: 10px;
@@ -93,7 +98,7 @@
         grid-template-columns: auto;
         line-height: 1.4;
         font-size: 11px;
-        padding: 3px 20px;
+        padding: 5px 20px;
 
         span:first-child {
           color: $light-400;
