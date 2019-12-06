@@ -68,17 +68,20 @@ export default Ember.Component.extend({
       let selectedResourse = component.mixSelectedActivities(
         activityContents.resource
       );
+      let selectedQuestion = component.mixSelectedActivities(
+        activityContents.question
+      );
       let selectedAssessment = component.mixSelectedActivities(
         activityContents.assessment
       );
       let selectedCollection = component.mixSelectedActivities(
         activityContents.collection
       );
-      let selectedOfflineActivity = component.mixSelectedActivities(
-        activityContents.offlineActivity
-      );
       let otherResourse = component.mixOtherActivities(
         activityContents.resource
+      );
+      let otherQuestion = component.mixOtherActivities(
+        activityContents.question
       );
       let otherAssessment = component.mixOtherActivities(
         activityContents.assessment
@@ -86,31 +89,28 @@ export default Ember.Component.extend({
       let otherCollection = component.mixOtherActivities(
         activityContents.collection
       );
-      let otherOfflineActivity = component.mixOtherActivities(
-        activityContents.offlineActivity
-      );
 
       activityList = [
         ...selectedResourse,
         ...selectedAssessment,
         ...selectedCollection,
-        ...selectedOfflineActivity
+        ...selectedQuestion
       ];
 
       let mixActivity = [
         ...otherResourse,
+        ...otherQuestion,
         ...otherAssessment,
-        ...otherCollection,
-        ...otherOfflineActivity
+        ...otherCollection
       ];
       activityList = activityList.concat(component.shuffle(mixActivity));
       component.set('sortedContents', sortedContents.concat(activityList));
     } else {
       let mixActivity = [
         ...activityContents.resource,
+        ...activityContents.question,
         ...activityContents.assessment,
-        ...activityContents.collection,
-        ...activityContents.offlineActivity
+        ...activityContents.collection
       ];
       activityList = activityList.concat(component.shuffle(mixActivity));
       component.set('sortedContents', sortedContents.concat(activityList));

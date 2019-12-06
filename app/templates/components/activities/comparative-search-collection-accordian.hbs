@@ -4,12 +4,15 @@
          <span class="icon {{activity.type}}"></span>
       </div>
       <div class="search-activity-title">
-         <span>{{activity.title}}</span>
-         {{#if (eq  activity.type "collection")}}
-            <span>{{activity.resourceCount}} {{t 'common.content-types.resource'}}</span>
-         {{else}}
-           <span>{{activity.questionCount}} {{t 'common.content-types.question'}}</span>
-         {{/if}}
+         <span class="search-activity-title-head">{{activity.title}}</span>
+         <div class="search-activity-title-subhead">
+           {{#if activity.questionCount}}
+           <span>{{activity.questionCount}} <i class="icon question"></i></span>
+           {{/if}}
+          {{#if (and (eq  activity.type "collection") activity.resourceCount)}}
+             <span>{{activity.resourceCount}} <i class="icon resource"></i></span>
+          {{/if}}
+         </div>
       </div>
       <div class="search-play-icon">
         {{#if isPlay}}
@@ -41,14 +44,7 @@
            {{activity.description}}
         </div>
         {{#each activityContent as |content|}}
-        <div class="comparative-gooru-collection-core">
-          <span class="icon {{activity.type}}"></span>
-          <div class="comparative-gooru-collection-head">
-              <span>{{content.title}}</span>
-              <span>{{content.content_subformat}}</span>
-          </div>
-          {{app-icon name="arrow_drop_down"}}
-        </div>
+          {{activities.comparative-search-collection-card activity = content}}
         {{/each}}
     </div>
 </div>

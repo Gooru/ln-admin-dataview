@@ -15,6 +15,8 @@
           height: 20px;
           background-size: 20px 20px;
           margin: 0 auto;
+          background-image: url(images/question-icon.svg);
+
           &.interactive {
             background-image: url(images/interactive-resource-dark.svg);
           }
@@ -30,6 +32,9 @@
           &.image {
             background-image: url(images/image-resource-dark.svg);
           }
+          &.audio {
+            background-image: url(images/audio-resource-dark.svg);
+          }
         }
       }
       .search-activity-title {
@@ -40,14 +45,17 @@
         line-height: 1.4;
         text-transform: capitalize;
         span {
+          &.title {
+            height: 20px;
+          }
           text-overflow: ellipsis;
           white-space: nowrap;
           overflow: hidden;
           font-weight: bold;
-        }
-        span:last-child {
-          font-size: 11px;
-          font-weight: 300;
+          &:last-child {
+            font-size: 11px;
+            font-weight: 300;
+          }
         }
       }
       .search-play-icon {

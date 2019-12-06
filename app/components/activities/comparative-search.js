@@ -49,6 +49,11 @@ export default Ember.Component.extend({
    */
   gradeList: [],
 
+  /**
+   * @property {Boolean} isPageLoading checking api response
+   */
+  isPageLoading: false,
+
   // --------------------------------------------------------------
   // Action
   actions: {
@@ -101,11 +106,16 @@ export default Ember.Component.extend({
      */
     onSelectGrade(grade) {
       let component = this;
+      let searchTerms = component.get('searchTerms');
       component.set('isPersonalize', false);
       component.set('gradeList', []);
       if (grade) {
         component.set('isPersonalize', true);
         component.set('gradeList', grade.get('gradeCode'));
+      }
+      if (searchTerms) {
+        component.set('gooruSearchContent', []);
+        component.gooruSearchTermsContent(searchTerms);
       }
     }
   },
@@ -118,6 +128,7 @@ export default Ember.Component.extend({
    */
   gooruSearchTermsContent(searchTerms, content = null) {
     let component = this;
+    component.set('isPageLoading', true);
     let startAt = content ? content.startAt : 0;
     let gradeList = component.get('gradeList');
     let params = {
@@ -133,6 +144,7 @@ export default Ember.Component.extend({
     }).then(({ gooruSearch }) => {
       component.set('gooruSearchContent', gooruSearch);
       component.set('isLoading', false);
+      component.set('isPageLoading', false);
     });
   },
 

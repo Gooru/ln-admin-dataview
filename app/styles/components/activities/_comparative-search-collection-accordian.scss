@@ -30,15 +30,32 @@
         font-size: 13px;
         line-height: 1.4;
         text-transform: capitalize;
-        span {
+        .search-activity-title-head {
           text-overflow: ellipsis;
           white-space: nowrap;
           overflow: hidden;
           font-weight: bold;
         }
-        span:last-child {
-          font-size: 11px;
-          font-weight: 300;
+        .search-activity-title-subhead {
+          display: flex;
+          span {
+            display: grid;
+            grid-template-columns: auto 20px;
+            align-items: center;
+            padding-right: 10px;
+            .icon {
+              width: 15px;
+              height: 15px;
+              background-size: 15px 15px;
+              margin: 0 auto;
+              &.resource {
+                background-image: url(images/resource-icon.svg);
+              }
+              &.question {
+                background-image: url(images/question-icon.svg);
+              }
+            }
+          }
         }
       }
       .search-play-icon {
@@ -73,45 +90,6 @@
       }
       .comparative-gooru-collection-description-content {
         padding: 0 20px;
-      }
-      .comparative-gooru-collection-core {
-        display: grid;
-        grid-template-columns: 50px 1fr 50px;
-        align-items: center;
-        border-top: 1px solid $light-100;
-        border-bottom: 1px solid $light-100;
-        cursor: pointer;
-        .icon {
-          width: 20px;
-          height: 20px;
-          background-size: 20px 20px;
-          margin: 0 auto;
-          &.collection {
-            background-image: url(images/resource-icon.svg);
-          }
-          &.assessment {
-            background-image: url(images/question-icon.svg);
-          }
-        }
-        i {
-          text-align: center;
-        }
-        .comparative-gooru-collection-head {
-          line-height: 1.4;
-          display: grid;
-          grid-template-columns: auto;
-          padding: 3px 0;
-          span {
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
-            font-weight: bold;
-          }
-          span:last-child {
-            font-size: 11px;
-            font-weight: 300;
-          }
-        }
       }
       .comparative-gooru-collection-accordian-content {
         display: none;

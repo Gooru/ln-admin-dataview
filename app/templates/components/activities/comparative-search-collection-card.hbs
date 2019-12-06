@@ -1,0 +1,21 @@
+<div class="comparative-gooru-collection-core" {{action "onToggleActivity"}}>
+  <span class="icon {{activity.content_format}}"></span>
+  <div class="comparative-gooru-collection-head">
+      <span>{{safe-html activity.title}}</span>
+      <span>{{activityFormat}}</span>
+  </div>
+  {{app-icon name="arrow_drop_down"}}
+</div>
+<div class="comparative-gooru-resource-accordian-panel">
+    <div class="comparative-gooru-resource-description-head">
+        {{t 'activities.description'}}
+    </div>
+    <div class="comparative-gooru-resource-description-content">
+       {{safe-html activity.description}}
+    </div>
+    <div class="comparative-search-taxonomy-code-container">
+      {{#if tags.length}}
+        {{taxonomy.taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
+      {{/if}}
+    </div>
+</div>

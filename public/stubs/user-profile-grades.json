@@ -1,8 +1,8 @@
 [
   {
-    "gradeCode": ["K12.SC-SC5", "K12.MA-MA5", "K12.SS-SS5", "K12.ELA-ELA5"],
+    "gradeCode": ["K12.SC-SC3", "K12.MA-MA3", "K12.SS-SS3", "K12.ELA-ELA3"],
     "userName": "Kate Middleton",
-    "gradeName": "Grade 5"
+    "gradeName": "Grade 3"
   },
   {
     "gradeCode": ["K12.MA-MA6", "K12.SC-SC6", "K12.SS-SS6", "K12.ELA-ELA6"],
