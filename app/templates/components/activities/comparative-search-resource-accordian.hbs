@@ -4,12 +4,18 @@
          <span class="icon {{activity.format}}"></span>
       </div>
       <div class="search-activity-title">
-         <span>{{activity.title}}</span>
-         <span>{{activity.format}}</span>
+         <span class="title">{{safe-html activity.title}}</span>
+         <span>
+           {{#if (eq activity.type 'question')}}
+           {{t activityFormat}}
+           {{else}}
+           {{activityFormat}}
+           {{/if}}
+         </span>
       </div>
       <div class="search-play-icon">
         {{#if isPlay}}
-        <span {{action "onPlayResource" activity.id}}>{{app-icon name="play_arrow"}}</span>
+        <span {{action "onPlay" activity}}>{{app-icon name="play_arrow"}}</span>
         {{/if}}
       </div>
       <div class="search-activity-expand-icon" {{action "onToggleActivity" activity}}>
@@ -27,7 +33,7 @@
             {{t 'activities.description'}}
         </div>
         <div class="comparative-gooru-resource-description-content">
-           {{activity.description}}
+           {{safe-html activity.description}}
         </div>
         <div class="comparative-search-taxonomy-code-container">
           {{#if tags.length}}

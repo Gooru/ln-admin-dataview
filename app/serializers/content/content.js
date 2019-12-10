@@ -55,6 +55,14 @@ export default Ember.Object.extend({
    * @return {Object}
    */
   normalizeCollectionContent: function(collectionData) {
+    let serializer = this;
+    if (collectionData.content) {
+      collectionData.content.map(activity => {
+        activity.standards = serializer
+          .get('taxonomySerializer')
+          .normalizeLearningMapsTaxonomyArray(activity.taxonomy);
+      });
+    }
     return collectionData ? collectionData : {};
   },
 
@@ -63,6 +71,14 @@ export default Ember.Object.extend({
    * @return {Object}
    */
   normalizeAssessmentContent: function(assessmentData) {
+    let serializer = this;
+    if (assessmentData.question) {
+      assessmentData.question.map(activity => {
+        activity.standards = serializer
+          .get('taxonomySerializer')
+          .normalizeLearningMapsTaxonomyArray(activity.taxonomy);
+      });
+    }
     return assessmentData ? assessmentData : {};
   },
 
@@ -77,7 +93,9 @@ export default Ember.Object.extend({
       .get('taxonomySerializer')
       .normalizeTaxonomyObject(courseData.taxonomy);
     serializedCourseData.taxonomy = taxonomy;
-    let aggregatedTaxonomy = serializer.get('taxonomySerializer').normalizeLearningMapsTaxonomyArray(courseData.aggregated_taxonomy);
+    let aggregatedTaxonomy = serializer
+      .get('taxonomySerializer')
+      .normalizeLearningMapsTaxonomyArray(courseData.aggregated_taxonomy);
     serializedCourseData.aggregated_taxonomy = aggregatedTaxonomy;
     return serializedCourseData;
   },

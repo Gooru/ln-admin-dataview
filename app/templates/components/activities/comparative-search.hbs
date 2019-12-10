@@ -24,6 +24,12 @@
           {{/if}}
           {{#if gooruSearchContent.maxTotalHitCount}}
              {{activities.comparative-gooru-search-card isLoading= isLoading paginateNext="paginateNext" activityContents = gooruSearchContent}}
+          {{else}}
+          {{#if isPageLoading}}
+            {{three-bounce-spinner}}
+          {{else}}
+            {{t 'activities.pull-out.no-content'}}
+          {{/if}}
           {{/if}}
 
         {{else}}

@@ -1,5 +1,8 @@
 import Ember from 'ember';
-import { GRADING_SCALE } from 'admin-dataview/config/config';
+import {
+  GRADING_SCALE,
+  QUESTION_TYPE_CONFIG
+} from 'admin-dataview/config/config';
 import { isNumeric } from './math';
 
 /**
@@ -28,6 +31,22 @@ export function getRoutePathFirstOccurrence() {
  */
 export function getResourceFormat(format) {
   return format ? format.split('_')[0] : undefined; // i.e video_resource to video
+}
+
+/**
+ * Get the resource format to be App compliant
+ * @function
+ * @param format
+ * @returns {string}
+ */
+export function getQuestionFormat(value, format) {
+  let questionType = '';
+  QUESTION_TYPE_CONFIG.map(question => {
+    if (question[value] === format) {
+      questionType = question.label;
+    }
+  });
+  return questionType;
 }
 
 /**

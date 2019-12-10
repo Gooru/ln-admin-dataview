@@ -6,6 +6,7 @@
       grid-template-columns: 50px 1fr 40px 40px;
       align-items: center;
       border-top: 1px solid $light-100;
+      border-bottom: 1px solid $light-100;
       .search-activity-icon {
         display: grid;
         text-align: center;
@@ -15,6 +16,8 @@
           height: 20px;
           background-size: 20px 20px;
           margin: 0 auto;
+          background-image: url(images/question-icon.svg);
+
           &.interactive {
             background-image: url(images/interactive-resource-dark.svg);
           }
@@ -30,6 +33,9 @@
           &.image {
             background-image: url(images/image-resource-dark.svg);
           }
+          &.audio {
+            background-image: url(images/audio-resource-dark.svg);
+          }
         }
       }
       .search-activity-title {
@@ -40,14 +46,17 @@
         line-height: 1.4;
         text-transform: capitalize;
         span {
+          &.title {
+            height: 20px;
+          }
           text-overflow: ellipsis;
           white-space: nowrap;
           overflow: hidden;
           font-weight: bold;
-        }
-        span:last-child {
-          font-size: 11px;
-          font-weight: 300;
+          &:last-child {
+            font-size: 11px;
+            font-weight: 300;
+          }
         }
       }
       .search-play-icon {
@@ -61,6 +70,9 @@
         cursor: pointer;
         i {
           font-size: 18px;
+          &.arrow_drop_up {
+            font-size: 40px;
+          }
         }
       }
     }
@@ -75,6 +87,7 @@
       }
       .comparative-gooru-resource-description-content {
         padding: 0 20px;
+        line-height: 1.4;
       }
       .comparative-search-taxonomy-code-container {
         margin: 10px;
@@ -85,7 +98,7 @@
         grid-template-columns: auto;
         line-height: 1.4;
         font-size: 11px;
-        padding: 3px 20px;
+        padding: 5px 20px;
 
         span:first-child {
           color: $light-400;

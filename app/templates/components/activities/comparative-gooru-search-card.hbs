@@ -1,9 +1,14 @@
 <div class="comparative-gooru-search-card-container">
+  {{#unless isPageLoading}}
   {{#each sortedContents as |content|}}
-    {{#if (eq "resource" content.type)}}
+    {{#if (or (eq "resource" content.type) (eq 'question' content.type))}}
       {{activities.comparative-search-resource-accordian activity = content}}
     {{else}}
       {{activities.comparative-search-collection-accordian activity = content}}
     {{/if}}
   {{/each}}
+  {{/unless}}
+  {{#if isPageLoading}}
+      {{three-bounce-spinner}}
+  {{/if}}
 </div>

@@ -570,9 +570,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
       description: questionData.description
         ? questionData.description
         : questionData.text,
-      type: questionData.resourceFormat
-        ? questionData.resourceFormat.value
-        : null,
+      type: questionData.contentFormat ? questionData.contentFormat : null,
       format: format,
       publisher: null, //TODO missing publisher at API response,
       thumbnailUrl: questionData.thumbnail,
