@@ -23,6 +23,8 @@ export default Ember.Controller.extend(ConfigurationMixin, {
     onMenuItemSelection(item) {
       if (item === 'network') {
         window.location.href = '/network';
+      } else if (item === 'learners') {
+        window.location.href = '/learners';
       } else {
         if (item === 'competency') {
           this.transitionToRoute(`${item}.tree`);
