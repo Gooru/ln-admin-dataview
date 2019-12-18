@@ -95,6 +95,7 @@ export default {
       resource: 'Resources',
       question: 'Questions',
       rubric: 'Rubrics',
+      offlineActivity: 'Offline Activities',
       signatureAssessment: 'Signature Assessments',
       signatureCollection: 'Signature Collections',
       unit: 'Units',
@@ -241,7 +242,14 @@ export default {
       content: 'Content',
       'no-content': 'No Content Available'
     },
-    'clear-all': 'Clear All'
+    'clear-all': 'Clear All',
+    personalize: 'PERSONALIZE',
+    compare: 'COMPARE',
+    'gooru-catalog': 'Gooru Catalog',
+    'no-search-result':
+      'Type in some keywords to see the results from different platforms.',
+    description: 'Description',
+    generalize: 'Generalize'
   },
   'century-skills': {
     legends: {

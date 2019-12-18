@@ -20,6 +20,8 @@
   flex-direction: column;
   border: 1px solid $light-100;
   overflow: hidden;
+  max-width: 105px;
+  max-height: 122px;
 }
 
 .cardGroupBody {
@@ -58,6 +60,19 @@
       height: 24.6px;
       object-fit: contain;
       display: block;
+    }
+  }
+
+  .offline-activity {
+    i {
+      background: url("images/offline.svg");
+      width: 32.8px;
+      height: 24.6px;
+      object-fit: contain;
+      display: block;
+      background-size: 24px;
+      background-position: center;
+      background-repeat: no-repeat;
     }
   }
 
@@ -142,6 +157,7 @@
   color: $dark-800;
   margin: 10px;
 }
+
 .tooltip {
-   text-transform: capitalize;
+  text-transform: capitalize;
 }

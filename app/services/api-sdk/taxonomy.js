@@ -206,5 +206,30 @@ export default Ember.Service.extend({
           }
         );
     });
+  },
+
+  /**
+   * @return {Promise}
+   * fetchUserProfileGrades used to fetch user grade list
+   */
+  fetchUserProfileGrades() {
+    const service = this;
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      service
+        .get('taxonomyAdapter')
+        .fetchUserProfileGrades()
+        .then(
+          function(response) {
+            resolve(
+              service
+                .get('taxonomySerializer')
+                .normalizeUserProfileGrades(response)
+            );
+          },
+          function(error) {
+            reject(error);
+          }
+        );
+    });
   }
 });

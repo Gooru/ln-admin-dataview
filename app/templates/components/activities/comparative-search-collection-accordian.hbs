@@ -1,0 +1,50 @@
+<div class="comparative-search-collection-accordian-container">
+    <div class="comparative-gooru-collection-accordian">
+      <div class="search-activity-icon">
+         <span class="icon {{activity.type}}"></span>
+      </div>
+      <div class="search-activity-title">
+         <span class="search-activity-title-head">{{activity.title}}</span>
+         <div class="search-activity-title-subhead">
+           {{#if activity.questionCount}}
+           <span>{{activity.questionCount}} <i class="icon question"></i></span>
+           {{/if}}
+          {{#if (and (eq  activity.type "collection") activity.resourceCount)}}
+             <span>{{activity.resourceCount}} <i class="icon resource"></i></span>
+          {{/if}}
+         </div>
+      </div>
+      <div class="search-play-icon">
+        {{#if isPlay}}
+          {{#if (eq  activity.type "collection")}}
+            <span {{action 'onPlayCollection' activity.id}}>{{app-icon name="play_arrow"}}</span>
+          {{else}}
+            <span {{action 'onPlayAssessment' activity.id}}>{{app-icon name="play_arrow"}}</span>
+          {{/if}}
+        {{/if}}
+      </div>
+      <div class="search-activity-expand-icon" {{action "onToggleActivity" activity}}>
+        <span >
+          {{#if isExpanded}}
+            {{app-icon name="arrow_drop_up"}}
+          {{else}}
+            {{app-icon name="remove_red_eye"}}
+          {{/if}}
+          </span>
+      </div>
+    </div>
+    <div class="comparative-gooru-collection-accordian-panel">
+        <div class="comparative-gooru-collection-img">
+            <img src="{{activity.thumbnailUrl}}">
+        </div>
+        <div class="comparative-gooru-collection-description-head">
+            {{t 'activities.description'}}
+        </div>
+        <div class="comparative-gooru-collection-description-content">
+           {{activity.description}}
+        </div>
+        {{#each activityContent as |content|}}
+          {{activities.comparative-search-collection-card activity = content}}
+        {{/each}}
+    </div>
+</div>

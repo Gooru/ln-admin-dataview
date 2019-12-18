@@ -38,7 +38,12 @@ export default Ember.Component.extend({
 
   didInsertElement() {
     let controller = this;
+    let userId = this.get('userId');
     let subjectCategory = controller.get('selectedSubjectCategory');
+    if (userId === '4420b570-cfae-44b4-a130-d5daecf52b69') {
+      // hard coded need to remove later.
+      subjectCategory = 'professional_learning';
+    }
     controller.fetchSubjectsByCategory(subjectCategory);
   },
 
@@ -157,6 +162,10 @@ export default Ember.Component.extend({
       .getTaxonomySubjects(subjectCategory)
       .then(subjects => {
         let subject = subjects[1];
+        let userId = this.get('userId');
+        if (userId === '4420b570-cfae-44b4-a130-d5daecf52b69') {
+          subject = subjects[0];
+        }
         controller.set('taxonomySubjects', subjects);
         controller.set('selectedSubject', subject);
       });

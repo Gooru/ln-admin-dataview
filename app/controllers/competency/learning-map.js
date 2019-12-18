@@ -257,7 +257,9 @@ export default Ember.Controller.extend({
    */
   getStructuredContentCount(contentCounts) {
     let controller = this;
-    let contentSequence = controller.get('contentSequence');
+    let contentSequence = controller.get('contentSequence').map(content => {
+      return content.type;
+    });
     let structuredContentCount = [];
     contentSequence.map(sequence => {
       let contentCount = {

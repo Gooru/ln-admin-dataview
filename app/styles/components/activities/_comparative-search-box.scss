@@ -1,0 +1,121 @@
+.comparative-search-box {
+  .comparative-search-box-container {
+    display: grid;
+    grid-template-columns: 50px 1fr 140px;
+    align-items: center;
+    background-color: $white;
+    margin-top: 20px;
+    .search-back {
+      display: grid;
+      padding: 10px;
+      align-items: center;
+      background-color: $light-200;
+      cursor: pointer;
+    }
+    .search-input {
+      display: grid;
+      grid-template-columns: 1fr 50px;
+      align-items: center;
+      padding-left: 10px;
+      span {
+        display: grid;
+        align-items: center;
+        cursor: pointer;
+      }
+      input {
+        width: 90%;
+        height: 40px;
+        outline: none;
+      }
+    }
+    .search-personalize {
+      position: relative;
+      .search-personalize-heading {
+        display: grid;
+        grid-template-columns: 1fr 40px;
+        align-items: center;
+        font-size: 11px;
+        font-weight: bold;
+        padding: 10px;
+        border-left: 1px solid $light-200;
+        text-transform: uppercase;
+        cursor: pointer;
+        span {
+          color: $blue-300;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          text-align: right;
+        }
+        i {
+          font-size: 20px;
+        }
+        .grade-profile {
+          margin: 0 auto;
+          width: 20px;
+          height: 20px;
+          background-image: url(images/profile.png);
+          background-size: 20px 20px;
+          border-radius: 50%;
+        }
+      }
+
+      .personalize-grade-dropdown {
+        width: 100%;
+        position: absolute;
+        top: 50px;
+        background-color: $white;
+        font-size: 12px;
+        z-index: 1;
+        box-shadow: 0 0 10px $light-200;
+        display: none;
+
+        .grade-list {
+          display: grid;
+          grid-template-columns: auto 50px;
+          align-items: center;
+          border-bottom: 1px solid $light-100;
+          padding: 3px 2px;
+          cursor: pointer;
+          &.active {
+            background-color: $light-100;
+          }
+          .grade-name {
+            line-height: 1.4;
+            text-align: right;
+            display: grid;
+            span {
+              text-transform: capitalize;
+              font-size: 11px;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
+            .grade-code {
+              font-weight: 100;
+            }
+          }
+          .person-icon {
+            margin: 0 auto;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 2px solid $light-200;
+            text-align: center;
+            i {
+              color: $light-200;
+            }
+          }
+          .grade-profile {
+            margin: 0 auto;
+            width: 30px;
+            height: 30px;
+            background-image: url(images/profile.png);
+            background-size: 30px 30px;
+            border-radius: 50%;
+          }
+        }
+      }
+    }
+  }
+}

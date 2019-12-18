@@ -281,6 +281,10 @@ export default Ember.Controller.extend({
               ? culcaqrCount.rubric.totalHitCount
               : 0;
 
+            let offlineActivityCount = culcaqrCount.offlineActivity
+              ? culcaqrCount.offlineActivity.totalHitCount
+              : 0;
+
             contentCountData.push(
               Utils.getStructuredContentData(CONTENT_TYPES.COURSE, courseCount)
             );
@@ -300,6 +304,12 @@ export default Ember.Controller.extend({
               Utils.getStructuredContentData(
                 CONTENT_TYPES.COLLECTION,
                 collectionCount
+              )
+            );
+            contentCountData.push(
+              Utils.getStructuredContentData(
+                CONTENT_TYPES.OFFLINEACTIVITY,
+                offlineActivityCount
               )
             );
             contentCountData.push(
@@ -331,6 +341,10 @@ export default Ember.Controller.extend({
             controller.set(
               'collectionContent',
               culcaqrContents.collection.slice(0, 3)
+            );
+            controller.set(
+              'offlineActivityContent',
+              culcaqrContents.offlineActivity.slice(0, 3)
             );
             controller.set(
               'assessmentContent',
@@ -561,7 +575,7 @@ export default Ember.Controller.extend({
     let categoryId = Utils.getCategoryId(code);
     let category = this.get('categories').findBy('code', categoryId);
     let filters = selectedNode.filters;
-    let selectedCategory = category.get('code');
+    let selectedCategory = category.get('id');
     let query = '*';
     let start = 1;
     let length = 3;

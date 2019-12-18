@@ -83,9 +83,8 @@ export const DEFAULT_IMAGES = {
   RUBRIC: `${config.rootURL}assets/images/rubric-default.png`,
   COLLECTION: `${config.rootURL}assets/images/collection-default.png`,
   ASSESSMENT: `${config.rootURL}assets/images/assessment-default.png`,
-  QUESTION_PLACEHOLDER_IMAGE: `${
-    config.rootURL
-  }assets/images/question-placeholder-image.png`,
+  QUESTION_PLACEHOLDER_IMAGE: `${config.rootURL}assets/images/question-placeholder-image.png`,
+  OFFLINE_ACTIVITY: `${config.rootURL}assets/gooru/offline-activity-default.png`,
   LOADER: `${config.rootURL}/assets/images/loader.svg`
 };
 
@@ -124,6 +123,7 @@ export const CONTENT_TYPES = {
   EXTERNAL_ASSESSMENT: 'assessment-external',
   COURSE: 'course',
   UNIT: 'unit',
+  OFFLINEACTIVITY: 'offline-activity',
   LESSON: 'lesson',
   RESOURCE: 'resource',
   QUESTION: 'question',
@@ -184,11 +184,31 @@ export const SCORES = {
 };
 
 export const GRADING_SCALE = [
-  { LOWER_LIMIT: 0, COLOR: '#F46360', RANGE: '0-59' },
-  { LOWER_LIMIT: 60, COLOR: '#ED8E36', RANGE: '60-69' },
-  { LOWER_LIMIT: 70, COLOR: '#FABA36', RANGE: '70-79' },
-  { LOWER_LIMIT: 80, COLOR: '#A8C99C', RANGE: '80-89' },
-  { LOWER_LIMIT: 90, COLOR: '#4B9740', RANGE: '90-100' }
+  {
+    LOWER_LIMIT: 0,
+    COLOR: '#F46360',
+    RANGE: '0-59'
+  },
+  {
+    LOWER_LIMIT: 60,
+    COLOR: '#ED8E36',
+    RANGE: '60-69'
+  },
+  {
+    LOWER_LIMIT: 70,
+    COLOR: '#FABA36',
+    RANGE: '70-79'
+  },
+  {
+    LOWER_LIMIT: 80,
+    COLOR: '#A8C99C',
+    RANGE: '80-89'
+  },
+  {
+    LOWER_LIMIT: 90,
+    COLOR: '#4B9740',
+    RANGE: '90-100'
+  }
 ];
 
 export const ROLES = {
@@ -475,21 +495,77 @@ export const LEARNING_MAP_DEFAULT_LEVELS = {
 };
 
 export const LEARNING_MAP_CONTENT_SEQUENCE = [
-  'course',
-  'unit',
-  'lesson',
-  'collection',
-  'assessment',
-  'resource',
-  'question',
-  'rubric',
-  'signatureCollection',
-  'signatureAssessment',
-  'signatureResource'
+  {
+    type: 'course',
+    label: 'course'
+  },
+  {
+    type: 'unit',
+    label: 'unit'
+  },
+  {
+    type: 'lesson',
+    label: 'lesson'
+  },
+  {
+    type: 'collection',
+    label: 'collection'
+  },
+  {
+    type: 'assessment',
+    label: 'assessment'
+  },
+  {
+    type: 'offlineActivity',
+    label: 'offline activity'
+  },
+  {
+    type: 'resource',
+    label: 'resource'
+  },
+  {
+    type: 'question',
+    label: 'question'
+  },
+  {
+    type: 'rubric',
+    label: 'rubric'
+  },
+  {
+    type: 'signatureCollection',
+    label: 'signature collection'
+  },
+  {
+    type: 'signatureAssessment',
+    label: 'signature assessment'
+  },
+  {
+    type: 'signatureResource',
+    label: 'signature resource'
+  }
 ];
 
 export const PLAYER_WINDOW_NAME = 'rgo_player';
 
 export const PLAYER_EVENT_SOURCE = {
   RGO: 'rgo'
+};
+
+export const GOOGLE_API_KEY = [
+  'AIzaSyD9z1JhHhwZ2b-i6WRxhG5i2JgIgIDxglA',
+  'AIzaSyABfhoEot0VkJFnSvwEsw9ivMFR_PfdYDY',
+  'AIzaSyA8wyzY0XMOVBTD2RBBRZL4Qk-pUIK_Sfk',
+  'AIzaSyAP847Hfs03TSR49RcfuItBTOfUsH6nY-g',
+  'AIzaSyAqfU3qDEBuX2_sqiEj5sr3MC8pQPIE7nU',
+  'AIzaSyC7-EsuJBK_kRwha7JZlopwUrEm9GDMSdM',
+  'AIzaSyCacylTMwgg1e6D7TXbtpw02terqlPbNiQ',
+  'AIzaSyAj3rw2xqm7KUBxxyFlT5g2eDM_2lPGl4k',
+  'AIzaSyARoulEDz8GHplwF-t9NGb7jTbfCqYfj_s',
+  'AIzaSyC-KPkkPxf7ghUJ2fq58cbRdpfjVpHemhE'
+];
+
+export const SEARCH_API = {
+  baseUrl: 'https://www.googleapis.com/customsearch/v1',
+  googleCx: '014236057503552390158:jjjumkgqhli',
+  bingCx: '014236057503552390158:nhidtvjygpo'
 };

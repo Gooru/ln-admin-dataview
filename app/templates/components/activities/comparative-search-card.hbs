@@ -1,0 +1,15 @@
+<div class="comparative-search-card-container comparative-search-card-{{searchCardName}}">
+  {{#each searchContent as |searchItem|}}
+    <div class="comparative-search-content-list">
+          <div class="search-title">
+              {{safe-html searchItem.title}}
+          </div>
+          <div class="search-link">
+            <a href='{{searchItem.link}}' target="_blank">{{searchItem.formattedUrl}}</a>
+          </div>
+          <div class="search-description">
+            {{searchItem.snippet}}
+          </div>
+    </div>
+  {{/each}}
+</div>

@@ -68,7 +68,10 @@ export default Ember.Component.extend(ModalMixin, {
       ) || component.get('selectedFilterItems');
     let filterType = component.get('filterType');
     let curFilterItems = selectedFilterItems[`${filterType.code}`];
-    if (curFilterItems && curFilterItems.length > 0) {
+    if (
+      (curFilterItems && curFilterItems.length > 0) ||
+      filterType.code === 'category'
+    ) {
       return true;
     }
     return false;

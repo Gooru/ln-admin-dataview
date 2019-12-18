@@ -1,0 +1,36 @@
+.comparative-search-card {
+  background-color: $white;
+  padding: 10px;
+  width: 320px;
+  box-shadow: 0 0 1px $light-500;
+
+  &.google {
+    height: calc(100vh - 220px);
+    overflow-y: auto;
+  }
+  &.bing {
+    height: calc(100vh - 220px);
+    overflow-y: auto;
+  }
+
+  .comparative-search-card-container {
+    .comparative-search-content-list {
+      margin: 10px 0;
+      .search-title {
+        font-size: 17px;
+        font-weight: bold;
+        color: $blue-300;
+        text-decoration: underline;
+      }
+      .search-link {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        width: 100%;
+        overflow: hidden;
+        a {
+          color: $green-400;
+        }
+      }
+    }
+  }
+}

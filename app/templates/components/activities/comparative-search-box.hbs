@@ -1,0 +1,41 @@
+<div class="comparative-search-box-container">
+      <div class="search-back" {{action "backToCatalog"}}>
+          {{app-icon name="arrow_back"}}
+      </div>
+      <div class="search-input">
+          {{input enter="onSearchTerms" type="text" value=searchTerms}}
+          <span {{action 'onSearchTerms'}}>{{app-icon name="search"}}</span>
+      </div>
+      <div class="search-personalize">
+        <div class="search-personalize-heading" {{action 'togglePeronalizeList'}}>
+          {{#if selectedGrade.userName}}
+              <span>{{selectedGrade.userName}}</span>
+              <div class="grade-profile">
+              </div>
+          {{else}}
+              <span>{{t 'activities.personalize'}}</span>
+                {{app-icon name='person'}}
+          {{/if}}
+        </div>
+        <div class="personalize-grade-dropdown">
+          {{#each gradeList as |grade| }}
+          <div class="grade-list {{if (eq selectedGrade.userName grade.userName) 'active'}}" {{action 'onSelectGrade' grade}}>
+            <div class="grade-name">
+              <span>{{grade.userName}}</span>
+              <span class="grade-code">{{grade.gradeName}}</span>
+            </div>
+            <div class="grade-profile">
+            </div>
+          </div>
+          {{/each}}
+          <div class="grade-list" {{action 'onSelectGrade' }}>
+            <div class="grade-name">
+              <span>{{t 'activities.generalize'}}</span>
+            </div>
+            <div class="person-icon">
+              {{app-icon name="person"}}
+            </div>
+          </div>
+        </div>
+      </div>
+</div>

@@ -11,6 +11,12 @@ export default Ember.Object.extend({
   namespace: '/api/nucleus/v1/taxonomy',
 
   /**
+   * @namespace namespaceStub
+   * API Endpoint for grade list stub
+   */
+  namespaceStub: 'stubs',
+
+  /**
    * @namespace taxonomyDSNamespace
    * API Endpoint of the DS users for taxonomy
    */
@@ -157,6 +163,25 @@ export default Ember.Object.extend({
       headers: adapter.defineHeaders()
     };
     return Ember.$.ajax(url, options);
+  },
+
+  /**
+   * @return {Promise}
+   * used to fetch user profile grade list
+   */
+  fetchUserProfileGrades() {
+    const adapter = this;
+    const namespace = adapter.get('namespaceStub');
+    const url = `${namespace}/user-profile-grades.json`;
+    const options = {
+      type: 'GET',
+      contentType: 'application/json; charset=utf-8'
+    };
+    return Ember.RSVP.hashSettled({
+      taxonomyGrade: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.taxonomyGrade.value;
+    });
   },
 
   defineHeaders() {

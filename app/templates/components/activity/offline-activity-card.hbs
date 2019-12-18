@@ -1,0 +1,52 @@
+<div class="card-panel-container" >
+  <div class="card-panel-header" {{action "onShowPullOut" offlineActivity}} style="background-image: url({{offlineActivity.thumbnailUrl}})">
+    <div class="info">
+      <div class="title">{{offlineActivity.title}}</div>
+    </div>
+  </div>
+  <div class="content-count-container">
+    <div class="task pull-left">
+      <i class="icon"></i>
+      <span>{{offlineActivity.taskCount}}</span>
+    </div>
+  </div>
+  <div class="offline-activity-info-container">
+    <div class="offline-activity-user-info">
+      <div class="created-by">{{t (if offlineActivity.sameOwnerAndCreator "common.created-by" "common.remixed-by")}}</div>
+      <div class="img-container pull-left">
+        <img class="img-responsive" src="{{offlineActivity.owner.avatarUrl}}">
+      </div>
+      <div class="username">{{offlineActivity.owner.displayName}}</div>
+    </div>
+    <div class="offline-activity-description">
+      {{safe-html offlineActivity.description}}
+    </div>
+    <div class="offline-activity-standards ">
+      {{#if tags.length}}
+        {{taxonomy.taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
+      {{/if}}
+    </div>
+
+  </div>
+  <div class="card-panel-footer">
+    <div class="buttons-container">
+      <div class="play-btn" title="Play" data-toggle="tooltip" data-placement="right" {{action "onPlayofflineActivity" offlineActivity.id}}>{{app-icon name="ic_play_arrow"}}</div>
+    </div>
+    <div class="offline-activity-prefs-container">
+      <span class="left-arc"></span>
+      <span class="right-arc"></span>
+      <div class="offline-activity-prefs relevance pull-left" style="background-color:rgba(0, 114, 188, {{offlineActivity.relevance}})">
+        <div class="count">{{offlineActivity.relevance}}</div>
+        <div class="title">{{t 'common.relevance'}}</div>
+      </div>
+      <div class="offline-activity-prefs engagement pull-left" style="background-color:rgba(0, 114, 188, {{offlineActivity.engagement}})">
+        <div class="count">{{offlineActivity.engagement}}</div>
+        <div class="title">{{t 'common.engagement'}}</div>
+      </div>
+      <div class="offline-activity-prefs efficacy pull-left" style="background-color:rgba(0, 114, 188, {{offlineActivity.efficacy}})">
+        <div class="count">{{offlineActivity.efficacy}}</div>
+        <div class="title">{{t 'common.efficacy'}}</div>
+      </div>
+    </div>
+  </div>
+</div>

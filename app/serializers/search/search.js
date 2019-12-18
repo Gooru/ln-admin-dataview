@@ -79,9 +79,9 @@ export default Ember.Object.extend(ConfigurationMixin, {
       lastModified: result.lastModified,
       lastModifiedBy: result.lastModifiedBy,
       subject: result.subjectBucket,
-      taxonomySubject: result.taxonomy.subject || null,
-      taxonomyCourse: result.taxonomy.course || null,
-      taxonomyDomain: result.taxonomy.taxonomyDomain || null,
+      taxonomySubject: result.taxonomy ? result.taxonomy.subject : null,
+      taxonomyCourse: result.taxonomy ? result.taxonomy.course : null,
+      taxonomyDomain: result.taxonomy ? result.taxonomy.taxonomyDomain : null,
       subjectSequence: result.subjectSequence,
       isVisibleOnProfile: result.visibleOnProfile,
       isPublished: result.publishStatus === 'published',
@@ -368,6 +368,77 @@ export default Ember.Object.extend(ConfigurationMixin, {
   },
 
   /**
+   * Normalize a offline Activity
+   * @param {*} offlineActivityData
+   * @returns {offline activity}
+   */
+  normalizeOfflineActivity: function(collectionData) {
+    const serializer = this;
+    const basePath = serializer.get('session.cdnUrls.content');
+    const userBasePath = serializer.get('session.cdnUrls.user');
+
+    const thumbnailUrl = collectionData.thumbnail
+      ? basePath + collectionData.thumbnail
+      : DEFAULT_IMAGES.OFFLINE_ACTIVITY;
+    const userThumbnailUrl = collectionData.userProfileImage
+      ? userBasePath + collectionData.userProfileImage
+      : DEFAULT_IMAGES.USER_PROFILE;
+    const creatorThumbnailUrl = collectionData.creatorProfileImage
+      ? userBasePath + collectionData.creatorProfileImage
+      : DEFAULT_IMAGES.USER_PROFILE;
+    const taxonomyInfo =
+      (collectionData.taxonomySet &&
+        collectionData.taxonomySet.curriculum &&
+        collectionData.taxonomySet.curriculum.curriculumInfo) ||
+      [];
+
+    const course = collectionData.course || {};
+    return CollectionModel.create(Ember.getOwner(this).ownerInjection(), {
+      id: collectionData.id,
+      title: collectionData.title,
+      description: collectionData.description,
+      type: collectionData.type ? collectionData.type : collectionData.format,
+      thumbnailUrl: thumbnailUrl,
+      standards: serializer
+        .get('taxonomySerializer')
+        .normalizeTaxonomyArray(taxonomyInfo),
+      publishStatus: collectionData.publishStatus,
+      learningObjectives: collectionData.languageObjective,
+      taskCount: collectionData.taskCount || 0,
+      course: course.title,
+      courseId: course.id,
+      isVisibleOnProfile: collectionData.profileUserVisibility,
+      owner: ProfileModel.create({
+        id: collectionData.gooruUId,
+        firstName: collectionData.userFirstName,
+        lastName: collectionData.userLastName,
+        avatarUrl: userThumbnailUrl,
+        username: collectionData.usernameDisplay
+      }),
+      creator: ProfileModel.create({
+        id: collectionData.creatorId,
+        firstName: collectionData.creatorFirstname,
+        lastName: collectionData.creatorLastname,
+        avatarUrl: creatorThumbnailUrl,
+        username: collectionData.creatornameDisplay
+      }),
+      taxonomySet: collectionData.taxonomySet,
+      createdDate: collectionData.addDate,
+      collaboratorIDs: collectionData.collaboratorIds,
+      grade: collectionData.grade,
+      instructionalModel: collectionData.instructionalMethod,
+      lastModified: collectionData.lastModified,
+      lastModifiedBy: collectionData.lastModifiedBy,
+      license: collectionData.license,
+      audience: collectionData.audience,
+      keyPoints: collectionData.keyPoints,
+      efficacy: collectionData.efficacy ? collectionData.efficacy : null,
+      relevance: collectionData.relevance ? collectionData.relevance : null,
+      engagement: collectionData.engagement ? collectionData.engagement : null
+    });
+  },
+
+  /**
    * Normalize the Search assessments response
    *
    * @param payload is the endpoint response in JSON format
@@ -499,9 +570,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
       description: questionData.description
         ? questionData.description
         : questionData.text,
-      type: questionData.resourceFormat
-        ? questionData.resourceFormat.value
-        : null,
+      type: questionData.contentFormat ? questionData.contentFormat : null,
       format: format,
       publisher: null, //TODO missing publisher at API response,
       thumbnailUrl: questionData.thumbnail,
@@ -586,7 +655,7 @@ export default Ember.Object.extend(ConfigurationMixin, {
     let questionData = [];
     let unitData = [];
     let lessonData = [];
-
+    let offlineActivityData = [];
     if (contents.assessment) {
       contents.assessment.searchResults.map(assessment => {
         let assessmentInfo = serializer.normalizeAssessment(assessment);
@@ -618,6 +687,29 @@ export default Ember.Object.extend(ConfigurationMixin, {
             TAXONOMY_LEVELS.COLLECTION
           );
         collectionData.push(collectionInfo);
+      });
+    }
+
+    if (contents.offlineActivity) {
+      contents.offlineActivity.searchResults.map(offlineActivity => {
+        let offlineActivityInfo = serializer.normalizeOfflineActivity(
+          offlineActivity
+        );
+        offlineActivityInfo.id = offlineActivity.id;
+        offlineActivityInfo.description = offlineActivity.learningObjective;
+        offlineActivityInfo.creator = serializer.normalizeOwner(
+          offlineActivity.creator
+        );
+        offlineActivityInfo.owner = serializer.normalizeOwner(
+          offlineActivity.user
+        );
+        offlineActivityInfo.standards = serializer
+          .get('taxonomySerializer')
+          .normalizeLearningMapsTaxonomyArray(
+            offlineActivity.taxonomy,
+            TAXONOMY_LEVELS.COLLECTION
+          );
+        offlineActivityData.push(offlineActivityInfo);
       });
     }
 
@@ -729,6 +821,16 @@ export default Ember.Object.extend(ConfigurationMixin, {
     serializedContentData.question = questionData;
     serializedContentData.unit = unitData;
     serializedContentData.lesson = lessonData;
+    serializedContentData.offlineActivity = offlineActivityData;
+    serializedContentData.maxTotalHitCount = Math.max(
+      contents.assessment.totalHitCount,
+      contents.assessmentExternal.totalHitCount,
+      contents.collectionExternal.totalHitCount,
+      contents.collection.totalHitCount,
+      contents.offlineActivity.totalHitCount,
+      contents.question.totalHitCount,
+      contents.resource.totalHitCount
+    );
     return serializedContentData;
   },
 
@@ -837,5 +939,33 @@ export default Ember.Object.extend(ConfigurationMixin, {
     competency.title = competency.title || '';
     competency.code = competency.code || '';
     return competency;
+  },
+
+  /**
+   * Normalize search data to ember data
+   */
+  normalizeSearchData(payload) {
+    let searchResults = Ember.A([]);
+    let searchItems = payload.items ? payload.items : [];
+    if (searchItems.length) {
+      searchItems.map(item => {
+        searchResults.pushObject(item);
+      });
+    }
+    return searchResults;
+  },
+
+  /**
+   * Normalize gooru search data to ember data
+   */
+  normalizeComparativeSearch(payload) {
+    let searchResults = Ember.A([]);
+    let searchItems = payload.contents ? payload.contents : [];
+    if (searchItems.length) {
+      searchItems.map(item => {
+        searchResults.pushObject(item);
+      });
+    }
+    return searchResults;
   }
 });

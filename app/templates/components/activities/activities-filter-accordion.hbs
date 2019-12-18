@@ -1,9 +1,9 @@
 <div class="filter {{filterType.code}}">
-  <div class="header">
+  <div class="header" {{action "onToggleExpandedView" filterType.code}}>
     <div class="name">
-      {{t filterType.title}} {{if (gt filterCount 0) (concat '(' filterCount ')')}}
+      {{t filterType.title}} {{if (and (gt filterCount 0) (not filterType.code 'category') (not filterType.code 'subject')) (concat '(' filterCount ')')}}
     </div>
-    <div class="toggle-dropdown" {{action "onToggleExpandedView" filterType.code}}>
+    <div class="toggle-dropdown">
       {{#if isExpanded}}
         {{app-icon name="arrow_drop_up"}}
       {{else}}

@@ -5,22 +5,27 @@
     margin-bottom: 10px;
     .header {
       display: flex;
+      cursor: pointer;
       .name {
-        width: 200px;
         text-transform: capitalize;
         font-size: 13px;
         font-weight: bolder;
         color: $dark-400;
+        padding-right: 5px;
       }
       .toggle-dropdown {
-        z-index: 999;
         cursor: pointer;
       }
     }
     .body {
+      position: absolute;
       max-height: 180px;
-      width: 220px;
+      z-index: 10;
+      padding: 5px;
+      background-color: $white;
       overflow: auto;
+      border: 1px solid $light-200;
+      box-shadow: 0 0 5px $light-200;
       .filter-name {
         padding: 3px;
         display: flex;

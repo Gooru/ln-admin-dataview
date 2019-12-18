@@ -190,6 +190,27 @@ export default Ember.Controller.extend({
     onEmptyFilters(isEmpty) {
       let controller = this;
       controller.set('isEmptyFilters', isEmpty);
+    },
+    /**
+     * Action triggered when am user click dropdown icon
+     */
+    onShowDropDown() {
+      Ember.$('.filter-list').slideToggle(500);
+    },
+
+    /**
+     * Action triggered when click on comparative buttton
+     */
+
+    onComparativeSearch() {
+      this.set('isComparativeSearch', true);
+    },
+
+    /**
+     * Action trigger when click on back arrow
+     */
+    backToCatalog() {
+      this.set('isComparativeSearch', false);
     }
   },
 
@@ -258,6 +279,12 @@ export default Ember.Controller.extend({
    * Currently selected menu item
    */
   curMenuItem: null,
+
+  /**
+   * @property {Boolean}
+   * used to switch search box in activity
+   */
+  isComparativeSearch: false,
 
   // -------------------------------------------------------------------------
   // Methods

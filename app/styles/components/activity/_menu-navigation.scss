@@ -1,6 +1,17 @@
 .activity-menu-navigation {
-
+  .row {
+    margin-right: 0;
+  }
   .nav-tabs {
+    display: inline-flex;
+    justify-content: center;
+    width: 100%;
+
+    li {
+      width: 100%;
+      float: none;
+    }
+
     &:after {
       display: none;
     }
@@ -9,7 +20,7 @@
       border: none;
       color: $gray-base;
       font-size: 15px;
-      padding: 3px 16px;
+      padding: 5px 0;
       outline: none;
       text-transform: capitalize;
       opacity: 0.2;

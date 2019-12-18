@@ -1,0 +1,49 @@
+<div class="comparative-search-resource-accordian-container">
+    <div class="comparative-gooru-resource-accordian">
+      <div class="search-activity-icon">
+         <span class="icon {{activity.format}}"></span>
+      </div>
+      <div class="search-activity-title">
+         <span class="title">{{safe-html activity.title}}</span>
+         <span>
+           {{#if (eq activity.type 'question')}}
+           {{t activityFormat}}
+           {{else}}
+           {{activityFormat}}
+           {{/if}}
+         </span>
+      </div>
+      <div class="search-play-icon">
+        {{#if isPlay}}
+        <span {{action "onPlay" activity}}>{{app-icon name="play_arrow"}}</span>
+        {{/if}}
+      </div>
+      <div class="search-activity-expand-icon" {{action "onToggleActivity" activity}}>
+        <span >
+          {{#if isExpanded}}
+            {{app-icon name="arrow_drop_up"}}
+          {{else}}
+            {{app-icon name="remove_red_eye"}}
+          {{/if}}
+          </span>
+      </div>
+    </div>
+    <div class="comparative-gooru-resource-accordian-panel">
+        <div class="comparative-gooru-resource-description-head">
+            {{t 'activities.description'}}
+        </div>
+        <div class="comparative-gooru-resource-description-content">
+           {{safe-html activity.description}}
+        </div>
+        <div class="comparative-search-taxonomy-code-container">
+          {{#if tags.length}}
+            {{taxonomy.taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
+          {{/if}}
+        </div>
+
+        <div class="comparative-gooru-resource-footer">
+          <span>{{activity.owner.username}}</span>
+          <span>{{activity.publisher}}</span>
+        </div>
+    </div>
+</div>

@@ -1,8 +1,10 @@
 .learning-map.competency-table {
   height: 70vh;
+
   .table-responsive {
     width: 1221px;
     margin: auto;
+
     .header {
       .competency-data-level {
         display: block;
@@ -15,11 +17,13 @@
         color: $white;
         line-height: 50px;
         display: flex;
+
         div.data-level-info {
           width: 70%;
           text-transform: uppercase;
           margin: auto;
         }
+
         span {
           .material-icons {
             cursor: pointer;
@@ -30,9 +34,11 @@
           font-size: 13px;
           font-weight: bold;
           display: flex;
+
           .app-toggle-button {
             margin-top: 20px;
           }
+
           .title {
             margin-top: 2px;
           }
@@ -48,14 +54,17 @@
       font-weight: bold;
       margin: auto;
       border-bottom: 1px solid $dark-300;
+
       .th {
         padding-left: 8px;
+
         i {
           float: right;
           line-height: 2.2;
           margin-right: 15px;
           cursor: pointer;
         }
+
         &.competency-info {
           text-transform: uppercase;
           font-size: 15px;
@@ -77,6 +86,7 @@
         background-size: 20px 20px;
         margin-top: 12px;
       }
+
       .course {
         i {
           background-image: url("images/course-icon.svg");
@@ -136,6 +146,13 @@
         }
       }
 
+      .offlineActivity {
+        i {
+          background-image: url("images/offline.svg");
+          @extend %content-icon-size;
+        }
+      }
+
       .signatureCollection {
         i {
           background-image: url("images/collection-orange.svg");
@@ -155,6 +172,7 @@
       height: 75vh;
       overflow: auto;
       margin-bottom: 20px;
+
       .table {
         .tbody {
           .competency-info {
@@ -167,6 +185,7 @@
               font-weight: bold;
             }
           }
+
           .content-info {
             cursor: pointer;
             text-align: center;
@@ -174,6 +193,7 @@
             font-size: 15px;
             vertical-align: middle;
           }
+
           .prerequisites-info {
             .prerequisites-id {
               color: $dark-400;
@@ -182,10 +202,12 @@
               cursor: pointer;
             }
           }
+
           .micro-competency {
             .competency-info {
               padding-left: 20px;
             }
+
             &.hide-row {
               display: none;
             }
@@ -197,17 +219,18 @@
         opacity: 0.5;
         pointer-events: none;
         background: $light-300;
+
         tr {
           td {
             background: $light-300;
           }
         }
       }
-
       /* width */
       &::-webkit-scrollbar {
         width: 7px;
       }
+
       &::-webkit-scrollbar-thumb {
         background: $dark-100;
         border-radius: 4px;
@@ -217,42 +240,50 @@
         background: $light-300;
       }
     }
-
     //Signature resource not available in the mock
     .signatureResource {
       display: none;
     }
+
     .competency-info {
-      width: 515px;
+      width: 465px;
     }
+
     .content-info {
       width: 50px;
       background-color: $ultra-light-gray;
+
       &.course {
         border-left: 2px solid $light-300;
         border-right: 2px dashed $light-300;
       }
+
       &.resource {
         border-left: 2px dashed $light-300;
       }
+
       &.rubric {
         border-right: 2px dashed $light-300;
       }
-      &.resource,
-      &.rubric,
+
+      &.course,
       &.question,
-      &.course {
+      &.resource,
+      &.rubric {
         background-color: $light-100;
       }
     }
+
     .prerequisites-info {
       width: 190px;
       border-left: 2px solid $light-300;
+
       .prerequisites-id {
         height: 30px;
         line-height: 30px;
       }
     }
+
     .not-available {
       text-align: center;
       font-size: 15px;
