@@ -47,7 +47,6 @@ export default Ember.Component.extend({
   filtersObserver: Ember.observer('selectedFilterItems', function() {
     let component = this;
     component.refreshVisibleFilterItems();
-    component.setupTooltip();
   }),
 
   /**
@@ -109,9 +108,6 @@ export default Ember.Component.extend({
   didInsertElement() {
     let component = this;
     component.refreshVisibleFilterItems();
-    if (component.get('appliedFilterList.length')) {
-      component.setupTooltip();
-    }
   },
 
   // -------------------------------------------------------------------------
@@ -192,6 +188,14 @@ export default Ember.Component.extend({
 
     onComparativeSearch() {
       this.sendAction('onComparativeSearch');
+    },
+
+    /**
+     * Action triggered when click selected filter list
+     */
+    onShowSelectedFilter() {
+      let component = this;
+      component.$('.non-visible-filters ').slideToggle(400);
     }
   },
 
@@ -238,38 +242,5 @@ export default Ember.Component.extend({
     });
     component.sendAction('onEmptyFilters', visibleFilters.length === 0);
     component.set('visibleFilters', visibleFilters);
-  },
-
-  /**
-   * @function setupTooltip
-   * Function to show popover content box while clicking on the more button
-   */
-  setupTooltip() {
-    let component = this;
-    var $anchor = component.$('button.non-visible-tags');
-
-    if ($anchor.length) {
-      let placement = 'bottom';
-      $anchor.addClass('clickable');
-      $anchor.attr('data-html', 'true');
-      $anchor.popover({
-        placement: placement,
-        content: function() {
-          return component.$('.non-visible-filters').html();
-        },
-        trigger: 'manual'
-      });
-
-      $anchor.click(function() {
-        var $this = $(this);
-        if (!$this.hasClass('list-open')) {
-          // Close all tag-list popovers by simulating a click on them
-          $('.non-visible-tags.list-open').click();
-          $this.addClass('list-open').popover('show');
-        } else {
-          $this.removeClass('list-open').popover('hide');
-        }
-      });
-    }
   }
 });

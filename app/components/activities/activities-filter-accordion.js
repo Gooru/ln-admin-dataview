@@ -61,17 +61,9 @@ export default Ember.Component.extend(ModalMixin, {
    */
   isExpanded: Ember.computed('filterType', function() {
     let component = this;
-    let userId = component.get('session.id');
-    let selectedFilterItems =
-      JSON.parse(
-        localStorage.getItem(`research_${userId}_activities_filters`)
-      ) || component.get('selectedFilterItems');
     let filterType = component.get('filterType');
-    let curFilterItems = selectedFilterItems[`${filterType.code}`];
-    if (
-      (curFilterItems && curFilterItems.length > 0) ||
-      filterType.code === 'category'
-    ) {
+    if (filterType.get('code') === 'category') {
+      filterType.set('isActive', true);
       return true;
     }
     return false;
@@ -113,10 +105,18 @@ export default Ember.Component.extend(ModalMixin, {
      */
     onToggleExpandedView(filterType) {
       let component = this;
-      let filter = filterType || component.get('filterType');
-      if (!component.get('isExpanded')) {
+      let filtersTypesList = component.get('filtersTypesList');
+      filtersTypesList.forEach(type => {
+        if (type.get('code') !== filterType.get('code')) {
+          type.set('isActive', false);
+        }
+      });
+      if (!filterType.get('isActive')) {
         component.set('isToggleExpanded', true);
-        component.fetchMethodByType(filter);
+        component.fetchMethodByType(filterType.get('code'));
+        filterType.set('isActive', true);
+      } else {
+        filterType.set('isActive', false);
       }
       component.set('isToggleExpanded', false);
       component.toggleProperty('isExpanded');
