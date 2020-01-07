@@ -14,6 +14,11 @@ export default Ember.Controller.extend({
   searchService: Ember.inject.service('api-sdk/search'),
 
   /**
+   * @requires searchService
+   */
+  taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
+
+  /**
    * @requires il8n
    */
   i18n: Ember.inject.service(),
@@ -153,12 +158,17 @@ export default Ember.Controller.extend({
           .get('searchService')
           .fetchLearningMapCompetency(filters, start, length)
       );
+      let categoryPromise = Ember.RSVP.resolve(
+        controller.get('taxonomyService').fetchTaxonomyClassifications()
+      );
       return Ember.RSVP.hash({
-        competencyList: competencyPromise
+        competencyList: competencyPromise,
+        categoryList: categoryPromise
       }).then(function(hash) {
         let competencies = controller.get('competencies');
         let fetchedCompetencies = hash.competencyList.competencyInfo;
         let totalHitCount = hash.competencyList.totalHitCount;
+        controller.set('categoryList', hash.categoryList);
         competencies = competencies.concat(fetchedCompetencies);
         controller.set('fetchedCompetencies', fetchedCompetencies);
         controller.set('competencies', competencies);
@@ -516,5 +526,11 @@ export default Ember.Controller.extend({
    * @property {Array}
    * Property to store fetched pull out info
    */
-  pullOutInfo: []
+  pullOutInfo: [],
+
+  /**
+   * @property {Array}
+   * property hold the taxonomy category list
+   */
+  categoryList: []
 });
