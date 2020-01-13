@@ -57,6 +57,14 @@
             font-size: 11px;
             font-weight: 300;
           }
+          .taxonomy-tag-list {
+            .taxonomy-tag {
+              height: 19px;
+            }
+            .non-visible-tags {
+              padding: 2px;
+            }
+          }
         }
       }
       .search-play-icon {

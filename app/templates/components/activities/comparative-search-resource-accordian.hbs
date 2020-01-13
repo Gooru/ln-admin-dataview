@@ -1,15 +1,13 @@
 <div class="comparative-search-resource-accordian-container">
     <div class="comparative-gooru-resource-accordian">
-      <div class="search-activity-icon">
+      <div class="search-activity-icon" title="{{if (eq activity.type 'question') (t activityFormat) activityFormat}}" data-toggle="tooltip" data-placement="top" data-trigger="hover">
          <span class="icon {{activity.format}}"></span>
       </div>
       <div class="search-activity-title">
          <span class="title">{{safe-html activity.title}}</span>
          <span>
-           {{#if (eq activity.type 'question')}}
-           {{t activityFormat}}
-           {{else}}
-           {{activityFormat}}
+           {{#if tags.length}}
+             {{taxonomy.taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
            {{/if}}
          </span>
       </div>

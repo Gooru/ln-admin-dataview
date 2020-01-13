@@ -43,6 +43,13 @@ export default Ember.Component.extend({
   isPlay: false,
 
   // ---------------------------------------------------------------------
+  // Events
+  didRender() {
+    var component = this;
+    component.$('[data-toggle="tooltip"]').tooltip({ trigger: 'hover' });
+  },
+
+  // ---------------------------------------------------------------------
   // Actions
 
   actions: {

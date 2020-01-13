@@ -1,17 +1,20 @@
 <div class="comparative-search-collection-accordian-container">
     <div class="comparative-gooru-collection-accordian">
-      <div class="search-activity-icon">
+      <div class="search-activity-icon" title="{{activity.type}}" data-toggle="tooltip" data-placement="top" data-trigger="hover">
          <span class="icon {{activity.type}}"></span>
       </div>
       <div class="search-activity-title">
          <span class="search-activity-title-head">{{activity.title}}</span>
          <div class="search-activity-title-subhead">
-           {{#if activity.questionCount}}
+           {{#if (taxonomy-formatter activity)}}
+             {{taxonomy.taxonomy-tag-list tags=(taxonomy-formatter activity) tagsVisible=1 isInCard=true showDescription=true}}
+           {{/if}}
+           <!-- {{#if activity.questionCount}}
            <span>{{activity.questionCount}} <i class="icon question"></i></span>
            {{/if}}
           {{#if (and (eq  activity.type "collection") activity.resourceCount)}}
              <span>{{activity.resourceCount}} <i class="icon resource"></i></span>
-          {{/if}}
+          {{/if}} -->
          </div>
       </div>
       <div class="search-play-icon">
@@ -24,7 +27,7 @@
         {{/if}}
       </div>
       <div class="search-activity-expand-icon" {{action "onToggleActivity" activity}}>
-        <span >
+        <span>
           {{#if isExpanded}}
             {{app-icon name="arrow_drop_up"}}
           {{else}}
@@ -42,6 +45,10 @@
         </div>
         <div class="comparative-gooru-collection-description-content">
            {{activity.description}}
+
+           {{#if (taxonomy-formatter activity)}}
+             {{taxonomy.taxonomy-tag-list tags=(taxonomy-formatter activity) tagsVisible=1 isInCard=true showDescription=true}}
+           {{/if}}
         </div>
         {{#each activityContent as |content|}}
           {{activities.comparative-search-collection-card activity = content}}

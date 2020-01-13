@@ -89,7 +89,6 @@ export default Ember.Component.extend({
       let otherCollection = component.mixOtherActivities(
         activityContents.collection
       );
-
       activityList = [
         ...selectedResourse,
         ...selectedAssessment,

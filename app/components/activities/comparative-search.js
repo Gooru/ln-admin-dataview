@@ -136,6 +136,7 @@ export default Ember.Component.extend({
       startAt: startAt,
       length: 10
     };
+    params['flt.hasStandard'] = 1;
     if (component.get('isPersonalize')) {
       params['flt.course'] = gradeList ? gradeList.toString() : '';
     }
