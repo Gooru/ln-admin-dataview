@@ -15,7 +15,7 @@
       </span>
     </div>
       <div class="body">
-        {{learning-map.app-domain-browser onSelectDomain="onSelectDomain" onSelectDataItem="onSelectDataItem"}}
+        {{learning-map.app-domain-browser categoryList=categoryList onSelectDomain="onSelectDomain" onSelectDataItem="onSelectDataItem"}}
         <div class="generate-table-btn" align="center">
           <button class="btn generate-btn {{unless isShowExportBtn 'disabled'}}" {{action "onExportCompetency"}}>{{t 'crosswalk.generate-table'}}</button>
         </div>

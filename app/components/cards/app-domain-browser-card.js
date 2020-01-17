@@ -8,16 +8,10 @@ export default Ember.Component.extend({
 
   // -------------------------------------------------------------------------
   // Events
-  didInsertElement() {
+  didRender() {
     let component = this;
     component.$('.category .k_12').addClass('active');
-    // this.checkDefaultItem();
   },
-
-  dataItemObserver: Ember.observer('dataContent', function() {
-    this.checkDefaultItem();
-  }),
-
   /**
    * @function checkDefaultItem
    * Method to set first item in each component selected by default

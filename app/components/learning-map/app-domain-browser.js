@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { TAXONOMY_CATEGORIES, LEARNING_MAP_DEFAULT_LEVELS } from 'admin-dataview/config/config';
+import { LEARNING_MAP_DEFAULT_LEVELS } from 'admin-dataview/config/config';
 import { capitalizeString } from 'admin-dataview/utils/utils';
 
 export default Ember.Component.extend({
@@ -143,11 +143,12 @@ export default Ember.Component.extend({
   fetchContentByType(type, dataItem) {
     let component = this;
     let itemsToReset = [];
+    let id = dataItem.id || dataItem.value;
     let selectedSubject = component.get('selectedSubject');
     switch (type) {
     case 'category':
       itemsToReset = ['subjects', 'courses', 'domains'];
-      component.fetchSubjectsByCategory(dataItem.value);
+      component.fetchSubjectsByCategory(id);
       break;
     case 'subject':
       itemsToReset = ['courses', 'domains'];
@@ -200,7 +201,7 @@ export default Ember.Component.extend({
    * @property {Array}
    * Property to store taxonomy categories
    */
-  categories: TAXONOMY_CATEGORIES,
+  categories: Ember.computed.alias('categoryList'),
 
   /**
    * @property {Array}
