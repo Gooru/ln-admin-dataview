@@ -29,6 +29,18 @@ export default Ember.Component.extend({
     component.toggleFilterVisibility();
   }),
 
+  /**
+   * Converted in filter as Ember data
+   */
+  filtersTypesList: Ember.computed('filterTypes', function() {
+    let filterTypes = this.get('filterTypes');
+    let filterList = Ember.A([]);
+    filterTypes.forEach(type => {
+      filterList.pushObject(Ember.Object.create(type));
+    });
+    return filterList;
+  }),
+
   //------------------------------------------------------------------------
   //Events
   didInsertElement() {
@@ -102,7 +114,10 @@ export default Ember.Component.extend({
         );
       }
     }
-    storedFilters = component.removedFilterItemsByType(filterType, storedFilters);
+    storedFilters = component.removedFilterItemsByType(
+      filterType,
+      storedFilters
+    );
     storedFilters[`${filterType}`] = userSelectedFilter;
     localStorage.setItem(
       `research_${userId}_activities_filters`,
