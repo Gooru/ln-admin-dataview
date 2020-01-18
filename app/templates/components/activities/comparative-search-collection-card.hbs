@@ -1,12 +1,10 @@
 <div class="comparative-gooru-collection-core" {{action "onToggleActivity"}}>
-  <span class="icon {{activity.content_format}}"></span>
+  <span class="icon {{activity.content_format}}" title="{{if (eq activity.content_format 'resource') activityFormat (t activityFormat)}}" data-toggle="tooltip" data-placement="top" data-trigger="hover"></span>
   <div class="comparative-gooru-collection-head">
       <span>{{safe-html activity.title}}</span>
-      <span>
-        {{#if (eq activity.content_format 'resource')}}
-          {{activityFormat}}
-        {{else}}
-          {{t activityFormat}}
+      <span class="compatency-tag">
+        {{#if tags.length}}
+          {{taxonomy.taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
         {{/if}}
       </span>
   </div>

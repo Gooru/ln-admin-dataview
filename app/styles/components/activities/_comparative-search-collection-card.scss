@@ -30,10 +30,22 @@
         white-space: nowrap;
         overflow: hidden;
         font-weight: bold;
-      }
-      span:last-child {
-        font-size: 11px;
-        font-weight: 300;
+
+        &.compatency-tag {
+          .taxonomy-tag-list {
+            font-size: 10px;
+            .taxonomy-tag {
+              .content {
+                .tag-caption {
+                  display: none;
+                }
+              }
+            }
+            .non-visible-tags {
+              padding: 2px;
+            }
+          }
+        }
       }
     }
   }

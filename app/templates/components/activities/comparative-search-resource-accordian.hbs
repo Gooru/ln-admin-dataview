@@ -5,15 +5,22 @@
       </div>
       <div class="search-activity-title">
          <span class="title">{{safe-html activity.title}}</span>
-         <span>
-           {{#if tags.length}}
-             {{taxonomy.taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
-           {{/if}}
-         </span>
+         <div class="sub-title">
+           <span>
+             {{#if tags.length}}
+               {{taxonomy.taxonomy-tag-list tags=tags tagsVisible=1 isInCard=true showDescription=true}}
+             {{/if}}
+           </span>
+           <div class="reef-content">
+             <span style="background-color: rgba(26, 169, 235, {{activity.efficacy}})">Eff {{activity.efficacy}}</span>
+             <span style="background-color: rgba(26, 169, 235, {{activity.engagement}})">Eng {{activity.engagement}}</span>
+              <span style="background-color: rgba(26, 169, 235, {{activity.relevance}})">Rel {{activity.relevance}}</span>
+           </div>
+         </div>
       </div>
       <div class="search-play-icon">
         {{#if isPlay}}
-        <span {{action "onPlay" activity}}>{{app-icon name="play_arrow"}}</span>
+          <span {{action "onPlay" activity}}>{{app-icon name="play_arrow"}}</span>
         {{/if}}
       </div>
       <div class="search-activity-expand-icon" {{action "onToggleActivity" activity}}>

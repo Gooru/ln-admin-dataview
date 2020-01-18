@@ -3,7 +3,7 @@
     .comparative-gooru-resource-accordian {
       background-color: $white;
       display: grid;
-      grid-template-columns: 50px 1fr 40px 40px;
+      grid-template-columns: 40px 1fr 30px 30px;
       align-items: center;
       border-top: 1px solid $light-100;
       border-bottom: 1px solid $light-100;
@@ -45,24 +45,50 @@
         font-size: 13px;
         line-height: 1.4;
         text-transform: capitalize;
+
         span {
           &.title {
             height: 20px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            font-weight: bold;
           }
-          text-overflow: ellipsis;
-          white-space: nowrap;
-          overflow: hidden;
-          font-weight: bold;
-          &:last-child {
-            font-size: 11px;
-            font-weight: 300;
-          }
+        }
+        .sub-title {
+          display: grid;
+          grid-template-columns: auto 1fr;
+          align-items: center;
+
           .taxonomy-tag-list {
-            .taxonomy-tag {
-              height: 19px;
+            font-size: 10px;
+            > .taxonomy-tag {
+              .content {
+                max-width: 52px;
+                .tag-caption {
+                  display: none;
+                }
+              }
             }
             .non-visible-tags {
               padding: 2px;
+            }
+          }
+          .reef-content {
+            display: flex;
+            align-items: center;
+            font-size: 10px;
+            margin-left: 10px;
+            span {
+              margin: 1px;
+              padding: 2px;
+              text-align: center;
+              display: block;
+              width: max-content;
+              border: 1px solid $light-400;
+              background-color: $sky-400;
+              border-radius: 3px;
+              color: $gray-base;
             }
           }
         }
@@ -79,7 +105,7 @@
         i {
           font-size: 18px;
           &.arrow_drop_up {
-            font-size: 40px;
+            font-size: 30px;
           }
         }
       }

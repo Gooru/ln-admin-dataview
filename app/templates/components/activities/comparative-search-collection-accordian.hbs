@@ -6,9 +6,18 @@
       <div class="search-activity-title">
          <span class="search-activity-title-head">{{activity.title}}</span>
          <div class="search-activity-title-subhead">
-           {{#if (taxonomy-formatter activity)}}
-             {{taxonomy.taxonomy-tag-list tags=(taxonomy-formatter activity) tagsVisible=1 isInCard=true showDescription=true}}
-           {{/if}}
+           <div class="sub-title">
+             <span>
+               {{#if (taxonomy-formatter activity)}}
+                 {{taxonomy.taxonomy-tag-list tags=(taxonomy-formatter activity) tagsVisible=1 isInCard=true showDescription=true}}
+               {{/if}}
+             </span>
+             <div class="reef-content">
+               <span style="background-color: rgba(26, 169, 235, {{activity.efficacy}})">Eff {{activity.efficacy}}</span>
+               <span style="background-color: rgba(26, 169, 235, {{activity.engagement}})">Eng {{activity.engagement}}</span>
+                <span style="background-color: rgba(26, 169, 235, {{activity.relevance}})">Rel {{activity.relevance}}</span>
+             </div>
+           </div>
            <!-- {{#if activity.questionCount}}
            <span>{{activity.questionCount}} <i class="icon question"></i></span>
            {{/if}}

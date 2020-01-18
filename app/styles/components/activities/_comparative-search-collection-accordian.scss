@@ -3,7 +3,7 @@
     .comparative-gooru-collection-accordian {
       background-color: $white;
       display: grid;
-      grid-template-columns: 50px 1fr 40px 40px;
+      grid-template-columns: 40px 1fr 30px 30px;
       align-items: center;
       border-top: 1px solid $light-100;
       .search-activity-icon {
@@ -39,12 +39,41 @@
         .search-activity-title-subhead {
           display: flex;
           font-size: 12px;
-          .taxonomy-tag-list {
-            .taxonomy-tag {
-              height: 20px;
+          .sub-title {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            align-items: center;
+
+            .taxonomy-tag-list {
+              font-size: 10px;
+              > .taxonomy-tag {
+                .content {
+                  max-width: 52px;
+                  .tag-caption {
+                    display: none;
+                  }
+                }
+              }
+              .non-visible-tags {
+                padding: 2px;
+              }
             }
-            .non-visible-tags {
-              padding: 2px;
+            .reef-content {
+              display: flex;
+              align-items: center;
+              font-size: 10px;
+              margin-left: 10px;
+              span {
+                margin: 1px;
+                padding: 2px;
+                text-align: center;
+                display: block;
+                width: max-content;
+                border: 1px solid $light-400;
+                background-color: $sky-400;
+                border-radius: 3px;
+                color: $gray-base;
+              }
             }
           }
         }
@@ -61,7 +90,7 @@
         i {
           font-size: 18px;
           &.arrow_drop_up {
-            font-size: 40px;
+            font-size: 30px;
           }
         }
       }
