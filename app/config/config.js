@@ -227,7 +227,8 @@ export const NAVIGATION_MENUS = [
   'network',
   'competency',
   'catalog',
-  'learners'
+  'learners',
+  'console'
 ];
 
 export const NAVIGATION_MENUS_INDEX = {
@@ -236,7 +237,8 @@ export const NAVIGATION_MENUS_INDEX = {
   activities: 2,
   catalog: 2,
   learners: 3,
-  learner: 3
+  learner: 3,
+  console: 4
 };
 
 export const ACTIVITIES_NAVIGATION_MENUS = [
