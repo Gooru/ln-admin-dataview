@@ -8,7 +8,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
   actions: {
     onMenuItemSelection(item) {
       if (item === 'competency-map') {
-        window.location.href = '/research/competency/competency-map';
+        window.location.href = '/competency/competency-map';
       } else {
         this.transitionTo(`competency.${item}`);
       }
