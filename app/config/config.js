@@ -261,8 +261,9 @@ export const ACTIVITIES_NAVIGATION_MENUS_INDEX = {
 
 export const COMPETENCY_NAVIGATION_MENUS = [
   'matrix',
-  'crosswalk',
+  'competency-map',
   'tree',
+  'crosswalk',
   'learning-map'
 ];
 
