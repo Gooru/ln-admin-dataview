@@ -1,7 +1,7 @@
 {
  "endpoint" : {
-   "url": "http://beta-admin.gooru.org",
-   "secureUrl": "https://beta-admin.gooru.org",
-   "gooruAppUrl": "//beta-admin.gooru.org"
+   "url": "http://beta.gooru.org",
+   "secureUrl": "https://beta.gooru.org",
+   "gooruAppUrl": "//beta.gooru.org"
  }
 }
