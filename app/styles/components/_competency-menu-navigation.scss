@@ -3,8 +3,8 @@
   box-shadow: -3px 0 4px 0 rgba(0, 0, 0, 0.2);
   height: 40px;
   .menu-container {
-    width: 545px;
-    margin: 0 auto;
+    display: flex;
+    justify-content: center;
   }
   .nav-tabs {
     &:after {
