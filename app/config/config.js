@@ -260,7 +260,6 @@ export const ACTIVITIES_NAVIGATION_MENUS_INDEX = {
 };
 
 export const COMPETENCY_NAVIGATION_MENUS = [
-  'matrix',
   'competency-map',
   'tree',
   'crosswalk',
@@ -268,11 +267,10 @@ export const COMPETENCY_NAVIGATION_MENUS = [
 ];
 
 export const COMPETENCY_NAVIGATION_MENUS_INDEX = {
-  matrix: 0,
-  'competency-map': 1,
-  tree: 2,
-  crosswalk: 3,
-  'learning-map': 4
+  'competency-map': 0,
+  tree: 1,
+  crosswalk: 2,
+  'learning-map': 3
 };
 
 export const CODE_TYPES = {
