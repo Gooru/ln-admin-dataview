@@ -104,17 +104,31 @@ export const LEARNING_CATEGORY = {
   label: 'common.categoryOptions.professional-dev'
 };
 
-export const SKILLS_TRAINING = {
+export const SKILLS_TRAINING_CATEGORY = {
   value: 'skills_training',
   apiCode: 'SK',
   label: 'common.categoryOptions.skills-training'
+};
+
+export const K12IND_CATEGORY = {
+  value: 'K12IND',
+  apiCode: 'K12IND',
+  label: 'common.categoryOptions.K12IND'
+};
+
+export const LG_CATEGORY = {
+  value: 'LG',
+  apiCode: 'LG',
+  label: 'common.categoryOptions.LG'
 };
 
 export const TAXONOMY_CATEGORIES = [
   K12_CATEGORY,
   EDUCATION_CATEGORY,
   LEARNING_CATEGORY,
-  SKILLS_TRAINING
+  SKILLS_TRAINING_CATEGORY,
+  K12IND_CATEGORY,
+  LG_CATEGORY
 ];
 
 export const CONTENT_TYPES = {

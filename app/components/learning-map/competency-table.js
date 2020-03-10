@@ -204,10 +204,12 @@ export default Ember.Component.extend({
     const $categoryComponent = Ember.$('.category .item');
     const $subjectComponent = Ember.$('.subject .item');
     const $courseComponent = Ember.$('.course .item');
+    $categoryComponent.removeClass('active');
     if (!$categoryComponent.hasClass('active')) {
-      Ember.$(`.category .item.${defaultLevels.categoryCode}`).addClass(
-        'active'
-      );
+      Ember.$(
+        `.category .item.${defaultLevels.categoryCode ||
+          defaultLevels.subjectClassification}`
+      ).addClass('active');
     }
     if (!$subjectComponent.hasClass('active')) {
       Ember.$(
