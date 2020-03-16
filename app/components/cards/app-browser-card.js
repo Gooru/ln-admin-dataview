@@ -1,7 +1,6 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -12,13 +11,19 @@ export default Ember.Component.extend({
 
   selectedFrameworks: [],
 
+  currentSubjectId: null,
+
+  defaultCategory: null,
+
   // -------------------------------------------------------------------------
   // Events
 
   didInsertElement: function() {
     let component = this;
-    component.$('#k_12').addClass('active');
-    component.$('#subject-1').addClass('active');
+    component.$(`#${component.get('defaultCategory')}`).addClass('active');
+    component
+      .$(`[data-id = '${component.get('currentSubjectId')}']`)
+      .addClass('active');
   },
 
   // -------------------------------------------------------------------------
@@ -26,19 +31,21 @@ export default Ember.Component.extend({
 
   actions: {
     /*
-    * Event triggered when user click category to pull subjects
-    */
+     * Event triggered when user click category to pull subjects
+     */
     getSubjects: function(category) {
       let component = this;
-      component.$('.category-card .current-level-value a').removeClass('active');
+      component
+        .$('.category-card .current-level-value a')
+        .removeClass('active');
       component.$('.subject-card .current-level-value a').removeClass('active');
       component.$(`#${category}`).addClass('active');
       component.sendAction('getSubjects', category);
     },
 
     /*
-    * Event triggered when user click subbject to pull frameworks
-    */
+     * Event triggered when user click subbject to pull frameworks
+     */
     getFrameworks: function(subject, elementIndex) {
       let component = this;
       component.$('.subject-card .current-level-value a').removeClass('active');
@@ -47,8 +54,8 @@ export default Ember.Component.extend({
     },
 
     /*
-    * Event triggered when user click framework item
-    */
+     * Event triggered when user click framework item
+     */
     selectCheckableItem: function(frameworkItem) {
       let component = this;
       let frameworkId = frameworkItem.frameworkId;

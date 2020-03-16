@@ -10,9 +10,31 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
    */
   taxonomyService: Ember.inject.service('taxonomy'),
 
+  taxonomyDataService: Ember.inject.service('api-sdk/taxonomy'),
+
   model() {
     return Ember.RSVP.hash({
       categories: this.get('taxonomyService').getTaxonomyClassifications()
+    }).then(hash => {
+      let defaultCategory = hash.categories[0].id;
+      return this.get('taxonomyDataService')
+        .fetchSubjects(defaultCategory)
+        .then(subjects => {
+          let defaultSubject =
+            subjects.findBy('isDefault', true) || subjects[0];
+          let defaultFWId = defaultSubject
+            .get('frameworks')
+            .find(fw => fw.isDefault)
+            ? defaultSubject.get('frameworks').find(fw => fw.isDefault)
+              .frameworkId
+            : 'GDT';
+          return {
+            categories: hash.categories,
+            defaultCategory,
+            defaultSubject,
+            defaultFWId
+          };
+        });
     });
   },
 
@@ -23,6 +45,8 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     controller.set('enableGenerateTableBtn', false);
     controller.set('showCrosswalkTable', false);
     controller.set('showSubjectBrowser', true);
+    controller.set('categoryId', model.defaultCategory);
+    controller.set('defaultSubject', model.defaultSubject);
     controller.set('selectedFrameworks', []);
     controller.set('categories', model.categories);
   }

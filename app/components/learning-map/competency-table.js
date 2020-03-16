@@ -1,8 +1,5 @@
 import Ember from 'ember';
-import {
-  LEARNING_MAP_CONTENT_SEQUENCE,
-  LEARNING_MAP_DEFAULT_LEVELS
-} from 'admin-dataview/config/config';
+import { LEARNING_MAP_CONTENT_SEQUENCE } from 'admin-dataview/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -200,7 +197,7 @@ export default Ember.Component.extend({
    * Method to set first item in each component selected by default
    */
   checkDefaultItem() {
-    let defaultLevels = LEARNING_MAP_DEFAULT_LEVELS;
+    let defaultLevels = this.get('dataLevels');
     const $categoryComponent = Ember.$('.category .item');
     const $subjectComponent = Ember.$('.subject .item');
     const $courseComponent = Ember.$('.course .item');
@@ -216,7 +213,7 @@ export default Ember.Component.extend({
         `.subject .item.${defaultLevels.subjectCode.replace(/\./, '-')}`
       ).addClass('active');
     }
-    if (!$courseComponent.hasClass('active')) {
+    if (!$courseComponent.hasClass('active') && defaultLevels.courseCode) {
       Ember.$(
         `.course .item.${defaultLevels.courseCode.replace(/\./, '-')}`
       ).addClass('active');

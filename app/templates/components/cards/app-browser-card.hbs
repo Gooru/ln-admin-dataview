@@ -16,7 +16,7 @@
           onclick={{action 'selectCheckableItem' value}}
           />
         {{/if}}
-        <a {{action "getFrameworks" value index}} id="{{concat type '-' index}}">
+        <a {{action "getFrameworks" value index}} data-id="{{value.id}}" id="{{concat type '-' index}}">
           {{value.title}}
         </a>
       </div>

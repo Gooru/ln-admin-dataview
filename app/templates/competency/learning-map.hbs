@@ -15,17 +15,19 @@
       </span>
     </div>
       <div class="body">
-        {{learning-map.app-domain-browser categoryList=categoryList onSelectDomain="onSelectDomain" onSelectDataItem="onSelectDataItem"}}
+          {{learning-map.app-domain-browser dataLevels=dataLevels categoryList=categoryList onSelectDomain="onSelectDomain" onSelectDataItem="onSelectDataItem"}}
         <div class="generate-table-btn" align="center">
           <button class="btn generate-btn {{unless isShowExportBtn 'disabled'}}" {{action "onExportCompetency"}}>{{t 'crosswalk.generate-table'}}</button>
         </div>
       </div>
   </div>
+
     <div class="table-container">
       {{learning-map.competency-table
         tableBody=tableBody
         selectedDataLevelItems=selectedDataLevelItems
         isLoading=isLoading
+        dataLevels=dataLevels
         searchTerm=searchTerm
         onToggleExportButton="onToggleExportButton"
         onSelectContentType="onSelectContentType"
