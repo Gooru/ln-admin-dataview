@@ -4,7 +4,7 @@
       {{t 'crosswalk.browser-level.category'}}
     </div>
     <div class="level-data">
-      {{cards.app-browser-card values=categories type="category" getSubjects="getSubjects"}}
+      {{cards.app-browser-card values=categories defaultCategory=defaultCategory type="category" getSubjects="getSubjects"}}
     </div>
   </div>
 
@@ -14,7 +14,7 @@
     </div>
     <div class="level-data">
       {{#if isShowSubjectLevel}}
-        {{cards.app-browser-card values=subjects type="subject" getFrameworks="getFrameworks"}}
+        {{cards.app-browser-card values=subjects currentSubjectId=currentSubjectId type="subject" getFrameworks="getFrameworks"}}
       {{/if}}
     </div>
   </div>

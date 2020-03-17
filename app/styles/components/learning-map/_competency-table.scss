@@ -21,6 +21,9 @@
         div.data-level-info {
           text-transform: uppercase;
           margin: auto;
+          display: grid;
+          grid-template-columns: auto 30px;
+          width: 75%;
         }
 
         span {

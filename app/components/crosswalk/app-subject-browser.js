@@ -30,7 +30,7 @@ export default Ember.Component.extend({
   /**
    * Selected category id
    */
-  currentCategoryId: 'k_12',
+  currentCategoryId: '',
 
   /**
    * Selected subject id

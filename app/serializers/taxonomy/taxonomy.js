@@ -56,6 +56,7 @@ export default Ember.Object.extend({
       title: subjectPayload.title,
       subjectTitle: subjectPayload.title,
       code: subjectPayload.code,
+      isDefault: subjectPayload.is_default,
       frameworks: serializer.normalizeFrameworks(
         subjectPayload.frameworks,
         subjectPayload.title
@@ -80,7 +81,8 @@ export default Ember.Object.extend({
       id: subjectPayload.taxonomy_subject_id,
       frameworkId: subjectPayload.standard_framework_id,
       title: subjectPayload.title,
-      subjectTitle: `${parentTitle}`
+      subjectTitle: `${parentTitle}`,
+      isDefault: subjectPayload.is_default
     });
   },
 

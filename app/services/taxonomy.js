@@ -67,11 +67,14 @@ export default Ember.Service.extend({
       } else {
         service.getTaxonomyClassifications().then(classifications => {
           let promises = classifications.map(classification => {
-            return apiTaxonomyService
-              .fetchSubjects(classification.get('id'))
-              .then(function(subjects) {
-                taxonomyContainer[classification.get('id')] = subjects;
-              });
+            return new Ember.RSVP.Promise(resolve => {
+              return apiTaxonomyService
+                .fetchSubjects(classification.get('id'))
+                .then(function(subjects) {
+                  taxonomyContainer[classification.get('id')] = subjects;
+                  return resolve(subjects);
+                });
+            });
           });
           Ember.RSVP.all(promises).then(function() {
             resolve(taxonomyContainer[category]);
