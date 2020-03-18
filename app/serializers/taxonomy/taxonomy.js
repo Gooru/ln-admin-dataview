@@ -109,6 +109,7 @@ export default Ember.Object.extend({
     return TaxonomyItem.create(Ember.getOwner(serializer).ownerInjection(), {
       id: coursePayload.id,
       code: coursePayload.code,
+      isDefault: coursePayload.is_default,
       title: coursePayload.title
     });
   },

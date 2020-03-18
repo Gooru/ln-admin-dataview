@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import {
   PLAYER_EVENT_SOURCE,
-  PLAYER_WINDOW_NAME
+  PLAYER_WINDOW_NAME,
+  ROLES
 } from 'admin-dataview/config/config';
 import { getGooruAppEndpointUrl } from 'admin-dataview/utils/endpoint-config';
 
@@ -79,6 +80,17 @@ export default Ember.Component.extend({
     onPlayCollection(collectionId) {
       let playerURL = `${getGooruAppEndpointUrl()}/player/${collectionId}?source=${
         PLAYER_EVENT_SOURCE.RGO
+      }`;
+      window.open(playerURL, PLAYER_WINDOW_NAME);
+    },
+
+    /**
+     * Action triggered when the user play offlineActivity
+     * It'll open the player in new tab
+     */
+    onPlayOffline(offlineId) {
+      let playerURL = `${getGooruAppEndpointUrl()}/player-offline-activity/${offlineId}?isPreview=true&role=${
+        ROLES.TEACHER
       }`;
       window.open(playerURL, PLAYER_WINDOW_NAME);
     }

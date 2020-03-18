@@ -18,8 +18,10 @@
         {{#if isPlay}}
           {{#if (eq  activity.type "collection")}}
             <span {{action 'onPlayCollection' activity.id}}>{{app-icon name="play_arrow"}}</span>
-          {{else}}
+          {{else if (eq  activity.type "assessment")}}
             <span {{action 'onPlayAssessment' activity.id}}>{{app-icon name="play_arrow"}}</span>
+          {{else}}
+              <span {{action 'onPlayOffline' activity.id}}>{{app-icon name="play_arrow"}}</span>
           {{/if}}
         {{/if}}
       </div>

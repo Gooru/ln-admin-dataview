@@ -16,9 +16,10 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
     return Ember.RSVP.hash({
       categories: this.get('taxonomyService').getTaxonomyClassifications()
     }).then(hash => {
-      let defaultCategory = hash.categories[0].id;
+      let defaultCategory =
+        hash.categories.findBy('is_default', true) || hash.categories[0];
       return this.get('taxonomyDataService')
-        .fetchSubjects(defaultCategory)
+        .fetchSubjects(defaultCategory.id)
         .then(subjects => {
           let defaultSubject =
             subjects.findBy('isDefault', true) || subjects[0];

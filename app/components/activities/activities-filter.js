@@ -76,6 +76,10 @@ export default Ember.Component.extend({
 
     clearFilters() {
       this.sendAction('clearFilter');
+    },
+
+    onCloseToggle() {
+      this.sendAction('onCloseToggle');
     }
   },
 
