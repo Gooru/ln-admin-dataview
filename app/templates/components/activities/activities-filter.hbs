@@ -1,9 +1,11 @@
 <div class="filters">
   <div class="title">
     {{t 'activities.filters'}}
+      <span class="close-toggle" {{action "onCloseToggle"}}>{{app-icon name="close"}}</span>
     {{#unless isEmptyFilters}}
-      <span class="clear-all" {{ action 'clearFilters' }}>     {{t 'activities.clear-all'}} </span>
+      <span class="clear-all" {{ action 'clearFilters' }}> {{t 'activities.clear-all'}}</span>
     {{/unless}}
+
   </div>
   <div class="filter-list-container">
     {{#each filtersTypesList as |filterType filterIndex|}}

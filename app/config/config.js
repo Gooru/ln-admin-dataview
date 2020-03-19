@@ -84,7 +84,7 @@ export const DEFAULT_IMAGES = {
   COLLECTION: `${config.rootURL}assets/images/collection-default.png`,
   ASSESSMENT: `${config.rootURL}assets/images/assessment-default.png`,
   QUESTION_PLACEHOLDER_IMAGE: `${config.rootURL}assets/images/question-placeholder-image.png`,
-  OFFLINE_ACTIVITY: `${config.rootURL}assets/gooru/offline-activity-default.png`,
+  OFFLINE_ACTIVITY: `${config.rootURL}assets/images/offline-activity-default.png`,
   LOADER: `${config.rootURL}/assets/images/loader.svg`
 };
 

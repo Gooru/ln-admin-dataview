@@ -1,6 +1,6 @@
 .activities-filter {
   background-color: $white;
-  margin-top: 20px;
+  margin-top: 3px;
   height: auto;
   box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.12);
   border-radius: 4px;
@@ -13,6 +13,12 @@
     border-bottom: 2px dashed $dark-100;
     padding: 10px;
 
+    .close-toggle {
+      padding-left: 10px;
+      i {
+        font-size: 30px;
+      }
+    }
     span {
       float: right;
       cursor: pointer;

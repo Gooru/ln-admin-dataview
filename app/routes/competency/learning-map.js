@@ -12,7 +12,7 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       .fetchTaxonomyClassifications()
       .then(classifications => {
         let defaultCategory =
-          classifications.findBy('isDefault', true) || classifications[0];
+          classifications.findBy('is_default', true) || classifications[0];
         return this.get('taxonomyService')
           .fetchSubjects(defaultCategory.get('id'))
           .then(subject => {
