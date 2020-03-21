@@ -43,18 +43,19 @@ export default Ember.Controller.extend({
     onShowPullOut(course) {
       let controller = this;
       controller.set('isLoadingPullout', true);
-      controller.getCourseContentById(course.id).then(function(courseContentData) {
-        controller.set('coursePullOutData', courseContentData);
-        controller
-          .fetchUserProfileById(course.lastModifiedBy)
-          .then(function(userProfileData) {
-            course.lastModifiedUser = userProfileData;
-            controller.set('selectedCourse', course);
-            controller.set('showPullOut', true);
-            controller.set('isLoadingPullout', false);
-          });
-      });
-
+      controller
+        .getCourseContentById(course.id)
+        .then(function(courseContentData) {
+          controller.set('coursePullOutData', courseContentData);
+          controller
+            .fetchUserProfileById(course.lastModifiedBy)
+            .then(function(userProfileData) {
+              course.lastModifiedUser = userProfileData;
+              controller.set('selectedCourse', course);
+              controller.set('showPullOut', true);
+              controller.set('isLoadingPullout', false);
+            });
+        });
     }
   },
 
@@ -140,11 +141,13 @@ export default Ember.Controller.extend({
         },
 
         creation: {
-          'Created On': moment(course.createdDate).format('MMMM DD, YYYY') || null,
+          'Created On':
+            moment(course.createdDate).format('MMMM DD, YYYY') || null,
           Publisher: 'Gooru Org',
           'Publish Status': course.isPublished ? 'Published' : 'Unpublished',
           Aggregator: course.aggregator ? course.aggregator : null,
-          'Modified On': moment(course.lastModified).format('MMMM DD, YYYY') || null,
+          'Modified On':
+            moment(course.lastModified).format('MMMM DD, YYYY') || null,
           'Modified By':
             course.lastModifiedUser.username || course.lastModifiedBy,
           License: coursePullOutData.license
@@ -168,14 +171,14 @@ export default Ember.Controller.extend({
 
         framework: {
           subject: course.taxonomySubject,
-          'Course': course.taxonomyCourse,
+          Course: course.taxonomyCourse,
           domain: course.taxonomyDomain,
           Standards: coursePullOutData.taxonomy[0].code || null
         },
 
         vector: {
           relevance: course.relevance || defaultVectorValue,
-          engagment: course.engagment || defaultVectorValue,
+          engagement: course.engagement || defaultVectorValue,
           efficacy: course.efficacy || defaultVectorValue
         }
       };

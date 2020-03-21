@@ -255,7 +255,7 @@ export default Ember.Controller.extend({
         },
         vector: {
           relevance: selectedResource.relevance || defaultVectorValue,
-          engagment: selectedResource.engagement || defaultVectorValue,
+          engagement: selectedResource.engagement || defaultVectorValue,
           efficacy: selectedResource.efficacy || defaultVectorValue
         }
       };

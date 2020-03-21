@@ -66,7 +66,7 @@ export default Ember.Component.extend({
       'isBroken',
       'address',
       'relevance',
-      'engagment',
+      'engagement',
       'efficacy'
     ];
 
