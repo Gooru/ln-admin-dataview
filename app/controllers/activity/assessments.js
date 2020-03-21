@@ -145,7 +145,9 @@ export default Ember.Controller.extend({
 
         creation: {
           Publisher: 'Gooru Org',
-          'Publish Status': assessment.publishStatus ? 'Published' : 'Unpublished',
+          'Publish Status': assessment.publishStatus
+            ? 'Published'
+            : 'Unpublished',
           Collaborator: assessment.collaboratorIDs,
           'Created by': assessment.creator.username,
           Aggregator: assessment.aggregator ? assessment.aggregator : null,
@@ -153,7 +155,9 @@ export default Ember.Controller.extend({
             assessment.lastModifiedUser.username || assessment.lastModifiedBy,
           'Date Modified':
             moment(assessment.lastModified).format('MMMM DD, YYYY') || null,
-          License: assessment.license ? assessment.license.code : 'Public Domain'
+          License: assessment.license
+            ? assessment.license.code
+            : 'Public Domain'
         },
 
         educational: {
@@ -164,7 +168,8 @@ export default Ember.Controller.extend({
 
         media: {
           Keywords: assessment.keyPoints,
-          Visibility: assessment.publishStatus === 'published' ? 'True' : 'False'
+          Visibility:
+            assessment.publishStatus === 'published' ? 'True' : 'False'
         },
 
         instructional: {
@@ -181,7 +186,7 @@ export default Ember.Controller.extend({
 
         vector: {
           relevance: assessment.relevance || defaultVectorValue,
-          engagment: assessment.engagment || defaultVectorValue,
+          engagement: assessment.engagement || defaultVectorValue,
           efficacy: assessment.efficacy || defaultVectorValue
         }
       };

@@ -88,7 +88,7 @@ export default Ember.Component.extend({
       'Modified On',
       'Modified By',
       'relevance',
-      'engagment',
+      'engagement',
       'efficacy'
     ];
 
@@ -165,7 +165,10 @@ export default Ember.Component.extend({
       visibleStandards.push(standard.id);
       return visibleStandards.length === visibilityCount;
     });
-    component.set('nonVisbibleStandards', standards.length - visibleStandards.length);
+    component.set(
+      'nonVisbibleStandards',
+      standards.length - visibleStandards.length
+    );
     component.set('visibleStandards', visibleStandards);
   },
 
@@ -201,7 +204,9 @@ export default Ember.Component.extend({
       let component = this;
       let isShowAllStandards = component.get('isShowAllStandards');
       let defaultVisibilityCount = component.get('standardVisibleCount');
-      let noOfStandardsToShow = isShowAllStandards ? defaultVisibilityCount : component.get('standards.length');
+      let noOfStandardsToShow = isShowAllStandards
+        ? defaultVisibilityCount
+        : component.get('standards.length');
       component.updateStandardsList(noOfStandardsToShow);
       component.toggleProperty('isShowAllStandards');
     }
