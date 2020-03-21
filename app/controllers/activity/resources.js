@@ -142,6 +142,7 @@ export default Ember.Controller.extend({
     let controller = this;
     let collection = this.get('collection');
     let resultSet = Ember.A();
+    let defaultVectorValue = 0.5;
     let selectedResource = controller.get('selectedResource');
     if (collection) {
       let metadataLevels = controller.get('metadataLevels');
@@ -186,19 +187,25 @@ export default Ember.Controller.extend({
           language: collection.info
             ? collection.info.language === 'eng'
               ? 'English'
-              : !collection.info.language ? 'English' : collection.info.language
+              : !collection.info.language
+                ? 'English'
+                : collection.info.language
             : 'English',
           'educational use': collection.metadata
             ? educational_use[collection.metadata.educational_use]
             : null,
           accessbility: collection.accessibility,
           grade: collection.metadata
-            ? collection.metadata.grade ? gradeLevelText.join(', ') : null
+            ? collection.metadata.grade
+              ? gradeLevelText.join(', ')
+              : null
             : null,
           'age-range': null,
           'Editorial Range': null,
           keywords: collection.info
-            ? collection.info.keywords ? collection.info.keywords[0] : null
+            ? collection.info.keywords
+              ? collection.info.keywords[0]
+              : null
             : null,
           audience: collection.metadata
             ? collection.metadata.audience
@@ -221,7 +228,9 @@ export default Ember.Controller.extend({
               : 'Low'
             : 'Low',
           framebreaker: collection.display_guide
-            ? collection.display_guide.is_frame_breaker === 1 ? 'Yes' : 'No'
+            ? collection.display_guide.is_frame_breaker === 1
+              ? 'Yes'
+              : 'No'
             : 'No',
           'Is Broken': collection.publish_date.is_broken
             ? collection.publish_date.is_broken
@@ -245,9 +254,9 @@ export default Ember.Controller.extend({
           standard: collection.taxonomy ? collection.taxonomy.id : null
         },
         vector: {
-          relevance: 0.5,
-          engagment: 0.5,
-          efficacy: 0.5
+          relevance: selectedResource.relevance || defaultVectorValue,
+          engagment: selectedResource.engagement || defaultVectorValue,
+          efficacy: selectedResource.efficacy || defaultVectorValue
         }
       };
     }
