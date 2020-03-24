@@ -24,6 +24,21 @@ export default Ember.Component.extend({
 
   usageStatistics: null,
 
+  /**
+   * @return {Array} pullupContent
+   */
+  popupContent: Ember.A(),
+
+  /**
+   * @return {string} popupType
+   */
+  popupType: null,
+
+  /**
+   * @return {string} popupType
+   */
+  isShowPopup: false,
+
   // /**
   //  * Grouping header  by key value to show
   //  */
@@ -32,7 +47,13 @@ export default Ember.Component.extend({
     let iterateKeyValue = this.get('groupData');
     let setResponse = [];
     let color = '';
-    const extracted = ['title', 'description', 'format'];
+    const extracted = [
+      'title',
+      'description',
+      'format',
+      'summary',
+      'transcript'
+    ];
     const curated = [
       'Published By',
       'Published Status',
@@ -153,6 +174,16 @@ export default Ember.Component.extend({
         : truncateString(description);
       component.$('.description .text').html(descriptionToShow);
       component.toggleProperty('isShowMore');
+    },
+
+    onTogglePop() {
+      this.set('isShowPopup', false);
+    },
+
+    onShowResource(resourceText, type) {
+      this.set('popupContent', resourceText);
+      this.set('popupType', type);
+      this.set('isShowPopup', true);
     }
   }
 
