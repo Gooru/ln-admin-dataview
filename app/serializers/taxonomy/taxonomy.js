@@ -2,10 +2,7 @@ import Ember from 'ember';
 import TaxonomyRoot from 'admin-dataview/models/taxonomy/taxonomy-root';
 import TaxonomyItem from 'admin-dataview/models/taxonomy/taxonomy-item';
 import TaxonomyTagData from 'admin-dataview/models/taxonomy/taxonomy-tag-data';
-import {
-  TAXONOMY_LEVELS,
-  TAXONOMY_CATEGORIES
-} from 'admin-dataview/config/config';
+import { TAXONOMY_LEVELS } from 'admin-dataview/config/config';
 
 /**
  * Serializer for Taxonomy endpoints
@@ -339,11 +336,8 @@ export default Ember.Object.extend({
   normalizeFetchClassification: function(response) {
     let resultSet = Ember.A();
     response = Ember.A(response.subject_classifications);
-    const taxonomyCategories = Ember.A(TAXONOMY_CATEGORIES);
     response.forEach(data => {
-      const taxonomyCategory = taxonomyCategories.findBy('value', data.id);
-      let result = Object.assign(taxonomyCategory, data);
-      resultSet.pushObject(Ember.Object.create(result));
+      resultSet.pushObject(Ember.Object.create(data));
     });
     return resultSet;
   },
