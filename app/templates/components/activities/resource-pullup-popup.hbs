@@ -1,0 +1,24 @@
+<div class="resource-pullup-popup-container">
+     <div class="backdrops" {{action 'onClose'}}></div>
+     <div class="pullup-header">
+       <span>{{type}}</span>
+       <div class="close-header" {{action 'onClose'}}>
+         {{app-icon name="close"}}
+       </div>
+     </div>
+     <div class="resource-pullup-popup-body">
+         {{#if (eq type 'summary')}}
+           <ul class="summary_black">
+             {{#each content as | summaries |}}
+                {{#each summaries.summaryText as |text|}}
+                  <li>{{safe-html text}}</li>
+                {{/each}}
+             {{/each}}
+           </ul>
+         {{else}}
+         {{#each content as | transcripts |}}
+              <p>{{safe-html transcripts.transcript }}</p>
+         {{/each}}
+         {{/if}}
+     </div>
+</div>

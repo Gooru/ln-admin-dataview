@@ -35,6 +35,11 @@ export default Ember.Controller.extend({
    */
   activityController: Ember.inject.controller('activity'),
 
+  /**
+   * @requires resourceService
+   */
+  resourceService: Ember.inject.service('api-sdk/resource'),
+
   //-------------------------------------------------------------------------
   //Properties
 
@@ -109,6 +114,18 @@ export default Ember.Controller.extend({
   collection: null,
 
   /**
+   * @property {Array}
+   *  resource transcript data
+   */
+  transcripts: Ember.A(),
+
+  /**
+   * @property {Arrary}
+   *  resource summary data
+   */
+  summaries: Ember.A(),
+
+  /**
    * @property {Object}
    *  usage statistics
    */
@@ -160,11 +177,12 @@ export default Ember.Controller.extend({
           gradeLevelText.push(grade[gradeLevel]);
         });
       }
-
       resultSet = {
         descriptive: {
           title: collection.title,
-          description: truncateString(collection.description)
+          description: truncateString(collection.description),
+          summary: this.get('summaries'),
+          transcript: this.get('transcripts')
         },
 
         creation: {
@@ -298,6 +316,7 @@ export default Ember.Controller.extend({
      */
     getResourceInfo: function(resource) {
       let controller = this;
+      controller.fetchTranscriptAndSummary(resource.id);
       controller.set('isLoadingPullOut', true);
       controller.set('showPullOut', true);
       controller.set('showMore', true);
@@ -394,6 +413,20 @@ export default Ember.Controller.extend({
       controller.set('OFFSET', OFFSET + CUR_ITERATION_COUNT);
       controller.set('hitCount', resources.get('hitCount'));
       controller.set('isLoading', false);
+    });
+  },
+
+  /**
+   * @function fetchTranscriptAndSummary
+   * Fetch resource summary and transcript datas
+   */
+  fetchTranscriptAndSummary(resourceId) {
+    Ember.RSVP.hash({
+      transcripts: this.get('resourceService').fetchTranscript(resourceId),
+      summaries: this.get('resourceService').fetchSummary(resourceId)
+    }).then(({ transcripts, summaries }) => {
+      this.set('transcripts', transcripts);
+      this.set('summaries', summaries);
     });
   }
 });
