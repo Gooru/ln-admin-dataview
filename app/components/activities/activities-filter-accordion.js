@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import {
-  TAXONOMY_CATEGORIES,
   ACTIVITIES_NAVIGATION_MENUS_INDEX,
   QUESTION_TYPE_CONFIG,
   RESOURCE_TYPE_CONFIG
@@ -23,6 +22,11 @@ export default Ember.Component.extend(ModalMixin, {
    * taxonomyService to fetch taxonomy informations
    */
   taxonomyService: Ember.inject.service('taxonomy'),
+
+  /**
+   * taxonomyService to fetch taxonomy API informations
+   */
+  apiTaxonomyService: Ember.inject.service('api-sdk/taxonomy'),
 
   /**
    * lookupService to fetch filter items
@@ -201,30 +205,33 @@ export default Ember.Component.extend(ModalMixin, {
    */
   fetchCategoryFilters() {
     let component = this;
-    let taxonomyCategories = TAXONOMY_CATEGORIES;
     let userId = component.get('session.id');
     let selectedFilterItems =
       JSON.parse(
         localStorage.getItem(`research_${userId}_activities_filters`)
       ) || component.get('selectedFilterItems');
     let filterList = [];
-    const i18n = component.get('i18n');
-    taxonomyCategories.map(category => {
-      let categoryInfo = {
-        label: String(i18n.t(category.label)),
-        code: category.value,
-        value: category.value
-      };
-      if (
-        selectedFilterItems.category !== undefined &&
-        selectedFilterItems.category.length > 0
-      ) {
-        let selectedCategory = selectedFilterItems.category[0];
-        categoryInfo.checked = category.value === selectedCategory.id;
-      }
-      filterList.push(categoryInfo);
-    });
-    component.set('filterList', filterList);
+    component
+      .get('apiTaxonomyService')
+      .fetchTaxonomyClassifications()
+      .then(classification => {
+        classification.map(category => {
+          let categoryInfo = {
+            label: category.title,
+            code: category.id,
+            value: category.id
+          };
+          if (
+            selectedFilterItems.category !== undefined &&
+            selectedFilterItems.category.length > 0
+          ) {
+            let selectedCategory = selectedFilterItems.category[0];
+            categoryInfo.checked = category.id === selectedCategory.id;
+          }
+          filterList.push(categoryInfo);
+        });
+        component.set('filterList', filterList);
+      });
   },
 
   /**

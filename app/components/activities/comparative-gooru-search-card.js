@@ -81,11 +81,11 @@ export default Ember.Component.extend({
         activityContents.offlineActivity
       );
       activityList = [
-        ...selectedResourse,
-        ...selectedAssessment,
         ...selectedCollection,
-        ...selectedQuestion,
-        ...selectedOfflineActivity
+        ...selectedAssessment,
+        ...selectedOfflineActivity,
+        ...selectedResourse,
+        ...selectedQuestion
       ];
       component.set('sortedContents', sortedContents.concat(activityList));
     }
@@ -164,9 +164,9 @@ export default Ember.Component.extend({
       let result = [
         ...otherCollection,
         ...otherAssessment,
-        ...otherQuestion,
+        ...otherOfflineActivity,
         ...otherResourse,
-        ...otherOfflineActivity
+        ...otherQuestion
       ];
       this.set('sortedContents', sortedContents.concat(result));
       this.shuffleContainer();
