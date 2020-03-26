@@ -1,29 +1,40 @@
 import Ember from 'ember';
-import { LEARNING_MAP_DEFAULT_LEVELS } from 'admin-dataview/config/config';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
   // Attributes
   classNames: ['cards', 'app-domain-browser-card'],
 
-  // -------------------------------------------------------------------------
-  // Events
-  didInsertElement() {
-    let component = this;
-    component.$('.category .k_12').addClass('active');
-    // this.checkDefaultItem();
-  },
-
-  dataItemObserver: Ember.observer('dataContent', function() {
-    this.checkDefaultItem();
+  defaultCategory: Ember.computed('dataLevels', function() {
+    return this.get('dataLevels.subjectClassification');
   }),
 
+  defaultCourse: Ember.computed('dataLevels', function() {
+    return this.get('dataLevels.courseCode');
+  }),
+
+  defaultSubject: Ember.computed('dataLevels', function() {
+    return this.get('dataLevels.subjectCode');
+  }),
+
+  // -------------------------------------------------------------------------
+  // Events
+  didRender() {
+    let type = this.get('type');
+    if (this.get('defaultCategory') && type === 'category') {
+      this.toggleActiveElement(type, this.get('defaultCategory'));
+    } else if (type === 'subject' && this.get('defaultSubject')) {
+      this.toggleActiveElement(type, this.get('defaultSubject'));
+    } else if (this.get('defaultCourse') && type === 'course') {
+      this.toggleActiveElement(type, this.get('defaultCourse'));
+    }
+  },
   /**
    * @function checkDefaultItem
    * Method to set first item in each component selected by default
    */
   checkDefaultItem() {
-    let defaultLevels = LEARNING_MAP_DEFAULT_LEVELS;
+    let defaultLevels = this.get('dataLevels');
     const $categoryComponent = Ember.$('.category .item');
     const $subjectComponent = Ember.$('.subject .item');
     const $courseComponent = Ember.$('.course .item');

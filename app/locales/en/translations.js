@@ -58,7 +58,9 @@ export default {
       'higher-ed': 'Higher Education',
       'professional-dev': 'Professional Development',
       'skills-training': 'Skills Training',
-      skills_training: 'Skills Training'
+      skills_training: 'Skills Training',
+      K12IND: 'K12IND',
+      LG: 'LG'
     },
     'in-progress': 'in progress',
     mastered: 'mastered',

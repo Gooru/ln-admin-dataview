@@ -132,6 +132,7 @@ export default Ember.Controller.extend({
     let controller = this;
     let collection = this.get('question');
     let selectedQuestion = controller.get('selectedQuestion');
+    let defaultVectorValue = 0.5;
     let resultSet = Ember.A();
     if (collection) {
       let metadataLevels = controller.get('metadataLevels');
@@ -182,12 +183,16 @@ export default Ember.Controller.extend({
             : null,
           accessbility: collection.accessibility,
           grade: collection.metadata
-            ? collection.metadata.grade ? gradeLevelText.join(', ') : null
+            ? collection.metadata.grade
+              ? gradeLevelText.join(', ')
+              : null
             : null,
           'age-range': collection.age ? collection.age : null,
           'Editorial Range': null,
           keywords: collection.info
-            ? collection.info.keywords ? collection.info.keywords[0] : null
+            ? collection.info.keywords
+              ? collection.info.keywords[0]
+              : null
             : null,
           audience: collection.metadata
             ? collection.metadata.audience
@@ -210,7 +215,9 @@ export default Ember.Controller.extend({
               : 'Low'
             : 'Low',
           framebreaker: collection.display_guide
-            ? collection.display_guide.is_frame_breaker === 1 ? 'Yes' : 'No'
+            ? collection.display_guide.is_frame_breaker === 1
+              ? 'Yes'
+              : 'No'
             : 'No',
           'Is Broken': collection.publish_date
             ? collection.publish_date.is_broken
@@ -235,9 +242,9 @@ export default Ember.Controller.extend({
         },
 
         vector: {
-          relevance: 0.5,
-          engagment: 0.5,
-          efficacy: 0.5
+          relevance: selectedQuestion.relevance || defaultVectorValue,
+          engagement: selectedQuestion.engagement || defaultVectorValue,
+          efficacy: selectedQuestion.efficacy || defaultVectorValue
         }
       };
     }

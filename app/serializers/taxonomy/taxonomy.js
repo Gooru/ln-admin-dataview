@@ -53,6 +53,7 @@ export default Ember.Object.extend({
       title: subjectPayload.title,
       subjectTitle: subjectPayload.title,
       code: subjectPayload.code,
+      isDefault: subjectPayload.is_default,
       frameworks: serializer.normalizeFrameworks(
         subjectPayload.frameworks,
         subjectPayload.title
@@ -77,7 +78,8 @@ export default Ember.Object.extend({
       id: subjectPayload.taxonomy_subject_id,
       frameworkId: subjectPayload.standard_framework_id,
       title: subjectPayload.title,
-      subjectTitle: `${parentTitle}`
+      subjectTitle: `${parentTitle}`,
+      isDefault: subjectPayload.is_default
     });
   },
 
@@ -104,6 +106,7 @@ export default Ember.Object.extend({
     return TaxonomyItem.create(Ember.getOwner(serializer).ownerInjection(), {
       id: coursePayload.id,
       code: coursePayload.code,
+      isDefault: coursePayload.is_default,
       title: coursePayload.title
     });
   },
@@ -334,8 +337,7 @@ export default Ember.Object.extend({
     let resultSet = Ember.A();
     response = Ember.A(response.subject_classifications);
     response.forEach(data => {
-      let result = Ember.Object.create(data);
-      resultSet.pushObject(result);
+      resultSet.pushObject(Ember.Object.create(data));
     });
     return resultSet;
   },

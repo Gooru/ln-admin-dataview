@@ -21,6 +21,9 @@
           &.collection {
             background-image: url(images/collection-icon.svg);
           }
+          &.offline-activity {
+            background-image: url(images/offline.svg);
+          }
         }
       }
       .search-activity-title {
@@ -84,7 +87,7 @@
       .comparative-gooru-collection-img {
         img {
           width: 100%;
-          max-height: 150px;
+          max-height: 100px;
           object-fit: cover;
         }
       }

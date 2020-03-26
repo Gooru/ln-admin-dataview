@@ -3,7 +3,7 @@
           {{app-icon name="arrow_back"}}
       </div>
       <div class="search-input">
-          {{input enter="onSearchTerms" type="text" value=searchTerms}}
+          {{input enter="onSearchTerms" placeholder="Type in some keywords in the search box to see the results from different platforms." type="text" autofocus='true' value=searchTerms}}
           <span {{action 'onSearchTerms'}}>{{app-icon name="search"}}</span>
       </div>
       <div class="search-personalize">

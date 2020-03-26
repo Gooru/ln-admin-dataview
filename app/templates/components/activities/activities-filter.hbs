@@ -1,16 +1,18 @@
 <div class="filters">
   <div class="title">
     {{t 'activities.filters'}}
+      <span class="close-toggle" {{action "onCloseToggle"}}>{{app-icon name="close"}}</span>
     {{#unless isEmptyFilters}}
-      <span class="clear-all" {{ action 'clearFilters' }}>     {{t 'activities.clear-all'}} </span>
+      <span class="clear-all" {{ action 'clearFilters' }}> {{t 'activities.clear-all'}}</span>
     {{/unless}}
+
   </div>
   <div class="filter-list-container">
-    {{#each filterTypes as |filterType filterIndex|}}
+    {{#each filtersTypesList as |filterType filterIndex|}}
     {{#if (eq filterIndex  3)}}
     <div class="split-row"></div>
     {{/if}}
-      {{activities.activities-filter-accordion filterType=filterType selectedFilterItems=selectedFilterItems onClickCheckbox="onClickCheckbox" onSelectCenturySkills="onSelectCenturySkills"}}
+      {{activities.activities-filter-accordion filtersTypesList=filtersTypesList filterType=filterType selectedFilterItems=selectedFilterItems onClickCheckbox="onClickCheckbox" onSelectCenturySkills="onSelectCenturySkills"}}
     {{/each}}
   </div>
 </div>

@@ -84,7 +84,7 @@ export const DEFAULT_IMAGES = {
   COLLECTION: `${config.rootURL}assets/images/collection-default.png`,
   ASSESSMENT: `${config.rootURL}assets/images/assessment-default.png`,
   QUESTION_PLACEHOLDER_IMAGE: `${config.rootURL}assets/images/question-placeholder-image.png`,
-  OFFLINE_ACTIVITY: `${config.rootURL}assets/gooru/offline-activity-default.png`,
+  OFFLINE_ACTIVITY: `${config.rootURL}assets/images/offline-activity-default.png`,
   LOADER: `${config.rootURL}/assets/images/loader.svg`
 };
 
@@ -104,17 +104,31 @@ export const LEARNING_CATEGORY = {
   label: 'common.categoryOptions.professional-dev'
 };
 
-export const SKILLS_TRAINING = {
+export const SKILLS_TRAINING_CATEGORY = {
   value: 'skills_training',
   apiCode: 'SK',
   label: 'common.categoryOptions.skills-training'
+};
+
+export const K12IND_CATEGORY = {
+  value: 'K12IND',
+  apiCode: 'K12IND',
+  label: 'common.categoryOptions.K12IND'
+};
+
+export const LG_CATEGORY = {
+  value: 'LG',
+  apiCode: 'LG',
+  label: 'common.categoryOptions.LG'
 };
 
 export const TAXONOMY_CATEGORIES = [
   K12_CATEGORY,
   EDUCATION_CATEGORY,
   LEARNING_CATEGORY,
-  SKILLS_TRAINING
+  SKILLS_TRAINING_CATEGORY,
+  K12IND_CATEGORY,
+  LG_CATEGORY
 ];
 
 export const CONTENT_TYPES = {
@@ -227,7 +241,8 @@ export const NAVIGATION_MENUS = [
   'network',
   'competency',
   'catalog',
-  'learners'
+  'learners',
+  'console'
 ];
 
 export const NAVIGATION_MENUS_INDEX = {
@@ -236,7 +251,8 @@ export const NAVIGATION_MENUS_INDEX = {
   activities: 2,
   catalog: 2,
   learners: 3,
-  learner: 3
+  learner: 3,
+  console: 4
 };
 
 export const ACTIVITIES_NAVIGATION_MENUS = [
@@ -258,16 +274,16 @@ export const ACTIVITIES_NAVIGATION_MENUS_INDEX = {
 };
 
 export const COMPETENCY_NAVIGATION_MENUS = [
-  'matrix',
-  'crosswalk',
+  'competency-map',
   'tree',
+  'crosswalk',
   'learning-map'
 ];
 
 export const COMPETENCY_NAVIGATION_MENUS_INDEX = {
-  matrix: 0,
-  crosswalk: 1,
-  tree: 2,
+  'competency-map': 0,
+  tree: 1,
+  crosswalk: 2,
   'learning-map': 3
 };
 

@@ -101,7 +101,9 @@ export default Ember.Controller.extend({
 
         creation: {
           Publisher: 'Gooru Org',
-          'Publish Status': collection.isPublished ? 'Published' : 'Unpublished',
+          'Publish Status': collection.isPublished
+            ? 'Published'
+            : 'Unpublished',
           Collaborator: collection.collaboratorIDs,
           'Created by': collection.creator.username,
           Aggregator: collection.aggregator ? collection.aggregator : null,
@@ -109,7 +111,9 @@ export default Ember.Controller.extend({
             collection.lastModifiedUser.username || collection.lastModifiedBy,
           'Date Modified':
             moment(collection.lastModified).format('MMMM DD, YYYY') || null,
-          License: collection.license ? collection.license.code : 'Public Domain'
+          License: collection.license
+            ? collection.license.code
+            : 'Public Domain'
         },
 
         educational: {
@@ -137,7 +141,7 @@ export default Ember.Controller.extend({
 
         vector: {
           relevance: collection.relevance || defaultVectorValue,
-          engagment: collection.engagment || defaultVectorValue,
+          engagement: collection.engagement || defaultVectorValue,
           efficacy: collection.efficacy || defaultVectorValue
         }
       };

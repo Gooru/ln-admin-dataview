@@ -57,7 +57,7 @@ export default Ember.Component.extend({
       'Publisher',
       'Collaborator',
       'relevance',
-      'engagment',
+      'engagement',
       'efficacy'
     ];
 

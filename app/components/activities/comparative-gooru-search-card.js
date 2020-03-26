@@ -77,44 +77,19 @@ export default Ember.Component.extend({
       let selectedCollection = component.mixSelectedActivities(
         activityContents.collection
       );
-      let otherResourse = component.mixOtherActivities(
-        activityContents.resource
+      let selectedOfflineActivity = component.mixSelectedActivities(
+        activityContents.offlineActivity
       );
-      let otherQuestion = component.mixOtherActivities(
-        activityContents.question
-      );
-      let otherAssessment = component.mixOtherActivities(
-        activityContents.assessment
-      );
-      let otherCollection = component.mixOtherActivities(
-        activityContents.collection
-      );
-
       activityList = [
         ...selectedResourse,
         ...selectedAssessment,
         ...selectedCollection,
-        ...selectedQuestion
+        ...selectedQuestion,
+        ...selectedOfflineActivity
       ];
-
-      let mixActivity = [
-        ...otherResourse,
-        ...otherQuestion,
-        ...otherAssessment,
-        ...otherCollection
-      ];
-      activityList = activityList.concat(component.shuffle(mixActivity));
-      component.set('sortedContents', sortedContents.concat(activityList));
-    } else {
-      let mixActivity = [
-        ...activityContents.resource,
-        ...activityContents.question,
-        ...activityContents.assessment,
-        ...activityContents.collection
-      ];
-      activityList = activityList.concat(component.shuffle(mixActivity));
       component.set('sortedContents', sortedContents.concat(activityList));
     }
+    this.shuffleContainer();
     component.set('startAt', startAt + length);
   },
 
@@ -148,20 +123,54 @@ export default Ember.Component.extend({
    * @function mixSelectedActivities used to mix selected activity data
    */
   mixSelectedActivities(content) {
-    return content.length > 4 ? content.slice(0, 4) : content;
+    return content.length ? [content.shift()] : [];
   },
 
   /**
    * @function mixOtherActivities used to mix other activity data
    */
   mixOtherActivities(content) {
-    return content.length > 4 ? content.slice(4, content.length) : [];
+    return content.length > 1
+      ? content.splice(0, 2)
+      : content.length
+        ? [content.shift()]
+        : [];
   },
 
   /**
    * @function shuffle used to suffle acitivity datas
    */
-  shuffle(content) {
-    return content.sort(() => Math.random() - 0.5);
+  shuffleContainer() {
+    let activityContents = this.get('activityContents');
+    let sortedContents = this.get('sortedContents');
+
+    if (
+      activityContents.assessment.length ||
+      activityContents.collection.length ||
+      activityContents.question.length ||
+      activityContents.resource.length
+    ) {
+      let otherCollection = this.mixOtherActivities(
+        activityContents.collection
+      );
+      let otherAssessment = this.mixOtherActivities(
+        activityContents.assessment
+      );
+      let otherQuestion = this.mixOtherActivities(activityContents.question);
+      let otherResourse = this.mixOtherActivities(activityContents.resource);
+      let otherOfflineActivity = this.mixOtherActivities(
+        activityContents.offlineActivity
+      );
+      let result = [
+        ...otherCollection,
+        ...otherAssessment,
+        ...otherQuestion,
+        ...otherResourse,
+        ...otherOfflineActivity
+      ];
+      this.set('sortedContents', sortedContents.concat(result));
+      this.shuffleContainer();
+    }
+    return false;
   }
 });

@@ -9,7 +9,7 @@
         {{#if searchTerm}}
           Keyword: {{searchTerm}}
         {{else}}
-          {{concat selectedDataLevelItems.category ' / ' (truncate text=selectedDataLevelItems.subject maxLength=20) ' / ' (truncate text=selectedDataLevelItems.course maxLength=20)}}
+          {{concat selectedDataLevelItems.category ' / ' (truncate text=selectedDataLevelItems.subject maxLength=15) ' / ' (truncate text=selectedDataLevelItems.course maxLength=15)}}
           {{if selectedDataLevelItems.domain (concat ' / ' selectedDataLevelItems.domain ' Domains')}}
         {{/if}}
         <span {{action "onScrollTop"}}><i class="material-icons">arrow_upward</i></span>

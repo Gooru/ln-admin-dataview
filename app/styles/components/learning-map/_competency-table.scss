@@ -19,9 +19,11 @@
         display: flex;
 
         div.data-level-info {
-          width: 70%;
           text-transform: uppercase;
           margin: auto;
+          display: grid;
+          grid-template-columns: auto 30px;
+          width: 75%;
         }
 
         span {

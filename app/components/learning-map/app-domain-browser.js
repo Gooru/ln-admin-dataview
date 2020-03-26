@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { TAXONOMY_CATEGORIES, LEARNING_MAP_DEFAULT_LEVELS } from 'admin-dataview/config/config';
 import { capitalizeString } from 'admin-dataview/utils/utils';
 
 export default Ember.Component.extend({
@@ -41,8 +40,9 @@ export default Ember.Component.extend({
       let selectedType = capitalizeString(type);
       let selectedId = dataItem.id || dataItem.value;
       let selectedItemValue = component.get(`selected${selectedType}`);
-      let isAlreadySelectedItem =
-        (selectedItemValue.id || selectedItemValue) === selectedId;
+      let isAlreadySelectedItem = selectedItemValue
+        ? (selectedItemValue.id || selectedItemValue) === selectedId
+        : false;
       component.set('isInitialIteration', false);
       if (!isAlreadySelectedItem) {
         component.fetchContentByType(type, dataItem);
@@ -88,6 +88,8 @@ export default Ember.Component.extend({
       if (component.get('isInitialIteration')) {
         let level = 'subject';
         defaultItem = component.getDefaultItemByCode(hash.subjectList, level);
+      } else {
+        defaultItem = hash.subjectList[0];
       }
       return defaultItem;
     });
@@ -99,9 +101,9 @@ export default Ember.Component.extend({
    */
   fetchCoursesBySubject(subject) {
     let component = this;
-    if (!subject.frameworkId) {
-      subject.frameworkId = component.get('defaultFramework');
-    }
+    subject.frameworkId = subject.get('frameworks').find(fw => fw.isDefault)
+      ? subject.get('frameworks').find(fw => fw.isDefault).frameworkId
+      : component.get('defaultFramework');
     component.set('selectedSubject', subject);
     const coursePromise = Ember.RSVP.resolve(
       component.get('taxonomyService').getCourses(subject)
@@ -114,6 +116,8 @@ export default Ember.Component.extend({
       if (component.get('isInitialIteration')) {
         let level = 'course';
         defaultItem = component.getDefaultItemByCode(hash.courseList, level);
+      } else {
+        defaultItem = hash.courseList[0];
       }
       return defaultItem;
     });
@@ -143,11 +147,12 @@ export default Ember.Component.extend({
   fetchContentByType(type, dataItem) {
     let component = this;
     let itemsToReset = [];
+    let id = dataItem.id || dataItem.value;
     let selectedSubject = component.get('selectedSubject');
     switch (type) {
     case 'category':
       itemsToReset = ['subjects', 'courses', 'domains'];
-      component.fetchSubjectsByCategory(dataItem.value);
+      component.fetchSubjectsByCategory(id);
       break;
     case 'subject':
       itemsToReset = ['courses', 'domains'];
@@ -183,13 +188,15 @@ export default Ember.Component.extend({
     let defaultLevels = component.get('defaultLevels');
     let defaultCode = defaultLevels[`${type}Code`];
     let defaultItem = [];
-    fetchedList.some(function(curItem) {
-      let isDefaultItemAvailable = curItem.code === defaultCode;
-      if (isDefaultItemAvailable) {
-        defaultItem = curItem;
-        return isDefaultItemAvailable;
-      }
-    });
+    if (fetchedList) {
+      fetchedList.some(function(curItem) {
+        let isDefaultItemAvailable = curItem.code === defaultCode;
+        if (isDefaultItemAvailable) {
+          defaultItem = curItem;
+          return isDefaultItemAvailable;
+        }
+      });
+    }
     return defaultItem;
   },
 
@@ -200,7 +207,7 @@ export default Ember.Component.extend({
    * @property {Array}
    * Property to store taxonomy categories
    */
-  categories: TAXONOMY_CATEGORIES,
+  categories: Ember.computed.alias('categoryList'),
 
   /**
    * @property {Array}
@@ -230,7 +237,9 @@ export default Ember.Component.extend({
    * @property {String}
    * Property to store selected category id
    */
-  selectedCategory: 'k_12',
+  selectedCategory: Ember.computed('dataLevels', function() {
+    return this.get('dataLevels.subjectClassification');
+  }),
 
   /**
    * @property {Object}
@@ -254,7 +263,9 @@ export default Ember.Component.extend({
    * @property {JSON}
    * Property to store current/default data levels
    */
-  defaultLevels: LEARNING_MAP_DEFAULT_LEVELS,
+  defaultLevels: Ember.computed('dataLevels', function() {
+    return this.get('dataLevels');
+  }),
 
   /**
    * @property {Boolean}

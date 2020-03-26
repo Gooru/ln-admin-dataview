@@ -14,6 +14,16 @@ export default Ember.Controller.extend({
   searchService: Ember.inject.service('api-sdk/search'),
 
   /**
+   * @requires taxonomyService
+   */
+  taxonomyService: Ember.inject.service('api-sdk/taxonomy'),
+
+  /**
+   * @requires taxonomyDataService
+   */
+  taxonomyDataService: Ember.inject.service('taxonomy'),
+
+  /**
    * @requires il8n
    */
   i18n: Ember.inject.service(),
@@ -51,14 +61,6 @@ export default Ember.Controller.extend({
     controller.set('isLoading', false);
     Ember.$('.browser-container').hide();
   }),
-
-  /**
-   * Initally load the learning map competency table
-   */
-  init() {
-    let controller = this;
-    controller.fetchLearningMapCompetency();
-  },
 
   // -------------------------------------------------------------------------
   // Actions
@@ -378,7 +380,6 @@ export default Ember.Controller.extend({
     );
     return selectedLearningMapData;
   },
-
   // -------------------------------------------------------------------------
   // Properties
 
@@ -393,12 +394,6 @@ export default Ember.Controller.extend({
    * Property to store user selected data level item and it's used for applying filters
    */
   dataLevels: LEARNING_MAP_DEFAULT_LEVELS,
-
-  defaultLevels: {
-    subjectClassification: 'k_12',
-    subjectCode: 'K12.SC',
-    courseCode: 'K12.SC-SCK'
-  },
 
   /**
    * @property {Array}
@@ -452,11 +447,7 @@ export default Ember.Controller.extend({
    * @property {JSON}
    * Property to store selected data leve items
    */
-  selectedDataLevelItems: {
-    category: 'K-12',
-    subject: 'Math',
-    course: 'Grade 6'
-  },
+  selectedDataLevelItems: Ember.Object.create(),
 
   /**
    * @property {String}
@@ -516,5 +507,11 @@ export default Ember.Controller.extend({
    * @property {Array}
    * Property to store fetched pull out info
    */
-  pullOutInfo: []
+  pullOutInfo: [],
+
+  /**
+   * @property {Array}
+   * property hold the taxonomy category list
+   */
+  categoryList: []
 });
