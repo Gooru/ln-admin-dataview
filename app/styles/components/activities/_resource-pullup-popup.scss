@@ -36,9 +36,14 @@
     }
 
     .resource-pullup-popup-body {
-      height: 100%;
+      height: 85%;
       overflow-y: auto;
       padding: 10px;
+
+      p {
+        width: 100%;
+        word-break: break-word;
+      }
     }
   }
 }

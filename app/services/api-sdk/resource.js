@@ -1,11 +1,11 @@
 import Ember from 'ember';
 import resourceAdapter from 'admin-dataview/adapters/resource/resource';
-import resoruceSerializer from 'admin-dataview/serializers/resource/resource';
+import resourceSerializer from 'admin-dataview/serializers/resource/resource';
 
 export default Ember.Object.extend({
   resourceAdapter: null,
 
-  resoruceSerializer: null,
+  resourceSerializer: null,
 
   init: function() {
     this._super(...arguments);
@@ -14,8 +14,8 @@ export default Ember.Object.extend({
       resourceAdapter.create(Ember.getOwner(this).ownerInjection())
     );
     this.set(
-      'resoruceSerializer',
-      resoruceSerializer.create(Ember.getOwner(this).ownerInjection())
+      'resourceSerializer',
+      resourceSerializer.create(Ember.getOwner(this).ownerInjection())
     );
   },
 
