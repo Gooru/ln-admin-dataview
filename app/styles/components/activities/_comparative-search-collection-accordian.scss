@@ -80,17 +80,17 @@
         }
       }
     }
+    .comparative-gooru-collection-img {
+      img {
+        width: 100%;
+        max-height: 100px;
+        object-fit: cover;
+      }
+    }
     .comparative-gooru-collection-accordian-panel {
       background-color: $white;
       display: none;
       margin-bottom: 10px;
-      .comparative-gooru-collection-img {
-        img {
-          width: 100%;
-          max-height: 100px;
-          object-fit: cover;
-        }
-      }
       .comparative-gooru-collection-description-head {
         font-weight: bold;
         font-size: 13px;

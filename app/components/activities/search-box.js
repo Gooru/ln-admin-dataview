@@ -136,17 +136,26 @@ export default Ember.Component.extend({
           categorizedFilterData.splice(userRemovedFilterIndex, 1);
         }
         storedFilters[`${filterType}`] = categorizedFilterData;
+        if (filterType === 'category') {
+          storedFilters = {};
+        } else if (filterType === 'subject') {
+          storedFilters = { category: storedFilters.category };
+        }
         localStorage.setItem(
           `research_${userId}_activities_filters`,
           JSON.stringify(storedFilters)
         );
         component.set('selectedFilterItems', storedFilters);
         //Trigger action to update the search results
-        component.sendAction(
-          'onChangeFilterItems',
-          storedFilters,
-          selectedFilter
-        );
+        if (filterType === 'category' || filterType === 'subject') {
+          component.get('router').transitionTo('/catalog');
+        } else {
+          component.sendAction(
+            'onChangeFilterItems',
+            storedFilters,
+            selectedFilter
+          );
+        }
       }
     },
 
