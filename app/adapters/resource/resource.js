@@ -18,7 +18,7 @@ export default Ember.Object.extend({
    */
 
   fetchTranscript(resourceId) {
-    const endpoint = `${this.namespace}/transcripts?resource_ids=${resourceId}`;
+    const endpoint = `${this.namespace}/transcripts?resource_id=${resourceId}`;
     const options = {
       type: 'GET',
       headers: this.defineHeaders(),
@@ -32,7 +32,7 @@ export default Ember.Object.extend({
    */
 
   fetchSummary(resourceId) {
-    const endpoint = `${this.namespace}/summary?resource_ids=${resourceId}`;
+    const endpoint = `${this.namespace}/summary?resource_id=${resourceId}`;
     const options = {
       type: 'GET',
       headers: this.defineHeaders(),
