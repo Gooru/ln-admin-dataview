@@ -118,6 +118,12 @@ export default Ember.Controller.extend({
      */
     backToCatalog() {
       this.set('isComparativeSearch', false);
+    },
+
+    onRemoveCategory(storedFilters, selectedFilter) {
+      if (selectedFilter.type === 'category') {
+        this.send('clearFilter');
+      }
     }
   },
 

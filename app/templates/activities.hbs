@@ -1,6 +1,6 @@
 <div class="activities">
   {{#if (not isComparativeSearch)}}
-  {{activities.search-box onComparativeSearch="onComparativeSearch" onShowDropDown="onShowDropDown" selectedFilterItems=selectedFilterItems onSearch='onSearch' clearSearchText='clearSearchText' onEmptyFilters="onEmptyFilters"}}
+  {{activities.search-box onComparativeSearch="onComparativeSearch" onShowDropDown="onShowDropDown" onChangeFilterItems="onRemoveCategory" selectedFilterItems=selectedFilterItems onSearch='onSearch' clearSearchText='clearSearchText' onEmptyFilters="onEmptyFilters"}}
   <div class="filters pull-left">
     <div class="filter-list">
       {{activities.activities-filter filterTypes=filterTypes onCloseToggle="onShowDropDown" onChangeFilterItems="onChangeFilterItems" toggleClearSearch=toggleClearSearch clearFilter='clearFilter' isEmptyFilters=isEmptyFilters}}
