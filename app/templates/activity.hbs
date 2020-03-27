@@ -1,7 +1,7 @@
 <div class="activity">
   <div class="wrapper">
     {{#if (not isComparativeSearch)}}
-    {{activities.search-box onComparativeSearch="onComparativeSearch" onShowDropDown="onShowDropDown" selectedFilterItems=visibleFilterItems onChangeFilterItems="onChangeFilterItems" onSearch='onSearch' searchStatus='searchStatus' clearSearchText='clearSearchText' term=searchTerm onEmptyFilters="onEmptyFilters" curMenuItem=curMenuItem}}
+    {{activities.search-box onComparativeSearch="onComparativeSearch" onShowDropDown="onShowDropDown" selectedFilterItems=selectedFilterItems onChangeFilterItems="onChangeFilterItems" onSearch='onSearch' searchStatus='searchStatus' clearSearchText='clearSearchText' term=searchTerm onEmptyFilters="onEmptyFilters" curMenuItem=curMenuItem}}
     <div class="filters pull-left">
       <div class="filter-list">
         {{activities.activities-filter onCloseToggle="onShowDropDown" toggleClearSearch=toggleClearSearch filterTypes=filterTypes onChangeFilterItems="onChangeFilterItems" clearFilter='clearFilter' isEmptyFilters=isEmptyFilters}}

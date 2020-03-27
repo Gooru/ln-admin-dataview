@@ -147,14 +147,13 @@ export default Ember.Component.extend({
         );
         component.set('selectedFilterItems', storedFilters);
         //Trigger action to update the search results
+        component.sendAction(
+          'onChangeFilterItems',
+          storedFilters,
+          selectedFilter
+        );
         if (filterType === 'category' || filterType === 'subject') {
           component.get('router').transitionTo('/catalog');
-        } else {
-          component.sendAction(
-            'onChangeFilterItems',
-            storedFilters,
-            selectedFilter
-          );
         }
       }
     },
