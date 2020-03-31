@@ -47,13 +47,7 @@ export default Ember.Component.extend({
     let iterateKeyValue = this.get('groupData');
     let setResponse = [];
     let color = '';
-    const extracted = [
-      'title',
-      'description',
-      'format',
-      'summary',
-      'transcript'
-    ];
+    const extracted = ['title', 'description', 'format'];
     const curated = [
       'Published By',
       'Published Status',
@@ -88,7 +82,9 @@ export default Ember.Component.extend({
       'address',
       'relevance',
       'engagement',
-      'efficacy'
+      'efficacy',
+      'summary',
+      'transcript'
     ];
 
     let headersEnabled = Ember.A();

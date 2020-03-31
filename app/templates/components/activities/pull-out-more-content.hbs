@@ -12,17 +12,17 @@
 </header>
 
 <div class="body">
-  <div class="col-md-12 header-property">
+  <div class=" header-property">
     {{#each selectedDatas as | parentHeader |}}
-      <div class="col-md-6 headergroup">
+      <div class="headergroup">
         {{#if parentHeader.value}}
           <span class="header-title"> {{parentHeader.key}} </span>
         {{/if}}
         {{#each parentHeader.value as | keysValue |}}
-          <div class="col-md-12 ">
-            <span class="col-md-6 header-lable" style=" color : {{keysValue.color}}">{{keysValue.key}} :  </span>
+          <div class="header-list-item">
+            <span class="header-lable" style=" color : {{keysValue.color}}">{{keysValue.key}} :  </span>
             {{#if keysValue.value}}
-              <span class="col-md-6  header-value {{keysValue.key}}">
+              <span class="header-value {{keysValue.key}}">
                 {{#if (or (eq keysValue.key 'summary') (eq keysValue.key 'transcript'))}}
                     {{#each keysValue.value as |resourceData|}}
                       <span class="text">{{safe-html (if (eq keysValue.key 'summary') resourceData.shortSummary resourceData.shortTranscript)}}</span>
@@ -38,7 +38,7 @@
                 {{/if}}
               </span>
             {{else}}
-              <span class="col-md-6  header-no-value"> __ </span>
+              <span class="header-no-value"> __ </span>
             {{/if}}
           </div>
         {{/each}}

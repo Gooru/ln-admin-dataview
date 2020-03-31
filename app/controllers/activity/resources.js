@@ -181,13 +181,9 @@ export default Ember.Controller.extend({
         descriptive: {
           title: collection.title,
           description: truncateString(collection.description),
-          summary: this.get('summaries'),
-          transcript: this.get('transcripts')
-        },
-
-        creation: {
           'Published By': 'Gooru org',
           'Published Status': 'Published',
+          address: collection.url ? collection.url : 'No',
           License: collection.license
             ? License[collection.license]
             : 'Public Domain',
@@ -201,7 +197,22 @@ export default Ember.Controller.extend({
           'modified by': collection.modified_by
         },
 
-        educational: {
+        instructional: {
+          subject: selectedResource.taxonomySubject,
+          course: selectedResource.taxonomyCourse
+            ? selectedResource.taxonomyCourse.join(', ')
+            : null,
+          domain: selectedResource.taxonomyDomain
+            ? selectedResource.taxonomyDomain.join(', ')
+            : null,
+          standard: collection.taxonomy ? collection.taxonomy.id : null,
+          audience: collection.metadata
+            ? collection.metadata.audience
+              ? audience[collection.metadata.audience]
+              : null
+            : null,
+          'Depth of Knowledge': collection.depthofknowledge,
+          '21st Century Skills': collection.skills,
           language: collection.info
             ? collection.info.language === 'eng'
               ? 'English'
@@ -212,7 +223,6 @@ export default Ember.Controller.extend({
           'educational use': collection.metadata
             ? educational_use[collection.metadata.educational_use]
             : null,
-          accessbility: collection.accessibility,
           grade: collection.metadata
             ? collection.metadata.grade
               ? gradeLevelText.join(', ')
@@ -224,15 +234,13 @@ export default Ember.Controller.extend({
             ? collection.info.keywords
               ? collection.info.keywords[0]
               : null
-            : null,
-          audience: collection.metadata
-            ? collection.metadata.audience
-              ? audience[collection.metadata.audience]
-              : null
             : null
         },
 
-        media: {
+        analysis: {
+          summary: this.get('summaries'),
+          transcript: this.get('transcripts'),
+          accessbility: collection.accessibility,
           format: collection.content_subformat
             ? collection.content_subformat.replace(/_/g, ' ')
             : null,
@@ -249,29 +257,12 @@ export default Ember.Controller.extend({
             ? collection.display_guide.is_frame_breaker === 1
               ? 'Yes'
               : 'No'
-            : 'No',
-          'Is Broken': collection.publish_date.is_broken
-            ? collection.publish_date.is_broken
-            : 'No',
-          address: collection.url ? collection.url : 'No'
+            : 'No'
+          // 'Is Broken': collection.publish_date.is_broken
+          //   ? collection.publish_date.is_broken
+          //   : 'No',
         },
-
-        instructional: {
-          'Depth of Knowledge': collection.depthofknowledge,
-          '21st Century Skills': collection.skills
-        },
-
-        framework: {
-          subject: selectedResource.taxonomySubject,
-          course: selectedResource.taxonomyCourse
-            ? selectedResource.taxonomyCourse.join(', ')
-            : null,
-          domain: selectedResource.taxonomyDomain
-            ? selectedResource.taxonomyDomain.join(', ')
-            : null,
-          standard: collection.taxonomy ? collection.taxonomy.id : null
-        },
-        vector: {
+        efficacy: {
           relevance: selectedResource.relevance || defaultVectorValue,
           engagement: selectedResource.engagement || defaultVectorValue,
           efficacy: selectedResource.efficacy || defaultVectorValue
