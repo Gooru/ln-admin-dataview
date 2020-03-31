@@ -237,7 +237,7 @@ export default Ember.Controller.extend({
             : null
         },
 
-        analysis: {
+        'content analysis': {
           summary: this.get('summaries'),
           transcript: this.get('transcripts'),
           accessbility: collection.accessibility,
