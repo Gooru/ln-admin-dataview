@@ -24,10 +24,12 @@
             {{#if keysValue.value}}
               <span class="header-value {{keysValue.key}}">
                 {{#if (or (eq keysValue.key 'summary') (eq keysValue.key 'transcript'))}}
-                    {{#each keysValue.value as |resourceData|}}
-                      <span class="text">{{safe-html (if (eq keysValue.key 'summary') resourceData.shortSummary resourceData.shortTranscript)}}</span>
-                    {{/each}}
-                    <span class="show-more" {{action "onShowResource" keysValue.value keysValue.key}}>More</span>
+                  {{#if keysValue.value}}
+                  {{#each keysValue.value as |resourceData|}}
+                    <span class="text">{{safe-html (if (eq keysValue.key 'summary') resourceData.shortSummary resourceData.shortTranscript)}}</span>
+                  {{/each}}
+                  <span class="show-more" {{action "onShowResource" keysValue.value keysValue.key}}>More</span>
+                  {{/if}}
                 {{else}}
                     {{#if (eq keysValue.key 'description')}}
                       <span class="text">{{safe-html keysValue.value}}</span>

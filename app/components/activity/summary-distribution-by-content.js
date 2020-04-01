@@ -109,7 +109,7 @@ export default Ember.Component.extend({
     component.set('isLoading', true);
     let resourceAggregatedFilters = {
       aggBy: 'contentSubFormat',
-      'flt.audience': 'All Students,Teachers',
+      'flt.audience': 'All',
       'flt.publisherQualityIndicatorGTE': 2
     };
     let questionAggregatedFilters = {
