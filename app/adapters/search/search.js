@@ -89,6 +89,8 @@ export default Ember.Object.extend({
       length: length,
       startAt: start,
       'flt.contentFormat': 'resource',
+      'flt.publisherQualityIndicatorGTE': '2',
+      'flt.audience': 'All Students,Teachers',
       isCrosswalk: false
     };
     let options = {
