@@ -121,6 +121,7 @@ export default Ember.Object.extend({
       length: length,
       startAt: start,
       'flt.resourceFormat': 'question',
+      'flt.audience': 'All Students,Teachers',
       isCrosswalk: false
     };
     let options = {
