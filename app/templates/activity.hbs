@@ -1,6 +1,7 @@
 <div class="activity">
   <div class="wrapper">
-    {{#if (not isComparativeSearch)}}
+    {{#if (or (not isComparativeSearch) hasSearchAccess)}}
+    {{#if (has-access 'page' permissionList.catalogSearchFilter)}}
     {{activities.search-box onComparativeSearch="onComparativeSearch" onShowDropDown="onShowDropDown" selectedFilterItems=selectedFilterItems onChangeFilterItems="onChangeFilterItems" onSearch='onSearch' searchStatus='searchStatus' clearSearchText='clearSearchText' term=searchTerm onEmptyFilters="onEmptyFilters" curMenuItem=curMenuItem}}
     <div class="filters pull-left">
       <div class="filter-list">
@@ -13,6 +14,7 @@
         {{outlet}}
       </div>
     </div>
+    {{/if}}
     {{else}}
       {{activities.comparative-search backToCatalog="backToCatalog"}}
     {{/if}}

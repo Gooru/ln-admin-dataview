@@ -3,8 +3,10 @@ import {
   DEFAULT_ACTIVITY_FILTERS,
   ACTIVITY_FILTER,
   QUESTION_TYPE_FILTERS,
-  RESOURCE_TYPE_FILTERS
+  RESOURCE_TYPE_FILTERS,
+  PERMISSION_LIST
 } from 'admin-dataview/config/config';
+import { hasAccess } from 'admin-dataview/helpers/has-access';
 
 export default Ember.Component.extend({
   // -------------------------------------------------------------------------
@@ -102,6 +104,23 @@ export default Ember.Component.extend({
    * Current menu item
    */
   curMenuItem: null,
+
+  /**
+   * @property {Object}
+   * holding permission for all pages
+   */
+  permissionList: PERMISSION_LIST,
+
+  /**
+   * @property {Boolean}
+   * checking
+   */
+  hasSearchAccess: Ember.computed(function() {
+    return (
+      hasAccess(['pages', this.get('permissionList.catalogSearchFilter')]) ||
+      hasAccess(['pages', this.get('permissionList.catalogDashboard')])
+    );
+  }),
 
   // -------------------------------------------------------------------------
   // Events
