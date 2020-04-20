@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { hasAccess } from 'admin-dataview/helpers/has-access';
 import AuthenticatedRouteMixin from 'admin-dataview/mixins/authenticated-route-mixin';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
@@ -12,6 +13,12 @@ export default Ember.Route.extend(AuthenticatedRouteMixin, {
       } else {
         this.transitionTo(`competency.${item}`);
       }
+    }
+  },
+
+  beforeModel() {
+    if (!hasAccess(['menu', 'competency'])) {
+      window.location.href = `/${hasAccess(['landingPage'])}`;
     }
   }
 });
