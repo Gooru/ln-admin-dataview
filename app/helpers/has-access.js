@@ -12,7 +12,10 @@ export function hasAccess(value) {
   } else if (isLandingPage) {
     return userRole.landingPage;
   }
-  return userRole.pages ? userRole.pages.indexOf(value[1]) !== -1 : false;
+  return userRole.pages
+    ? userRole.pages.indexOf(value[1]) !== -1 ||
+        userRole.pages.indexOf('all') !== -1
+    : false;
 }
 
 export default Ember.Helper.helper(hasAccess);

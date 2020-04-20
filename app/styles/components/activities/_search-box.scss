@@ -93,7 +93,6 @@
     .search-form {
       align-items: center;
       width: calc(100% - 350px);
-      border-right: 1px solid #b8bfc4;
       display: grid;
       grid-template-columns: 1fr 1fr 120px;
 
@@ -156,6 +155,7 @@
       padding-left: 10px;
       text-align: center;
       cursor: pointer;
+      border-left: 1px solid #b8bfc4;
       i {
         font-size: 20px;
       }
