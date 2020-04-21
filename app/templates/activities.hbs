@@ -1,14 +1,14 @@
 <div class="activities">
   {{#if (and (not isComparativeSearch) hasSearchAccess)}}
   {{activities.search-box onComparativeSearch="onComparativeSearch" onShowDropDown="onShowDropDown" onChangeFilterItems="onRemoveCategory" selectedFilterItems=selectedFilterItems onSearch='onSearch' clearSearchText='clearSearchText' onEmptyFilters="onEmptyFilters"}}
-{{#if (has-access 'page' permissionList.catalogSearchFilter)}}
+{{#if (has-access 'catalog' permissionList.catalogSearchFilter)}}
   <div class="filters pull-left">
     <div class="filter-list">
       {{activities.activities-filter filterTypes=filterTypes onCloseToggle="onShowDropDown" onChangeFilterItems="onChangeFilterItems" toggleClearSearch=toggleClearSearch clearFilter='clearFilter' isEmptyFilters=isEmptyFilters}}
     </div>
   </div>
   {{/if}}
-  {{#if (has-access 'page' permissionList.catalogDashboard)}}
+  {{#if (has-access 'catalog' permissionList.catalogDashboard)}}
   <div class="activities-summary pull-left">
     <div class="content-distribution section">
       <div class="header">
@@ -29,7 +29,7 @@
   </div>
   {{/if}}
   {{else}}
-    {{#if (has-access 'page' permissionList.catalogComparativeSearch)}}
+    {{#if (has-access 'catalog' permissionList.catalogComparativeSearch)}}
       {{activities.comparative-search backToCatalog="backToCatalog"}}
     {{/if}}
   {{/if}}

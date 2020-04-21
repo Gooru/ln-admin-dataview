@@ -4,7 +4,7 @@
      <span>{{t 'activities.gooru-catalog'}}</span>
   </div>
   <div class="search-form">
-    {{#if (has-access 'page' permissionList.catalogSearchFilter)}}
+    {{#if (has-access 'catalog' permissionList.catalogSearchFilter)}}
     <form {{action "searchTerm" on="submit"}} class="form-inline">
       <div class="form-group">
         <div class="input-group validation {{if searchErrorMessage 'has-error'}}">
@@ -64,7 +64,7 @@
     </div>
     {{/if}}
   </div>
-    {{#if (has-access 'page' permissionList.catalogComparativeSearch)}}
+    {{#if (has-access 'catalog' permissionList.catalogComparativeSearch)}}
   <div class="comparative-search-filters" {{action "onComparativeSearch"}}>
       <span>{{t 'activities.compare'}}</span>
       {{app-icon name='person'}}

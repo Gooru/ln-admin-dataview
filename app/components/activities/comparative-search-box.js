@@ -48,8 +48,8 @@ export default Ember.Component.extend({
    */
   hasSearchAccess: Ember.computed(function() {
     return (
-      hasAccess(['pages', this.get('permissionList.catalogSearchFilter')]) ||
-      hasAccess(['pages', this.get('permissionList.catalogDashboard')])
+      hasAccess(['catalog', this.get('permissionList.catalogSearchFilter')]) ||
+      hasAccess(['catalog', this.get('permissionList.catalogDashboard')])
     );
   }),
 
