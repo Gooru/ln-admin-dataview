@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import { PERMISSION_LIST } from 'admin-dataview/config/config';
+import { hasAccess } from 'admin-dataview/helpers/has-access';
 
 /**
  * Component for comparative search box
@@ -33,6 +35,23 @@ export default Ember.Component.extend({
    * @property {Object} selectedGrade hold active grade user
    */
   selectedGrade: null,
+
+  /**
+   * @property {Object}
+   * holding permission for all pages
+   */
+  permissionList: PERMISSION_LIST,
+
+  /**
+   * @property {Boolean}
+   * checking
+   */
+  hasSearchAccess: Ember.computed(function() {
+    return (
+      hasAccess(['catalog', this.get('permissionList.catalogSearchFilter')]) ||
+      hasAccess(['catalog', this.get('permissionList.catalogDashboard')])
+    );
+  }),
 
   // ------------------------------------------------------------
   // Hooks

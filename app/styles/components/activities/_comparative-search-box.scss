@@ -12,6 +12,12 @@
       background-color: $light-200;
       cursor: pointer;
     }
+    &.no-search {
+      grid-template-columns: 1fr 140px;
+      .search-back {
+        display: none;
+      }
+    }
     .search-input {
       display: grid;
       grid-template-columns: 1fr 50px;

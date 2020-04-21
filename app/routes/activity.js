@@ -1,9 +1,16 @@
 import Ember from 'ember';
+import { hasAccess } from 'admin-dataview/helpers/has-access';
 import AuthenticatedRouteMixin from 'admin-dataview/mixins/authenticated-route-mixin';
 
 export default Ember.Route.extend(AuthenticatedRouteMixin, {
   // -------------------------------------------------------------------------
   // Events
+
+  beforeModel() {
+    if (!hasAccess(['menu', 'catalog'])) {
+      window.location.href = `/${hasAccess(['landingPage'])}`;
+    }
+  },
 
   model: function(params) {
     return params;

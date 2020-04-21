@@ -1,9 +1,11 @@
 import Ember from 'ember';
 import {
   DEFAULT_ACTIVITY_FILTERS,
-  ACTIVITIES_NAVIGATION_MENUS_INDEX
+  ACTIVITIES_NAVIGATION_MENUS_INDEX,
+  PERMISSION_LIST
 } from 'admin-dataview/config/config';
 import Utils from 'admin-dataview/utils/utils';
+import { hasAccess } from 'admin-dataview/helpers/has-access';
 
 export default Ember.Controller.extend({
   activityController: Ember.inject.controller('activity'),
@@ -30,6 +32,23 @@ export default Ember.Controller.extend({
    * used to switch search box in activity
    */
   isComparativeSearch: false,
+
+  /**
+   * @property {Object}
+   * holding permission for all pages
+   */
+  permissionList: PERMISSION_LIST,
+
+  /**
+   * @property {Boolean}
+   * checking
+   */
+  hasSearchAccess: Ember.computed(function() {
+    return (
+      hasAccess(['catalog', this.get('permissionList.catalogSearchFilter')]) ||
+      hasAccess(['catalog', this.get('permissionList.catalogDashboard')])
+    );
+  }),
 
   // -------------------------------------------------------------------------
   // Actions

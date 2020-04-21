@@ -252,3 +252,10 @@ export function getObjectsDeepCopy(objectElements) {
   }
   return clonedObjectElements;
 }
+
+/**
+ * @function accessList help to hold the data
+ */
+export function accessList() {
+  return JSON.parse(window.localStorage.MC_APP_USER_ROLE);
+}

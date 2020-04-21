@@ -585,3 +585,9 @@ export const SEARCH_API = {
   googleCx: '014236057503552390158:jjjumkgqhli',
   bingCx: '014236057503552390158:nhidtvjygpo'
 };
+
+export const PERMISSION_LIST = {
+  catalogDashboard: 'catalog-dashboard',
+  catalogSearchFilter: 'catalog-search-filter',
+  catalogComparativeSearch: 'catalog-comparative-search'
+};
