@@ -1,7 +1,16 @@
 .app-navigation {
   background-color: $white;
 
+  .row {
+    width: 700px;
+  }
+
   .nav-tabs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8px;
+
     &:after {
       display: none;
     }
