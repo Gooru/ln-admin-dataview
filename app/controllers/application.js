@@ -27,6 +27,8 @@ export default Ember.Controller.extend(ConfigurationMixin, {
         window.location.href = '/learners';
       } else if (item === 'console') {
         window.location.href = '/console';
+      } else if (item === 'research') {
+        window.location.href = '/projects';
       } else {
         if (item === 'competency') {
           this.transitionToRoute(`${item}.tree`);
