@@ -20,7 +20,7 @@
       color: $dark-400;
       font-size: 15px;
       font-weight: 300;
-      padding: 10px 40px;
+      padding: 10px 20px;
       outline: none;
       text-transform: uppercase;
 
@@ -66,6 +66,36 @@
     li:hover > a {
       &::after {
         transform: scale(1);
+      }
+    }
+    .research-menu:hover .research-container {
+      display: block;
+    }
+    .research-container {
+      position: absolute;
+      display: none;
+      background-color: $white;
+      width: 100px;
+      ul {
+        display: grid;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        grid-template-columns: 1fr;
+        text-transform: uppercase;
+
+        li {
+          padding: 5px;
+          font-size: 13px;
+          border-bottom: 1px solid $light-100;
+          cursor: pointer;
+
+          &:last-child {
+            border: none;
+            pointer-events: none;
+            opacity: 0.4;
+          }
+        }
       }
     }
   }

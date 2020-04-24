@@ -242,6 +242,7 @@ export const NAVIGATION_MENUS = [
   'competency',
   'catalog',
   'learners',
+  'research',
   'console'
 ];
 
