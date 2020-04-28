@@ -15,10 +15,19 @@
             {{#if isAuthenticated}}
             <li class="navbar-nav-list visible-md visible-lg profile-link">
               <div class="profile">
-                <div class="img-container pull-left">
+                <div class="img-container pull-left" {{action 'onToggleDropdown'}}>
                   <img class="img-responsive" src="{{session.user.avatarUrl}}" />
                 </div>
-                <span class="username">{{truncate text=session.user.username maxLength=18}}</span>
+                <span class="username" {{action 'onToggleDropdown'}}>{{truncate text=session.user.username maxLength=18}}</span>
+                {{#if (or (has-access 'catalog' 'all') isShowRoleDropdownList)}}
+                <div class="role-list">
+                    <ul class="role-list-blk">
+                         {{#each roleList as |role|}}
+                         <li {{action "onSelectRole" role}} class={{if (eq isActiveCode role.code) 'active'}}>{{app-icon name="person"}} <em>{{role.name}}</em></li>
+                         {{/each}}
+                    </ul>
+                </div>
+                {{/if}}
               </div>
             </li>
             <li class="navbar-nav-list visible-md visible-lg dropdown">

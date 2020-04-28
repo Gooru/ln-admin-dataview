@@ -42,5 +42,23 @@ export default Ember.Object.extend({
     }).then(function(hash) {
       return hash.countriesRegion.value;
     });
+  },
+
+  /**
+   * Get demo User roles
+   * @returns {Promise.<[]>}
+   */
+  getDemoUserAccounts() {
+    const adapter = this;
+    const namespace = adapter.get('namespace');
+    const url = `${namespace}/demo-accounts.json`;
+    const options = {
+      type: 'GET'
+    };
+    return Ember.RSVP.hashSettled({
+      demoUsers: Ember.$.ajax(url, options)
+    }).then(function(hash) {
+      return hash.demoUsers.value;
+    });
   }
 });
