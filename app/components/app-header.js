@@ -21,6 +21,8 @@ export default Ember.Component.extend(ModalMixin, {
   // Properties
   isAuthenticated: Ember.computed.alias('session.isAuthenticated'),
 
+  demoUserService: Ember.inject.service('api-sdk/countries'),
+
   // -------------------------------------------------------------------------
   // Attributes
 
@@ -40,7 +42,36 @@ export default Ember.Component.extend(ModalMixin, {
 
     onMenuItemSelection(item) {
       this.sendAction('onMenuItemSelection', item);
+    },
+
+    onToggleDropdown() {
+      this.$('.role-list').slideToggle();
+    },
+
+    onSelectRole(role) {
+      window.localStorage.MC_UPDATE_LOGIN = JSON.stringify(role);
+      window.localStorage.DEMO_ACTIVE = JSON.stringify(role);
+      window.location.href = '/login';
     }
+  },
+
+  // ----------------------------------------------------------------------------------------------
+  // Methods
+
+  loadRoles() {
+    this.get('demoUserService')
+      .getDemoUserAccounts()
+      .then(role => {
+        let roleList = this.get('roleList');
+        roleList = roleList.concat(role);
+        this.set('roleList', roleList);
+      });
+  },
+
+  // ----------------------------------------------------------------------------------------------
+  // Hooks
+  didInsertElement() {
+    this.loadRoles();
   },
 
   // -------------------------------------------------------------------------
@@ -52,5 +83,32 @@ export default Ember.Component.extend(ModalMixin, {
    */
   supportSiteUrl: Ember.computed(function() {
     return Env.supportSiteUrl;
+  }),
+
+  /**
+   * Holding initial role list
+   */
+  roleList: Ember.computed(function() {
+    let list = Ember.A([
+      Ember.Object.create({
+        name: 'Super User',
+        code: 'DEMO_USER'
+      })
+    ]);
+    return list;
+  }),
+
+  demoUser: Ember.computed(function() {
+    return JSON.parse(window.localStorage.MC_DEMO_SESSION);
+  }),
+
+  isShowRoleDropdownList: Ember.computed(function() {
+    return window.localStorage.MC_DEMO_SESSION;
+  }),
+
+  isActiveCode: Ember.computed(function() {
+    return window.localStorage.DEMO_ACTIVE
+      ? JSON.parse(window.localStorage.DEMO_ACTIVE).code
+      : 'DEMO_USER';
   })
 });

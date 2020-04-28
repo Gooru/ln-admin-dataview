@@ -1,0 +1,26 @@
+[
+    {
+        "username": "mctestroleclusteradmin@gooru.org",
+        "password": "Z29vcnUxMjM0",
+        "name": "Cluster Admin",
+        "code": "CLUSTER_ADMIN"
+    },
+    {
+        "username": "mctestroleschooladmin@gooru.org",
+        "password": "Z29vcnUxMjM0",
+        "name": "School Admin",
+        "code": "SCHOOL_ADMIN"
+    },
+    {
+        "username": "mctestrolecontentprovider@gooru.org",
+        "password": "Z29vcnUxMjM0",
+        "name": "Content Provider",
+        "code": "CONTENT_PROVIDER"
+    },
+    {
+        "username": "mctestrolegroupadmin@gooru.org",
+        "password": "Z29vcnUxMjM0",
+        "name": "Group Admin",
+        "code": "GROUP_ADMIN"
+    }
+]

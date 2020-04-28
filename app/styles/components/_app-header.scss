@@ -244,6 +244,7 @@
         .profile {
           height: 39px;
           cursor: default;
+          position: relative;
           @include flexbox;
           @include justify-content(center);
           @include align-items(center);
@@ -253,6 +254,7 @@
             overflow: hidden;
             border-radius: 50%;
             box-shadow: 0 0 5px 0 rgba(136, 152, 170, 0.7);
+            cursor: pointer;
             img {
               width: 100%;
               height: 100%;
@@ -264,6 +266,41 @@
             overflow: hidden;
             text-overflow: ellipsis;
             display: block;
+            cursor: pointer;
+          }
+
+          .role-list {
+            position: absolute;
+            background-color: $white;
+            top: 50px;
+            right: 0;
+            min-width: 200px;
+            display: none;
+            .role-list-blk {
+              padding: 0;
+              margin: 0;
+              padding: 10px;
+
+              li {
+                display: grid;
+                grid-template-columns: 20px 1fr;
+                align-items: center;
+                grid-column-gap: 5px;
+                padding: 5px;
+                font-size: 14px;
+                cursor: pointer;
+                &.active {
+                  pointer-events: none;
+                  opacity: 0.6;
+                }
+                i {
+                  color: $light-200;
+                  background-color: $light-100;
+                  border-radius: 50%;
+                  font-size: 20px;
+                }
+              }
+            }
           }
         }
       }

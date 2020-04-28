@@ -7,12 +7,14 @@ import CountriesAdapter from 'admin-dataview/adapters/countries/countries';
  * @typedef {Object} countriesService
  */
 export default Ember.Service.extend({
-
   countriesAdapter: null,
 
   init: function() {
     this._super(...arguments);
-    this.set('countriesAdapter', CountriesAdapter.create(Ember.getOwner(this).ownerInjection()));
+    this.set(
+      'countriesAdapter',
+      CountriesAdapter.create(Ember.getOwner(this).ownerInjection())
+    );
   },
 
   /**
@@ -49,6 +51,25 @@ export default Ember.Service.extend({
           resolve(result);
         }, reject);
     });
-  }
+  },
 
+  /**
+   * Fetch the demo user accounts details
+   * @returns {Object}
+   */
+  getDemoUserAccounts() {
+    const service = this;
+    return new Ember.RSVP.Promise((resolve, reject) => {
+      service
+        .get('countriesAdapter')
+        .getDemoUserAccounts()
+        .then(response => {
+          let result = Ember.A();
+          response.forEach(data => {
+            result.pushObject(Ember.Object.create(data));
+          });
+          resolve(result);
+        }, reject);
+    });
+  }
 });
