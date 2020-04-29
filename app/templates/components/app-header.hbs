@@ -14,7 +14,7 @@
           <ul class="nav navbar-nav menu-navbar">
             {{#if isAuthenticated}}
             <li class="navbar-nav-list visible-md visible-lg profile-link">
-              <div class="profile">
+              <div class="profile {{unless (or (has-access 'catalog' 'all') isShowRoleDropdownList) 'inActive'}}">
                 <div class="img-container pull-left" {{action 'onToggleDropdown'}}>
                   <img class="img-responsive" src="{{session.user.avatarUrl}}" />
                 </div>

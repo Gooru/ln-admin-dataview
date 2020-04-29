@@ -248,6 +248,7 @@
           @include flexbox;
           @include justify-content(center);
           @include align-items(center);
+
           .img-container {
             width: 36px;
             height: 36px;
@@ -269,11 +270,18 @@
             cursor: pointer;
           }
 
+          &.inActive {
+            .img-container,
+            .username {
+              pointer-events: none;
+            }
+          }
+
           .role-list {
             position: absolute;
             background-color: $white;
             top: 50px;
-            right: 0;
+            left: 0;
             min-width: 200px;
             display: none;
             .role-list-blk {
