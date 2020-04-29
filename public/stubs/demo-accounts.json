@@ -1,26 +1,38 @@
 [
     {
-        "username": "mctestroleclusteradmin@gooru.org",
-        "password": "Z29vcnUxMjM0",
-        "name": "Cluster Admin",
-        "code": "CLUSTER_ADMIN"
+        "username": "bmcclintockad",
+        "password": "vfkFmVfAwFK7D",
+        "name": "District Admin",
+        "code": "DISTRICT_ADMIN"
     },
     {
-        "username": "mctestroleschooladmin@gooru.org",
-        "password": "Z29vcnUxMjM0",
-        "name": "School Admin",
+        "username": "bmcclintocksp",
+        "password": "vfkFmVfAwFK7D",
+        "name": "School Principal",
         "code": "SCHOOL_ADMIN"
     },
     {
-        "username": "mctestrolecontentprovider@gooru.org",
-        "password": "Z29vcnUxMjM0",
+        "username": "bmcclintockcc",
+        "password": "vfkFmVfAwFK7D",
+        "name": "Curriculum Coordinator",
+        "code": "CURRICULUM COORDINATOR"
+    },
+    {
+        "username": "bmcclintockcp",
+        "password": "vfkFmVfAwFK7D",
         "name": "Content Provider",
         "code": "CONTENT_PROVIDER"
     },
     {
-        "username": "mctestrolegroupadmin@gooru.org",
-        "password": "Z29vcnUxMjM0",
-        "name": "Group Admin",
-        "code": "GROUP_ADMIN"
+        "username": "bmcclintockre",
+        "password": "vfkFmVfAwFK7D",
+        "name": "Researcher",
+        "code": "RESEARCHER"
+    },
+    {
+        "username": "bmcclintockfu",
+        "password": "vfkFmVfAwFK7D",
+        "name": "Funder",
+        "code": "FUNDER"
     }
 ]

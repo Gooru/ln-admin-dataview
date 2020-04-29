@@ -590,5 +590,6 @@ export const SEARCH_API = {
 export const PERMISSION_LIST = {
   catalogDashboard: 'catalog-dashboard',
   catalogSearchFilter: 'catalog-search-filter',
-  catalogComparativeSearch: 'catalog-comparative-search'
+  catalogComparativeSearch: 'catalog-comparative-search',
+  roleView: 'role-view'
 };

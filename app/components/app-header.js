@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import ModalMixin from '../mixins/modal';
 import Env from 'admin-dataview/config/environment';
+import { hasAccess } from 'admin-dataview/helpers/has-access';
 
 /**
  * Application header component
@@ -37,6 +38,8 @@ export default Ember.Component.extend(ModalMixin, {
     logout() {
       let userId = this.get('session.id');
       localStorage.removeItem(`research_${userId}_activities_filters`);
+      localStorage.removeItem('MC_DEMO_SESSION');
+      localStorage.removeItem('DEMO_ACTIVE');
       this.sendAction('logout');
     },
 
@@ -63,7 +66,16 @@ export default Ember.Component.extend(ModalMixin, {
       .getDemoUserAccounts()
       .then(role => {
         let roleList = this.get('roleList');
-        roleList = roleList.concat(role);
+        let superUser = {};
+        superUser = {
+          username: this.get('demoUser')
+            ? this.get('demoUser.username')
+            : 'Super User',
+          name: 'Super User',
+          code: 'DEMO_USER'
+        };
+        const userExist = role.findBy('username', superUser.username);
+        roleList = userExist ? role : [...[superUser], ...role];
         this.set('roleList', roleList);
       });
   },
@@ -88,27 +100,25 @@ export default Ember.Component.extend(ModalMixin, {
   /**
    * Holding initial role list
    */
-  roleList: Ember.computed(function() {
-    let list = Ember.A([
-      Ember.Object.create({
-        name: 'Super User',
-        code: 'DEMO_USER'
-      })
-    ]);
-    return list;
-  }),
+  roleList: Ember.A([]),
 
   demoUser: Ember.computed(function() {
-    return JSON.parse(window.localStorage.MC_DEMO_SESSION);
+    return window.localStorage.MC_DEMO_SESSION
+      ? JSON.parse(window.localStorage.MC_DEMO_SESSION)
+      : this.get('session');
   }),
 
   isShowRoleDropdownList: Ember.computed(function() {
-    return window.localStorage.MC_DEMO_SESSION;
+    return (
+      window.localStorage.MC_DEMO_SESSION ||
+      hasAccess(['all', 'all']) ||
+      hasAccess(['nav', 'role-view'])
+    );
   }),
 
   isActiveCode: Ember.computed(function() {
     return window.localStorage.DEMO_ACTIVE
       ? JSON.parse(window.localStorage.DEMO_ACTIVE).code
-      : 'DEMO_USER';
+      : this.get('roleList')[0];
   })
 });
