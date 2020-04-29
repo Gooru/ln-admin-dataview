@@ -591,5 +591,6 @@ export const PERMISSION_LIST = {
   catalogDashboard: 'catalog-dashboard',
   catalogSearchFilter: 'catalog-search-filter',
   catalogComparativeSearch: 'catalog-comparative-search',
-  roleView: 'role-view'
+  roleView: 'role-view',
+  all: 'all'
 };
