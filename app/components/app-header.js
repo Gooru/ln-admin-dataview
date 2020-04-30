@@ -2,6 +2,7 @@ import Ember from 'ember';
 import ModalMixin from '../mixins/modal';
 import Env from 'admin-dataview/config/environment';
 import { hasAccess } from 'admin-dataview/helpers/has-access';
+import { PERMISSION_LIST } from 'admin-dataview/config/config';
 
 /**
  * Application header component
@@ -39,7 +40,6 @@ export default Ember.Component.extend(ModalMixin, {
       let userId = this.get('session.id');
       localStorage.removeItem(`research_${userId}_activities_filters`);
       localStorage.removeItem('MC_DEMO_SESSION');
-      localStorage.removeItem('DEMO_ACTIVE');
       this.sendAction('logout');
     },
 
@@ -52,8 +52,7 @@ export default Ember.Component.extend(ModalMixin, {
     },
 
     onSelectRole(role) {
-      window.localStorage.MC_UPDATE_LOGIN = JSON.stringify(role);
-      window.localStorage.DEMO_ACTIVE = JSON.stringify(role);
+      localStorage.setItem('MC_UPDATE_LOGIN', JSON.stringify(role));
       window.location.href = '/login';
     }
   },
@@ -103,22 +102,20 @@ export default Ember.Component.extend(ModalMixin, {
   roleList: Ember.A([]),
 
   demoUser: Ember.computed(function() {
-    return window.localStorage.MC_DEMO_SESSION
-      ? JSON.parse(window.localStorage.MC_DEMO_SESSION)
-      : this.get('session');
+    return localStorage.getItem('MC_DEMO_SESSION')
+      ? JSON.parse(localStorage.getItem('MC_DEMO_SESSION'))
+      : this.get('session.user');
   }),
 
   isShowRoleDropdownList: Ember.computed(function() {
     return (
-      window.localStorage.MC_DEMO_SESSION ||
-      hasAccess(['all', 'all']) ||
-      hasAccess(['nav', 'role-view'])
+      localStorage.getItem('MC_DEMO_SESSION') ||
+      hasAccess(['all', PERMISSION_LIST.all]) ||
+      hasAccess(['nav', PERMISSION_LIST.roleView])
     );
   }),
 
   isActiveCode: Ember.computed(function() {
-    return window.localStorage.DEMO_ACTIVE
-      ? JSON.parse(window.localStorage.DEMO_ACTIVE).code
-      : this.get('roleList')[0];
+    return this.get('session.user.username');
   })
 });

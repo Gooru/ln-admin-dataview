@@ -23,7 +23,7 @@
                 <div class="role-list">
                     <ul class="role-list-blk">
                          {{#each roleList as |role|}}
-                         <li {{action "onSelectRole" role}} class={{if (eq isActiveCode role.code) 'active'}}>{{app-icon name="person"}} <span><b>{{role.username}}</b>  <em>{{role.name}}</em></span> </li>
+                         <li {{action "onSelectRole" role}} class={{if (eq isActiveCode role.username) 'active'}}>{{app-icon name="person"}} <span><b>{{role.username}}</b>  <em>{{role.name}}</em></span> </li>
                          {{/each}}
                     </ul>
                 </div>
