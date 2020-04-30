@@ -1,6 +1,4 @@
 .app-navigation {
-  background-color: $white;
-
   .row {
     width: 700px;
   }
@@ -9,11 +7,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 8px;
-
-    &:after {
-      display: none;
-    }
+    margin-top: 3px;
     > li > a {
       border: none;
       box-shadow: none;
@@ -37,18 +31,6 @@
         color: $blue-700 !important;
         background: transparent;
       }
-
-      &::after {
-        content: "";
-        background: $white;
-        height: 1px;
-        position: absolute;
-        width: 100%;
-        left: 0;
-        bottom: -1px;
-        transition: all 250ms ease 0s;
-        transform: scale(1);
-      }
     }
 
     li.active > a {
@@ -57,17 +39,8 @@
       box-shadow: none;
       color: $blue-700 !important;
       background: transparent;
-      &::after {
-        transform: scale(1);
-        background: $white;
-      }
     }
 
-    li:hover > a {
-      &::after {
-        transform: scale(1);
-      }
-    }
     .research-menu:hover .research-container {
       display: block;
     }
