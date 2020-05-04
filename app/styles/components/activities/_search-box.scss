@@ -96,6 +96,10 @@
       display: grid;
       grid-template-columns: 1fr 1fr 120px;
 
+      &.no-comparative-search {
+        width: calc(100% - 100px);
+      }
+
       .input-group {
         input {
           margin-left: 17px;
