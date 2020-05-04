@@ -3,7 +3,7 @@
       <div class="gooru-logo"></div>
      <span>{{t 'activities.gooru-catalog'}}</span>
   </div>
-  <div class="search-form">
+  <div class="search-form {{unless (has-access 'catalog' permissionList.catalogComparativeSearch) 'no-comparative-search'}}">
     {{#if (has-access 'catalog' permissionList.catalogSearchFilter)}}
     <form {{action "searchTerm" on="submit"}} class="form-inline">
       <div class="form-group">
